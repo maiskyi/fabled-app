@@ -9,7 +9,7 @@ import {
   DEFAULT_LOCALIZATION_CONTEXT_VALUE,
 } from '../../contexts/LocalizationContext';
 
-type LocalizationProviderProps = PropsWithChildren<
+export type LocalizationProviderProps = PropsWithChildren<
   PartialDeep<LocalizationContextProps>
 >;
 
