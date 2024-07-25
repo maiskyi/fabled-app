@@ -3,6 +3,7 @@ import { FC, PropsWithChildren, useRef, useState } from 'react';
 import { getAuth, User } from 'firebase/auth';
 import { FirebaseApp } from 'firebase/app';
 import { useMount } from 'react-use';
+import { isUndefined } from 'lodash';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -12,7 +13,7 @@ export type AuthProviderProps = PropsWithChildren<{
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children, app }) => {
   const { current: auth } = useRef(getAuth(app));
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User>();
 
   useMount(() => {
     auth.onAuthStateChanged((v) => setUser(v));
@@ -20,7 +21,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children, app }) => {
 
   return (
     <AuthContext.Provider value={{ auth, user }}>
-      {children}
+      {isUndefined(user) ? null : children}
     </AuthContext.Provider>
   );
 };
