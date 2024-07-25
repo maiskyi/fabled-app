@@ -4,4 +4,5 @@ export enum RoutePath {
   Profile = '/profile',
   Create = '/create',
   Auth = '/auth',
+  Any = '*',
 }

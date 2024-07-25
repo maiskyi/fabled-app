@@ -6,8 +6,8 @@ import { setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { RoutePath } from '@bootstrap/constants';
 
-import { Root } from './root/routes/Root/Root';
-import { Auth } from './auth/routes/Auth/Auth';
+import { Root } from './root/routes';
+import { Auth } from './auth/routes';
 
 setupIonicReact();
 
@@ -20,6 +20,9 @@ export const Router = memo(() => {
         <Route exact path={RoutePath.Root}>
           <Redirect to={RoutePath.Home} />
         </Route>
+        <Route exact path={RoutePath.Any}>
+          <Redirect to={RoutePath.Home} />
+        </Route>
         <Root />
       </IonReactRouter>
     );
@@ -30,7 +33,12 @@ export const Router = memo(() => {
       <Route exact path={RoutePath.Root}>
         <Redirect to={RoutePath.Auth} />
       </Route>
-      <Auth />
+      <Route exact path={RoutePath.Any}>
+        <Redirect to={RoutePath.Auth} />
+      </Route>
+      <Route path={RoutePath.Auth}>
+        <Auth />
+      </Route>
     </IonReactRouter>
   );
 });

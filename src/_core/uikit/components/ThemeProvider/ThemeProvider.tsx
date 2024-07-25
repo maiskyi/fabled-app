@@ -1,10 +1,14 @@
 import { FC, PropsWithChildren } from 'react';
 
 import { IonApp, setupIonicReact } from '@ionic/react';
+import {} from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 
 import './ThemeProvider.css';
 
-setupIonicReact();
+setupIonicReact({
+  mode: Capacitor.getPlatform() === 'web' ? 'ios' : undefined,
+});
 
 export type ThemeProviderProps = PropsWithChildren<{}>;
 
