@@ -1,0 +1,7 @@
+{
+  "name": "Fabled Space",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
