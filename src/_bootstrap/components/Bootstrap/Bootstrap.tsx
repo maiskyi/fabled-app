@@ -1,7 +1,11 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from 'react';
 
-export type BootstrapProps = PropsWithChildren<{}>;
+import { AuthProvider, AuthProviderProps } from '@core/auth';
 
-export const Bootstrap: FC<BootstrapProps> = ({ children }) => {
-  return <>{children}</>;
+export type BootstrapProps = PropsWithChildren<{
+  auth: AuthProviderProps;
+}>;
+
+export const Bootstrap: FC<BootstrapProps> = ({ auth, children }) => {
+  return <AuthProvider {...auth}>{children}</AuthProvider>;
 };
