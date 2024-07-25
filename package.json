@@ -31,6 +31,7 @@
     "react-router-dom": "^5.3.4",
     "react-use": "^17.5.1",
     "scheduler": "^0.23.2",
+    "type-fest": "^4.23.0",
     "use-context-selector": "^2.0.0"
   },
   "devDependencies": {

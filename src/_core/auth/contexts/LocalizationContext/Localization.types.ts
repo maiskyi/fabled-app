@@ -1,5 +1,6 @@
-import { AuthErrorCode } from '../../constants/authErrorCode.const';
+import { AuthErrorCodes } from 'firebase/auth';
+import { ValueOf } from 'type-fest';
 
 export interface LocalizationContextProps {
-  authError: Record<AuthErrorCode, string>;
+  authError: Record<ValueOf<typeof AuthErrorCodes>, string>;
 }
