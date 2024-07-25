@@ -3,3 +3,5 @@ export * from './components/Content';
 export * from './components/Page';
 export * from './components/ThemeProvider';
 export * from './components/Header';
+export * from './components/Button';
+export * from './components/Button';
