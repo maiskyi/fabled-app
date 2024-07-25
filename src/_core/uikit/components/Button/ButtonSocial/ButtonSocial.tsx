@@ -13,15 +13,17 @@ import { ICONS_MAPPING } from './ButtonSocial.const';
 type ButtonSocialProps = PropsWithChildren<{
   name: ButtonSocialName;
   loading?: boolean;
+  onClick?: () => void;
 }>;
 
 export const ButtonSocial: FC<ButtonSocialProps> = ({
   name,
   children,
   loading = false,
+  onClick,
 }) => {
   return (
-    <IonButton fill="outline" shape="round">
+    <IonButton fill="outline" shape="round" onClick={onClick}>
       {loading && <IonSpinner className={styles.spinner} />}
       <Icon
         slot="start"
