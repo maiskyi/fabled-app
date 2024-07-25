@@ -1,11 +1,7 @@
 import { FC } from 'react';
 
 import { initializeApp } from 'firebase/app';
-/* Core CSS required for Ionic components to work properly */
 import { Bootstrap, BootstrapProps } from '@bootstrap/components';
-
-/* Theme variables */
-import './theme/variables.css';
 
 import { Router } from './Router';
 
