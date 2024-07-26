@@ -8,7 +8,7 @@ import { RoutePath } from '@bootstrap/constants';
 
 import { Root } from './root/routes';
 import { Auth } from './auth/routes';
-// import { Create } from './create/routes';
+import { Create } from './create/routes';
 
 setupIonicReact();
 
@@ -18,16 +18,15 @@ export const Router = memo(() => {
   if (isAuthenticated) {
     return (
       <IonReactRouter>
-        <Route exact path={RoutePath.Root}>
-          <Redirect to={RoutePath.Home} />
+        <Route path={RoutePath.Root}>
+          <Root />
         </Route>
-        {/* <Route exact path={RoutePath.Create}>
+        <Route path={RoutePath.Create}>
           <Create />
-        </Route> */}
-        <Route exact path={RoutePath.Any}>
+        </Route>
+        <Route path={RoutePath.Any}>
           <Redirect to={RoutePath.Home} />
         </Route>
-        <Root />
       </IonReactRouter>
     );
   }

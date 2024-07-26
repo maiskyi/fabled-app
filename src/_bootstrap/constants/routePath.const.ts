@@ -1,7 +1,7 @@
 export enum RoutePath {
-  Root = '/',
-  Home = '/home',
-  Profile = '/profile',
+  Root = '/root',
+  Home = '/root/home',
+  Profile = '/root/profile',
   Create = '/create',
   Auth = '/auth',
   Any = '*',

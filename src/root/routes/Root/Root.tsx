@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { memo } from 'react';
 
 import {
@@ -31,6 +31,9 @@ export const Root = memo(() => {
         </Route>
         <Route exact path={RoutePath.Profile}>
           <Tab3 />
+        </Route>
+        <Route exact path={RoutePath.Root}>
+          <Redirect to={RoutePath.Home} />
         </Route>
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
