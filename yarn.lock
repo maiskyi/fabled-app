@@ -1155,6 +1155,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor-firebase/authentication/-/authentication-6.1.0.tgz#ae2b32351477d070eabfd4d53c1ea8d64004b841"
   integrity sha512-mJbbCJFhKi/aKNuoDKAgC98EgRSfg0LxoM5lDoGqQrMwp75WDvOSxsjMUMtuuKFKJ9ASofnVYvJ3aigCpLyssw==
 
+"@capacitor-firebase/firestore@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@capacitor-firebase/firestore/-/firestore-6.1.0.tgz#0dcd75e09c3eebec4b63e78d0994807e20c24bc6"
+  integrity sha512-C2Pp0IJG7mm12lQQKxACxQLVamQzJknO6hYnLBkm1K32eubjgiYRKqVUNNsuRCEHFcNHdnZFwjH/hu+pUy2lOg==
+
 "@capacitor/app@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@capacitor/app/-/app-6.0.0.tgz#b383c97543e2fb9462e8bd69c0f512c33bba0089"
@@ -2334,6 +2339,18 @@
   version "4.19.2"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-4.19.2.tgz#02d377aa0133fa211f5e4c1ace4baa329ed1cde2"
   integrity sha512-ZdnbHmHEl8E5vN0GWDtONe5w6j3CrSqqxZM4hNLBPkV/aouWKug7D5/Mi6RazfYO5U4fmHQYLwMz60rHcx0G4g==
+
+"@tanstack/query-core@5.51.15":
+  version "5.51.15"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.51.15.tgz#7aee6a2d5d3f64de3e54096607233b1132dc6afd"
+  integrity sha512-xyobHDJ0yhPE3+UkSQ2/4X1fLSg7ICJI5J1JyU9yf7F3deQfEwSImCDrB1WSRrauJkMtXW7YIEcC0oA6ZZWt5A==
+
+"@tanstack/react-query@^5.51.15":
+  version "5.51.15"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.51.15.tgz#059bb2966f828263adb355de81410d107e22b5bc"
+  integrity sha512-UgFg23SrdIYrmfTSxAUn9g+J64VQy11pb9/EefoY/u2+zWuNMeqEOnvpJhf52XQy0yztQoyM9p6x8PFyTNaxXg==
+  dependencies:
+    "@tanstack/query-core" "5.51.15"
 
 "@testing-library/dom@>=7.21.4":
   version "10.4.0"

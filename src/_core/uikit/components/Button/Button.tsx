@@ -4,7 +4,9 @@ import { IonButton } from '@ionic/react';
 
 import { ButtonSocial } from './ButtonSocial/ButtonSocial';
 
-export type ButtonProps = PropsWithChildren<{}>;
+export type ButtonProps = PropsWithChildren<{
+  onClick?: () => void;
+}>;
 
 interface ButtonComponent {
   (props: ButtonProps): ReactElement;
@@ -12,8 +14,12 @@ interface ButtonComponent {
 }
 
 // eslint-disable-next-line react/prop-types
-export const Button: ButtonComponent = ({ children }) => {
-  return <IonButton>{children}</IonButton>;
+export const Button: ButtonComponent = ({ children, onClick }) => {
+  return (
+    <IonButton shape="round" onClick={onClick}>
+      {children}
+    </IonButton>
+  );
 };
 
 Button.Social = ButtonSocial;
