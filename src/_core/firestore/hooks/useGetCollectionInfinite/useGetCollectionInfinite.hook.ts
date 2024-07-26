@@ -19,7 +19,7 @@ interface UseGetCollectionParams {
 }
 
 export const useGetCollectionInfinite = <T extends object>(
-  { limit = 25, doc, startAfter }: UseGetCollectionParams,
+  { limit = 20, doc, startAfter }: UseGetCollectionParams,
   { filter: compositeFilter }: UseGetCollectionKey = {}
 ) => {
   const { throwError } = useFirestoreError();
@@ -28,26 +28,27 @@ export const useGetCollectionInfinite = <T extends object>(
     DocumentSnapshot<T>[],
     Error,
     InfiniteData<DocumentSnapshot<T>[]>,
-    ['getCollectionInfinite', string, number, string, UseGetCollectionKey],
+    ['getCollectionInfinite', string, number, UseGetCollectionKey],
     string | undefined
   >({
     queryKey: [
       'getCollectionInfinite',
       doc,
       limit,
-      startAfter,
       {
         filter: compositeFilter,
       },
     ],
     initialPageParam: startAfter,
     getNextPageParam: (last) => {
-      if (last.length) return last.pop().id;
+      if (last.length) {
+        return last[last.length - 1]?.path;
+      }
       return undefined;
     },
     queryFn: async ({
       pageParam: startAfter,
-      queryKey: [_, reference, limit, _startAfter, { filter: compositeFilter }],
+      queryKey: [_, reference, limit, { filter: compositeFilter }],
     }) => {
       try {
         const queryStartAfter: QueryNonFilterConstraint[] = startAfter
