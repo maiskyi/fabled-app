@@ -4,12 +4,16 @@ import {
 } from '@capacitor-firebase/firestore';
 import { useMutation } from '@tanstack/react-query';
 
+import { useFirestoreError } from '../useFirestoreError';
+
 interface MutationVariables<T extends object> {
   doc: string;
   data: T;
 }
 
 export const useAddDocument = <T extends object>() => {
+  const { throwError } = useFirestoreError();
+
   return useMutation<DocumentReference, Error, MutationVariables<T>>({
     mutationKey: ['addDocument'],
     mutationFn: async ({ data, doc: reference }) => {
@@ -20,7 +24,7 @@ export const useAddDocument = <T extends object>() => {
         });
         return res;
       } catch (err) {
-        throw new Error('err');
+        throwError(err);
       }
     },
   });
