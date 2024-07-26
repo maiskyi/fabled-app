@@ -13,9 +13,9 @@ import {
 import { ellipse, square, triangle } from 'ionicons/icons';
 import { RoutePath } from '@bootstrap/constants';
 
-import Tab1 from '../../../pages/Tab1';
 import Tab3 from '../../../pages/Tab3';
 import { Create } from '../../../create/routes';
+import { Home } from '../../../home/routes';
 
 setupIonicReact();
 
@@ -24,7 +24,7 @@ export const Root = memo(() => {
     <IonTabs>
       <IonRouterOutlet>
         <Route exact path={RoutePath.Home}>
-          <Tab1 />
+          <Home />
         </Route>
         <Route exact path={RoutePath.Create}>
           <Create />
