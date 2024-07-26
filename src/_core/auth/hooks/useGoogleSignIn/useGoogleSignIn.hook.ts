@@ -1,21 +1,24 @@
-import { useContextSelector } from 'use-context-selector';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAsyncFn } from 'react-use';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithCredential,
+} from 'firebase/auth';
 
-import { AuthContext } from '../../contexts/AuthContext';
 import { useAuthError } from '../useAuthError';
 
-const provider = new GoogleAuthProvider();
-
 export const useGoogleSignIn = () => {
-  const auth = useContextSelector(AuthContext, ({ auth }) => auth);
-
   const { throwError } = useAuthError();
 
   return useAsyncFn(async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      return GoogleAuthProvider.credentialFromResult(result);
+      const auth = getAuth();
+      const result = await FirebaseAuthentication.signInWithGoogle();
+      const credential = GoogleAuthProvider.credential(
+        result.credential?.idToken
+      );
+      return await signInWithCredential(auth, credential);
     } catch (err) {
       throwError(err);
     }

@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
 import { initializeApp } from 'firebase/app';
-import { Bootstrap, BootstrapProps } from '@bootstrap/components';
+import { Bootstrap } from '@bootstrap/components';
 
 import { Router } from './Router';
 
-const app = initializeApp({
+initializeApp({
   apiKey: 'AIzaSyBtHvYr_zbv8vRsTI6BEuPFMAq8lAsqmcc',
   authDomain: 'fabled-976c8.firebaseapp.com',
   projectId: 'fabled-976c8',
@@ -15,12 +15,8 @@ const app = initializeApp({
   measurementId: 'G-C3GFTX5S4Z',
 });
 
-const props: BootstrapProps = {
-  auth: { app },
-};
-
 const App: FC = () => (
-  <Bootstrap {...props}>
+  <Bootstrap>
     <Router />
   </Bootstrap>
 );

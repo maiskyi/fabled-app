@@ -1,18 +1,31 @@
 import { FC, PropsWithChildren, useRef, useState } from 'react';
 
-import { getAuth, User } from 'firebase/auth';
-import { FirebaseApp } from 'firebase/app';
+import {
+  getAuth,
+  indexedDBLocalPersistence,
+  initializeAuth,
+  User,
+} from 'firebase/auth';
+import { getApp } from 'firebase/app';
 import { useMount } from 'react-use';
 import { isUndefined } from 'lodash';
+import { Capacitor } from '@capacitor/core';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
-export type AuthProviderProps = PropsWithChildren<{
-  app: FirebaseApp;
-}>;
+export type AuthProviderProps = PropsWithChildren<{}>;
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children, app }) => {
-  const { current: auth } = useRef(getAuth(app));
+export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+  const { current: auth } = useRef(
+    (() => {
+      if (Capacitor.isNativePlatform()) {
+        return initializeAuth(getApp(), {
+          persistence: indexedDBLocalPersistence,
+        });
+      }
+      return getAuth(getApp());
+    })()
+  );
   const [user, setUser] = useState<User>();
 
   useMount(() => {

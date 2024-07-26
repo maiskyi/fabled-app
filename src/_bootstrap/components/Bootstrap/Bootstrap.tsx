@@ -1,16 +1,14 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { AuthProvider, AuthProviderProps } from '@core/auth';
+import { AuthProvider } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
 
-export type BootstrapProps = PropsWithChildren<{
-  auth: AuthProviderProps;
-}>;
+export type BootstrapProps = PropsWithChildren<{}>;
 
-export const Bootstrap: FC<BootstrapProps> = ({ auth, children }) => {
+export const Bootstrap: FC<BootstrapProps> = ({ children }) => {
   return (
     <ThemeProvider>
-      <AuthProvider {...auth}>{children}</AuthProvider>
+      <AuthProvider>{children}</AuthProvider>
     </ThemeProvider>
   );
 };
