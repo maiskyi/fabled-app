@@ -1,11 +1,14 @@
+import { useRef } from 'react';
+
 import { useContextSelector } from 'use-context-selector';
+import { getAuth } from 'firebase/auth';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
 export const useAuth = () => {
-  const user = useContextSelector(AuthContext, ({ user }) => user);
+  const { current: auth } = useRef(getAuth());
 
-  const auth = useContextSelector(AuthContext, ({ auth }) => auth);
+  const user = useContextSelector(AuthContext, ({ user }) => user);
 
   const isAuthenticated = !!user;
 
