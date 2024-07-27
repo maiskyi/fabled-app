@@ -72,7 +72,7 @@ export const FormControl: FormControlComponent = ({
         });
 
         return (
-          <div className={classNames(styles.default, className)}>{content}</div>
+          <div className={classNames(styles.root, className)}>{content}</div>
         );
       }}
     />

@@ -1,27 +1,5 @@
-.default {
-  padding: 16px;
-  padding-top: 41px;
-}
-
-.inline {
-  padding: 16px;
-}
-
-.list {
-  &:not(:last-child) {
-    margin-bottom: 16px;
+.root {
+  & + .root {
+    margin-top: 32px;
   }
-
-  + .submit {
-    margin-top: 40px;
-  }
-
-  .error {
-    margin-top: 8px;
-  }
-}
-
-.error {
-  display: block;
-  --color: var(--color-red-400);
 }

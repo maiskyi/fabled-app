@@ -1,7 +1,8 @@
 import { get, invoke, merge } from 'lodash';
 import { useContextSelector } from 'use-context-selector';
 import { useWatch, ControllerProps } from 'react-hook-form';
-import { LocalizationContext } from '../../../../contexts/LocalizationContext/LocalizationContext';
+
+import { LocalizationContext } from '../../../../contexts/LocalizationContext';
 import { FORM_CONTROL_RULES } from '../../_hooks/useFormControlRules/useFormControlRules.const';
 
 type FormItemRules = ControllerProps['rules'];

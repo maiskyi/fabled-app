@@ -40,7 +40,8 @@ export const FormText: FC<FormTextProps> = ({
             autoCapitalize={autocapitalize}
             label={props.label}
             fill="outline"
-            labelPlacement="stacked"
+            mode="md"
+            labelPlacement="floating"
             errorText={error?.message}
             className={classNames({
               'ion-invalid': invalid,

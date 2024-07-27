@@ -18,7 +18,24 @@ export const Create = memo(function Create() {
   return (
     <Page>
       <Form<DTO.Fable> onSubmit={handleOnSubmit}>
-        <Content></Content>
+        <Content>
+          <Form.Text
+            label="Title 1"
+            name="test1"
+            validation={{ required: true }}
+          />
+          <Form.Text
+            label="Title 2"
+            name="test2"
+            validation={{ required: true }}
+          />
+          <Form.Select
+            label="Title 3"
+            name="test3"
+            options={[]}
+            validation={{ required: true }}
+          />
+        </Content>
         <Footer>
           <Form.Submit loading={isPending}>Create</Form.Submit>
         </Footer>

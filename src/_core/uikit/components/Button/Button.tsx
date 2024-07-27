@@ -35,6 +35,7 @@ export const Button: ButtonComponent = ({
       type={type}
       disabled={disabled}
       shape="round"
+      mode="ios"
       onClick={onClick}
       className={classNames(styles.root, className)}
       expand={block ? 'block' : undefined}
