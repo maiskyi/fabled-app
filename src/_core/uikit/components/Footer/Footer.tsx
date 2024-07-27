@@ -7,7 +7,7 @@ export type FooterProps = PropsWithChildren<{}>;
 export const Footer: FC<FooterProps> = ({ children }) => {
   return (
     <IonFooter>
-      <IonToolbar>{children}</IonToolbar>{' '}
+      <IonToolbar>{children}</IonToolbar>
     </IonFooter>
   );
 };

@@ -15,7 +15,7 @@ import { PartialDeep } from 'type-fest';
 // import { FormPassword } from './FormPassword/FormPassword';
 // import { FormSection } from './FormSection/FormSection';
 import { FormSubmit } from './FormSubmit/FormSubmit';
-// import { FormText } from './FormText/FormText';
+import { FormText } from './FormText/FormText';
 // import { FormRadioGroup } from './FormRadioGroup/FormRadioGroup';
 // import { FormCheckboxGroup } from './FormCheckboxGroup/FormCheckboxGroup';
 // import { FormActions } from './FormActions/FormActions';
@@ -39,7 +39,7 @@ interface FormComponent {
   //   Password: typeof FormPassword;
   //   Section: typeof FormSection;
   Submit: typeof FormSubmit;
-  //   Text: typeof FormText;
+  Text: typeof FormText;
   //   RadioGroup: typeof FormRadioGroup;
   //   CheckboxGroup: typeof FormCheckboxGroup;
   //   Actions: typeof FormActions;
@@ -81,7 +81,7 @@ export const Form = forwardRef<FormInstance, FormProps>(function Form(
 // Form.Password = FormPassword;
 // Form.Section = FormSection;
 Form.Submit = FormSubmit;
-// Form.Text = FormText;
+Form.Text = FormText;
 // Form.RadioGroup = FormRadioGroup;
 // Form.CheckboxGroup = FormCheckboxGroup;
 // Form.Actions = FormActions;
