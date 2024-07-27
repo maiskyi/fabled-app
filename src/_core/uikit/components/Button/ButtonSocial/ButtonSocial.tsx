@@ -3,7 +3,7 @@ import { FC, PropsWithChildren } from 'react';
 import { IonButton, IonSpinner } from '@ionic/react';
 import classNames from 'classnames';
 
-import styles from './ButtonSocial.module.scss';
+import styles from '../Button.module.scss';
 
 import { Icon } from '../../Icon';
 

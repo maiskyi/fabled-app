@@ -1,11 +1,19 @@
-import { PropsWithChildren, ReactElement } from 'react';
+import { ComponentProps, PropsWithChildren, ReactElement } from 'react';
 
-import { IonButton } from '@ionic/react';
+import { IonButton, IonSpinner } from '@ionic/react';
+import classNames from 'classnames';
+
+import styles from './Button.module.scss';
 
 import { ButtonSocial } from './ButtonSocial/ButtonSocial';
 
 export type ButtonProps = PropsWithChildren<{
+  block?: boolean;
+  disabled?: boolean;
+  className?: string;
   onClick?: () => void;
+  loading?: boolean;
+  type?: ComponentProps<typeof IonButton>['type'];
 }>;
 
 interface ButtonComponent {
@@ -13,11 +21,32 @@ interface ButtonComponent {
   Social: typeof ButtonSocial;
 }
 
-// eslint-disable-next-line react/prop-types
-export const Button: ButtonComponent = ({ children, onClick }) => {
+export const Button: ButtonComponent = ({
+  children,
+  onClick,
+  className,
+  block = true,
+  type = 'button',
+  disabled = false,
+  loading = false,
+}: ButtonProps) => {
   return (
-    <IonButton shape="round" onClick={onClick}>
-      {children}
+    <IonButton
+      type={type}
+      disabled={disabled}
+      shape="round"
+      onClick={onClick}
+      className={classNames(styles.root, className)}
+      expand={block ? 'block' : undefined}
+    >
+      {loading && <IonSpinner className={styles.spinner} />}
+      <span
+        className={classNames({
+          [styles.transparent]: loading,
+        })}
+      >
+        {children}
+      </span>
     </IonButton>
   );
 };

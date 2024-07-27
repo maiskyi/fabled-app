@@ -1,27 +1,28 @@
 import { memo } from 'react';
 
-import { Page, Content, Button } from '@core/uikit';
+import { Page, Content, Form, Footer } from '@core/uikit';
 import { useAddDocument } from '@core/firestore';
 import { FireStoreDocument } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 
 export const Create = memo(function Create() {
-  const { mutateAsync } = useAddDocument<DTO.Fable>();
+  const { isPending, mutateAsync } = useAddDocument<DTO.Fable>();
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (data: DTO.Fable) => {
     mutateAsync({
+      data,
       doc: FireStoreDocument.Fable,
-      data: {
-        title: 'test',
-      },
     });
   };
 
   return (
     <Page>
-      <Content>
-        <Button onClick={handleOnSubmit}>Create</Button>
-      </Content>
+      <Form<DTO.Fable> onSubmit={handleOnSubmit}>
+        <Content></Content>
+        <Footer>
+          <Form.Submit loading={isPending}>Create</Form.Submit>
+        </Footer>
+      </Form>
     </Page>
   );
 });
