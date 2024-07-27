@@ -35,6 +35,11 @@ export const Create = memo(function Create() {
             options={[]}
             validation={{ required: true }}
           />
+          <Form.Textarea
+            label="Title 4"
+            name="test4"
+            validation={{ required: true }}
+          />
         </Content>
         <Footer>
           <Form.Submit loading={isPending}>Create</Form.Submit>

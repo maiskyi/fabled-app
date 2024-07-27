@@ -22,7 +22,7 @@ import { FormText } from './FormText/FormText';
 import { FormSelect } from './FormSelect/FormSelect';
 // import { FormCheckboxToggle } from './FormCheckboxToggle/FormCheckboxToggle';
 // import { FormPlain } from './FormPlain/FormPlain';
-// import { FormTextarea } from './FormTextarea/FormTextarea';
+import { FormTextarea } from './FormTextarea/FormTextarea';
 import { FormInstance } from './Form.types';
 import { FormContext } from './Form.context';
 
@@ -46,7 +46,7 @@ interface FormComponent {
   Select: typeof FormSelect;
   //   CheckboxToggle: typeof FormCheckboxToggle;
   //   Plain: typeof FormPlain;
-  //   Textrea: typeof FormTextarea;
+  Textarea: typeof FormTextarea;
 }
 
 export const Form = forwardRef<FormInstance, FormProps>(function Form(
@@ -88,4 +88,4 @@ Form.Text = FormText;
 Form.Select = FormSelect;
 // Form.CheckboxToggle = FormCheckboxToggle;
 // Form.Plain = FormPlain;
-// Form.Textrea = FormTextarea;
+Form.Textarea = FormTextarea;

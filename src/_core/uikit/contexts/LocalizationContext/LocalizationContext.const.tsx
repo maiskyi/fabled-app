@@ -15,18 +15,18 @@ const patternInputError: FormValidationErrorFn = ({ name, label }) =>
 // const minLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
 //   `${label || name} must be at least ${value} characters`;
 
-// const maxLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
-//   `${label || name} must be not more then ${value} characters`;
+const maxLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
+  `${label || name} must be not more then ${value} characters`;
 
 export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
   form: {
-    // textarea: {
-    //   errors: {
-    //     generic: genericError,
-    //     required: requiredInputError,
-    //     maxLength: maxLengthInputError,
-    //   },
-    // },
+    textarea: {
+      errors: {
+        generic: genericError,
+        required: requiredInputError,
+        maxLength: maxLengthInputError,
+      },
+    },
     text: {
       errors: {
         email: patternInputError,

@@ -6,7 +6,7 @@ import { FormSelectValidation } from '../../components/Form/FormSelect/FormSelec
 // import { FormRadioGroupValidation } from '../../components/Form/FormRadioGroup/FormRadioGroup.types';
 // import { FormCheckboxGroupValidation } from '../../components/Form/FormCheckboxGroup/FormCheckboxGroup.types';
 // import { FormCheckboxToggleValidation } from '../../components/Form/FormCheckboxToggle/FormCheckboxToggle.types';
-// import { FormTextareaValidation } from '../../components/Form/FormTextarea/FormTextarea.types';
+import { FormTextareaValidation } from '../../components/Form/FormTextarea/FormTextarea.types';
 // import { FormPlainValidation } from '../../components/Form/FormPlain/FormPlain.types';
 
 interface FormValidationErrorFnParams {
@@ -39,10 +39,10 @@ interface Form {
     errors: Record<keyof FormSelectValidation, FormValidationErrorFn> &
       FormGenericError;
   };
-  // textarea: {
-  //   errors: Record<keyof FormTextareaValidation, FormValidationErrorFn> &
-  //     FormGenericError;
-  // };
+  textarea: {
+    errors: Record<keyof FormTextareaValidation, FormValidationErrorFn> &
+      FormGenericError;
+  };
   // password: {
   //   errors: Record<keyof FormPasswordValidation, FormValidationErrorFn> &
   //     FormGenericError;

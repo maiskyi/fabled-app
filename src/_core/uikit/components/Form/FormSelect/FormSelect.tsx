@@ -1,4 +1,4 @@
-import { Key, ReactElement, useLayoutEffect, useRef } from 'react';
+import { Key, ReactElement } from 'react';
 
 import { IonSelect, IonSelectOption, isPlatform } from '@ionic/react';
 import classNames from 'classnames';
@@ -27,14 +27,11 @@ export const FormSelect: FormSelectComponent = ({
   placeholder,
   ...props
 }: FormSelectProps<any>) => {
-  const select = useRef<HTMLIonSelectElement>();
-
   return (
     <FormControl type="select" {...props}>
       {({ value, onBlur, onChange, invalid }) => (
         <IonSelect
           mode="md"
-          ref={select}
           value={value}
           fill="outline"
           onIonBlur={onBlur}
