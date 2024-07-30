@@ -1,4 +1,4 @@
-import { FC, ComponentProps } from 'react';
+import { FC, ComponentProps, forwardRef } from 'react';
 
 import { IonIcon } from '@ionic/react';
 
@@ -12,8 +12,16 @@ export interface IconProps {
   size?: ComponentProps<typeof IonIcon>['size'];
 }
 
-export const Icon: FC<IconProps> = ({ size, name, slot, className }) => {
-  return (
-    <IonIcon slot={slot} icon={ICON[name]} size={size} className={className} />
-  );
-};
+export const Icon: FC<IconProps> = forwardRef<HTMLIonIconElement, IconProps>(
+  function Icon({ size, name, slot, className }, ref) {
+    return (
+      <IonIcon
+        ref={ref}
+        slot={slot}
+        icon={ICON[name]}
+        size={size}
+        className={className}
+      />
+    );
+  }
+);
