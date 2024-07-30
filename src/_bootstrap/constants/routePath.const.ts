@@ -1,4 +1,5 @@
 export enum RoutePath {
+  Index = '/',
   Root = '/root',
   Home = '/root/home',
   Profile = '/root/profile',

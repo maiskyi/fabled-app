@@ -19,7 +19,7 @@ export const Home = memo(function Home() {
 
   return (
     <Page>
-      <Content inset={false}>
+      <Content fullscreen inset={false}>
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
           {data?.pages
             .flatMap((item) => item)

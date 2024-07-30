@@ -10,7 +10,7 @@ export const useAuth = () => {
 
   const user = useContextSelector(AuthContext, ({ user }) => user);
 
-  const isAuthenticated = !!user;
+  const isAuthenticated = !!auth?.currentUser;
 
   return { isAuthenticated, auth, user };
 };

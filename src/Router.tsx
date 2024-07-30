@@ -1,49 +1,39 @@
 import { memo } from 'react';
-import { Redirect, Route } from 'react-router-dom';
 
-import { useAuth } from '@core/auth';
-import { setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { RoutePath } from '@bootstrap/constants';
+import { RoutePath, Role } from '@bootstrap/constants';
+import {
+  Route,
+  ViewOutlet,
+  ProtectedWithRedirect,
+  Router as NavRouter,
+} from '@core/navigation';
 
-import { Root } from './root/routes';
 import { Auth } from './auth/routes';
 import { Create } from './create/routes';
+import { Home } from './home/routes';
 
-setupIonicReact();
-
-export const Router = memo(() => {
-  const { isAuthenticated } = useAuth();
-
-  if (isAuthenticated) {
-    return (
-      <IonReactRouter>
-        <Route path={RoutePath.Root}>
-          <Root />
-        </Route>
-        <Route path={RoutePath.Create}>
-          <Create />
-        </Route>
-        <Route path={RoutePath.Any}>
-          <Redirect to={RoutePath.Home} />
-        </Route>
-      </IonReactRouter>
-    );
-  }
-
+export const Router = memo(function Router() {
   return (
-    <IonReactRouter>
-      <Route exact path={RoutePath.Root}>
-        <Redirect to={RoutePath.Auth} />
-      </Route>
-      <Route exact path={RoutePath.Any}>
-        <Redirect to={RoutePath.Auth} />
-      </Route>
-      <Route path={RoutePath.Auth}>
-        <Auth />
-      </Route>
-    </IonReactRouter>
+    <NavRouter>
+      <ViewOutlet>
+        <Route path={RoutePath.Index}>
+          <Route exact path={RoutePath.Index}>
+            <ProtectedWithRedirect roles={[Role.User]}>
+              <Home />
+            </ProtectedWithRedirect>
+          </Route>
+          <Route exact path={RoutePath.Create}>
+            <ProtectedWithRedirect roles={[Role.User]}>
+              <Create />
+            </ProtectedWithRedirect>
+          </Route>
+          <Route exact path={RoutePath.Auth}>
+            <ProtectedWithRedirect roles={[Role.None]}>
+              <Auth />
+            </ProtectedWithRedirect>
+          </Route>
+        </Route>
+      </ViewOutlet>
+    </NavRouter>
   );
 });
-
-Router.displayName = 'Router';

@@ -5,15 +5,19 @@ import { ThemeProvider } from '@core/uikit';
 import { FirestoreProvider } from '@core/firestore';
 import { NetworkProvider } from '@core/network';
 
+import { Navigation } from '../Navigation/Navigation';
+
 export type BootstrapProps = PropsWithChildren<{}>;
 
 export const Bootstrap: FC<BootstrapProps> = ({ children }) => {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <NetworkProvider>
-          <FirestoreProvider>{children}</FirestoreProvider>
-        </NetworkProvider>
+        <Navigation>
+          <NetworkProvider>
+            <FirestoreProvider>{children}</FirestoreProvider>
+          </NetworkProvider>
+        </Navigation>
       </AuthProvider>
     </ThemeProvider>
   );
