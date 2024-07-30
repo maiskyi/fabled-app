@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Page, Content, Form, Footer } from '@core/uikit';
+import { Page, Content, Form, Header } from '@core/uikit';
 import { useAddDocument } from '@core/firestore';
 import { FireStoreDocument } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
@@ -17,8 +17,14 @@ export const Create = memo(function Create() {
 
   return (
     <Page>
-      <Form<DTO.Fable> onSubmit={handleOnSubmit}>
-        <Content>
+      <Header translucent>
+        <Header.Title>Create Fable</Header.Title>
+      </Header>
+      <Content inset={false}>
+        <Header collapse="condense">
+          <Header.Title size="large">Create Fable</Header.Title>
+        </Header>
+        <Form<DTO.Fable> onSubmit={handleOnSubmit}>
           <Form.Text
             label="Title 1"
             name="test1"
@@ -40,11 +46,9 @@ export const Create = memo(function Create() {
             name="test4"
             validation={{ required: true }}
           />
-        </Content>
-        <Footer>
           <Form.Submit loading={isPending}>Create</Form.Submit>
-        </Footer>
-      </Form>
+        </Form>
+      </Content>
     </Page>
   );
 });

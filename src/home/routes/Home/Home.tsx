@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useGetCollectionInfinite } from '@core/firestore';
 import { FireStoreDocument, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
-import { Page, Content, InfiniteScroll, Fab } from '@core/uikit';
+import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
 import {
   IonCard,
   IonCardHeader,
@@ -26,7 +26,13 @@ export const Home = memo(function Home() {
 
   return (
     <Page>
+      <Header translucent>
+        <Header.Title>My Fables</Header.Title>
+      </Header>
       <Content fullscreen inset={false}>
+        <Header collapse="condense">
+          <Header.Title size="large">My Fables</Header.Title>
+        </Header>
         <Fab slot="fixed" placement={['end', 'bottom']}>
           <Fab.Button icon="add" onClick={handleOnCreate} />
         </Fab>

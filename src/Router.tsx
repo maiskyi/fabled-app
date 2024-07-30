@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { RoutePath, Role } from '@bootstrap/constants';
 import {
   Route,
-  ViewOutlet,
+  RouterOutlet,
   ProtectedWithRedirect,
   Router as NavRouter,
 } from '@core/navigation';
@@ -15,9 +15,9 @@ import { Home } from './home/routes';
 export const Router = memo(function Router() {
   return (
     <NavRouter>
-      <ViewOutlet>
+      <RouterOutlet>
         <Route path={RoutePath.Index}>
-          <ViewOutlet>
+          <RouterOutlet>
             <Route exact path={RoutePath.Index}>
               <ProtectedWithRedirect roles={[Role.User]}>
                 <Home />
@@ -33,9 +33,9 @@ export const Router = memo(function Router() {
                 <Auth />
               </ProtectedWithRedirect>
             </Route>
-          </ViewOutlet>
+          </RouterOutlet>
         </Route>
-      </ViewOutlet>
+      </RouterOutlet>
     </NavRouter>
   );
 });

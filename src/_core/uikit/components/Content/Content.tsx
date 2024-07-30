@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, forwardRef, PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 import { IonContent } from '@ionic/react';
@@ -9,13 +9,13 @@ export type ContentProps = PropsWithChildren<{
   fullscreen?: boolean;
 }>;
 
-export const Content: FC<ContentProps> = ({
-  children,
-  fullscreen,
-  inset = true,
-}) => {
+export const Content: FC<ContentProps> = forwardRef<
+  HTMLIonContentElement,
+  ContentProps
+>(function Content({ children, fullscreen, inset = true }, ref) {
   return (
     <IonContent
+      ref={ref}
       fullscreen={fullscreen}
       className={classNames({
         'ion-padding': inset,
@@ -24,4 +24,4 @@ export const Content: FC<ContentProps> = ({
       {children}
     </IonContent>
   );
-};
+});

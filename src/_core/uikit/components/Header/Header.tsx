@@ -1,6 +1,13 @@
-import { ComponentProps, FC, PropsWithChildren } from 'react';
+import {
+  ComponentProps,
+  forwardRef,
+  PropsWithChildren,
+  ReactElement,
+} from 'react';
 
 import { IonHeader, IonToolbar } from '@ionic/react';
+
+import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 
 export type HeaderProps = PropsWithChildren<{
   className?: string;
@@ -8,14 +15,24 @@ export type HeaderProps = PropsWithChildren<{
   collapse?: ComponentProps<typeof IonHeader>['collapse'];
 }>;
 
-export const Header: FC<HeaderProps> = ({
-  children,
-  className,
-  translucent,
-}) => {
-  return (
-    <IonHeader className={className} translucent={translucent}>
-      <IonToolbar>{children}</IonToolbar>
-    </IonHeader>
-  );
-};
+interface HeaderComponent {
+  (props: HeaderProps): ReactElement;
+  Title: typeof HeaderTitle;
+}
+
+export const Header = forwardRef<HTMLIonHeaderElement, HeaderProps>(
+  function Header({ children, className, translucent, collapse }, ref) {
+    return (
+      <IonHeader
+        ref={ref}
+        className={className}
+        translucent={translucent}
+        collapse={collapse}
+      >
+        <IonToolbar>{children}</IonToolbar>
+      </IonHeader>
+    );
+  }
+) as unknown as HeaderComponent;
+
+Header.Title = HeaderTitle;

@@ -1,4 +1,4 @@
-export { IonRouterOutlet as ViewOutlet } from '@ionic/react';
+export { IonRouterOutlet as RouterOutlet } from '@ionic/react';
 export { Route } from 'react-router-dom';
 export { IonReactRouter as Router } from '@ionic/react-router';
 
