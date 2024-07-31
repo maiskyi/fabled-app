@@ -8,6 +8,7 @@ import {
 import { IonHeader, IonToolbar } from '@ionic/react';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
+import { HeaderBack } from './HeaderBack/HeaderBack';
 
 export type HeaderProps = PropsWithChildren<{
   className?: string;
@@ -18,6 +19,7 @@ export type HeaderProps = PropsWithChildren<{
 interface HeaderComponent {
   (props: HeaderProps): ReactElement;
   Title: typeof HeaderTitle;
+  Back: typeof HeaderBack;
 }
 
 export const Header = forwardRef<HTMLIonHeaderElement, HeaderProps>(
@@ -36,3 +38,4 @@ export const Header = forwardRef<HTMLIonHeaderElement, HeaderProps>(
 ) as unknown as HeaderComponent;
 
 Header.Title = HeaderTitle;
+Header.Back = HeaderBack;
