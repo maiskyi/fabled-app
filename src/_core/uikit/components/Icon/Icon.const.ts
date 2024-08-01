@@ -1,6 +1,7 @@
-import { logoGoogle, add } from 'ionicons/icons';
+import { logoGoogle, add, arrowBack } from 'ionicons/icons';
 
 export const ICON = {
   add,
   google: logoGoogle,
+  'arrow-back': arrowBack,
 };

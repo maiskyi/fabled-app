@@ -1,21 +1,18 @@
 import { FC } from 'react';
 
-import { IonBackButton, IonButtons } from '@ionic/react';
+import { IonButtons, IonButton, IonIcon } from '@ionic/react';
 import { arrowBack } from 'ionicons/icons';
 
 interface HeaderBackProps {
   defaultHref?: string;
 }
 
-export const HeaderBack: FC<HeaderBackProps> = ({ defaultHref }) => {
+export const HeaderBack: FC<HeaderBackProps> = ({ defaultHref: _ }) => {
   return (
     <IonButtons slot="start">
-      <IonBackButton
-        mode="md"
-        icon={arrowBack}
-        routerAnimation={null}
-        defaultHref={defaultHref}
-      />
+      <IonButton mode="md">
+        <IonIcon slot="icon-only" icon={arrowBack} />
+      </IonButton>
     </IonButtons>
   );
 };

@@ -1,3 +1,10 @@
+export enum FableStatus {
+  Error = 'error',
+  Success = 'success',
+  Initialized = 'initialized',
+  ContentInProgress = 'contentInProgress',
+}
+
 export interface FableRequest {
   characterName: string;
   readTime: number;
@@ -6,5 +13,6 @@ export interface FableRequest {
 }
 
 export interface Fable {
+  status: FableStatus;
   request: FableRequest;
 }

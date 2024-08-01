@@ -5,3 +5,4 @@ export * from './components/FirestoreProvider';
 export * from './hooks/useAddDocument';
 export * from './hooks/useGetCollection';
 export * from './hooks/useGetCollectionInfinite';
+export * from './hooks/useGetDocument';

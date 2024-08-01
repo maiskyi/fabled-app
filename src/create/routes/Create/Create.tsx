@@ -16,7 +16,10 @@ export const Create = memo(function Create() {
 
   const handleOnSubmit = (request: DTO.FableRequest) => {
     mutateAsync({
-      data: { request },
+      data: {
+        request,
+        status: DTO.FableStatus.Initialized,
+      },
       doc: FireStoreDocument.Fable,
     });
   };
