@@ -5,10 +5,16 @@ import { App, AppProps } from './App';
 
 const config: AppProps = {
   functions: {
-    emulator: {
-      host: '127.0.0.1',
-      port: 5001,
-    },
+    // emulator: {
+    //   host: '127.0.0.1',
+    //   port: 5001,
+    // },
+  },
+  firestore: {
+    // emulator: {
+    //   host: '127.0.0.1',
+    //   port: 8080,
+    // },
   },
   app: {
     apiKey: 'AIzaSyBtHvYr_zbv8vRsTI6BEuPFMAq8lAsqmcc',

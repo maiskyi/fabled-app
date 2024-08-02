@@ -1,15 +1,18 @@
 import { memo } from 'react';
 
 import { Page, Content, Form, Header, Container } from '@core/uikit';
-import { RoutePath, FunctionName } from '@bootstrap/constants';
+import { FunctionName } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 // import { Redirect } from '@core/navigation';
+import { useRoute } from '@core/navigation';
 import { useStaticOptions } from '@bootstrap/hooks';
 import { useFunction } from '@core/functions';
 
 import { FormField, initialValue } from './Create.const';
 
 export const Create = memo(function Create() {
+  const [, navigate] = useRoute();
+
   const { data, isPending, mutateAsync } = useFunction<
     DTO.RequestInput,
     DTO.Fable
@@ -32,7 +35,7 @@ export const Create = memo(function Create() {
   return (
     <Page>
       <Header translucent>
-        <Header.Back defaultHref={RoutePath.Index} />
+        <Header.Back onClick={() => navigate({ back: true })} />
         <Header.Title>Create Fable</Header.Title>
       </Header>
       <Content inset={false}>
