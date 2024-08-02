@@ -4,6 +4,12 @@ import { createRoot } from 'react-dom/client';
 import { App, AppProps } from './App';
 
 const config: AppProps = {
+  functions: {
+    emulator: {
+      host: '127.0.0.1',
+      port: 5001,
+    },
+  },
   app: {
     apiKey: 'AIzaSyBtHvYr_zbv8vRsTI6BEuPFMAq8lAsqmcc',
     authDomain: 'fabled-976c8.firebaseapp.com',

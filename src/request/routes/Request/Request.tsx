@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Page, Header, Content, Container } from '@core/uikit';
-import { FireStoreDocument, RoutePath } from '@bootstrap/constants';
+import { Document, RoutePath } from '@bootstrap/constants';
 import { useGetDocument } from '@core/firestore';
 import { DTO } from '@bootstrap/dto';
 import { useRoute } from '@core/navigation';
@@ -11,7 +11,7 @@ export const Request: FC = () => {
 
   const { data } = useGetDocument<DTO.Fable>({
     id: params.id,
-    doc: FireStoreDocument.Fable,
+    doc: Document.Fable,
   });
 
   return (

@@ -4,7 +4,7 @@ import { AuthProvider } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
 import { FirestoreProvider } from '@core/firestore';
 import { NetworkProvider } from '@core/app';
-import { FunctionsProvider } from '@core/functions';
+import { FunctionsProvider, FunctionsProviderProps } from '@core/functions';
 import {
   AppProvider,
   AppProviderProps,
@@ -14,16 +14,17 @@ import { Navigation } from '../Navigation/Navigation';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
+  functions: FunctionsProviderProps;
 }>;
 
-export const Bootstrap: FC<BootstrapProps> = ({ children, app }) => {
+export const Bootstrap: FC<BootstrapProps> = ({ children, app, functions }) => {
   return (
     <ThemeProvider>
       <AppProvider {...app}>
         <AuthProvider>
           <NetworkProvider>
             <FirestoreProvider>
-              <FunctionsProvider>
+              <FunctionsProvider {...functions}>
                 <Navigation>{children}</Navigation>
               </FunctionsProvider>
             </FirestoreProvider>

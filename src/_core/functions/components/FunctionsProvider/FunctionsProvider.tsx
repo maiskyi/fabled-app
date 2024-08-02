@@ -1,14 +1,27 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useRef } from 'react';
 
-import { getFunctions } from 'firebase/functions';
+import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
 import { getApp } from 'firebase/app';
 import { useMount } from 'react-use';
 
-export type FunctionsProviderProps = PropsWithChildren<{}>;
+export type FunctionsProviderProps = PropsWithChildren<{
+  emulator?: {
+    host: string;
+    port: number;
+  };
+}>;
 
-export const FunctionsProvider: FC<FunctionsProviderProps> = ({ children }) => {
+export const FunctionsProvider: FC<FunctionsProviderProps> = ({
+  children,
+  emulator,
+}) => {
+  const { current: functions } = useRef(getFunctions(getApp()));
+
   useMount(() => {
-    getFunctions(getApp());
+    if (emulator) {
+      const { host, port } = emulator;
+      connectFunctionsEmulator(functions, host, port);
+    }
   });
 
   return <>{children}</>;

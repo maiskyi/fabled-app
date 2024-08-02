@@ -1,32 +1,33 @@
 import { memo } from 'react';
 
 import { Page, Content, Form, Header, Container } from '@core/uikit';
-import { useAddDocument } from '@core/firestore';
-import { FireStoreDocument, RoutePath } from '@bootstrap/constants';
+import { RoutePath, FunctionName } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
-import { Redirect } from '@core/navigation';
+// import { Redirect } from '@core/navigation';
 import { useStaticOptions } from '@bootstrap/hooks';
+import { useFunction } from '@core/functions';
 
-import { FormField } from './Create.const';
+import { FormField, initialValue } from './Create.const';
+
 export const Create = memo(function Create() {
-  const { data, isPending, isSuccess, mutateAsync } =
-    useAddDocument<DTO.Fable>();
+  const { data, isPending, mutateAsync } = useFunction<
+    DTO.RequestInput,
+    DTO.Fable
+  >({
+    name: FunctionName.Request,
+  });
 
   const { readTime } = useStaticOptions();
 
-  const handleOnSubmit = (request: DTO.FableRequest) => {
-    mutateAsync({
-      data: {
-        request,
-        status: DTO.FableStatus.Initialized,
-      },
-      doc: FireStoreDocument.Fable,
-    });
+  const handleOnSubmit = (data: DTO.RequestInput) => {
+    mutateAsync(data);
   };
 
-  if (isSuccess) {
-    return <Redirect pathname={RoutePath.Request} params={{ id: data.id }} />;
-  }
+  console.log(data);
+
+  // if (isSuccess) {
+  //   return <Redirect pathname={RoutePath.Request} params={{ id: data.id }} />;
+  // }
 
   return (
     <Page>
@@ -38,7 +39,10 @@ export const Create = memo(function Create() {
         <Header collapse="condense">
           <Header.Title size="large">Create Fable</Header.Title>
         </Header>
-        <Form<DTO.FableRequest> onSubmit={handleOnSubmit}>
+        <Form<DTO.FableRequest>
+          defaultValues={initialValue}
+          onSubmit={handleOnSubmit}
+        >
           <Container padding>
             <Form.Text
               label="Character name"

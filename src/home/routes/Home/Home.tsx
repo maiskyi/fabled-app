@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useGetCollectionInfinite } from '@core/firestore';
-import { FireStoreDocument, RoutePath } from '@bootstrap/constants';
+import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
 import { IonCard, IonCardHeader, IonCardSubtitle } from '@ionic/react';
@@ -12,7 +12,7 @@ export const Home = memo(function Home() {
 
   const { data, hasNextPage, fetchNextPage } =
     useGetCollectionInfinite<DTO.Fable>({
-      doc: FireStoreDocument.Fable,
+      doc: Document.Fable,
     });
 
   const handleOnCreate = async () => {
