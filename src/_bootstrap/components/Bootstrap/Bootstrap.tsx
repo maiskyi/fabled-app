@@ -4,6 +4,7 @@ import { AuthProvider } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
 import { FirestoreProvider } from '@core/firestore';
 import { NetworkProvider } from '@core/network';
+import { FunctionsProvider } from '@core/funations';
 
 import { Navigation } from '../Navigation/Navigation';
 
@@ -13,11 +14,13 @@ export const Bootstrap: FC<BootstrapProps> = ({ children }) => {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Navigation>
-          <NetworkProvider>
-            <FirestoreProvider>{children}</FirestoreProvider>
-          </NetworkProvider>
-        </Navigation>
+        <NetworkProvider>
+          <FirestoreProvider>
+            <FunctionsProvider>
+              <Navigation>{children}</Navigation>
+            </FunctionsProvider>
+          </FirestoreProvider>
+        </NetworkProvider>
       </AuthProvider>
     </ThemeProvider>
   );

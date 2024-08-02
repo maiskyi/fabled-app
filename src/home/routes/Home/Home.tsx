@@ -15,7 +15,7 @@ export const Home = memo(function Home() {
       doc: FireStoreDocument.Fable,
     });
 
-  const handleOnCreate = () => {
+  const handleOnCreate = async () => {
     push({ pathname: RoutePath.Create });
   };
 
