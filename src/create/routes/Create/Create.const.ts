@@ -3,11 +3,5 @@ export enum FormField {
   ReadTime = 'readTime',
   SceneOfAction = 'sceneOfAction',
   WhatIsThisFableAbout = 'description',
+  Version = 'version',
 }
-
-export const initialValue = {
-  [FormField.CharacterName]: 'mickey mouse',
-  [FormField.ReadTime]: 5,
-  [FormField.SceneOfAction]: 'magic forest',
-  [FormField.WhatIsThisFableAbout]: 'how to build a friendship',
-};

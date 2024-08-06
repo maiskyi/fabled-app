@@ -5,25 +5,25 @@ import { App, AppProps } from './App';
 
 const config: AppProps = {
   functions: {
-    // emulator: {
-    //   host: '127.0.0.1',
-    //   port: 5001,
-    // },
+    emulator: {
+      host: '127.0.0.1',
+      port: 5001,
+    },
   },
   firestore: {
-    // emulator: {
-    //   host: '127.0.0.1',
-    //   port: 8080,
-    // },
+    emulator: {
+      host: '127.0.0.1',
+      port: 8080,
+    },
   },
   app: {
-    apiKey: 'AIzaSyBtHvYr_zbv8vRsTI6BEuPFMAq8lAsqmcc',
-    authDomain: 'fabled-976c8.firebaseapp.com',
-    projectId: 'fabled-976c8',
-    storageBucket: 'fabled-976c8.appspot.com',
-    messagingSenderId: '325556814897',
-    appId: '1:325556814897:web:b9333358b6d5cb93960110',
-    measurementId: 'G-C3GFTX5S4Z',
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
   },
 };
 

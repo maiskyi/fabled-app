@@ -11,6 +11,7 @@ import {
 } from '@core/app/components/AppProvider';
 
 import { Navigation } from '../Navigation/Navigation';
+import { Init } from '../Init/Init';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -31,7 +32,9 @@ export const Bootstrap: FC<BootstrapProps> = ({
           <NetworkProvider>
             <FirestoreProvider {...firestore}>
               <FunctionsProvider {...functions}>
-                <Navigation>{children}</Navigation>
+                <Navigation>
+                  <Init>{children}</Init>
+                </Navigation>
               </FunctionsProvider>
             </FirestoreProvider>
           </NetworkProvider>

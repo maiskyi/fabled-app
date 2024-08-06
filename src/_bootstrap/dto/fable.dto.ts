@@ -10,6 +10,7 @@ export interface FableRequest {
   readTime: number;
   sceneOfAction: string;
   description: string;
+  version: string;
 }
 
 export interface Fable {

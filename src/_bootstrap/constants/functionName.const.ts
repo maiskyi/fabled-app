@@ -1,3 +1,3 @@
 export enum FunctionName {
-  Request = 'request',
+  OnRequest = 'onRequest',
 }

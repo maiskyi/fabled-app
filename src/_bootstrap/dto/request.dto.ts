@@ -3,4 +3,5 @@ export interface RequestInput {
   readTime: number;
   sceneOfAction: string;
   description: string;
+  version: string;
 }

@@ -8,16 +8,18 @@ import { useRoute } from '@core/navigation';
 import { useStaticOptions } from '@bootstrap/hooks';
 import { useFunction } from '@core/functions';
 
-import { FormField, initialValue } from './Create.const';
+import { FormField } from './Create.const';
+import { useCreate } from './Create.hook';
 
 export const Create = memo(function Create() {
   const [, navigate] = useRoute();
+  const { initialValue } = useCreate();
 
   const { data, isPending, mutateAsync } = useFunction<
     DTO.RequestInput,
     DTO.Fable
   >({
-    name: FunctionName.Request,
+    name: FunctionName.OnRequest,
   });
 
   const { readTime } = useStaticOptions();
