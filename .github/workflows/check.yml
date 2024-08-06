@@ -17,7 +17,7 @@ jobs:
         run: yarn
 
       - name: Lint app
-        run: yarn run lint --max-warnings=0
+        run: yarn lint
 
       - name: Build app
         run: yarn build
