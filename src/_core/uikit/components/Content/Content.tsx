@@ -9,19 +9,18 @@ export type ContentProps = PropsWithChildren<{
   fullscreen?: boolean;
 }>;
 
-export const Content: FC<ContentProps> = forwardRef<
-  HTMLIonContentElement,
-  ContentProps
->(function Content({ children, fullscreen, inset = true }, ref) {
-  return (
-    <IonContent
-      ref={ref}
-      fullscreen={fullscreen}
-      className={classNames({
-        'ion-padding': inset,
-      })}
-    >
-      {children}
-    </IonContent>
-  );
-});
+export const Content: FC<ContentProps> = forwardRef<any, ContentProps>(
+  function Content({ children, fullscreen, inset = true }, ref) {
+    return (
+      <IonContent
+        ref={ref}
+        fullscreen={fullscreen}
+        className={classNames({
+          'ion-padding': inset,
+        })}
+      >
+        {children}
+      </IonContent>
+    );
+  }
+);

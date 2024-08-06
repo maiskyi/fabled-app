@@ -15,10 +15,11 @@ export const Create = memo(function Create() {
   const [, navigate] = useRoute();
   const { initialValue } = useCreate();
 
-  const { data, isPending, mutateAsync } = useFunction<
-    DTO.RequestInput,
-    DTO.Fable
-  >({
+  const {
+    // data,
+    isPending,
+    mutateAsync,
+  } = useFunction<DTO.RequestInput, DTO.Fable>({
     name: FunctionName.OnRequest,
   });
 
@@ -28,7 +29,7 @@ export const Create = memo(function Create() {
     mutateAsync(data);
   };
 
-  console.log(data);
+  // console.log(data);
 
   // if (isSuccess) {
   //   return <Redirect pathname={RoutePath.Request} params={{ id: data.id }} />;
