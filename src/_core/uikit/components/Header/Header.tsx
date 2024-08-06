@@ -22,20 +22,21 @@ interface HeaderComponent {
   Back: typeof HeaderBack;
 }
 
-export const Header = forwardRef<HTMLIonHeaderElement, HeaderProps>(
-  function Header({ children, className, translucent, collapse }, ref) {
-    return (
-      <IonHeader
-        ref={ref}
-        className={className}
-        translucent={translucent}
-        collapse={collapse}
-      >
-        <IonToolbar>{children}</IonToolbar>
-      </IonHeader>
-    );
-  }
-) as unknown as HeaderComponent;
+export const Header = forwardRef<any, HeaderProps>(function Header(
+  { children, className, translucent, collapse },
+  ref
+) {
+  return (
+    <IonHeader
+      ref={ref}
+      className={className}
+      translucent={translucent}
+      collapse={collapse}
+    >
+      <IonToolbar>{children}</IonToolbar>
+    </IonHeader>
+  );
+}) as unknown as HeaderComponent;
 
 Header.Title = HeaderTitle;
 Header.Back = HeaderBack;
