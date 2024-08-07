@@ -15,7 +15,8 @@ export interface FableRequest {
 }
 
 export interface FableResponse {
-  illustration: string;
+  illustration?: string;
+  title?: string;
 }
 
 export interface Fable {

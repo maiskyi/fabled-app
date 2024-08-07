@@ -5,6 +5,7 @@ import { IonCard } from '@ionic/react';
 import { CardHeader } from './CardHeader/CardHeader';
 import { CardSubtitle } from './CardSubtitle/CardSubtitle';
 import { CardThumb } from './CardThumb/CardThumb';
+import { CardTitle } from './CardTitle/CardTitle';
 
 export type CardProps = PropsWithChildren<{}>;
 
@@ -13,6 +14,7 @@ interface CardComponent {
   Header: typeof CardHeader;
   Subtitle: typeof CardSubtitle;
   Thumb: typeof CardThumb;
+  Title: typeof CardTitle;
 }
 
 export const Card: CardComponent = ({ children }: CardProps) => {
@@ -22,3 +24,4 @@ export const Card: CardComponent = ({ children }: CardProps) => {
 Card.Header = CardHeader;
 Card.Subtitle = CardSubtitle;
 Card.Thumb = CardThumb;
+Card.Title = CardTitle;

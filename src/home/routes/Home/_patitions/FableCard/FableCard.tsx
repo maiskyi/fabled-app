@@ -17,6 +17,7 @@ export const FableCard: FC<FableCardProps> = ({ item }) => {
       </Card.Thumb>
       <Card.Header>
         <Card.Subtitle>{item?.id}</Card.Subtitle>
+        <Card.Title>{item.data.response.title}</Card.Title>
       </Card.Header>
     </Card>
   );
