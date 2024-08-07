@@ -1,5 +1,6 @@
 // Components
 export * from './components/Button';
+export * from './components/Card';
 export * from './components/Container';
 export * from './components/Content';
 export * from './components/Fab';

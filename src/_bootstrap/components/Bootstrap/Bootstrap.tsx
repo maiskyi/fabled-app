@@ -3,12 +3,9 @@ import { FC, PropsWithChildren } from 'react';
 import { AuthProvider } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
 import { FirestoreProvider, FirestoreProviderProps } from '@core/firestore';
-import { NetworkProvider } from '@core/app';
+import { NetworkProvider, AppProvider, AppProviderProps } from '@core/app';
 import { FunctionsProvider, FunctionsProviderProps } from '@core/functions';
-import {
-  AppProvider,
-  AppProviderProps,
-} from '@core/app/components/AppProvider';
+import { StorageProvider } from '@core/storage';
 
 import { Navigation } from '../Navigation/Navigation';
 import { Init } from '../Init/Init';
@@ -20,8 +17,8 @@ export type BootstrapProps = PropsWithChildren<{
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
-  children,
   app,
+  children,
   functions,
   firestore,
 }) => {
@@ -32,9 +29,11 @@ export const Bootstrap: FC<BootstrapProps> = ({
           <NetworkProvider>
             <FirestoreProvider {...firestore}>
               <FunctionsProvider {...functions}>
-                <Navigation>
-                  <Init>{children}</Init>
-                </Navigation>
+                <StorageProvider>
+                  <Navigation>
+                    <Init>{children}</Init>
+                  </Navigation>
+                </StorageProvider>
               </FunctionsProvider>
             </FirestoreProvider>
           </NetworkProvider>

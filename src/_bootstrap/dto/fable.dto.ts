@@ -13,7 +13,12 @@ export interface FableRequest {
   version: string;
 }
 
+export interface FableResponse {
+  illustration: string;
+}
+
 export interface Fable {
   status: FableStatus;
   request: FableRequest;
+  response: FableResponse;
 }

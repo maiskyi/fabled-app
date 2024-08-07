@@ -5,7 +5,8 @@ import { useGetCollectionInfinite } from '@core/firestore';
 import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
-import { IonCard, IonCardHeader, IonCardSubtitle } from '@ionic/react';
+
+import { FableCard } from './_patitions/FableCard';
 
 export const Home = memo(function Home() {
   const { push } = useHistory();
@@ -34,14 +35,8 @@ export const Home = memo(function Home() {
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
           {data?.pages
             .flatMap((item) => item)
-            .map(({ id }) => {
-              return (
-                <IonCard key={id}>
-                  <IonCardHeader>
-                    <IonCardSubtitle>{id}</IonCardSubtitle>
-                  </IonCardHeader>
-                </IonCard>
-              );
+            .map((item) => {
+              return <FableCard key={item.id} item={item} />;
             })}
         </InfiniteScroll>
       </Content>
