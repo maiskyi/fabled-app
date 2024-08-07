@@ -19,10 +19,10 @@ export const FableCard: FC<FableCardProps> = ({ item }) => {
         />
       </Card.Thumb>
       <Card.Header>
+        <Card.Title>{item.data.response.title}</Card.Title>
         <Card.Subtitle>
           Time to read: {item?.data.request.readTime} min
         </Card.Subtitle>
-        <Card.Title>{item.data.response.title}</Card.Title>
       </Card.Header>
     </Card>
   );

@@ -12,6 +12,7 @@ import { Auth } from './auth/routes';
 import { Create } from './create/routes';
 import { Home } from './home/routes';
 import { Request } from './request/routes';
+import { Profile } from './profile/routes';
 
 export const Router = memo(function Router() {
   return (
@@ -37,6 +38,11 @@ export const Router = memo(function Router() {
             <Route exact path={RoutePath.Auth}>
               <ProtectedWithRedirect roles={[Role.None]}>
                 <Auth />
+              </ProtectedWithRedirect>
+            </Route>
+            <Route exact path={RoutePath.Profile}>
+              <ProtectedWithRedirect roles={[Role.User]}>
+                <Profile />
               </ProtectedWithRedirect>
             </Route>
           </RouterOutlet>
