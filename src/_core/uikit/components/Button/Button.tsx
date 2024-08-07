@@ -40,7 +40,7 @@ export const Button: ButtonComponent = ({
       className={classNames(styles.root, className)}
       expand={block ? 'block' : undefined}
     >
-      {loading && <IonSpinner className={styles.spinner} />}
+      {loading && <IonSpinner name="circular" className={styles.spinner} />}
       <span
         className={classNames({
           [styles.transparent]: loading,

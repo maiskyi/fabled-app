@@ -2,9 +2,11 @@ import { memo } from 'react';
 
 import { Header, Page, Content, Card } from '@core/uikit';
 import { useRoute } from '@core/navigation';
+import { useAuth } from '@core/auth';
 
 export const Profile = memo(function Profile() {
   const [, navigate] = useRoute();
+  const { user } = useAuth();
 
   return (
     <Page>
@@ -18,8 +20,9 @@ export const Profile = memo(function Profile() {
         </Header>
         <Card>
           <Card.Header>
-            <Card.Title>123</Card.Title>
-            <Card.Subtitle>123</Card.Subtitle>
+            <Card.Avatar src={user.photoURL} />
+            <Card.Title>{user.displayName}</Card.Title>
+            <Card.Subtitle>{user.email}</Card.Subtitle>
           </Card.Header>
         </Card>
       </Content>
