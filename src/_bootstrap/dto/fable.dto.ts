@@ -2,7 +2,8 @@ export enum FableStatus {
   Error = 'error',
   Success = 'success',
   Initialized = 'initialized',
-  ContentInProgress = 'contentInProgress',
+  Content = 'content',
+  Image = 'image',
 }
 
 export interface FableRequest {

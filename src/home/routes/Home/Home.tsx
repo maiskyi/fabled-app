@@ -12,9 +12,24 @@ export const Home = memo(function Home() {
   const { push } = useHistory();
 
   const { data, hasNextPage, fetchNextPage } =
-    useGetCollectionInfinite<DTO.Fable>({
-      doc: Document.Fable,
-    });
+    useGetCollectionInfinite<DTO.Fable>(
+      {
+        doc: Document.Fable,
+      },
+      {
+        filter: {
+          type: 'and',
+          queryConstraints: [
+            {
+              type: 'where',
+              fieldPath: 'status',
+              opStr: '==',
+              value: DTO.FableStatus.Success,
+            },
+          ],
+        },
+      }
+    );
 
   const handleOnCreate = async () => {
     push({ pathname: RoutePath.Create });
