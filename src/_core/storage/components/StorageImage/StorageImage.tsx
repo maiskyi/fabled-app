@@ -4,13 +4,15 @@ import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { useAsync } from 'react-use';
 
 export interface ImageStorageProps {
+  alt: string;
   filename: string;
-  aspectRatio?: CSSProperties['aspectRatio'];
+  objectFit?: CSSProperties['objectFit'];
 }
 
 export const ImageStorage: FC<ImageStorageProps> = ({
+  alt,
   filename,
-  aspectRatio = '16 / 9',
+  objectFit = 'cover',
 }) => {
   const { value } = useAsync(async (): Promise<string> => {
     const storage = getStorage();
@@ -18,5 +20,5 @@ export const ImageStorage: FC<ImageStorageProps> = ({
     return await getDownloadURL(image);
   });
 
-  return <img alt="" src={value} style={{ aspectRatio }} loading="lazy" />;
+  return <img alt={alt} src={value} style={{ objectFit }} loading="lazy" />;
 };

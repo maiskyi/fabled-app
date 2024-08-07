@@ -6,6 +6,7 @@ import {
 } from 'react';
 
 import { IonHeader, IonToolbar } from '@ionic/react';
+import classNames from 'classnames';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';
@@ -29,7 +30,7 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
   return (
     <IonHeader
       ref={ref}
-      className={className}
+      className={classNames('ion-no-border', className)}
       translucent={translucent}
       collapse={collapse}
     >

@@ -13,7 +13,10 @@ export const FableCard: FC<FableCardProps> = ({ item }) => {
   return (
     <Card>
       <Card.Thumb>
-        <ImageStorage filename={item.data.response.illustration} />
+        <ImageStorage
+          alt={item.data.response.title}
+          filename={item.data.response.illustration}
+        />
       </Card.Thumb>
       <Card.Header>
         <Card.Subtitle>{item?.id}</Card.Subtitle>
