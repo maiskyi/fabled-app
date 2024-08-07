@@ -4,4 +4,5 @@ export enum RoutePath {
   Auth = '/auth',
   Any = '*',
   Request = '/request/:id',
+  Profile = '/profile',
 }

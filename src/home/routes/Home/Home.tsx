@@ -31,14 +31,21 @@ export const Home = memo(function Home() {
       }
     );
 
-  const handleOnCreate = async () => {
+  const handleOnCreate = () => {
     push({ pathname: RoutePath.Create });
+  };
+
+  const handleOnProfile = () => {
+    push({ pathname: RoutePath.Profile });
   };
 
   return (
     <Page>
       <Header translucent>
         <Header.Title>My Fables</Header.Title>
+        <Header.Actions>
+          <Header.Action icons="person-circle" onClick={handleOnProfile} />
+        </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
         <Header collapse="condense">
