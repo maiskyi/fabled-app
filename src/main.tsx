@@ -1,9 +1,17 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { Language } from '@locale/constants';
+import { resources } from '@locale/resources';
+
 import { App, AppProps } from './App';
 
 const config: AppProps = {
+  localization: {
+    resources,
+    fallbackLng: Language.en,
+    supportedLngs: [Language.en],
+  },
   functions: {
     emulator: {
       host: '127.0.0.1',

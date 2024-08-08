@@ -5,11 +5,15 @@ import { useGetCollectionInfinite } from '@core/firestore';
 import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
+import { useTranslation } from '@core/localization';
 
 import { FableCard } from './_patitions/FableCard';
 
 export const Home = memo(function Home() {
   const { push } = useHistory();
+  const { t } = useTranslation();
+
+  const title = t('pages.home');
 
   const { data, hasNextPage, fetchNextPage } =
     useGetCollectionInfinite<DTO.Fable>(
@@ -42,14 +46,14 @@ export const Home = memo(function Home() {
   return (
     <Page>
       <Header translucent>
-        <Header.Title>My Fables</Header.Title>
+        <Header.Title>{title}</Header.Title>
         <Header.Actions>
           <Header.Action icons="person-circle" onClick={handleOnProfile} />
         </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
         <Header collapse="condense">
-          <Header.Title size="large">My Fables</Header.Title>
+          <Header.Title size="large">{title}</Header.Title>
         </Header>
         <Fab slot="fixed" placement={['end', 'bottom']}>
           <Fab.Button icon="add" onClick={handleOnCreate} />

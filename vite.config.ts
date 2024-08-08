@@ -13,6 +13,7 @@ export default defineConfig({
     alias: {
       '@bootstrap': path.resolve(__dirname, './src/_bootstrap'),
       '@core': path.resolve(__dirname, './src/_core'),
+      '@locale': path.resolve(__dirname, './src/_locale'),
     },
   },
   plugins: [react(), legacy()],
