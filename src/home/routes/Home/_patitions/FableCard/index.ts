@@ -1,0 +1,1 @@
+export { FableCard } from './FableCard';

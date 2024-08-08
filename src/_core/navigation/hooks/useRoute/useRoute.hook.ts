@@ -17,15 +17,17 @@ type UseRouteReturnType<P extends object> = [
 export const useRoute = <P extends object = {}>(): UseRouteReturnType<P> => {
   const params = useParams<P>();
 
-  const { goBack } = useHistory();
+  const { goBack, push } = useHistory();
 
   const navigate: UseRouteDispatch = useCallback(
     (params): void => {
       if ('back' in params) {
         goBack();
+      } else {
+        push({ pathname: params.pathname });
       }
     },
-    [goBack]
+    [goBack, push]
   );
 
   return useMemo(() => [{ params }, navigate], [params, navigate]);

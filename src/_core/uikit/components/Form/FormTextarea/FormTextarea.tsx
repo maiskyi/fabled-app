@@ -1,7 +1,7 @@
 import { FC, ComponentProps } from 'react';
+import classNames from 'classnames';
 
 import { IonInput, IonTextarea } from '@ionic/react';
-import classNames from 'classnames';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';
 

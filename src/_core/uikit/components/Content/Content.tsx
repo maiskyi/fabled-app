@@ -1,6 +1,6 @@
 import { FC, forwardRef, PropsWithChildren } from 'react';
-
 import classNames from 'classnames';
+
 import { IonContent } from '@ionic/react';
 
 export type ContentProps = PropsWithChildren<{

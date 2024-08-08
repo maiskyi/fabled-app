@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
-
-import classNames from 'classnames';
 import { Controller } from 'react-hook-form';
+import classNames from 'classnames';
 
 import styles from './FormControl.module.scss';
 

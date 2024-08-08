@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
+import { get } from 'lodash';
 
 import { useContextSelector } from 'use-context-selector';
 import { FirebaseError } from 'firebase/app';
-import { get } from 'lodash';
 
 import { LocalizationContext } from '../../contexts/LocalizationContext';
 

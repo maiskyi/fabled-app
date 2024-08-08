@@ -1,19 +1,27 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { Language } from '@locale/constants';
+import { resources } from '@locale/resources';
+
 import { App, AppProps } from './App';
 
 const config: AppProps = {
+  localization: {
+    resources,
+    fallbackLng: Language.en,
+    supportedLngs: [Language.en],
+  },
   functions: {
     emulator: {
-      host: '127.0.0.1',
-      port: 5001,
+      host: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_HOST,
+      port: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_PORT,
     },
   },
   firestore: {
     emulator: {
-      host: '127.0.0.1',
-      port: 8080,
+      host: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_HOST,
+      port: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT,
     },
   },
   app: {

@@ -2,7 +2,8 @@ export enum FableStatus {
   Error = 'error',
   Success = 'success',
   Initialized = 'initialized',
-  ContentInProgress = 'contentInProgress',
+  Content = 'content',
+  Image = 'image',
 }
 
 export interface FableRequest {
@@ -13,7 +14,13 @@ export interface FableRequest {
   version: string;
 }
 
+export interface FableResponse {
+  illustration?: string;
+  title?: string;
+}
+
 export interface Fable {
   status: FableStatus;
   request: FableRequest;
+  response: FableResponse;
 }

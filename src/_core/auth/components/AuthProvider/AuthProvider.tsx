@@ -1,4 +1,6 @@
 import { FC, PropsWithChildren, useState } from 'react';
+import { useMount } from 'react-use';
+import { isUndefined } from 'lodash';
 
 import {
   getAuth,
@@ -7,8 +9,6 @@ import {
   User,
 } from 'firebase/auth';
 import { getApp } from 'firebase/app';
-import { useMount } from 'react-use';
-import { isUndefined } from 'lodash';
 import { Capacitor } from '@capacitor/core';
 
 import { AuthContext } from '../../contexts/AuthContext';

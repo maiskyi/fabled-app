@@ -5,28 +5,55 @@ import { useGetCollectionInfinite } from '@core/firestore';
 import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
-import { IonCard, IonCardHeader, IonCardSubtitle } from '@ionic/react';
+import { useTranslation } from '@core/localization';
+
+import { FableCard } from './_patitions/FableCard';
 
 export const Home = memo(function Home() {
   const { push } = useHistory();
+  const { t } = useTranslation();
+
+  const title = t('pages.home');
 
   const { data, hasNextPage, fetchNextPage } =
-    useGetCollectionInfinite<DTO.Fable>({
-      doc: Document.Fable,
-    });
+    useGetCollectionInfinite<DTO.Fable>(
+      {
+        doc: Document.Fable,
+      },
+      {
+        filter: {
+          type: 'and',
+          queryConstraints: [
+            {
+              type: 'where',
+              fieldPath: 'status',
+              opStr: '==',
+              value: DTO.FableStatus.Success,
+            },
+          ],
+        },
+      }
+    );
 
-  const handleOnCreate = async () => {
+  const handleOnCreate = () => {
     push({ pathname: RoutePath.Create });
+  };
+
+  const handleOnProfile = () => {
+    push({ pathname: RoutePath.Profile });
   };
 
   return (
     <Page>
       <Header translucent>
-        <Header.Title>My Fables</Header.Title>
+        <Header.Title>{title}</Header.Title>
+        <Header.Actions>
+          <Header.Action icons="person-circle" onClick={handleOnProfile} />
+        </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
         <Header collapse="condense">
-          <Header.Title size="large">My Fables</Header.Title>
+          <Header.Title size="large">{title}</Header.Title>
         </Header>
         <Fab slot="fixed" placement={['end', 'bottom']}>
           <Fab.Button icon="add" onClick={handleOnCreate} />
@@ -34,14 +61,8 @@ export const Home = memo(function Home() {
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
           {data?.pages
             .flatMap((item) => item)
-            .map(({ id }) => {
-              return (
-                <IonCard key={id}>
-                  <IonCardHeader>
-                    <IonCardSubtitle>{id}</IonCardSubtitle>
-                  </IonCardHeader>
-                </IonCard>
-              );
+            .map((item) => {
+              return <FableCard key={item.id} item={item} />;
             })}
         </InfiniteScroll>
       </Content>

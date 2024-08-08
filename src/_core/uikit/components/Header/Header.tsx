@@ -4,11 +4,14 @@ import {
   PropsWithChildren,
   ReactElement,
 } from 'react';
+import classNames from 'classnames';
 
 import { IonHeader, IonToolbar } from '@ionic/react';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';
+import { HeaderActions } from './HeaderActions/HeaderActions';
+import { HeaderAction } from './HeaderAction/HeaderAction';
 
 export type HeaderProps = PropsWithChildren<{
   className?: string;
@@ -20,6 +23,8 @@ interface HeaderComponent {
   (props: HeaderProps): ReactElement;
   Title: typeof HeaderTitle;
   Back: typeof HeaderBack;
+  Actions: typeof HeaderActions;
+  Action: typeof HeaderAction;
 }
 
 export const Header = forwardRef<any, HeaderProps>(function Header(
@@ -29,7 +34,7 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
   return (
     <IonHeader
       ref={ref}
-      className={className}
+      className={classNames('ion-no-border', className)}
       translucent={translucent}
       collapse={collapse}
     >
@@ -40,3 +45,5 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
 
 Header.Title = HeaderTitle;
 Header.Back = HeaderBack;
+Header.Actions = HeaderActions;
+Header.Action = HeaderAction;

@@ -1,0 +1,12 @@
+.header {
+  .avatar {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+  }
+
+  &:has(> .avatar) {
+    position: relative;
+    padding-left: 88px;
+  }
+}

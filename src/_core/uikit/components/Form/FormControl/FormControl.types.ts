@@ -1,7 +1,7 @@
 import { ReactElement, ComponentProps } from 'react';
+import { ControllerProps, FieldError } from 'react-hook-form';
 
 import { IonInput } from '@ionic/react';
-import { ControllerProps, FieldError } from 'react-hook-form';
 
 import { FORM_CONTROL_RULES } from '../_hooks/useFormControlRules/useFormControlRules.const';
 

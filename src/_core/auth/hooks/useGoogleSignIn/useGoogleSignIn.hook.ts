@@ -1,4 +1,5 @@
 import { useAsyncFn } from 'react-use';
+
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import {
   getAuth,

@@ -1,7 +1,7 @@
 import { ComponentProps, PropsWithChildren, ReactElement } from 'react';
+import classNames from 'classnames';
 
 import { IonButton, IonSpinner } from '@ionic/react';
-import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
@@ -40,7 +40,7 @@ export const Button: ButtonComponent = ({
       className={classNames(styles.root, className)}
       expand={block ? 'block' : undefined}
     >
-      {loading && <IonSpinner className={styles.spinner} />}
+      {loading && <IonSpinner name="circular" className={styles.spinner} />}
       <span
         className={classNames({
           [styles.transparent]: loading,
