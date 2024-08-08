@@ -27,12 +27,12 @@ export const LocalizationProvider: FC<LocalizationProviderProps> = ({
   formatters = {},
 }) => {
   const { value } = useAsync(async (): Promise<string> => {
-    const { value: languageCode } = await Device.getLanguageCode();
+    const { value: lng } = await Device.getLanguageTag();
     await i18n.use(initReactI18next).init({
+      lng,
       fallbackLng,
       debug: false,
       supportedLngs,
-      lng: languageCode,
       resources: Object.entries(resources).reduce(
         (res, [key, translation]) => ({
           ...res,
