@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren, useRef } from 'react';
+import { useMount } from 'react-use';
 
 import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
 import { getApp } from 'firebase/app';
-import { useMount } from 'react-use';
 
 export type FunctionsProviderProps = PropsWithChildren<{
   emulator?: {

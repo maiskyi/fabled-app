@@ -4,9 +4,9 @@ import {
   PropsWithChildren,
   ReactElement,
 } from 'react';
+import classNames from 'classnames';
 
 import { IonHeader, IonToolbar } from '@ionic/react';
-import classNames from 'classnames';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';

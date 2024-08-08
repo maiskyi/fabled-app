@@ -67,8 +67,6 @@ export const useGetCollectionInfinite = <T extends object>(
           },
         ];
 
-        const q: QueryNonFilterConstraint[] = [{}];
-
         const { snapshots } = await FirebaseFirestore.getCollection<T>({
           reference,
           compositeFilter,

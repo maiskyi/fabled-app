@@ -1,7 +1,7 @@
 import { FC, CSSProperties } from 'react';
+import { useAsync } from 'react-use';
 
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import { useAsync } from 'react-use';
 
 export interface ImageStorageProps {
   alt: string;

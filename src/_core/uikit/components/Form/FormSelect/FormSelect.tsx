@@ -1,7 +1,7 @@
 import { Key, ReactElement } from 'react';
+import classNames from 'classnames';
 
 import { IonSelect, IonSelectOption, isPlatform } from '@ionic/react';
-import classNames from 'classnames';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';
 import { OptionProps } from '../Form.types';

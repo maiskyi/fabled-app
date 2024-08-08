@@ -1,7 +1,7 @@
 import { ComponentProps, PropsWithChildren, ReactElement } from 'react';
+import classNames from 'classnames';
 
 import { IonButton, IonSpinner } from '@ionic/react';
-import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 

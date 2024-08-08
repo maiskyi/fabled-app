@@ -1,8 +1,8 @@
 import { FC, Fragment, PropsWithChildren, useRef } from 'react';
+import { useMount } from 'react-use';
 
 import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import { getApp } from 'firebase/app';
-import { useMount } from 'react-use';
 
 export type FirestoreProviderProps = PropsWithChildren<{
   emulator?: {
