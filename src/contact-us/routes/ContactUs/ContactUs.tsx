@@ -1,6 +1,14 @@
 import { FC } from 'react';
 
-import { Page, Header, Content, Form, Container, useUtils } from '@core/uikit';
+import {
+  Page,
+  Header,
+  Content,
+  Form,
+  Container,
+  Text,
+  useUtils,
+} from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
@@ -57,6 +65,9 @@ export const ContactUs: FC = () => {
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
+        <Container padding>
+          <Text>{t('intro.inquiry')}</Text>
+        </Container>
         <Form<DTO.ContactUsRequest>
           onSubmit={handleOnSubmit}
           defaultValues={defaultValues}
