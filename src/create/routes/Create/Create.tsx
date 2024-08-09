@@ -6,7 +6,7 @@ import { DTO } from '@bootstrap/dto';
 // import { Redirect } from '@core/navigation';
 import { useRoute } from '@core/navigation';
 import { useStaticOptions } from '@bootstrap/hooks';
-import { useFunction } from '@core/functions';
+import { useMutationFunction } from '@core/functions';
 
 import { FormField } from './Create.const';
 import { useCreate } from './Create.hook';
@@ -19,7 +19,7 @@ export const Create = memo(function Create() {
     // data,
     isPending,
     mutateAsync,
-  } = useFunction<DTO.RequestInput, DTO.Fable>({
+  } = useMutationFunction<DTO.RequestInput, DTO.Fable>({
     name: FunctionName.OnRequest,
   });
 

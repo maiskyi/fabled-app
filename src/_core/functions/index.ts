@@ -2,4 +2,4 @@
 export * from './components/FunctionsProvider';
 
 // Hooks
-export * from './hooks/useFunction';
+export * from './hooks/useMutationFunction';

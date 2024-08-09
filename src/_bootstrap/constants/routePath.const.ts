@@ -4,8 +4,8 @@ export enum RoutePath {
   Create = '/create',
   Index = '/',
   Profile = '/profile',
-  ProfileContactUs = '/profile/contact-us',
-  ProfileContactUsSuccess = '/profile/contact-us/success',
+  ContactUs = '/contact-us',
+  ContactUsSuccess = '/contact-us/success',
   ProfileFeedback = '/profile/feedback',
   Request = '/request/:id',
 }

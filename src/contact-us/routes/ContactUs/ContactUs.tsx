@@ -1,19 +1,20 @@
 import { FC } from 'react';
 
-import { Page, Header, Content, Form, Container } from '@core/uikit';
-import { useRoute, Redirect } from '@core/navigation';
+import { Page, Header, Content, Form, Container, useUtils } from '@core/uikit';
+import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
-import { useFunction } from '@core/functions';
-import { FunctionName, RoutePath } from '@bootstrap/constants';
+import { useMutationFunction } from '@core/functions';
+import { FunctionName } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 
 export const ContactUs: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
+  const { toast } = useUtils();
 
   const title = t('pages.contactUs');
 
-  const { isSuccess, isPending, mutateAsync } = useFunction<
+  const { isPending, mutateAsync } = useMutationFunction<
     DTO.ContactUsRequest,
     DTO.ContactUsResponse
   >({
@@ -21,12 +22,22 @@ export const ContactUs: FC = () => {
   });
 
   const handleOnSubmit = async (data: DTO.ContactUsRequest) => {
-    await mutateAsync(data);
+    try {
+      await mutateAsync(data);
+      toast({
+        variant: 'success',
+        title: t('notifications.contactUsSubmissionSucceed.title'),
+        message: t('notifications.contactUsSubmissionSucceed.message'),
+      });
+      navigate({ back: true });
+    } catch (err) {
+      toast({
+        variant: 'success',
+        title: t('notifications.contactUsSubmissionFailed.title'),
+        message: t('notifications.contactUsSubmissionFailed.message'),
+      });
+    }
   };
-
-  if (isSuccess) {
-    return <Redirect pathname={RoutePath.ProfileContactUs} />;
-  }
 
   return (
     <Page>
