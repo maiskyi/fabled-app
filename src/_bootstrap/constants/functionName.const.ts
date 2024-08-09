@@ -1,4 +1,5 @@
 export enum FunctionName {
-  OnRequest = 'onRequest',
+  OnFableRequest = 'onFableRequest',
   OnContactUs = 'onContactUs',
+  OnFeedback = 'onFeedback',
 }

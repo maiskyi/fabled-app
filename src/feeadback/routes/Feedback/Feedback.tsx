@@ -11,6 +11,9 @@ import {
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
+import { useMutationFunction } from '@core/functions';
+import { FunctionName } from '@bootstrap/constants';
+import { DTO } from '@bootstrap/dto';
 
 export const Feedback: FC = () => {
   const [, navigate] = useRoute();
@@ -19,17 +22,29 @@ export const Feedback: FC = () => {
 
   const title = t('pages.feedback');
 
-  const handleOnSubmit = () => {
-    // toast({
-    //   variant: 'success',
-    //   title: t('notifications.feedbackSucceed.title'),
-    //   message: t('notifications.feedbackSucceed.message'),
-    // });
-    toast({
-      variant: 'error',
-      title: t('notifications.feedbackFailed.title'),
-      message: t('notifications.feedbackFailed.message'),
-    });
+  const { isPending, mutateAsync } = useMutationFunction<
+    DTO.FeedbackRequest,
+    DTO.FeedbackResponse
+  >({
+    name: FunctionName.OnFeedback,
+  });
+
+  const handleOnSubmit = async (form: DTO.FeedbackRequest) => {
+    try {
+      await mutateAsync(form);
+      toast({
+        variant: 'success',
+        title: t('notifications.feedbackSucceed.title'),
+        message: t('notifications.feedbackSucceed.message'),
+      });
+      navigate({ back: true });
+    } catch (_) {
+      toast({
+        variant: 'error',
+        title: t('notifications.feedbackFailed.title'),
+        message: t('notifications.feedbackFailed.message'),
+      });
+    }
   };
 
   return (
@@ -59,7 +74,7 @@ export const Feedback: FC = () => {
             />
           </Container>
           <Container padding>
-            <Form.Submit>{t('actions.submit')}</Form.Submit>
+            <Form.Submit loading={isPending}>{t('actions.submit')}</Form.Submit>
           </Container>
         </Form>
       </Content>
