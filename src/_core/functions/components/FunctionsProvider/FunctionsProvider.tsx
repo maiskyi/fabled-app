@@ -18,8 +18,9 @@ export const FunctionsProvider: FC<FunctionsProviderProps> = ({
   const { current: functions } = useRef(getFunctions(getApp()));
 
   useMount(() => {
-    if (emulator) {
-      const { host, port } = emulator;
+    const host = emulator?.host;
+    const port = emulator?.port;
+    if (host && port) {
       connectFunctionsEmulator(functions, host, port);
     }
   });

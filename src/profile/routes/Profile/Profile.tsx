@@ -37,7 +37,7 @@ export const Profile = memo(function Profile() {
           </List.Item>
           <List.Item
             button
-            onClick={() => navigate({ pathname: RoutePath.ProfileFeedback })}
+            onClick={() => navigate({ pathname: RoutePath.Feedback })}
           >
             <List.Icon name="chatbox-ellipses-outline" />
             <List.Label>Share your feedback</List.Label>

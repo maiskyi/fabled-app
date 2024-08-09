@@ -14,6 +14,7 @@ import { Home } from './home/routes';
 import { Request } from './request/routes';
 import { Profile } from './profile/routes';
 import { ContactUs } from './contact-us/routes';
+import { Feedback } from './feeadback/routes';
 
 export const Router = memo(function Router() {
   return (
@@ -42,6 +43,11 @@ export const Router = memo(function Router() {
         <Route path={RoutePath.Profile}>
           <ProtectedWithRedirect roles={[Role.User]}>
             <Profile />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.Feedback}>
+          <ProtectedWithRedirect roles={[Role.User]}>
+            <Feedback />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.ContactUs}>
