@@ -36,15 +36,15 @@ export const ContactUs: FC = () => {
       await mutateAsync(data);
       toast({
         variant: 'success',
-        title: t('notifications.contactUsSubmissionSucceed.title'),
-        message: t('notifications.contactUsSubmissionSucceed.message'),
+        title: t('notifications.inquirySucceed.title'),
+        message: t('notifications.inquirySucceed.message'),
       });
       navigate({ back: true });
     } catch (err) {
       toast({
-        variant: 'success',
-        title: t('notifications.contactUsSubmissionFailed.title'),
-        message: t('notifications.contactUsSubmissionFailed.message'),
+        variant: 'error',
+        title: t('notifications.inquiryFailed.title'),
+        message: t('notifications.inquiryFailed.message'),
       });
     }
   };
