@@ -6,11 +6,13 @@ import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
 import { FunctionName } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
+import { useAuth } from '@core/auth';
 
 export const ContactUs: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
   const { toast } = useUtils();
+  const { user } = useAuth();
 
   const title = t('pages.contactUs');
 
@@ -39,6 +41,12 @@ export const ContactUs: FC = () => {
     }
   };
 
+  const defaultValues: DTO.ContactUsRequest = {
+    email: user?.email,
+    subject: '',
+    text: '',
+  };
+
   return (
     <Page>
       <Header translucent>
@@ -49,8 +57,17 @@ export const ContactUs: FC = () => {
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Form<DTO.ContactUsRequest> onSubmit={handleOnSubmit}>
+        <Form<DTO.ContactUsRequest>
+          onSubmit={handleOnSubmit}
+          defaultValues={defaultValues}
+        >
           <Container padding>
+            <Form.Text
+              name="email"
+              label={t('forms.email')}
+              disabled={!!user?.email}
+              validation={{ required: true }}
+            />
             <Form.Text
               name="subject"
               label={t('forms.subject')}
