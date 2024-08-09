@@ -19,3 +19,5 @@ import '@ionic/react/css/display.css';
 import '@ionic/react/css/palettes/dark.always.css';
 /* import '@ionic/react/css/palettes/dark.class.css'; */
 // import '@ionic/react/css/palettes/dark.system.css';
+import '../../assets/fonts/sf-rounded/stylesheet.css';
+import './ThemeProvider.theme.css';

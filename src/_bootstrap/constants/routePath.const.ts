@@ -6,6 +6,6 @@ export enum RoutePath {
   Profile = '/profile',
   ContactUs = '/contact-us',
   ContactUsSuccess = '/contact-us/success',
-  ProfileFeedback = '/profile/feedback',
+  Feedback = '/feedback',
   Request = '/request/:id',
 }

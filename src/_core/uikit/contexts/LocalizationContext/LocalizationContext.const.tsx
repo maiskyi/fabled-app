@@ -20,6 +20,12 @@ const maxLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
 
 export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
   form: {
+    starRating: {
+      errors: {
+        generic: genericError,
+        required: requiredInputError,
+      },
+    },
     textarea: {
       errors: {
         generic: genericError,

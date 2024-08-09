@@ -7,6 +7,7 @@ import { FormSelectValidation } from '../../components/Form/FormSelect/FormSelec
 // import { FormCheckboxGroupValidation } from '../../components/Form/FormCheckboxGroup/FormCheckboxGroup.types';
 // import { FormCheckboxToggleValidation } from '../../components/Form/FormCheckboxToggle/FormCheckboxToggle.types';
 import { FormTextareaValidation } from '../../components/Form/FormTextarea/FormTextarea.types';
+import { FormStarRatingValidation } from '../../components/Form/FormStarRating/FormText.types';
 // import { FormPlainValidation } from '../../components/Form/FormPlain/FormPlain.types';
 
 interface FormValidationErrorFnParams {
@@ -41,6 +42,10 @@ interface Form {
   };
   textarea: {
     errors: Record<keyof FormTextareaValidation, FormValidationErrorFn> &
+      FormGenericError;
+  };
+  starRating: {
+    errors: Record<keyof FormStarRatingValidation, FormValidationErrorFn> &
       FormGenericError;
   };
   // password: {

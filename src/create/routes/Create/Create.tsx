@@ -20,7 +20,7 @@ export const Create = memo(function Create() {
     isPending,
     mutateAsync,
   } = useMutationFunction<DTO.RequestInput, DTO.Fable>({
-    name: FunctionName.OnRequest,
+    name: FunctionName.OnFableRequest,
   });
 
   const { readTime } = useStaticOptions();

@@ -4,9 +4,9 @@ import {
   Page,
   Header,
   Content,
-  Form,
   Container,
   Text,
+  Form,
   useUtils,
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
@@ -14,45 +14,37 @@ import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
 import { FunctionName } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
-import { useAuth } from '@core/auth';
 
-export const ContactUs: FC = () => {
+export const Feedback: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
   const { toast } = useUtils();
-  const { user } = useAuth();
 
-  const title = t('pages.contactUs');
+  const title = t('pages.feedback');
 
   const { isPending, mutateAsync } = useMutationFunction<
-    DTO.ContactUsRequest,
-    DTO.ContactUsResponse
+    DTO.FeedbackRequest,
+    DTO.FeedbackResponse
   >({
-    name: FunctionName.OnContactUs,
+    name: FunctionName.OnFeedback,
   });
 
-  const handleOnSubmit = async (data: DTO.ContactUsRequest) => {
+  const handleOnSubmit = async (form: DTO.FeedbackRequest) => {
     try {
-      await mutateAsync(data);
+      await mutateAsync(form);
       toast({
         variant: 'success',
-        title: t('notifications.inquirySucceed.title'),
-        message: t('notifications.inquirySucceed.message'),
+        title: t('notifications.feedbackSucceed.title'),
+        message: t('notifications.feedbackSucceed.message'),
       });
       navigate({ back: true });
-    } catch (err) {
+    } catch (_) {
       toast({
         variant: 'error',
-        title: t('notifications.inquiryFailed.title'),
-        message: t('notifications.inquiryFailed.message'),
+        title: t('notifications.feedbackFailed.title'),
+        message: t('notifications.feedbackFailed.message'),
       });
     }
-  };
-
-  const defaultValues: DTO.ContactUsRequest = {
-    email: user?.email,
-    subject: '',
-    text: '',
   };
 
   return (
@@ -66,26 +58,17 @@ export const ContactUs: FC = () => {
           <Header.Title size="large">{title}</Header.Title>
         </Header>
         <Container padding>
-          <Text>{t('intro.inquiry')}</Text>
+          <Text>{t('intro.feedback')}</Text>
         </Container>
-        <Form<DTO.ContactUsRequest>
-          onSubmit={handleOnSubmit}
-          defaultValues={defaultValues}
-        >
+        <Form onSubmit={handleOnSubmit}>
+          <Form.StarRating
+            name="rating"
+            label={t('forms.rateUs')}
+            validation={{ required: true }}
+          />
           <Container padding>
-            <Form.Text
-              name="email"
-              label={t('forms.email')}
-              disabled={!!user?.email}
-              validation={{ required: true }}
-            />
-            <Form.Text
-              name="subject"
-              label={t('forms.subject')}
-              validation={{ required: true }}
-            />
             <Form.Textarea
-              name="text"
+              name="message"
               label={t('forms.message')}
               validation={{ required: true }}
             />

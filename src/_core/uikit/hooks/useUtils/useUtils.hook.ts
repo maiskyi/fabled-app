@@ -15,7 +15,6 @@ export const useUtils = () => {
       showToast({
         message,
         header: title,
-        duration: 5000,
         position: 'top',
         color: COLOR_MAPPING[variant],
         icon: ICON_MAPPING[variant],

@@ -18,8 +18,9 @@ export const FirestoreProvider: FC<FirestoreProviderProps> = ({
   const { current: database } = useRef(getFirestore(getApp()));
 
   useMount(() => {
-    if (emulator) {
-      const { host, port } = emulator;
+    const host = emulator?.host;
+    const port = emulator?.port;
+    if (host && port) {
       connectFirestoreEmulator(database, host, port);
     }
   });

@@ -23,6 +23,7 @@ import { FormSelect } from './FormSelect/FormSelect';
 // import { FormCheckboxToggle } from './FormCheckboxToggle/FormCheckboxToggle';
 // import { FormPlain } from './FormPlain/FormPlain';
 import { FormTextarea } from './FormTextarea/FormTextarea';
+import { FormStarRating } from './FormStarRating/FormStarRating';
 import { FormInstance } from './Form.types';
 import { FormContext } from './Form.context';
 
@@ -47,6 +48,7 @@ interface FormComponent {
   //   CheckboxToggle: typeof FormCheckboxToggle;
   //   Plain: typeof FormPlain;
   Textarea: typeof FormTextarea;
+  StarRating: typeof FormStarRating;
 }
 
 export const Form = forwardRef<FormInstance, FormProps>(function Form(
@@ -89,3 +91,4 @@ Form.Select = FormSelect;
 // Form.CheckboxToggle = FormCheckboxToggle;
 // Form.Plain = FormPlain;
 Form.Textarea = FormTextarea;
+Form.StarRating = FormStarRating;

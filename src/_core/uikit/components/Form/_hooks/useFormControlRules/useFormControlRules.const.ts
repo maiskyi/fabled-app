@@ -8,6 +8,7 @@ import { FORM_SELECT_RULES } from '../../FormSelect/FormSelect.const';
 // import { FORM_CHECKBOX_TOGGLE_RULES } from '../../FormCheckboxToggle/FormCheckboxToggle.const';
 // import { FORM_PLAIN_RULES } from '../../FormPlain/FormPlain.const';
 import { FORM_TEXTAREA_RULES } from '../../FormTextarea/FormTextarea.const';
+import { FORM_STAR_RATING_RULES } from '../../FormStarRating/FormText.const';
 // Types
 import { FormTextRules } from '../../FormText/FormText.types';
 // import { FormPasswordRules } from '../../FormPassword/FormPassword.types';
@@ -19,6 +20,7 @@ import { FormSelectRules } from '../../FormSelect/FormSelect.types';
 // import { FormCheckboxToggleRules } from '../../FormCheckboxToggle/FormCheckboxToggle.types';
 // import { FormPlainRules } from '../../FormPlain/FormPlain.types';
 import { FormTextareaRules } from '../../FormTextarea/FormTextarea.types';
+import { FormStarRatingRules } from '../../FormStarRating/FormText.types';
 
 interface FormControlRules
   extends FormTextRules,
@@ -30,7 +32,8 @@ interface FormControlRules
     // FormCheckboxGroupRules,
     // FormCheckboxToggleRules,
     // FormPlainRules,
-    FormTextareaRules {}
+    FormTextareaRules,
+    FormStarRatingRules {}
 
 export const FORM_CONTROL_RULES: FormControlRules = {
   ...FORM_TEXT_RULES,
@@ -43,4 +46,5 @@ export const FORM_CONTROL_RULES: FormControlRules = {
   // ...FORM_CHECKBOX_TOGGLE_RULES,
   // ...FORM_PLAIN_RULES,
   ...FORM_TEXTAREA_RULES,
+  ...FORM_STAR_RATING_RULES,
 };
