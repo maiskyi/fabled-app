@@ -5,11 +5,13 @@ import { useMutation } from '@tanstack/react-query';
 
 import { useFunctionsError } from '../useFunctionsError';
 
-interface UseFunctionParams {
+interface UseMutationFunctionParams {
   name: string;
 }
 
-export const useFunction = <Request, Response>({ name }: UseFunctionParams) => {
+export const useMutationFunction = <Request, Response>({
+  name,
+}: UseMutationFunctionParams) => {
   const { current: functions } = useRef(getFunctions());
 
   const { throwError } = useFunctionsError();

@@ -13,6 +13,7 @@ import { Create } from './create/routes';
 import { Home } from './home/routes';
 import { Request } from './request/routes';
 import { Profile } from './profile/routes';
+import { ContactUs } from './contact-us/routes';
 
 export const Router = memo(function Router() {
   return (
@@ -42,6 +43,9 @@ export const Router = memo(function Router() {
           <ProtectedWithRedirect roles={[Role.User]}>
             <Profile />
           </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.ContactUs}>
+          <ContactUs />
         </Route>
       </RouterOutlet>
     </NavRouter>

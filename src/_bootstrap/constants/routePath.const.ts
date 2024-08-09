@@ -1,10 +1,11 @@
 export enum RoutePath {
-  Index = '/',
-  Create = '/create',
-  Auth = '/auth',
   Any = '*',
-  Request = '/request/:id',
+  Auth = '/auth',
+  Create = '/create',
+  Index = '/',
   Profile = '/profile',
-  ProfileContactUs = '/profile/contact-us',
+  ContactUs = '/contact-us',
+  ContactUsSuccess = '/contact-us/success',
   ProfileFeedback = '/profile/feedback',
+  Request = '/request/:id',
 }

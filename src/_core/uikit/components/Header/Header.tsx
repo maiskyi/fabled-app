@@ -8,6 +8,8 @@ import classNames from 'classnames';
 
 import { IonHeader, IonToolbar } from '@ionic/react';
 
+import { Selector } from '../../constants/selector.const';
+
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';
 import { HeaderActions } from './HeaderActions/HeaderActions';
@@ -34,6 +36,7 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
   return (
     <IonHeader
       ref={ref}
+      id={Selector.Header}
       className={classNames('ion-no-border', className)}
       translucent={translucent}
       collapse={collapse}

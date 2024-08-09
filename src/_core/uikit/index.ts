@@ -11,4 +11,8 @@ export * from './components/Icon';
 export * from './components/InfiniteScroll';
 export * from './components/List';
 export * from './components/Page';
+export * from './components/Text';
 export * from './components/ThemeProvider';
+
+// Hooks
+export * from './hooks/useUtils';
