@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, generatePath } from 'react-router-dom';
 
 import { NavigateParams } from './useRoute.types';
 
@@ -24,7 +24,7 @@ export const useRoute = <P extends object = {}>(): UseRouteReturnType<P> => {
       if ('back' in params) {
         goBack();
       } else {
-        push({ pathname: params.pathname });
+        push({ pathname: generatePath(params.pathname, params.params) });
       }
     },
     [goBack, push]

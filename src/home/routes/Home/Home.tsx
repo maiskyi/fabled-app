@@ -1,18 +1,18 @@
 import { memo } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { useGetCollectionInfinite } from '@core/firestore';
 import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
 import { useTranslation } from '@core/localization';
+import { useRoute } from '@core/navigation';
 
 import { FableCard } from './_patitions/FableCard';
 import { HOME_INITIAL_DATA } from './Home.const';
 
 export const Home = memo(function Home() {
-  const { push } = useHistory();
   const { t } = useTranslation();
+  const [, navigate] = useRoute();
 
   const title = t('pages.home');
 
@@ -40,12 +40,16 @@ export const Home = memo(function Home() {
     }
   );
 
-  const handleOnCreate = () => {
-    push({ pathname: RoutePath.Create });
+  const handleOnCreateClick = () => {
+    navigate({ pathname: RoutePath.Create });
   };
 
-  const handleOnProfile = () => {
-    push({ pathname: RoutePath.Profile });
+  const handleOnProfileClick = () => {
+    navigate({ pathname: RoutePath.Profile });
+  };
+
+  const handleOnFableClick = (id: string) => {
+    navigate({ pathname: RoutePath.Fable, params: { id } });
   };
 
   return (
@@ -53,7 +57,7 @@ export const Home = memo(function Home() {
       <Header translucent>
         <Header.Title>{title}</Header.Title>
         <Header.Actions>
-          <Header.Action icons="person-circle" onClick={handleOnProfile} />
+          <Header.Action icons="person-circle" onClick={handleOnProfileClick} />
         </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
@@ -61,14 +65,19 @@ export const Home = memo(function Home() {
           <Header.Title size="large">{title}</Header.Title>
         </Header>
         <Fab slot="fixed" placement={['end', 'bottom']}>
-          <Fab.Button icon="add" onClick={handleOnCreate} />
+          <Fab.Button icon="add" onClick={handleOnCreateClick} />
         </Fab>
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
           {data?.pages
             .flatMap((item) => item)
             .map((item) => {
               return (
-                <FableCard loading={isLoading} key={item.id} item={item} />
+                <FableCard
+                  item={item}
+                  key={item.id}
+                  loading={isLoading}
+                  onClick={() => handleOnFableClick(item.id)}
+                />
               );
             })}
         </InfiniteScroll>

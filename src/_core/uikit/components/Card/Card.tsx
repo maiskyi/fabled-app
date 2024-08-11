@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react';
+import { noop } from 'lodash';
 
 import { IonCard } from '@ionic/react';
 
@@ -11,6 +12,7 @@ import { CardContext } from './Card.context';
 
 export type CardProps = PropsWithChildren<{
   loading?: boolean;
+  onClick?: () => void;
 }>;
 
 interface CardComponent {
@@ -22,10 +24,18 @@ interface CardComponent {
   Avatar: typeof CardAvatar;
 }
 
-export const Card: CardComponent = ({ children, loading }: CardProps) => {
+export const Card: CardComponent = ({
+  children,
+  loading,
+  onClick = noop,
+}: CardProps) => {
+  const handleOnClick = () => {
+    if (!loading) onClick();
+  };
+
   return (
     <CardContext.Provider value={{ loading }}>
-      <IonCard>{children}</IonCard>
+      <IonCard onClick={handleOnClick}>{children}</IonCard>
     </CardContext.Provider>
   );
 };
