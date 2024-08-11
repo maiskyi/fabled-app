@@ -15,7 +15,7 @@ export const Home = memo(function Home() {
 
   const title = t('pages.home');
 
-  const { data, hasNextPage, fetchNextPage } =
+  const { data, isLoading, hasNextPage, fetchNextPage } =
     useGetCollectionInfinite<DTO.Fable>(
       {
         doc: Document.Fable,
@@ -62,7 +62,9 @@ export const Home = memo(function Home() {
           {data?.pages
             .flatMap((item) => item)
             .map((item) => {
-              return <FableCard key={item.id} item={item} />;
+              return (
+                <FableCard loading={isLoading} key={item.id} item={item} />
+              );
             })}
         </InfiniteScroll>
       </Content>

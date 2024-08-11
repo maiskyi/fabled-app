@@ -1,9 +1,24 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { IonCardSubtitle } from '@ionic/react';
+import { useContextSelector } from 'use-context-selector';
+import { IonCardSubtitle, IonSkeletonText } from '@ionic/react';
+
+import styles from './CardSubtitle.module.css';
+
+import { CardContext } from '../Card.context';
 
 type CardSubtitleProps = PropsWithChildren<{}>;
 
 export const CardSubtitle: FC<CardSubtitleProps> = ({ children }) => {
-  return <IonCardSubtitle>{children}</IonCardSubtitle>;
+  const loading = useContextSelector(CardContext, ({ loading }) => loading);
+
+  return (
+    <IonCardSubtitle>
+      {loading ? (
+        <IonSkeletonText className={styles.skeleton} animated />
+      ) : (
+        children
+      )}
+    </IonCardSubtitle>
+  );
 };

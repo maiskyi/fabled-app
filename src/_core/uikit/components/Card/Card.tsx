@@ -7,8 +7,11 @@ import { CardSubtitle } from './CardSubtitle/CardSubtitle';
 import { CardThumb } from './CardThumb/CardThumb';
 import { CardTitle } from './CardTitle/CardTitle';
 import { CardAvatar } from './CardAvatar/CardAvatar';
+import { CardContext } from './Card.context';
 
-export type CardProps = PropsWithChildren<{}>;
+export type CardProps = PropsWithChildren<{
+  loading?: boolean;
+}>;
 
 interface CardComponent {
   (props: CardProps): ReactElement;
@@ -19,8 +22,12 @@ interface CardComponent {
   Avatar: typeof CardAvatar;
 }
 
-export const Card: CardComponent = ({ children }: CardProps) => {
-  return <IonCard>{children}</IonCard>;
+export const Card: CardComponent = ({ children, loading }: CardProps) => {
+  return (
+    <CardContext.Provider value={{ loading }}>
+      <IonCard>{children}</IonCard>
+    </CardContext.Provider>
+  );
 };
 
 Card.Header = CardHeader;
