@@ -8,6 +8,7 @@ import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 import { FableCard } from './_patitions/FableCard';
+import { HOME_INITIAL_DATA } from './Home.const';
 
 export const Home = memo(function Home() {
   const { push } = useHistory();
@@ -15,25 +16,29 @@ export const Home = memo(function Home() {
 
   const title = t('pages.home');
 
-  const { data, isLoading, hasNextPage, fetchNextPage } =
-    useGetCollectionInfinite<DTO.Fable>(
-      {
-        doc: Document.Fable,
+  const {
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    data = HOME_INITIAL_DATA,
+  } = useGetCollectionInfinite<DTO.Fable>(
+    {
+      doc: Document.Fable,
+    },
+    {
+      filter: {
+        type: 'and',
+        queryConstraints: [
+          {
+            type: 'where',
+            fieldPath: 'status',
+            opStr: '==',
+            value: DTO.FableStatus.Success,
+          },
+        ],
       },
-      {
-        filter: {
-          type: 'and',
-          queryConstraints: [
-            {
-              type: 'where',
-              fieldPath: 'status',
-              opStr: '==',
-              value: DTO.FableStatus.Success,
-            },
-          ],
-        },
-      }
-    );
+    }
+  );
 
   const handleOnCreate = () => {
     push({ pathname: RoutePath.Create });

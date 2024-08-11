@@ -8,19 +8,24 @@ import {
 
 import { useFirestoreError } from '../useFirestoreError';
 
-interface UseGetCollectionKey {
+interface UseGetCollectionInfiniteKey {
   filter?: QueryCompositeFilterConstraint;
 }
 
-interface UseGetCollectionParams {
+interface UseGetCollectionInfiniteParams {
   doc: string;
   limit?: number;
   startAfter?: string;
 }
 
+interface UseGetCollectionInfiniteQueryParams<T extends object> {
+  initialData?: InfiniteData<DocumentSnapshot<T>[], string>;
+}
+
 export const useGetCollectionInfinite = <T extends object>(
-  { limit = 20, doc, startAfter }: UseGetCollectionParams,
-  { filter: compositeFilter }: UseGetCollectionKey = {}
+  { limit = 20, doc, startAfter }: UseGetCollectionInfiniteParams,
+  { filter: compositeFilter }: UseGetCollectionInfiniteKey = {},
+  { initialData }: UseGetCollectionInfiniteQueryParams<T> = {}
 ) => {
   const { throwError } = useFirestoreError();
 
@@ -28,9 +33,10 @@ export const useGetCollectionInfinite = <T extends object>(
     DocumentSnapshot<T>[],
     Error,
     InfiniteData<DocumentSnapshot<T>[]>,
-    ['getCollectionInfinite', string, number, UseGetCollectionKey],
+    ['getCollectionInfinite', string, number, UseGetCollectionInfiniteKey],
     string | undefined
   >({
+    initialData,
     queryKey: [
       'getCollectionInfinite',
       doc,
