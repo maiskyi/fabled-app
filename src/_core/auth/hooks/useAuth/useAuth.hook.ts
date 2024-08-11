@@ -1,16 +1,23 @@
-import { useRef } from 'react';
+import { useCallback, useRef, useContext } from 'react';
 
-// import { useContextSelector } from 'use-context-selector';
 import { getAuth } from 'firebase/auth';
 
-// import { AuthContext } from '../../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const useAuth = () => {
   const { current: auth } = useRef(getAuth());
+  const { user } = useContext(AuthContext);
 
-  // const user = useContextSelector(AuthContext, ({ user }) => user);
+  const isAuthenticated = !!user;
 
-  const isAuthenticated = !!auth?.currentUser;
+  const signOut = useCallback(() => {
+    return auth.signOut();
+  }, [auth]);
 
-  return { isAuthenticated, auth, user: auth?.currentUser };
+  return {
+    user,
+    auth,
+    signOut,
+    isAuthenticated,
+  };
 };

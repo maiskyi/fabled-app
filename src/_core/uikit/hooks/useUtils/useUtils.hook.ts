@@ -1,14 +1,15 @@
 import { useCallback } from 'react';
 
-import { useIonToast } from '@ionic/react';
+import { useIonToast, useIonAlert } from '@ionic/react';
 
 import { Selector } from '../../constants/selector.const';
 
-import { ToastParams } from './useUtils.types';
+import { ToastParams, ConfirmParams } from './useUtils.types';
 import { ICON_MAPPING, COLOR_MAPPING } from './useUtils.const';
 
 export const useUtils = () => {
   const [showToast] = useIonToast();
+  const [showAlert] = useIonAlert();
 
   const toast = useCallback(
     ({ title, message, variant }: ToastParams) => {
@@ -29,5 +30,35 @@ export const useUtils = () => {
     [showToast]
   );
 
-  return { toast };
+  const confirm = useCallback(
+    ({
+      title,
+      message,
+      variant,
+      onConfirm,
+      confirmBtn = 'Ok',
+      cancelBtn = 'Cancel',
+    }: ConfirmParams) => {
+      showAlert({
+        message,
+        header: title,
+        buttons: [
+          {
+            text: cancelBtn,
+            role: 'cancel',
+          },
+          {
+            handler: async () => {
+              await onConfirm();
+            },
+            text: confirmBtn,
+            role: variant === 'error' ? 'destructive' : 'cancel',
+          },
+        ],
+      });
+    },
+    [showAlert]
+  );
+
+  return { toast, confirm };
 };
