@@ -5,7 +5,7 @@ import { RoutePath } from '@bootstrap/constants';
 
 import { Index } from './Index/Index';
 
-export const Auth = memo(() => {
+export const Auth = memo(function Auth() {
   return (
     <>
       <Route exact path={RoutePath.Auth}>
@@ -14,5 +14,3 @@ export const Auth = memo(() => {
     </>
   );
 });
-
-Auth.displayName = 'Auth';
