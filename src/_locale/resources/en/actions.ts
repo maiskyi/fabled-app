@@ -7,4 +7,5 @@ export const actions = {
   continue: 'Continue',
   signUp: 'Sign Up',
   requestNewLink: 'Request New Link',
+  contactSupport: 'Contact support',
 };

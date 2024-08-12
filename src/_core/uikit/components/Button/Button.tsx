@@ -14,6 +14,7 @@ export type ButtonProps = PropsWithChildren<{
   onClick?: () => void;
   loading?: boolean;
   type?: ComponentProps<typeof IonButton>['type'];
+  fill?: ComponentProps<typeof IonButton>['fill'];
 }>;
 
 interface ButtonComponent {
@@ -22,21 +23,23 @@ interface ButtonComponent {
 }
 
 export const Button: ButtonComponent = ({
-  children,
+  fill,
   onClick,
+  children,
   className,
   block = true,
   type = 'button',
-  disabled = false,
   loading = false,
+  disabled = false,
 }: ButtonProps) => {
   return (
     <IonButton
-      type={type}
-      disabled={disabled}
-      shape="round"
       mode="ios"
+      fill={fill}
+      type={type}
+      shape="round"
       onClick={onClick}
+      disabled={disabled}
       className={classNames(styles.root, className)}
       expand={block ? 'block' : undefined}
     >

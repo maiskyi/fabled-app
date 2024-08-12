@@ -6,3 +6,4 @@ export * from './components/LocalizationProvider';
 export * from './hooks/useAuth';
 export * from './hooks/useGoogleSignIn';
 export * from './hooks/useSignUp';
+export * from './hooks/useSendEmailVerification';
