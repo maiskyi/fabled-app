@@ -26,7 +26,7 @@ export const ButtonSocial: FC<ButtonSocialProps> = ({
 }) => {
   return (
     <IonButton fill="outline" shape="round" onClick={onClick} expand={expand}>
-      {loading && <IonSpinner className={styles.spinner} />}
+      {loading && <IonSpinner name="circular" className={styles.spinner} />}
       <Icon
         slot="start"
         name={ICONS_MAPPING[name]}

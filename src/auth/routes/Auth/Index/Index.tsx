@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Page, Content, Header, Button, Box, Text, Form } from '@core/uikit';
+import { Page, Content, Button, Box, Text, Form } from '@core/uikit';
 import { useGoogleSignIn } from '@core/auth';
 import { useTranslation } from '@core/localization';
 
@@ -10,7 +10,6 @@ export const Index = memo(function Index() {
 
   return (
     <Page>
-      <Header translucent />
       <Content fullscreen>
         <Box
           height="100%"
@@ -26,17 +25,17 @@ export const Index = memo(function Index() {
               loading={loading}
               onClick={signInWithGoogle}
             >
-              Continue with Google
+              {t('actions.continueWithGoogle')}
             </Button.Social>
-            <Button.Social name="google" expand="block">
-              Continue with Apple
+            <Button.Social name="apple" expand="block">
+              {t('actions.continueWithApple')}
             </Button.Social>
-            <Button.Social name="google" expand="block">
-              Continue with Facebook
+            <Button.Social name="facebook" expand="block">
+              {t('actions.continueWithFacebook')}
             </Button.Social>
           </Box>
           <Box padding={4} display="flex" justifyContent="center">
-            <Text>or</Text>
+            <Text variant="h3">or</Text>
           </Box>
           <Form>
             <Box padding={20} display="flex" flexDirection="column" gap={12}>
@@ -46,7 +45,7 @@ export const Index = memo(function Index() {
                 label={t('forms.email')}
                 validation={{ required: true }}
               />
-              <Form.Submit>{t('actions.signInUp')}</Form.Submit>
+              <Form.Submit>{t('actions.continue')}</Form.Submit>
             </Box>
           </Form>
         </Box>
