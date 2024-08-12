@@ -30,10 +30,10 @@ export const SignUp: FC = () => {
               label={t('forms.email')}
               validation={{ required: true, email: true }}
             />
-            <Form.Text
-              name="email"
+            <Form.Password
+              name="password"
               label={t('forms.password')}
-              validation={{ required: true, email: true }}
+              validation={{ required: true }}
             />
           </Box>
           <Box padding={16} paddingInline={20}>

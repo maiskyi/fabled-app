@@ -12,7 +12,7 @@ import { PartialDeep } from 'type-fest';
 
 // import { FormCheckbox } from './FormCheckbox/FormCheckbox';
 // import { FormDatepicker } from './FormDatepicker/FormDatepicker';
-// import { FormPassword } from './FormPassword/FormPassword';
+import { FormPassword } from './FormPassword/FormPassword';
 // import { FormSection } from './FormSection/FormSection';
 import { FormSubmit } from './FormSubmit/FormSubmit';
 import { FormText } from './FormText/FormText';
@@ -37,7 +37,7 @@ interface FormComponent {
   <T extends object = {}>(props: FormProps<T>, ref: FormInstance): ReactElement;
   //   Checkbox: typeof FormCheckbox;
   //   Datepicker: typeof FormDatepicker;
-  //   Password: typeof FormPassword;
+  Password: typeof FormPassword;
   //   Section: typeof FormSection;
   Submit: typeof FormSubmit;
   Text: typeof FormText;
@@ -80,7 +80,7 @@ export const Form = forwardRef<FormInstance, FormProps>(function Form(
 
 // Form.Checkbox = FormCheckbox;
 // Form.Datepicker = FormDatepicker;
-// Form.Password = FormPassword;
+Form.Password = FormPassword;
 // Form.Section = FormSection;
 Form.Submit = FormSubmit;
 Form.Text = FormText;

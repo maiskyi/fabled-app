@@ -1,5 +1,5 @@
 import { FORM_TEXT_RULES } from '../../FormText/FormText.const';
-// import { FORM_PASSWORD_RULES } from '../../FormPassword/FormPassword.const';
+import { FORM_PASSWORD_RULES } from '../../FormPassword/FormPassword.const';
 // import { FORM_CHECKBOX_RULES } from '../../FormCheckbox/FormCheckbox.const';
 // import { FORM_DATEPICKER_RULES } from '../../FormDatepicker/FormDatepicker.const';
 // import { FORM_RADIO_GROUP_RULES } from '../../FormRadioGroup/FormRadioGroup.const';
@@ -11,7 +11,7 @@ import { FORM_TEXTAREA_RULES } from '../../FormTextarea/FormTextarea.const';
 import { FORM_STAR_RATING_RULES } from '../../FormStarRating/FormText.const';
 // Types
 import { FormTextRules } from '../../FormText/FormText.types';
-// import { FormPasswordRules } from '../../FormPassword/FormPassword.types';
+import { FormPasswordRules } from '../../FormPassword/FormPassword.types';
 // import { FormCheckboxRules } from '../../FormCheckbox/FormCheckbox.types';
 // import { FormDatepickerRules } from '../../FormDatepicker/FormDatepicker.types';
 // import { FormRadioGroupRules } from '../../FormRadioGroup/FormRadioGroup.types';
@@ -25,7 +25,7 @@ import { FormStarRatingRules } from '../../FormStarRating/FormText.types';
 interface FormControlRules
   extends FormTextRules,
     FormSelectRules,
-    // FormPasswordRules,
+    FormPasswordRules,
     // FormCheckboxRules,
     // FormDatepickerRules,
     // FormRadioGroupRules,
@@ -37,7 +37,7 @@ interface FormControlRules
 
 export const FORM_CONTROL_RULES: FormControlRules = {
   ...FORM_TEXT_RULES,
-  // ...FORM_PASSWORD_RULES,
+  ...FORM_PASSWORD_RULES,
   // ...FORM_CHECKBOX_RULES,
   // ...FORM_DATEPICKER_RULES,
   // ...FORM_RADIO_GROUP_RULES,
