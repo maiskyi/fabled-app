@@ -2,15 +2,24 @@ import { memo } from 'react';
 import { Route } from 'react-router-dom';
 
 import { RoutePath } from '@bootstrap/constants';
+import { Page } from '@core/uikit';
+import { RouterOutlet } from '@core/navigation';
 
 import { Index } from './Index/Index';
+import { SignUp } from './SignUp/SignUp';
 
 export const Auth = memo(function Auth() {
   return (
-    <>
-      <Route exact path={RoutePath.Auth}>
-        <Index />
-      </Route>
-    </>
+    <Page>
+      <RouterOutlet>
+        <Route exact path={RoutePath.Auth}>
+          <Index />
+        </Route>
+        <Route path={RoutePath.AuthSignIn}>SignIn</Route>
+        <Route path={RoutePath.AuthSignUp}>
+          <SignUp />
+        </Route>
+      </RouterOutlet>
+    </Page>
   );
 });

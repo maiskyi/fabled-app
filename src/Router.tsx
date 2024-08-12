@@ -36,11 +36,6 @@ export const Router = memo(function Router() {
             <Request />
           </ProtectedWithRedirect>
         </Route>
-        <Route exact path={RoutePath.Auth}>
-          <ProtectedWithRedirect roles={[Role.None]}>
-            <Auth />
-          </ProtectedWithRedirect>
-        </Route>
         <Route path={RoutePath.Profile}>
           <ProtectedWithRedirect roles={[Role.User]}>
             <Profile />
@@ -58,6 +53,11 @@ export const Router = memo(function Router() {
         </Route>
         <Route path={RoutePath.ContactUs}>
           <ContactUs />
+        </Route>
+        <Route path={RoutePath.Auth}>
+          <ProtectedWithRedirect roles={[Role.None]}>
+            <Auth />
+          </ProtectedWithRedirect>
         </Route>
       </RouterOutlet>
     </NavRouter>

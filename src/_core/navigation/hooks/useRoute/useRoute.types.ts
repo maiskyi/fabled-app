@@ -5,6 +5,7 @@ export interface NavigateParamsBack {
 export interface NavigateParamsPush {
   pathname: string;
   params?: object;
+  search?: object;
 }
 
 export type NavigateParams = NavigateParamsBack | NavigateParamsPush;

@@ -5,4 +5,5 @@ export const actions = {
   continueWithApple: 'Continue with Apple',
   continueWithFacebook: 'Continue with Facebook',
   continue: 'Continue',
+  signUp: 'Sign Up',
 };
