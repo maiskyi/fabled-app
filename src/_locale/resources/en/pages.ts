@@ -3,4 +3,5 @@ export const pages = {
   contactUs: 'Contact Us',
   feedback: 'Share your feedback',
   signUp: 'Sign Up',
+  verifyEmail: 'Verify Your Email',
 };

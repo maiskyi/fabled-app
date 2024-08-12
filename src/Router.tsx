@@ -55,7 +55,7 @@ export const Router = memo(function Router() {
           <ContactUs />
         </Route>
         <Route path={RoutePath.Auth}>
-          <ProtectedWithRedirect roles={[Role.None]}>
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
             <Auth />
           </ProtectedWithRedirect>
         </Route>

@@ -8,13 +8,27 @@ import { Role, RoutePath } from '../../constants';
 export type NavigationProps = PropsWithChildren<{}>;
 
 export const Navigation: FC<NavigationProps> = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
-  const roles = isAuthenticated ? [Role.User] : [Role.None];
+  const roles = (() => {
+    if (isAuthenticated && user?.emailVerified) {
+      return [Role.User];
+    }
+    if (isAuthenticated && !user?.emailVerified) {
+      return [Role.Unverified];
+    }
+    return [Role.None];
+  })();
 
-  const defaultProtectedRedirect = isAuthenticated
-    ? RoutePath.Index
-    : RoutePath.Auth;
+  const defaultProtectedRedirect = (() => {
+    if (isAuthenticated && user?.emailVerified) {
+      return RoutePath.Index;
+    }
+    if (isAuthenticated && !user?.emailVerified) {
+      return RoutePath.AuthVerifyEmail;
+    }
+    return RoutePath.Auth;
+  })();
 
   return (
     <NavigationProvider

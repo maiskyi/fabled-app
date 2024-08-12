@@ -6,4 +6,5 @@ export const actions = {
   continueWithFacebook: 'Continue with Facebook',
   continue: 'Continue',
   signUp: 'Sign Up',
+  requestNewLink: 'Request New Link',
 };

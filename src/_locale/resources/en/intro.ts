@@ -1,4 +1,6 @@
 export const intro = {
+  verifyEmail:
+    "We’ve sent a verification link to your email <b>{{email}}</b>. Please check your inbox and click the link to verify your account. If you don't see it, check your spam folder or request a new link below.",
   signUp:
     "Create your account by filling out the form below. We’re glad you’re joining our community and can't wait for you to get started!",
   feedback:
