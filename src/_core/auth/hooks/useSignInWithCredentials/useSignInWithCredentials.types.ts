@@ -1,8 +1,8 @@
-import {
-  SignInResult,
-  SignInWithEmailAndPasswordOptions,
-} from '@capacitor-firebase/authentication';
+import { SignInResult } from '@capacitor-firebase/authentication';
 
-export type SignInRequest = SignInWithEmailAndPasswordOptions;
+export interface SignInRequest {
+  email: string;
+  password: string;
+}
 
 export type SignInResponse = SignInResult;

@@ -11,6 +11,11 @@ import { UNKNOWN_AUTH_ERROR_CODE } from '../../constants';
 import { AuthError } from './useAuthError.services';
 
 export const useAuthError = () => {
+  const authErrorTitle = useContextSelector(
+    LocalizationContext,
+    ({ authErrorTitle }) => authErrorTitle
+  );
+
   const authErrorMessage = useContextSelector(
     LocalizationContext,
     ({ authErrorMessage }) => authErrorMessage
@@ -24,12 +29,16 @@ export const useAuthError = () => {
           error.code,
           UNKNOWN_AUTH_ERROR_CODE
         );
-        throw new AuthError(message, error.code as AuthErrorCode);
+        throw new AuthError(
+          authErrorTitle,
+          message,
+          error.code as AuthErrorCode
+        );
       } else {
         throw new Error('Auth error');
       }
     },
-    [authErrorMessage]
+    [authErrorTitle, authErrorMessage]
   );
 
   return { throwError };

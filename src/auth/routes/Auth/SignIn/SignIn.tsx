@@ -1,7 +1,17 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import { noop } from 'lodash';
 
-import { Box, Button, Content, Form, Header, Page, Text } from '@core/uikit';
+import {
+  Box,
+  Button,
+  Content,
+  Form,
+  FormInstance,
+  Header,
+  Page,
+  Text,
+  useUtils,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { useSignInWithCredentials, SignInRequest } from '@core/auth';
@@ -10,15 +20,23 @@ import { RoutePath } from '@bootstrap/constants';
 export const SignIn: FC = () => {
   const { t } = useTranslation();
   const [{ search }, navigate] = useRoute<{}, Partial<SignInRequest>>();
+  const form = useRef<FormInstance<SignInRequest>>();
+  const { toast } = useUtils();
 
   const title = t('pages.signIn');
 
   const { isPending, mutateAsync } = useSignInWithCredentials();
 
-  const handleOnSubmit = async (form: SignInRequest) => {
+  const handleOnSubmit = async (data: SignInRequest) => {
     try {
-      await mutateAsync(form, {
-        onError: () => {},
+      await mutateAsync(data, {
+        onError: ({ title, message, fields }) => {
+          if (fields) {
+            form.current.setErrors(fields);
+          } else {
+            toast({ variant: 'error', title, message });
+          }
+        },
         onSuccess: ({ user: { emailVerified } }) => {
           if (!emailVerified) {
             navigate({ action: 'push', pathname: RoutePath.AuthVerifyEmail });
@@ -43,7 +61,11 @@ export const SignIn: FC = () => {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.signIn')}</Text>
         </Box>
-        <Form<SignInRequest> defaultValues={search} onSubmit={handleOnSubmit}>
+        <Form<SignInRequest>
+          ref={form}
+          defaultValues={search}
+          onSubmit={handleOnSubmit}
+        >
           <Box padding={16} paddingInline={20}>
             <Form.Text
               name="email"

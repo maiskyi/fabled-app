@@ -65,7 +65,7 @@ export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
     [AuthErrorCodes.INVALID_EMULATOR_SCHEME]:
       'The emulator scheme provided is invalid.',
     [AuthErrorCodes.INVALID_LOGIN_CREDENTIALS]:
-      'The provided credentials are invalid.',
+      'The username or email you entered is incorrect.',
     [AuthErrorCodes.INVALID_MESSAGE_PAYLOAD]: 'The message payload is invalid.',
     [AuthErrorCodes.INVALID_MFA_SESSION]:
       'The multi-factor authentication session is invalid.',

@@ -24,17 +24,20 @@ import { FormSelect } from './FormSelect/FormSelect';
 // import { FormPlain } from './FormPlain/FormPlain';
 import { FormTextarea } from './FormTextarea/FormTextarea';
 import { FormStarRating } from './FormStarRating/FormStarRating';
-import { FormInstance } from './Form.types';
+import { FormInstance, FormSetErrors } from './Form.types';
 import { FormContext } from './Form.context';
 
 export type FormProps<T extends object = {}> = PropsWithChildren<{
   onSubmit?: (v: T) => void;
   defaultValues?: PartialDeep<T>;
-  ref?: MutableRefObject<FormInstance>;
+  ref?: MutableRefObject<FormInstance<T>>;
 }>;
 
 interface FormComponent {
-  <T extends object = {}>(props: FormProps<T>, ref: FormInstance): ReactElement;
+  <T extends object = {}>(
+    props: FormProps<T>,
+    ref: FormInstance<T>
+  ): ReactElement;
   //   Checkbox: typeof FormCheckbox;
   //   Datepicker: typeof FormDatepicker;
   Password: typeof FormPassword;
@@ -51,7 +54,7 @@ interface FormComponent {
   StarRating: typeof FormStarRating;
 }
 
-export const Form = forwardRef<FormInstance, FormProps>(function Form(
+export const Form = forwardRef<FormInstance<{}>, FormProps>(function Form(
   { children, defaultValues, onSubmit = noop },
   ref
 ) {
@@ -67,7 +70,16 @@ export const Form = forwardRef<FormInstance, FormProps>(function Form(
     return () => value;
   })();
 
+  const setErrors: FormSetErrors<{}> = (params) => {
+    Object.entries(params).forEach(([key, message]) => {
+      methods.setError(key as any, {
+        message: message as string,
+      });
+    });
+  };
+
   useImperativeHandle(ref, () => ({
+    setErrors,
     hasUnsavedChanges,
   }));
 
