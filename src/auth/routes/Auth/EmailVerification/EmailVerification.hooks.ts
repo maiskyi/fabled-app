@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 
-import { AuthQueryStatus, AuthError } from '@core/auth';
+import { AuthQueryStatus } from '@core/auth';
 import { useTranslation } from '@core/localization';
 
 import {
@@ -10,7 +10,6 @@ import {
 
 interface UseActionCopyParams {
   status: AuthQueryStatus;
-  error?: AuthError;
 }
 
 export const useEmailVerificationCopy = ({ status }: UseActionCopyParams) => {

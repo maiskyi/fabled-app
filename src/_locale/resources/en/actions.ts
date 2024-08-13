@@ -1,14 +1,14 @@
 export const actions = {
   submit: 'Submit',
-  logOut: 'Log Out',
+  logOut: 'Log out',
   continueWithGoogle: 'Continue with Google',
   continueWithApple: 'Continue with Apple',
   continueWithFacebook: 'Continue with Facebook',
   continue: 'Continue',
-  signUp: 'Sign Up',
-  requestNewLink: 'Request New Link',
+  signUp: 'Sign up',
+  requestNewLink: 'Request new link',
   contactSupport: 'Contact support',
-  signIn: 'Sign In',
+  signIn: 'Sign in',
   forgotPassword: 'Forgot password?',
   goToFabledSpace: 'Go to Fabled Space',
 };

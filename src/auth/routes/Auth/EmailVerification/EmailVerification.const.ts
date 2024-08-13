@@ -11,5 +11,5 @@ export const ACTION_MESSAGE_MAPPING: AuthActionCopyMap = {
   error: 'notifications.emailVerificationFailed.error',
   idle: '',
   pending: 'notifications.emailVerificationInProgress.message',
-  success: '',
+  success: 'notifications.emailVerificationSucceed.message',
 };
