@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { useMount } from 'react-use';
+import { useAsyncFn } from 'react-use';
 
 import {
   Box,
@@ -9,12 +9,12 @@ import {
   Page,
   Text,
   useUtils,
+  useViewDidEnter,
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import {
   useApplyActionCode,
   useAuth,
-  useGetCurrentUser,
   useSendEmailVerification,
 } from '@core/auth';
 import { useTranslation } from '@core/localization';
@@ -26,8 +26,10 @@ import { useEmailVerificationCopy } from './EmailVerification.hooks';
 
 export const EmailVerification = memo(function Action() {
   const { t } = useTranslation();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, reload } = useAuth();
   const { toast } = useUtils();
+
+  const [{ loading: isReloadingUser }, reloadUser] = useAsyncFn(() => reload());
 
   const [
     {
@@ -35,9 +37,6 @@ export const EmailVerification = memo(function Action() {
     },
     navigate,
   ] = useRoute<{}, AuthActionModeRouteSearch>();
-
-  const { isPending: isGettingCurrentUser, mutate: getCurrentUser } =
-    useGetCurrentUser();
 
   const {
     mutate: sendEmailVerification,
@@ -63,6 +62,10 @@ export const EmailVerification = memo(function Action() {
     navigate({ action: 'push', pathname: RoutePath.AuthSignIn });
   };
 
+  const handleOnGoToFabledSpace = () => {
+    reloadUser();
+  };
+
   const handleOnRequestNewLink = async () => {
     sendEmailVerification(undefined, {
       onSuccess: () =>
@@ -73,14 +76,14 @@ export const EmailVerification = memo(function Action() {
         }),
       onError: () =>
         toast({
-          variant: 'success',
+          variant: 'error',
           title: t('notifications.sendVerificationLinkFailed.title'),
           message: t('notifications.sendVerificationLinkFailed.message'),
         }),
     });
   };
 
-  useMount(() => applyActionCode({ oobCode }));
+  useViewDidEnter(() => applyActionCode({ oobCode }));
 
   return (
     <Page>
@@ -107,8 +110,8 @@ export const EmailVerification = memo(function Action() {
           {isAuthenticated && isSuccess && (
             <Button
               fill="solid"
-              loading={isGettingCurrentUser}
-              onClick={() => getCurrentUser()}
+              loading={isReloadingUser}
+              onClick={handleOnGoToFabledSpace}
             >
               {t('actions.goToFabledSpace')}
             </Button>

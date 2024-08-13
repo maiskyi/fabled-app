@@ -34,7 +34,7 @@ export const VerifyEmail: FC = () => {
       });
     } catch (error) {
       toast({
-        variant: 'success',
+        variant: 'error',
         title: t('notifications.sendVerificationLinkFailed.title'),
         message: t('notifications.sendVerificationLinkFailed.message'),
       });
