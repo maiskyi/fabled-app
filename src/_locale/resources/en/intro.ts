@@ -1,4 +1,6 @@
 export const intro = {
+  action:
+    'The link is either invalid or not supported. Please check the link or contact support for assistance.',
   signIn: 'Please enter your credentials to access your account.',
   verifyEmail:
     "We’ve sent a verification link to your email <b>{{email}}</b>. Please check your inbox and click the link to verify your account. If you don't see it, check your spam folder or request a new link below.",

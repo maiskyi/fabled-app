@@ -1,4 +1,19 @@
 export const notifications = {
+  emailVerificationInProgress: {
+    title: 'Verifying your email',
+    message:
+      "We're currently verifying your email. Please wait a moment as we complete the process.",
+  },
+  emailVerificationSucceed: {
+    title: 'Email Verification Successful',
+    message: 'Your email has been successfully verified. Thank you!',
+  },
+  emailVerificationFailed: {
+    title: 'Email Verification Failed',
+    message: 'Your email has been successfully verified. Thank you!',
+    error:
+      'The email validation link is either invalid or has already been used. Please request a new verification link if needed.',
+  },
   sendVerificationLinkSucceed: {
     title: 'New Verification Link Sent',
     message:

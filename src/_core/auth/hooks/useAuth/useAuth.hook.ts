@@ -6,6 +6,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 export const useAuth = () => {
   const { current: auth } = useRef(getAuth());
+
   const { user } = useContext(AuthContext);
 
   const isAuthenticated = !!user;

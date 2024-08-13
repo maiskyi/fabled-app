@@ -10,4 +10,5 @@ export const actions = {
   contactSupport: 'Contact support',
   signIn: 'Sign In',
   forgotPassword: 'Forgot password?',
+  goToFabledSpace: 'Go to Fabled Space',
 };

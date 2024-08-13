@@ -7,7 +7,7 @@ export const useSendEmailVerification = () => {
   const { throwError } = useAuthError();
 
   return useMutation<void, Error, void>({
-    mutationKey: ['useSignUp'],
+    mutationKey: ['useSendEmailVerification'],
     mutationFn: async () => {
       try {
         await FirebaseAuthentication.sendEmailVerification();
