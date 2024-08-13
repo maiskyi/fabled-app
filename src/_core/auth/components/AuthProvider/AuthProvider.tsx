@@ -36,8 +36,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const [user, setUser] = useState<User>();
 
-  console.log(user);
-
   const isAuthenticated = !!user;
 
   const signOut = useCallback(async () => {
