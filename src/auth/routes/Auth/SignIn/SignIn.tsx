@@ -33,7 +33,7 @@ export const SignIn: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ action: 'back' })} />
+        <Header.Back />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content>

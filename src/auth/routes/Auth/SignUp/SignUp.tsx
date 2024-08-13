@@ -9,7 +9,7 @@ import { RoutePath } from '@bootstrap/constants';
 
 export const SignUp: FC = () => {
   const { t } = useTranslation();
-  const [{ search }, navigate] = useRoute<{}, Partial<SignUpRequest>>();
+  const [{ search }] = useRoute<{}, Partial<SignUpRequest>>();
 
   const title = t('pages.signUp');
 
@@ -30,7 +30,7 @@ export const SignUp: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content>

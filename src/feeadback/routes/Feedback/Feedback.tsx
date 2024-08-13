@@ -37,7 +37,7 @@ export const Feedback: FC = () => {
         title: t('notifications.feedbackSucceed.title'),
         message: t('notifications.feedbackSucceed.message'),
       });
-      navigate({ back: true });
+      navigate({ action: 'back' });
     } catch (_) {
       toast({
         variant: 'error',
@@ -50,7 +50,7 @@ export const Feedback: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content fullscreen inset={false}>

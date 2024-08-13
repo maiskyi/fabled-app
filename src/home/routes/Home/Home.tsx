@@ -41,15 +41,15 @@ export const Home = memo(function Home() {
   );
 
   const handleOnCreateClick = () => {
-    navigate({ pathname: RoutePath.Create });
+    navigate({ action: 'push', pathname: RoutePath.Create });
   };
 
   const handleOnProfileClick = () => {
-    navigate({ pathname: RoutePath.Profile });
+    navigate({ action: 'push', pathname: RoutePath.Profile });
   };
 
   const handleOnFableClick = (id: string) => {
-    navigate({ pathname: RoutePath.Fable, params: { id } });
+    navigate({ action: 'push', pathname: RoutePath.Fable, params: { id } });
   };
 
   return (

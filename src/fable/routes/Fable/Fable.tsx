@@ -11,7 +11,6 @@ export const Fable = memo(function Fable() {
     {
       params: { id },
     },
-    navigate,
   ] = useRoute<{ id: string }>();
 
   const { data } = useGetDocument<DTO.Fable>({
@@ -22,7 +21,7 @@ export const Fable = memo(function Fable() {
   return (
     <Page>
       <Header collapse="fade">
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back />
       </Header>
       <Content fullscreen>
         <Container aspectRatio={1}>123</Container>

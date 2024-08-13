@@ -4,7 +4,6 @@ import { Page, Content, Form, Header, Container } from '@core/uikit';
 import { FunctionName } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 // import { Redirect } from '@core/navigation';
-import { useRoute } from '@core/navigation';
 import { useStaticOptions } from '@bootstrap/hooks';
 import { useMutationFunction } from '@core/functions';
 
@@ -12,7 +11,6 @@ import { FormField } from './Create.const';
 import { useCreate } from './Create.hook';
 
 export const Create = memo(function Create() {
-  const [, navigate] = useRoute();
   const { initialValue } = useCreate();
 
   const {
@@ -38,7 +36,7 @@ export const Create = memo(function Create() {
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back />
         <Header.Title>Create Fable</Header.Title>
       </Header>
       <Content inset={false}>

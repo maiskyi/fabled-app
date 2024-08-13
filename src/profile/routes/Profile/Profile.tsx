@@ -25,7 +25,7 @@ export const Profile = memo(function Profile() {
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back />
         <Header.Title>Profile</Header.Title>
       </Header>
       <Content fullscreen inset={false}>
@@ -43,14 +43,18 @@ export const Profile = memo(function Profile() {
           <List.Header>Support</List.Header>
           <List.Item
             button
-            onClick={() => navigate({ pathname: RoutePath.ContactUs })}
+            onClick={() =>
+              navigate({ action: 'push', pathname: RoutePath.ContactUs })
+            }
           >
             <List.Icon name="mail-outline" />
             <List.Label>Contact Us</List.Label>
           </List.Item>
           <List.Item
             button
-            onClick={() => navigate({ pathname: RoutePath.Feedback })}
+            onClick={() =>
+              navigate({ action: 'push', pathname: RoutePath.Feedback })
+            }
           >
             <List.Icon name="chatbox-ellipses-outline" />
             <List.Label>Share your feedback</List.Label>
