@@ -22,7 +22,6 @@ export const useSignInWithCredentials = () => {
           email,
           password,
         });
-        await FirebaseAuthentication.sendEmailVerification();
         return result;
       } catch (error) {
         throwError(error);

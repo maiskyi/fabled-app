@@ -1,5 +1,10 @@
 import { FC } from 'react';
-import { Redirect as RouterRedirect, generatePath } from 'react-router-dom';
+import { useMount } from 'react-use';
+import { generatePath } from 'react-router';
+
+import { useIonRouter } from '@ionic/react';
+
+import { stringify } from '../../utils/queryString';
 
 export interface RedirectProps {
   pathname: string;
@@ -7,11 +12,17 @@ export interface RedirectProps {
   search?: object;
 }
 
-export const Redirect: FC<RedirectProps> = ({ pathname, params }) => {
-  return (
-    <RouterRedirect
-      push={false}
-      to={{ pathname: generatePath(pathname, params) }}
-    />
-  );
+export const Redirect: FC<RedirectProps> = ({
+  pathname: initialPathname,
+  params,
+  search,
+}) => {
+  const router = useIonRouter();
+
+  useMount(() => {
+    const pathname = generatePath(initialPathname, params) + stringify(search);
+    router.push(pathname, 'forward', 'replace');
+  });
+
+  return null;
 };

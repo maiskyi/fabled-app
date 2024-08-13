@@ -3,15 +3,16 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithCredential,
+  UserCredential,
 } from 'firebase/auth';
 import { useMutation } from '@tanstack/react-query';
 
-import { useAuthError } from '../useAuthError';
+import { useAuthError, AuthError } from '../useAuthError';
 
 export const useSignInWithGoogle = () => {
   const { throwError } = useAuthError();
 
-  return useMutation({
+  return useMutation<UserCredential, AuthError, void>({
     mutationKey: ['useSignInWithGoogle'],
     mutationFn: async () => {
       try {

@@ -5,14 +5,14 @@ import {
 } from '@capacitor-firebase/authentication';
 import { useMutation } from '@tanstack/react-query';
 
-import { useAuthError } from '../useAuthError';
+import { useAuthError, AuthError } from '../useAuthError';
 
 export const useSignUp = () => {
   const { throwError } = useAuthError();
 
   return useMutation<
     SignInResult,
-    Error,
+    AuthError,
     CreateUserWithEmailAndPasswordOptions
   >({
     mutationKey: ['useSignUp'],

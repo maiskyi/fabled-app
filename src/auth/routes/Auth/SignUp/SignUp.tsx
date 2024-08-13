@@ -1,7 +1,15 @@
-import { FC } from 'react';
-import { noop } from 'lodash';
+import { FC, useRef } from 'react';
 
-import { Page, Header, Content, Box, Text, Form } from '@core/uikit';
+import {
+  Page,
+  Header,
+  Content,
+  Box,
+  Text,
+  Form,
+  FormInstance,
+  useUtils,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { Redirect, useRoute } from '@core/navigation';
 import { useSignUp, SignUpRequest } from '@core/auth';
@@ -10,20 +18,26 @@ import { RoutePath } from '@bootstrap/constants';
 export const SignUp: FC = () => {
   const { t } = useTranslation();
   const [{ search }] = useRoute<{}, Partial<SignUpRequest>>();
+  const form = useRef<FormInstance<SignUpRequest>>();
+  const { toast } = useUtils();
 
   const title = t('pages.signUp');
 
-  const { data, mutateAsync } = useSignUp();
+  const { isPending, data, mutate } = useSignUp();
 
-  const handleOnSubmit = async (form: SignUpRequest) => {
-    try {
-      await mutateAsync(form);
-    } catch (error) {
-      noop();
-    }
+  const handleOnSubmit = async (data: SignUpRequest) => {
+    mutate(data, {
+      onError: ({ fields, title, message }) => {
+        if (fields) {
+          form.current.setErrors(fields);
+        } else {
+          toast({ variant: 'error', title, message });
+        }
+      },
+    });
   };
 
-  if (data.user) {
+  if (data?.user) {
     return <Redirect pathname={RoutePath.AuthVerifyEmail} />;
   }
 
@@ -40,7 +54,11 @@ export const SignUp: FC = () => {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.signUp')}</Text>
         </Box>
-        <Form<SignUpRequest> defaultValues={search} onSubmit={handleOnSubmit}>
+        <Form<SignUpRequest>
+          ref={form}
+          defaultValues={search}
+          onSubmit={handleOnSubmit}
+        >
           <Box padding={16} paddingInline={20}>
             <Form.Text
               name="email"
@@ -50,11 +68,11 @@ export const SignUp: FC = () => {
             <Form.Password
               name="password"
               label={t('forms.password')}
-              validation={{ required: true }}
+              validation={{ required: true, minLength: 8 }}
             />
           </Box>
           <Box padding={16} paddingInline={20}>
-            <Form.Submit>{t('actions.signUp')}</Form.Submit>
+            <Form.Submit loading={isPending}>{t('actions.signUp')}</Form.Submit>
           </Box>
         </Form>
       </Content>
