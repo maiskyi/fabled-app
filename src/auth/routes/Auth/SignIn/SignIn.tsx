@@ -39,7 +39,10 @@ export const SignIn: FC = () => {
         },
         onSuccess: ({ user: { emailVerified } }) => {
           if (!emailVerified) {
-            navigate({ action: 'push', pathname: RoutePath.AuthVerifyEmail });
+            navigate({
+              action: 'replace',
+              pathname: RoutePath.AuthVerifyEmail,
+            });
           }
         },
       });
