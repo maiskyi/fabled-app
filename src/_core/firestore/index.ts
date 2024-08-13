@@ -9,3 +9,4 @@ export * from './hooks/useGetDocument';
 
 // Types
 export type { DocumentSnapshot } from '@capacitor-firebase/firestore';
+export type { InfiniteData } from '@tanstack/react-query';

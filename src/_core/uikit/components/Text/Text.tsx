@@ -1,9 +1,22 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, createElement } from 'react';
+import classNames from 'classnames';
 
 import { IonText } from '@ionic/react';
 
-export type TextProps = PropsWithChildren<{}>;
+import styles from './Text.module.scss';
 
-export const Text: FC<TextProps> = ({ children }) => {
-  return <IonText>{children}</IonText>;
+export type TextProps = PropsWithChildren<{
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+}>;
+
+export const Text: FC<TextProps> = ({ children, variant = 'p' }) => {
+  return (
+    <IonText>
+      {createElement(
+        variant,
+        { className: classNames(styles.variant, variant) },
+        children
+      )}
+    </IonText>
+  );
 };

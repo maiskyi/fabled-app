@@ -12,8 +12,8 @@ const requiredInputError: FormValidationErrorFn = ({ name, label }) =>
 const patternInputError: FormValidationErrorFn = ({ name, label }) =>
   `${label || name} is invalid`;
 
-// const minLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
-//   `${label || name} must be at least ${value} characters`;
+const minLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
+  `${label || name} must be at least ${value} characters`;
 
 const maxLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
   `${label || name} must be not more then ${value} characters`;
@@ -64,14 +64,14 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
     //     required: requiredInputError,
     //   },
     // },
-    // password: {
-    //   errors: {
-    //     minLength: minLengthInputError,
-    //     generic: genericError,
-    //     pattern: patternInputError,
-    //     required: requiredInputError,
-    //   },
-    // },
+    password: {
+      errors: {
+        minLength: minLengthInputError,
+        generic: genericError,
+        pattern: patternInputError,
+        required: requiredInputError,
+      },
+    },
     // radioGroup: {
     //   errors: {
     //     generic: genericError,

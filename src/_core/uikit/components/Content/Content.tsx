@@ -10,7 +10,7 @@ export type ContentProps = PropsWithChildren<{
 }>;
 
 export const Content: FC<ContentProps> = forwardRef<any, ContentProps>(
-  function Content({ children, fullscreen, inset = true }, ref) {
+  function Content({ children, fullscreen, inset = false }, ref) {
     return (
       <IonContent
         ref={ref}

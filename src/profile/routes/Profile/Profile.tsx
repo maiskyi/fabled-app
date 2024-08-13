@@ -1,18 +1,31 @@
 import { memo } from 'react';
 
-import { Header, Page, Content, Card, List } from '@core/uikit';
+import { Header, Page, Content, Card, List, useUtils } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useAuth } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
+import { useTranslation } from '@core/localization';
 
 export const Profile = memo(function Profile() {
   const [, navigate] = useRoute();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+  const { confirm } = useUtils();
+  const { t } = useTranslation();
+
+  const handleOnLogout = () => {
+    confirm({
+      variant: 'error',
+      confirmBtn: t('actions.logOut'),
+      title: t('confirms.logout.title'),
+      message: t('confirms.logout.message'),
+      onConfirm: () => signOut(),
+    });
+  };
 
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back />
         <Header.Title>Profile</Header.Title>
       </Header>
       <Content fullscreen inset={false}>
@@ -21,23 +34,27 @@ export const Profile = memo(function Profile() {
         </Header>
         <Card>
           <Card.Header>
-            <Card.Avatar src={user.photoURL} />
-            <Card.Title>{user.displayName}</Card.Title>
-            <Card.Subtitle>{user.email}</Card.Subtitle>
+            <Card.Avatar src={user?.photoURL} />
+            <Card.Title>{user?.displayName}</Card.Title>
+            <Card.Subtitle>{user?.email}</Card.Subtitle>
           </Card.Header>
         </Card>
         <List>
           <List.Header>Support</List.Header>
           <List.Item
             button
-            onClick={() => navigate({ pathname: RoutePath.ContactUs })}
+            onClick={() =>
+              navigate({ action: 'push', pathname: RoutePath.ContactUs })
+            }
           >
             <List.Icon name="mail-outline" />
             <List.Label>Contact Us</List.Label>
           </List.Item>
           <List.Item
             button
-            onClick={() => navigate({ pathname: RoutePath.Feedback })}
+            onClick={() =>
+              navigate({ action: 'push', pathname: RoutePath.Feedback })
+            }
           >
             <List.Icon name="chatbox-ellipses-outline" />
             <List.Label>Share your feedback</List.Label>
@@ -56,7 +73,7 @@ export const Profile = memo(function Profile() {
         </List>
         <List>
           <List.Header />
-          <List.Item>
+          <List.Item onClick={handleOnLogout}>
             <List.Label color="danger">Log out</List.Label>
           </List.Item>
         </List>

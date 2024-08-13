@@ -1,1 +1,1 @@
-export type ButtonSocialName = 'google';
+export type ButtonSocialName = 'google' | 'apple' | 'facebook';

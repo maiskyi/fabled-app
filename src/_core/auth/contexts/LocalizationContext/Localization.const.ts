@@ -3,7 +3,10 @@ import { AuthErrorCodes } from 'firebase/auth';
 import { LocalizationContextProps } from './Localization.types';
 
 export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
-  authError: {
+  authErrorTitle: 'Authentication Error!',
+  authErrorMessage: {
+    'auth/unknown':
+      'An error occurred during authentication. Please try again later.',
     [AuthErrorCodes.ADMIN_ONLY_OPERATION]:
       'This operation is restricted to administrators only.',
     [AuthErrorCodes.ARGUMENT_ERROR]:
@@ -61,10 +64,8 @@ export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
       'The email address is not valid. Please check the email format and try again.',
     [AuthErrorCodes.INVALID_EMULATOR_SCHEME]:
       'The emulator scheme provided is invalid.',
-    [AuthErrorCodes.INVALID_IDP_RESPONSE]:
-      'The response from the identity provider is invalid.',
-    // [AuthErrorCodes.INVALID_LOGIN_CREDENTIALS]:
-    //   'The provided credentials are invalid.',
+    [AuthErrorCodes.INVALID_LOGIN_CREDENTIALS]:
+      'The email or password you entered is incorrect.',
     [AuthErrorCodes.INVALID_MESSAGE_PAYLOAD]: 'The message payload is invalid.',
     [AuthErrorCodes.INVALID_MFA_SESSION]:
       'The multi-factor authentication session is invalid.',

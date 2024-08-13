@@ -7,7 +7,7 @@ import { DTO } from '@bootstrap/dto';
 import { useRoute } from '@core/navigation';
 
 export const Request: FC = () => {
-  const [{ params }, navigate] = useRoute<{ id: string }>();
+  const [{ params }] = useRoute<{ id: string }>();
 
   const { data } = useGetDocument<DTO.Fable>({
     id: params.id,
@@ -17,7 +17,7 @@ export const Request: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back />
         <Header.Title>Your request is being processed...</Header.Title>
       </Header>
       <Content inset={false}>

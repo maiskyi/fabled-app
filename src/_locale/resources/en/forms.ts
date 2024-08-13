@@ -3,4 +3,5 @@ export const forms = {
   message: 'Message',
   email: 'Email',
   rateUs: 'Rate Us',
+  password: 'Password',
 };

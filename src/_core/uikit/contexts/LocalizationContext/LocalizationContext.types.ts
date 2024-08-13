@@ -1,6 +1,6 @@
 import { FormTextValidation } from '../../components/Form/FormText/FormText.types';
 import { FormSelectValidation } from '../../components/Form/FormSelect/FormSelect.types';
-// import { FormPasswordValidation } from '../../components/Form/FormPassword/FormPassword.types';
+import { FormPasswordValidation } from '../../components/Form/FormPassword/FormPassword.types';
 // import { FormCheckboxValidation } from '../../components/Form/FormCheckbox/FormCheckbox.types';
 // import { FormDatepickerValidation } from '../../components/Form/FormDatepicker/FormDatepicker.types';
 // import { FormRadioGroupValidation } from '../../components/Form/FormRadioGroup/FormRadioGroup.types';
@@ -48,10 +48,10 @@ interface Form {
     errors: Record<keyof FormStarRatingValidation, FormValidationErrorFn> &
       FormGenericError;
   };
-  // password: {
-  //   errors: Record<keyof FormPasswordValidation, FormValidationErrorFn> &
-  //     FormGenericError;
-  // };
+  password: {
+    errors: Record<keyof FormPasswordValidation, FormValidationErrorFn> &
+      FormGenericError;
+  };
   // checkbox: {
   //   errors: Record<keyof FormCheckboxValidation, FormValidationErrorFn> &
   //     FormGenericError;

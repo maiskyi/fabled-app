@@ -1,16 +1,27 @@
 import { FC } from 'react';
 
-import { IonButtons, IonButton, IonIcon } from '@ionic/react';
+import { IonButtons, IonButton, IonIcon, useIonRouter } from '@ionic/react';
 import { arrowBack } from 'ionicons/icons';
 
 interface HeaderBackProps {
-  onClick: () => void;
+  pathname?: string;
 }
 
-export const HeaderBack: FC<HeaderBackProps> = ({ onClick }) => {
+export const HeaderBack: FC<HeaderBackProps> = ({ pathname }) => {
+  const router = useIonRouter();
+
+  const handleOnClick = () => {
+    if (router.canGoBack()) {
+      return router.goBack();
+    }
+    if (!router.canGoBack() && pathname) {
+      return router.push(pathname, 'back', 'replace');
+    }
+  };
+
   return (
     <IonButtons slot="start">
-      <IonButton mode="md" onClick={onClick}>
+      <IonButton mode="md" onClick={handleOnClick}>
         <IonIcon slot="icon-only" icon={arrowBack} />
       </IonButton>
     </IonButtons>

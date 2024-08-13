@@ -1,34 +1,60 @@
 import { useCallback, useMemo } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, generatePath, useLocation } from 'react-router-dom';
+
+import { useIonRouter } from '@ionic/react';
+
+import { stringify, parse } from '../../utils/queryString';
 
 import { NavigateParams } from './useRoute.types';
 
-interface UseRouteState<P extends object> {
-  params: P;
+interface UseRouteState<P extends object, S extends object> {
+  params?: P;
+  search?: S;
 }
 
 type UseRouteDispatch = (params: NavigateParams) => void;
 
-type UseRouteReturnType<P extends object> = [
-  UseRouteState<P>,
+type UseRouteReturnType<P extends object, S extends object> = [
+  UseRouteState<P, S>,
   UseRouteDispatch,
 ];
 
-export const useRoute = <P extends object = {}>(): UseRouteReturnType<P> => {
+export const useRoute = <
+  P extends object = {},
+  S extends object = {},
+>(): UseRouteReturnType<P, S> => {
   const params = useParams<P>();
+  const { search: initialSearch } = useLocation();
 
-  const { goBack, push } = useHistory();
+  const router = useIonRouter();
+
+  const search = useMemo((): S => {
+    return parse(initialSearch) as S;
+  }, [initialSearch]);
 
   const navigate: UseRouteDispatch = useCallback(
     (params): void => {
-      if ('back' in params) {
-        goBack();
-      } else {
-        push({ pathname: params.pathname });
+      if (params.action === 'back' && router.canGoBack()) {
+        return router.goBack();
+      }
+      if (params.action === 'push') {
+        const pathname =
+          generatePath(params.pathname, params.params) +
+          stringify(params.search);
+        return router.push(pathname);
+      }
+      if (params.action === 'replace') {
+        const pathname =
+          generatePath(params.pathname, params.params) +
+          stringify(params.search);
+        return router.push(pathname, 'forward', 'replace');
       }
     },
-    [goBack, push]
+    [router]
   );
 
-  return useMemo(() => [{ params }, navigate], [params, navigate]);
+  return useMemo(
+    () => [{ params, search }, navigate],
+    [params, navigate, search]
+  );
 };

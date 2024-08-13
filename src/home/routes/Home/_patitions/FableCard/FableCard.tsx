@@ -6,12 +6,14 @@ import { DocumentSnapshot } from '@core/firestore';
 // import { ImageStorage } from '@core/storage';
 
 interface FableCardProps {
+  loading?: boolean;
+  onClick: () => void;
   item: DocumentSnapshot<DTO.Fable>;
 }
 
-export const FableCard: FC<FableCardProps> = ({ item }) => {
+export const FableCard: FC<FableCardProps> = ({ item, loading, onClick }) => {
   return (
-    <Card>
+    <Card loading={loading} onClick={onClick}>
       <Card.Thumb>
         {/* <ImageStorage
           alt={item.data.response.title}

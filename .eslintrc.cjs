@@ -54,7 +54,8 @@ module.exports = {
         'newlines-between': 'always',
         pathGroups: [
           {
-            pattern: '{classnames,i18next,lodash,react,react-*,react-dom/*}',
+            pattern:
+              '{classnames,i18next,lodash,react,react-*,react-dom/*, */react-*}',
             group: 'builtin',
             position: 'before',
             patternOptions: { partial: true },
