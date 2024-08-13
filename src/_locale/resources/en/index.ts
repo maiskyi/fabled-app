@@ -4,3 +4,4 @@ export { forms } from './forms';
 export { notifications } from './notifications';
 export { intro } from './intro';
 export { confirms } from './confirms';
+export { defaults } from './defaults';

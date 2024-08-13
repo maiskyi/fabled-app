@@ -6,4 +6,5 @@ export const pages = {
   verifyEmail: 'Verify Your Email',
   signIn: 'Sign in',
   action: 'Invalid or Unsupported Link',
+  profile: 'Profile',
 };

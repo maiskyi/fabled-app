@@ -12,6 +12,10 @@ export const Profile = memo(function Profile() {
   const { confirm } = useUtils();
   const { t } = useTranslation();
 
+  const title = t('pages.profile');
+
+  const userDisplayName = user?.displayName || t('defaults.userDisplayName');
+
   const handleOnLogout = () => {
     confirm({
       variant: 'error',
@@ -26,16 +30,16 @@ export const Profile = memo(function Profile() {
     <Page>
       <Header translucent>
         <Header.Back />
-        <Header.Title>Profile</Header.Title>
+        <Header.Title>{title}</Header.Title>
       </Header>
       <Content fullscreen inset={false}>
         <Header collapse="condense">
-          <Header.Title size="large">Profile</Header.Title>
+          <Header.Title size="large">{title}</Header.Title>
         </Header>
         <Card>
           <Card.Header>
             <Card.Avatar src={user?.photoURL} />
-            <Card.Title>{user?.displayName}</Card.Title>
+            <Card.Title>{userDisplayName}</Card.Title>
             <Card.Subtitle>{user?.email}</Card.Subtitle>
           </Card.Header>
         </Card>
