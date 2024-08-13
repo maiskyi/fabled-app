@@ -21,9 +21,17 @@ export const Index = memo(function Index() {
   const handleOnSubmit = async (form: DTO.CheckEmailRequest) => {
     const { exists, providers } = await checkIfEmailExist(form);
     if (exists && providers.includes(DTO.AuthProvider.Password)) {
-      navigate({ pathname: RoutePath.AuthSignIn });
+      navigate({
+        search: form,
+        action: 'push',
+        pathname: RoutePath.AuthSignIn,
+      });
     } else {
-      navigate({ pathname: RoutePath.AuthSignUp, search: form });
+      navigate({
+        search: form,
+        action: 'push',
+        pathname: RoutePath.AuthSignUp,
+      });
     }
   };
 

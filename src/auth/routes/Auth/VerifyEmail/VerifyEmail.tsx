@@ -42,13 +42,13 @@ export const VerifyEmail: FC = () => {
   };
 
   const handleOnSupport = () => {
-    navigate({ pathname: RoutePath.ContactUs });
+    navigate({ action: 'push', pathname: RoutePath.ContactUs });
   };
 
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back onClick={() => navigate({ action: 'back' })} />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content>

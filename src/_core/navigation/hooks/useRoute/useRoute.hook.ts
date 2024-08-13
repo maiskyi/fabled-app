@@ -1,10 +1,7 @@
 import { useCallback, useMemo } from 'react';
-import {
-  useParams,
-  useHistory,
-  generatePath,
-  useLocation,
-} from 'react-router-dom';
+import { useParams, generatePath, useLocation } from 'react-router-dom';
+
+import { useIonRouter } from '@ionic/react';
 
 import { stringify, parse } from '../../utils/queryString';
 
@@ -29,7 +26,7 @@ export const useRoute = <
   const params = useParams<P>();
   const { search: initialSearch } = useLocation();
 
-  const { goBack, push } = useHistory();
+  const router = useIonRouter();
 
   const search = useMemo((): S => {
     return parse(initialSearch) as S;
@@ -37,16 +34,23 @@ export const useRoute = <
 
   const navigate: UseRouteDispatch = useCallback(
     (params): void => {
-      if ('back' in params) {
-        goBack();
-      } else {
-        push({
-          pathname: generatePath(params.pathname, params.params),
-          search: stringify(params.search),
-        });
+      if (params.action === 'back' && router.canGoBack()) {
+        return router.goBack();
+      }
+      if (params.action === 'push') {
+        const pathname =
+          generatePath(params.pathname, params.params) +
+          stringify(params.search);
+        return router.push(pathname);
+      }
+      if (params.action === 'replace') {
+        const pathname =
+          generatePath(params.pathname, params.params) +
+          stringify(params.search);
+        return router.push(pathname, 'forward', 'replace');
       }
     },
-    [goBack, push]
+    [router]
   );
 
   return useMemo(

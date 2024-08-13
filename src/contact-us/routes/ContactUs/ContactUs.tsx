@@ -39,7 +39,7 @@ export const ContactUs: FC = () => {
         title: t('notifications.inquirySucceed.title'),
         message: t('notifications.inquirySucceed.message'),
       });
-      navigate({ back: true });
+      navigate({ action: 'back' });
     } catch (err) {
       toast({
         variant: 'error',
@@ -58,7 +58,7 @@ export const ContactUs: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back onClick={() => navigate({ back: true })} />
+        <Header.Back onClick={() => navigate({ action: 'back' })} />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content fullscreen inset={false}>

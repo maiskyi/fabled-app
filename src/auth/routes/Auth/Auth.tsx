@@ -8,6 +8,7 @@ import { RouterOutlet } from '@core/navigation';
 import { Index } from './Index/Index';
 import { SignUp } from './SignUp/SignUp';
 import { VerifyEmail } from './VerifyEmail/VerifyEmail';
+import { SignIn } from './SignIn/SignIn';
 
 export const Auth = memo(function Auth() {
   return (
@@ -22,6 +23,9 @@ export const Auth = memo(function Auth() {
         </Route>
         <Route path={RoutePath.AuthSignUp}>
           <SignUp />
+        </Route>
+        <Route path={RoutePath.AuthSignIn}>
+          <SignIn />
         </Route>
       </RouterOutlet>
     </Page>

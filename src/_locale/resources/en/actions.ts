@@ -1,6 +1,6 @@
 export const actions = {
   submit: 'Submit',
-  logOut: 'Log out',
+  logOut: 'Log Out',
   continueWithGoogle: 'Continue with Google',
   continueWithApple: 'Continue with Apple',
   continueWithFacebook: 'Continue with Facebook',
@@ -8,4 +8,6 @@ export const actions = {
   signUp: 'Sign Up',
   requestNewLink: 'Request New Link',
   contactSupport: 'Contact support',
+  signIn: 'Sign In',
+  forgotPassword: 'Forgot password?',
 };
