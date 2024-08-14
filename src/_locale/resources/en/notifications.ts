@@ -34,6 +34,10 @@ export const notifications = {
       'Your message has been successfully submitted. Our team will review your inquiry and get back to you as soon as possible.',
     title: 'Thank You for Reaching Out!',
   },
+  sendPasswordResetEmailSucceed: {
+    message: "We've got you covered! Check your email for the reset link.",
+    title: "You're Almost There!",
+  },
   sendVerificationLinkFailed: {
     message:
       'There was an issue sending the verification link. Please try again later. If the problem persists, contact support.',

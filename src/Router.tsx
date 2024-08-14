@@ -16,6 +16,7 @@ import { Profile } from './profile/routes';
 import { ContactUs } from './contact-us/routes';
 import { Feedback } from './feeadback/routes';
 import { Fable } from './fable/routes';
+import { Notification } from './notification/routes';
 
 export const Router = memo(function Router() {
   return (
@@ -53,6 +54,9 @@ export const Router = memo(function Router() {
         </Route>
         <Route path={RoutePath.ContactUs}>
           <ContactUs />
+        </Route>
+        <Route path={RoutePath.Notification}>
+          <Notification />
         </Route>
         <Route path={RoutePath.Auth}>
           <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>

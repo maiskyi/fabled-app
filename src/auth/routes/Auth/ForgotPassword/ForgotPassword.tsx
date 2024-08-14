@@ -2,17 +2,40 @@ import { memo } from 'react';
 
 import { Box, Button, Content, Form, Header, Page, Text } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { RoutePath } from '@bootstrap/constants';
+import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useRoute } from '@core/navigation';
+import {
+  useSendPasswordResetEmail,
+  SendPasswordResetEmailRequest,
+} from '@core/auth';
 
 export const ForgotPassword = memo(function ForgotPassword() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
 
+  const { isPending, mutate: sendPasswordResetEmail } =
+    useSendPasswordResetEmail();
+
   const title = t('pages.forgotPassword');
 
   const handleOnContactSupport = () => {
     navigate({ action: 'push', pathname: RoutePath.ContactUs });
+  };
+
+  const handleOnSubmit = (data: SendPasswordResetEmailRequest) => {
+    sendPasswordResetEmail(data, {
+      onSuccess: () =>
+        navigate({
+          action: 'replace',
+          params: {
+            type: NotificationType.SendPasswordResetEmailSucceed,
+          },
+          pathname: RoutePath.Notification,
+          search: {
+            back: RoutePath.AuthSignIn,
+          },
+        }),
+    });
   };
 
   return (
@@ -28,7 +51,7 @@ export const ForgotPassword = memo(function ForgotPassword() {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.forgotPassword')}</Text>
         </Box>
-        <Form>
+        <Form<SendPasswordResetEmailRequest> onSubmit={handleOnSubmit}>
           <Box padding={16} paddingInline={20}>
             <Form.Text
               label={t('forms.email')}
@@ -43,7 +66,9 @@ export const ForgotPassword = memo(function ForgotPassword() {
             padding={16}
             paddingInline={20}
           >
-            <Form.Submit>{t('actions.sendResetLink')}</Form.Submit>
+            <Form.Submit loading={isPending}>
+              {t('actions.sendResetLink')}
+            </Form.Submit>
             <Button fill="outline" onClick={handleOnContactSupport}>
               {t('actions.contactSupport')}
             </Button>

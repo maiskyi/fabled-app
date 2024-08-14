@@ -7,6 +7,7 @@ export const actions = {
   forgotPassword: 'Forgot password?',
   goToFabledSpace: 'Go to Fabled Space',
   logOut: 'Log out',
+  ok: 'OK',
   requestNewLink: 'Request new link',
   sendResetLink: 'Send reset link',
   signIn: 'Sign in',

@@ -11,6 +11,7 @@ export * from './hooks/useSendEmailVerification';
 export * from './hooks/useSignInWithCredentials';
 export * from './hooks/useSignInWithGoogle';
 export * from './hooks/useSignUp';
+export * from './hooks/useSendPasswordResetEmail';
 
 // Types
 export * from './types';
