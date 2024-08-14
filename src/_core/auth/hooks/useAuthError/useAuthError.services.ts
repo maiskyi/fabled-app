@@ -10,6 +10,7 @@ interface AuthErrorFields {
 const EMAIL_ERROR_CODES: AuthErrorCode[] = [
   AuthErrorCodes.INVALID_LOGIN_CREDENTIALS,
   AuthErrorCodes.INVALID_EMAIL,
+  AuthErrorCodes.EMAIL_EXISTS,
 ];
 
 export class AuthError extends Error {

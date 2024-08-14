@@ -12,19 +12,24 @@ import {
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { Redirect } from '@core/navigation';
-import { useSignUp, SignUpRequest } from '@core/auth';
+import {
+  useCreateUserWithEmailAndPassword,
+  CreateUserWithEmailAndPasswordRequest,
+} from '@core/auth';
 import { RoutePath, VALIDATION_PATTERNS } from '@bootstrap/constants';
 
 export const SignUp: FC = () => {
   const { t } = useTranslation();
-  const form = useRef<FormInstance<SignUpRequest>>();
+  const form = useRef<FormInstance<CreateUserWithEmailAndPasswordRequest>>();
   const { toast } = useUtils();
 
   const title = t('pages.signUp');
 
-  const { isPending, data, mutate } = useSignUp();
+  const { isPending, data, mutate } = useCreateUserWithEmailAndPassword();
 
-  const handleOnSubmit = async (data: SignUpRequest) => {
+  const handleOnSubmit = async (
+    data: CreateUserWithEmailAndPasswordRequest
+  ) => {
     mutate(data, {
       onError: ({ fields, title, message }) => {
         if (fields) {
@@ -53,7 +58,10 @@ export const SignUp: FC = () => {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.signUp')}</Text>
         </Box>
-        <Form<SignUpRequest> onSubmit={handleOnSubmit} ref={form}>
+        <Form<CreateUserWithEmailAndPasswordRequest>
+          onSubmit={handleOnSubmit}
+          ref={form}
+        >
           <Box padding={16} paddingInline={20}>
             <Form.Text
               icon="mail-outline"

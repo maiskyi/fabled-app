@@ -12,7 +12,7 @@ export * from './hooks/useSendEmailVerification';
 export * from './hooks/useSendPasswordResetEmail';
 export * from './hooks/useSignInWithCredentials';
 export * from './hooks/useSignInWithGoogle';
-export * from './hooks/useSignUp';
+export * from './hooks/useCreateUserWithEmailAndPassword';
 
 // Types
 export * from './types';
