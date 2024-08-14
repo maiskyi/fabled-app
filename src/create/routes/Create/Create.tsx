@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { Page, Content, Form, Header, Container } from '@core/uikit';
-import { FunctionName } from '@bootstrap/constants';
+import { FunctionName, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 // import { Redirect } from '@core/navigation';
 import { useStaticOptions } from '@bootstrap/hooks';
@@ -36,7 +36,7 @@ export const Create = memo(function Create() {
   return (
     <Page>
       <Header translucent>
-        <Header.Back />
+        <Header.Back pathname={RoutePath.Index} />
         <Header.Title>Create Fable</Header.Title>
       </Header>
       <Content inset={false}>
