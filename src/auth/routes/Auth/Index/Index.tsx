@@ -13,11 +13,19 @@ export const Index = memo(function Index() {
   const [, navigate] = useRoute();
 
   const handleOnSignIn = () => {
-    navigate({ action: 'push', pathname: RoutePath.AuthSignIn });
+    navigate({
+      action: 'push',
+      pathname: RoutePath.AuthSignIn,
+      search: { from: RoutePath.Auth },
+    });
   };
 
   const handleOnSignUp = () => {
-    navigate({ action: 'push', pathname: RoutePath.AuthSignUp });
+    navigate({
+      action: 'push',
+      pathname: RoutePath.AuthSignUp,
+      search: { from: RoutePath.Auth },
+    });
   };
 
   return (

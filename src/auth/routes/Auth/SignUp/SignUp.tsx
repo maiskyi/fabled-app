@@ -15,9 +15,15 @@ import { Redirect, useRoute } from '@core/navigation';
 import { useSignUp, SignUpRequest } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 
+import { SignUpRouteSearch } from './SignUp.types';
+
 export const SignUp: FC = () => {
   const { t } = useTranslation();
-  const [{ search }] = useRoute<{}, Partial<SignUpRequest>>();
+  const [
+    {
+      search: { from = RoutePath.Auth },
+    },
+  ] = useRoute<{}, SignUpRouteSearch>();
   const form = useRef<FormInstance<SignUpRequest>>();
   const { toast } = useUtils();
 
@@ -44,7 +50,7 @@ export const SignUp: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back pathname={RoutePath.Auth} />
+        <Header.Back pathname={from} />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content>
@@ -54,11 +60,7 @@ export const SignUp: FC = () => {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.signUp')}</Text>
         </Box>
-        <Form<SignUpRequest>
-          defaultValues={search}
-          onSubmit={handleOnSubmit}
-          ref={form}
-        >
+        <Form<SignUpRequest> onSubmit={handleOnSubmit} ref={form}>
           <Box padding={16} paddingInline={20}>
             <Form.Text
               label={t('forms.email')}

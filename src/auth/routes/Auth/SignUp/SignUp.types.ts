@@ -1,3 +1,3 @@
 export interface SignUpRouteSearch {
-  email?: string;
+  from?: string;
 }
