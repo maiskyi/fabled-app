@@ -1,12 +1,14 @@
 import { memo } from 'react';
 
 import { Box, Button, Content, Header, Page, Text } from '@core/uikit';
-import { Redirect, useRoute } from '@core/navigation';
+import { useRoute } from '@core/navigation';
 import { AuthActionMode } from '@core/auth';
 import { useTranslation } from '@core/localization';
 import { RoutePath } from '@bootstrap/constants';
 
-import { AuthActionRouteSearch } from '../Auth.types';
+import { ResetPassword } from './_partitions/ResetPassword';
+import { EmailVerification } from './_partitions/EmailVerification';
+import { AuthActionRouteSearch } from './Action.types';
 
 export const Action = memo(function Action() {
   const { t } = useTranslation();
@@ -20,10 +22,12 @@ export const Action = memo(function Action() {
     navigate,
   ] = useRoute<{}, AuthActionRouteSearch>();
 
+  if (mode === AuthActionMode.ResetPassword) {
+    return <ResetPassword {...search} />;
+  }
+
   if (mode === AuthActionMode.VerifyEmail) {
-    return (
-      <Redirect pathname={RoutePath.AuthEmailVerification} search={search} />
-    );
+    return <EmailVerification {...search} />;
   }
 
   return (

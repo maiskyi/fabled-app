@@ -4,25 +4,25 @@ import { useMutation } from '@tanstack/react-query';
 import { useAuthError, AuthError } from '../useAuthError';
 
 import {
-  SendPasswordResetEmailRequest,
-  SendPasswordResetEmailResponse,
-} from './useSendPasswordResetEmail.types';
+  ConfirmPasswordResetRequest,
+  ConfirmPasswordResetResponse,
+} from './useConfirmPasswordReset.types';
 
-export const useSendPasswordResetEmail = () => {
+export const useConfirmPasswordReset = () => {
   const { throwError } = useAuthError();
 
   return useMutation<
-    SendPasswordResetEmailResponse,
+    ConfirmPasswordResetResponse,
     AuthError,
-    SendPasswordResetEmailRequest
+    ConfirmPasswordResetRequest
   >({
     mutationFn: async (request) => {
       try {
-        await FirebaseAuthentication.sendPasswordResetEmail(request);
+        await FirebaseAuthentication.confirmPasswordReset(request);
       } catch (err) {
         throwError(err);
       }
     },
-    mutationKey: ['useSendPasswordResetEmail'],
+    mutationKey: ['useConfirmPasswordReset'],
   });
 };

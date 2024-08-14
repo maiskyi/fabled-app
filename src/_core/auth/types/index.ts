@@ -11,4 +11,7 @@ export type AuthQueryStatus = 'error' | 'idle' | 'pending' | 'success';
 
 export enum AuthActionMode {
   VerifyEmail = 'verifyEmail',
+  ResetPassword = 'resetPassword',
 }
+
+export { AuthErrorCodes };

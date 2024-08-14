@@ -2,7 +2,6 @@ import { memo } from 'react';
 
 import { Box, Button, Content, Header, Page, Text } from '@core/uikit';
 import { useRoute } from '@core/navigation';
-import { useTranslation } from '@core/localization';
 
 import {
   NotificationRouteParams,
@@ -11,19 +10,18 @@ import {
 import { useNotificationCopy } from './Notification.hooks';
 
 export const Notification = memo(function Success() {
-  const { t } = useTranslation();
   const [
     {
-      search: { back },
+      search: { back, next, code },
       params: { type },
     },
     navigate,
   ] = useRoute<NotificationRouteParams, NotificationRouteSearch>();
 
-  const { title, message } = useNotificationCopy({ type });
+  const { cta, title, message } = useNotificationCopy({ code, next, type });
 
-  const handleOnOk = () => {
-    navigate({ action: 'back', pathname: back });
+  const handleOnCtaClick = () => {
+    navigate({ action: 'replace', pathname: next });
   };
 
   return (
@@ -32,7 +30,7 @@ export const Notification = memo(function Success() {
         <Header.Back pathname={back} />
       </Header>
       <Content>
-        <Header>
+        <Header collapse="condense">
           <Header.Title size="large" wrap>
             {title}
           </Header.Title>
@@ -41,7 +39,7 @@ export const Notification = memo(function Success() {
           <Text>{message}</Text>
         </Box>
         <Box padding={16} paddingInline={20}>
-          <Button onClick={handleOnOk}>{t('actions.ok')}</Button>
+          <Button onClick={handleOnCtaClick}>{cta}</Button>
         </Box>
       </Content>
     </Page>

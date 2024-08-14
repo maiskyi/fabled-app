@@ -1,4 +1,18 @@
+import { NotificationType } from '@bootstrap/constants';
+import { AuthErrorCodes } from '@core/auth';
+
 export const notifications = {
+  [NotificationType.ConfirmPasswordResetFailed]: {
+    message: '123',
+    title: 'Password reset failed',
+    [AuthErrorCodes.EXPIRED_OOB_CODE]:
+      'It looks like the reset link has expired. Please request a new link to reset your password.',
+  },
+  [NotificationType.ConfirmPasswordResetSucceed]: {
+    message:
+      'Your password has been successfully updated. You can now sign in with your new password.',
+    title: 'Password reset successful',
+  },
   emailVerificationFailed: {
     error:
       'The email validation link is either invalid or has already been used. Please request a new verification link if needed.',
@@ -34,7 +48,7 @@ export const notifications = {
       'Your message has been successfully submitted. Our team will review your inquiry and get back to you as soon as possible.',
     title: 'Thank You for Reaching Out!',
   },
-  sendPasswordResetEmailSucceed: {
+  [NotificationType.SendPasswordResetEmailSucceed]: {
     message: "We've got you covered! Check your email for the reset link.",
     title: "You're Almost There!",
   },
@@ -49,3 +63,5 @@ export const notifications = {
     title: 'New Verification Link Sent',
   },
 };
+
+console.log(notifications);

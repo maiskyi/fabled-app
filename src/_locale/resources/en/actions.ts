@@ -1,4 +1,5 @@
 export const actions = {
+  confirmNewPassword: 'Confirm new password',
   contactSupport: 'Contact support',
   continue: 'Continue',
   continueWithApple: 'Continue with Apple',

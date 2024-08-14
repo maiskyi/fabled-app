@@ -41,5 +41,5 @@ export const useAuthError = () => {
     [authErrorTitle, authErrorMessage]
   );
 
-  return { throwError };
+  return { authErrorMessage, throwError };
 };
