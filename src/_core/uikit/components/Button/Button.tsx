@@ -34,16 +34,16 @@ export const Button: ButtonComponent = ({
 }: ButtonProps) => {
   return (
     <IonButton
-      mode="ios"
-      fill={fill}
-      type={type}
-      shape="round"
-      onClick={onClick}
-      disabled={disabled}
       className={classNames(styles.root, className)}
+      disabled={disabled}
       expand={block ? 'block' : undefined}
+      fill={fill}
+      mode="ios"
+      onClick={onClick}
+      shape="round"
+      type={type}
     >
-      {loading && <IonSpinner name="circular" className={styles.spinner} />}
+      {loading && <IonSpinner className={styles.spinner} name="circular" />}
       <span
         className={classNames({
           [styles.transparent]: loading,

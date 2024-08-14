@@ -93,7 +93,7 @@ export const EmailVerification = memo(function Action() {
       </Header>
       <Content>
         <Header collapse="condense">
-          <Header.Title wrap size="large">
+          <Header.Title size="large" wrap>
             {title}
           </Header.Title>
         </Header>
@@ -101,11 +101,11 @@ export const EmailVerification = memo(function Action() {
           <Text>{message}</Text>
         </Box>
         <Box
+          display="flex"
+          flexDirection="column"
           gap={12}
           padding={16}
-          display="flex"
           paddingInline={20}
-          flexDirection="column"
         >
           {isAuthenticated && isSuccess && (
             <Button
@@ -124,8 +124,8 @@ export const EmailVerification = memo(function Action() {
           {isAuthenticated && isError && (
             <Button
               fill="solid"
-              onClick={handleOnRequestNewLink}
               loading={isSendingEmailVerification}
+              onClick={handleOnRequestNewLink}
             >
               {t('actions.requestNewLink')}
             </Button>

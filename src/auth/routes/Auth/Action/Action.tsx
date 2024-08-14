@@ -34,7 +34,7 @@ export const Action = memo(function Action() {
       </Header>
       <Content>
         <Header collapse="condense">
-          <Header.Title wrap size="large">
+          <Header.Title size="large" wrap>
             {title}
           </Header.Title>
         </Header>

@@ -10,12 +10,12 @@ interface TranslateProps {
 export const Translate: FC<TranslateProps> = ({ id, components, values }) => {
   return (
     <Trans
-      values={values}
-      i18nKey={id}
       components={{
         b: <strong />,
         ...components,
       }}
+      i18nKey={id}
+      values={values}
     />
   );
 };

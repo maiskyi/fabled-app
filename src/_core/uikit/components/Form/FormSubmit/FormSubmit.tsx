@@ -11,7 +11,7 @@ export const FormSubmit: FC<FormSubmitProps> = ({ children, ...props }) => {
   const submit = useContextSelector(FormContext, ({ submit }) => submit);
 
   return (
-    <Button {...props} type="submit" onClick={submit}>
+    <Button {...props} onClick={submit} type="submit">
       {children}
     </Button>
   );

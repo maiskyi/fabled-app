@@ -39,22 +39,22 @@ export const Index = memo(function Index() {
     <Page>
       <Content fullscreen>
         <Box
-          height="100%"
           display="flex"
-          minHeight="100%"
           flexDirection="column"
+          height="100%"
           justifyContent="center"
+          minHeight="100%"
         >
           <FederatedLogin />
-          <Box padding={4} display="flex" justifyContent="center">
+          <Box display="flex" justifyContent="center" padding={4}>
             <Text variant="h3">or</Text>
           </Box>
           <Form<DTO.CheckEmailRequest> onSubmit={handleOnSubmit}>
-            <Box padding={20} display="flex" flexDirection="column" gap={12}>
+            <Box display="flex" flexDirection="column" gap={12} padding={20}>
               <Form.Text
-                type="email"
-                name="email"
                 label={t('forms.email')}
+                name="email"
+                type="email"
                 validation={{ email: true, required: true }}
               />
               <Form.Submit loading={isCheckEmailPending}>

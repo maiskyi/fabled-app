@@ -28,25 +28,25 @@ export const FormText: FC<FormTextProps> = ({
       {({ help, error, onBlur, invalid, onChange, value = '' }) => {
         return (
           <IonInput
-            type={type}
-            value={value}
-            helperText={help}
-            onIonBlur={onBlur}
-            disabled={disabled}
-            autofocus={autofocus}
-            onIonInput={onChange}
-            placeholder={placeholder}
-            autocomplete={autocomplete}
             autoCapitalize={autocapitalize}
-            label={props.label}
-            fill="outline"
-            mode="md"
-            labelPlacement="floating"
-            errorText={error?.message}
+            autocomplete={autocomplete}
+            autofocus={autofocus}
             className={classNames({
               'ion-invalid': invalid,
               'ion-touched': invalid,
             })}
+            disabled={disabled}
+            errorText={error?.message}
+            fill="outline"
+            helperText={help}
+            label={props.label}
+            labelPlacement="floating"
+            mode="md"
+            onIonBlur={onBlur}
+            onIonInput={onChange}
+            placeholder={placeholder}
+            type={type}
+            value={value}
           />
         );
       }}

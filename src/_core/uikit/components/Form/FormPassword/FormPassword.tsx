@@ -24,23 +24,23 @@ export const FormPassword: FC<FormPasswordProps> = ({
         return (
           <Fragment>
             <IonInput
-              fill="outline"
-              mode="md"
-              value={value}
-              helperText={help}
-              onIonBlur={onBlur}
-              disabled={disabled}
-              label={props.label}
               autofocus={autofocus}
-              onIonInput={onChange}
-              labelPlacement="floating"
-              placeholder={placeholder}
-              errorText={error?.message}
-              type="password"
               className={classNames({
                 'ion-invalid': invalid,
                 'ion-touched': invalid,
               })}
+              disabled={disabled}
+              errorText={error?.message}
+              fill="outline"
+              helperText={help}
+              label={props.label}
+              labelPlacement="floating"
+              mode="md"
+              onIonBlur={onBlur}
+              onIonInput={onChange}
+              placeholder={placeholder}
+              type="password"
+              value={value}
             >
               {/* <IonInputPasswordToggle mode="md" slot="end" /> */}
             </IonInput>

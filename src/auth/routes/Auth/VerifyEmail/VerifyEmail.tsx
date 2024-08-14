@@ -61,11 +61,11 @@ export const VerifyEmail: FC = () => {
           </Text>
         </Box>
         <Box
+          display="flex"
+          flexDirection="column"
           gap={12}
           padding={16}
-          display="flex"
           paddingInline={20}
-          flexDirection="column"
         >
           <Button loading={isPending} onClick={handleOnRequest}>
             {t('actions.requestNewLink')}

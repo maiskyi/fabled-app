@@ -25,8 +25,8 @@ export const ForgotPassword = memo(function ForgotPassword() {
         <Form>
           <Box padding={16} paddingInline={20}>
             <Form.Text
-              name="email"
               label={t('forms.email')}
+              name="email"
               validation={{ email: true, required: true }}
             />
           </Box>

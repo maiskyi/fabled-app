@@ -32,8 +32,8 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
 
   return (
     <NavigationProvider
-      roles={roles}
       defaultProtectedRedirect={defaultProtectedRedirect}
+      roles={roles}
     >
       {children}
     </NavigationProvider>

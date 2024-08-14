@@ -7,10 +7,10 @@ export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
     cancelled: 'The operation was cancelled.',
     'data-loss': 'Unrecoverable data loss or corruption occurred.',
     'deadline-exceeded': 'The deadline for the operation was exceeded.',
+    default: 'An unspecified error occurred. Please try again.',
     'failed-precondition':
       'The operation was rejected due to a failed precondition.',
     internal: 'An internal error occurred.',
-    default: 'An unspecified error occurred. Please try again.',
     'invalid-argument': 'An invalid argument was provided.',
     'not-found': 'The requested resource was not found.',
     ok: 'The operation was successful.',

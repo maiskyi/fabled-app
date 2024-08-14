@@ -65,30 +65,30 @@ export const SignIn: FC = () => {
           <Text>{t('intro.signIn')}</Text>
         </Box>
         <Form<SignInRequest>
-          ref={form}
           defaultValues={search}
           onSubmit={handleOnSubmit}
+          ref={form}
         >
           <Box padding={16} paddingInline={20}>
             <Form.Text
-              name="email"
               label={t('forms.email')}
+              name="email"
               validation={{
                 email: true,
                 required: true,
               }}
             />
             <Form.Password
-              name="password"
               label={t('forms.password')}
+              name="password"
               validation={{ required: true }}
             />
           </Box>
           <Box
-            padding={16}
             display="flex"
-            paddingInline={20}
             flexDirection="column"
+            padding={16}
+            paddingInline={20}
           >
             <Form.Submit loading={isPending}>{t('actions.signIn')}</Form.Submit>
             <Button fill="clear" onClick={handleOnForgotPassword}>

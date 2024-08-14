@@ -46,7 +46,6 @@ export const FormControl: FormControlComponent = ({
   return (
     <Controller
       name={name}
-      rules={rules}
       render={({
         field: { value, onChange, onBlur },
         fieldState: { invalid, error },
@@ -74,6 +73,7 @@ export const FormControl: FormControlComponent = ({
           <div className={classNames(styles.root, className)}>{content}</div>
         );
       }}
+      rules={rules}
     />
   );
 };

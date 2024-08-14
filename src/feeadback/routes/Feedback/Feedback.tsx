@@ -62,14 +62,14 @@ export const Feedback: FC = () => {
         </Container>
         <Form onSubmit={handleOnSubmit}>
           <Form.StarRating
-            name="rating"
             label={t('forms.rateUs')}
+            name="rating"
             validation={{ required: true }}
           />
           <Container padding>
             <Form.Textarea
-              name="message"
               label={t('forms.message')}
+              name="message"
               validation={{ required: true }}
             />
           </Container>

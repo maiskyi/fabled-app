@@ -7,10 +7,10 @@ export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
     'already-exists':
       'The document already exists. Attempting to create a document that already exists is not allowed.',
     cancelled: 'The operation was cancelled, typically by the caller.',
-    'deadline-exceeded':
-      'The deadline for the operation was exceeded. The operation might have taken too long to complete.',
     'data-loss':
       'Unrecoverable data loss or corruption occurred. This indicates a serious failure.',
+    'deadline-exceeded':
+      'The deadline for the operation was exceeded. The operation might have taken too long to complete.',
     'failed-precondition':
       'The operation was rejected because the system is not in a state required for the operation’s execution.',
     internal:
@@ -23,8 +23,6 @@ export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
       'The operation attempted to access data outside the valid range.',
     'permission-denied':
       'The caller does not have permission to execute the specified operation.',
-    unknown:
-      'An unknown error occurred. This might be due to network issues or a bug in the application.',
     'resource-exhausted':
       'The resource limits for the Firestore instance have been exhausted. This can happen if the quota is exceeded.',
     unauthenticated:
@@ -33,5 +31,7 @@ export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
       'The Firestore service is currently unavailable. This might be due to a temporary server issue or network problems.',
     unimplemented:
       'The operation is not implemented or is not supported/enabled in the Firestore database.',
+    unknown:
+      'An unknown error occurred. This might be due to network issues or a bug in the application.',
   },
 };

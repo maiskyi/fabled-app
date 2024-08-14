@@ -35,11 +35,11 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
 ) {
   return (
     <IonHeader
-      ref={ref}
-      id={Selector.Header}
       className={classNames('ion-no-border', className)}
-      translucent={translucent}
       collapse={collapse}
+      id={Selector.Header}
+      ref={ref}
+      translucent={translucent}
     >
       <IonToolbar>{children}</IonToolbar>
     </IonHeader>

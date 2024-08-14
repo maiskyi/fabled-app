@@ -27,17 +27,17 @@ export const FormStarRating: FC<FormStarRatingProps> = ({
               const itemValue = index + 1;
               return (
                 <IonButton
-                  slot="end"
-                  key={index}
-                  size="large"
-                  fill="clear"
-                  disabled={disabled}
                   color={invalid && 'danger'}
+                  disabled={disabled}
+                  fill="clear"
+                  key={index}
                   onClick={() => onChange(itemValue)}
+                  size="large"
+                  slot="end"
                 >
                   <IonIcon
-                    slot="icon-only"
                     icon={value >= itemValue ? star : starOutline}
+                    slot="icon-only"
                   />
                 </IonButton>
               );

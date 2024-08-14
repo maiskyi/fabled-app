@@ -55,19 +55,19 @@ export const SignUp: FC = () => {
           <Text>{t('intro.signUp')}</Text>
         </Box>
         <Form<SignUpRequest>
-          ref={form}
           defaultValues={search}
           onSubmit={handleOnSubmit}
+          ref={form}
         >
           <Box padding={16} paddingInline={20}>
             <Form.Text
-              name="email"
               label={t('forms.email')}
+              name="email"
               validation={{ email: true, required: true }}
             />
             <Form.Password
-              name="password"
               label={t('forms.password')}
+              name="password"
               validation={{ minLength: 8, required: true }}
             />
           </Box>

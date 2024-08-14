@@ -18,7 +18,7 @@ export const CardThumb: FC<CardThumbProps> = ({
   const loading = useContextSelector(CardContext, ({ loading }) => loading);
 
   return (
-    <div style={{ aspectRatio }} className={styles.root}>
+    <div className={styles.root} style={{ aspectRatio }}>
       {loading ? (
         <IonSkeletonText animated className={styles.skeleton} />
       ) : (

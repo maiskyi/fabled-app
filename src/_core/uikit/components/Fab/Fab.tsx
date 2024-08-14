@@ -19,7 +19,7 @@ export const Fab: FabComponent = ({ children, slot, placement }: FabProps) => {
   const [horizontal, vertical] = placement || [];
 
   return (
-    <IonFab slot={slot} vertical={vertical} horizontal={horizontal}>
+    <IonFab horizontal={horizontal} slot={slot} vertical={vertical}>
       {children}
     </IonFab>
   );

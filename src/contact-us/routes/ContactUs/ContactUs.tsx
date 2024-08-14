@@ -69,24 +69,24 @@ export const ContactUs: FC = () => {
           <Text>{t('intro.inquiry')}</Text>
         </Container>
         <Form<DTO.ContactUsRequest>
-          onSubmit={handleOnSubmit}
           defaultValues={defaultValues}
+          onSubmit={handleOnSubmit}
         >
           <Container padding>
             <Form.Text
-              name="email"
-              label={t('forms.email')}
               disabled={!!user?.email}
+              label={t('forms.email')}
+              name="email"
               validation={{ required: true }}
             />
             <Form.Text
-              name="subject"
               label={t('forms.subject')}
+              name="subject"
               validation={{ required: true }}
             />
             <Form.Textarea
-              name="text"
               label={t('forms.message')}
+              name="text"
               validation={{ required: true }}
             />
           </Container>

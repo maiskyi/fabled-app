@@ -26,9 +26,9 @@ export const InfiniteScroll: FC<InfiniteScrollProps> = ({
     <Fragment>
       {children}
       <IonInfiniteScroll
-        threshold="30%"
         disabled={disabled}
         onIonInfinite={handleOnIonInfinite}
+        threshold="30%"
       >
         <IonInfiniteScrollContent />
       </IonInfiniteScroll>
