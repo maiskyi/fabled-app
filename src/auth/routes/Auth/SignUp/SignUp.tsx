@@ -13,7 +13,7 @@ import {
 import { useTranslation } from '@core/localization';
 import { Redirect, useRoute } from '@core/navigation';
 import { useSignUp, SignUpRequest } from '@core/auth';
-import { RoutePath } from '@bootstrap/constants';
+import { RoutePath, VALIDATION_PATTERNS } from '@bootstrap/constants';
 
 import { SignUpRouteSearch } from './SignUp.types';
 
@@ -69,10 +69,32 @@ export const SignUp: FC = () => {
               validation={{ email: true, required: true }}
             />
             <Form.Password
+              errors={{
+                pattern: [
+                  t('validation.containsNumber', {
+                    label: t('forms.password'),
+                  }),
+                  t('validation.containsUppercaseLetter', {
+                    label: t('forms.password'),
+                  }),
+                  t('validation.containsSpecialCharacter', {
+                    label: t('forms.password'),
+                  }),
+                ],
+              }}
+              help={t('help.password')}
               icon="lock-closed-outline"
               label={t('forms.password')}
               name="password"
-              validation={{ minLength: 8, required: true }}
+              validation={{
+                minLength: 8,
+                pattern: [
+                  VALIDATION_PATTERNS.CONTAINS_NUMBER,
+                  VALIDATION_PATTERNS.CONTAINS_UPPERCASE_LETTER,
+                  VALIDATION_PATTERNS.CONTAINS_SPECIAL_CHARACTER,
+                ],
+                required: true,
+              }}
             />
           </Box>
           <Box padding={16} paddingInline={20}>

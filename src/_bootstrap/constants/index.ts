@@ -4,3 +4,4 @@ export * from './role.const';
 export * from './functionName.const';
 export * from './notificationType.const';
 export * from './legalType.const';
+export * from './validationPatterns.const';
