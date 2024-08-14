@@ -31,8 +31,13 @@ interface FormGenericError {
   generic: (v: FormValidationGenericErrorFnParams) => string;
 }
 
+interface FormControlPlaceholderParams {
+  label: string;
+}
+
 interface Form {
   text: {
+    placeholder: (params: FormControlPlaceholderParams) => string;
     errors: Record<keyof FormTextValidation, FormValidationErrorFn> &
       FormGenericError;
   };
@@ -49,6 +54,7 @@ interface Form {
       FormGenericError;
   };
   password: {
+    placeholder: (params: FormControlPlaceholderParams) => string;
     errors: Record<keyof FormPasswordValidation, FormValidationErrorFn> &
       FormGenericError;
   };

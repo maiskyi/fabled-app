@@ -1,13 +1,17 @@
 import { FC, ComponentProps } from 'react';
 import classNames from 'classnames';
 
-import { IonInput } from '@ionic/react';
+import { useContextSelector } from 'use-context-selector';
+import { IonIcon, IonInput } from '@ionic/react';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';
+import { IconName, ICON } from '../../Icon';
+import { LocalizationContext } from '../../../contexts/LocalizationContext';
 
 import { FormTextValidation } from './FormText.types';
 
 interface FormTextProps extends FormControlBaseProps<FormTextValidation> {
+  icon?: IconName;
   placeholder?: string;
   type?: 'text' | 'email';
   autocomplete?: ComponentProps<typeof IonInput>['autocomplete'];
@@ -15,14 +19,24 @@ interface FormTextProps extends FormControlBaseProps<FormTextValidation> {
 }
 
 export const FormText: FC<FormTextProps> = ({
+  icon,
   disabled,
   autofocus,
-  placeholder,
+  placeholder: initialPlaceholder,
   autocomplete,
   type = 'text',
   autocapitalize,
   ...props
 }) => {
+  const placeholder = useContextSelector(
+    LocalizationContext,
+    ({
+      form: {
+        text: { placeholder },
+      },
+    }) => initialPlaceholder || placeholder({ label: props.label })
+  );
+
   return (
     <FormControl type="text" {...props}>
       {({ help, error, onBlur, invalid, onChange, value = '' }) => {
@@ -40,14 +54,18 @@ export const FormText: FC<FormTextProps> = ({
             fill="outline"
             helperText={help}
             label={props.label}
-            labelPlacement="floating"
+            labelPlacement={icon ? 'stacked' : 'floating'}
             mode="md"
             onIonBlur={onBlur}
             onIonInput={onChange}
             placeholder={placeholder}
             type={type}
             value={value}
-          />
+          >
+            {icon && (
+              <IonIcon aria-hidden="true" icon={ICON[icon]} slot="start" />
+            )}
+          </IonInput>
         );
       }}
     </FormControl>

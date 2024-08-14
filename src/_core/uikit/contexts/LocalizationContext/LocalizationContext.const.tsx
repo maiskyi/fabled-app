@@ -49,6 +49,7 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
         pattern: patternInputError,
         required: requiredInputError,
       },
+      placeholder: ({ label }) => `Enter ${label.toLowerCase()}`,
     },
 
     select: {
@@ -71,6 +72,7 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
         generic: genericError,
         required: requiredInputError,
       },
+      placeholder: ({ label }) => `Enter ${label.toLowerCase()}`,
     },
 
     textarea: {

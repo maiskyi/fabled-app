@@ -63,11 +63,13 @@ export const SignUp: FC = () => {
         <Form<SignUpRequest> onSubmit={handleOnSubmit} ref={form}>
           <Box padding={16} paddingInline={20}>
             <Form.Text
+              icon="mail-outline"
               label={t('forms.email')}
               name="email"
               validation={{ email: true, required: true }}
             />
             <Form.Password
+              icon="lock-closed-outline"
               label={t('forms.password')}
               name="password"
               validation={{ minLength: 8, required: true }}

@@ -1,23 +1,37 @@
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
 
-import { IonInput } from '@ionic/react';
+import { IonIcon, IonInput, IonInputPasswordToggle } from '@ionic/react';
+import { useContextSelector } from 'use-context-selector';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';
+import { IconName, ICON } from '../../Icon';
+import { LocalizationContext } from '../../../contexts/LocalizationContext';
 
 import { FormPasswordValidation } from './FormPassword.types';
 
 interface FormPasswordProps
   extends FormControlBaseProps<FormPasswordValidation> {
   placeholder?: string;
+  icon?: IconName;
 }
 
 export const FormPassword: FC<FormPasswordProps> = ({
+  icon,
   disabled,
   autofocus,
-  placeholder,
+  placeholder: initialPlaceholder,
   ...props
 }) => {
+  const placeholder = useContextSelector(
+    LocalizationContext,
+    ({
+      form: {
+        text: { placeholder },
+      },
+    }) => initialPlaceholder || placeholder({ label: props.label })
+  );
+
   return (
     <FormControl type="password" {...props}>
       {({ value = '', onChange, onBlur, invalid, help, error }) => {
@@ -34,7 +48,7 @@ export const FormPassword: FC<FormPasswordProps> = ({
               fill="outline"
               helperText={help}
               label={props.label}
-              labelPlacement="floating"
+              labelPlacement={icon ? 'stacked' : 'floating'}
               mode="md"
               onIonBlur={onBlur}
               onIonInput={onChange}
@@ -42,7 +56,10 @@ export const FormPassword: FC<FormPasswordProps> = ({
               type="password"
               value={value}
             >
-              {/* <IonInputPasswordToggle mode="md" slot="end" /> */}
+              {icon && (
+                <IonIcon aria-hidden="true" icon={ICON[icon]} slot="start" />
+              )}
+              {icon && <IonInputPasswordToggle mode="md" slot="end" />}
             </IonInput>
           </Fragment>
         );
