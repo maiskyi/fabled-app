@@ -68,17 +68,17 @@ export const EmailVerification = memo(function Action() {
 
   const handleOnRequestNewLink = async () => {
     sendEmailVerification(undefined, {
-      onSuccess: () =>
-        toast({
-          variant: 'success',
-          title: t('notifications.sendVerificationLinkSucceed.title'),
-          message: t('notifications.sendVerificationLinkSucceed.message'),
-        }),
       onError: () =>
         toast({
-          variant: 'error',
-          title: t('notifications.sendVerificationLinkFailed.title'),
           message: t('notifications.sendVerificationLinkFailed.message'),
+          title: t('notifications.sendVerificationLinkFailed.title'),
+          variant: 'error',
+        }),
+      onSuccess: () =>
+        toast({
+          message: t('notifications.sendVerificationLinkSucceed.message'),
+          title: t('notifications.sendVerificationLinkSucceed.title'),
+          variant: 'success',
         }),
     });
   };

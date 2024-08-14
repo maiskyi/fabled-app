@@ -14,16 +14,16 @@ export const useUtils = () => {
   const toast = useCallback(
     ({ title, message, variant }: ToastParams) => {
       showToast({
-        message,
-        header: title,
-        position: 'top',
-        color: COLOR_MAPPING[variant],
-        icon: ICON_MAPPING[variant],
         buttons: [
           {
             text: 'Ok',
           },
         ],
+        color: COLOR_MAPPING[variant],
+        header: title,
+        icon: ICON_MAPPING[variant],
+        message,
+        position: 'top',
         positionAnchor: Selector.Header,
       });
     },
@@ -40,25 +40,25 @@ export const useUtils = () => {
       cancelBtn = 'Cancel',
     }: ConfirmParams) => {
       showAlert({
-        message,
-        header: title,
         buttons: [
           {
-            text: cancelBtn,
             role: 'cancel',
+            text: cancelBtn,
           },
           {
             handler: async () => {
               await onConfirm();
             },
-            text: confirmBtn,
             role: variant === 'error' ? 'destructive' : 'cancel',
+            text: confirmBtn,
           },
         ],
+        header: title,
+        message,
       });
     },
     [showAlert]
   );
 
-  return { toast, confirm };
+  return { confirm, toast };
 };

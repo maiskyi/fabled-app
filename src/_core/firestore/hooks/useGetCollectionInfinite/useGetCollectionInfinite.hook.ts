@@ -36,22 +36,14 @@ export const useGetCollectionInfinite = <T extends object>(
     ['getCollectionInfinite', string, number, UseGetCollectionInfiniteKey],
     string | undefined
   >({
-    initialData,
-    queryKey: [
-      'getCollectionInfinite',
-      doc,
-      limit,
-      {
-        filter: compositeFilter,
-      },
-    ],
-    initialPageParam: startAfter,
     getNextPageParam: (last) => {
       if (last.length) {
         return last[last.length - 1]?.path;
       }
       return undefined;
     },
+    initialData,
+    initialPageParam: startAfter,
     queryFn: async ({
       pageParam: startAfter,
       queryKey: [_, reference, limit, { filter: compositeFilter }],
@@ -74,9 +66,9 @@ export const useGetCollectionInfinite = <T extends object>(
         ];
 
         const { snapshots } = await FirebaseFirestore.getCollection<T>({
-          reference,
           compositeFilter,
           queryConstraints: [...queryLimit, ...queryStartAfter],
+          reference,
         });
 
         return snapshots;
@@ -84,5 +76,13 @@ export const useGetCollectionInfinite = <T extends object>(
         throwError(err);
       }
     },
+    queryKey: [
+      'getCollectionInfinite',
+      doc,
+      limit,
+      {
+        filter: compositeFilter,
+      },
+    ],
   });
 };

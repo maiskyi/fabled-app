@@ -4,11 +4,11 @@ import { Color } from '@ionic/core';
 import { ToastVariant } from './useUtils.types';
 
 export const ICON_MAPPING: Record<ToastVariant, string> = {
-  success: checkmarkCircleOutline,
   error: alertCircleOutline,
+  success: checkmarkCircleOutline,
 };
 
 export const COLOR_MAPPING: Record<ToastVariant, Color> = {
-  success: 'success',
   error: 'danger',
+  success: 'success',
 };

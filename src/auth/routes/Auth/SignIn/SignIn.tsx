@@ -1,5 +1,4 @@
 import { FC, useRef } from 'react';
-import { noop } from 'lodash';
 
 import {
   Box,
@@ -25,30 +24,31 @@ export const SignIn: FC = () => {
 
   const title = t('pages.signIn');
 
-  const { isPending, mutateAsync } = useSignInWithCredentials();
+  const { isPending, mutate: signInWithCredentials } =
+    useSignInWithCredentials();
 
-  const handleOnSubmit = async (data: SignInRequest) => {
-    try {
-      await mutateAsync(data, {
-        onError: ({ title, message, fields }) => {
-          if (fields) {
-            form.current.setErrors(fields);
-          } else {
-            toast({ variant: 'error', title, message });
-          }
-        },
-        onSuccess: ({ user: { emailVerified } }) => {
-          if (!emailVerified) {
-            navigate({
-              action: 'replace',
-              pathname: RoutePath.AuthVerifyEmail,
-            });
-          }
-        },
-      });
-    } catch (error) {
-      noop();
-    }
+  const handleOnSubmit = (data: SignInRequest) => {
+    signInWithCredentials(data, {
+      onError: ({ title, message, fields }) => {
+        if (fields) {
+          form.current.setErrors(fields);
+        } else {
+          toast({ message, title, variant: 'error' });
+        }
+      },
+      onSuccess: ({ user: { emailVerified } }) => {
+        if (!emailVerified) {
+          navigate({
+            action: 'replace',
+            pathname: RoutePath.AuthVerifyEmail,
+          });
+        }
+      },
+    });
+  };
+
+  const handleOnForgotPassword = () => {
+    navigate({ action: 'push', pathname: RoutePath.AuthForgotPassword });
   };
 
   return (
@@ -91,7 +91,9 @@ export const SignIn: FC = () => {
             flexDirection="column"
           >
             <Form.Submit loading={isPending}>{t('actions.signIn')}</Form.Submit>
-            <Button fill="clear">{t('actions.forgotPassword')}</Button>
+            <Button fill="clear" onClick={handleOnForgotPassword}>
+              {t('actions.forgotPassword')}
+            </Button>
           </Box>
         </Form>
       </Content>

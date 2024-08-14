@@ -1,10 +1,11 @@
 export const pages = {
-  home: 'My Fables',
-  contactUs: 'Contact Us',
+  action: 'Invalid or unsupported link',
+  contactUs: 'Contact us',
   feedback: 'Share your feedback',
-  signUp: 'Sign Up',
-  verifyEmail: 'Verify Your Email',
-  signIn: 'Sign in',
-  action: 'Invalid or Unsupported Link',
+  forgotPassword: 'Forgot password?',
+  home: 'My Fables',
   profile: 'Profile',
+  signIn: 'Sign in',
+  signUp: 'Sign Up',
+  verifyEmail: 'Verify your email',
 };

@@ -15,7 +15,6 @@ export const useAddDocument = <T extends object>() => {
   const { throwError } = useFirestoreError();
 
   return useMutation<DocumentReference, Error, MutationVariables<T>>({
-    mutationKey: ['addDocument'],
     mutationFn: async ({ data, doc: reference }) => {
       try {
         const { reference: res } = await FirebaseFirestore.addDocument({
@@ -27,5 +26,6 @@ export const useAddDocument = <T extends object>() => {
         throwError(err);
       }
     },
+    mutationKey: ['addDocument'],
   });
 };

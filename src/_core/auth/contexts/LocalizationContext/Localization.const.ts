@@ -3,7 +3,6 @@ import { AuthErrorCodes } from 'firebase/auth';
 import { LocalizationContextProps } from './Localization.types';
 
 export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
-  authErrorTitle: 'Authentication Error!',
   authErrorMessage: {
     'auth/unknown':
       'An error occurred during authentication. Please try again later.',
@@ -187,4 +186,5 @@ export const DEFAULT_LOCALIZATION_CONTEXT_VALUE: LocalizationContextProps = {
       'The reCAPTCHA version is invalid.',
     [AuthErrorCodes.INVALID_REQ_TYPE]: 'The request type is invalid.',
   },
+  authErrorTitle: 'Authentication Error!',
 };

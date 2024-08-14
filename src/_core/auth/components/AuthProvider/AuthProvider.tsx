@@ -51,7 +51,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   }, [auth]);
 
   const contextValue = useMemo(
-    () => ({ user, reload, signOut, isAuthenticated }),
+    () => ({ isAuthenticated, reload, signOut, user }),
     [user, reload, signOut, isAuthenticated]
   );
 

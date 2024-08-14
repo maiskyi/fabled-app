@@ -35,16 +35,16 @@ export const ContactUs: FC = () => {
     try {
       await mutateAsync(data);
       toast({
-        variant: 'success',
-        title: t('notifications.inquirySucceed.title'),
         message: t('notifications.inquirySucceed.message'),
+        title: t('notifications.inquirySucceed.title'),
+        variant: 'success',
       });
       navigate({ action: 'back' });
     } catch (err) {
       toast({
-        variant: 'error',
-        title: t('notifications.inquiryFailed.title'),
         message: t('notifications.inquiryFailed.message'),
+        title: t('notifications.inquiryFailed.title'),
+        variant: 'error',
       });
     }
   };

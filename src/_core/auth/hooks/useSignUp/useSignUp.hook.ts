@@ -15,7 +15,6 @@ export const useSignUp = () => {
     AuthError,
     CreateUserWithEmailAndPasswordOptions
   >({
-    mutationKey: ['useSignUp'],
     mutationFn: async ({ email, password }) => {
       try {
         const result =
@@ -29,5 +28,6 @@ export const useSignUp = () => {
         throwError(err);
       }
     },
+    mutationKey: ['useSignUp'],
   });
 };

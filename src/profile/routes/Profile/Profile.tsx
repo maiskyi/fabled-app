@@ -18,11 +18,11 @@ export const Profile = memo(function Profile() {
 
   const handleOnLogout = () => {
     confirm({
-      variant: 'error',
       confirmBtn: t('actions.logOut'),
-      title: t('confirms.logout.title'),
       message: t('confirms.logout.message'),
       onConfirm: () => signOut(),
+      title: t('confirms.logout.title'),
+      variant: 'error',
     });
   };
 

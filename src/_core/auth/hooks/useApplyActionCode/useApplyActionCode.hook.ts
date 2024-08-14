@@ -12,7 +12,6 @@ export const useApplyActionCode = () => {
   const { throwError } = useAuthError();
 
   return useMutation<ActionCodeResponse, AuthError, ActionCodeRequest>({
-    mutationKey: ['useApplyActionCode'],
     mutationFn: async ({ oobCode }) => {
       try {
         return await FirebaseAuthentication.applyActionCode({ oobCode });
@@ -20,5 +19,6 @@ export const useApplyActionCode = () => {
         throwError(err);
       }
     },
+    mutationKey: ['useApplyActionCode'],
   });
 };

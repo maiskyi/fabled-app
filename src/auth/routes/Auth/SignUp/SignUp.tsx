@@ -31,7 +31,7 @@ export const SignUp: FC = () => {
         if (fields) {
           form.current.setErrors(fields);
         } else {
-          toast({ variant: 'error', title, message });
+          toast({ message, title, variant: 'error' });
         }
       },
     });
@@ -63,12 +63,12 @@ export const SignUp: FC = () => {
             <Form.Text
               name="email"
               label={t('forms.email')}
-              validation={{ required: true, email: true }}
+              validation={{ email: true, required: true }}
             />
             <Form.Password
               name="password"
               label={t('forms.password')}
-              validation={{ required: true, minLength: 8 }}
+              validation={{ minLength: 8, required: true }}
             />
           </Box>
           <Box padding={16} paddingInline={20}>

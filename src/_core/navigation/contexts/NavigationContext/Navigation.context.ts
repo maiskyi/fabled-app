@@ -6,6 +6,6 @@ export interface NavigationContextProps {
 }
 
 export const NavigationContext = createContext<NavigationContextProps>({
-  roles: [],
   defaultProtectedRedirect: '/',
+  roles: [],
 });

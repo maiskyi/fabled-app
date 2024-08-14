@@ -22,15 +22,15 @@ export const Index = memo(function Index() {
     const { exists, providers } = await checkIfEmailExist(form);
     if (exists && providers.includes(DTO.AuthProvider.Password)) {
       navigate({
-        search: form,
         action: 'push',
         pathname: RoutePath.AuthSignIn,
+        search: form,
       });
     } else {
       navigate({
-        search: form,
         action: 'push',
         pathname: RoutePath.AuthSignUp,
+        search: form,
       });
     }
   };
@@ -55,7 +55,7 @@ export const Index = memo(function Index() {
                 type="email"
                 name="email"
                 label={t('forms.email')}
-                validation={{ required: true, email: true }}
+                validation={{ email: true, required: true }}
               />
               <Form.Submit loading={isCheckEmailPending}>
                 {t('actions.continue')}

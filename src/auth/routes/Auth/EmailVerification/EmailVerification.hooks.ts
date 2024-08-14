@@ -19,5 +19,5 @@ export const useEmailVerificationCopy = ({ status }: UseActionCopyParams) => {
 
   const message = t(get(ACTION_MESSAGE_MAPPING, [status]));
 
-  return { title, message };
+  return { message, title };
 };

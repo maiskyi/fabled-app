@@ -1,7 +1,7 @@
 export const forms = {
-  subject: 'Subject',
-  message: 'Message',
   email: 'Email',
-  rateUs: 'Rate Us',
+  message: 'Message',
   password: 'Password',
+  rateUs: 'Rate Us',
+  subject: 'Subject',
 };

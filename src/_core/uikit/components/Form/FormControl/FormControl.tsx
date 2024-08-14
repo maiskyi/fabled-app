@@ -36,10 +36,10 @@ export const FormControl: FormControlComponent = ({
   help: initialHelp,
 }: FormControlProps<{}>) => {
   const { rules } = useFormControlRules({
+    errors,
+    label,
     name,
     type,
-    label,
-    errors,
     validation,
   });
 
@@ -62,12 +62,12 @@ export const FormControl: FormControlComponent = ({
         })();
 
         const content = children({
-          value,
-          onChange,
-          onBlur,
-          invalid,
           error,
           help,
+          invalid,
+          onBlur,
+          onChange,
+          value,
         });
 
         return (

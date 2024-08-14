@@ -12,7 +12,6 @@ export const useGetCurrentUser = () => {
   const { throwError } = useAuthError();
 
   return useMutation<GetCurrentUserResponse, AuthError, GetCurrentUserRequest>({
-    mutationKey: ['useGetCurrentUser'],
     mutationFn: async () => {
       try {
         return await FirebaseAuthentication.getCurrentUser();
@@ -20,5 +19,6 @@ export const useGetCurrentUser = () => {
         throwError(err);
       }
     },
+    mutationKey: ['useGetCurrentUser'],
   });
 };

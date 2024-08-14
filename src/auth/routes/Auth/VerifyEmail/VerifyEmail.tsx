@@ -28,15 +28,15 @@ export const VerifyEmail: FC = () => {
     try {
       await mutateAsync();
       toast({
-        variant: 'success',
-        title: t('notifications.sendVerificationLinkSucceed.title'),
         message: t('notifications.sendVerificationLinkSucceed.message'),
+        title: t('notifications.sendVerificationLinkSucceed.title'),
+        variant: 'success',
       });
     } catch (error) {
       toast({
-        variant: 'error',
-        title: t('notifications.sendVerificationLinkFailed.title'),
         message: t('notifications.sendVerificationLinkFailed.message'),
+        title: t('notifications.sendVerificationLinkFailed.title'),
+        variant: 'error',
       });
     }
   };

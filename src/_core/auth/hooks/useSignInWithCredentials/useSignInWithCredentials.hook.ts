@@ -15,7 +15,6 @@ export const useSignInWithCredentials = () => {
     AuthError,
     SignInWithEmailAndPasswordOptions
   >({
-    mutationKey: ['useSignInWithCredentials'],
     mutationFn: async ({ email, password }) => {
       try {
         const result = await FirebaseAuthentication.signInWithEmailAndPassword({
@@ -27,5 +26,6 @@ export const useSignInWithCredentials = () => {
         throwError(error);
       }
     },
+    mutationKey: ['useSignInWithCredentials'],
   });
 };

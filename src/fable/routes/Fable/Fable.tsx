@@ -14,8 +14,8 @@ export const Fable = memo(function Fable() {
   ] = useRoute<{ id: string }>();
 
   const { data } = useGetDocument<DTO.Fable>({
-    id,
     doc: Document.Fable,
+    id,
   });
 
   return (

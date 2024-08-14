@@ -10,8 +10,8 @@ interface AuthContextProps {
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  user: null,
   isAuthenticated: false,
   reload: () => Promise.resolve(),
   signOut: () => Promise.resolve(),
+  user: null,
 });

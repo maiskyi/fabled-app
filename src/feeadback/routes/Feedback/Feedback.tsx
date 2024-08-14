@@ -33,16 +33,16 @@ export const Feedback: FC = () => {
     try {
       await mutateAsync(form);
       toast({
-        variant: 'success',
-        title: t('notifications.feedbackSucceed.title'),
         message: t('notifications.feedbackSucceed.message'),
+        title: t('notifications.feedbackSucceed.title'),
+        variant: 'success',
       });
       navigate({ action: 'back' });
     } catch (_) {
       toast({
-        variant: 'error',
-        title: t('notifications.feedbackFailed.title'),
         message: t('notifications.feedbackFailed.message'),
+        title: t('notifications.feedbackFailed.title'),
+        variant: 'error',
       });
     }
   };

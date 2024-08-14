@@ -13,7 +13,7 @@ export const NavigationProvider: FC<NavigationProviderProps> = ({
   defaultProtectedRedirect,
 }) => {
   return (
-    <NavigationContext.Provider value={{ roles, defaultProtectedRedirect }}>
+    <NavigationContext.Provider value={{ defaultProtectedRedirect, roles }}>
       {children}
     </NavigationContext.Provider>
   );
