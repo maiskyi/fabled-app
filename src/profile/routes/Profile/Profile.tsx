@@ -29,7 +29,7 @@ export const Profile = memo(function Profile() {
   return (
     <Page>
       <Header translucent>
-        <Header.Back />
+        <Header.Back pathname={RoutePath.Index} />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content fullscreen inset={false}>
