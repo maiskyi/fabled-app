@@ -40,7 +40,7 @@ export const SignIn: FC = () => {
         if (!emailVerified) {
           navigate({
             action: 'replace',
-            pathname: RoutePath.AuthVerifyEmail,
+            pathname: RoutePath.VerifyEmail,
           });
         }
       },

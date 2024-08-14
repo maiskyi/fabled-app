@@ -25,7 +25,7 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
       return RoutePath.Index;
     }
     if (isAuthenticated && !user?.emailVerified) {
-      return RoutePath.AuthVerifyEmail;
+      return RoutePath.VerifyEmail;
     }
     return RoutePath.Auth;
   })();

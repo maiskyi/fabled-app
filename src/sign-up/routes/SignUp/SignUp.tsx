@@ -42,7 +42,7 @@ export const SignUp: FC = () => {
   };
 
   if (data?.user) {
-    return <Redirect pathname={RoutePath.AuthVerifyEmail} />;
+    return <Redirect pathname={RoutePath.VerifyEmail} />;
   }
 
   return (
