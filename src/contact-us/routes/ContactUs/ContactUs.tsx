@@ -12,7 +12,7 @@ import {
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
-import { FunctionName } from '@bootstrap/constants';
+import { FunctionName, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { useAuth } from '@core/auth';
 
@@ -39,7 +39,7 @@ export const ContactUs: FC = () => {
         title: t('notifications.inquirySucceed.title'),
         variant: 'success',
       });
-      navigate({ action: 'back' });
+      navigate({ action: 'back', pathname: RoutePath.Index });
     } catch (err) {
       toast({
         message: t('notifications.inquiryFailed.message'),

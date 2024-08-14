@@ -12,7 +12,7 @@ import {
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
-import { FunctionName } from '@bootstrap/constants';
+import { FunctionName, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 
 export const Feedback: FC = () => {
@@ -37,7 +37,7 @@ export const Feedback: FC = () => {
         title: t('notifications.feedbackSucceed.title'),
         variant: 'success',
       });
-      navigate({ action: 'back' });
+      navigate({ action: 'back', pathname: RoutePath.Profile });
     } catch (_) {
       toast({
         message: t('notifications.feedbackFailed.message'),
