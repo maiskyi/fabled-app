@@ -23,8 +23,7 @@ export const Index = memo(function Index() {
   const handleOnSignUp = () => {
     navigate({
       action: 'push',
-      pathname: RoutePath.AuthSignUp,
-      search: { from: RoutePath.Auth },
+      pathname: RoutePath.SignUp,
     });
   };
 

@@ -6,7 +6,6 @@ import { Page } from '@core/uikit';
 import { RouterOutlet } from '@core/navigation';
 
 import { Index } from './Index/Index';
-import { SignUp } from './SignUp/SignUp';
 import { VerifyEmail } from './VerifyEmail/VerifyEmail';
 import { SignIn } from './SignIn/SignIn';
 import { Action } from './Action/Action';
@@ -21,9 +20,6 @@ export const Auth = memo(function Auth() {
         </Route>
         <Route path={RoutePath.AuthVerifyEmail}>
           <VerifyEmail />
-        </Route>
-        <Route path={RoutePath.AuthSignUp}>
-          <SignUp />
         </Route>
         <Route path={RoutePath.AuthSignIn}>
           <SignIn />

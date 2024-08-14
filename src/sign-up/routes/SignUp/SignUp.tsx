@@ -11,19 +11,12 @@ import {
   useUtils,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { Redirect, useRoute } from '@core/navigation';
+import { Redirect } from '@core/navigation';
 import { useSignUp, SignUpRequest } from '@core/auth';
 import { RoutePath, VALIDATION_PATTERNS } from '@bootstrap/constants';
 
-import { SignUpRouteSearch } from './SignUp.types';
-
 export const SignUp: FC = () => {
   const { t } = useTranslation();
-  const [
-    {
-      search: { from = RoutePath.Auth },
-    },
-  ] = useRoute<{}, SignUpRouteSearch>();
   const form = useRef<FormInstance<SignUpRequest>>();
   const { toast } = useUtils();
 
@@ -50,7 +43,7 @@ export const SignUp: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back pathname={from} />
+        <Header.Back pathname={RoutePath.Auth} />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content>
