@@ -54,7 +54,7 @@ export const SignIn: FC = () => {
   return (
     <Page>
       <Header translucent>
-        <Header.Back />
+        <Header.Back pathname={RoutePath.Auth} />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content>
