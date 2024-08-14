@@ -32,7 +32,7 @@ export const ForgotPassword = memo(function ForgotPassword() {
           },
           pathname: RoutePath.Notification,
           search: {
-            back: RoutePath.AuthSignIn,
+            back: RoutePath.SignIn,
           },
         }),
     });
@@ -41,7 +41,7 @@ export const ForgotPassword = memo(function ForgotPassword() {
   return (
     <Page>
       <Header translucent>
-        <Header.Back pathname={RoutePath.AuthSignIn} />
+        <Header.Back pathname={RoutePath.SignIn} />
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content>

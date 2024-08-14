@@ -56,7 +56,7 @@ export const EmailVerification = memo<AuthActionModeProps>(function Action({
   };
 
   const handleSignIn = () => {
-    navigate({ action: 'push', pathname: RoutePath.AuthSignIn });
+    navigate({ action: 'push', pathname: RoutePath.SignIn });
   };
 
   const handleOnGoToFabledSpace = () => {

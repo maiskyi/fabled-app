@@ -3,7 +3,7 @@ export enum RoutePath {
   Auth = '/auth',
   AuthAction = '/auth/action',
   AuthForgotPassword = '/auth/forgot-password',
-  AuthSignIn = '/auth/sign-in',
+  SignIn = '/sign-in',
   VerifyEmail = '/verify-email',
   ContactUs = '/contact-us',
   ContactUsSuccess = '/contact-us/success',

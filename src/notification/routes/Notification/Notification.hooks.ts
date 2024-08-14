@@ -63,7 +63,7 @@ export const useNotificationCopy = ({
 
   const ctaMapping = useMemo(
     (): Partial<Record<RoutePath, string>> => ({
-      [RoutePath.AuthSignIn]: t('actions.signIn'),
+      [RoutePath.SignIn]: t('actions.signIn'),
     }),
     [t]
   );
