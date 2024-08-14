@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { Page, Content, Box, Text, Button, Divider } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
-import { RoutePath } from '@bootstrap/constants';
+import { LegalType, RoutePath } from '@bootstrap/constants';
 import { Link, useRoute } from '@core/navigation';
 
 import { FederatedLogin } from '../../../features';
@@ -54,19 +54,19 @@ export const Index = memo(function Index() {
             <Box>
               <FederatedLogin />
             </Box>
-            <Box textAlign="center">
+            <Box paddingBottom={12} paddingTop={12} textAlign="center">
               <Text>
                 <Translate
                   components={{
                     privacy: (
                       <Link
-                        params={{ id: 'privacy' }}
+                        params={{ id: LegalType.PrivacyPolicy }}
                         pathname={RoutePath.Legal}
                       />
                     ),
                     terms: (
                       <Link
-                        params={{ id: 'terms' }}
+                        params={{ id: LegalType.TermsAndConditions }}
                         pathname={RoutePath.Legal}
                       />
                     ),
