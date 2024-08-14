@@ -15,4 +15,5 @@ export enum RoutePath {
   Profile = '/profile',
   Request = '/request/:id',
   Notification = '/notification/:type',
+  Legal = '/legal/:id',
 }

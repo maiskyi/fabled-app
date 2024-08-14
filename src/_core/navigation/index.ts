@@ -6,6 +6,7 @@ export * from './components/NavigationProvider';
 export * from './components/ProtectedWithRedirect';
 export * from './components/Redirect';
 export * from './components/NavigateBack';
+export * from './components/Link';
 
 // Hooks
 export * from './hooks/useRoute';
