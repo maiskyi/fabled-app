@@ -13,21 +13,27 @@ import {
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
-import { useSignInWithCredentials, SignInRequest } from '@core/auth';
+import {
+  useSignInWithEmailAndPassword,
+  SignInWithEmailAndPasswordRequest,
+} from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 
 export const SignIn: FC = () => {
   const { t } = useTranslation();
-  const [{ search }, navigate] = useRoute<{}, Partial<SignInRequest>>();
-  const form = useRef<FormInstance<SignInRequest>>();
+  const [{ search }, navigate] = useRoute<
+    {},
+    Partial<SignInWithEmailAndPasswordRequest>
+  >();
+  const form = useRef<FormInstance<SignInWithEmailAndPasswordRequest>>();
   const { toast } = useUtils();
 
   const title = t('pages.signIn');
 
   const { isPending, mutate: signInWithCredentials } =
-    useSignInWithCredentials();
+    useSignInWithEmailAndPassword();
 
-  const handleOnSubmit = (data: SignInRequest) => {
+  const handleOnSubmit = (data: SignInWithEmailAndPasswordRequest) => {
     signInWithCredentials(data, {
       onError: ({ title, message, fields }) => {
         if (fields) {
@@ -64,13 +70,14 @@ export const SignIn: FC = () => {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.signIn')}</Text>
         </Box>
-        <Form<SignInRequest>
+        <Form<SignInWithEmailAndPasswordRequest>
           defaultValues={search}
           onSubmit={handleOnSubmit}
           ref={form}
         >
           <Box padding={16} paddingInline={20}>
             <Form.Text
+              icon="mail-outline"
               label={t('forms.email')}
               name="email"
               validation={{
@@ -79,6 +86,7 @@ export const SignIn: FC = () => {
               }}
             />
             <Form.Password
+              icon="lock-closed-outline"
               label={t('forms.password')}
               name="password"
               validation={{ required: true }}

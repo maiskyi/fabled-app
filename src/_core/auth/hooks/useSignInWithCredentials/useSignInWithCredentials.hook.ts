@@ -1,19 +1,20 @@
-import {
-  SignInResult,
-  FirebaseAuthentication,
-  SignInWithEmailAndPasswordOptions,
-} from '@capacitor-firebase/authentication';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { useMutation } from '@tanstack/react-query';
 
 import { useAuthError, AuthError } from '../useAuthError';
 
-export const useSignInWithCredentials = () => {
+import {
+  SignInWithEmailAndPasswordRequest,
+  SignInWithEmailAndPasswordResponse,
+} from './useSignInWithCredentials.types';
+
+export const useSignInWithEmailAndPassword = () => {
   const { throwError } = useAuthError();
 
   return useMutation<
-    SignInResult,
+    SignInWithEmailAndPasswordResponse,
     AuthError,
-    SignInWithEmailAndPasswordOptions
+    SignInWithEmailAndPasswordRequest
   >({
     mutationFn: async ({ email, password }) => {
       try {
@@ -26,6 +27,6 @@ export const useSignInWithCredentials = () => {
         throwError(error);
       }
     },
-    mutationKey: ['useSignInWithCredentials'],
+    mutationKey: ['useSignInWithEmailAndPassword'],
   });
 };
