@@ -22,6 +22,7 @@ import { SignUp } from './sign-up/routes';
 import { VerifyEmail } from './verify-email/routes';
 import { SignIn } from './sign-in/routes';
 import { ForgotPassword } from './forgot-password/routes';
+import { Action } from './action/routes';
 
 export const Router = memo(function Router() {
   return (
@@ -90,6 +91,11 @@ export const Router = memo(function Router() {
         <Route path={RoutePath.ForgotPassword}>
           <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
             <ForgotPassword />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.Action}>
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+            <Action />
           </ProtectedWithRedirect>
         </Route>
       </RouterOutlet>
