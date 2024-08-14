@@ -3,7 +3,8 @@ import { AuthErrorCodes } from '@core/auth';
 
 export const notifications = {
   [NotificationType.ConfirmPasswordResetFailed]: {
-    message: '123',
+    message:
+      "We couldn't reset your password. Please try again or contact support.",
     title: 'Password reset failed',
     [AuthErrorCodes.EXPIRED_OOB_CODE]:
       'It looks like the reset link has expired. Please request a new link to reset your password.',
@@ -63,5 +64,3 @@ export const notifications = {
     title: 'New Verification Link Sent',
   },
 };
-
-console.log(notifications);

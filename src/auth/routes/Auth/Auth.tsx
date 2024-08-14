@@ -10,7 +10,6 @@ import { SignUp } from './SignUp/SignUp';
 import { VerifyEmail } from './VerifyEmail/VerifyEmail';
 import { SignIn } from './SignIn/SignIn';
 import { Action } from './Action/Action';
-import { EmailVerification } from './EmailVerification/EmailVerification';
 import { ForgotPassword } from './ForgotPassword/ForgotPassword';
 
 export const Auth = memo(function Auth() {
@@ -20,7 +19,6 @@ export const Auth = memo(function Auth() {
         <Route exact path={RoutePath.Auth}>
           <Index />
         </Route>
-        <Route path={RoutePath.AuthSignIn}>SignIn</Route>
         <Route path={RoutePath.AuthVerifyEmail}>
           <VerifyEmail />
         </Route>
@@ -32,9 +30,6 @@ export const Auth = memo(function Auth() {
         </Route>
         <Route path={RoutePath.AuthAction}>
           <Action />
-        </Route>
-        <Route path={RoutePath.AuthEmailVerification}>
-          <EmailVerification />
         </Route>
         <Route path={RoutePath.AuthForgotPassword}>
           <ForgotPassword />
