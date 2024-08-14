@@ -16,8 +16,6 @@ import { useRoute } from '@core/navigation';
 import { useSignInWithCredentials, SignInRequest } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 
-import { FederatedLogin } from '../../../features';
-
 export const SignIn: FC = () => {
   const { t } = useTranslation();
   const [{ search }, navigate] = useRoute<{}, Partial<SignInRequest>>();
@@ -98,10 +96,6 @@ export const SignIn: FC = () => {
             </Button>
           </Box>
         </Form>
-        <Box display="flex" justifyContent="center" padding={4}>
-          <Text variant="h3">or</Text>
-        </Box>
-        <FederatedLogin />
       </Content>
     </Page>
   );

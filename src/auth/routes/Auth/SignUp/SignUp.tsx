@@ -15,8 +15,6 @@ import { Redirect, useRoute } from '@core/navigation';
 import { useSignUp, SignUpRequest } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 
-import { FederatedLogin } from '../../../features';
-
 export const SignUp: FC = () => {
   const { t } = useTranslation();
   const [{ search }] = useRoute<{}, Partial<SignUpRequest>>();
@@ -77,10 +75,6 @@ export const SignUp: FC = () => {
             <Form.Submit loading={isPending}>{t('actions.signUp')}</Form.Submit>
           </Box>
         </Form>
-        <Box display="flex" justifyContent="center" padding={4}>
-          <Text variant="h3">or</Text>
-        </Box>
-        <FederatedLogin />
       </Content>
     </Page>
   );

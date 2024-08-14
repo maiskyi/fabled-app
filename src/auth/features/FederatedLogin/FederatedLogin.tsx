@@ -11,7 +11,7 @@ export const FederatedLogin = memo(function FederatedLogin() {
     useSignInWithGoogle();
 
   return (
-    <Box display="flex" flexDirection="column" gap={8} padding={20}>
+    <Box display="flex" flexDirection="column" gap={8}>
       <Button.Social
         expand="block"
         loading={isSigningInWithGoogle}
