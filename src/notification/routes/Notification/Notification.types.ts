@@ -1,8 +1,6 @@
-import { NotificationType, RoutePath } from '@bootstrap/constants';
+import { NotificationType } from '@bootstrap/constants';
 
 export interface NotificationRouteSearch {
-  back: string;
-  next: RoutePath;
   code?: string;
 }
 

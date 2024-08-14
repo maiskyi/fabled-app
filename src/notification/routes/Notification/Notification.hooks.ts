@@ -4,13 +4,13 @@ import { get } from 'lodash';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { AuthErrorCodes } from '@core/auth';
+import { useRoute } from '@core/navigation';
 
 import { NotificationByCodeMap } from './Notification.types';
 
-interface UseNotificationCopyParams {
+interface UseNotificationParams {
   type: NotificationType;
   code?: string;
-  next: RoutePath;
 }
 
 const TYPES: NotificationType[] = [
@@ -19,12 +19,21 @@ const TYPES: NotificationType[] = [
   NotificationType.ConfirmPasswordResetFailed,
 ];
 
-export const useNotificationCopy = ({
+type UseNotificationReturnType = [
+  {
+    cta: string;
+    message: string;
+    title: string;
+  },
+  () => void,
+];
+
+export const useNotification = ({
   type,
-  next,
   code = null,
-}: UseNotificationCopyParams) => {
+}: UseNotificationParams): UseNotificationReturnType => {
   const { t } = useTranslation();
+  const [, navigate] = useRoute();
 
   const titleMapping = useMemo((): Record<NotificationType, string> => {
     return TYPES.reduce(
@@ -62,18 +71,36 @@ export const useNotificationCopy = ({
   );
 
   const ctaMapping = useMemo(
-    (): Partial<Record<RoutePath, string>> => ({
-      [RoutePath.SignIn]: t('actions.signIn'),
+    (): Record<NotificationType, string> => ({
+      [NotificationType.ConfirmPasswordResetSucceed]: t('actions.signIn'),
+      [NotificationType.SendPasswordResetEmailSucceed]: t('actions.ok'),
+      [NotificationType.ConfirmPasswordResetFailed]: '',
     }),
     [t]
   );
 
-  const cta = get(ctaMapping, [next]);
+  const ctaHandler = useMemo(
+    (): Record<NotificationType, () => void> => ({
+      [NotificationType.ConfirmPasswordResetSucceed]: () =>
+        navigate({ action: 'replace', pathname: RoutePath.SignIn }),
+      [NotificationType.SendPasswordResetEmailSucceed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Auth,
+        }),
+      [NotificationType.ConfirmPasswordResetFailed]: () => {},
+    }),
+    [navigate]
+  );
+
+  const cta = get(ctaMapping, type);
 
   const title = get(titleMapping, type);
+
+  const dispatch = get(ctaHandler, type);
 
   const message =
     get(messageCodeMapping, [type, code]) || get(messageMapping, type);
 
-  return { cta, message, title };
+  return [{ cta, message, title }, dispatch];
 };

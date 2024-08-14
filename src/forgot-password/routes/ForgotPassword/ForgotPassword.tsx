@@ -1,6 +1,16 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 
-import { Box, Button, Content, Form, Header, Page, Text } from '@core/uikit';
+import {
+  Box,
+  Button,
+  Content,
+  Form,
+  FormInstance,
+  Header,
+  Page,
+  Text,
+  useUtils,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useRoute } from '@core/navigation';
@@ -12,6 +22,8 @@ import {
 export const ForgotPassword = memo(function ForgotPassword() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
+  const form = useRef<FormInstance<SendPasswordResetEmailRequest>>();
+  const { toast } = useUtils();
 
   const { isPending, mutate: sendPasswordResetEmail } =
     useSendPasswordResetEmail();
@@ -24,6 +36,12 @@ export const ForgotPassword = memo(function ForgotPassword() {
 
   const handleOnSubmit = (data: SendPasswordResetEmailRequest) => {
     sendPasswordResetEmail(data, {
+      onError: ({ fields, title, message }) => {
+        if (fields) {
+          return form.current.setErrors(fields);
+        }
+        return toast({ message, title, variant: 'error' });
+      },
       onSuccess: () =>
         navigate({
           action: 'replace',
@@ -31,9 +49,6 @@ export const ForgotPassword = memo(function ForgotPassword() {
             type: NotificationType.SendPasswordResetEmailSucceed,
           },
           pathname: RoutePath.Notification,
-          search: {
-            back: RoutePath.SignIn,
-          },
         }),
     });
   };
@@ -51,7 +66,10 @@ export const ForgotPassword = memo(function ForgotPassword() {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.forgotPassword')}</Text>
         </Box>
-        <Form<SendPasswordResetEmailRequest> onSubmit={handleOnSubmit}>
+        <Form<SendPasswordResetEmailRequest>
+          onSubmit={handleOnSubmit}
+          ref={form}
+        >
           <Box padding={16} paddingInline={20}>
             <Form.Text
               icon="mail-outline"
