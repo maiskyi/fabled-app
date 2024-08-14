@@ -54,6 +54,7 @@ export const ForgotPassword = memo(function ForgotPassword() {
         <Form<SendPasswordResetEmailRequest> onSubmit={handleOnSubmit}>
           <Box padding={16} paddingInline={20}>
             <Form.Text
+              icon="mail-outline"
               label={t('forms.email')}
               name="email"
               validation={{ email: true, required: true }}
