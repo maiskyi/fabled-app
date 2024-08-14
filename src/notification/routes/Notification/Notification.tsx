@@ -33,7 +33,9 @@ export const Notification = memo(function Success() {
       </Header>
       <Content>
         <Header>
-          <Header.Title size="large">{title}</Header.Title>
+          <Header.Title size="large" wrap>
+            {title}
+          </Header.Title>
         </Header>
         <Box padding={16} paddingInline={20}>
           <Text>{message}</Text>
