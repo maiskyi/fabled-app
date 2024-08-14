@@ -7,7 +7,6 @@ import { RouterOutlet } from '@core/navigation';
 
 import { Index } from './Index/Index';
 import { Action } from './Action/Action';
-import { ForgotPassword } from './ForgotPassword/ForgotPassword';
 
 export const Auth = memo(function Auth() {
   return (
@@ -18,9 +17,6 @@ export const Auth = memo(function Auth() {
         </Route>
         <Route path={RoutePath.AuthAction}>
           <Action />
-        </Route>
-        <Route path={RoutePath.AuthForgotPassword}>
-          <ForgotPassword />
         </Route>
       </RouterOutlet>
     </Page>

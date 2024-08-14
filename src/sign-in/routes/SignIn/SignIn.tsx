@@ -54,7 +54,7 @@ export const SignIn: FC = () => {
   };
 
   const handleOnForgotPassword = () => {
-    navigate({ action: 'push', pathname: RoutePath.AuthForgotPassword });
+    navigate({ action: 'push', pathname: RoutePath.ForgotPassword });
   };
 
   return (

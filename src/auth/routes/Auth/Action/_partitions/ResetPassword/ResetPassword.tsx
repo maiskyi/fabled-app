@@ -36,7 +36,7 @@ export const ResetPassword = memo<AuthActionModeProps>(function ResetPassword({
               search: {
                 back: RoutePath.Auth,
                 code,
-                next: RoutePath.AuthForgotPassword,
+                next: RoutePath.ForgotPassword,
               },
             });
           }
