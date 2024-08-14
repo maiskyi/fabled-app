@@ -33,11 +33,7 @@ export const ResetPassword = memo<AuthActionModeProps>(function ResetPassword({
               action: 'replace',
               params: { type: NotificationType.ConfirmPasswordResetFailed },
               pathname: RoutePath.Notification,
-              search: {
-                back: RoutePath.Auth,
-                code,
-                next: RoutePath.ForgotPassword,
-              },
+              search: { code },
             });
           }
         },
@@ -46,10 +42,6 @@ export const ResetPassword = memo<AuthActionModeProps>(function ResetPassword({
             action: 'replace',
             params: { type: NotificationType.ConfirmPasswordResetSucceed },
             pathname: RoutePath.Notification,
-            search: {
-              back: RoutePath.Auth,
-              next: RoutePath.SignIn,
-            },
           }),
       }
     );
@@ -73,6 +65,7 @@ export const ResetPassword = memo<AuthActionModeProps>(function ResetPassword({
         <Form<Partial<ConfirmPasswordResetRequest>> onSubmit={handleOnSubmit}>
           <Box padding={16} paddingInline={20}>
             <Form.Password
+              icon="lock-closed-outline"
               label={t('forms.newPassword')}
               name="newPassword"
               validation={{ minLength: 8, required: true }}
