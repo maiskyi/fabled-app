@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   appName: 'Fabled Space',
   plugins: {
     FirebaseAuthentication: {
-      providers: ['google.com'],
+      providers: ['google.com', 'apple.com'],
       skipNativeAuth: false,
     },
   },

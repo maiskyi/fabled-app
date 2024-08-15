@@ -26,7 +26,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 export type AuthProviderProps = PropsWithChildren<{}>;
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User>();
 
   const { current: auth } = useRef(
     (() => {
