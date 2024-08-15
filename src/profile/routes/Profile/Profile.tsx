@@ -69,11 +69,11 @@ export const Profile = memo(function Profile() {
         <List>
           <List.Header>Legal</List.Header>
           <List.Item button>
-            <List.Icon name="book-outline" />
+            <List.Icon name="document-text-outline" />
             <List.Label>Terms and conditions</List.Label>
           </List.Item>
           <List.Item button>
-            <List.Icon name="book-outline" />
+            <List.Icon name="document-text-outline" />
             <List.Label>Privacy policy</List.Label>
           </List.Item>
         </List>
