@@ -10,15 +10,6 @@ export const useSignInWithApple = () => {
   return useMutation<AuthFederatedSignInResponse, AuthError, void>({
     mutationFn: async () => {
       try {
-        // const auth = getAuth();
-        // const provider = new OAuthProvider('apple.com');
-        // const {
-        //   credential: { idToken, nonce },
-        // } = await FirebaseAuthentication.signInWithApple({
-        //   mode: 'popup',
-        // });
-        // const credential = provider.credential({ idToken, rawNonce: nonce });
-        // return await signInWithCredential(auth, credential);
         return await FirebaseAuthentication.signInWithApple({
           mode: 'popup',
         });

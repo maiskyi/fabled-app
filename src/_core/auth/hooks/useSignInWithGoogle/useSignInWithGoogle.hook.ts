@@ -11,14 +11,6 @@ export const useSignInWithGoogle = () => {
   return useMutation<AuthFederatedSignInResponse, AuthError, void>({
     mutationFn: async () => {
       try {
-        // const auth = getAuth();
-        // const result = await FirebaseAuthentication.signInWithGoogle({
-        //   mode: Capacitor.isNativePlatform() ? 'redirect' : 'popup',
-        // });
-        // const credential = GoogleAuthProvider.credential(
-        //   result.credential?.idToken
-        // );
-        // return await signInWithCredential(auth, credential);
         return await FirebaseAuthentication.signInWithGoogle({
           mode: Capacitor.isNativePlatform() ? 'redirect' : 'popup',
         });
