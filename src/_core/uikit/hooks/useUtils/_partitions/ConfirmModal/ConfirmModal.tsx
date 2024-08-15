@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react';
+import { memo } from 'react';
 import { useAsyncFn } from 'react-use';
 
 import { IonIcon } from '@ionic/react';
@@ -40,7 +40,7 @@ export const ConfirmModal = memo<ConfirmModalParams>(function ConfirmModal({
   };
 
   return (
-    <Fragment>
+    <Box paddingBottom="var(--ion-safe-area-bottom)">
       <Box display="flex" gap={8} paddingInline={20} paddingTop={24}>
         <Box flex={0} paddingTop={4}>
           <IonIcon color={variant} icon={ICON[icon]} size="large" />
@@ -77,6 +77,6 @@ export const ConfirmModal = memo<ConfirmModalParams>(function ConfirmModal({
           </Button>
         </Box>
       </Box>
-    </Fragment>
+    </Box>
   );
 });
