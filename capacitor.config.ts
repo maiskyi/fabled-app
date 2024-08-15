@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
     providers: ['apple.com', 'facebook.com', 'google.com'],
     skipNativeAuth: false,
   },
-  appId: 'io.ionic.starter',
+  appId: 'app.fabled.space',
   appName: 'Fabled Space',
   webDir: 'dist',
 };
