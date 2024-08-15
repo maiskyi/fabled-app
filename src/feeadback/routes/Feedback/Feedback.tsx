@@ -1,24 +1,19 @@
 import { FC } from 'react';
 
-import {
-  Page,
-  Header,
-  Content,
-  Container,
-  Text,
-  Form,
-  useUtils,
-} from '@core/uikit';
+import { Page, Header, Content, Container, Text, Form } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
-import { FunctionName } from '@bootstrap/constants';
+import {
+  FunctionName,
+  NotificationType,
+  RoutePath,
+} from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 
 export const Feedback: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
-  const { toast } = useUtils();
 
   const title = t('pages.feedback');
 
@@ -32,17 +27,16 @@ export const Feedback: FC = () => {
   const handleOnSubmit = async (form: DTO.FeedbackRequest) => {
     try {
       await mutateAsync(form);
-      toast({
-        variant: 'success',
-        title: t('notifications.feedbackSucceed.title'),
-        message: t('notifications.feedbackSucceed.message'),
+      navigate({
+        action: 'replace',
+        params: { type: NotificationType.FeedbackSucceed },
+        pathname: RoutePath.Notification,
       });
-      navigate({ action: 'back' });
     } catch (_) {
-      toast({
-        variant: 'error',
-        title: t('notifications.feedbackFailed.title'),
-        message: t('notifications.feedbackFailed.message'),
+      navigate({
+        action: 'replace',
+        params: { type: NotificationType.FeedbackFailed },
+        pathname: RoutePath.Notification,
       });
     }
   };
@@ -62,14 +56,14 @@ export const Feedback: FC = () => {
         </Container>
         <Form onSubmit={handleOnSubmit}>
           <Form.StarRating
-            name="rating"
             label={t('forms.rateUs')}
+            name="rating"
             validation={{ required: true }}
           />
           <Container padding>
             <Form.Textarea
-              name="message"
               label={t('forms.message')}
+              name="message"
               validation={{ required: true }}
             />
           </Container>

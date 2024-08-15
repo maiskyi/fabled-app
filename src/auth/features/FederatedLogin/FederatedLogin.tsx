@@ -11,19 +11,19 @@ export const FederatedLogin = memo(function FederatedLogin() {
     useSignInWithGoogle();
 
   return (
-    <Box padding={20} display="flex" flexDirection="column" gap={8}>
+    <Box display="flex" flexDirection="column">
       <Button.Social
-        name="google"
         expand="block"
-        onClick={signInWithGoogle}
         loading={isSigningInWithGoogle}
+        name="google"
+        onClick={signInWithGoogle}
       >
         {t('actions.continueWithGoogle')}
       </Button.Social>
-      <Button.Social name="apple" expand="block">
+      <Button.Social expand="block" name="apple">
         {t('actions.continueWithApple')}
       </Button.Social>
-      <Button.Social name="facebook" expand="block">
+      <Button.Social expand="block" name="facebook">
         {t('actions.continueWithFacebook')}
       </Button.Social>
     </Box>

@@ -30,6 +30,20 @@ export const useGetCollection = <T extends object>({
     DocumentSnapshot<T>[],
     ['getCollection', UseGetCollectionKey]
   >({
+    queryFn: async ({
+      queryKey: [, { constraints: queryConstraints, filter: compositeFilter }],
+    }) => {
+      try {
+        const { snapshots } = await FirebaseFirestore.getCollection<T>({
+          compositeFilter,
+          queryConstraints,
+          reference,
+        });
+        return snapshots;
+      } catch (err) {
+        throwError(err);
+      }
+    },
     queryKey: [
       'getCollection',
       {
@@ -37,19 +51,5 @@ export const useGetCollection = <T extends object>({
         filter: compositeFilter,
       },
     ],
-    queryFn: async ({
-      queryKey: [, { constraints: queryConstraints, filter: compositeFilter }],
-    }) => {
-      try {
-        const { snapshots } = await FirebaseFirestore.getCollection<T>({
-          reference,
-          compositeFilter,
-          queryConstraints,
-        });
-        return snapshots;
-      } catch (err) {
-        throwError(err);
-      }
-    },
   });
 };

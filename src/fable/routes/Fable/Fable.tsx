@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { Content, Header, Page, Container, Text, Card } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useGetDocument } from '@core/firestore';
-import { Document } from '@bootstrap/constants';
+import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 
 export const Fable = memo(function Fable() {
@@ -14,14 +14,14 @@ export const Fable = memo(function Fable() {
   ] = useRoute<{ id: string }>();
 
   const { data } = useGetDocument<DTO.Fable>({
-    id,
     doc: Document.Fable,
+    id,
   });
 
   return (
     <Page>
       <Header collapse="fade">
-        <Header.Back />
+        <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content fullscreen>
         <Container aspectRatio={1}>123</Container>

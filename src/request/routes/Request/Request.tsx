@@ -10,8 +10,8 @@ export const Request: FC = () => {
   const [{ params }] = useRoute<{ id: string }>();
 
   const { data } = useGetDocument<DTO.Fable>({
-    id: params.id,
     doc: Document.Fable,
+    id: params.id,
   });
 
   return (

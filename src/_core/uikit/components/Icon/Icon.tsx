@@ -18,11 +18,11 @@ export const Icon: FC<IconProps> = forwardRef<any, IconProps>(function Icon(
 ) {
   return (
     <IonIcon
-      ref={ref}
-      slot={slot}
-      icon={ICON[name]}
-      size={size}
       className={className}
+      icon={ICON[name]}
+      ref={ref}
+      size={size}
+      slot={slot}
     />
   );
 });

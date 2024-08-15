@@ -25,15 +25,15 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
       return RoutePath.Index;
     }
     if (isAuthenticated && !user?.emailVerified) {
-      return RoutePath.AuthVerifyEmail;
+      return RoutePath.VerifyEmail;
     }
     return RoutePath.Auth;
   })();
 
   return (
     <NavigationProvider
-      roles={roles}
       defaultProtectedRedirect={defaultProtectedRedirect}
+      roles={roles}
     >
       {children}
     </NavigationProvider>

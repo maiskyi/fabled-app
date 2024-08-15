@@ -29,10 +29,16 @@ export const LocalizationProvider: FC<LocalizationProviderProps> = ({
   const { value } = useAsync(async (): Promise<string> => {
     const { value: lng } = await Device.getLanguageTag();
     await i18n.use(initReactI18next).init({
-      lng,
-      fallbackLng,
       debug: false,
-      supportedLngs,
+      fallbackLng,
+      interpolation: {
+        format: (value, format) => {
+          const [resolved] = i18n.languages;
+          return invoke(formatters, [format, resolved], value) || value;
+        },
+      },
+      lng,
+      ns: ['translation'],
       resources: Object.entries(resources).reduce(
         (res, [key, translation]) => ({
           ...res,
@@ -42,13 +48,7 @@ export const LocalizationProvider: FC<LocalizationProviderProps> = ({
         }),
         {}
       ),
-      ns: ['translation'],
-      interpolation: {
-        format: (value, format) => {
-          const [resolved] = i18n.languages;
-          return invoke(formatters, [format, resolved], value) || value;
-        },
-      },
+      supportedLngs,
     });
     return i18n.language;
   });

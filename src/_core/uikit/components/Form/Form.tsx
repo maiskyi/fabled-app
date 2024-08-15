@@ -79,8 +79,8 @@ export const Form = forwardRef<FormInstance<{}>, FormProps>(function Form(
   };
 
   useImperativeHandle(ref, () => ({
-    setErrors,
     hasUnsavedChanges,
+    setErrors,
   }));
 
   return (

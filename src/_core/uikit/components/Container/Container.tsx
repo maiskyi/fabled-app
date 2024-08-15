@@ -13,10 +13,10 @@ export const Container: FC<ContainerProps> = ({
 }) => {
   return (
     <div
-      style={{ aspectRatio }}
       className={classNames({
         'ion-padding': padding,
       })}
+      style={{ aspectRatio }}
     >
       {children}
     </div>

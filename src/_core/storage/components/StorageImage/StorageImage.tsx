@@ -20,5 +20,5 @@ export const ImageStorage: FC<ImageStorageProps> = ({
     return await getDownloadURL(image);
   });
 
-  return <img alt={alt} src={value} style={{ objectFit }} loading="lazy" />;
+  return <img alt={alt} loading="lazy" src={value} style={{ objectFit }} />;
 };

@@ -22,7 +22,6 @@ export const useMutationFunction = <Request, Response>({
   );
 
   return useMutation<Response, Error, Request>({
-    mutationKey: ['httpsCallable', name],
     mutationFn: async (request) => {
       try {
         const { data } = await callable(request);
@@ -31,5 +30,6 @@ export const useMutationFunction = <Request, Response>({
         throwError(err);
       }
     },
+    mutationKey: ['httpsCallable', name],
   });
 };

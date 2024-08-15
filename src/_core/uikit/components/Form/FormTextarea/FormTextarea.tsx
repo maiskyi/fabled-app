@@ -29,25 +29,25 @@ export const FormTextarea: FC<FormTextareaProps> = ({
       {({ help, error, onBlur, invalid, onChange, value = '' }) => {
         return (
           <IonTextarea
-            mode="md"
-            rows={rows}
-            value={value}
-            fill="outline"
-            helperText={help}
-            onIonBlur={onBlur}
-            disabled={disabled}
-            label={props.label}
-            autofocus={autofocus}
-            onIonInput={onChange}
-            labelPlacement="floating"
-            placeholder={placeholder}
-            errorText={error?.message}
             autoCapitalize={autocapitalize}
-            maxlength={validation?.maxLength}
+            autofocus={autofocus}
             className={classNames({
               'ion-invalid': invalid,
               'ion-touched': invalid,
             })}
+            disabled={disabled}
+            errorText={error?.message}
+            fill="outline"
+            helperText={help}
+            label={props.label}
+            labelPlacement="floating"
+            maxlength={validation?.maxLength}
+            mode="md"
+            onIonBlur={onBlur}
+            onIonInput={onChange}
+            placeholder={placeholder}
+            rows={rows}
+            value={value}
           />
         );
       }}

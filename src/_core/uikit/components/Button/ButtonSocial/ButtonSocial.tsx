@@ -25,14 +25,14 @@ export const ButtonSocial: FC<ButtonSocialProps> = ({
   onClick,
 }) => {
   return (
-    <IonButton fill="outline" shape="round" onClick={onClick} expand={expand}>
-      {loading && <IonSpinner name="circular" className={styles.spinner} />}
+    <IonButton expand={expand} fill="outline" onClick={onClick} shape="round">
+      {loading && <IonSpinner className={styles.spinner} name="circular" />}
       <Icon
-        slot="start"
-        name={ICONS_MAPPING[name]}
         className={classNames({
           [styles.transparent]: loading,
         })}
+        name={ICONS_MAPPING[name]}
+        slot="start"
       />
       <span
         className={classNames({

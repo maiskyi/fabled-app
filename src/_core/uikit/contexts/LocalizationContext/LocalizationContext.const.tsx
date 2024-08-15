@@ -19,33 +19,11 @@ const maxLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
   `${label || name} must be not more then ${value} characters`;
 
 export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
+  confirm: {
+    cancelText: 'Cancel',
+    confirmText: 'Yes',
+  },
   form: {
-    starRating: {
-      errors: {
-        generic: genericError,
-        required: requiredInputError,
-      },
-    },
-    textarea: {
-      errors: {
-        generic: genericError,
-        required: requiredInputError,
-        maxLength: maxLengthInputError,
-      },
-    },
-    text: {
-      errors: {
-        email: patternInputError,
-        generic: genericError,
-        required: requiredInputError,
-      },
-    },
-    select: {
-      errors: {
-        generic: genericError,
-        required: requiredInputError,
-      },
-    },
     // checkbox: {
     //   errors: {
     //     generic: genericError,
@@ -66,9 +44,41 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
     // },
     password: {
       errors: {
-        minLength: minLengthInputError,
         generic: genericError,
+        minLength: minLengthInputError,
         pattern: patternInputError,
+        required: requiredInputError,
+      },
+      placeholder: ({ label }) => `Enter ${label.toLowerCase()}`,
+    },
+
+    select: {
+      errors: {
+        generic: genericError,
+        required: requiredInputError,
+      },
+    },
+
+    starRating: {
+      errors: {
+        generic: genericError,
+        required: requiredInputError,
+      },
+    },
+
+    text: {
+      errors: {
+        email: patternInputError,
+        generic: genericError,
+        required: requiredInputError,
+      },
+      placeholder: ({ label }) => `Enter ${label.toLowerCase()}`,
+    },
+
+    textarea: {
+      errors: {
+        generic: genericError,
+        maxLength: maxLengthInputError,
         required: requiredInputError,
       },
     },
@@ -97,12 +107,8 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
     //   },
     // },
   },
-  confirm: {
-    cancelText: 'Cancel',
-    confirmText: 'Yes',
-  },
   tour: {
-    next: 'Next',
     last: 'Let’s get helpful',
+    next: 'Next',
   },
 };

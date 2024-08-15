@@ -13,11 +13,11 @@ export const Content: FC<ContentProps> = forwardRef<any, ContentProps>(
   function Content({ children, fullscreen, inset = false }, ref) {
     return (
       <IonContent
-        ref={ref}
-        fullscreen={fullscreen}
         className={classNames({
           'ion-padding': inset,
         })}
+        fullscreen={fullscreen}
+        ref={ref}
       >
         {children}
       </IonContent>

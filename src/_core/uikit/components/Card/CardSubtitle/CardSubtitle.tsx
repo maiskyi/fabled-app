@@ -15,7 +15,7 @@ export const CardSubtitle: FC<CardSubtitleProps> = ({ children }) => {
   return (
     <IonCardSubtitle>
       {loading ? (
-        <IonSkeletonText className={styles.skeleton} animated />
+        <IonSkeletonText animated className={styles.skeleton} />
       ) : (
         children
       )}

@@ -27,15 +27,15 @@ export const Home = memo(function Home() {
     },
     {
       filter: {
-        type: 'and',
         queryConstraints: [
           {
-            type: 'where',
             fieldPath: 'status',
             opStr: '==',
+            type: 'where',
             value: DTO.FableStatus.Success,
           },
         ],
+        type: 'and',
       },
     }
   );
@@ -49,7 +49,7 @@ export const Home = memo(function Home() {
   };
 
   const handleOnFableClick = (id: string) => {
-    navigate({ action: 'push', pathname: RoutePath.Fable, params: { id } });
+    navigate({ action: 'push', params: { id }, pathname: RoutePath.Fable });
   };
 
   return (
@@ -64,7 +64,7 @@ export const Home = memo(function Home() {
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Fab slot="fixed" placement={['end', 'bottom']}>
+        <Fab placement={['end', 'bottom']} slot="fixed">
           <Fab.Button icon="add" onClick={handleOnCreateClick} />
         </Fab>
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>

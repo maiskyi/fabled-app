@@ -4,10 +4,10 @@ import { FormPasswordRules } from './FormPassword.types';
 
 export const FORM_PASSWORD_RULES: FormPasswordRules = {
   password: {
-    required: ({ message, value }) => ({
-      required: {
-        value,
+    minLength: ({ message, value }) => ({
+      minLength: {
         message,
+        value,
       },
     }),
     pattern: ({ message, value }) => {
@@ -26,15 +26,15 @@ export const FORM_PASSWORD_RULES: FormPasswordRules = {
       }
       return {
         pattern: {
-          value,
           message,
+          value,
         },
       };
     },
-    minLength: ({ message, value }) => ({
-      minLength: {
-        value,
+    required: ({ message, value }) => ({
+      required: {
         message,
+        value,
       },
     }),
   },

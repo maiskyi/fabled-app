@@ -23,7 +23,6 @@ export const useGetDocument = <T extends object>({
     DocumentSnapshot<T>,
     ['getDocument', string, string]
   >({
-    queryKey: ['getDocument', doc, id],
     queryFn: async ({ queryKey: [, doc, id] }) => {
       try {
         const { snapshot } = await FirebaseFirestore.getDocument<T>({
@@ -34,5 +33,6 @@ export const useGetDocument = <T extends object>({
         throwError(err);
       }
     },
+    queryKey: ['getDocument', doc, id],
   });
 };

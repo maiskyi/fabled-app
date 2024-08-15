@@ -1,9 +1,11 @@
 // Components
+
 export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
 export * from './components/Container';
 export * from './components/Content';
+export * from './components/Divider';
 export * from './components/Fab';
 export * from './components/Footer';
 export * from './components/Form';
@@ -17,3 +19,4 @@ export * from './components/ThemeProvider';
 
 // Hooks
 export * from './hooks/useUtils';
+export { useIonViewDidEnter as useViewDidEnter } from '@ionic/react';

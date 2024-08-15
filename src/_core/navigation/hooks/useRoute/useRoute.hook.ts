@@ -34,19 +34,18 @@ export const useRoute = <
 
   const navigate: UseRouteDispatch = useCallback(
     (params): void => {
+      const pathname =
+        generatePath(params.pathname, params.params) + stringify(params.search);
       if (params.action === 'back' && router.canGoBack()) {
         return router.goBack();
       }
+      if (params.action === 'back' && !router.canGoBack()) {
+        return router.push(pathname, 'back', 'replace');
+      }
       if (params.action === 'push') {
-        const pathname =
-          generatePath(params.pathname, params.params) +
-          stringify(params.search);
         return router.push(pathname);
       }
       if (params.action === 'replace') {
-        const pathname =
-          generatePath(params.pathname, params.params) +
-          stringify(params.search);
         return router.push(pathname, 'forward', 'replace');
       }
     },

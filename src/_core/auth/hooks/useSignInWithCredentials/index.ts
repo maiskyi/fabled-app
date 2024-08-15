@@ -1,5 +1,5 @@
-export { useSignInWithCredentials } from './useSignInWithCredentials.hook';
+export { useSignInWithEmailAndPassword } from './useSignInWithCredentials.hook';
 export type {
-  SignInRequest,
-  SignInResponse,
+  SignInWithEmailAndPasswordRequest,
+  SignInWithEmailAndPasswordResponse,
 } from './useSignInWithCredentials.types';

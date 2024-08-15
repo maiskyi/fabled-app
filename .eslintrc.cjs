@@ -1,9 +1,7 @@
 module.exports = {
-  root: true,
   env: {
     node: true,
   },
-  plugins: ['prettier'],
   extends: [
     'react-app',
     'eslint:recommended',
@@ -13,12 +11,18 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
   },
+  plugins: ['prettier', 'sort-keys-fix'],
+  root: true,
   rules: {
-    'no-console': 'warn',
-    'react/jsx-key': 'error',
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        vars: 'all',
+        varsIgnorePattern: '^_',
+      },
+    ],
     'import/no-duplicates': ['error'],
     'import/no-extraneous-dependencies': [
       'error',
@@ -28,47 +32,9 @@ module.exports = {
         peerDependencies: false,
       },
     ],
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      {
-        vars: 'all',
-        args: 'all',
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-      },
-    ],
-    'prettier/prettier': [
-      'warn',
-      {
-        singleQuote: true,
-        semi: true,
-        tabWidth: 2,
-        useTabs: false,
-        trailingComma: 'es5',
-        endOfLine: 'lf',
-      },
-    ],
     'import/order': [
       'warn',
       {
-        'newlines-between': 'always',
-        pathGroups: [
-          {
-            pattern:
-              '{classnames,i18next,lodash,react,react-*,react-dom/*, */react-*}',
-            group: 'builtin',
-            position: 'before',
-            patternOptions: { partial: true },
-          },
-          {
-            pattern: '*.{css,sass,less,scss,pcss,styl}',
-            group: 'internal',
-            position: 'before',
-            patternOptions: { matchBase: true },
-          },
-        ],
-        pathGroupsExcludedImportTypes: ['react'],
-        warnOnUnassignedImports: true,
         groups: [
           'builtin',
           'external',
@@ -79,7 +45,48 @@ module.exports = {
           'object',
           'type',
         ],
+        'newlines-between': 'always',
+        pathGroups: [
+          {
+            group: 'builtin',
+            pattern:
+              '{classnames,i18next,lodash,react,react-*,react-dom/*, */react-*}',
+            patternOptions: { partial: true },
+            position: 'before',
+          },
+          {
+            group: 'internal',
+            pattern: '*.{css,sass,less,scss,pcss,styl}',
+            patternOptions: { matchBase: true },
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['react'],
+        warnOnUnassignedImports: true,
       },
     ],
+    'no-console': 'warn',
+    'prettier/prettier': [
+      'warn',
+      {
+        endOfLine: 'lf',
+        semi: true,
+        singleQuote: true,
+        tabWidth: 2,
+        trailingComma: 'es5',
+        useTabs: false,
+      },
+    ],
+    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
+    'react/jsx-key': 'error',
+    'react/jsx-sort-props': 'warn',
+    'react/react-in-jsx-scope': 'off',
+    'sort-keys': [
+      'warn',
+      'asc',
+      { caseSensitive: true, minKeys: 2, natural: false },
+    ],
+    'sort-keys-fix/sort-keys-fix': 'warn',
   },
 };

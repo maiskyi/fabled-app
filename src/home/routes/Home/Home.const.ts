@@ -11,10 +11,7 @@ export const HOME_INITIAL_DATA: InfiniteData<
       length: 3,
     }).map(
       (_, index): DocumentSnapshot<DTO.Fable> => ({
-        id: `${index}`,
-        path: '',
         data: {
-          status: DTO.FableStatus.Initialized,
           request: {
             characterName: '',
             description: '',
@@ -23,7 +20,10 @@ export const HOME_INITIAL_DATA: InfiniteData<
             version: '',
           },
           response: {},
+          status: DTO.FableStatus.Initialized,
         },
+        id: `${index}`,
+        path: '',
       })
     ),
   ],

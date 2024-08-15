@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { Page, Content, Form, Header, Container } from '@core/uikit';
-import { FunctionName } from '@bootstrap/constants';
+import { FunctionName, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 // import { Redirect } from '@core/navigation';
 import { useStaticOptions } from '@bootstrap/hooks';
@@ -36,7 +36,7 @@ export const Create = memo(function Create() {
   return (
     <Page>
       <Header translucent>
-        <Header.Back />
+        <Header.Back pathname={RoutePath.Index} />
         <Header.Title>Create Fable</Header.Title>
       </Header>
       <Content inset={false}>
@@ -50,27 +50,27 @@ export const Create = memo(function Create() {
           <Container padding>
             <Form.Text
               label="Character name"
-              placeholder="e.g. Mickey Mouse"
               name={FormField.CharacterName}
+              placeholder="e.g. Mickey Mouse"
               validation={{ required: true }}
             />
             <Form.Select
               label="Read time"
-              placeholder="Select reed time"
               name={FormField.ReadTime}
               options={readTime}
+              placeholder="Select reed time"
               validation={{ required: true }}
             />
             <Form.Text
               label="Scene of action"
-              placeholder="e.g. Magic forest"
               name={FormField.SceneOfAction}
+              placeholder="e.g. Magic forest"
               validation={{ required: true }}
             />
             <Form.Textarea
               label="What is this fable about"
-              placeholder="e.g. How to build a friendship"
               name={FormField.WhatIsThisFableAbout}
+              placeholder="e.g. How to build a friendship"
               validation={{ required: true }}
             />
           </Container>

@@ -9,17 +9,19 @@ import {
   chatboxEllipsesOutline,
   logoApple,
   logoFacebook,
+  lockClosedOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
   add,
-  google: logoGoogle,
   apple: logoApple,
-  facebook: logoFacebook,
   'arrow-back': arrowBack,
-  'person-circle': personCircle,
   'book-outline': bookOutline,
-  'chevron-forward': chevronForward,
-  'mail-outline': mailOutline,
   'chatbox-ellipses-outline': chatboxEllipsesOutline,
+  'chevron-forward': chevronForward,
+  facebook: logoFacebook,
+  google: logoGoogle,
+  'lock-closed-outline': lockClosedOutline,
+  'mail-outline': mailOutline,
+  'person-circle': personCircle,
 };

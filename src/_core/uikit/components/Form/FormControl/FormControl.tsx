@@ -36,17 +36,16 @@ export const FormControl: FormControlComponent = ({
   help: initialHelp,
 }: FormControlProps<{}>) => {
   const { rules } = useFormControlRules({
+    errors,
+    label,
     name,
     type,
-    label,
-    errors,
     validation,
   });
 
   return (
     <Controller
       name={name}
-      rules={rules}
       render={({
         field: { value, onChange, onBlur },
         fieldState: { invalid, error },
@@ -62,18 +61,19 @@ export const FormControl: FormControlComponent = ({
         })();
 
         const content = children({
-          value,
-          onChange,
-          onBlur,
-          invalid,
           error,
           help,
+          invalid,
+          onBlur,
+          onChange,
+          value,
         });
 
         return (
           <div className={classNames(styles.root, className)}>{content}</div>
         );
       }}
+      rules={rules}
     />
   );
 };

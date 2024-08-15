@@ -31,21 +31,21 @@ export const FormSelect: FormSelectComponent = ({
     <FormControl type="select" {...props}>
       {({ value, onBlur, onChange, invalid }) => (
         <IonSelect
-          mode="md"
-          value={value}
-          fill="outline"
-          onIonBlur={onBlur}
-          disabled={disabled}
-          label={props.label}
           autoFocus={autofocus}
-          onIonChange={onChange}
-          placeholder={placeholder}
-          labelPlacement="floating"
           className={classNames({
             'ion-invalid': invalid,
             'ion-touched': invalid,
           })}
+          disabled={disabled}
+          fill="outline"
           interface={isPlatform('desktop') ? 'popover' : 'action-sheet'}
+          label={props.label}
+          labelPlacement="floating"
+          mode="md"
+          onIonBlur={onBlur}
+          onIonChange={onChange}
+          placeholder={placeholder}
+          value={value}
         >
           {options.map(({ value, label }) => {
             return (

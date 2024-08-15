@@ -10,5 +10,5 @@ interface ListIconProps {
 }
 
 export const ListIcon: FC<ListIconProps> = ({ name, slot = 'start' }) => {
-  return <IonIcon slot={slot} icon={ICON[name]} />;
+  return <IonIcon icon={ICON[name]} slot={slot} />;
 };

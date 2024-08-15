@@ -1,25 +1,20 @@
 import { FC } from 'react';
 
-import {
-  Page,
-  Header,
-  Content,
-  Form,
-  Container,
-  Text,
-  useUtils,
-} from '@core/uikit';
+import { Page, Header, Content, Form, Container, Text } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
-import { FunctionName } from '@bootstrap/constants';
+import {
+  FunctionName,
+  NotificationType,
+  RoutePath,
+} from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { useAuth } from '@core/auth';
 
 export const ContactUs: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
-  const { toast } = useUtils();
   const { user } = useAuth();
 
   const title = t('pages.contactUs');
@@ -34,17 +29,20 @@ export const ContactUs: FC = () => {
   const handleOnSubmit = async (data: DTO.ContactUsRequest) => {
     try {
       await mutateAsync(data);
-      toast({
-        variant: 'success',
-        title: t('notifications.inquirySucceed.title'),
-        message: t('notifications.inquirySucceed.message'),
+      navigate({
+        action: 'replace',
+        params: {
+          type: NotificationType.InquirySucceed,
+        },
+        pathname: RoutePath.Notification,
       });
-      navigate({ action: 'back' });
     } catch (err) {
-      toast({
-        variant: 'error',
-        title: t('notifications.inquiryFailed.title'),
-        message: t('notifications.inquiryFailed.message'),
+      navigate({
+        action: 'replace',
+        params: {
+          type: NotificationType.InquiryFailed,
+        },
+        pathname: RoutePath.Notification,
       });
     }
   };
@@ -69,24 +67,24 @@ export const ContactUs: FC = () => {
           <Text>{t('intro.inquiry')}</Text>
         </Container>
         <Form<DTO.ContactUsRequest>
-          onSubmit={handleOnSubmit}
           defaultValues={defaultValues}
+          onSubmit={handleOnSubmit}
         >
           <Container padding>
             <Form.Text
-              name="email"
-              label={t('forms.email')}
               disabled={!!user?.email}
+              label={t('forms.email')}
+              name="email"
               validation={{ required: true }}
             />
             <Form.Text
-              name="subject"
               label={t('forms.subject')}
+              name="subject"
               validation={{ required: true }}
             />
             <Form.Textarea
-              name="text"
               label={t('forms.message')}
+              name="text"
               validation={{ required: true }}
             />
           </Container>

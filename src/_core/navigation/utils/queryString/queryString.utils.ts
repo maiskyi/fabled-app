@@ -6,7 +6,6 @@ import { KEYWORDS } from './queryString.const';
 
 export const parse = (v: string) =>
   qs.parse(v, {
-    ignoreQueryPrefix: true,
     decoder: (value: string) => {
       if (/^(\d+|\d*\.\d+)$/.test(value)) {
         return parseFloat(value);
@@ -20,10 +19,11 @@ export const parse = (v: string) =>
         return value;
       }
     },
+    ignoreQueryPrefix: true,
   });
 
 export const stringify = (params: object) =>
   qs.stringify(params, {
-    encode: false,
     addQueryPrefix: true,
+    encode: false,
   });

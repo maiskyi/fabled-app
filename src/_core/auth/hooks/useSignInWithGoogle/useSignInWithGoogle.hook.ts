@@ -13,7 +13,6 @@ export const useSignInWithGoogle = () => {
   const { throwError } = useAuthError();
 
   return useMutation<UserCredential, AuthError, void>({
-    mutationKey: ['useSignInWithGoogle'],
     mutationFn: async () => {
       try {
         const auth = getAuth();
@@ -26,5 +25,6 @@ export const useSignInWithGoogle = () => {
         throwError(err);
       }
     },
+    mutationKey: ['useSignInWithGoogle'],
   });
 };
