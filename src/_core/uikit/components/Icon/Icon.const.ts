@@ -10,6 +10,7 @@ import {
   logoApple,
   logoFacebook,
   lockClosedOutline,
+  logOutOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
@@ -22,6 +23,7 @@ export const ICON = {
   facebook: logoFacebook,
   google: logoGoogle,
   'lock-closed-outline': lockClosedOutline,
+  'log-out-outline': logOutOutline,
   'mail-outline': mailOutline,
   'person-circle': personCircle,
 };

@@ -2,6 +2,7 @@ import { ComponentProps, PropsWithChildren, ReactElement } from 'react';
 import classNames from 'classnames';
 
 import { IonButton, IonSpinner } from '@ionic/react';
+import { Color } from '@ionic/core';
 
 import styles from './Button.module.scss';
 
@@ -15,6 +16,7 @@ export type ButtonProps = PropsWithChildren<{
   loading?: boolean;
   type?: ComponentProps<typeof IonButton>['type'];
   fill?: ComponentProps<typeof IonButton>['fill'];
+  color?: Color;
 }>;
 
 interface ButtonComponent {
@@ -25,6 +27,7 @@ interface ButtonComponent {
 export const Button: ButtonComponent = ({
   fill,
   onClick,
+  color,
   children,
   className,
   block = true,
@@ -35,6 +38,7 @@ export const Button: ButtonComponent = ({
   return (
     <IonButton
       className={classNames(styles.root, className)}
+      color={color}
       disabled={disabled}
       expand={block ? 'block' : undefined}
       fill={fill}
