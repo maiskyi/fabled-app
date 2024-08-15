@@ -29,22 +29,22 @@ export const notifications = {
     message: 'Your email has been successfully verified. Thank you!',
     title: 'Email Verification Successful',
   },
-  feedbackFailed: {
+  [NotificationType.FeedbackFailed]: {
     message:
       "Sorry, something went wrong and we couldn't submit your feedback. Please try again later or ensure all required fields are filled out correctly.",
     title: 'Feedback Submission Failed',
   },
-  feedbackSucceed: {
+  [NotificationType.FeedbackSucceed]: {
     message:
       'Your feedback has been successfully submitted. We appreciate your input and will use it to enhance our services.',
     title: 'Thank You for Your Feedback!',
   },
-  inquiryFailed: {
+  [NotificationType.InquiryFailed]: {
     message:
       "Oops! Something went wrong, and we couldn't submit your message. Please try again later, or check your internet connection and ensure all required fields are filled out correctly.",
     title: 'Submission Failed',
   },
-  inquirySucceed: {
+  [NotificationType.InquirySucceed]: {
     message:
       'Your message has been successfully submitted. Our team will review your inquiry and get back to you as soon as possible.',
     title: 'Thank You for Reaching Out!',

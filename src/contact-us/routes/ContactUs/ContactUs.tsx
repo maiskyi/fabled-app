@@ -1,25 +1,20 @@
 import { FC } from 'react';
 
-import {
-  Page,
-  Header,
-  Content,
-  Form,
-  Container,
-  Text,
-  useUtils,
-} from '@core/uikit';
+import { Page, Header, Content, Form, Container, Text } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
-import { FunctionName, RoutePath } from '@bootstrap/constants';
+import {
+  FunctionName,
+  NotificationType,
+  RoutePath,
+} from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 import { useAuth } from '@core/auth';
 
 export const ContactUs: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
-  const { toast } = useUtils();
   const { user } = useAuth();
 
   const title = t('pages.contactUs');
@@ -34,17 +29,20 @@ export const ContactUs: FC = () => {
   const handleOnSubmit = async (data: DTO.ContactUsRequest) => {
     try {
       await mutateAsync(data);
-      toast({
-        message: t('notifications.inquirySucceed.message'),
-        title: t('notifications.inquirySucceed.title'),
-        variant: 'success',
+      navigate({
+        action: 'replace',
+        params: {
+          type: NotificationType.InquirySucceed,
+        },
+        pathname: RoutePath.Notification,
       });
-      navigate({ action: 'back', pathname: RoutePath.Index });
     } catch (err) {
-      toast({
-        message: t('notifications.inquiryFailed.message'),
-        title: t('notifications.inquiryFailed.title'),
-        variant: 'error',
+      navigate({
+        action: 'replace',
+        params: {
+          type: NotificationType.InquiryFailed,
+        },
+        pathname: RoutePath.Notification,
       });
     }
   };

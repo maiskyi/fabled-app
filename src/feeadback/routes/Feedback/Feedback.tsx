@@ -1,24 +1,19 @@
 import { FC } from 'react';
 
-import {
-  Page,
-  Header,
-  Content,
-  Container,
-  Text,
-  Form,
-  useUtils,
-} from '@core/uikit';
+import { Page, Header, Content, Container, Text, Form } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
-import { FunctionName, RoutePath } from '@bootstrap/constants';
+import {
+  FunctionName,
+  NotificationType,
+  RoutePath,
+} from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
 
 export const Feedback: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
-  const { toast } = useUtils();
 
   const title = t('pages.feedback');
 
@@ -32,17 +27,16 @@ export const Feedback: FC = () => {
   const handleOnSubmit = async (form: DTO.FeedbackRequest) => {
     try {
       await mutateAsync(form);
-      toast({
-        message: t('notifications.feedbackSucceed.message'),
-        title: t('notifications.feedbackSucceed.title'),
-        variant: 'success',
+      navigate({
+        action: 'replace',
+        params: { type: NotificationType.FeedbackSucceed },
+        pathname: RoutePath.Notification,
       });
-      navigate({ action: 'back', pathname: RoutePath.Profile });
     } catch (_) {
-      toast({
-        message: t('notifications.feedbackFailed.message'),
-        title: t('notifications.feedbackFailed.title'),
-        variant: 'error',
+      navigate({
+        action: 'replace',
+        params: { type: NotificationType.FeedbackFailed },
+        pathname: RoutePath.Notification,
       });
     }
   };

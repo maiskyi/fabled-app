@@ -17,6 +17,10 @@ const TYPES: NotificationType[] = [
   NotificationType.SendPasswordResetEmailSucceed,
   NotificationType.ConfirmPasswordResetSucceed,
   NotificationType.ConfirmPasswordResetFailed,
+  NotificationType.InquirySucceed,
+  NotificationType.InquiryFailed,
+  NotificationType.FeedbackFailed,
+  NotificationType.FeedbackSucceed,
 ];
 
 type UseNotificationReturnType = [
@@ -75,6 +79,10 @@ export const useNotification = ({
       [NotificationType.ConfirmPasswordResetSucceed]: t('actions.signIn'),
       [NotificationType.SendPasswordResetEmailSucceed]: t('actions.ok'),
       [NotificationType.ConfirmPasswordResetFailed]: '',
+      [NotificationType.InquirySucceed]: t('actions.ok'),
+      [NotificationType.InquiryFailed]: t('actions.ok'),
+      [NotificationType.FeedbackFailed]: t('actions.ok'),
+      [NotificationType.FeedbackSucceed]: t('actions.ok'),
     }),
     [t]
   );
@@ -89,6 +97,26 @@ export const useNotification = ({
           pathname: RoutePath.Auth,
         }),
       [NotificationType.ConfirmPasswordResetFailed]: () => {},
+      [NotificationType.InquirySucceed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Auth,
+        }),
+      [NotificationType.InquiryFailed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Auth,
+        }),
+      [NotificationType.FeedbackFailed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Auth,
+        }),
+      [NotificationType.FeedbackSucceed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Auth,
+        }),
     }),
     [navigate]
   );

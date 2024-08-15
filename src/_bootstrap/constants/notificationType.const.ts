@@ -1,5 +1,9 @@
 export enum NotificationType {
-  SendPasswordResetEmailSucceed = 'send-password-reset-email-succeed',
-  ConfirmPasswordResetSucceed = 'confirm-password-reset-succeed',
   ConfirmPasswordResetFailed = 'confirm-password-reset-failed',
+  ConfirmPasswordResetSucceed = 'confirm-password-reset-succeed',
+  FeedbackFailed = 'feedback-failed',
+  FeedbackSucceed = 'feedback-succeed',
+  InquiryFailed = 'inquiry-failed',
+  InquirySucceed = 'inquiry-succeed',
+  SendPasswordResetEmailSucceed = 'send-password-reset-email-succeed',
 }

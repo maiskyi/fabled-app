@@ -11,7 +11,7 @@ import {
   useUtils,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { Redirect } from '@core/navigation';
+import { useRoute } from '@core/navigation';
 import {
   useCreateUserWithEmailAndPassword,
   CreateUserWithEmailAndPasswordRequest,
@@ -22,15 +22,17 @@ export const SignUp: FC = () => {
   const { t } = useTranslation();
   const form = useRef<FormInstance<CreateUserWithEmailAndPasswordRequest>>();
   const { toast } = useUtils();
+  const [, navigate] = useRoute();
 
   const title = t('pages.signUp');
 
-  const { isPending, data, mutate } = useCreateUserWithEmailAndPassword();
+  const { isPending, mutate: createUserWithEmailAndPassword } =
+    useCreateUserWithEmailAndPassword();
 
   const handleOnSubmit = async (
     data: CreateUserWithEmailAndPasswordRequest
   ) => {
-    mutate(data, {
+    createUserWithEmailAndPassword(data, {
       onError: ({ fields, title, message }) => {
         if (fields) {
           form.current.setErrors(fields);
@@ -38,12 +40,10 @@ export const SignUp: FC = () => {
           toast({ message, title, variant: 'error' });
         }
       },
+      onSuccess: () =>
+        navigate({ action: 'replace', pathname: RoutePath.VerifyEmail }),
     });
   };
-
-  if (data?.user) {
-    return <Redirect pathname={RoutePath.VerifyEmail} />;
-  }
 
   return (
     <Page>
