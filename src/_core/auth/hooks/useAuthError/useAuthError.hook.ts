@@ -3,6 +3,7 @@ import { get } from 'lodash';
 
 import { useContextSelector } from 'use-context-selector';
 import { FirebaseError } from 'firebase/app';
+import { CapacitorException } from '@capacitor/core';
 
 import { LocalizationContext } from '../../contexts/LocalizationContext';
 import { AuthErrorCode } from '../../types';
@@ -34,6 +35,10 @@ export const useAuthError = () => {
           message,
           error.code as AuthErrorCode
         );
+      } else if (error instanceof CapacitorException) {
+        const code = `auth/${error.code}`;
+        const message = get(authErrorMessage, code, UNKNOWN_AUTH_ERROR_CODE);
+        throw new AuthError(authErrorTitle, message, code as AuthErrorCode);
       } else {
         throw new Error('Auth error');
       }

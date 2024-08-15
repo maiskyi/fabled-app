@@ -3,12 +3,14 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  FirebaseAuthentication: {
-    providers: ['apple.com', 'facebook.com', 'google.com'],
-    skipNativeAuth: false,
-  },
   appId: 'app.fabled.space',
   appName: 'Fabled Space',
+  plugins: {
+    FirebaseAuthentication: {
+      providers: ['google.com'],
+      skipNativeAuth: false,
+    },
+  },
   webDir: 'dist',
 };
 

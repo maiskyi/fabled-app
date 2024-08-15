@@ -38,7 +38,7 @@ export const Profile = memo(function Profile() {
         </Header>
         <Card>
           <Card.Header>
-            <Card.Avatar src={user?.photoURL} />
+            <Card.Avatar src={user?.photoUrl} />
             <Card.Title>{userDisplayName}</Card.Title>
             <Card.Subtitle>{user?.email}</Card.Subtitle>
           </Card.Header>
