@@ -41,14 +41,8 @@ export const ConfirmModal = memo<ConfirmModalParams>(function ConfirmModal({
 
   return (
     <Fragment>
-      <Box
-        alignItems="center"
-        display="flex"
-        gap={8}
-        paddingInline={20}
-        paddingTop={24}
-      >
-        <Box flex={0}>
+      <Box display="flex" gap={8} paddingInline={20} paddingTop={24}>
+        <Box flex={0} paddingTop={4}>
           <IonIcon color={variant} icon={ICON[icon]} size="large" />
         </Box>
         <Box flex={1} fontSize="min(2.125rem, 61.2px)" fontWeight="bold">

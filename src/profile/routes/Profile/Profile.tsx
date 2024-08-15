@@ -2,15 +2,16 @@ import { memo } from 'react';
 
 import { Header, Page, Content, Card, List, useUtils } from '@core/uikit';
 import { useRoute } from '@core/navigation';
-import { useAuth } from '@core/auth';
+import { useAuth, useSignOut } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 
 export const Profile = memo(function Profile() {
   const [, navigate] = useRoute();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { confirm } = useUtils();
   const { t } = useTranslation();
+  const { mutateAsync: signOut } = useSignOut();
 
   const title = t('pages.profile');
 

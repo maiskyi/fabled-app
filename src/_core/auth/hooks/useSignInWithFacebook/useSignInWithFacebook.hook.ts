@@ -20,6 +20,7 @@ export const useSignInWithFacebook = () => {
         // return await signInWithCredential(auth, credential);
         return await FirebaseAuthentication.signInWithFacebook({
           mode: 'popup',
+          scopes: ['email', 'public_profile'],
         });
       } catch (err) {
         throwError(err);

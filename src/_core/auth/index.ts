@@ -13,8 +13,9 @@ export * from './hooks/useSendEmailVerification';
 export * from './hooks/useSendPasswordResetEmail';
 export * from './hooks/useSignInWithApple';
 export * from './hooks/useSignInWithCredentials';
-export * from './hooks/useSignInWithGoogle';
 export * from './hooks/useSignInWithFacebook';
+export * from './hooks/useSignInWithGoogle';
+export * from './hooks/useSignOut';
 
 // Types
 export * from './types';

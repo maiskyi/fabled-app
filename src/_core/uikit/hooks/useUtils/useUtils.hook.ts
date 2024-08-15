@@ -45,7 +45,7 @@ export const useUtils = () => {
         ...params,
       });
       showConfirm({
-        // backdropDismiss: false,
+        backdropDismiss: false,
         breakpoints: [0, 1],
         cssClass: styles.confirm,
         initialBreakpoint: 1,
