@@ -1,6 +1,7 @@
 import {
   FC,
   PropsWithChildren,
+  ReactNode,
   useCallback,
   useMemo,
   useRef,
@@ -23,9 +24,14 @@ import {
 
 import { AuthContext } from '../../contexts/AuthContext';
 
-export type AuthProviderProps = PropsWithChildren<{}>;
+export type AuthProviderProps = PropsWithChildren<{
+  fallback?: ReactNode;
+}>;
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: FC<AuthProviderProps> = ({
+  children,
+  fallback = null,
+}) => {
   const [user, setUser] = useState<User>();
 
   const { current: auth } = useRef(
@@ -66,7 +72,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider value={contextValue}>
-      {isUndefined(user) ? null : children}
+      {isUndefined(user) ? fallback : children}
     </AuthContext.Provider>
   );
 };
