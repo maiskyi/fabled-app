@@ -2,7 +2,12 @@ import { memo } from 'react';
 
 import { Box, Button, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { useSignInWithGoogle, useSignInWithApple, AuthError } from '@core/auth';
+import {
+  useSignInWithGoogle,
+  useSignInWithApple,
+  useSignInWithFacebook,
+  AuthError,
+} from '@core/auth';
 
 export const FederatedLogin = memo(function FederatedLogin() {
   const { t } = useTranslation();
@@ -18,6 +23,9 @@ export const FederatedLogin = memo(function FederatedLogin() {
     toast({ message, title, variant: 'error' });
   };
 
+  const { isPending: isSigningInWithFacebook, mutate: signInWithFacebook } =
+    useSignInWithFacebook();
+
   const handleOnSignInWithGoogle = () => {
     signInWithGoogle(undefined, {
       onError: (error) => signInErrorHandler(error),
@@ -26,6 +34,12 @@ export const FederatedLogin = memo(function FederatedLogin() {
 
   const handleOnSignInWithApple = () => {
     signInWithApple(undefined, {
+      onError: (error) => signInErrorHandler(error),
+    });
+  };
+
+  const handleOnSignInWithFacebook = () => {
+    signInWithFacebook(undefined, {
       onError: (error) => signInErrorHandler(error),
     });
   };
@@ -48,7 +62,12 @@ export const FederatedLogin = memo(function FederatedLogin() {
       >
         {t('actions.continueWithApple')}
       </Button.Social>
-      <Button.Social expand="block" name="facebook">
+      <Button.Social
+        expand="block"
+        loading={isSigningInWithFacebook}
+        name="facebook"
+        onClick={handleOnSignInWithFacebook}
+      >
         {t('actions.continueWithFacebook')}
       </Button.Social>
     </Box>
