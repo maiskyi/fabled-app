@@ -12,7 +12,7 @@ import {
 import { Translate, useTranslation } from '@core/localization';
 import { useAuth, useSendEmailVerification } from '@core/auth';
 import { useRoute } from '@core/navigation';
-import { RoutePath } from '@bootstrap/constants';
+import { NotificationType, RoutePath } from '@bootstrap/constants';
 
 export const VerifyEmail: FC = () => {
   const { t } = useTranslation();
@@ -27,10 +27,10 @@ export const VerifyEmail: FC = () => {
   const handleOnRequest = async () => {
     try {
       await mutateAsync();
-      toast({
-        message: t('notifications.sendVerificationLinkSucceed.message'),
-        title: t('notifications.sendVerificationLinkSucceed.title'),
-        variant: 'success',
+      navigate({
+        action: 'replace',
+        params: { type: NotificationType.SendVerificationLinkSucceed },
+        pathname: RoutePath.Notification,
       });
     } catch (error) {
       toast({

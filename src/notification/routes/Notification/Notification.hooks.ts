@@ -21,6 +21,8 @@ const TYPES: NotificationType[] = [
   NotificationType.InquiryFailed,
   NotificationType.FeedbackFailed,
   NotificationType.FeedbackSucceed,
+  NotificationType.SendVerificationLinkSucceed,
+  NotificationType.SendVerificationLinkFailed,
 ];
 
 type UseNotificationReturnType = [
@@ -83,6 +85,8 @@ export const useNotification = ({
       [NotificationType.InquiryFailed]: t('actions.ok'),
       [NotificationType.FeedbackFailed]: t('actions.ok'),
       [NotificationType.FeedbackSucceed]: t('actions.ok'),
+      [NotificationType.SendVerificationLinkSucceed]: t('actions.ok'),
+      [NotificationType.SendVerificationLinkFailed]: t('actions.ok'),
     }),
     [t]
   );
@@ -110,9 +114,19 @@ export const useNotification = ({
       [NotificationType.FeedbackFailed]: () =>
         navigate({
           action: 'back',
-          pathname: RoutePath.Auth,
+          pathname: RoutePath.Profile,
         }),
       [NotificationType.FeedbackSucceed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Profile,
+        }),
+      [NotificationType.SendVerificationLinkSucceed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Auth,
+        }),
+      [NotificationType.SendVerificationLinkFailed]: () =>
         navigate({
           action: 'back',
           pathname: RoutePath.Auth,

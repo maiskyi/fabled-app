@@ -53,12 +53,12 @@ export const notifications = {
     message: "We've got you covered! Check your email for the reset link.",
     title: "You're Almost There!",
   },
-  sendVerificationLinkFailed: {
+  [NotificationType.SendVerificationLinkFailed]: {
     message:
       'There was an issue sending the verification link. Please try again later. If the problem persists, contact support.',
     title: 'Error Sending Verification Link',
   },
-  sendVerificationLinkSucceed: {
+  [NotificationType.SendVerificationLinkSucceed]: {
     message:
       'A new verification link has been sent to your email. Please check your inbox and click the link to verify your account. If you don’t see it, be sure to check your spam folder.',
     title: 'New Verification Link Sent',
