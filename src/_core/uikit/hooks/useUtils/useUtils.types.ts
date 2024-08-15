@@ -1,6 +1,10 @@
+import { Color } from '@ionic/core';
+
+import { ConfirmModalParams } from './_partitions/ConfirmModal';
+
 export type ToastVariant = 'success' | 'error';
 
-export type ConfirmVariant = 'success' | 'error';
+export type ConfirmVariant = Color;
 
 export interface ToastParams {
   title?: string;
@@ -8,11 +12,4 @@ export interface ToastParams {
   variant: ToastVariant;
 }
 
-export interface ConfirmParams {
-  title?: string;
-  message: string;
-  variant?: ToastVariant;
-  confirmBtn?: string;
-  cancelBtn?: string;
-  onConfirm: () => Promise<unknown>;
-}
+export type ConfirmParams = Omit<ConfirmModalParams, 'dismiss'>;

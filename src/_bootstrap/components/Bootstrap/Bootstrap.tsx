@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { AuthProvider } from '@core/auth';
+import { AuthProvider, AuthProviderProps } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
 import { FirestoreProvider, FirestoreProviderProps } from '@core/firestore';
 import { NetworkProvider, AppProvider, AppProviderProps } from '@core/app';
@@ -11,11 +11,12 @@ import {
   LocalizationProviderProps,
 } from '@core/localization';
 
-import { Navigation } from '../Navigation/Navigation';
-import { Init } from '../Init/Init';
+import { Navigation } from '../Navigation';
+import { Init } from '../Init';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
+  auth: AuthProviderProps;
   functions: FunctionsProviderProps;
   firestore: FirestoreProviderProps;
   localization: LocalizationProviderProps;

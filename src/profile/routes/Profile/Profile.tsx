@@ -2,15 +2,16 @@ import { memo } from 'react';
 
 import { Header, Page, Content, Card, List, useUtils } from '@core/uikit';
 import { useRoute } from '@core/navigation';
-import { useAuth } from '@core/auth';
+import { useAuth, useSignOut } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 
 export const Profile = memo(function Profile() {
   const [, navigate] = useRoute();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { confirm } = useUtils();
   const { t } = useTranslation();
+  const { mutateAsync: signOut } = useSignOut();
 
   const title = t('pages.profile');
 
@@ -19,10 +20,11 @@ export const Profile = memo(function Profile() {
   const handleOnLogout = () => {
     confirm({
       confirmBtn: t('actions.logOut'),
+      icon: 'log-out-outline',
       message: t('confirms.logout.message'),
       onConfirm: () => signOut(),
       title: t('confirms.logout.title'),
-      variant: 'error',
+      variant: 'danger',
     });
   };
 
@@ -38,7 +40,7 @@ export const Profile = memo(function Profile() {
         </Header>
         <Card>
           <Card.Header>
-            <Card.Avatar src={user?.photoURL} />
+            <Card.Avatar src={user?.photoUrl} />
             <Card.Title>{userDisplayName}</Card.Title>
             <Card.Subtitle>{user?.email}</Card.Subtitle>
           </Card.Header>
@@ -67,11 +69,11 @@ export const Profile = memo(function Profile() {
         <List>
           <List.Header>Legal</List.Header>
           <List.Item button>
-            <List.Icon name="book-outline" />
+            <List.Icon name="document-text-outline" />
             <List.Label>Terms and conditions</List.Label>
           </List.Item>
           <List.Item button>
-            <List.Icon name="book-outline" />
+            <List.Icon name="document-text-outline" />
             <List.Label>Privacy policy</List.Label>
           </List.Item>
         </List>

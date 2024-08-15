@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { User } from 'firebase/auth';
+import { User } from '@capacitor-firebase/authentication';
 
 interface AuthContextProps {
   user: User;

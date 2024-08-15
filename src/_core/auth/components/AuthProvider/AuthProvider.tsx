@@ -1,6 +1,7 @@
 import {
   FC,
   PropsWithChildren,
+  ReactNode,
   useCallback,
   useMemo,
   useRef,
@@ -13,16 +14,26 @@ import {
   getAuth,
   indexedDBLocalPersistence,
   initializeAuth,
-  User,
 } from 'firebase/auth';
 import { getApp } from 'firebase/app';
 import { Capacitor } from '@capacitor/core';
+import {
+  User,
+  FirebaseAuthentication,
+} from '@capacitor-firebase/authentication';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
-export type AuthProviderProps = PropsWithChildren<{}>;
+export type AuthProviderProps = PropsWithChildren<{
+  fallback?: ReactNode;
+}>;
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: FC<AuthProviderProps> = ({
+  children,
+  fallback = null,
+}) => {
+  const [user, setUser] = useState<User>();
+
   const { current: auth } = useRef(
     (() => {
       if (Capacitor.isNativePlatform()) {
@@ -34,18 +45,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     })()
   );
 
-  const [user, setUser] = useState<User>();
-
   const isAuthenticated = !!user;
 
   const signOut = useCallback(async () => {
-    return auth.signOut();
-  }, [auth]);
+    return FirebaseAuthentication.signOut();
+  }, []);
 
   const reload = useCallback(async () => {
     if (auth.currentUser) {
-      await auth.currentUser.reload();
-      return setUser(() => ({ ...auth.currentUser }));
+      const { user } = await FirebaseAuthentication.getCurrentUser();
+      return setUser(() => ({ ...user }));
     }
     return Promise.resolve();
   }, [auth]);
@@ -56,12 +65,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   );
 
   useMount(() => {
-    auth.onAuthStateChanged((v) => setUser(v));
+    FirebaseAuthentication.addListener('authStateChange', ({ user }) => {
+      setUser(user);
+    });
   });
 
   return (
     <AuthContext.Provider value={contextValue}>
-      {isUndefined(user) ? null : children}
+      {isUndefined(user) ? fallback : children}
     </AuthContext.Provider>
   );
 };

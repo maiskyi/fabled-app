@@ -1,15 +1,23 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
-import { useIonToast, useIonAlert } from '@ionic/react';
+import { useIonToast, useIonModal } from '@ionic/react';
+
+import styles from './useUtils.module.scss';
 
 import { Selector } from '../../constants/selector.const';
 
 import { ToastParams, ConfirmParams } from './useUtils.types';
 import { ICON_MAPPING, COLOR_MAPPING } from './useUtils.const';
+import { ConfirmModal, ConfirmModalParams } from './_partitions/ConfirmModal';
 
 export const useUtils = () => {
   const [showToast] = useIonToast();
-  const [showAlert] = useIonAlert();
+  const [confirmParams, setConfirmParams] = useState<ConfirmModalParams>();
+
+  const [showConfirm, dismissConfirm] = useIonModal(
+    ConfirmModal,
+    confirmParams
+  );
 
   const toast = useCallback(
     ({ title, message, variant }: ToastParams) => {
@@ -31,33 +39,20 @@ export const useUtils = () => {
   );
 
   const confirm = useCallback(
-    ({
-      title,
-      message,
-      variant,
-      onConfirm,
-      confirmBtn = 'Ok',
-      cancelBtn = 'Cancel',
-    }: ConfirmParams) => {
-      showAlert({
-        buttons: [
-          {
-            role: 'cancel',
-            text: cancelBtn,
-          },
-          {
-            handler: async () => {
-              await onConfirm();
-            },
-            role: variant === 'error' ? 'destructive' : 'cancel',
-            text: confirmBtn,
-          },
-        ],
-        header: title,
-        message,
+    (params: ConfirmParams) => {
+      setConfirmParams({
+        dismiss: dismissConfirm,
+        ...params,
+      });
+      showConfirm({
+        backdropDismiss: false,
+        breakpoints: [0, 1],
+        cssClass: styles.confirm,
+        initialBreakpoint: 1,
+        showBackdrop: true,
       });
     },
-    [showAlert]
+    [showConfirm, dismissConfirm]
   );
 
   return { confirm, toast };

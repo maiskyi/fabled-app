@@ -3,12 +3,14 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  FirebaseAuthentication: {
-    providers: ['apple.com', 'facebook.com', 'google.com'],
-    skipNativeAuth: false,
-  },
-  appId: 'io.ionic.starter',
+  appId: 'app.fabled.space',
   appName: 'Fabled Space',
+  plugins: {
+    FirebaseAuthentication: {
+      providers: ['google.com', 'apple.com', 'facebook.com'],
+      skipNativeAuth: false,
+    },
+  },
   webDir: 'dist',
 };
 

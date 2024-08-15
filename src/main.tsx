@@ -3,8 +3,11 @@ import { createRoot } from 'react-dom/client';
 
 import { Language } from '@locale/constants';
 import { resources } from '@locale/resources';
+import { Splash } from '@bootstrap/components';
 
 import { App, AppProps } from './App';
+
+const splash = <Splash />;
 
 const config: AppProps = {
   app: {
@@ -15,6 +18,9 @@ const config: AppProps = {
     messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
     storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  },
+  auth: {
+    fallback: splash,
   },
   firestore: {
     emulator: {
@@ -29,6 +35,7 @@ const config: AppProps = {
     },
   },
   localization: {
+    fallback: splash,
     fallbackLng: Language.en,
     resources,
     supportedLngs: [Language.en],
