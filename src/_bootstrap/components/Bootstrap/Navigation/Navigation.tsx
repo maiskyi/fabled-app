@@ -3,7 +3,7 @@ import { FC, PropsWithChildren } from 'react';
 import { NavigationProvider } from '@core/navigation';
 import { useAuth } from '@core/auth';
 
-import { Role, RoutePath } from '../../constants';
+import { Role, RoutePath } from '../../../constants';
 
 export type NavigationProps = PropsWithChildren<{}>;
 

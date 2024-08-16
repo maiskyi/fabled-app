@@ -11,9 +11,8 @@ import {
   LocalizationProviderProps,
 } from '@core/localization';
 
-import { Navigation } from '../Navigation';
-import { Init, InitProps } from '../Init';
-import { Network, NetworkProps } from '../Network';
+import { Network, NetworkProps } from './Network';
+import { Navigation } from './Navigation';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -22,12 +21,10 @@ export type BootstrapProps = PropsWithChildren<{
   firestore: FirestoreProviderProps;
   localization: LocalizationProviderProps;
   network: NetworkProps;
-  init: InitProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
   app,
-  init,
   children,
   functions,
   firestore,
@@ -44,9 +41,7 @@ export const Bootstrap: FC<BootstrapProps> = ({
                 <FirestoreProvider {...firestore}>
                   <FunctionsProvider {...functions}>
                     <StorageProvider>
-                      <Navigation>
-                        <Init {...init}>{children}</Init>
-                      </Navigation>
+                      <Navigation>{children}</Navigation>
                     </StorageProvider>
                   </FunctionsProvider>
                 </FirestoreProvider>
