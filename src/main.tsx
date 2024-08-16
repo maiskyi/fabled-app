@@ -34,11 +34,23 @@ const config: AppProps = {
       port: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_PORT,
     },
   },
+  init: {
+    data: {
+      fallback: splash,
+    },
+  },
   localization: {
     fallback: splash,
     fallbackLng: Language.en,
     resources,
     supportedLngs: [Language.en],
+  },
+  network: {
+    contentful: {
+      apiKey: import.meta.env.VITE_CONTENTFUL_API_KEY,
+      environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT,
+      space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+    },
   },
 };
 

@@ -14,6 +14,7 @@ const config: CodegenConfig = {
           func: '../hooks/useFetchData/useFetchData.hook#useFetchData',
           isReactHook: true,
         },
+        reactQueryVersion: 5,
         withHooks: true,
       },
       documents: ['./src/_network/contentful/documents/*.graphql'],
@@ -22,9 +23,6 @@ const config: CodegenConfig = {
         'typescript-operations',
         'typescript-react-query',
       ],
-    },
-    './src/_network/contentful/__generated__/types.ts': {
-      plugins: ['typescript'],
     },
   },
   ignoreNoDocuments: true,

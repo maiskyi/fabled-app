@@ -18,7 +18,6 @@ export type ResponseInterceptorRejectedFn<T = any> = (
 ) => Promise<AxiosError<T>>;
 
 export type NetworkProviderProps = PropsWithChildren<{
-  baseUrl: string;
   requestInterceptorRejected?: RequestInterceptorRejectedFn;
   requestInterceptorFulfilled?: RequestInterceptorFulfilledFn;
   responseInterceptorRejected?: ResponseInterceptorRejectedFn;

@@ -1,5 +1,4 @@
-import { FC, useRef } from 'react';
-import { useUnmount } from 'react-use';
+import { FC, useEffect, useRef } from 'react';
 import { stringify } from 'qs';
 import axios from 'axios';
 
@@ -12,6 +11,8 @@ import {
   ResponseInterceptorRejectedFn,
 } from '../../types';
 
+import { getBaseUrl } from './ContentfulProvider.utils';
+
 export interface ContentfulProviderProps extends NetworkProviderProps {
   space: string;
   environment: string;
@@ -22,41 +23,43 @@ export interface ContentfulProviderProps extends NetworkProviderProps {
 }
 
 export const ContentfulProvider: FC<ContentfulProviderProps> = ({
-  baseUrl,
   space,
   children,
   environment,
-  responseInterceptorFulfilled,
-  responseInterceptorRejected,
-  requestInterceptorRejected,
-  requestInterceptorFulfilled,
+  responseInterceptorFulfilled = null,
+  responseInterceptorRejected = null,
+  requestInterceptorRejected = null,
+  requestInterceptorFulfilled = null,
 }) => {
   const { current: instance } = useRef(
     axios.create({
-      baseURL: baseUrl,
+      baseURL: getBaseUrl({ environment, space }),
       paramsSerializer: (params) => stringify(params, { indices: false }),
       timeout: 30000,
     })
   );
 
-  const { current: requestInterceptor } = useRef(
-    instance.interceptors.request.use(
+  useEffect(() => {
+    const requestInterceptor = instance.interceptors.request.use(
       requestInterceptorFulfilled,
       requestInterceptorRejected
-    )
-  );
-
-  const { current: responseInterceptor } = useRef(
-    instance.interceptors.response.use(
+    );
+    const responseInterceptor = instance.interceptors.response.use(
       responseInterceptorFulfilled,
       responseInterceptorRejected
-    )
-  );
-
-  useUnmount(() => {
-    instance.interceptors.request.eject(requestInterceptor);
-    instance.interceptors.response.eject(responseInterceptor);
-  });
+    );
+    return () => {
+      instance.interceptors.request.eject(requestInterceptor);
+      instance.interceptors.response.eject(responseInterceptor);
+    };
+  }, [
+    instance.interceptors.request,
+    instance.interceptors.response,
+    requestInterceptorFulfilled,
+    requestInterceptorRejected,
+    responseInterceptorFulfilled,
+    responseInterceptorRejected,
+  ]);
 
   return (
     <ContentfulContext.Provider

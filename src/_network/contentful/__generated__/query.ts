@@ -600,13 +600,19 @@ export const useGetBootstrapQuery = <
   TError = unknown,
 >(
   variables?: GetBootstrapQueryVariables,
-  options?: UseQueryOptions<GetBootstrapQuery, TError, TData>
+  options?: Omit<
+    UseQueryOptions<GetBootstrapQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetBootstrapQuery, TError, TData>['queryKey'];
+  }
 ) => {
-  return useQuery<GetBootstrapQuery, TError, TData>(
-    variables === undefined ? ['getBootstrap'] : ['getBootstrap', variables],
-    useFetchData<GetBootstrapQuery, GetBootstrapQueryVariables>(
+  return useQuery<GetBootstrapQuery, TError, TData>({
+    queryFn: useFetchData<GetBootstrapQuery, GetBootstrapQueryVariables>(
       GetBootstrapDocument
     ).bind(null, variables),
-    options
-  );
+    queryKey:
+      variables === undefined ? ['getBootstrap'] : ['getBootstrap', variables],
+    ...options,
+  });
 };

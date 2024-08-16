@@ -12,7 +12,8 @@ import {
 } from '@core/localization';
 
 import { Navigation } from '../Navigation';
-import { Init } from '../Init';
+import { Init, InitProps } from '../Init';
+import { Network, NetworkProps } from '../Network';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -20,34 +21,40 @@ export type BootstrapProps = PropsWithChildren<{
   functions: FunctionsProviderProps;
   firestore: FirestoreProviderProps;
   localization: LocalizationProviderProps;
+  network: NetworkProps;
+  init: InitProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
   app,
+  init,
   children,
   functions,
   firestore,
   localization,
+  network,
 }) => {
   return (
     <ThemeProvider>
-      <LocalizationProvider {...localization}>
-        <AppProvider {...app}>
-          <AuthProvider>
-            <NetworkProvider>
-              <FirestoreProvider {...firestore}>
-                <FunctionsProvider {...functions}>
-                  <StorageProvider>
-                    <Navigation>
-                      <Init>{children}</Init>
-                    </Navigation>
-                  </StorageProvider>
-                </FunctionsProvider>
-              </FirestoreProvider>
-            </NetworkProvider>
-          </AuthProvider>
-        </AppProvider>
-      </LocalizationProvider>
+      <Network {...network}>
+        <LocalizationProvider {...localization}>
+          <AppProvider {...app}>
+            <AuthProvider>
+              <NetworkProvider>
+                <FirestoreProvider {...firestore}>
+                  <FunctionsProvider {...functions}>
+                    <StorageProvider>
+                      <Navigation>
+                        <Init {...init}>{children}</Init>
+                      </Navigation>
+                    </StorageProvider>
+                  </FunctionsProvider>
+                </FirestoreProvider>
+              </NetworkProvider>
+            </AuthProvider>
+          </AppProvider>
+        </LocalizationProvider>
+      </Network>
     </ThemeProvider>
   );
 };
