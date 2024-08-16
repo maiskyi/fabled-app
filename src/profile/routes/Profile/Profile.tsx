@@ -5,6 +5,7 @@ import { useRoute } from '@core/navigation';
 import { useAuth, useSignOut } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
+import { useLegal } from '@common/hooks';
 
 export const Profile = memo(function Profile() {
   const [, navigate] = useRoute();
@@ -12,6 +13,7 @@ export const Profile = memo(function Profile() {
   const { confirm } = useUtils();
   const { t } = useTranslation();
   const { mutateAsync: signOut } = useSignOut();
+  const { openPrivacyPolicy, openTermsAndConditions } = useLegal();
 
   const title = t('pages.profile');
 
@@ -68,13 +70,13 @@ export const Profile = memo(function Profile() {
         </List>
         <List>
           <List.Header>Legal</List.Header>
-          <List.Item button>
-            <List.Icon name="document-text-outline" />
-            <List.Label>Terms and conditions</List.Label>
-          </List.Item>
-          <List.Item button>
+          <List.Item button onClick={openPrivacyPolicy}>
             <List.Icon name="document-text-outline" />
             <List.Label>Privacy policy</List.Label>
+          </List.Item>
+          <List.Item button onClick={openTermsAndConditions}>
+            <List.Icon name="document-text-outline" />
+            <List.Label>Terms and conditions</List.Label>
           </List.Item>
         </List>
         <List>

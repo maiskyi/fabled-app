@@ -16,6 +16,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@bootstrap': path.resolve(__dirname, './src/_bootstrap'),
+      '@common': path.resolve(__dirname, './src/_common'),
       '@core': path.resolve(__dirname, './src/_core'),
       '@locale': path.resolve(__dirname, './src/_locale'),
       '@network': path.resolve(__dirname, './src/_network'),

@@ -1,9 +1,10 @@
 import { memo } from 'react';
 
-import { Page, Content, Box, Text, Button, Divider, Header } from '@core/uikit';
-import { Translate, useTranslation } from '@core/localization';
-import { LegalType, RoutePath } from '@bootstrap/constants';
-import { Link, useRoute } from '@core/navigation';
+import { Page, Content, Box, Button, Divider, Header } from '@core/uikit';
+import { useTranslation } from '@core/localization';
+import { RoutePath } from '@bootstrap/constants';
+import { useRoute } from '@core/navigation';
+import { Disclaimer } from '@common/features';
 
 import { FederatedLogin } from '../../features';
 
@@ -79,25 +80,7 @@ export const Auth = memo(function Index() {
               <FederatedLogin />
             </Box>
             <Box paddingBottom={12} paddingTop={12} textAlign="center">
-              <Text>
-                <Translate
-                  components={{
-                    privacy: (
-                      <Link
-                        params={{ id: LegalType.PrivacyPolicy }}
-                        pathname={RoutePath.Legal}
-                      />
-                    ),
-                    terms: (
-                      <Link
-                        params={{ id: LegalType.TermsAndConditions }}
-                        pathname={RoutePath.Legal}
-                      />
-                    ),
-                  }}
-                  id="copy.agreeToTermsAndPolicy"
-                />
-              </Text>
+              <Disclaimer />
             </Box>
           </Box>
         </Box>
