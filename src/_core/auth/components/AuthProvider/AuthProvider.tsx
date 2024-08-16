@@ -47,10 +47,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({
 
   const isAuthenticated = !!user;
 
-  const signOut = useCallback(async () => {
-    return FirebaseAuthentication.signOut();
-  }, []);
-
   const reload = useCallback(async () => {
     if (auth.currentUser) {
       const { user } = await FirebaseAuthentication.getCurrentUser();
@@ -60,8 +56,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   }, [auth]);
 
   const contextValue = useMemo(
-    () => ({ isAuthenticated, reload, signOut, user }),
-    [user, reload, signOut, isAuthenticated]
+    () => ({ isAuthenticated, reload, user }),
+    [user, reload, isAuthenticated]
   );
 
   useMount(() => {

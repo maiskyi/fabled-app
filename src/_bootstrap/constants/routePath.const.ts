@@ -10,7 +10,6 @@ export enum RoutePath {
   Fable = '/fables/:id',
   Feedback = '/feedback',
   Index = '/',
-  Legal = '/legal/:id',
   Notification = '/notification/:type',
   Profile = '/profile',
   Request = '/request/:id',
