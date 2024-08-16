@@ -47,7 +47,9 @@ export const Button: ButtonComponent = ({
       shape="round"
       type={type}
     >
-      {loading && <IonSpinner className={styles.spinner} name="circular" />}
+      {loading && (
+        <IonSpinner className={styles.spinner} color={color} name="circular" />
+      )}
       <span
         className={classNames({
           [styles.transparent]: loading,

@@ -1,0 +1,10 @@
+query getBootstrap {
+  characterCollection {
+    items {
+      sys {
+        id
+      }
+      title
+    }
+  }
+}

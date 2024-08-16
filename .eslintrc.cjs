@@ -50,7 +50,7 @@ module.exports = {
           {
             group: 'builtin',
             pattern:
-              '{classnames,i18next,lodash,react,react-*,react-dom/*, */react-*}',
+              '{qs,axios,use-context-selector,classnames,i18next,lodash,react,react-*,react-dom/*, */react-*}',
             patternOptions: { partial: true },
             position: 'before',
           },

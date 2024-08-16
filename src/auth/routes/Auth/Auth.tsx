@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Page, Content, Box, Text, Button, Divider } from '@core/uikit';
+import { Page, Content, Box, Text, Button, Divider, Header } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 import { LegalType, RoutePath } from '@bootstrap/constants';
 import { Link, useRoute } from '@core/navigation';
@@ -26,9 +26,24 @@ export const Auth = memo(function Index() {
     });
   };
 
+  const handleOnContactUs = () => {
+    navigate({
+      action: 'push',
+      pathname: RoutePath.ContactUs,
+    });
+  };
+
   return (
     <Page>
-      <Content fullscreen>
+      <Header translucent>
+        <Header.Actions>
+          <Header.Action
+            icons="help-buoy-outline"
+            onClick={handleOnContactUs}
+          />
+        </Header.Actions>
+      </Header>
+      <Content>
         <Box
           display="flex"
           flexDirection="column"
@@ -37,6 +52,7 @@ export const Auth = memo(function Index() {
           minHeight="100%"
           padding={20}
         >
+          <Header collapse="condense" />
           <Box
             alignItems="center"
             display="flex"
@@ -48,7 +64,9 @@ export const Auth = memo(function Index() {
           <Box display="flex" flex={0} flexDirection="column" gap={12}>
             <Box display="flex" gap={12}>
               <Box flex={1}>
-                <Button onClick={handleOnSignIn}>{t('actions.signIn')}</Button>
+                <Button color="tertiary" onClick={handleOnSignIn}>
+                  {t('actions.signIn')}
+                </Button>
               </Box>
               <Box flex={1}>
                 <Button onClick={handleOnSignUp}>{t('actions.signUp')}</Button>
