@@ -1,7 +1,7 @@
 import { FC, Fragment, PropsWithChildren } from 'react';
+import { useContextSelector } from 'use-context-selector';
 
 import { IonSkeletonText, IonCardTitle } from '@ionic/react';
-import { useContextSelector } from 'use-context-selector';
 
 import styles from './CardTitle.module.scss';
 

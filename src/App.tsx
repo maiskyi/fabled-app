@@ -1,13 +1,23 @@
 import { FC } from 'react';
 
-import { Bootstrap, BootstrapProps } from '@bootstrap/components';
+import {
+  Bootstrap,
+  BootstrapProps,
+  Init,
+  InitProps,
+} from '@bootstrap/components';
 
 import { Router } from './Router';
 
-export type AppProps = BootstrapProps;
+export interface AppProps {
+  bootstrap: BootstrapProps;
+  init: InitProps;
+}
 
-export const App: FC<AppProps> = (props) => (
-  <Bootstrap {...props}>
-    <Router />
+export const App: FC<AppProps> = ({ bootstrap, init }) => (
+  <Bootstrap {...bootstrap}>
+    <Init {...init}>
+      <Router />
+    </Init>
   </Bootstrap>
 );

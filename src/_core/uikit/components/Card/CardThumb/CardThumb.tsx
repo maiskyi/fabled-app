@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, CSSProperties } from 'react';
-
 import { useContextSelector } from 'use-context-selector';
+
 import { IonSkeletonText } from '@ionic/react';
 
 import styles from './CardThumb.module.scss';

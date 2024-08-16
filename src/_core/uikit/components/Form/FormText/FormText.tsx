@@ -1,7 +1,7 @@
 import { FC, ComponentProps } from 'react';
 import classNames from 'classnames';
-
 import { useContextSelector } from 'use-context-selector';
+
 import { IonIcon, IonInput } from '@ionic/react';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';

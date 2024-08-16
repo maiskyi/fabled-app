@@ -12,6 +12,7 @@ import {
   lockClosedOutline,
   logOutOutline,
   documentTextOutline,
+  helpBuoyOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
@@ -24,6 +25,7 @@ export const ICON = {
   'document-text-outline': documentTextOutline,
   facebook: logoFacebook,
   google: logoGoogle,
+  'help-buoy-outline': helpBuoyOutline,
   'lock-closed-outline': lockClosedOutline,
   'log-out-outline': logOutOutline,
   'mail-outline': mailOutline,

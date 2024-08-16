@@ -1,17 +1,20 @@
 import { memo } from 'react';
+import { entries } from 'lodash';
 
 import { Header, Page, Content, Card, List, useUtils } from '@core/uikit';
-import { useRoute } from '@core/navigation';
 import { useAuth, useSignOut } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 
+import { useProfileMenu } from './Profile.hooks';
+
 export const Profile = memo(function Profile() {
-  const [, navigate] = useRoute();
   const { user } = useAuth();
   const { confirm } = useUtils();
   const { t } = useTranslation();
   const { mutateAsync: signOut } = useSignOut();
+
+  const { menu } = useProfileMenu();
 
   const title = t('pages.profile');
 
@@ -45,38 +48,19 @@ export const Profile = memo(function Profile() {
             <Card.Subtitle>{user?.email}</Card.Subtitle>
           </Card.Header>
         </Card>
-        <List>
-          <List.Header>Support</List.Header>
-          <List.Item
-            button
-            onClick={() =>
-              navigate({ action: 'push', pathname: RoutePath.ContactUs })
-            }
-          >
-            <List.Icon name="mail-outline" />
-            <List.Label>Contact Us</List.Label>
-          </List.Item>
-          <List.Item
-            button
-            onClick={() =>
-              navigate({ action: 'push', pathname: RoutePath.Feedback })
-            }
-          >
-            <List.Icon name="chatbox-ellipses-outline" />
-            <List.Label>Share your feedback</List.Label>
-          </List.Item>
-        </List>
-        <List>
-          <List.Header>Legal</List.Header>
-          <List.Item button>
-            <List.Icon name="document-text-outline" />
-            <List.Label>Terms and conditions</List.Label>
-          </List.Item>
-          <List.Item button>
-            <List.Icon name="document-text-outline" />
-            <List.Label>Privacy policy</List.Label>
-          </List.Item>
-        </List>
+        {entries(menu).map(([title, items]) => {
+          return (
+            <List key={title}>
+              <List.Header>{title}</List.Header>
+              {items.map(({ label, onClick, icon }) => (
+                <List.Item button key={label} onClick={onClick}>
+                  <List.Icon name={icon} />
+                  <List.Label>{label}</List.Label>
+                </List.Item>
+              ))}
+            </List>
+          );
+        })}
         <List>
           <List.Header />
           <List.Item onClick={handleOnLogout}>

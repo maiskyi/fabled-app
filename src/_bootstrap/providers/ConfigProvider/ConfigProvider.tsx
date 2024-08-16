@@ -1,15 +1,44 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
+
+import { useGetBootstrapQuery } from '@network/contentful';
 
 import { ConfigContext } from './ConfigProvider.context';
 
-type ConfigProviderProps = PropsWithChildren<{}>;
+export type ConfigProviderProps = PropsWithChildren<{
+  fallback: ReactNode;
+  version: string;
+}>;
 
-export const ConfigProvider: FC<ConfigProviderProps> = ({ children }) => {
+export const ConfigProvider: FC<ConfigProviderProps> = ({
+  children,
+  version,
+  fallback = null,
+}) => {
+  const { data, isSuccess } = useGetBootstrapQuery(
+    { version },
+    {
+      initialData: {
+        characterCollection: {
+          items: [],
+        },
+        configCollection: {
+          items: [],
+        },
+      },
+    }
+  );
+
   return (
     <ConfigContext.Provider
-      value={{ version: import.meta.env.PACKAGE_VERSION }}
+      value={{
+        characters: data.characterCollection.items,
+        privacyPolicyUrl: data.configCollection.items[0]?.privacyPolicyUrl,
+        termsAndConditionsUrl:
+          data.configCollection.items[0]?.termsAndConditionsUrl,
+        version,
+      }}
     >
-      {children}
+      {isSuccess ? children : fallback}
     </ConfigContext.Provider>
   );
 };

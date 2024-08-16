@@ -19,4 +19,5 @@ export * from './components/ThemeProvider';
 
 // Hooks
 export * from './hooks/useUtils';
+export * from './hooks/useBrowser';
 export { useIonViewDidEnter as useViewDidEnter } from '@ionic/react';

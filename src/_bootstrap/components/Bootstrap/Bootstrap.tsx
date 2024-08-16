@@ -11,8 +11,8 @@ import {
   LocalizationProviderProps,
 } from '@core/localization';
 
-import { Navigation } from '../Navigation';
-import { Init } from '../Init';
+import { Network, NetworkProps } from './Network';
+import { Navigation } from './Navigation';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -20,6 +20,7 @@ export type BootstrapProps = PropsWithChildren<{
   functions: FunctionsProviderProps;
   firestore: FirestoreProviderProps;
   localization: LocalizationProviderProps;
+  network: NetworkProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
@@ -28,26 +29,27 @@ export const Bootstrap: FC<BootstrapProps> = ({
   functions,
   firestore,
   localization,
+  network,
 }) => {
   return (
     <ThemeProvider>
-      <LocalizationProvider {...localization}>
-        <AppProvider {...app}>
-          <AuthProvider>
-            <NetworkProvider>
-              <FirestoreProvider {...firestore}>
-                <FunctionsProvider {...functions}>
-                  <StorageProvider>
-                    <Navigation>
-                      <Init>{children}</Init>
-                    </Navigation>
-                  </StorageProvider>
-                </FunctionsProvider>
-              </FirestoreProvider>
-            </NetworkProvider>
-          </AuthProvider>
-        </AppProvider>
-      </LocalizationProvider>
+      <Network {...network}>
+        <LocalizationProvider {...localization}>
+          <AppProvider {...app}>
+            <AuthProvider>
+              <NetworkProvider>
+                <FirestoreProvider {...firestore}>
+                  <FunctionsProvider {...functions}>
+                    <StorageProvider>
+                      <Navigation>{children}</Navigation>
+                    </StorageProvider>
+                  </FunctionsProvider>
+                </FirestoreProvider>
+              </NetworkProvider>
+            </AuthProvider>
+          </AppProvider>
+        </LocalizationProvider>
+      </Network>
     </ThemeProvider>
   );
 };

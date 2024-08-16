@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
-
 import { useContextSelector } from 'use-context-selector';
+
 import { IonCardSubtitle, IonSkeletonText } from '@ionic/react';
 
 import styles from './CardSubtitle.module.css';

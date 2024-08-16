@@ -7,6 +7,7 @@ export * from './components/ProtectedWithRedirect';
 export * from './components/Redirect';
 export * from './components/NavigateBack';
 export * from './components/Link';
+export * from './components/LinkVoid';
 
 // Hooks
 export * from './hooks/useRoute';

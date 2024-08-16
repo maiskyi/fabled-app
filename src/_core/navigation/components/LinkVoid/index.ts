@@ -1,0 +1,1 @@
+export { LinkVoid } from './LinkVoid';

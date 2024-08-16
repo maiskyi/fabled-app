@@ -17,7 +17,6 @@ import { ContactUs } from './contact-us/routes';
 import { Feedback } from './feeadback/routes';
 import { Fable } from './fable/routes';
 import { Notification } from './notification/routes';
-import { Legal } from './legal/routes';
 import { SignUp } from './sign-up/routes';
 import { VerifyEmail } from './verify-email/routes';
 import { SignIn } from './sign-in/routes';
@@ -64,9 +63,7 @@ export const Router = memo(function Router() {
         <Route path={RoutePath.Notification}>
           <Notification />
         </Route>
-        <Route path={RoutePath.Legal}>
-          <Legal />
-        </Route>
+
         {/* Auth */}
         <Route path={RoutePath.Auth}>
           <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>

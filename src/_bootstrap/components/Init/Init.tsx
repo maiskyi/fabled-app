@@ -1,9 +1,14 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { ConfigProvider } from '../../providers/ConfigProvider';
+import {
+  ConfigProvider,
+  ConfigProviderProps,
+} from '../../providers/ConfigProvider';
 
-type InitProps = PropsWithChildren<{}>;
+export type InitProps = PropsWithChildren<{
+  config: ConfigProviderProps;
+}>;
 
-export const Init: FC<InitProps> = ({ children }) => {
-  return <ConfigProvider>{children}</ConfigProvider>;
+export const Init: FC<InitProps> = ({ children, config }) => {
+  return <ConfigProvider {...config}>{children}</ConfigProvider>;
 };
