@@ -52,13 +52,8 @@ const config: AppProps = {
   },
   init: {
     config: {
-      privacyPolicyUrl: import.meta.env.VITE_IUBENDA_PRIVACY_POLICY_URL,
-      termsAndConditionsUrl: import.meta.env
-        .VITE_IUBENDA_TERMS_AND_CONDITIONS_URL,
-      version: import.meta.env.PACKAGE_VERSION,
-    },
-    data: {
       fallback: splash,
+      version: import.meta.env.PACKAGE_VERSION,
     },
   },
 };

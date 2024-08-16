@@ -1,10 +1,17 @@
-query getBootstrap {
+query getBootstrap($version: String!) {
   characterCollection {
     items {
       sys {
         id
       }
       title
+    }
+  }
+  configCollection(where: { version_in: [$version] }) {
+    items {
+      version
+      privacyPolicyUrl
+      termsAndConditionsUrl
     }
   }
 }

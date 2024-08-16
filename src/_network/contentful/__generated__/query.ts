@@ -298,6 +298,112 @@ export enum CharacterOrder {
   TitleDesc = 'title_DESC',
 }
 
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
+export type Config = Entry &
+  _Node & {
+    __typename?: 'Config';
+    _id: Scalars['ID']['output'];
+    contentfulMetadata: ContentfulMetadata;
+    linkedFrom?: Maybe<ConfigLinkingCollections>;
+    privacyPolicyUrl?: Maybe<Scalars['String']['output']>;
+    sys: Sys;
+    termsAndConditionsUrl?: Maybe<Scalars['String']['output']>;
+    version?: Maybe<Scalars['String']['output']>;
+  };
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
+export type ConfigLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
+export type ConfigPrivacyPolicyUrlArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
+export type ConfigTermsAndConditionsUrlArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
+export type ConfigVersionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ConfigCollection = {
+  __typename?: 'ConfigCollection';
+  items: Array<Maybe<Config>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type ConfigFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ConfigFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ConfigFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
+  privacyPolicyUrl_contains?: InputMaybe<Scalars['String']['input']>;
+  privacyPolicyUrl_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  privacyPolicyUrl_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  privacyPolicyUrl_not?: InputMaybe<Scalars['String']['input']>;
+  privacyPolicyUrl_not_contains?: InputMaybe<Scalars['String']['input']>;
+  privacyPolicyUrl_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  sys?: InputMaybe<SysFilter>;
+  termsAndConditionsUrl?: InputMaybe<Scalars['String']['input']>;
+  termsAndConditionsUrl_contains?: InputMaybe<Scalars['String']['input']>;
+  termsAndConditionsUrl_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  termsAndConditionsUrl_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  termsAndConditionsUrl_not?: InputMaybe<Scalars['String']['input']>;
+  termsAndConditionsUrl_not_contains?: InputMaybe<Scalars['String']['input']>;
+  termsAndConditionsUrl_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  version?: InputMaybe<Scalars['String']['input']>;
+  version_contains?: InputMaybe<Scalars['String']['input']>;
+  version_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  version_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  version_not?: InputMaybe<Scalars['String']['input']>;
+  version_not_contains?: InputMaybe<Scalars['String']['input']>;
+  version_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ConfigLinkingCollections = {
+  __typename?: 'ConfigLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ConfigLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ConfigOrder {
+  PrivacyPolicyUrlAsc = 'privacyPolicyUrl_ASC',
+  PrivacyPolicyUrlDesc = 'privacyPolicyUrl_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TermsAndConditionsUrlAsc = 'termsAndConditionsUrl_ASC',
+  TermsAndConditionsUrlDesc = 'termsAndConditionsUrl_DESC',
+  VersionAsc = 'version_ASC',
+  VersionDesc = 'version_DESC',
+}
+
 export type ContentfulMetadata = {
   __typename?: 'ContentfulMetadata';
   tags: Array<Maybe<ContentfulTag>>;
@@ -457,6 +563,8 @@ export type Query = {
   assetCollection?: Maybe<AssetCollection>;
   character?: Maybe<Character>;
   characterCollection?: Maybe<CharacterCollection>;
+  config?: Maybe<Config>;
+  configCollection?: Maybe<ConfigCollection>;
   entryCollection?: Maybe<EntryCollection>;
 };
 
@@ -494,6 +602,21 @@ export type QueryCharacterCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<CharacterFilter>;
+};
+
+export type QueryConfigArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryConfigCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<ConfigOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ConfigFilter>;
 };
 
 export type QueryEntryCollectionArgs = {
@@ -568,7 +691,9 @@ export type _Node = {
   _id: Scalars['ID']['output'];
 };
 
-export type GetBootstrapQueryVariables = Exact<{ [key: string]: never }>;
+export type GetBootstrapQueryVariables = Exact<{
+  version: Scalars['String']['input'];
+}>;
 
 export type GetBootstrapQuery = {
   __typename?: 'Query';
@@ -580,16 +705,32 @@ export type GetBootstrapQuery = {
       sys: { __typename?: 'Sys'; id: string };
     } | null>;
   } | null;
+  configCollection?: {
+    __typename?: 'ConfigCollection';
+    items: Array<{
+      __typename?: 'Config';
+      version?: string | null;
+      privacyPolicyUrl?: string | null;
+      termsAndConditionsUrl?: string | null;
+    } | null>;
+  } | null;
 };
 
 export const GetBootstrapDocument = `
-    query getBootstrap {
+    query getBootstrap($version: String!) {
   characterCollection {
     items {
       sys {
         id
       }
       title
+    }
+  }
+  configCollection(where: {version_in: [$version]}) {
+    items {
+      version
+      privacyPolicyUrl
+      termsAndConditionsUrl
     }
   }
 }
@@ -599,7 +740,7 @@ export const useGetBootstrapQuery = <
   TData = GetBootstrapQuery,
   TError = unknown,
 >(
-  variables?: GetBootstrapQueryVariables,
+  variables: GetBootstrapQueryVariables,
   options?: Omit<
     UseQueryOptions<GetBootstrapQuery, TError, TData>,
     'queryKey'
@@ -611,8 +752,7 @@ export const useGetBootstrapQuery = <
     queryFn: useFetchData<GetBootstrapQuery, GetBootstrapQueryVariables>(
       GetBootstrapDocument
     ).bind(null, variables),
-    queryKey:
-      variables === undefined ? ['getBootstrap'] : ['getBootstrap', variables],
+    queryKey: ['getBootstrap', variables],
     ...options,
   });
 };

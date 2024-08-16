@@ -1,8 +1,8 @@
 import { FC, Fragment } from 'react';
 import classNames from 'classnames';
+import { useContextSelector } from 'use-context-selector';
 
 import { IonIcon, IonInput, IonInputPasswordToggle } from '@ionic/react';
-import { useContextSelector } from 'use-context-selector';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';
 import { IconName, ICON } from '../../Icon';
