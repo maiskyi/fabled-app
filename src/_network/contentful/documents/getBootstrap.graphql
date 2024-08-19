@@ -14,4 +14,12 @@ query getBootstrap($version: String!) {
       termsAndConditionsUrl
     }
   }
+  promptCollection {
+    items {
+      title
+      slug
+      description
+      textPrompt
+    }
+  }
 }

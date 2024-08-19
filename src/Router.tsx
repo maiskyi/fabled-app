@@ -32,7 +32,7 @@ export const Router = memo(function Router() {
             <Home />
           </ProtectedWithRedirect>
         </Route>
-        <Route exact path={RoutePath.Create}>
+        <Route path={RoutePath.Create}>
           <ProtectedWithRedirect roles={[Role.User]}>
             <Create />
           </ProtectedWithRedirect>

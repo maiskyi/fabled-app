@@ -8,6 +8,7 @@ import { CardSubtitle } from './CardSubtitle/CardSubtitle';
 import { CardThumb } from './CardThumb/CardThumb';
 import { CardTitle } from './CardTitle/CardTitle';
 import { CardAvatar } from './CardAvatar/CardAvatar';
+import { CardContent } from './CardContent/CardContent';
 import { CardContext } from './Card.context';
 
 export type CardProps = PropsWithChildren<{
@@ -22,6 +23,7 @@ interface CardComponent {
   Thumb: typeof CardThumb;
   Title: typeof CardTitle;
   Avatar: typeof CardAvatar;
+  Content: typeof CardContent;
 }
 
 export const Card: CardComponent = ({
@@ -45,3 +47,4 @@ Card.Subtitle = CardSubtitle;
 Card.Thumb = CardThumb;
 Card.Title = CardTitle;
 Card.Avatar = CardAvatar;
+Card.Content = CardContent;

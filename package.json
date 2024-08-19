@@ -22,6 +22,7 @@
     "@capacitor/haptics": "6.0.0",
     "@capacitor/keyboard": "6.0.1",
     "@capacitor/status-bar": "6.0.0",
+    "@emotion/react": "^11.13.0",
     "@ionic/core": "^8.2.6",
     "@ionic/react": "^8.0.0",
     "@ionic/react-router": "^8.0.0",
@@ -44,12 +45,14 @@
     "react-router-dom": "^5.3.4",
     "react-use": "^17.5.1",
     "scheduler": "^0.23.2",
+    "swiper": "^11.1.9",
     "type-fest": "^4.24.0",
     "use-context-selector": "^2.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "6.1.1",
     "@capacitor/ios": "^6.1.2",
+    "@faker-js/faker": "^8.4.1",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript": "^4.0.9",
     "@graphql-codegen/typescript-operations": "^4.2.3",
