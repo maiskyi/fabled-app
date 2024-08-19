@@ -23,19 +23,23 @@ const config: AppProps = {
     auth: {
       fallback: splash,
     },
+    config: {
+      fallback: splash,
+      version: import.meta.env.PACKAGE_VERSION,
+    },
     firestore: {
       emulator: {
         host: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_HOST,
         port: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT,
       },
     },
+
     functions: {
       emulator: {
         host: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_HOST,
         port: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_PORT,
       },
     },
-
     localization: {
       fallback: splash,
       fallbackLng: Language.en,
@@ -48,12 +52,6 @@ const config: AppProps = {
         environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT,
         space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
       },
-    },
-  },
-  init: {
-    config: {
-      fallback: splash,
-      version: import.meta.env.PACKAGE_VERSION,
     },
   },
 };

@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+  &.left {
+    padding-left: 20px;
+  }
+}
+
+.arrow {
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  overflow: hidden;
+  z-index: 11;
+  top: 20px;
+
+  &.left {
+    transform: rotate(-90deg);
+  }
+
+  &:after {
+    inset-inline-start: 3px;
+    top: 3px;
+    border-radius: 3px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
+    background: var(--ion-color-base);
+    content: "";
+    z-index: 10;
+  }
+}

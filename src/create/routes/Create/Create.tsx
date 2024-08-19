@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Content, Header, Page, Card, Box } from '@core/uikit';
+import { Content, Header, Page, Box, Message } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useUserDisplayName } from '@common/hooks';
@@ -17,14 +17,12 @@ export const Create = memo(function Create() {
       <Content>
         <Box display="flex" flexDirection="column" minHeight="100%">
           <Box flex={0}>
-            <Card>
-              <Card.Header>
-                <Card.Subtitle>
-                  {t('copy.hiUserGreeting', { displayName })}
-                </Card.Subtitle>
-              </Card.Header>
-              <Card.Content>{t('pages.create')}</Card.Content>
-            </Card>
+            <Message
+              color="dark"
+              title={t('copy.hiUserGreeting', { displayName })}
+            >
+              {t('pages.create')}
+            </Message>
           </Box>
           <Box alignItems="center" display="flex" flex={1}>
             <Header collapse="condense">

@@ -2,6 +2,7 @@ import { PropsWithChildren, ReactElement } from 'react';
 import { noop } from 'lodash';
 
 import { IonCard } from '@ionic/react';
+import { Color } from '@ionic/core';
 
 import { CardHeader } from './CardHeader/CardHeader';
 import { CardSubtitle } from './CardSubtitle/CardSubtitle';
@@ -14,6 +15,7 @@ import { CardContext } from './Card.context';
 export type CardProps = PropsWithChildren<{
   loading?: boolean;
   onClick?: () => void;
+  color?: Color;
 }>;
 
 interface CardComponent {
@@ -29,6 +31,7 @@ interface CardComponent {
 export const Card: CardComponent = ({
   children,
   loading,
+  color,
   onClick = noop,
 }: CardProps) => {
   const handleOnClick = () => {
@@ -37,7 +40,9 @@ export const Card: CardComponent = ({
 
   return (
     <CardContext.Provider value={{ loading }}>
-      <IonCard onClick={handleOnClick}>{children}</IonCard>
+      <IonCard color={color} onClick={handleOnClick}>
+        {children}
+      </IonCard>
     </CardContext.Provider>
   );
 };

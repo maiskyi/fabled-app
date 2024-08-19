@@ -13,7 +13,7 @@ export * from './components/Header';
 export * from './components/Icon';
 export * from './components/InfiniteScroll';
 export * from './components/List';
-export * from './components/Note';
+export * from './components/Message';
 export * from './components/Page';
 export * from './components/Swiper';
 export * from './components/Text';

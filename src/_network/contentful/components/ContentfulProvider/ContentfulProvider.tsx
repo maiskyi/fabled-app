@@ -39,6 +39,16 @@ export const ContentfulProvider: FC<ContentfulProviderProps> = ({
     })
   );
 
+  instance.interceptors.request.use(
+    requestInterceptorFulfilled,
+    requestInterceptorRejected
+  );
+
+  instance.interceptors.response.use(
+    responseInterceptorFulfilled,
+    responseInterceptorRejected
+  );
+
   useEffect(() => {
     const requestInterceptor = instance.interceptors.request.use(
       requestInterceptorFulfilled,
