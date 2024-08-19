@@ -9,6 +9,7 @@ import {
   Message,
   Footer,
   Button,
+  Form,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
@@ -19,6 +20,7 @@ import { LinkVoid } from '@core/navigation';
 import styles from './Create.module.scss';
 
 import { CreateForm } from './Create.types';
+import { FormField } from './Create.const';
 
 export const Create = memo(function Create() {
   const { t } = useTranslation();
@@ -37,61 +39,60 @@ export const Create = memo(function Create() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content>
-        <Box display="flex" flexDirection="column" minHeight="100%">
-          <Box flex={0}>
-            <Message
-              color="dark"
-              title={t('copy.hiUserGreeting', { displayName })}
-            >
-              {t('pages.create')}
-            </Message>
+        <Form>
+          <Box display="flex" flexDirection="column" minHeight="100%">
+            <Box flex={0}>
+              <Message
+                color="dark"
+                title={t('copy.hiUserGreeting', { displayName })}
+              >
+                {t('pages.create')}
+              </Message>
+            </Box>
+            <Box alignItems="center" display="flex" flex={1}>
+              {prompts.map(({ slug, description }) => {
+                return (
+                  <Header collapse="condense" key={slug}>
+                    <Header.Title size="large" wrap>
+                      <Translate
+                        components={{
+                          character: (
+                            <Form.Inline
+                              name={FormField.Character}
+                              validation={{ required: true }}
+                            />
+                          ),
+                          description: (
+                            <Form.Inline
+                              name={FormField.Description}
+                              validation={{ required: true }}
+                            />
+                          ),
+                          scene: (
+                            <Form.Inline
+                              name={FormField.Scene}
+                              validation={{ required: true }}
+                            />
+                          ),
+                        }}
+                        defaults={description}
+                        id={slug}
+                        values={{
+                          character: t('actions.clickToSelect').toLowerCase(),
+                          description: t('actions.clickToSelect').toLowerCase(),
+                          scene: t('actions.clickToSelect').toLowerCase(),
+                        }}
+                      />
+                    </Header.Title>
+                  </Header>
+                );
+              })}
+            </Box>
+            <Box flex={0} padding={16} paddingInline={20}>
+              <Form.Submit>{t('actions.writeFable')}</Form.Submit>
+            </Box>
           </Box>
-          <Box alignItems="center" display="flex" flex={1}>
-            {prompts.map(({ slug, description }) => {
-              return (
-                <Header collapse="condense" key={slug}>
-                  <Header.Title size="large" wrap>
-                    <Translate
-                      components={{
-                        character: (
-                          <LinkVoid
-                            className={classNames(styles.select, {
-                              [styles.none]: !state.character,
-                            })}
-                          />
-                        ),
-                        description: (
-                          <LinkVoid
-                            className={classNames(styles.select, {
-                              [styles.none]: !state.description,
-                            })}
-                          />
-                        ),
-                        scene: (
-                          <LinkVoid
-                            className={classNames(styles.select, {
-                              [styles.none]: !state.scene,
-                            })}
-                          />
-                        ),
-                      }}
-                      defaults={description}
-                      id={slug}
-                      values={{
-                        character: t('actions.clickToSelect').toLowerCase(),
-                        description: t('actions.clickToSelect').toLowerCase(),
-                        scene: t('actions.clickToSelect').toLowerCase(),
-                      }}
-                    />
-                  </Header.Title>
-                </Header>
-              );
-            })}
-          </Box>
-          <Box flex={0} padding={16} paddingInline={20}>
-            <Button>{t('actions.writeFable')}</Button>
-          </Box>
-        </Box>
+        </Form>
       </Content>
       <Footer />
     </Page>

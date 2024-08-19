@@ -15,6 +15,7 @@ import {
 
 interface FormControlProps<T extends FormControlBaseValidation>
   extends FormControlBaseProps<T> {
+  inline?: boolean;
   className?: string;
   isReadOnly?: boolean;
   type: FormControlType;
@@ -30,6 +31,7 @@ export const FormControl: FormControlComponent = ({
   name,
   label,
   children,
+  inline,
   className,
   errors = {},
   validation = {},
@@ -68,6 +70,8 @@ export const FormControl: FormControlComponent = ({
           onChange,
           value,
         });
+
+        if (inline) return <>{content}</>;
 
         return (
           <div className={classNames(styles.root, className)}>{content}</div>

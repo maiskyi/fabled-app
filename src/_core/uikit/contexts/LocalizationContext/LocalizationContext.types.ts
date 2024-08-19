@@ -8,6 +8,7 @@ import { FormPasswordValidation } from '../../components/Form/FormPassword/FormP
 // import { FormCheckboxToggleValidation } from '../../components/Form/FormCheckboxToggle/FormCheckboxToggle.types';
 import { FormTextareaValidation } from '../../components/Form/FormTextarea/FormTextarea.types';
 import { FormStarRatingValidation } from '../../components/Form/FormStarRating/FormText.types';
+import { FormInlineValidation } from '../../components/Form/FormInline/FormInline.types';
 // import { FormPlainValidation } from '../../components/Form/FormPlain/FormPlain.types';
 
 interface FormValidationErrorFnParams {
@@ -33,12 +34,18 @@ interface FormGenericError {
 
 interface FormControlPlaceholderParams {
   label: string;
+  name: string;
 }
 
 interface Form {
   text: {
     placeholder: (params: FormControlPlaceholderParams) => string;
     errors: Record<keyof FormTextValidation, FormValidationErrorFn> &
+      FormGenericError;
+  };
+  inline: {
+    placeholder: (params: FormControlPlaceholderParams) => string;
+    errors: Record<keyof FormInlineValidation, FormValidationErrorFn> &
       FormGenericError;
   };
   select: {

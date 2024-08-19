@@ -38,12 +38,13 @@ module.exports = {
         groups: [
           'builtin',
           'external',
-          'internal',
+
           'parent',
           'index',
           'sibling',
           'object',
           'type',
+          'internal',
         ],
         'newlines-between': 'always',
         pathGroups: [
