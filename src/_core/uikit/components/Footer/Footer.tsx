@@ -6,7 +6,7 @@ export type FooterProps = PropsWithChildren<{}>;
 
 export const Footer: FC<FooterProps> = ({ children }) => {
   return (
-    <IonFooter>
+    <IonFooter collapse="fade">
       <IonToolbar>{children}</IonToolbar>
     </IonFooter>
   );

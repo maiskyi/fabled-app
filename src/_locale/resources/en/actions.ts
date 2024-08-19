@@ -1,4 +1,5 @@
 export const actions = {
+  clickToSelect: 'Click to select',
   confirmNewPassword: 'Confirm new password',
   contactSupport: 'Contact support',
   contactUs: 'Contact us',
@@ -20,4 +21,5 @@ export const actions = {
   submit: 'Submit',
   support: 'Support',
   termsAndConditions: 'Terms and conditions',
+  writeFable: 'Write a Fable',
 };

@@ -24,6 +24,9 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
         configCollection: {
           items: [],
         },
+        promptCollection: {
+          items: [],
+        },
       },
     }
   );
@@ -33,6 +36,7 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
       value={{
         characters: data.characterCollection.items,
         privacyPolicyUrl: data.configCollection.items[0]?.privacyPolicyUrl,
+        prompts: data.promptCollection.items,
         termsAndConditionsUrl:
           data.configCollection.items[0]?.termsAndConditionsUrl,
         version,
