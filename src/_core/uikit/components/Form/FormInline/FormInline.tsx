@@ -60,7 +60,7 @@ export const FormInline: FC<FormInlineProps> = ({
       {({
         // help, error, onBlur,
         invalid,
-        // onChange,
+        onChange,
         value = '',
       }) => {
         return (
@@ -92,7 +92,11 @@ export const FormInline: FC<FormInlineProps> = ({
                 </IonToolbar>
               </IonHeader>
               <IonContent>
-                <Component dismiss={handleOnDismiss} />
+                <Component
+                  dismiss={handleOnDismiss}
+                  onChange={onChange}
+                  value={value}
+                />
               </IonContent>
               <IonFooter collapse="fade">
                 <IonToolbar />
