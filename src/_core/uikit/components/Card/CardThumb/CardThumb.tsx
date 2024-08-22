@@ -3,9 +3,9 @@ import { useContextSelector } from 'use-context-selector';
 
 import { IonSkeletonText } from '@ionic/react';
 
-import styles from './CardThumb.module.scss';
-
 import { CardContext } from '../Card.context';
+
+import styles from './CardThumb.module.scss';
 
 type CardThumbProps = PropsWithChildren<{
   aspectRatio?: CSSProperties['aspectRatio'];

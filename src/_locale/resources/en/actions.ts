@@ -1,5 +1,7 @@
 export const actions = {
+  cancel: 'Cancel',
   clickToSelect: 'Click to select',
+  confirm: 'Confirm',
   confirmNewPassword: 'Confirm new password',
   contactSupport: 'Contact support',
   contactUs: 'Contact us',

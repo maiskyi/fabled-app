@@ -5,6 +5,9 @@ query getBootstrap($version: String!) {
         id
       }
       title
+      illustration {
+        url(transform: { width: 1000, height: 1000, resizeStrategy: THUMB })
+      }
     }
   }
   configCollection(where: { version_in: [$version] }) {

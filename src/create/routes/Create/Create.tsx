@@ -1,5 +1,4 @@
-import { memo, useState } from 'react';
-import classNames from 'classnames';
+import { memo } from 'react';
 
 import {
   Content,
@@ -7,31 +6,32 @@ import {
   Page,
   Box,
   Message,
-  Footer,
-  Button,
   Form,
+  Button,
+  BOT_AVATAR_SRC,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
-import { useUserDisplayName } from '@common/hooks';
+import { useUser } from '@common/hooks';
 import { useConfig } from '@bootstrap/providers';
-import { LinkVoid } from '@core/navigation';
+import { useRoute } from '@core/navigation';
 
-import styles from './Create.module.scss';
-
-import { CreateForm } from './Create.types';
 import { FormField } from './Create.const';
+import { Character } from './_partitions/Character';
+import { Scene } from './_partitions/Scene';
+import { Plot } from './_partitions/Plot';
 
 export const Create = memo(function Create() {
   const { t } = useTranslation();
-  const { displayName } = useUserDisplayName();
+  const { displayName: userDisplayName, avatar: userAvatar } = useUser();
   const { prompts } = useConfig();
+  const [, navigate] = useRoute();
 
-  const [state, setState] = useState<CreateForm>({
-    character: '',
-    description: '',
-    scene: '',
-  });
+  const { slug, description } = prompts[0];
+
+  const handleOnCancel = () => {
+    navigate({ action: 'back', pathname: RoutePath.Index });
+  };
 
   return (
     <Page>
@@ -41,60 +41,75 @@ export const Create = memo(function Create() {
       <Content>
         <Form>
           <Box display="flex" flexDirection="column" minHeight="100%">
-            <Box flex={0}>
+            <Box>
               <Message
-                color="dark"
-                title={t('copy.hiUserGreeting', { displayName })}
+                avatar={BOT_AVATAR_SRC}
+                origin="companion"
+                title={t('copy.fabledAi')}
               >
-                {t('pages.create')}
+                {t('copy.createFableAiGreeting', {
+                  displayName: userDisplayName,
+                })}
+              </Message>
+              <Message
+                avatar={userAvatar}
+                origin="me"
+                title={t('copy.fabledAi')}
+              >
+                {t('copy.createFableAiGreeting', {
+                  displayName: userDisplayName,
+                })}
               </Message>
             </Box>
-            <Box alignItems="center" display="flex" flex={1}>
-              {prompts.map(({ slug, description }) => {
-                return (
-                  <Header collapse="condense" key={slug}>
-                    <Header.Title size="large" wrap>
-                      <Translate
-                        components={{
-                          character: (
-                            <Form.Inline
-                              name={FormField.Character}
-                              validation={{ required: true }}
-                            />
-                          ),
-                          description: (
-                            <Form.Inline
-                              name={FormField.Description}
-                              validation={{ required: true }}
-                            />
-                          ),
-                          scene: (
-                            <Form.Inline
-                              name={FormField.Scene}
-                              validation={{ required: true }}
-                            />
-                          ),
-                        }}
-                        defaults={description}
-                        id={slug}
-                        values={{
-                          character: t('actions.clickToSelect').toLowerCase(),
-                          description: t('actions.clickToSelect').toLowerCase(),
-                          scene: t('actions.clickToSelect').toLowerCase(),
-                        }}
-                      />
-                    </Header.Title>
-                  </Header>
-                );
-              })}
+            <Box alignItems="center" display="flex">
+              <Header collapse="condense" key={slug}>
+                <Header.Title size="large" wrap>
+                  <Translate
+                    components={{
+                      character: (
+                        <Form.Inline
+                          component={Character}
+                          name={FormField.Character}
+                          validation={{ required: true }}
+                        />
+                      ),
+                      description: (
+                        <Form.Inline
+                          component={Plot}
+                          name={FormField.Description}
+                          validation={{ required: true }}
+                        />
+                      ),
+                      scene: (
+                        <Form.Inline
+                          component={Scene}
+                          name={FormField.Scene}
+                          validation={{ required: true }}
+                        />
+                      ),
+                    }}
+                    defaults={description}
+                    id={slug}
+                  />
+                </Header.Title>
+              </Header>
             </Box>
-            <Box flex={0} padding={16} paddingInline={20}>
+            <Box
+              display="flex"
+              flex={0}
+              gap={8}
+              justifyContent="flex-end"
+              padding={16}
+              paddingInline={20}
+            >
+              <Button fill="outline" onClick={handleOnCancel}>
+                {t('actions.cancel')}
+              </Button>
               <Form.Submit>{t('actions.writeFable')}</Form.Submit>
             </Box>
           </Box>
         </Form>
       </Content>
-      <Footer />
     </Page>
   );
 });

@@ -6,9 +6,11 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 import { SwiperSlide } from './SwiperSlide/SwiperSlide';
+import { SwiperPaginationProps } from './Swiper.types';
 
 export type SwiperProps = PropsWithChildren<{
   gap?: number;
+  pagination?: SwiperPaginationProps;
 }>;
 
 interface SwiperComponent {
@@ -16,12 +18,16 @@ interface SwiperComponent {
   Slide: typeof SwiperSlide;
 }
 
-export const Swiper: SwiperComponent = ({ children, gap }: SwiperProps) => {
+export const Swiper: SwiperComponent = ({
+  children,
+  gap,
+  pagination,
+}: SwiperProps) => {
   return (
     <ReactSwiper
       centeredSlides
       modules={[Pagination]}
-      pagination
+      pagination={pagination}
       slidesPerView="auto"
       spaceBetween={gap}
     >

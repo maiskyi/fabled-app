@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
+import { useMount } from 'react-use';
 
 import { useGetBootstrapQuery } from '@network/contentful';
 
@@ -14,24 +15,22 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
   version,
   fallback = null,
 }) => {
-  const { data, isSuccess } = useGetBootstrapQuery(
+  const { data, isSuccess, refetch } = useGetBootstrapQuery(
     { version },
     {
-      initialData: {
-        characterCollection: {
-          items: [],
-        },
-        configCollection: {
-          items: [],
-        },
-        promptCollection: {
-          items: [],
-        },
-      },
+      enabled: false,
     }
   );
 
-  return (
+  useMount(async () => {
+    (await refetch()).data.characterCollection.items.forEach(
+      ({ illustration: { url } }) => {
+        new Image().src = url;
+      }
+    );
+  });
+
+  return isSuccess ? (
     <ConfigContext.Provider
       value={{
         characters: data.characterCollection.items,
@@ -42,7 +41,9 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
         version,
       }}
     >
-      {isSuccess ? children : fallback}
+      {children}
     </ConfigContext.Provider>
+  ) : (
+    <>{fallback}</>
   );
 };

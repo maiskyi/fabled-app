@@ -1,2 +1,2 @@
 export * from './useLegal';
-export * from './useUserDisplayName';
+export * from './useUser';

@@ -219,11 +219,25 @@ export enum AssetOrder {
 export type Character = Entry & _Node & {
   __typename?: 'Character';
   _id: Scalars['ID']['output'];
+  category?: Maybe<Scalars['String']['output']>;
   contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']['output']>;
   illustration?: Maybe<Asset>;
   linkedFrom?: Maybe<CharacterLinkingCollections>;
   sys: Sys;
   title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
+export type CharacterCategoryArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
+export type CharacterDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -256,7 +270,21 @@ export type CharacterCollection = {
 export type CharacterFilter = {
   AND?: InputMaybe<Array<InputMaybe<CharacterFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CharacterFilter>>>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  category_contains?: InputMaybe<Scalars['String']['input']>;
+  category_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  category_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  category_not?: InputMaybe<Scalars['String']['input']>;
+  category_not_contains?: InputMaybe<Scalars['String']['input']>;
+  category_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   illustration_exists?: InputMaybe<Scalars['Boolean']['input']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -282,6 +310,8 @@ export type CharacterLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum CharacterOrder {
+  CategoryAsc = 'category_ASC',
+  CategoryDesc = 'category_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -819,7 +849,7 @@ export type GetBootstrapQueryVariables = Exact<{
 }>;
 
 
-export type GetBootstrapQuery = { __typename?: 'Query', characterCollection?: { __typename?: 'CharacterCollection', items: Array<{ __typename?: 'Character', title?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, configCollection?: { __typename?: 'ConfigCollection', items: Array<{ __typename?: 'Config', version?: string | null, privacyPolicyUrl?: string | null, termsAndConditionsUrl?: string | null } | null> } | null, promptCollection?: { __typename?: 'PromptCollection', items: Array<{ __typename?: 'Prompt', title?: string | null, slug?: string | null, description?: string | null, textPrompt?: string | null } | null> } | null };
+export type GetBootstrapQuery = { __typename?: 'Query', characterCollection?: { __typename?: 'CharacterCollection', items: Array<{ __typename?: 'Character', title?: string | null, sys: { __typename?: 'Sys', id: string }, illustration?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null, configCollection?: { __typename?: 'ConfigCollection', items: Array<{ __typename?: 'Config', version?: string | null, privacyPolicyUrl?: string | null, termsAndConditionsUrl?: string | null } | null> } | null, promptCollection?: { __typename?: 'PromptCollection', items: Array<{ __typename?: 'Prompt', title?: string | null, slug?: string | null, description?: string | null, textPrompt?: string | null } | null> } | null };
 
 
 
@@ -831,6 +861,9 @@ export const GetBootstrapDocument = `
         id
       }
       title
+      illustration {
+        url(transform: {width: 1000, height: 1000, resizeStrategy: THUMB})
+      }
     }
   }
   configCollection(where: {version_in: [$version]}) {

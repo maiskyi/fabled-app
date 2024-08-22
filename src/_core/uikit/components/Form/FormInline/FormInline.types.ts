@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import {
   FormControlBaseValidation,
   FormItemRuleFunction,
@@ -8,3 +10,9 @@ export interface FormInlineValidation extends FormControlBaseValidation {}
 export interface FormInlineRules {
   inline: Record<keyof FormInlineValidation, FormItemRuleFunction>;
 }
+
+export interface FormInlineComponentProps {
+  dismiss: () => void;
+}
+
+export type FormInlineComponent = FC<FormInlineComponentProps>;
