@@ -57,7 +57,12 @@ export const FormInline: FC<FormInlineProps> = ({
 
   return (
     <FormControl inline type="inline" {...props}>
-      {({ help, error, onBlur, invalid, onChange, value = '' }) => {
+      {({
+        // help, error, onBlur,
+        invalid,
+        // onChange,
+        value = '',
+      }) => {
         return (
           <Fragment>
             <a

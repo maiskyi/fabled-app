@@ -2,13 +2,13 @@ import { useCallback, useState } from 'react';
 
 import { useIonToast, useIonModal } from '@ionic/react';
 
-import styles from './useUtils.module.scss';
-
 import { Selector } from '../../constants/selector.const';
 
 import { ToastParams, ConfirmParams } from './useUtils.types';
 import { ICON_MAPPING, COLOR_MAPPING } from './useUtils.const';
 import { ConfirmModal, ConfirmModalParams } from './_partitions/ConfirmModal';
+
+import styles from './useUtils.module.scss';
 
 export const useUtils = () => {
   const [showToast] = useIonToast();

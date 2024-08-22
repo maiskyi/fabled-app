@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import { IonButton, IonSpinner } from '@ionic/react';
 import { Color } from '@ionic/core';
 
-import styles from './Button.module.scss';
-
 import { ButtonSocial } from './ButtonSocial/ButtonSocial';
+
+import styles from './Button.module.scss';
 
 export type ButtonProps = PropsWithChildren<{
   block?: boolean;

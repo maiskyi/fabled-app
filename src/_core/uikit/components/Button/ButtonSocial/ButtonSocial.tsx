@@ -3,12 +3,12 @@ import classNames from 'classnames';
 
 import { IonButton, IonSpinner } from '@ionic/react';
 
-import styles from '../Button.module.scss';
-
 import { Icon } from '../../Icon';
 
 import { ButtonSocialName } from './ButtonSocial.type';
 import { ICONS_MAPPING } from './ButtonSocial.const';
+
+import styles from '../Button.module.scss';
 
 type ButtonSocialProps = PropsWithChildren<{
   name: ButtonSocialName;

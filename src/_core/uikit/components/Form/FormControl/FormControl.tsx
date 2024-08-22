@@ -2,8 +2,6 @@ import { ReactElement } from 'react';
 import { Controller } from 'react-hook-form';
 import classNames from 'classnames';
 
-import styles from './FormControl.module.scss';
-
 import { useFormControlRules } from '../_hooks/useFormControlRules/useFormControlRules.hook';
 
 import {
@@ -12,6 +10,8 @@ import {
   FormControlBaseValidation,
   FormControlType,
 } from './FormControl.types';
+
+import styles from './FormControl.module.scss';
 
 interface FormControlProps<T extends FormControlBaseValidation>
   extends FormControlBaseProps<T> {

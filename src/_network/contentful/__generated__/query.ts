@@ -1,25 +1,39 @@
 // @ts-nocheck
 
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+
 import { useFetchData } from '../hooks/useFetchData/useFetchData.hook';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  DateTime: { input: any; output: any; }
-  Dimension: { input: any; output: any; }
-  HexColor: { input: any; output: any; }
-  Quality: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  DateTime: { input: any; output: any };
+  Dimension: { input: any; output: any };
+  HexColor: { input: any; output: any };
+  Quality: { input: any; output: any };
 };
 
 /** Represents a binary file in a space. An asset can be any file type. */
@@ -38,55 +52,46 @@ export type Asset = {
   width?: Maybe<Scalars['Int']['output']>;
 };
 
-
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetContentTypeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetFileNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetHeightArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetSizeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetUrlArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   transform?: InputMaybe<ImageTransformOptions>;
 };
-
 
 /** Represents a binary file in a space. An asset can be any file type. */
 export type AssetWidthArgs = {
@@ -110,7 +115,9 @@ export type AssetFilter = {
   contentType_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentType_not?: InputMaybe<Scalars['String']['input']>;
   contentType_not_contains?: InputMaybe<Scalars['String']['input']>;
-  contentType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  contentType_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   description?: InputMaybe<Scalars['String']['input']>;
   description_contains?: InputMaybe<Scalars['String']['input']>;
@@ -118,7 +125,9 @@ export type AssetFilter = {
   description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   description_not?: InputMaybe<Scalars['String']['input']>;
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   fileName?: InputMaybe<Scalars['String']['input']>;
   fileName_contains?: InputMaybe<Scalars['String']['input']>;
   fileName_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -176,14 +185,12 @@ export type AssetLinkingCollections = {
   entryCollection?: Maybe<EntryCollection>;
 };
 
-
 export type AssetLinkingCollectionsCharacterCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
 };
-
 
 export type AssetLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -212,34 +219,32 @@ export enum AssetOrder {
   UrlAsc = 'url_ASC',
   UrlDesc = 'url_DESC',
   WidthAsc = 'width_ASC',
-  WidthDesc = 'width_DESC'
+  WidthDesc = 'width_DESC',
 }
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
-export type Character = Entry & _Node & {
-  __typename?: 'Character';
-  _id: Scalars['ID']['output'];
-  category?: Maybe<Scalars['String']['output']>;
-  contentfulMetadata: ContentfulMetadata;
-  description?: Maybe<Scalars['String']['output']>;
-  illustration?: Maybe<Asset>;
-  linkedFrom?: Maybe<CharacterLinkingCollections>;
-  sys: Sys;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
+export type Character = Entry &
+  _Node & {
+    __typename?: 'Character';
+    _id: Scalars['ID']['output'];
+    category?: Maybe<Scalars['String']['output']>;
+    contentfulMetadata: ContentfulMetadata;
+    description?: Maybe<Scalars['String']['output']>;
+    illustration?: Maybe<Asset>;
+    linkedFrom?: Maybe<CharacterLinkingCollections>;
+    sys: Sys;
+    title?: Maybe<Scalars['String']['output']>;
+  };
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
 export type CharacterCategoryArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
 export type CharacterDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
 export type CharacterIllustrationArgs = {
@@ -247,12 +252,10 @@ export type CharacterIllustrationArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
 export type CharacterLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
 export type CharacterTitleArgs = {
@@ -284,7 +287,9 @@ export type CharacterFilter = {
   description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   description_not?: InputMaybe<Scalars['String']['input']>;
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   illustration_exists?: InputMaybe<Scalars['Boolean']['input']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -300,7 +305,6 @@ export type CharacterLinkingCollections = {
   __typename?: 'CharacterLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
 };
-
 
 export type CharacterLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -321,39 +325,36 @@ export enum CharacterOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
 }
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
-export type Config = Entry & _Node & {
-  __typename?: 'Config';
-  _id: Scalars['ID']['output'];
-  contentfulMetadata: ContentfulMetadata;
-  linkedFrom?: Maybe<ConfigLinkingCollections>;
-  privacyPolicyUrl?: Maybe<Scalars['String']['output']>;
-  sys: Sys;
-  termsAndConditionsUrl?: Maybe<Scalars['String']['output']>;
-  version?: Maybe<Scalars['String']['output']>;
-};
-
+export type Config = Entry &
+  _Node & {
+    __typename?: 'Config';
+    _id: Scalars['ID']['output'];
+    contentfulMetadata: ContentfulMetadata;
+    linkedFrom?: Maybe<ConfigLinkingCollections>;
+    privacyPolicyUrl?: Maybe<Scalars['String']['output']>;
+    sys: Sys;
+    termsAndConditionsUrl?: Maybe<Scalars['String']['output']>;
+    version?: Maybe<Scalars['String']['output']>;
+  };
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
 export type ConfigLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
 export type ConfigPrivacyPolicyUrlArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
 export type ConfigTermsAndConditionsUrlArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/config) */
 export type ConfigVersionArgs = {
@@ -375,18 +376,26 @@ export type ConfigFilter = {
   privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
   privacyPolicyUrl_contains?: InputMaybe<Scalars['String']['input']>;
   privacyPolicyUrl_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  privacyPolicyUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  privacyPolicyUrl_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   privacyPolicyUrl_not?: InputMaybe<Scalars['String']['input']>;
   privacyPolicyUrl_not_contains?: InputMaybe<Scalars['String']['input']>;
-  privacyPolicyUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  privacyPolicyUrl_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   sys?: InputMaybe<SysFilter>;
   termsAndConditionsUrl?: InputMaybe<Scalars['String']['input']>;
   termsAndConditionsUrl_contains?: InputMaybe<Scalars['String']['input']>;
   termsAndConditionsUrl_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  termsAndConditionsUrl_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  termsAndConditionsUrl_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   termsAndConditionsUrl_not?: InputMaybe<Scalars['String']['input']>;
   termsAndConditionsUrl_not_contains?: InputMaybe<Scalars['String']['input']>;
-  termsAndConditionsUrl_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  termsAndConditionsUrl_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   version?: InputMaybe<Scalars['String']['input']>;
   version_contains?: InputMaybe<Scalars['String']['input']>;
   version_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -400,7 +409,6 @@ export type ConfigLinkingCollections = {
   __typename?: 'ConfigLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
 };
-
 
 export type ConfigLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -423,7 +431,7 @@ export enum ConfigOrder {
   TermsAndConditionsUrlAsc = 'termsAndConditionsUrl_ASC',
   TermsAndConditionsUrlDesc = 'termsAndConditionsUrl_DESC',
   VersionAsc = 'version_ASC',
-  VersionDesc = 'version_DESC'
+  VersionDesc = 'version_DESC',
 }
 
 export type ContentfulMetadata = {
@@ -480,7 +488,7 @@ export enum EntryOrder {
   SysPublishedAtAsc = 'sys_publishedAt_ASC',
   SysPublishedAtDesc = 'sys_publishedAt_DESC',
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
-  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
 }
 
 export enum ImageFormat {
@@ -502,7 +510,7 @@ export enum ImageFormat {
    */
   Png8 = 'PNG8',
   /** WebP image format. */
-  Webp = 'WEBP'
+  Webp = 'WEBP',
 }
 
 export enum ImageResizeFocus {
@@ -527,7 +535,7 @@ export enum ImageResizeFocus {
   /** Focus the resizing on the top left. */
   TopLeft = 'TOP_LEFT',
   /** Focus the resizing on the top right. */
-  TopRight = 'TOP_RIGHT'
+  TopRight = 'TOP_RIGHT',
 }
 
 export enum ImageResizeStrategy {
@@ -545,7 +553,7 @@ export enum ImageResizeStrategy {
   /** Resizes the image to the specified dimensions, changing the original aspect ratio if needed. */
   Scale = 'SCALE',
   /** Creates a thumbnail from the image. */
-  Thumb = 'THUMB'
+  Thumb = 'THUMB',
 }
 
 export type ImageTransformOptions = {
@@ -579,42 +587,38 @@ export type ImageTransformOptions = {
 };
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
-export type Prompt = Entry & _Node & {
-  __typename?: 'Prompt';
-  _id: Scalars['ID']['output'];
-  contentfulMetadata: ContentfulMetadata;
-  description?: Maybe<Scalars['String']['output']>;
-  linkedFrom?: Maybe<PromptLinkingCollections>;
-  slug?: Maybe<Scalars['String']['output']>;
-  sys: Sys;
-  textPrompt?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
+export type Prompt = Entry &
+  _Node & {
+    __typename?: 'Prompt';
+    _id: Scalars['ID']['output'];
+    contentfulMetadata: ContentfulMetadata;
+    description?: Maybe<Scalars['String']['output']>;
+    linkedFrom?: Maybe<PromptLinkingCollections>;
+    slug?: Maybe<Scalars['String']['output']>;
+    sys: Sys;
+    textPrompt?: Maybe<Scalars['String']['output']>;
+    title?: Maybe<Scalars['String']['output']>;
+  };
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
 export type PromptDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
 export type PromptLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
-
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
 export type PromptSlugArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
-
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
 export type PromptTextPromptArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
-
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
 export type PromptTitleArgs = {
@@ -639,7 +643,9 @@ export type PromptFilter = {
   description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   description_not?: InputMaybe<Scalars['String']['input']>;
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   slug?: InputMaybe<Scalars['String']['input']>;
   slug_contains?: InputMaybe<Scalars['String']['input']>;
   slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -669,7 +675,6 @@ export type PromptLinkingCollections = {
   entryCollection?: Maybe<EntryCollection>;
 };
 
-
 export type PromptLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -689,7 +694,7 @@ export enum PromptOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
 }
 
 export type Query = {
@@ -706,20 +711,17 @@ export type Query = {
   promptCollection?: Maybe<PromptCollection>;
 };
 
-
 export type Query_NodeArgs = {
   id: Scalars['ID']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-
 export type QueryAssetArgs = {
   id: Scalars['String']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
-
 
 export type QueryAssetCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -730,13 +732,11 @@ export type QueryAssetCollectionArgs = {
   where?: InputMaybe<AssetFilter>;
 };
 
-
 export type QueryCharacterArgs = {
   id: Scalars['String']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
-
 
 export type QueryCharacterCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -747,13 +747,11 @@ export type QueryCharacterCollectionArgs = {
   where?: InputMaybe<CharacterFilter>;
 };
 
-
 export type QueryConfigArgs = {
   id: Scalars['String']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
-
 
 export type QueryConfigCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -764,7 +762,6 @@ export type QueryConfigCollectionArgs = {
   where?: InputMaybe<ConfigFilter>;
 };
 
-
 export type QueryEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -774,13 +771,11 @@ export type QueryEntryCollectionArgs = {
   where?: InputMaybe<EntryFilter>;
 };
 
-
 export type QueryPromptArgs = {
   id: Scalars['String']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
-
 
 export type QueryPromptCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -808,11 +803,15 @@ export type SysFilter = {
   firstPublishedAt_exists?: InputMaybe<Scalars['Boolean']['input']>;
   firstPublishedAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
   firstPublishedAt_gte?: InputMaybe<Scalars['DateTime']['input']>;
-  firstPublishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  firstPublishedAt_in?: InputMaybe<
+    Array<InputMaybe<Scalars['DateTime']['input']>>
+  >;
   firstPublishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
   firstPublishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
   firstPublishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  firstPublishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  firstPublishedAt_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['DateTime']['input']>>
+  >;
   id?: InputMaybe<Scalars['String']['input']>;
   id_contains?: InputMaybe<Scalars['String']['input']>;
   id_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -828,16 +827,22 @@ export type SysFilter = {
   publishedAt_lt?: InputMaybe<Scalars['DateTime']['input']>;
   publishedAt_lte?: InputMaybe<Scalars['DateTime']['input']>;
   publishedAt_not?: InputMaybe<Scalars['DateTime']['input']>;
-  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']['input']>>>;
+  publishedAt_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['DateTime']['input']>>
+  >;
   publishedVersion?: InputMaybe<Scalars['Float']['input']>;
   publishedVersion_exists?: InputMaybe<Scalars['Boolean']['input']>;
   publishedVersion_gt?: InputMaybe<Scalars['Float']['input']>;
   publishedVersion_gte?: InputMaybe<Scalars['Float']['input']>;
-  publishedVersion_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  publishedVersion_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
   publishedVersion_lt?: InputMaybe<Scalars['Float']['input']>;
   publishedVersion_lte?: InputMaybe<Scalars['Float']['input']>;
   publishedVersion_not?: InputMaybe<Scalars['Float']['input']>;
-  publishedVersion_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  publishedVersion_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['Float']['input']>>
+  >;
 };
 
 export type _Node = {
@@ -848,10 +853,37 @@ export type GetBootstrapQueryVariables = Exact<{
   version: Scalars['String']['input'];
 }>;
 
-
-export type GetBootstrapQuery = { __typename?: 'Query', characterCollection?: { __typename?: 'CharacterCollection', items: Array<{ __typename?: 'Character', title?: string | null, sys: { __typename?: 'Sys', id: string }, illustration?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null, configCollection?: { __typename?: 'ConfigCollection', items: Array<{ __typename?: 'Config', version?: string | null, privacyPolicyUrl?: string | null, termsAndConditionsUrl?: string | null } | null> } | null, promptCollection?: { __typename?: 'PromptCollection', items: Array<{ __typename?: 'Prompt', title?: string | null, slug?: string | null, description?: string | null, textPrompt?: string | null } | null> } | null };
-
-
+export type GetBootstrapQuery = {
+  __typename?: 'Query';
+  characterCollection?: {
+    __typename?: 'CharacterCollection';
+    items: Array<{
+      __typename?: 'Character';
+      title?: string | null;
+      sys: { __typename?: 'Sys'; id: string };
+      illustration?: { __typename?: 'Asset'; url?: string | null } | null;
+    } | null>;
+  } | null;
+  configCollection?: {
+    __typename?: 'ConfigCollection';
+    items: Array<{
+      __typename?: 'Config';
+      version?: string | null;
+      privacyPolicyUrl?: string | null;
+      termsAndConditionsUrl?: string | null;
+    } | null>;
+  } | null;
+  promptCollection?: {
+    __typename?: 'PromptCollection';
+    items: Array<{
+      __typename?: 'Prompt';
+      title?: string | null;
+      slug?: string | null;
+      description?: string | null;
+      textPrompt?: string | null;
+    } | null>;
+  } | null;
+};
 
 export const GetBootstrapDocument = `
     query getBootstrap($version: String!) {
@@ -885,17 +917,22 @@ export const GetBootstrapDocument = `
     `;
 
 export const useGetBootstrapQuery = <
-      TData = GetBootstrapQuery,
-      TError = unknown
-    >(
-      variables: GetBootstrapQueryVariables,
-      options?: Omit<UseQueryOptions<GetBootstrapQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetBootstrapQuery, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<GetBootstrapQuery, TError, TData>(
-      {
-    queryKey: ['getBootstrap', variables],
-    queryFn: useFetchData<GetBootstrapQuery, GetBootstrapQueryVariables>(GetBootstrapDocument).bind(null, variables),
-    ...options
+  TData = GetBootstrapQuery,
+  TError = unknown,
+>(
+  variables: GetBootstrapQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetBootstrapQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetBootstrapQuery, TError, TData>['queryKey'];
   }
-    )};
+) => {
+  return useQuery<GetBootstrapQuery, TError, TData>({
+    queryFn: useFetchData<GetBootstrapQuery, GetBootstrapQueryVariables>(
+      GetBootstrapDocument
+    ).bind(null, variables),
+    queryKey: ['getBootstrap', variables],
+    ...options,
+  });
+};
