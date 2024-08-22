@@ -33,6 +33,7 @@ export const Index = memo(function Create() {
                 character: (
                   <Form.Inline
                     component={Character}
+                    label={t('forms.mainCharacter')}
                     name={FormField.Character}
                     validation={{ required: true }}
                   />
@@ -47,6 +48,7 @@ export const Index = memo(function Create() {
                 scene: (
                   <Form.Inline
                     component={Scene}
+                    label={t('forms.sceneOfAction')}
                     name={FormField.Scene}
                     validation={{ required: true }}
                   />

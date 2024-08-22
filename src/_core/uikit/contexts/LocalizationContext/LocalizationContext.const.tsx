@@ -29,7 +29,8 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
         generic: genericError,
         required: requiredInputError,
       },
-      placeholder: () => `Click to select`,
+      placeholder: ({ label }) =>
+        label ? `Select ${label}` : `Click to select`,
     },
 
     // checkbox: {

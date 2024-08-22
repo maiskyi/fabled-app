@@ -7,7 +7,7 @@ import { CardContext } from '../Card.context';
 
 import styles from './CardThumb.module.scss';
 
-type CardThumbProps = PropsWithChildren<{
+export type CardThumbProps = PropsWithChildren<{
   aspectRatio?: CSSProperties['aspectRatio'];
 }>;
 

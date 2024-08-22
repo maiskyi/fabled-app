@@ -9,6 +9,8 @@ import {
 import { useTranslation } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 
+import { FormField } from '../../../Create.const';
+
 import styles from './Character.module.scss';
 
 export const Character: FormInlineComponent = () => {
@@ -34,21 +36,29 @@ export const Character: FormInlineComponent = () => {
           justifyContent="center"
         >
           <Box>
-            <Swiper pagination={{ dynamicBullets: true }}>
-              {characters.map(
-                ({ sys: { id }, illustration: { url }, title }) => {
-                  return (
-                    <Swiper.Slide className={styles.slide} key={id}>
-                      <Card>
-                        <Card.Thumb aspectRatio="1">
-                          <img alt={title} src={url} />
-                        </Card.Thumb>
-                      </Card>
-                    </Swiper.Slide>
-                  );
-                }
-              )}
-            </Swiper>
+            <Form.RadioGroup
+              name={FormField.Character}
+              validation={{ required: true }}
+            >
+              <Swiper pagination={{ dynamicBullets: true }}>
+                {characters.map(
+                  ({ sys: { id }, illustration: { url }, title }) => {
+                    return (
+                      <Swiper.Slide className={styles.slide} key={id}>
+                        <Form.RadioGroup.Card
+                          key={id}
+                          thumb={{
+                            aspectRatio: 1,
+                            children: <img alt={title} src={url} />,
+                          }}
+                          value={title}
+                        />
+                      </Swiper.Slide>
+                    );
+                  }
+                )}
+              </Swiper>
+            </Form.RadioGroup>
           </Box>
           <Box paddingInline={80}>
             <Form.Submit>{t('actions.confirm')}</Form.Submit>
