@@ -62,6 +62,7 @@ export const Character: FormInlineComponent = ({
                           key={id}
                           thumb={{
                             aspectRatio: 1,
+                            caption: title,
                             children: <img alt={title} src={url} />,
                           }}
                           value={title}
