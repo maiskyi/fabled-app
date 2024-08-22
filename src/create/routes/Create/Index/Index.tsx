@@ -48,7 +48,7 @@ export const Index = memo(function Create() {
                 scene: (
                   <Form.Inline
                     component={Scene}
-                    label={t('forms.sceneOfAction')}
+                    label={t('forms.placeOfEvents')}
                     name={FormField.Scene}
                     validation={{ required: true }}
                   />

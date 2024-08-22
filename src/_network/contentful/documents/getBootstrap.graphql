@@ -10,6 +10,17 @@ query getBootstrap($version: String!) {
       }
     }
   }
+  sceneCollection {
+    items {
+      sys {
+        id
+      }
+      title
+      illustration {
+        url(transform: { width: 1000, height: 1000, resizeStrategy: THUMB })
+      }
+    }
+  }
   configCollection(where: { version_in: [$version] }) {
     items {
       version

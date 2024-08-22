@@ -36,6 +36,7 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
         characters: data.characterCollection.items,
         privacyPolicyUrl: data.configCollection.items[0]?.privacyPolicyUrl,
         prompts: data.promptCollection.items,
+        scenes: data.sceneCollection.items,
         termsAndConditionsUrl:
           data.configCollection.items[0]?.termsAndConditionsUrl,
         version,

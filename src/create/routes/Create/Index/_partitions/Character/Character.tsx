@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Box, FormInlineComponent, Header, Swiper, Form } from '@core/uikit';
-import { useTranslation } from '@core/localization';
+import { Translate, useTranslation } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 
 import { FormField } from '../../../Create.const';
@@ -33,8 +33,7 @@ export const Character: FormInlineComponent = ({
         <Box flex={0}>
           <Header collapse="condense">
             <Header.Title size="large" wrap>
-              Main character
-              <br /> will be a...
+              <Translate id="forms.mainCharacterWillBe" />
             </Header.Title>
           </Header>
         </Box>

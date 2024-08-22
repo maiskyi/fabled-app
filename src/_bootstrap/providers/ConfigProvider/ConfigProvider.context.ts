@@ -8,12 +8,14 @@ interface ConfigContextProps {
   termsAndConditionsUrl: string;
   characters: DTO.GetBootstrapQuery['characterCollection']['items'];
   prompts: DTO.GetBootstrapQuery['promptCollection']['items'];
+  scenes: DTO.GetBootstrapQuery['sceneCollection']['items'];
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({
   characters: [],
   privacyPolicyUrl: '/',
   prompts: [],
+  scenes: [],
   termsAndConditionsUrl: '/',
   version: '1.0.0',
 });
