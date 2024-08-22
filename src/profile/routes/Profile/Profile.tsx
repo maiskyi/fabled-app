@@ -5,6 +5,7 @@ import { Header, Page, Content, Card, List, useUtils } from '@core/uikit';
 import { useAuth, useSignOut } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
+import { useUser } from '@common/hooks';
 
 import { useProfileMenu } from './Profile.hooks';
 
@@ -13,12 +14,11 @@ export const Profile = memo(function Profile() {
   const { confirm } = useUtils();
   const { t } = useTranslation();
   const { mutateAsync: signOut } = useSignOut();
+  const { displayName: userDisplayName, avatar: userAvatar } = useUser();
 
   const { menu } = useProfileMenu();
 
   const title = t('pages.profile');
-
-  const userDisplayName = user?.displayName || t('defaults.userDisplayName');
 
   const handleOnLogout = () => {
     confirm({
@@ -43,7 +43,7 @@ export const Profile = memo(function Profile() {
         </Header>
         <Card>
           <Card.Header>
-            <Card.Avatar src={user?.photoUrl} />
+            <Card.Avatar src={userAvatar} />
             <Card.Title>{userDisplayName}</Card.Title>
             <Card.Subtitle>{user?.email}</Card.Subtitle>
           </Card.Header>

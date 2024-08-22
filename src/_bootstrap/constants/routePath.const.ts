@@ -7,6 +7,7 @@ export enum RoutePath {
   VerifyEmail = '/verify-email',
   ContactUs = '/contact-us',
   Create = '/create',
+  CreateScene = '/create/scene',
   Fable = '/fables/:id',
   Feedback = '/feedback',
   Index = '/',

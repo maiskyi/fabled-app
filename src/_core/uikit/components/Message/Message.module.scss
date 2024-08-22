@@ -1,0 +1,66 @@
+.root {
+  display: flex;
+  align-items: flex-end;
+
+  &.companion {
+    padding-left: 16px;
+  }
+
+  &.me {
+    flex-direction: row-reverse;
+    padding-right: 16px;
+  }
+}
+
+.avatar {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-bottom: 24px;
+}
+
+.message {
+  position: relative;
+  flex: 1;
+  
+  &.companion {
+    padding-left: 20px;
+  }
+
+  &.companion {
+    padding-right: 20px;
+  }
+}
+
+.arrow {
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  overflow: hidden;
+  z-index: 11;
+  
+  &.companion {
+    left: 0px;
+    bottom: 44px;
+    transform: rotate(-90deg);
+  }
+
+  &.me {
+    right: 0;
+    bottom: 44px;
+    transform: rotate(90deg);
+  }
+
+  &:after {
+    inset-inline-start: 3px;
+    top: 3px;
+    border-radius: 3px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    transform: rotate(45deg);
+    background: var(--ion-color-base);
+    content: "";
+    z-index: 10;
+  }
+}

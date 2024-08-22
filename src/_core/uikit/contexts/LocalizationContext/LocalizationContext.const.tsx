@@ -24,6 +24,14 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
     confirmText: 'Yes',
   },
   form: {
+    inline: {
+      errors: {
+        generic: genericError,
+        required: requiredInputError,
+      },
+      placeholder: () => `Click to select`,
+    },
+
     // checkbox: {
     //   errors: {
     //     generic: genericError,

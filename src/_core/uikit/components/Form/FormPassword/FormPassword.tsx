@@ -29,7 +29,9 @@ export const FormPassword: FC<FormPasswordProps> = ({
       form: {
         text: { placeholder },
       },
-    }) => initialPlaceholder || placeholder({ label: props.label })
+    }) =>
+      initialPlaceholder ||
+      placeholder({ label: props.label, name: props.name })
   );
 
   return (

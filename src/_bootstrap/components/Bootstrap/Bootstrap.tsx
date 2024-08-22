@@ -13,6 +13,7 @@ import {
 
 import { Network, NetworkProps } from './Network';
 import { Navigation } from './Navigation';
+import { Config, ConfigProps } from './Config';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -21,6 +22,7 @@ export type BootstrapProps = PropsWithChildren<{
   firestore: FirestoreProviderProps;
   localization: LocalizationProviderProps;
   network: NetworkProps;
+  config: ConfigProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
@@ -30,26 +32,29 @@ export const Bootstrap: FC<BootstrapProps> = ({
   firestore,
   localization,
   network,
+  config,
 }) => {
   return (
     <ThemeProvider>
-      <Network {...network}>
-        <LocalizationProvider {...localization}>
-          <AppProvider {...app}>
-            <AuthProvider>
-              <NetworkProvider>
-                <FirestoreProvider {...firestore}>
-                  <FunctionsProvider {...functions}>
-                    <StorageProvider>
-                      <Navigation>{children}</Navigation>
-                    </StorageProvider>
-                  </FunctionsProvider>
-                </FirestoreProvider>
-              </NetworkProvider>
-            </AuthProvider>
-          </AppProvider>
-        </LocalizationProvider>
-      </Network>
+      <NetworkProvider>
+        <Network {...network}>
+          <Config {...config}>
+            <LocalizationProvider {...localization}>
+              <AppProvider {...app}>
+                <AuthProvider>
+                  <FirestoreProvider {...firestore}>
+                    <FunctionsProvider {...functions}>
+                      <StorageProvider>
+                        <Navigation>{children}</Navigation>
+                      </StorageProvider>
+                    </FunctionsProvider>
+                  </FirestoreProvider>
+                </AuthProvider>
+              </AppProvider>
+            </LocalizationProvider>
+          </Config>
+        </Network>
+      </NetworkProvider>
     </ThemeProvider>
   );
 };

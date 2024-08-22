@@ -13,6 +13,7 @@ import {
   logOutOutline,
   documentTextOutline,
   helpBuoyOutline,
+  closeOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
@@ -22,6 +23,7 @@ export const ICON = {
   'book-outline': bookOutline,
   'chatbox-ellipses-outline': chatboxEllipsesOutline,
   'chevron-forward': chevronForward,
+  'close-outline': closeOutline,
   'document-text-outline': documentTextOutline,
   facebook: logoFacebook,
   google: logoGoogle,

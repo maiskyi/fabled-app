@@ -3,9 +3,9 @@ import { useContextSelector } from 'use-context-selector';
 
 import { IonCardSubtitle, IonSkeletonText } from '@ionic/react';
 
-import styles from './CardSubtitle.module.css';
-
 import { CardContext } from '../Card.context';
+
+import styles from './CardSubtitle.module.css';
 
 type CardSubtitleProps = PropsWithChildren<{}>;
 

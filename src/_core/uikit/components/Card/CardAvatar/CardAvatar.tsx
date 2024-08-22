@@ -3,9 +3,9 @@ import classNames from 'classnames';
 
 import { IonAvatar } from '@ionic/react';
 
-import styles from '../Card.module.scss';
-
 import DEFAULT_AVATAR_SRC from './CardAvatar.svg';
+
+import styles from '../Card.module.scss';
 
 interface CardAvatarProps {
   src?: string;

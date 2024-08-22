@@ -227,12 +227,24 @@ export type Character = Entry &
   _Node & {
     __typename?: 'Character';
     _id: Scalars['ID']['output'];
+    category?: Maybe<Scalars['String']['output']>;
     contentfulMetadata: ContentfulMetadata;
+    description?: Maybe<Scalars['String']['output']>;
     illustration?: Maybe<Asset>;
     linkedFrom?: Maybe<CharacterLinkingCollections>;
     sys: Sys;
     title?: Maybe<Scalars['String']['output']>;
   };
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
+export type CharacterCategoryArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
+export type CharacterDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/character) */
 export type CharacterIllustrationArgs = {
@@ -261,7 +273,23 @@ export type CharacterCollection = {
 export type CharacterFilter = {
   AND?: InputMaybe<Array<InputMaybe<CharacterFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CharacterFilter>>>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  category_contains?: InputMaybe<Scalars['String']['input']>;
+  category_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  category_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  category_not?: InputMaybe<Scalars['String']['input']>;
+  category_not_contains?: InputMaybe<Scalars['String']['input']>;
+  category_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  description_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
   illustration_exists?: InputMaybe<Scalars['Boolean']['input']>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -286,6 +314,8 @@ export type CharacterLinkingCollectionsEntryCollectionArgs = {
 };
 
 export enum CharacterOrder {
+  CategoryAsc = 'category_ASC',
+  CategoryDesc = 'category_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -556,6 +586,117 @@ export type ImageTransformOptions = {
   width?: InputMaybe<Scalars['Dimension']['input']>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
+export type Prompt = Entry &
+  _Node & {
+    __typename?: 'Prompt';
+    _id: Scalars['ID']['output'];
+    contentfulMetadata: ContentfulMetadata;
+    description?: Maybe<Scalars['String']['output']>;
+    linkedFrom?: Maybe<PromptLinkingCollections>;
+    slug?: Maybe<Scalars['String']['output']>;
+    sys: Sys;
+    textPrompt?: Maybe<Scalars['String']['output']>;
+    title?: Maybe<Scalars['String']['output']>;
+  };
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
+export type PromptDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
+export type PromptLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
+export type PromptSlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
+export type PromptTextPromptArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
+export type PromptTitleArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PromptCollection = {
+  __typename?: 'PromptCollection';
+  items: Array<Maybe<Prompt>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type PromptFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PromptFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PromptFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  description_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+  textPrompt?: InputMaybe<Scalars['String']['input']>;
+  textPrompt_contains?: InputMaybe<Scalars['String']['input']>;
+  textPrompt_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  textPrompt_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  textPrompt_not?: InputMaybe<Scalars['String']['input']>;
+  textPrompt_not_contains?: InputMaybe<Scalars['String']['input']>;
+  textPrompt_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type PromptLinkingCollections = {
+  __typename?: 'PromptLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+export type PromptLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum PromptOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export type Query = {
   __typename?: 'Query';
   _node?: Maybe<_Node>;
@@ -566,6 +707,8 @@ export type Query = {
   config?: Maybe<Config>;
   configCollection?: Maybe<ConfigCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  prompt?: Maybe<Prompt>;
+  promptCollection?: Maybe<PromptCollection>;
 };
 
 export type Query_NodeArgs = {
@@ -626,6 +769,21 @@ export type QueryEntryCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<EntryFilter>;
+};
+
+export type QueryPromptArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryPromptCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PromptOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<PromptFilter>;
 };
 
 export type Sys = {
@@ -703,6 +861,7 @@ export type GetBootstrapQuery = {
       __typename?: 'Character';
       title?: string | null;
       sys: { __typename?: 'Sys'; id: string };
+      illustration?: { __typename?: 'Asset'; url?: string | null } | null;
     } | null>;
   } | null;
   configCollection?: {
@@ -712,6 +871,16 @@ export type GetBootstrapQuery = {
       version?: string | null;
       privacyPolicyUrl?: string | null;
       termsAndConditionsUrl?: string | null;
+    } | null>;
+  } | null;
+  promptCollection?: {
+    __typename?: 'PromptCollection';
+    items: Array<{
+      __typename?: 'Prompt';
+      title?: string | null;
+      slug?: string | null;
+      description?: string | null;
+      textPrompt?: string | null;
     } | null>;
   } | null;
 };
@@ -724,6 +893,9 @@ export const GetBootstrapDocument = `
         id
       }
       title
+      illustration {
+        url(transform: {width: 1000, height: 1000, resizeStrategy: THUMB})
+      }
     }
   }
   configCollection(where: {version_in: [$version]}) {
@@ -731,6 +903,14 @@ export const GetBootstrapDocument = `
       version
       privacyPolicyUrl
       termsAndConditionsUrl
+    }
+  }
+  promptCollection {
+    items {
+      title
+      slug
+      description
+      textPrompt
     }
   }
 }
