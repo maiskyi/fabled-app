@@ -17,8 +17,8 @@ export const Character: FormInlineComponent = ({
   const { t } = useTranslation();
   const { characters } = useConfig();
 
-  const handleOnSubmit = ({ characterName }: CharacterForm) => {
-    onChange(characterName);
+  const handleOnSubmit = ({ character }: CharacterForm) => {
+    onChange(character);
     dismiss();
   };
 
