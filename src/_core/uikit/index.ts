@@ -1,5 +1,6 @@
 // Components
 
+export * from './components/Animation';
 export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
@@ -18,6 +19,7 @@ export * from './components/Page';
 export * from './components/Swiper';
 export * from './components/Text';
 export * from './components/ThemeProvider';
+export * from './components/View';
 
 // Hooks
 export * from './hooks/useUtils';
