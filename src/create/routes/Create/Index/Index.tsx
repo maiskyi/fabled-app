@@ -7,9 +7,10 @@ import { useConfig } from '@bootstrap/providers';
 import { useRoute } from '@core/navigation';
 
 import { FormField } from '../Create.const';
-import { Character } from '../_partitions/Character';
-import { Scene } from '../_partitions/Scene';
-import { Plot } from '../_partitions/Plot';
+
+import { Character } from './_partitions/Character';
+import { Scene } from './_partitions/Scene';
+import { Plot } from './_partitions/Plot';
 
 export const Index = memo(function Create() {
   const { t } = useTranslation();
