@@ -40,6 +40,7 @@ export const FormRadioGroup: FormRadioGroupComponent = ({
               [styles.transparent]: transparent,
             })}
             name={props.name}
+            onIonChange={onChange}
             value={value}
           >
             <FormRadioGroupContext.Provider

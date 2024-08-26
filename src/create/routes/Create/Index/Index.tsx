@@ -11,6 +11,7 @@ import { FormField } from '../Create.const';
 import { Character } from './_partitions/Character';
 import { Scene } from './_partitions/Scene';
 import { Theme } from './_partitions/Theme';
+import { ReadTime } from './_partitions/ReadTime';
 
 export const Index = memo(function Create() {
   const { t } = useTranslation();
@@ -43,6 +44,14 @@ export const Index = memo(function Create() {
                     component={Theme}
                     label={t('forms.moralLesson')}
                     name={FormField.Description}
+                    validation={{ required: true }}
+                  />
+                ),
+                readTime: (
+                  <Form.Inline
+                    component={ReadTime}
+                    label={t('forms.readingTime')}
+                    name={FormField.ReadTime}
                     validation={{ required: true }}
                   />
                 ),

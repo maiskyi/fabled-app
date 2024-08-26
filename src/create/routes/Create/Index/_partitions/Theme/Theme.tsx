@@ -4,18 +4,29 @@ import { useConfig } from '@bootstrap/providers';
 
 import { FormField } from '../../../Create.const';
 
-export const Theme: FormInlineComponent = () => {
+import { ThemeForm } from './Theme.types';
+
+export const Theme: FormInlineComponent = ({ onChange, dismiss, value }) => {
   const { t } = useTranslation();
+
   const { themes } = useConfig();
 
+  const handleOnSubmit = (form: ThemeForm) => {
+    onChange(form.description);
+    dismiss();
+  };
+
   return (
-    <Form>
+    <Form<ThemeForm>
+      defaultValues={{ [FormField.Description]: value?.toString() }}
+      onSubmit={handleOnSubmit}
+    >
       <Header collapse="condense">
         <Header.Title size="large" wrap>
           {t('forms.chooseMoralLessonFromTheFable')}
         </Header.Title>
       </Header>
-      <Box>
+      <Box padding={16} paddingInline={0}>
         <Form.RadioGroup name={FormField.Description} transparent>
           {themes.map(({ sys: { id }, title, description }) => {
             return (
@@ -23,7 +34,7 @@ export const Theme: FormInlineComponent = () => {
                 description={description}
                 key={id}
                 label={title}
-                value={id}
+                value={title}
               />
             );
           })}

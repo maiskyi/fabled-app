@@ -9,7 +9,9 @@ export const forms = {
   newPassword: 'New password',
   or: 'Or',
   password: 'Password',
+  pickReadingTime: 'Pick reading time',
   placeOfEvents: 'Place of events',
   rateUs: 'Rate Us',
+  readingTime: 'Reading time',
   subject: 'Subject',
 };
