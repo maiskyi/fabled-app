@@ -10,6 +10,7 @@ import {
   IonHeader,
   IonIcon,
   IonModal,
+  IonTitle,
   IonToolbar,
 } from '@ionic/react';
 
@@ -84,6 +85,7 @@ export const FormInline: FC<FormInlineProps> = ({
             >
               <IonHeader translucent>
                 <IonToolbar>
+                  <IonTitle>{props.label}</IonTitle>
                   <IonButtons slot="end">
                     <IonButton onClick={handleOnDismiss}>
                       <IonIcon icon={ICON['close-outline']} slot="icon-only" />

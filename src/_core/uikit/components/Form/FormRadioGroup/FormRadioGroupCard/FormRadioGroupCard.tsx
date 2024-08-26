@@ -6,6 +6,7 @@ import { IonCheckbox } from '@ionic/react';
 
 import { Card } from '../../../Card';
 import { CardThumbProps } from '../../../Card/CardThumb';
+import { CardTitleProps } from '../../../Card/CardTitle';
 import { FormRadioGroupContext } from '../FormRadioGroup.context';
 
 import styles from './FormRadioGroupCard.module.scss';
@@ -13,11 +14,13 @@ import styles from './FormRadioGroupCard.module.scss';
 interface FormRadioGroupCardProps {
   value: string | number;
   thumb?: CardThumbProps;
+  title?: CardTitleProps;
 }
 
 export const FormRadioGroupCard: FC<FormRadioGroupCardProps> = ({
   value: internalValue,
   thumb,
+  title,
 }) => {
   const onChange = useContextSelector(
     FormRadioGroupContext,
@@ -38,6 +41,11 @@ export const FormRadioGroupCard: FC<FormRadioGroupCardProps> = ({
       onClick={() => onChange(internalValue)}
     >
       {!!thumb && <Card.Thumb {...thumb} />}
+      {!!title && (
+        <Card.Header>
+          {!!title && <Card.Title>{title.children}</Card.Title>}
+        </Card.Header>
+      )}
       <div className={styles.radio}>
         <IonCheckbox checked={isEqual(value, internalValue)} />
       </div>

@@ -39,6 +39,7 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
         scenes: data.sceneCollection.items,
         termsAndConditionsUrl:
           data.configCollection.items[0]?.termsAndConditionsUrl,
+        themes: data.themeCollection.items,
         version,
       }}
     >

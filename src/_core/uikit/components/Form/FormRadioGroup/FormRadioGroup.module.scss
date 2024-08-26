@@ -1,0 +1,5 @@
+.root {
+  &.transparent {
+    --ion-item-background: var(--ion-background-color)
+  }
+}

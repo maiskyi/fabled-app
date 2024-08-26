@@ -1,4 +1,13 @@
 query getBootstrap($version: String!) {
+  themeCollection {
+    items {
+      sys {
+        id
+      }
+      title
+      description
+    }
+  }
   characterCollection {
     items {
       sys {

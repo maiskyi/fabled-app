@@ -9,6 +9,7 @@ interface ConfigContextProps {
   characters: DTO.GetBootstrapQuery['characterCollection']['items'];
   prompts: DTO.GetBootstrapQuery['promptCollection']['items'];
   scenes: DTO.GetBootstrapQuery['sceneCollection']['items'];
+  themes: DTO.GetBootstrapQuery['themeCollection']['items'];
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({
@@ -17,5 +18,6 @@ export const ConfigContext = createContext<ConfigContextProps>({
   prompts: [],
   scenes: [],
   termsAndConditionsUrl: '/',
+  themes: [],
   version: '1.0.0',
 });

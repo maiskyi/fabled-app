@@ -10,7 +10,7 @@ import { FormField } from '../Create.const';
 
 import { Character } from './_partitions/Character';
 import { Scene } from './_partitions/Scene';
-import { Plot } from './_partitions/Plot';
+import { Theme } from './_partitions/Theme';
 
 export const Index = memo(function Create() {
   const { t } = useTranslation();
@@ -40,7 +40,8 @@ export const Index = memo(function Create() {
                 ),
                 description: (
                   <Form.Inline
-                    component={Plot}
+                    component={Theme}
+                    label={t('forms.moralLesson')}
                     name={FormField.Description}
                     validation={{ required: true }}
                   />

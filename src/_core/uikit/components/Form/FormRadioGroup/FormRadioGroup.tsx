@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react';
+import classNames from 'classnames';
 
 import { IonRadioGroup } from '@ionic/react';
 
@@ -6,10 +7,15 @@ import { FormControl, FormControlBaseProps } from '../FormControl';
 
 import { FormRadioGroupValidation } from './FormRadioGroup.types';
 import { FormRadioGroupCard } from './FormRadioGroupCard/FormRadioGroupCard';
+import { FormRadioGroupItem } from './FormRadioGroupItem/FormRadioGroupItem';
 import { FormRadioGroupContext } from './FormRadioGroup.context';
 
+import styles from './FormRadioGroup.module.scss';
+
 interface FormRadioGroupPropsWithoutChildren
-  extends FormControlBaseProps<FormRadioGroupValidation> {}
+  extends FormControlBaseProps<FormRadioGroupValidation> {
+  transparent?: boolean;
+}
 
 type FormRadioGroupProps =
   PropsWithChildren<FormRadioGroupPropsWithoutChildren>;
@@ -17,17 +23,25 @@ type FormRadioGroupProps =
 interface FormRadioGroupComponent {
   (props: FormRadioGroupProps): ReactElement;
   Card: typeof FormRadioGroupCard;
+  Item: typeof FormRadioGroupItem;
 }
 
 export const FormRadioGroup: FormRadioGroupComponent = ({
   children,
+  transparent,
   ...props
 }: FormRadioGroupProps) => {
   return (
     <FormControl type="radioGroup" {...props}>
       {({ value, onChange, invalid }) => {
         return (
-          <IonRadioGroup name={props.name} value={value}>
+          <IonRadioGroup
+            className={classNames(styles.root, {
+              [styles.transparent]: transparent,
+            })}
+            name={props.name}
+            value={value}
+          >
             <FormRadioGroupContext.Provider
               value={{ invalid, onChange, value }}
             >
@@ -41,3 +55,4 @@ export const FormRadioGroup: FormRadioGroupComponent = ({
 };
 
 FormRadioGroup.Card = FormRadioGroupCard;
+FormRadioGroup.Item = FormRadioGroupItem;
