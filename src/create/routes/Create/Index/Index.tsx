@@ -12,6 +12,7 @@ import { Character } from './_partitions/Character';
 import { Scene } from './_partitions/Scene';
 import { Theme } from './_partitions/Theme';
 import { ReadTime } from './_partitions/ReadTime';
+import { IndexForm } from './Index.type';
 
 export const Index = memo(function Create() {
   const { t } = useTranslation();
@@ -24,10 +25,14 @@ export const Index = memo(function Create() {
     navigate({ action: 'back', pathname: RoutePath.Index });
   };
 
+  const handleOnSubmit = (form: IndexForm) => {
+    console.log(form);
+  };
+
   return (
     <Animation.Message>
       <Box>
-        <Form>
+        <Form<IndexForm> onSubmit={handleOnSubmit}>
           <Header.Title size="large" wrap>
             <Translate
               components={{

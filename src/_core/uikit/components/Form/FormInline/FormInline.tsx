@@ -93,16 +93,15 @@ export const FormInline: FC<FormInlineProps> = ({
                   </IonButtons>
                 </IonToolbar>
               </IonHeader>
-              <IonContent>
-                <Component
-                  dismiss={handleOnDismiss}
-                  onChange={onChange}
-                  value={value}
-                />
-              </IonContent>
+              <Component
+                dismiss={handleOnDismiss}
+                onChange={onChange}
+                value={value}
+              />
+              {/* <IonContent></IonContent>
               <IonFooter collapse="fade">
                 <IonToolbar />
-              </IonFooter>
+              </IonFooter> */}
             </IonModal>
           </Fragment>
         );
