@@ -39,23 +39,40 @@ export const Index = memo(function Create() {
   };
 
   const handleOnSubmit = async (form: IndexForm) => {
-    const { label: character } = characters.find(
+    const { label: characterLabel } = characters.find(
       ({ value }) => value === form.character
     );
-    const { label: scene } = scenes.find(({ value }) => value === form.scene);
-    const { label: description } = themes.find(
+
+    const { label: sceneLabel } = scenes.find(
+      ({ value }) => value === form.scene
+    );
+
+    const { label: descriptionLabel } = themes.find(
       ({ value }) => value === form.description
     );
-    const { value: readTime } = readTimes.find(
+
+    const { value: readTimeValue, label: readTimeLabel } = readTimes.find(
       ({ value }) => value === form.readTime
     );
-    const message = render(prompt, { character, description, readTime, scene });
+
+    const request = {
+      character: characterLabel,
+      description: descriptionLabel,
+      readTime: readTimeLabel,
+      scene: sceneLabel,
+    };
+
+    const message = render(prompt, {
+      character: characterLabel,
+      description: descriptionLabel,
+      readTime: readTimeLabel,
+      scene: sceneLabel,
+    });
+
     await mutateAsync({
-      character,
-      description,
+      ...request,
       message,
-      readTime,
-      scene,
+      readTime: readTimeValue,
     });
   };
 

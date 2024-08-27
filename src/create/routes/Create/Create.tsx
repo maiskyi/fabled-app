@@ -15,6 +15,7 @@ import { useUser } from '@common/hooks';
 import { Route } from '@core/navigation';
 
 import { Index } from './Index/Index';
+import { Details } from './Details/Details';
 
 export const Create = memo(function Create() {
   const { t } = useTranslation();
@@ -40,6 +41,9 @@ export const Create = memo(function Create() {
           </Animation.Message>
           <Route exact path={RoutePath.Create}>
             <Index />
+          </Route>
+          <Route path={RoutePath.CreateDetails}>
+            <Details />
           </Route>
         </View.DidEnter>
       </Content>

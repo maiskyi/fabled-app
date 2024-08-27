@@ -6,24 +6,13 @@ export enum FableStatus {
   Image = 'image',
 }
 
-export interface FableRequest {
-  characterName: string;
-  readTime: number;
-  sceneOfAction: string;
-  description: string;
-  version: string;
-}
-
-export interface FableResponse {
-  illustration?: string;
-  title?: string;
-  content?: string;
-}
-
 export interface Fable {
-  status: FableStatus;
-  request: FableRequest;
-  response: FableResponse;
+  character: string;
+  scene: string;
+  description: string;
+  readTime: number;
+  message: string;
+  status: FableStatus[];
 }
 
 export interface CreateFableRequest {
