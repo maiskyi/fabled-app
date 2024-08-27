@@ -24,7 +24,7 @@ import { FormSelect } from './FormSelect/FormSelect';
 // import { FormPlain } from './FormPlain/FormPlain';
 import { FormTextarea } from './FormTextarea/FormTextarea';
 import { FormStarRating } from './FormStarRating/FormStarRating';
-import { FormInline } from './FormInline/FormInline';
+import { FormPicker } from './FormPicker/FormPicker';
 import { FormInstance, FormSetErrors } from './Form.types';
 import { FormContext } from './Form.context';
 
@@ -53,7 +53,7 @@ interface FormComponent {
   //   Plain: typeof FormPlain;
   Textarea: typeof FormTextarea;
   StarRating: typeof FormStarRating;
-  Inline: typeof FormInline;
+  Picker: typeof FormPicker;
 }
 
 export const Form = forwardRef<FormInstance<{}>, FormProps>(function Form(
@@ -106,4 +106,4 @@ Form.Select = FormSelect;
 // Form.Plain = FormPlain;
 Form.Textarea = FormTextarea;
 Form.StarRating = FormStarRating;
-Form.Inline = FormInline;
+Form.Picker = FormPicker;

@@ -1,27 +1,31 @@
-import { FC } from 'react';
+/* eslint-disable react/prop-types */
+import { ReactElement } from 'react';
 
 import { IonItem, IonLabel, IonNote, IonRadio } from '@ionic/react';
 
-import { FormRadioGroupValue } from '../FormRadioGroup.types';
+import { FormInputOptionProps, FormInputOptionValue } from '../../../../types';
 
-interface FormRadioGroupItemProps {
-  label?: string;
-  description?: string;
-  value: FormRadioGroupValue;
+interface FormRadioGroupItemProps<V extends FormInputOptionValue>
+  extends FormInputOptionProps<V> {}
+
+interface FormRadioGroupItemComponent {
+  <V extends FormInputOptionValue>(
+    props: FormRadioGroupItemProps<V>
+  ): ReactElement;
 }
 
-export const FormRadioGroupItem: FC<FormRadioGroupItemProps> = ({
+export const FormRadioGroupItem: FormRadioGroupItemComponent = ({
   value,
   label,
-  description,
+  note,
 }) => {
   return (
     <IonItem>
       <IonRadio justify="start" labelPlacement="end" mode="md" value={value}>
         <IonLabel className="ion-text-wrap">
           <strong>{label}</strong>
-          {!!description && <br />}
-          {!!description && <IonNote>{description}</IonNote>}
+          {!!note && <br />}
+          {!!note && <IonNote>{note}</IonNote>}
         </IonLabel>
       </IonRadio>
     </IonItem>

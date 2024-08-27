@@ -1,22 +1,25 @@
+/* eslint-disable react/prop-types */
 import {
   Box,
   Content,
   Footer,
   Form,
-  FormInlineComponent,
+  FormPickerComponent,
   Header,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { useConfig } from '@bootstrap/providers';
 
 import { FormField } from '../../../Create.const';
 
 import { ThemeForm } from './Theme.types';
 
-export const Theme: FormInlineComponent = ({ onChange, dismiss, value }) => {
+export const Theme: FormPickerComponent<string> = ({
+  onChange,
+  dismiss,
+  value,
+  options,
+}) => {
   const { t } = useTranslation();
-
-  const { themes } = useConfig();
 
   const handleOnSubmit = (form: ThemeForm) => {
     onChange(form.description);
@@ -36,15 +39,8 @@ export const Theme: FormInlineComponent = ({ onChange, dismiss, value }) => {
         </Header>
         <Box padding={16} paddingInline={0}>
           <Form.RadioGroup name={FormField.Description} transparent>
-            {themes.map(({ sys: { id }, title, description }) => {
-              return (
-                <Form.RadioGroup.Item
-                  description={description}
-                  key={id}
-                  label={title}
-                  value={title}
-                />
-              );
+            {options.map((props) => {
+              return <Form.RadioGroup.Item key={props.value} {...props} />;
             })}
           </Form.RadioGroup>
         </Box>

@@ -24,14 +24,6 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
     confirmText: 'Yes',
   },
   form: {
-    inline: {
-      errors: {
-        generic: genericError,
-        required: requiredInputError,
-      },
-      placeholder: ({ label }) => (label ? `Pick ${label}` : `Click to select`),
-    },
-
     // checkbox: {
     //   errors: {
     //     generic: genericError,
@@ -58,6 +50,14 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
         required: requiredInputError,
       },
       placeholder: ({ label }) => `Enter ${label.toLowerCase()}`,
+    },
+
+    picker: {
+      errors: {
+        generic: genericError,
+        required: requiredInputError,
+      },
+      placeholder: ({ label }) => (label ? `Pick ${label}` : `Click to select`),
     },
 
     select: {

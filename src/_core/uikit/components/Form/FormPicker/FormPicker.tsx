@@ -1,12 +1,17 @@
-import { FC, Fragment, MouseEventHandler, useId, useRef } from 'react';
+/* eslint-disable react/prop-types */
+import {
+  Fragment,
+  MouseEventHandler,
+  ReactElement,
+  useId,
+  useRef,
+} from 'react';
 import classNames from 'classnames';
 import { useContextSelector } from 'use-context-selector';
 
 import {
   IonButton,
   IonButtons,
-  IonContent,
-  IonFooter,
   IonHeader,
   IonIcon,
   IonModal,
@@ -17,17 +22,30 @@ import {
 import { FormControl, FormControlBaseProps } from '../FormControl';
 import { LocalizationContext } from '../../../contexts/LocalizationContext';
 import { ICON } from '../../Icon';
+import { FormInputOptionProps, FormInputOptionValue } from '../../../types';
 
-import { FormInlineValidation, FormInlineComponent } from './FormInline.types';
+import {
+  FormPickerValidation,
+  FormPickerComponent as FormPickerModalComponent,
+} from './FormPicker.types';
 
-import styles from './FormInline.module.scss';
+import styles from './FormPicker.module.scss';
 
-interface FormInlineProps extends FormControlBaseProps<FormInlineValidation> {
+interface FormPickerProps<V extends FormInputOptionValue>
+  extends FormControlBaseProps<FormPickerValidation> {
   placeholder?: string;
-  component?: FormInlineComponent;
+  component?: FormPickerModalComponent<V>;
+  options: FormInputOptionProps<V>[];
 }
 
-export const FormInline: FC<FormInlineProps> = ({
+interface FormPickerComponent {
+  <V extends FormInputOptionValue = string>(
+    props: FormPickerProps<V>
+  ): ReactElement;
+}
+
+export const FormPicker: FormPickerComponent = ({
+  options,
   placeholder: initialPlaceholder,
   component: Component = Fragment,
   ...props
@@ -41,7 +59,7 @@ export const FormInline: FC<FormInlineProps> = ({
     LocalizationContext,
     ({
       form: {
-        inline: { placeholder },
+        picker: { placeholder },
       },
     }) =>
       initialPlaceholder ||
@@ -57,13 +75,12 @@ export const FormInline: FC<FormInlineProps> = ({
   };
 
   return (
-    <FormControl inline type="inline" {...props}>
-      {({
-        // help, error, onBlur,
-        invalid,
-        onChange,
-        value = '',
-      }) => {
+    <FormControl inline type="picker" {...props}>
+      {({ invalid, onChange, value }) => {
+        const anchor = value
+          ? options.find(({ value: v }) => value === v)?.label
+          : placeholder;
+
         return (
           <Fragment>
             <a
@@ -76,7 +93,7 @@ export const FormInline: FC<FormInlineProps> = ({
               onClick={handleOnClick}
               ref={ref}
             >
-              {value || placeholder}
+              {anchor}
             </a>
             <IonModal
               presentingElement={ref?.current?.closest('ion-page')}
@@ -96,12 +113,9 @@ export const FormInline: FC<FormInlineProps> = ({
               <Component
                 dismiss={handleOnDismiss}
                 onChange={onChange}
+                options={options}
                 value={value}
               />
-              {/* <IonContent></IonContent>
-              <IonFooter collapse="fade">
-                <IonToolbar />
-              </IonFooter> */}
             </IonModal>
           </Fragment>
         );

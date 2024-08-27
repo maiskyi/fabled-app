@@ -9,7 +9,7 @@ import { FORM_SELECT_RULES } from '../../FormSelect/FormSelect.const';
 // import { FORM_PLAIN_RULES } from '../../FormPlain/FormPlain.const';
 import { FORM_TEXTAREA_RULES } from '../../FormTextarea/FormTextarea.const';
 import { FORM_STAR_RATING_RULES } from '../../FormStarRating/FormText.const';
-import { FORM_INLINE_RULES } from '../../FormInline/FormInline.const';
+import { FORM_INLINE_RULES } from '../../FormPicker/FormPicker.const';
 // Types
 import { FormTextRules } from '../../FormText/FormText.types';
 import { FormPasswordRules } from '../../FormPassword/FormPassword.types';
@@ -22,7 +22,7 @@ import { FormSelectRules } from '../../FormSelect/FormSelect.types';
 // import { FormPlainRules } from '../../FormPlain/FormPlain.types';
 import { FormTextareaRules } from '../../FormTextarea/FormTextarea.types';
 import { FormStarRatingRules } from '../../FormStarRating/FormText.types';
-import { FormInlineRules } from '../../FormInline/FormInline.types';
+import { FormPickerRules } from '../../FormPicker/FormPicker.types';
 
 interface FormControlRules
   extends FormTextRules,
@@ -36,7 +36,7 @@ interface FormControlRules
     // FormPlainRules,
     FormTextareaRules,
     FormStarRatingRules,
-    FormInlineRules {}
+    FormPickerRules {}
 
 export const FORM_CONTROL_RULES: FormControlRules = {
   ...FORM_TEXT_RULES,

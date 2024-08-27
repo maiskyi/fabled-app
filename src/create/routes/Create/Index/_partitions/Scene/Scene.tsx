@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import {
   Box,
-  FormInlineComponent,
+  FormPickerComponent,
   Header,
   Swiper,
   Form,
@@ -9,7 +9,6 @@ import {
   Footer,
 } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
-import { useConfig } from '@bootstrap/providers';
 
 import { FormField } from '../../../Create.const';
 
@@ -17,20 +16,24 @@ import { CharacterForm } from './Scene.types';
 
 import styles from './Scene.module.scss';
 
-export const Scene: FormInlineComponent = ({ dismiss, onChange, value }) => {
+export const Scene: FormPickerComponent<string> = ({
+  dismiss,
+  onChange,
+  value,
+  options,
+}) => {
   const { t } = useTranslation();
-  const { scenes } = useConfig();
 
   const handleOnSubmit = ({ scene }: CharacterForm) => {
     onChange(scene);
     dismiss();
   };
 
-  const initialSlide = scenes.findIndex(({ title }) => title === value);
+  const initialSlide = options.findIndex(({ value: v }) => v === value);
 
   return (
     <Form<CharacterForm>
-      defaultValues={{ [FormField.Scene]: value.toString() }}
+      defaultValues={{ [FormField.Scene]: value }}
       onSubmit={handleOnSubmit}
     >
       <Content>
@@ -58,23 +61,21 @@ export const Scene: FormInlineComponent = ({ dismiss, onChange, value }) => {
                   initialSlide={initialSlide}
                   pagination={{ dynamicBullets: true }}
                 >
-                  {scenes.map(
-                    ({ sys: { id }, illustration: { url }, title }) => {
-                      return (
-                        <Swiper.Slide className={styles.slide} key={id}>
-                          <Form.RadioGroup.Card
-                            key={id}
-                            thumb={{
-                              aspectRatio: 1,
-                              caption: title,
-                              children: <img alt={title} src={url} />,
-                            }}
-                            value={title}
-                          />
-                        </Swiper.Slide>
-                      );
-                    }
-                  )}
+                  {options.map(({ label, image, value }) => {
+                    return (
+                      <Swiper.Slide className={styles.slide} key={value}>
+                        <Form.RadioGroup.Card
+                          key={label}
+                          thumb={{
+                            aspectRatio: 1,
+                            caption: label,
+                            children: <img alt={label} src={image} />,
+                          }}
+                          value={value}
+                        />
+                      </Swiper.Slide>
+                    );
+                  })}
                 </Swiper>
               </Form.RadioGroup>
             </Box>

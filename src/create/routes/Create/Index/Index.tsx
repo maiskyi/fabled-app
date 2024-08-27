@@ -13,11 +13,13 @@ import { Scene } from './_partitions/Scene';
 import { Theme } from './_partitions/Theme';
 import { ReadTime } from './_partitions/ReadTime';
 import { IndexForm } from './Index.type';
+import { useOptions } from './Index.hooks';
 
 export const Index = memo(function Create() {
   const { t } = useTranslation();
   const { prompts } = useConfig();
   const [, navigate] = useRoute();
+  const { characters, themes, scenes, readTime } = useOptions();
 
   const { slug, description } = prompts[0];
 
@@ -37,34 +39,38 @@ export const Index = memo(function Create() {
             <Translate
               components={{
                 character: (
-                  <Form.Inline
+                  <Form.Picker<string>
                     component={Character}
                     label={t('forms.mainCharacter')}
                     name={FormField.Character}
+                    options={characters}
                     validation={{ required: true }}
                   />
                 ),
                 description: (
-                  <Form.Inline
+                  <Form.Picker<string>
                     component={Theme}
                     label={t('forms.moralLesson')}
                     name={FormField.Description}
+                    options={themes}
                     validation={{ required: true }}
                   />
                 ),
                 readTime: (
-                  <Form.Inline
+                  <Form.Picker<number>
                     component={ReadTime}
                     label={t('forms.readingTime')}
                     name={FormField.ReadTime}
+                    options={readTime}
                     validation={{ required: true }}
                   />
                 ),
                 scene: (
-                  <Form.Inline
+                  <Form.Picker<string>
                     component={Scene}
                     label={t('forms.placeOfEvents')}
                     name={FormField.Scene}
+                    options={scenes}
                     validation={{ required: true }}
                   />
                 ),

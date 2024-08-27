@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import {
   Box,
   Content,
   Footer,
   Form,
-  FormInlineComponent,
+  FormPickerComponent,
   Header,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
@@ -12,7 +13,12 @@ import { FormField } from '../../../Create.const';
 
 import { ReadTimeForm } from './ReadTime.types';
 
-export const ReadTime: FormInlineComponent = ({ onChange, dismiss, value }) => {
+export const ReadTime: FormPickerComponent<number> = ({
+  onChange,
+  dismiss,
+  value,
+  options,
+}) => {
   const { t } = useTranslation();
 
   const handleOnSubmit = ({ readTime }: ReadTimeForm) => {
@@ -20,14 +26,9 @@ export const ReadTime: FormInlineComponent = ({ onChange, dismiss, value }) => {
     dismiss();
   };
 
-  const options = [5, 7, 10].map((v) => ({
-    label: t('options.minutesValue', { value: v }),
-    value: t('options.minutesValue', { value: v }),
-  }));
-
   return (
     <Form<ReadTimeForm>
-      defaultValues={{ [FormField.ReadTime]: value?.toString() }}
+      defaultValues={{ [FormField.ReadTime]: value }}
       onSubmit={handleOnSubmit}
     >
       <Content>
@@ -38,10 +39,8 @@ export const ReadTime: FormInlineComponent = ({ onChange, dismiss, value }) => {
         </Header>
         <Box padding={16} paddingInline={0}>
           <Form.RadioGroup name={FormField.ReadTime} transparent>
-            {options.map(({ label, value }) => {
-              return (
-                <Form.RadioGroup.Item key={value} label={label} value={value} />
-              );
+            {options.map((props) => {
+              return <Form.RadioGroup.Item key={props.value} {...props} />;
             })}
           </Form.RadioGroup>
         </Box>

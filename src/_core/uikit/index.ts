@@ -29,3 +29,6 @@ export { useIonViewDidEnter as useViewDidEnter } from '@ionic/react';
 
 // Constants
 export * from './constants';
+
+// Types
+export * from './types';
