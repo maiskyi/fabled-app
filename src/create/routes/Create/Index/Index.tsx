@@ -1,10 +1,13 @@
 import { memo } from 'react';
 
 import { Header, Box, Form, Button, Animation } from '@core/uikit';
-import { RoutePath } from '@bootstrap/constants';
+import { FunctionName, RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
-import { useRoute } from '@core/navigation';
+import { Redirect, useRoute } from '@core/navigation';
+import { useTemplate } from '@network/contentful';
+import { useMutationFunction } from '@core/functions';
+import { DTO } from '@bootstrap/dto';
 
 import { FormField } from '../Create.const';
 
@@ -19,17 +22,48 @@ export const Index = memo(function Create() {
   const { t } = useTranslation();
   const { prompts } = useConfig();
   const [, navigate] = useRoute();
-  const { characters, themes, scenes, readTime } = useOptions();
+  const { render } = useTemplate();
+  const { characters, themes, scenes, readTimes } = useOptions();
 
-  const { slug, description } = prompts[0];
+  const { slug, description: prompt } = prompts[0];
+
+  const { data, isSuccess, isPending, mutateAsync } = useMutationFunction<
+    DTO.CreateFableRequest,
+    DTO.CreateFableResponse
+  >({
+    name: FunctionName.OnFableRequest,
+  });
 
   const handleOnCancel = () => {
     navigate({ action: 'back', pathname: RoutePath.Index });
   };
 
-  const handleOnSubmit = (form: IndexForm) => {
-    console.log(form);
+  const handleOnSubmit = async (form: IndexForm) => {
+    const { label: character } = characters.find(
+      ({ value }) => value === form.character
+    );
+    const { label: scene } = scenes.find(({ value }) => value === form.scene);
+    const { label: description } = themes.find(
+      ({ value }) => value === form.description
+    );
+    const { value: readTime } = readTimes.find(
+      ({ value }) => value === form.readTime
+    );
+    const message = render(prompt, { character, description, readTime, scene });
+    await mutateAsync({
+      character,
+      description,
+      message,
+      readTime,
+      scene,
+    });
   };
+
+  if (isSuccess) {
+    return (
+      <Redirect params={{ id: data.id }} pathname={RoutePath.CreateDetails} />
+    );
+  }
 
   return (
     <Animation.Message>
@@ -61,7 +95,7 @@ export const Index = memo(function Create() {
                     component={ReadTime}
                     label={t('forms.readingTime')}
                     name={FormField.ReadTime}
-                    options={readTime}
+                    options={readTimes}
                     validation={{ required: true }}
                   />
                 ),
@@ -75,7 +109,7 @@ export const Index = memo(function Create() {
                   />
                 ),
               }}
-              defaults={description}
+              defaults={prompt}
               id={slug}
             />
           </Header.Title>
@@ -90,7 +124,9 @@ export const Index = memo(function Create() {
             <Button fill="outline" onClick={handleOnCancel}>
               {t('actions.cancel')}
             </Button>
-            <Form.Submit>{t('actions.writeFable')}</Form.Submit>
+            <Form.Submit loading={isPending}>
+              {t('actions.writeFable')}
+            </Form.Submit>
           </Box>
         </Form>
       </Box>

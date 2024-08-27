@@ -25,3 +25,16 @@ export interface Fable {
   request: FableRequest;
   response: FableResponse;
 }
+
+export interface CreateFableRequest {
+  character: string;
+  scene: string;
+  description: string;
+  readTime: number;
+  message: string;
+}
+
+export interface CreateFableResponse {
+  id: string;
+  path: string;
+}

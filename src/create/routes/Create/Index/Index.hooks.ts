@@ -49,7 +49,7 @@ export const useOptions = () => {
 
   return {
     characters: charactersOptions,
-    readTime: readTimeOptions,
+    readTimes: readTimeOptions,
     scenes: scenesOptions,
     themes: themesOptions,
   };
