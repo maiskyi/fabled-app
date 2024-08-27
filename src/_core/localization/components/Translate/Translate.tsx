@@ -20,6 +20,7 @@ export const Translate: FC<TranslateProps> = ({
     <Trans
       components={{
         b: <strong />,
+        n: <br />,
         ...components,
       }}
       defaultValue={defaultValue}

@@ -183,6 +183,7 @@ export type AssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
   characterCollection?: Maybe<CharacterCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  sceneCollection?: Maybe<SceneCollection>;
 };
 
 export type AssetLinkingCollectionsCharacterCollectionArgs = {
@@ -193,6 +194,13 @@ export type AssetLinkingCollectionsCharacterCollectionArgs = {
 };
 
 export type AssetLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type AssetLinkingCollectionsSceneCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -709,6 +717,10 @@ export type Query = {
   entryCollection?: Maybe<EntryCollection>;
   prompt?: Maybe<Prompt>;
   promptCollection?: Maybe<PromptCollection>;
+  scene?: Maybe<Scene>;
+  sceneCollection?: Maybe<SceneCollection>;
+  theme?: Maybe<Theme>;
+  themeCollection?: Maybe<ThemeCollection>;
 };
 
 export type Query_NodeArgs = {
@@ -786,6 +798,127 @@ export type QueryPromptCollectionArgs = {
   where?: InputMaybe<PromptFilter>;
 };
 
+export type QuerySceneArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QuerySceneCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<SceneOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<SceneFilter>;
+};
+
+export type QueryThemeArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type QueryThemeCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<ThemeOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ThemeFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/scene) */
+export type Scene = Entry &
+  _Node & {
+    __typename?: 'Scene';
+    _id: Scalars['ID']['output'];
+    contentfulMetadata: ContentfulMetadata;
+    illustration?: Maybe<Asset>;
+    linkedFrom?: Maybe<SceneLinkingCollections>;
+    slug?: Maybe<Scalars['String']['output']>;
+    sys: Sys;
+    title?: Maybe<Scalars['String']['output']>;
+  };
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/scene) */
+export type SceneIllustrationArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/scene) */
+export type SceneLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/scene) */
+export type SceneSlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/scene) */
+export type SceneTitleArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SceneCollection = {
+  __typename?: 'SceneCollection';
+  items: Array<Maybe<Scene>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type SceneFilter = {
+  AND?: InputMaybe<Array<InputMaybe<SceneFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<SceneFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  illustration_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type SceneLinkingCollections = {
+  __typename?: 'SceneLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+export type SceneLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum SceneOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export type Sys = {
   __typename?: 'Sys';
   environmentId: Scalars['String']['output'];
@@ -845,6 +978,104 @@ export type SysFilter = {
   >;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/theme) */
+export type Theme = Entry &
+  _Node & {
+    __typename?: 'Theme';
+    _id: Scalars['ID']['output'];
+    contentfulMetadata: ContentfulMetadata;
+    description?: Maybe<Scalars['String']['output']>;
+    linkedFrom?: Maybe<ThemeLinkingCollections>;
+    slug?: Maybe<Scalars['String']['output']>;
+    sys: Sys;
+    title?: Maybe<Scalars['String']['output']>;
+  };
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/theme) */
+export type ThemeDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/theme) */
+export type ThemeLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/theme) */
+export type ThemeSlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/theme) */
+export type ThemeTitleArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ThemeCollection = {
+  __typename?: 'ThemeCollection';
+  items: Array<Maybe<Theme>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type ThemeFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ThemeFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ThemeFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  description_not_in?: InputMaybe<
+    Array<InputMaybe<Scalars['String']['input']>>
+  >;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ThemeLinkingCollections = {
+  __typename?: 'ThemeLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+export type ThemeLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export enum ThemeOrder {
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 export type _Node = {
   _id: Scalars['ID']['output'];
 };
@@ -855,10 +1086,28 @@ export type GetBootstrapQueryVariables = Exact<{
 
 export type GetBootstrapQuery = {
   __typename?: 'Query';
+  themeCollection?: {
+    __typename?: 'ThemeCollection';
+    items: Array<{
+      __typename?: 'Theme';
+      title?: string | null;
+      description?: string | null;
+      sys: { __typename?: 'Sys'; id: string };
+    } | null>;
+  } | null;
   characterCollection?: {
     __typename?: 'CharacterCollection';
     items: Array<{
       __typename?: 'Character';
+      title?: string | null;
+      sys: { __typename?: 'Sys'; id: string };
+      illustration?: { __typename?: 'Asset'; url?: string | null } | null;
+    } | null>;
+  } | null;
+  sceneCollection?: {
+    __typename?: 'SceneCollection';
+    items: Array<{
+      __typename?: 'Scene';
       title?: string | null;
       sys: { __typename?: 'Sys'; id: string };
       illustration?: { __typename?: 'Asset'; url?: string | null } | null;
@@ -887,7 +1136,27 @@ export type GetBootstrapQuery = {
 
 export const GetBootstrapDocument = `
     query getBootstrap($version: String!) {
+  themeCollection {
+    items {
+      sys {
+        id
+      }
+      title
+      description
+    }
+  }
   characterCollection {
+    items {
+      sys {
+        id
+      }
+      title
+      illustration {
+        url(transform: {width: 1000, height: 1000, resizeStrategy: THUMB})
+      }
+    }
+  }
+  sceneCollection {
     items {
       sys {
         id

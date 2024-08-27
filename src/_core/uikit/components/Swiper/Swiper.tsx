@@ -10,6 +10,7 @@ import { SwiperPaginationProps } from './Swiper.types';
 
 export type SwiperProps = PropsWithChildren<{
   gap?: number;
+  initialSlide?: number;
   pagination?: SwiperPaginationProps;
 }>;
 
@@ -22,10 +23,12 @@ export const Swiper: SwiperComponent = ({
   children,
   gap,
   pagination,
+  initialSlide,
 }: SwiperProps) => {
   return (
     <ReactSwiper
       centeredSlides
+      initialSlide={initialSlide}
       modules={[Pagination]}
       pagination={pagination}
       slidesPerView="auto"

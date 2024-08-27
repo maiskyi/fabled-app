@@ -1,5 +1,25 @@
 query getBootstrap($version: String!) {
+  themeCollection {
+    items {
+      sys {
+        id
+      }
+      title
+      description
+    }
+  }
   characterCollection {
+    items {
+      sys {
+        id
+      }
+      title
+      illustration {
+        url(transform: { width: 1000, height: 1000, resizeStrategy: THUMB })
+      }
+    }
+  }
+  sceneCollection {
     items {
       sys {
         id

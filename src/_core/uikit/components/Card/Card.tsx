@@ -16,6 +16,7 @@ export type CardProps = PropsWithChildren<{
   loading?: boolean;
   onClick?: () => void;
   color?: Color;
+  className?: string;
 }>;
 
 interface CardComponent {
@@ -33,6 +34,7 @@ export const Card: CardComponent = ({
   loading,
   color,
   onClick = noop,
+  className,
 }: CardProps) => {
   const handleOnClick = () => {
     if (!loading) onClick();
@@ -40,7 +42,7 @@ export const Card: CardComponent = ({
 
   return (
     <CardContext.Provider value={{ loading }}>
-      <IonCard color={color} onClick={handleOnClick}>
+      <IonCard className={className} color={color} onClick={handleOnClick}>
         {children}
       </IonCard>
     </CardContext.Provider>

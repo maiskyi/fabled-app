@@ -16,7 +16,7 @@ import { FormPassword } from './FormPassword/FormPassword';
 // import { FormSection } from './FormSection/FormSection';
 import { FormSubmit } from './FormSubmit/FormSubmit';
 import { FormText } from './FormText/FormText';
-// import { FormRadioGroup } from './FormRadioGroup/FormRadioGroup';
+import { FormRadioGroup } from './FormRadioGroup/FormRadioGroup';
 // import { FormCheckboxGroup } from './FormCheckboxGroup/FormCheckboxGroup';
 // import { FormActions } from './FormActions/FormActions';
 import { FormSelect } from './FormSelect/FormSelect';
@@ -24,7 +24,7 @@ import { FormSelect } from './FormSelect/FormSelect';
 // import { FormPlain } from './FormPlain/FormPlain';
 import { FormTextarea } from './FormTextarea/FormTextarea';
 import { FormStarRating } from './FormStarRating/FormStarRating';
-import { FormInline } from './FormInline/FormInline';
+import { FormPicker } from './FormPicker/FormPicker';
 import { FormInstance, FormSetErrors } from './Form.types';
 import { FormContext } from './Form.context';
 
@@ -45,7 +45,7 @@ interface FormComponent {
   //   Section: typeof FormSection;
   Submit: typeof FormSubmit;
   Text: typeof FormText;
-  //   RadioGroup: typeof FormRadioGroup;
+  RadioGroup: typeof FormRadioGroup;
   //   CheckboxGroup: typeof FormCheckboxGroup;
   //   Actions: typeof FormActions;
   Select: typeof FormSelect;
@@ -53,7 +53,7 @@ interface FormComponent {
   //   Plain: typeof FormPlain;
   Textarea: typeof FormTextarea;
   StarRating: typeof FormStarRating;
-  Inline: typeof FormInline;
+  Picker: typeof FormPicker;
 }
 
 export const Form = forwardRef<FormInstance<{}>, FormProps>(function Form(
@@ -98,7 +98,7 @@ Form.Password = FormPassword;
 // Form.Section = FormSection;
 Form.Submit = FormSubmit;
 Form.Text = FormText;
-// Form.RadioGroup = FormRadioGroup;
+Form.RadioGroup = FormRadioGroup;
 // Form.CheckboxGroup = FormCheckboxGroup;
 // Form.Actions = FormActions;
 Form.Select = FormSelect;
@@ -106,4 +106,4 @@ Form.Select = FormSelect;
 // Form.Plain = FormPlain;
 Form.Textarea = FormTextarea;
 Form.StarRating = FormStarRating;
-Form.Inline = FormInline;
+Form.Picker = FormPicker;

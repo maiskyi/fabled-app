@@ -5,6 +5,7 @@ export * from './components/ContentfulProvider';
 
 // Hooks
 export { useGetBootstrapQuery } from './__generated__/query';
+export * from './hooks/useTemplate';
 
 // Types
 export type {

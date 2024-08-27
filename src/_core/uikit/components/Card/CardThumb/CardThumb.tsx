@@ -1,17 +1,19 @@
-import { FC, PropsWithChildren, CSSProperties } from 'react';
+import { FC, PropsWithChildren, CSSProperties, Fragment } from 'react';
 import { useContextSelector } from 'use-context-selector';
 
-import { IonSkeletonText } from '@ionic/react';
+import { IonCardTitle, IonSkeletonText } from '@ionic/react';
 
 import { CardContext } from '../Card.context';
 
 import styles from './CardThumb.module.scss';
 
-type CardThumbProps = PropsWithChildren<{
+export type CardThumbProps = PropsWithChildren<{
   aspectRatio?: CSSProperties['aspectRatio'];
+  caption?: string;
 }>;
 
 export const CardThumb: FC<CardThumbProps> = ({
+  caption,
   children,
   aspectRatio = '16 / 9',
 }) => {
@@ -22,7 +24,14 @@ export const CardThumb: FC<CardThumbProps> = ({
       {loading ? (
         <IonSkeletonText animated className={styles.skeleton} />
       ) : (
-        children
+        <Fragment>
+          {children}
+          {!!caption && (
+            <div className={styles.caption}>
+              <IonCardTitle className={styles.text}>{caption}</IonCardTitle>
+            </div>
+          )}
+        </Fragment>
       )}
     </div>
   );
