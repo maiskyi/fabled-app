@@ -9,3 +9,4 @@ export { pages } from './pages';
 export { validation } from './validation';
 export { help } from './help';
 export { options } from './options';
+export { bot } from './bot';

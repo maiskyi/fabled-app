@@ -32,9 +32,9 @@ export const Create = memo(function Create() {
             <Message
               avatar={BOT_AVATAR_SRC}
               origin="companion"
-              title={t('copy.fabledAi')}
+              title={t('bot.fabledAi')}
             >
-              {t('copy.createFableAiGreeting', {
+              {t('bot.createFableAiGreeting', {
                 displayName: userDisplayName,
               })}
             </Message>

@@ -25,9 +25,9 @@ export const Index = memo(function Create() {
   const { render } = useTemplate();
   const { characters, themes, scenes, readTimes } = useOptions();
 
-  const { slug, description: prompt } = prompts[0];
+  const { slug, description: promptDescription, textPrompt } = prompts.at(0);
 
-  const { data, isSuccess, isPending, mutateAsync } = useMutationFunction<
+  const { data, isSuccess, isPending, mutate } = useMutationFunction<
     DTO.CreateFableRequest,
     DTO.CreateFableResponse
   >({
@@ -38,8 +38,8 @@ export const Index = memo(function Create() {
     navigate({ action: 'back', pathname: RoutePath.Index });
   };
 
-  const handleOnSubmit = async (form: IndexForm) => {
-    const { label: characterLabel } = characters.find(
+  const handleOnSubmit = (form: IndexForm) => {
+    const { label: characterLabel, note: characterNote } = characters.find(
       ({ value }) => value === form.character
     );
 
@@ -47,7 +47,7 @@ export const Index = memo(function Create() {
       ({ value }) => value === form.scene
     );
 
-    const { label: descriptionLabel } = themes.find(
+    const { label: descriptionLabel, note: descriptionNote } = themes.find(
       ({ value }) => value === form.description
     );
 
@@ -62,16 +62,26 @@ export const Index = memo(function Create() {
       scene: sceneLabel,
     };
 
-    const message = render(prompt, {
+    const message = render(promptDescription, {
       character: characterLabel,
       description: descriptionLabel,
       readTime: readTimeLabel,
       scene: sceneLabel,
     });
 
-    await mutateAsync({
+    const prompt = render(textPrompt, {
+      character: characterLabel,
+      characterNote: characterNote && `(${characterNote})`,
+      contentLength: readTimeValue * 150,
+      description: descriptionLabel,
+      descriptionNote: descriptionNote && `(${descriptionNote})`,
+      scene: sceneLabel,
+    });
+
+    mutate({
       ...request,
       message,
+      prompt,
       readTime: readTimeValue,
     });
   };
@@ -126,7 +136,7 @@ export const Index = memo(function Create() {
                   />
                 ),
               }}
-              defaults={prompt}
+              defaults={promptDescription}
               id={slug}
             />
           </Header.Title>

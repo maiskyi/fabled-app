@@ -18,11 +18,11 @@ export const Details = memo(function Details() {
           <Animation.Message key={item.id}>
             {item.type === 'message' && (
               <Message
-                avatar={item.avatar}
-                origin={item.origin}
-                title={item.title}
+                avatar={item.props.avatar}
+                origin={item.props.origin}
+                title={item.props.title}
               >
-                {item.children}
+                {item.props.children}
               </Message>
             )}
           </Animation.Message>

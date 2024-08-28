@@ -14,6 +14,7 @@ query getBootstrap($version: String!) {
         id
       }
       title
+      description
       illustration {
         url(transform: { width: 1000, height: 1000, resizeStrategy: THUMB })
       }
