@@ -14,6 +14,7 @@ export interface Fable {
   readTime: number;
   message: string;
   status: FableStatus;
+  content?: string[];
   image?: {
     public_id: string;
   };

@@ -41,7 +41,7 @@ export const useThread = ({ id }: UseThreadParams) => {
           DTO.FableStatus.ImageInProgress,
         ],
         type: 'message',
-      },
+      } as ThreadItem,
       {
         id: 'content',
         props: {
@@ -55,7 +55,7 @@ export const useThread = ({ id }: UseThreadParams) => {
           DTO.FableStatus.ImageInProgress,
         ],
         type: 'message',
-      },
+      } as ThreadItem,
       {
         id: 'image',
         props: {
@@ -66,7 +66,7 @@ export const useThread = ({ id }: UseThreadParams) => {
         },
         status: [DTO.FableStatus.ImageInProgress],
         type: 'message',
-      },
+      } as ThreadItem,
     ].filter(({ status }) => status.includes(data?.data.status));
   }, [displayName, avatar, data, t]);
 

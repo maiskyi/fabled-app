@@ -26,10 +26,12 @@ export const Fable = memo(function Fable() {
       <Content fullscreen>
         <Container aspectRatio={1}>123</Container>
         <Card.Header>
-          <Card.Title>{data?.data?.response?.title}</Card.Title>
+          <Card.Title>{data?.data?.title}</Card.Title>
         </Card.Header>
         <Container padding>
-          <Text>{data?.data?.response?.content}</Text>
+          <Text>
+            {data?.data?.content.map((str, index) => <p key={index}>{str}</p>)}
+          </Text>
         </Container>
       </Content>
     </Page>
