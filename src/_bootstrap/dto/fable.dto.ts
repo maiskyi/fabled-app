@@ -7,6 +7,7 @@ export enum FableStatus {
 }
 
 export interface Fable {
+  title?: string;
   character: string;
   scene: string;
   description: string;

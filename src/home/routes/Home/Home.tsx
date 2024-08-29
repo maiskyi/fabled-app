@@ -6,6 +6,7 @@ import { DTO } from '@bootstrap/dto';
 import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
+import { useUser } from '@common/hooks';
 
 import { FableCard } from './_patitions/FableCard';
 import { HOME_INITIAL_DATA } from './Home.const';
@@ -13,6 +14,7 @@ import { HOME_INITIAL_DATA } from './Home.const';
 export const Home = memo(function Home() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
+  const { uid } = useUser();
 
   const title = t('pages.home');
 
@@ -33,6 +35,12 @@ export const Home = memo(function Home() {
             opStr: '==',
             type: 'where',
             value: DTO.FableStatus.Success,
+          },
+          {
+            fieldPath: 'uid',
+            opStr: '==',
+            type: 'where',
+            value: uid,
           },
         ],
         type: 'and',
