@@ -14,6 +14,9 @@ export interface Fable {
   readTime: number;
   message: string;
   status: FableStatus;
+  image?: {
+    public_id: string;
+  };
 }
 
 export interface CreateFableRequest {

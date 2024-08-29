@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { Card } from '@core/uikit';
+import { Card, useDevice } from '@core/uikit';
 import { DTO } from '@bootstrap/dto';
 import { DocumentSnapshot } from '@core/firestore';
-// import { ImageStorage } from '@core/storage';
+import { CloudinaryImage } from '@network/cloudinary';
 
 interface FableCardProps {
   loading?: boolean;
@@ -12,13 +12,18 @@ interface FableCardProps {
 }
 
 export const FableCard: FC<FableCardProps> = ({ item, loading, onClick }) => {
+  const { width } = useDevice();
+
   return (
     <Card loading={loading} onClick={onClick}>
       <Card.Thumb>
-        {/* <ImageStorage
-          alt={item.data.response.title}
-          filename={item.data.response.illustration}
-        /> */}
+        <CloudinaryImage
+          aspectRatio="16:9"
+          crop="thumb"
+          gravity="custom:faces"
+          publicId={item.data?.image?.public_id}
+          width={width}
+        />
       </Card.Thumb>
       <Card.Header>
         <Card.Title>{item.data.title}</Card.Title>
