@@ -13,6 +13,18 @@ export const bot = {
   },
   createFableAiGreeting:
     'Hi, {{displayName}}. What should I tell you a fable about today?',
+  fableReady: {
+    0: 'All set! 🎉✨ Your Fable is finished and ready for you to explore. Let the magic begin!',
+    1: 'Your magical Fable is ready! 🌟✨ Dive into your enchanted story and let the adventure begin!',
+    2: 'Ta-da! 🪄✨ Your Fable is complete, brimming with wonder and excitement. Enjoy your story!',
+    3: 'The magic is done, and your Fable is here! 🧚‍♀️✨ Embark on your journey through this enchanting tale.',
+    4: 'Your fairy tale is finished and ready for you! 📜✨ Step into the world of magic and enjoy your adventure!',
+    5: 'Your Fable has come to life! 🌈✨ The story is now yours to explore—enjoy the magic within!',
+    6: 'It’s here! ✨ Your Fable is crafted and ready, full of twists, turns, and enchantment. Dive in now!',
+    7: 'Your enchanting Fable is ready to read! 📖✨ Uncover the magical world that awaits you inside.',
+    8: 'The wait is over—your Fable is complete! 🏰✨ Open it up and let the adventure unfold!',
+    9: 'Your story is ready! 🧙‍♂️✨ The Fable has been crafted with care—jump in and enjoy the magic!',
+  },
   fabledAi: 'Fabled AI',
   imageInProgress: {
     0: "Our artists are crafting your illustration right now! 🎨🪄 Stay tuned, and you'll see the magic unfold very soon.",

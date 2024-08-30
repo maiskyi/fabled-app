@@ -1,15 +1,23 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
-import { Animation, Message } from '@core/uikit';
+import { Animation, Box, Button, Message } from '@core/uikit';
 import { useRoute } from '@core/navigation';
+import { RoutePath } from '@bootstrap/constants';
 
 import { useThread } from './Details.hooks';
 import { RouteParams } from './Details.types';
 
 export const Details = memo(function Details() {
-  const [{ params }] = useRoute<RouteParams>();
+  const [{ params }, navigate] = useRoute<RouteParams>();
 
-  const { thread } = useThread(params);
+  const onRead = useCallback(() => {
+    navigate({ action: 'replace', params, pathname: RoutePath.Fable });
+  }, [navigate, params]);
+
+  const { thread } = useThread({
+    onRead,
+    ...params,
+  });
 
   return (
     <>
@@ -24,6 +32,13 @@ export const Details = memo(function Details() {
               >
                 {item.props.children}
               </Message>
+            )}
+            {item.type === 'actions' && (
+              <Box display="flex" justifyContent="flex-end" paddingInline={20}>
+                {item.props.map((props, index) => {
+                  return <Button key={index} {...props} />;
+                })}
+              </Box>
             )}
           </Animation.Message>
         );

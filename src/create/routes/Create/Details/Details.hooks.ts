@@ -11,9 +11,10 @@ import { ThreadItem } from './Details.types';
 
 interface UseThreadParams {
   id: string;
+  onRead: () => void;
 }
 
-export const useThread = ({ id }: UseThreadParams) => {
+export const useThread = ({ id, onRead }: UseThreadParams) => {
   const { t } = useTranslation();
   const { displayName, avatar } = useUser();
 
@@ -23,8 +24,7 @@ export const useThread = ({ id }: UseThreadParams) => {
   });
 
   const thread = useMemo((): ThreadItem[] => {
-    const contentCopyIndex = data?.data.message.length % 10;
-    const imageCopyIndex = 9 - contentCopyIndex;
+    const copyIndex = data?.data.message.length % 10;
 
     const userMessage: ThreadItem[] = [
       {
@@ -49,7 +49,7 @@ export const useThread = ({ id }: UseThreadParams) => {
             id: 'contentMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: t(`bot.contentInProgress.${contentCopyIndex}`),
+              children: t(`bot.contentInProgress.${copyIndex}`),
               origin: 'companion',
               title: t('bot.fabledAi'),
             },
@@ -70,7 +70,7 @@ export const useThread = ({ id }: UseThreadParams) => {
             id: 'imageMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: t(`bot.imageInProgress.${imageCopyIndex}`),
+              children: t(`bot.imageInProgress.${copyIndex}`),
               origin: 'companion',
               title: t('bot.fabledAi'),
             },
@@ -82,20 +82,35 @@ export const useThread = ({ id }: UseThreadParams) => {
     })();
 
     const successMessage: ThreadItem[] = (() => {
-      if (
-        data?.data.status === DTO.FableStatus.ImageInProgress ||
-        !!data?.data.image
-      ) {
+      if (data?.data.status === DTO.FableStatus.Success) {
         return [
           {
             id: 'successMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: t(`bot.imageInProgress.${imageCopyIndex}`),
+              children: t(`bot.fableReady.${copyIndex}`),
               origin: 'companion',
               title: t('bot.fabledAi'),
             },
             type: 'message',
+          },
+        ];
+      }
+      return [];
+    })();
+
+    const successActions: ThreadItem[] = (() => {
+      if (data?.data.status === DTO.FableStatus.Success) {
+        return [
+          {
+            id: 'successMessage',
+            props: [
+              {
+                children: t('actions.readTheFable'),
+                onClick: onRead,
+              },
+            ],
+            type: 'actions',
           },
         ];
       }
@@ -107,8 +122,9 @@ export const useThread = ({ id }: UseThreadParams) => {
       ...contentMessage,
       ...imageMessage,
       ...successMessage,
+      ...successActions,
     ];
-  }, [displayName, avatar, data, t]);
+  }, [displayName, avatar, data, t, onRead]);
 
   return { thread };
 };

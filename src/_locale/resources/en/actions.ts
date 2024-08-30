@@ -15,6 +15,7 @@ export const actions = {
   logOut: 'Log out',
   ok: 'OK',
   privacyPolicy: 'Privacy policy',
+  readTheFable: 'Read the Fable',
   requestNewLink: 'Request new link',
   sendResetLink: 'Send reset link',
   shareYourFeedback: 'Share your feedback',

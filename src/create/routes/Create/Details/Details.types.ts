@@ -1,4 +1,4 @@
-import { MessageProps } from '@core/uikit';
+import { ButtonProps, MessageProps } from '@core/uikit';
 
 interface ThreadMessageItem {
   id: string;
@@ -9,6 +9,7 @@ interface ThreadMessageItem {
 interface ThreadActionsItem {
   id: string;
   type: 'actions';
+  props: ButtonProps[];
 }
 
 export type ThreadItem = ThreadMessageItem | ThreadActionsItem;
