@@ -8,6 +8,7 @@ import {
   BOT_AVATAR_SRC,
   Animation,
   View,
+  Box,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -28,23 +29,25 @@ export const Create = memo(function Create() {
       </Header>
       <Content>
         <View.DidEnter>
-          <Animation.Message>
-            <Message
-              avatar={BOT_AVATAR_SRC}
-              origin="companion"
-              title={t('bot.fabledAi')}
-            >
-              {t('bot.createFableAiGreeting', {
-                displayName: userDisplayName,
-              })}
-            </Message>
-          </Animation.Message>
-          <Route exact path={RoutePath.Create}>
-            <Index />
-          </Route>
-          <Route path={RoutePath.CreateDetails}>
-            <Details />
-          </Route>
+          <Box>
+            <Animation.Message>
+              <Message
+                avatar={BOT_AVATAR_SRC}
+                origin="companion"
+                title={t('bot.fabledAi')}
+              >
+                {t('bot.createFableAiGreeting', {
+                  displayName: userDisplayName,
+                })}
+              </Message>
+            </Animation.Message>
+            <Route exact path={RoutePath.Create}>
+              <Index />
+            </Route>
+            <Route path={RoutePath.CreateDetails}>
+              <Details />
+            </Route>
+          </Box>
         </View.DidEnter>
       </Content>
     </Page>
