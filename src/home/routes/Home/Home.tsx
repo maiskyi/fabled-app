@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { useGetCollectionInfinite } from '@core/firestore';
 import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
-import { Page, Content, InfiniteScroll, Fab, Header } from '@core/uikit';
+import { Page, Content, InfiniteScroll, Fab, Header, Box } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { useUser } from '@common/hooks';
@@ -73,26 +73,32 @@ export const Home = memo(function Home() {
         </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
-        <Header collapse="condense">
-          <Header.Title size="large">{title}</Header.Title>
-        </Header>
+        <Box display="flex" flexDirection="column" minHeight="100%">
+          <Box flex={0}>
+            <Header collapse="condense">
+              <Header.Title size="large">{title}</Header.Title>
+            </Header>
+          </Box>
+          <Box flex={1}>
+            <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
+              {data?.pages
+                .flatMap((item) => item)
+                .map((item) => {
+                  return (
+                    <FableCard
+                      item={item}
+                      key={item.id}
+                      loading={isLoading}
+                      onClick={() => handleOnFableClick(item.id)}
+                    />
+                  );
+                })}
+            </InfiniteScroll>
+          </Box>
+        </Box>
         <Fab placement={['end', 'bottom']} slot="fixed">
           <Fab.Button icon="add" onClick={handleOnCreateClick} />
         </Fab>
-        <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
-          {data?.pages
-            .flatMap((item) => item)
-            .map((item) => {
-              return (
-                <FableCard
-                  item={item}
-                  key={item.id}
-                  loading={isLoading}
-                  onClick={() => handleOnFableClick(item.id)}
-                />
-              );
-            })}
-        </InfiniteScroll>
       </Content>
     </Page>
   );

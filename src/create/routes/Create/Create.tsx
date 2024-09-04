@@ -26,9 +26,7 @@ export const Create = memo(function Create() {
 
   const handleOnMessage = useCallback(() => {
     if (content.current) {
-      setTimeout(() => {
-        content.current.scrollToBottom(300);
-      }, 100);
+      setTimeout(() => content.current.scrollToBottom(300), 100);
     }
   }, []);
 
@@ -38,25 +36,25 @@ export const Create = memo(function Create() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content ref={content}>
-        <View.DidEnter>
-          <Animation.Message>
-            <Message
-              avatar={BOT_AVATAR_SRC}
-              origin="companion"
-              title={t('bot.fabledAi')}
-            >
-              {t('bot.createFableAiGreeting', {
-                displayName: userDisplayName,
-              })}
-            </Message>
-          </Animation.Message>
-          <Route exact path={RoutePath.Create}>
-            <Index />
-          </Route>
-          <Route path={RoutePath.CreateDetails}>
+        <Animation.Message>
+          <Message
+            avatar={BOT_AVATAR_SRC}
+            origin="companion"
+            title={t('bot.fabledAi')}
+          >
+            {t('bot.createFableAiGreeting', {
+              displayName: userDisplayName,
+            })}
+          </Message>
+        </Animation.Message>
+        <Route exact path={RoutePath.Create}>
+          <Index />
+        </Route>
+        <Route path={RoutePath.CreateDetails}>
+          <View.DidEnter>
             <Details onMessage={handleOnMessage} />
-          </Route>
-        </View.DidEnter>
+          </View.DidEnter>
+        </Route>
       </Content>
       <Footer />
     </Page>
