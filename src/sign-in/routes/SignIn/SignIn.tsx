@@ -18,6 +18,7 @@ import {
   SignInWithEmailAndPasswordRequest,
 } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
+import { Disclaimer } from '@common/features';
 
 export const SignIn: FC = () => {
   const { t } = useTranslation();
@@ -102,6 +103,9 @@ export const SignIn: FC = () => {
             <Button fill="clear" onClick={handleOnForgotPassword}>
               {t('actions.forgotPassword')}
             </Button>
+          </Box>
+          <Box paddingBottom={12} textAlign="center">
+            <Disclaimer />
           </Box>
         </Form>
       </Content>
