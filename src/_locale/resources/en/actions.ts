@@ -9,6 +9,7 @@ export const actions = {
   continueWithApple: 'Continue with Apple',
   continueWithFacebook: 'Continue with Facebook',
   continueWithGoogle: 'Continue with Google',
+  createNewFable: 'Create a new fable',
   createYourFirstFable: 'Create your first Fable',
   forgotPassword: 'Forgot password?',
   goToFabledSpace: 'Go to Fabled Space',

@@ -13,6 +13,7 @@ export const FablesEmpty = memo(function FableEmpty() {
       flex={1}
       justifyContent="center"
       minHeight="100%"
+      paddingBottom={188}
     >
       <Empty
         description={t('empty.noFables.description')}

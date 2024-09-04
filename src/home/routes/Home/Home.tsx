@@ -1,9 +1,9 @@
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
 import { useGetCollectionInfinite } from '@core/firestore';
 import { Document, RoutePath } from '@bootstrap/constants';
 import { DTO } from '@bootstrap/dto';
-import { Page, Content, InfiniteScroll, Fab, Header, Box } from '@core/uikit';
+import { Page, Content, InfiniteScroll, Header, Box } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { useUser } from '@common/hooks';
@@ -11,6 +11,7 @@ import { useUser } from '@common/hooks';
 import { FablesSkeleton } from './_patitions/FablesSkeleton';
 import { FablesEmpty } from './_patitions/FablesEmpty';
 import { FablesList } from './_patitions/FablesList';
+import { FablesCreate, FablesCreateOnClickFn } from './_patitions/FablesCreate';
 import { HOME_INITIAL_DATA } from './Home.const';
 
 export const Home = memo(function Home() {
@@ -58,9 +59,9 @@ export const Home = memo(function Home() {
     return data?.pages.flatMap((item) => item);
   }, [data]);
 
-  const handleOnCreateClick = () => {
+  const handleOnCreateClick: FablesCreateOnClickFn = useCallback(() => {
     navigate({ action: 'push', pathname: RoutePath.Create });
-  };
+  }, [navigate]);
 
   const handleOnProfileClick = () => {
     navigate({ action: 'push', pathname: RoutePath.Profile });
@@ -86,15 +87,13 @@ export const Home = memo(function Home() {
                 <Header.Title size="large">{title}</Header.Title>
               </Header>
             </Box>
+            <FablesCreate onClick={handleOnCreateClick} />
             {isLoading && <FablesSkeleton />}
             {!isLoading && !records.length && <FablesEmpty />}
             {!isLoading && !!records.length && (
               <FablesList data={records} onClick={handleOnFableClick} />
             )}
           </Box>
-          <Fab placement={['end', 'bottom']} slot="fixed">
-            <Fab.Button icon="add" onClick={handleOnCreateClick} />
-          </Fab>
         </InfiniteScroll>
       </Content>
     </Page>

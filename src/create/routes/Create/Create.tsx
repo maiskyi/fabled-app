@@ -9,7 +9,6 @@ import {
   Animation,
   View,
   ContentInstance,
-  Footer,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -56,7 +55,6 @@ export const Create = memo(function Create() {
           </View.DidEnter>
         </Route>
       </Content>
-      <Footer />
     </Page>
   );
 });
