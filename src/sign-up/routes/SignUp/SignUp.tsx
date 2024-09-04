@@ -17,6 +17,7 @@ import {
   CreateUserWithEmailAndPasswordRequest,
 } from '@core/auth';
 import { RoutePath, VALIDATION_PATTERNS } from '@bootstrap/constants';
+import { Disclaimer } from '@common/features';
 
 export const SignUp: FC = () => {
   const { t } = useTranslation();
@@ -100,6 +101,9 @@ export const SignUp: FC = () => {
           </Box>
           <Box padding={16} paddingInline={20}>
             <Form.Submit loading={isPending}>{t('actions.signUp')}</Form.Submit>
+          </Box>
+          <Box paddingBottom={12} paddingTop={12} textAlign="center">
+            <Disclaimer />
           </Box>
         </Form>
       </Content>

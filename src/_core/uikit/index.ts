@@ -4,7 +4,6 @@ export * from './components/Animation';
 export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
-export * from './components/Container';
 export * from './components/Content';
 export * from './components/Divider';
 export * from './components/Fab';
@@ -25,6 +24,7 @@ export * from './components/View';
 export * from './hooks/useUtils';
 export * from './hooks/useBrowser';
 export * from './hooks/useModal';
+export * from './hooks/useDevice';
 export { useIonViewDidEnter as useViewDidEnter } from '@ionic/react';
 
 // Constants

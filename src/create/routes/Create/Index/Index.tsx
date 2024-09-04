@@ -25,9 +25,14 @@ export const Index = memo(function Create() {
   const { render } = useTemplate();
   const { characters, themes, scenes, readTimes } = useOptions();
 
-  const { slug, description: prompt } = prompts[0];
+  const {
+    slug,
+    description: promptDescription,
+    textPrompt,
+    imagePrompt,
+  } = prompts.at(0);
 
-  const { data, isSuccess, isPending, mutateAsync } = useMutationFunction<
+  const { data, isSuccess, isPending, mutate } = useMutationFunction<
     DTO.CreateFableRequest,
     DTO.CreateFableResponse
   >({
@@ -38,24 +43,60 @@ export const Index = memo(function Create() {
     navigate({ action: 'back', pathname: RoutePath.Index });
   };
 
-  const handleOnSubmit = async (form: IndexForm) => {
-    const { label: character } = characters.find(
+  const handleOnSubmit = (form: IndexForm) => {
+    const { label: characterLabel, note: characterNote } = characters.find(
       ({ value }) => value === form.character
     );
-    const { label: scene } = scenes.find(({ value }) => value === form.scene);
-    const { label: description } = themes.find(
+
+    const { label: sceneLabel } = scenes.find(
+      ({ value }) => value === form.scene
+    );
+
+    const { label: descriptionLabel, note: descriptionNote } = themes.find(
       ({ value }) => value === form.description
     );
-    const { value: readTime } = readTimes.find(
+
+    const { value: readTimeValue, label: readTimeLabel } = readTimes.find(
       ({ value }) => value === form.readTime
     );
-    const message = render(prompt, { character, description, readTime, scene });
-    await mutateAsync({
-      character,
-      description,
+
+    const request = {
+      character: characterLabel,
+      description: descriptionLabel,
+      readTime: readTimeLabel,
+      scene: sceneLabel,
+    };
+
+    const message = render(promptDescription, {
+      character: characterLabel,
+      description: descriptionLabel,
+      readTime: readTimeLabel,
+      scene: sceneLabel,
+    });
+
+    const contentPrompt = render(textPrompt, {
+      character: characterLabel,
+      characterNote: characterNote && `(${characterNote})`,
+      contentLength: readTimeValue * 150,
+      description: descriptionLabel,
+      descriptionNote: descriptionNote && `(${descriptionNote})`,
+      scene: sceneLabel,
+    });
+
+    const illustrationPrompt = render(imagePrompt, {
+      character: characterLabel,
+      characterNote: characterNote && `(${characterNote})`,
+      scene: sceneLabel,
+    });
+
+    mutate({
+      ...request,
       message,
-      readTime,
-      scene,
+      prompt: {
+        content: contentPrompt,
+        image: illustrationPrompt,
+      },
+      readTime: readTimeValue,
     });
   };
 
@@ -109,7 +150,7 @@ export const Index = memo(function Create() {
                   />
                 ),
               }}
-              defaults={prompt}
+              defaults={promptDescription}
               id={slug}
             />
           </Header.Title>

@@ -10,11 +10,14 @@ export const useOptions = () => {
 
   const charactersOptions = useMemo(
     (): FormInputOptionProps<string>[] =>
-      characters.map(({ title, sys: { id }, illustration: { url } }) => ({
-        image: url,
-        label: title,
-        value: id,
-      })),
+      characters.map(
+        ({ title, description, sys: { id }, illustration: { url } }) => ({
+          image: url,
+          label: title,
+          note: description,
+          value: id,
+        })
+      ),
     [characters]
   );
 

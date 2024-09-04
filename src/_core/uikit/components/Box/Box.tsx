@@ -1,7 +1,14 @@
-import { CSSProperties, FC, PropsWithChildren } from 'react';
+import { CSSProperties, forwardRef, PropsWithChildren } from 'react';
 
 export type BoxProps = PropsWithChildren<CSSProperties>;
 
-export const Box: FC<BoxProps> = ({ children, ...style }) => {
-  return <div style={style}>{children}</div>;
-};
+export const Box = forwardRef<HTMLDivElement, BoxProps>(function Box(
+  { children, ...style },
+  ref
+) {
+  return (
+    <div ref={ref} style={style}>
+      {children}
+    </div>
+  );
+});

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Page, Header, Content, Form, Container, Text } from '@core/uikit';
+import { Page, Header, Content, Form, Text, Box } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
@@ -63,14 +63,14 @@ export const ContactUs: FC = () => {
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Container padding>
+        <Box padding={16} paddingInline={20}>
           <Text>{t('intro.inquiry')}</Text>
-        </Container>
+        </Box>
         <Form<DTO.ContactUsRequest>
           defaultValues={defaultValues}
           onSubmit={handleOnSubmit}
         >
-          <Container padding>
+          <Box padding={16} paddingInline={20}>
             <Form.Text
               disabled={!!user?.email}
               label={t('forms.email')}
@@ -87,10 +87,10 @@ export const ContactUs: FC = () => {
               name="text"
               validation={{ required: true }}
             />
-          </Container>
-          <Container padding>
+          </Box>
+          <Box padding={16} paddingInline={20}>
             <Form.Submit loading={isPending}>{t('actions.submit')}</Form.Submit>
-          </Container>
+          </Box>
         </Form>
       </Content>
     </Page>

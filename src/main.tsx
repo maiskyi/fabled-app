@@ -23,6 +23,9 @@ const config: AppProps = {
     auth: {
       fallback: splash,
     },
+    cloudinary: {
+      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+    },
     config: {
       fallback: splash,
       version: import.meta.env.PACKAGE_VERSION,

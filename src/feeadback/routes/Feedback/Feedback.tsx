@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Page, Header, Content, Container, Text, Form } from '@core/uikit';
+import { Page, Header, Content, Text, Form, Box } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { useMutationFunction } from '@core/functions';
@@ -51,25 +51,25 @@ export const Feedback: FC = () => {
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Container padding>
+        <Box padding={16} paddingInline={20}>
           <Text>{t('intro.feedback')}</Text>
-        </Container>
+        </Box>
         <Form onSubmit={handleOnSubmit}>
           <Form.StarRating
             label={t('forms.rateUs')}
             name="rating"
             validation={{ required: true }}
           />
-          <Container padding>
+          <Box padding={16} paddingInline={20}>
             <Form.Textarea
               label={t('forms.message')}
               name="message"
               validation={{ required: true }}
             />
-          </Container>
-          <Container padding>
+          </Box>
+          <Box padding={16} paddingInline={20}>
             <Form.Submit loading={isPending}>{t('actions.submit')}</Form.Submit>
-          </Container>
+          </Box>
         </Form>
       </Content>
     </Page>

@@ -2,28 +2,22 @@ export enum FableStatus {
   Error = 'error',
   Success = 'success',
   Initialized = 'initialized',
-  Content = 'content',
-  Image = 'image',
-}
-
-export interface FableRequest {
-  characterName: string;
-  readTime: number;
-  sceneOfAction: string;
-  description: string;
-  version: string;
-}
-
-export interface FableResponse {
-  illustration?: string;
-  title?: string;
-  content?: string;
+  ContentInProgress = 'contentInProgress',
+  ImageInProgress = 'imageInProgress',
 }
 
 export interface Fable {
-  status: FableStatus;
-  request: FableRequest;
-  response: FableResponse;
+  title?: string;
+  character: string;
+  scene: string;
+  description: string;
+  readTime: number;
+  message: string;
+  status: FableStatus[];
+  content?: string[];
+  image?: {
+    public_id: string;
+  };
 }
 
 export interface CreateFableRequest {
@@ -32,6 +26,10 @@ export interface CreateFableRequest {
   description: string;
   readTime: number;
   message: string;
+  prompt: {
+    content: string;
+    image: string;
+  };
 }
 
 export interface CreateFableResponse {

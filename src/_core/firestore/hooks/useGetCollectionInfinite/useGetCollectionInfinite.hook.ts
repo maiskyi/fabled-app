@@ -5,6 +5,7 @@ import {
   DocumentSnapshot,
   QueryNonFilterConstraint,
 } from '@capacitor-firebase/firestore';
+import { OrderByDirection } from 'firebase/firestore';
 
 import { useFirestoreError } from '../useFirestoreError';
 
@@ -16,6 +17,10 @@ interface UseGetCollectionInfiniteParams {
   doc: string;
   limit?: number;
   startAfter?: string;
+  orderBy?: {
+    fieldPath: string;
+    direction?: OrderByDirection;
+  };
 }
 
 interface UseGetCollectionInfiniteQueryParams<T extends object> {
@@ -23,7 +28,7 @@ interface UseGetCollectionInfiniteQueryParams<T extends object> {
 }
 
 export const useGetCollectionInfinite = <T extends object>(
-  { limit = 20, doc, startAfter }: UseGetCollectionInfiniteParams,
+  { limit = 20, doc, startAfter, orderBy }: UseGetCollectionInfiniteParams,
   { filter: compositeFilter }: UseGetCollectionInfiniteKey = {},
   { initialData }: UseGetCollectionInfiniteQueryParams<T> = {}
 ) => {
@@ -37,9 +42,7 @@ export const useGetCollectionInfinite = <T extends object>(
     string | undefined
   >({
     getNextPageParam: (last) => {
-      if (last.length) {
-        return last[last.length - 1]?.path;
-      }
+      if (last.length) return last[last.length - 1]?.path;
       return undefined;
     },
     initialData,
@@ -65,9 +68,23 @@ export const useGetCollectionInfinite = <T extends object>(
           },
         ];
 
+        const queryOrderBy: QueryNonFilterConstraint[] = orderBy
+          ? [
+              {
+                directionStr: orderBy.direction,
+                fieldPath: orderBy.fieldPath,
+                type: 'orderBy',
+              },
+            ]
+          : [];
+
         const { snapshots } = await FirebaseFirestore.getCollection<T>({
           compositeFilter,
-          queryConstraints: [...queryLimit, ...queryStartAfter],
+          queryConstraints: [
+            ...queryOrderBy,
+            ...queryLimit,
+            ...queryStartAfter,
+          ],
           reference,
         });
 
