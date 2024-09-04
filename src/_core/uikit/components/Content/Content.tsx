@@ -1,7 +1,9 @@
-import { FC, forwardRef, PropsWithChildren } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
 import { IonContent } from '@ionic/react';
+
+import { ContentInstance } from './Content.types';
 
 export type ContentProps = PropsWithChildren<{
   inset?: boolean;
@@ -9,7 +11,7 @@ export type ContentProps = PropsWithChildren<{
   fullscreen?: boolean;
 }>;
 
-export const Content: FC<ContentProps> = forwardRef<any, ContentProps>(
+export const Content = forwardRef<ContentInstance, ContentProps>(
   function Content({ children, fullscreen, inset = false }, ref) {
     return (
       <IonContent

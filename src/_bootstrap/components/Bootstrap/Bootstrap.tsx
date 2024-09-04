@@ -5,7 +5,6 @@ import { ThemeProvider } from '@core/uikit';
 import { FirestoreProvider, FirestoreProviderProps } from '@core/firestore';
 import { NetworkProvider, AppProvider, AppProviderProps } from '@core/app';
 import { FunctionsProvider, FunctionsProviderProps } from '@core/functions';
-import { StorageProvider } from '@core/storage';
 import {
   LocalizationProvider,
   LocalizationProviderProps,
@@ -51,9 +50,7 @@ export const Bootstrap: FC<BootstrapProps> = ({
                   <AuthProvider>
                     <FirestoreProvider {...firestore}>
                       <FunctionsProvider {...functions}>
-                        <StorageProvider>
-                          <Navigation>{children}</Navigation>
-                        </StorageProvider>
+                        <Navigation>{children}</Navigation>
                       </FunctionsProvider>
                     </FirestoreProvider>
                   </AuthProvider>

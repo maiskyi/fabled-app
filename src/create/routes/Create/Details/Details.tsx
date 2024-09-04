@@ -1,4 +1,5 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useLayoutEffect, useRef } from 'react';
+import { noop } from 'lodash';
 
 import { Animation, Box, Button, Message } from '@core/uikit';
 import { useRoute } from '@core/navigation';
@@ -7,20 +8,42 @@ import { RoutePath } from '@bootstrap/constants';
 import { useThread } from './Details.hooks';
 import { RouteParams } from './Details.types';
 
-export const Details = memo(function Details() {
-  const [{ params }, navigate] = useRoute<RouteParams>();
+interface DetailsProps {
+  onMessage?: () => void;
+}
 
-  const onRead = useCallback(() => {
+export const Details = memo<DetailsProps>(function Details({
+  onMessage = noop,
+}: DetailsProps) {
+  const [{ params }, navigate] = useRoute<RouteParams>();
+  const ref = useRef();
+
+  const onReadNow = useCallback(() => {
     navigate({ action: 'replace', params, pathname: RoutePath.Fable });
   }, [navigate, params]);
 
+  const onReadLater = useCallback(() => {
+    navigate({ action: 'back', pathname: RoutePath.Index });
+  }, [navigate]);
+
   const { thread } = useThread({
-    onRead,
+    onReadLater,
+    onReadNow,
     ...params,
   });
 
+  useLayoutEffect(() => {
+    if (ref.current) {
+      const observer = new MutationObserver(onMessage);
+      observer.observe(ref.current, {
+        childList: true,
+      });
+      return () => observer.disconnect();
+    }
+  }, [onMessage]);
+
   return (
-    <>
+    <Box ref={ref}>
       {thread.map((item) => {
         return (
           <Animation.Message key={item.id}>
@@ -34,7 +57,12 @@ export const Details = memo(function Details() {
               </Message>
             )}
             {item.type === 'actions' && (
-              <Box display="flex" justifyContent="flex-end" paddingInline={20}>
+              <Box
+                display="flex"
+                gap={8}
+                justifyContent="flex-end"
+                paddingInline={20}
+              >
                 {item.props.map((props, index) => {
                   return <Button key={index} {...props} />;
                 })}
@@ -43,6 +71,6 @@ export const Details = memo(function Details() {
           </Animation.Message>
         );
       })}
-    </>
+    </Box>
   );
 });

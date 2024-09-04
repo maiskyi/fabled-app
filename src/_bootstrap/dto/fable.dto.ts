@@ -13,7 +13,7 @@ export interface Fable {
   description: string;
   readTime: number;
   message: string;
-  status: FableStatus;
+  status: FableStatus[];
   content?: string[];
   image?: {
     public_id: string;
@@ -26,7 +26,10 @@ export interface CreateFableRequest {
   description: string;
   readTime: number;
   message: string;
-  prompt: string;
+  prompt: {
+    content: string;
+    image: string;
+  };
 }
 
 export interface CreateFableResponse {

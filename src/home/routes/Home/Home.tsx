@@ -26,13 +26,17 @@ export const Home = memo(function Home() {
   } = useGetCollectionInfinite<DTO.Fable>(
     {
       doc: Document.Fable,
+      orderBy: {
+        direction: 'desc',
+        fieldPath: 'createdAt',
+      },
     },
     {
       filter: {
         queryConstraints: [
           {
             fieldPath: 'status',
-            opStr: '==',
+            opStr: 'array-contains',
             type: 'where',
             value: DTO.FableStatus.Success,
           },

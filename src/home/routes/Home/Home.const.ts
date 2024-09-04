@@ -20,7 +20,7 @@ export const HOME_INITIAL_DATA: InfiniteData<
           message: '',
           readTime: 0,
           scene: '',
-          status: DTO.FableStatus.Initialized,
+          status: [],
 
           title: '',
         },

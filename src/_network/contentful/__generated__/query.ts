@@ -593,6 +593,7 @@ export type Prompt = Entry & _Node & {
   _id: Scalars['ID']['output'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']['output']>;
+  imagePrompt?: Maybe<Scalars['String']['output']>;
   linkedFrom?: Maybe<PromptLinkingCollections>;
   slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
@@ -603,6 +604,12 @@ export type Prompt = Entry & _Node & {
 
 /** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
 export type PromptDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/iizbwse9qod4/content_types/prompt) */
+export type PromptImagePromptArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -649,6 +656,13 @@ export type PromptFilter = {
   description_not?: InputMaybe<Scalars['String']['input']>;
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  imagePrompt?: InputMaybe<Scalars['String']['input']>;
+  imagePrompt_contains?: InputMaybe<Scalars['String']['input']>;
+  imagePrompt_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  imagePrompt_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  imagePrompt_not?: InputMaybe<Scalars['String']['input']>;
+  imagePrompt_not_contains?: InputMaybe<Scalars['String']['input']>;
+  imagePrompt_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   slug?: InputMaybe<Scalars['String']['input']>;
   slug_contains?: InputMaybe<Scalars['String']['input']>;
   slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1091,7 +1105,7 @@ export type GetBootstrapQueryVariables = Exact<{
 }>;
 
 
-export type GetBootstrapQuery = { __typename?: 'Query', themeCollection?: { __typename?: 'ThemeCollection', items: Array<{ __typename?: 'Theme', title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, characterCollection?: { __typename?: 'CharacterCollection', items: Array<{ __typename?: 'Character', title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string }, illustration?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null, sceneCollection?: { __typename?: 'SceneCollection', items: Array<{ __typename?: 'Scene', title?: string | null, sys: { __typename?: 'Sys', id: string }, illustration?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null, configCollection?: { __typename?: 'ConfigCollection', items: Array<{ __typename?: 'Config', version?: string | null, privacyPolicyUrl?: string | null, termsAndConditionsUrl?: string | null } | null> } | null, promptCollection?: { __typename?: 'PromptCollection', items: Array<{ __typename?: 'Prompt', title?: string | null, slug?: string | null, description?: string | null, textPrompt?: string | null } | null> } | null };
+export type GetBootstrapQuery = { __typename?: 'Query', themeCollection?: { __typename?: 'ThemeCollection', items: Array<{ __typename?: 'Theme', title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, characterCollection?: { __typename?: 'CharacterCollection', items: Array<{ __typename?: 'Character', title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string }, illustration?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null, sceneCollection?: { __typename?: 'SceneCollection', items: Array<{ __typename?: 'Scene', title?: string | null, sys: { __typename?: 'Sys', id: string }, illustration?: { __typename?: 'Asset', url?: string | null } | null } | null> } | null, configCollection?: { __typename?: 'ConfigCollection', items: Array<{ __typename?: 'Config', version?: string | null, privacyPolicyUrl?: string | null, termsAndConditionsUrl?: string | null } | null> } | null, promptCollection?: { __typename?: 'PromptCollection', items: Array<{ __typename?: 'Prompt', title?: string | null, slug?: string | null, description?: string | null, textPrompt?: string | null, imagePrompt?: string | null } | null> } | null };
 
 
 
@@ -1142,6 +1156,7 @@ export const GetBootstrapDocument = `
       slug
       description
       textPrompt
+      imagePrompt
     }
   }
 }

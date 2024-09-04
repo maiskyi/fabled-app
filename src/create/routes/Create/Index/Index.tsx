@@ -25,7 +25,12 @@ export const Index = memo(function Create() {
   const { render } = useTemplate();
   const { characters, themes, scenes, readTimes } = useOptions();
 
-  const { slug, description: promptDescription, textPrompt } = prompts.at(0);
+  const {
+    slug,
+    description: promptDescription,
+    textPrompt,
+    imagePrompt,
+  } = prompts.at(0);
 
   const { data, isSuccess, isPending, mutate } = useMutationFunction<
     DTO.CreateFableRequest,
@@ -69,7 +74,7 @@ export const Index = memo(function Create() {
       scene: sceneLabel,
     });
 
-    const prompt = render(textPrompt, {
+    const contentPrompt = render(textPrompt, {
       character: characterLabel,
       characterNote: characterNote && `(${characterNote})`,
       contentLength: readTimeValue * 150,
@@ -78,10 +83,19 @@ export const Index = memo(function Create() {
       scene: sceneLabel,
     });
 
+    const illustrationPrompt = render(imagePrompt, {
+      character: characterLabel,
+      characterNote: characterNote && `(${characterNote})`,
+      scene: sceneLabel,
+    });
+
     mutate({
       ...request,
       message,
-      prompt,
+      prompt: {
+        content: contentPrompt,
+        image: illustrationPrompt,
+      },
       readTime: readTimeValue,
     });
   };

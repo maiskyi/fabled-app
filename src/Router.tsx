@@ -11,7 +11,6 @@ import {
 import { Auth } from './auth/routes';
 import { Create } from './create/routes';
 import { Home } from './home/routes';
-import { Request } from './request/routes';
 import { Profile } from './profile/routes';
 import { ContactUs } from './contact-us/routes';
 import { Feedback } from './feeadback/routes';
@@ -35,11 +34,6 @@ export const Router = memo(function Router() {
         <Route path={RoutePath.Create}>
           <ProtectedWithRedirect roles={[Role.User]}>
             <Create />
-          </ProtectedWithRedirect>
-        </Route>
-        <Route exact path={RoutePath.Request}>
-          <ProtectedWithRedirect roles={[Role.User]}>
-            <Request />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.Profile}>

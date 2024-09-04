@@ -18,6 +18,7 @@ import { HeaderAction } from './HeaderAction/HeaderAction';
 export type HeaderProps = PropsWithChildren<{
   className?: string;
   translucent?: boolean;
+  fixed?: boolean;
   collapse?: ComponentProps<typeof IonHeader>['collapse'];
 }>;
 

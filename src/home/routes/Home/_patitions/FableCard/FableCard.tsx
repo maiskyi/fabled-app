@@ -16,9 +16,9 @@ export const FableCard: FC<FableCardProps> = ({ item, loading, onClick }) => {
 
   return (
     <Card loading={loading} onClick={onClick}>
-      <Card.Thumb>
+      <Card.Thumb aspectRatio={4 / 3}>
         <CloudinaryImage
-          aspectRatio="16:9"
+          aspectRatio="4:3"
           crop="thumb"
           gravity="custom:faces"
           publicId={item.data?.image?.public_id}
