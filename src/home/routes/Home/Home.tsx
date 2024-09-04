@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 import { useGetCollectionInfinite } from '@core/firestore';
 import { Document, RoutePath } from '@bootstrap/constants';
@@ -8,7 +8,9 @@ import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { useUser } from '@common/hooks';
 
-import { FableCard } from './_patitions/FableCard';
+import { FablesSkeleton } from './_patitions/FablesSkeleton';
+import { FablesEmpty } from './_patitions/FablesEmpty';
+import { FablesList } from './_patitions/FablesList';
 import { HOME_INITIAL_DATA } from './Home.const';
 
 export const Home = memo(function Home() {
@@ -52,6 +54,10 @@ export const Home = memo(function Home() {
     }
   );
 
+  const records = useMemo(() => {
+    return data?.pages.flatMap((item) => item);
+  }, [data]);
+
   const handleOnCreateClick = () => {
     navigate({ action: 'push', pathname: RoutePath.Create });
   };
@@ -73,32 +79,23 @@ export const Home = memo(function Home() {
         </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
-        <Box display="flex" flexDirection="column" minHeight="100%">
-          <Box flex={0}>
-            <Header collapse="condense">
-              <Header.Title size="large">{title}</Header.Title>
-            </Header>
+        <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
+          <Box display="flex" flexDirection="column" minHeight="100%">
+            <Box flex={0}>
+              <Header collapse="condense">
+                <Header.Title size="large">{title}</Header.Title>
+              </Header>
+            </Box>
+            {isLoading && <FablesSkeleton />}
+            {!isLoading && !records.length && <FablesEmpty />}
+            {!isLoading && !!records.length && (
+              <FablesList data={records} onClick={handleOnFableClick} />
+            )}
           </Box>
-          <Box flex={1}>
-            <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
-              {data?.pages
-                .flatMap((item) => item)
-                .map((item) => {
-                  return (
-                    <FableCard
-                      item={item}
-                      key={item.id}
-                      loading={isLoading}
-                      onClick={() => handleOnFableClick(item.id)}
-                    />
-                  );
-                })}
-            </InfiniteScroll>
-          </Box>
-        </Box>
-        <Fab placement={['end', 'bottom']} slot="fixed">
-          <Fab.Button icon="add" onClick={handleOnCreateClick} />
-        </Fab>
+          <Fab placement={['end', 'bottom']} slot="fixed">
+            <Fab.Button icon="add" onClick={handleOnCreateClick} />
+          </Fab>
+        </InfiniteScroll>
       </Content>
     </Page>
   );
