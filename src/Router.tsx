@@ -1,8 +1,12 @@
-import { Fragment, memo, useMemo } from 'react';
+import { memo } from 'react';
 
-import { RoutePath } from '@bootstrap/constants';
-import { Route, RouterOutlet, Router as NavRouter } from '@core/navigation';
-import { useAuth } from '@core/auth';
+import { RoutePath, Role } from '@bootstrap/constants';
+import {
+  Route,
+  RouterOutlet,
+  ProtectedWithRedirect,
+  Router as NavRouter,
+} from '@core/navigation';
 
 import { Auth } from './auth/routes';
 import { Create } from './create/routes';
@@ -19,68 +23,72 @@ import { ForgotPassword } from './forgot-password/routes';
 import { Action } from './action/routes';
 
 export const Router = memo(function Router() {
-  const { isAuthenticated, user } = useAuth();
-
-  const common = useMemo(() => {
-    return (
-      <Fragment>
+  return (
+    <NavRouter>
+      <RouterOutlet>
+        <Route exact path={RoutePath.Index}>
+          <ProtectedWithRedirect roles={[Role.User]}>
+            <Home />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.Create}>
+          <ProtectedWithRedirect roles={[Role.User]}>
+            <Create />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.Profile}>
+          <ProtectedWithRedirect roles={[Role.User]}>
+            <Profile />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.Feedback}>
+          <ProtectedWithRedirect roles={[Role.User]}>
+            <Feedback />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.Fable}>
+          <ProtectedWithRedirect roles={[Role.User]}>
+            <Fable />
+          </ProtectedWithRedirect>
+        </Route>
         <Route path={RoutePath.ContactUs}>
           <ContactUs />
         </Route>
         <Route path={RoutePath.Notification}>
           <Notification />
         </Route>
-      </Fragment>
-    );
-  }, []);
 
-  if (isAuthenticated && user.emailVerified) {
-    return (
-      <NavRouter>
-        <RouterOutlet>
-          <Route exact path={RoutePath.Index}>
-            <Home />
-          </Route>
-          <Route path={RoutePath.Create}>
-            <Create />
-          </Route>
-          <Route path={RoutePath.Profile}>
-            <Profile />
-          </Route>
-          <Route path={RoutePath.Feedback}>
-            <Feedback />
-          </Route>
-          <Route path={RoutePath.Fable}>
-            <Fable />
-          </Route>
-          {common}
-        </RouterOutlet>
-      </NavRouter>
-    );
-  }
-
-  return (
-    <NavRouter>
-      <RouterOutlet>
+        {/* Auth */}
         <Route path={RoutePath.Auth}>
-          <Auth />
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+            <Auth />
+          </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.SignUp}>
-          <SignUp />
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+            <SignUp />
+          </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.VerifyEmail}>
-          <VerifyEmail />
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+            <VerifyEmail />
+          </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.SignIn}>
-          <SignIn />
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+            <SignIn />
+          </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.ForgotPassword}>
-          <ForgotPassword />
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+            <ForgotPassword />
+          </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.Action}>
-          <Action />
+          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+            <Action />
+          </ProtectedWithRedirect>
         </Route>
-        {common}
       </RouterOutlet>
     </NavRouter>
   );
