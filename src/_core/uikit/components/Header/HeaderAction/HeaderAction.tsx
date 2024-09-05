@@ -11,7 +11,7 @@ interface HeaderActionProps {
 
 export const HeaderAction: FC<HeaderActionProps> = ({ icons, onClick }) => {
   return (
-    <IonButton onClick={onClick}>
+    <IonButton color="dark" onClick={onClick}>
       <Icon name={icons} slot="icon-only" />
     </IonButton>
   );

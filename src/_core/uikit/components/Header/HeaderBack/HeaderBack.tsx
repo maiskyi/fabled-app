@@ -21,7 +21,7 @@ export const HeaderBack: FC<HeaderBackProps> = ({ pathname }) => {
 
   return (
     <IonButtons slot="start">
-      <IonButton mode="md" onClick={handleOnClick}>
+      <IonButton color="dark" mode="md" onClick={handleOnClick}>
         <IonIcon icon={arrowBack} slot="icon-only" />
       </IonButton>
     </IonButtons>
