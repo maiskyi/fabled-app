@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 export enum FableStatus {
   Error = 'error',
   Success = 'success',
@@ -7,6 +9,7 @@ export enum FableStatus {
 }
 
 export interface Fable {
+  uid: string;
   title?: string;
   character: string;
   scene: string;
@@ -18,6 +21,7 @@ export interface Fable {
   image?: {
     public_id: string;
   };
+  createdAt: Timestamp;
 }
 
 export interface CreateFableRequest {

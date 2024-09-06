@@ -1,59 +1,30 @@
 import { memo, useCallback, useMemo } from 'react';
 
-import { useGetCollectionInfinite } from '@core/firestore';
-import { Document, RoutePath } from '@bootstrap/constants';
-import { DTO } from '@bootstrap/dto';
+import { RoutePath } from '@bootstrap/constants';
 import { Page, Content, InfiniteScroll, Header, Box } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
-import { useUser } from '@common/hooks';
+
+import { useFablesContext } from '../../providers';
 
 import { FablesSkeleton } from './_patitions/FablesSkeleton';
 import { FablesEmpty } from './_patitions/FablesEmpty';
 import { FablesList } from './_patitions/FablesList';
 import { FablesCreate, FablesCreateOnClickFn } from './_patitions/FablesCreate';
-import { HOME_INITIAL_DATA } from './Home.const';
 
 export const Home = memo(function Home() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
-  const { uid } = useUser();
 
   const title = t('pages.home');
 
-  const {
-    isLoading,
-    hasNextPage,
-    fetchNextPage,
-    data = HOME_INITIAL_DATA,
-  } = useGetCollectionInfinite<DTO.Fable>(
-    {
-      doc: Document.Fable,
-      orderBy: {
-        direction: 'desc',
-        fieldPath: 'createdAt',
-      },
-    },
-    {
-      filter: {
-        queryConstraints: [
-          {
-            fieldPath: 'status',
-            opStr: 'array-contains',
-            type: 'where',
-            value: DTO.FableStatus.Success,
-          },
-          {
-            fieldPath: 'uid',
-            opStr: '==',
-            type: 'where',
-            value: uid,
-          },
-        ],
-        type: 'and',
-      },
-    }
-  );
+  const isLoading = useFablesContext(({ isLoading }) => isLoading);
+
+  const hasNextPage = useFablesContext(({ hasNextPage }) => hasNextPage);
+
+  const fetchNextPage = useFablesContext(({ fetchNextPage }) => fetchNextPage);
+
+  const data = useFablesContext(({ data }) => data);
 
   const records = useMemo(() => {
     return data?.pages.flatMap((item) => item);

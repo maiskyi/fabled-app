@@ -21,33 +21,40 @@ import { VerifyEmail } from './verify-email/routes';
 import { SignIn } from './sign-in/routes';
 import { ForgotPassword } from './forgot-password/routes';
 import { Action } from './action/routes';
+import { FablesProvider } from './home/providers';
+
+const USER_ROLES = [Role.User];
+
+const AUTH_ROLES = [Role.None, Role.Unverified];
 
 export const Router = memo(function Router() {
   return (
     <NavRouter>
       <RouterOutlet>
         <Route exact path={RoutePath.Index}>
-          <ProtectedWithRedirect roles={[Role.User]}>
-            <Home />
+          <ProtectedWithRedirect roles={USER_ROLES}>
+            <FablesProvider>
+              <Home />
+            </FablesProvider>
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.Create}>
-          <ProtectedWithRedirect roles={[Role.User]}>
+          <ProtectedWithRedirect roles={USER_ROLES}>
             <Create />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.Profile}>
-          <ProtectedWithRedirect roles={[Role.User]}>
+          <ProtectedWithRedirect roles={USER_ROLES}>
             <Profile />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.Feedback}>
-          <ProtectedWithRedirect roles={[Role.User]}>
+          <ProtectedWithRedirect roles={USER_ROLES}>
             <Feedback />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.Fable}>
-          <ProtectedWithRedirect roles={[Role.User]}>
+          <ProtectedWithRedirect roles={USER_ROLES}>
             <Fable />
           </ProtectedWithRedirect>
         </Route>
@@ -60,32 +67,32 @@ export const Router = memo(function Router() {
 
         {/* Auth */}
         <Route path={RoutePath.Auth}>
-          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+          <ProtectedWithRedirect roles={AUTH_ROLES}>
             <Auth />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.SignUp}>
-          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+          <ProtectedWithRedirect roles={AUTH_ROLES}>
             <SignUp />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.VerifyEmail}>
-          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+          <ProtectedWithRedirect roles={AUTH_ROLES}>
             <VerifyEmail />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.SignIn}>
-          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+          <ProtectedWithRedirect roles={AUTH_ROLES}>
             <SignIn />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.ForgotPassword}>
-          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+          <ProtectedWithRedirect roles={AUTH_ROLES}>
             <ForgotPassword />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.Action}>
-          <ProtectedWithRedirect roles={[Role.None, Role.Unverified]}>
+          <ProtectedWithRedirect roles={AUTH_ROLES}>
             <Action />
           </ProtectedWithRedirect>
         </Route>

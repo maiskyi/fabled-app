@@ -1,26 +1,33 @@
+import { Path } from 'react-hook-form';
+
 import { useInfiniteQuery, InfiniteData } from '@tanstack/react-query';
 import {
   FirebaseFirestore,
   QueryCompositeFilterConstraint,
   DocumentSnapshot,
   QueryNonFilterConstraint,
+  QueryFieldFilterConstraint,
 } from '@capacitor-firebase/firestore';
 import { OrderByDirection } from 'firebase/firestore';
 
 import { useFirestoreError } from '../useFirestoreError';
 
-interface UseGetCollectionInfiniteKey {
-  filter?: QueryCompositeFilterConstraint;
+interface UseGetCollectionInfiniteOrderParams<T extends object> {
+  field: Path<T>;
+  direction?: OrderByDirection;
 }
 
-interface UseGetCollectionInfiniteParams {
+interface UseGetCollectionInfiniteEveryParams<T extends object>
+  extends Omit<QueryFieldFilterConstraint, 'fieldPath'> {
+  fieldPath: Path<T>;
+}
+
+interface UseGetCollectionInfiniteParams<T extends object> {
   doc: string;
   limit?: number;
   startAfter?: string;
-  orderBy?: {
-    fieldPath: string;
-    direction?: OrderByDirection;
-  };
+  order?: UseGetCollectionInfiniteOrderParams<T>;
+  every?: UseGetCollectionInfiniteEveryParams<T>[];
 }
 
 interface UseGetCollectionInfiniteQueryParams<T extends object> {
@@ -28,8 +35,13 @@ interface UseGetCollectionInfiniteQueryParams<T extends object> {
 }
 
 export const useGetCollectionInfinite = <T extends object>(
-  { limit = 20, doc, startAfter, orderBy }: UseGetCollectionInfiniteParams,
-  { filter: compositeFilter }: UseGetCollectionInfiniteKey = {},
+  {
+    limit = 20,
+    doc,
+    startAfter,
+    order,
+    every,
+  }: UseGetCollectionInfiniteParams<T>,
   { initialData }: UseGetCollectionInfiniteQueryParams<T> = {}
 ) => {
   const { throwError } = useFirestoreError();
@@ -38,7 +50,13 @@ export const useGetCollectionInfinite = <T extends object>(
     DocumentSnapshot<T>[],
     Error,
     InfiniteData<DocumentSnapshot<T>[]>,
-    ['getCollectionInfinite', string, number, UseGetCollectionInfiniteKey],
+    [
+      'getCollectionInfinite',
+      string,
+      number,
+      UseGetCollectionInfiniteOrderParams<T>,
+      UseGetCollectionInfiniteEveryParams<T>[],
+    ],
     string | undefined
   >({
     getNextPageParam: (last) => {
@@ -49,7 +67,7 @@ export const useGetCollectionInfinite = <T extends object>(
     initialPageParam: startAfter,
     queryFn: async ({
       pageParam: startAfter,
-      queryKey: [_, reference, limit, { filter: compositeFilter }],
+      queryKey: [_, reference, limit, order, every],
     }) => {
       try {
         const queryStartAfter: QueryNonFilterConstraint[] = startAfter
@@ -68,15 +86,22 @@ export const useGetCollectionInfinite = <T extends object>(
           },
         ];
 
-        const queryOrderBy: QueryNonFilterConstraint[] = orderBy
+        const queryOrderBy: QueryNonFilterConstraint[] = order
           ? [
               {
-                directionStr: orderBy.direction,
-                fieldPath: orderBy.fieldPath,
+                directionStr: order.direction,
+                fieldPath: order.field,
                 type: 'orderBy',
               },
             ]
           : [];
+
+        const compositeFilter: QueryCompositeFilterConstraint = every
+          ? {
+              queryConstraints: every,
+              type: 'and',
+            }
+          : undefined;
 
         const { snapshots } = await FirebaseFirestore.getCollection<T>({
           compositeFilter,
@@ -93,13 +118,6 @@ export const useGetCollectionInfinite = <T extends object>(
         throwError(err);
       }
     },
-    queryKey: [
-      'getCollectionInfinite',
-      doc,
-      limit,
-      {
-        filter: compositeFilter,
-      },
-    ],
+    queryKey: ['getCollectionInfinite', doc, limit, order, every],
   });
 };

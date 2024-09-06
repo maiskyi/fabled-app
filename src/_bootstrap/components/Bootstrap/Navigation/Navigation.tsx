@@ -1,24 +1,28 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useMemo } from 'react';
 
 import { NavigationProvider } from '@core/navigation';
 import { useAuth } from '@core/auth';
 
-import { Role, RoutePath } from '../../../constants';
+import { RoutePath } from '../../../constants';
+
+import { NONE, UNVERIFIED, USER } from './Navigation.const';
 
 export type NavigationProps = PropsWithChildren<{}>;
 
 export const Navigation: FC<NavigationProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
 
-  const roles = (() => {
-    if (isAuthenticated && user?.emailVerified) {
-      return [Role.User];
+  const emailVerified = user?.emailVerified;
+
+  const roles = useMemo(() => {
+    if (isAuthenticated && emailVerified) {
+      return USER;
     }
-    if (isAuthenticated && !user?.emailVerified) {
-      return [Role.Unverified];
+    if (isAuthenticated && emailVerified) {
+      return UNVERIFIED;
     }
-    return [Role.None];
-  })();
+    return NONE;
+  }, [isAuthenticated, emailVerified]);
 
   const defaultProtectedRedirect = (() => {
     if (isAuthenticated && user?.emailVerified) {
