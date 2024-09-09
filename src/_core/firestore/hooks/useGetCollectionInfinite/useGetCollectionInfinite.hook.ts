@@ -1,38 +1,19 @@
-import { Path } from 'react-hook-form';
-
 import { useInfiniteQuery, InfiniteData } from '@tanstack/react-query';
 import {
   FirebaseFirestore,
   QueryCompositeFilterConstraint,
   DocumentSnapshot,
   QueryNonFilterConstraint,
-  QueryFieldFilterConstraint,
 } from '@capacitor-firebase/firestore';
-import { OrderByDirection } from 'firebase/firestore';
 
 import { useFirestoreError } from '../useFirestoreError';
 
-interface UseGetCollectionInfiniteOrderParams<T extends object> {
-  field: Path<T>;
-  direction?: OrderByDirection;
-}
-
-interface UseGetCollectionInfiniteEveryParams<T extends object>
-  extends Omit<QueryFieldFilterConstraint, 'fieldPath'> {
-  fieldPath: Path<T>;
-}
-
-interface UseGetCollectionInfiniteParams<T extends object> {
-  doc: string;
-  limit?: number;
-  startAfter?: string;
-  order?: UseGetCollectionInfiniteOrderParams<T>;
-  every?: UseGetCollectionInfiniteEveryParams<T>[];
-}
-
-interface UseGetCollectionInfiniteQueryParams<T extends object> {
-  initialData?: InfiniteData<DocumentSnapshot<T>[], string>;
-}
+import {
+  UseGetCollectionInfiniteParams,
+  UseGetCollectionInfiniteQueryParams,
+  UseGetCollectionInfiniteOrderParams,
+  UseGetCollectionInfiniteEveryParams,
+} from './useGetCollectionInfinite.types';
 
 export const useGetCollectionInfinite = <T extends object>(
   {
