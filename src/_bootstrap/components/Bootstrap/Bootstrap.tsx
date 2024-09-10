@@ -13,6 +13,7 @@ import {
   CloudinaryProvider,
   CloudinaryProviderProps,
 } from '@network/cloudinary';
+import { AppUrlListener } from '@core/navigation';
 
 import { Network, NetworkProps } from './Network';
 import { Navigation } from './Navigation';
@@ -40,26 +41,28 @@ export const Bootstrap: FC<BootstrapProps> = ({
   cloudinary,
 }) => {
   return (
-    <ThemeProvider>
-      <CloudinaryProvider {...cloudinary}>
-        <NetworkProvider>
-          <Network {...network}>
-            <Config {...config}>
-              <LocalizationProvider {...localization}>
-                <AppProvider {...app}>
-                  <AuthProvider>
-                    <FirestoreProvider {...firestore}>
-                      <FunctionsProvider {...functions}>
-                        <Navigation>{children}</Navigation>
-                      </FunctionsProvider>
-                    </FirestoreProvider>
-                  </AuthProvider>
-                </AppProvider>
-              </LocalizationProvider>
-            </Config>
-          </Network>
-        </NetworkProvider>
-      </CloudinaryProvider>
-    </ThemeProvider>
+    <AppUrlListener>
+      <ThemeProvider>
+        <CloudinaryProvider {...cloudinary}>
+          <NetworkProvider>
+            <Network {...network}>
+              <Config {...config}>
+                <LocalizationProvider {...localization}>
+                  <AppProvider {...app}>
+                    <AuthProvider>
+                      <FirestoreProvider {...firestore}>
+                        <FunctionsProvider {...functions}>
+                          <Navigation>{children}</Navigation>
+                        </FunctionsProvider>
+                      </FirestoreProvider>
+                    </AuthProvider>
+                  </AppProvider>
+                </LocalizationProvider>
+              </Config>
+            </Network>
+          </NetworkProvider>
+        </CloudinaryProvider>
+      </ThemeProvider>
+    </AppUrlListener>
   );
 };

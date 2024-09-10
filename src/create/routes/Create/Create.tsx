@@ -30,10 +30,10 @@ export const Create = memo(function Create() {
 
   return (
     <Page>
-      <Header collapse="condense" translucent>
+      <Header translucent>
         <Header.Back pathname={RoutePath.Index} />
       </Header>
-      <Content ref={content}>
+      <Content fullscreen ref={content}>
         <Animation.Message>
           <Message
             avatar={BOT_AVATAR_SRC}

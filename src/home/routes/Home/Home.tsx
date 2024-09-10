@@ -60,8 +60,8 @@ export const Home = memo(function Home() {
             </Box>
             <FablesCreate onClick={handleOnCreateClick} />
             {isLoading && <FablesSkeleton />}
-            {!isLoading && !records.length && <FablesEmpty />}
-            {!isLoading && !!records.length && (
+            {!isLoading && !records?.length && <FablesEmpty />}
+            {!isLoading && !!records?.length && (
               <FablesList data={records} onClick={handleOnFableClick} />
             )}
           </Box>
