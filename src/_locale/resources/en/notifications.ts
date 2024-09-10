@@ -2,6 +2,11 @@ import { NotificationType } from '@bootstrap/constants';
 import { AuthErrorCodes } from '@core/auth';
 
 export const notifications = {
+  [NotificationType.UpdateProfileSucceed]: {
+    message:
+      'Your name has been updated. The changes will be reflected in your profile.',
+    title: 'Name updated successfully',
+  },
   [NotificationType.UpdatePasswordSucceed]: {
     message:
       'Your password has been updated. Please use your new password the next time you log in. ',

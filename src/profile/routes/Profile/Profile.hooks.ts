@@ -26,6 +26,14 @@ export const useProfileMenu = () => {
           navigate({ action: 'push', pathname: RoutePath.ChangePassword }),
       } as ProfileMenuItem,
       {
+        active: user.providerData[0].providerId === 'password',
+        group: t('actions.settings'),
+        icon: 'person-outline',
+        label: t('actions.changeName'),
+        onClick: () =>
+          navigate({ action: 'push', pathname: RoutePath.ChangeName }),
+      } as ProfileMenuItem,
+      {
         active: true,
         group: t('actions.support'),
         icon: 'mail-outline',

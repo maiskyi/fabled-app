@@ -15,6 +15,7 @@ import {
   helpBuoyOutline,
   closeOutline,
   arrowForwardOutline,
+  personOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
@@ -34,4 +35,5 @@ export const ICON = {
   'log-out-outline': logOutOutline,
   'mail-outline': mailOutline,
   'person-circle': personCircle,
+  'person-outline': personOutline,
 };

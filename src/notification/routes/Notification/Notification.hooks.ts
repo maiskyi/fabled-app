@@ -24,6 +24,7 @@ const TYPES: NotificationType[] = [
   NotificationType.SendVerificationLinkSucceed,
   NotificationType.SendVerificationLinkFailed,
   NotificationType.UpdatePasswordSucceed,
+  NotificationType.UpdateProfileSucceed,
 ];
 
 type UseNotificationReturnType = [
@@ -89,6 +90,7 @@ export const useNotification = ({
       [NotificationType.SendVerificationLinkSucceed]: t('actions.ok'),
       [NotificationType.SendVerificationLinkFailed]: t('actions.ok'),
       [NotificationType.UpdatePasswordSucceed]: t('actions.ok'),
+      [NotificationType.UpdateProfileSucceed]: t('actions.ok'),
     }),
     [t]
   );
@@ -134,6 +136,11 @@ export const useNotification = ({
           pathname: RoutePath.Auth,
         }),
       [NotificationType.UpdatePasswordSucceed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Auth,
+        }),
+      [NotificationType.UpdateProfileSucceed]: () =>
         navigate({
           action: 'back',
           pathname: RoutePath.Auth,

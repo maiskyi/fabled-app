@@ -3,6 +3,7 @@ export enum RoutePath {
   Any = '*',
   Auth = '/auth',
   ChangePassword = '/change-password',
+  ChangeName = '/change-name',
   ContactUs = '/contact-us',
   Create = '/create',
   CreateDetails = '/create/:id',
