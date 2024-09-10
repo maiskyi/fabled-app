@@ -5,6 +5,7 @@ export const SKELETON_INITIAL_DATA: DTO.Fable[] = Array.from({
 }).map(
   (): DTO.Fable => ({
     character: '',
+    createdAt: null,
     description: '',
     image: {
       public_id: undefined,
@@ -14,5 +15,6 @@ export const SKELETON_INITIAL_DATA: DTO.Fable[] = Array.from({
     scene: '',
     status: [],
     title: '',
+    uid: '',
   })
 );
