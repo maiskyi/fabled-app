@@ -1,60 +1,38 @@
-import { memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
-import { useGetCollectionInfinite } from '@core/firestore';
-import { Document, RoutePath } from '@bootstrap/constants';
-import { DTO } from '@bootstrap/dto';
-import { Page, Content, InfiniteScroll, Fab, Header, Box } from '@core/uikit';
+import { RoutePath } from '@bootstrap/constants';
+import { Page, Content, InfiniteScroll, Header, Box } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
-import { useUser } from '@common/hooks';
 
-import { FableCard } from './_patitions/FableCard';
-import { HOME_INITIAL_DATA } from './Home.const';
+import { useFablesContext } from '../../providers';
+
+import { FablesSkeleton } from './_patitions/FablesSkeleton';
+import { FablesEmpty } from './_patitions/FablesEmpty';
+import { FablesList } from './_patitions/FablesList';
+import { FablesCreate, FablesCreateOnClickFn } from './_patitions/FablesCreate';
 
 export const Home = memo(function Home() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
-  const { uid } = useUser();
 
   const title = t('pages.home');
 
-  const {
-    isLoading,
-    hasNextPage,
-    fetchNextPage,
-    data = HOME_INITIAL_DATA,
-  } = useGetCollectionInfinite<DTO.Fable>(
-    {
-      doc: Document.Fable,
-      orderBy: {
-        direction: 'desc',
-        fieldPath: 'createdAt',
-      },
-    },
-    {
-      filter: {
-        queryConstraints: [
-          {
-            fieldPath: 'status',
-            opStr: 'array-contains',
-            type: 'where',
-            value: DTO.FableStatus.Success,
-          },
-          {
-            fieldPath: 'uid',
-            opStr: '==',
-            type: 'where',
-            value: uid,
-          },
-        ],
-        type: 'and',
-      },
-    }
-  );
+  const isLoading = useFablesContext(({ isLoading }) => isLoading);
 
-  const handleOnCreateClick = () => {
+  const hasNextPage = useFablesContext(({ hasNextPage }) => hasNextPage);
+
+  const fetchNextPage = useFablesContext(({ fetchNextPage }) => fetchNextPage);
+
+  const data = useFablesContext(({ data }) => data);
+
+  const records = useMemo(() => {
+    return data?.pages.flatMap((item) => item);
+  }, [data]);
+
+  const handleOnCreateClick: FablesCreateOnClickFn = useCallback(() => {
     navigate({ action: 'push', pathname: RoutePath.Create });
-  };
+  }, [navigate]);
 
   const handleOnProfileClick = () => {
     navigate({ action: 'push', pathname: RoutePath.Profile });
@@ -73,32 +51,21 @@ export const Home = memo(function Home() {
         </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
-        <Box display="flex" flexDirection="column" minHeight="100%">
-          <Box flex={0}>
-            <Header collapse="condense">
-              <Header.Title size="large">{title}</Header.Title>
-            </Header>
+        <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
+          <Box display="flex" flexDirection="column" minHeight="100%">
+            <Box flex={0}>
+              <Header collapse="condense">
+                <Header.Title size="large">{title}</Header.Title>
+              </Header>
+            </Box>
+            <FablesCreate onClick={handleOnCreateClick} />
+            {isLoading && <FablesSkeleton />}
+            {!isLoading && !records.length && <FablesEmpty />}
+            {!isLoading && !!records.length && (
+              <FablesList data={records} onClick={handleOnFableClick} />
+            )}
           </Box>
-          <Box flex={1}>
-            <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
-              {data?.pages
-                .flatMap((item) => item)
-                .map((item) => {
-                  return (
-                    <FableCard
-                      item={item}
-                      key={item.id}
-                      loading={isLoading}
-                      onClick={() => handleOnFableClick(item.id)}
-                    />
-                  );
-                })}
-            </InfiniteScroll>
-          </Box>
-        </Box>
-        <Fab placement={['end', 'bottom']} slot="fixed">
-          <Fab.Button icon="add" onClick={handleOnCreateClick} />
-        </Fab>
+        </InfiniteScroll>
       </Content>
     </Page>
   );

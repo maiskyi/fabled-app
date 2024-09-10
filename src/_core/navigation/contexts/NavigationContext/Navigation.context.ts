@@ -1,4 +1,4 @@
-import { createContext } from 'use-context-selector';
+import { createContext } from 'react';
 
 export interface NavigationContextProps {
   roles: string[];

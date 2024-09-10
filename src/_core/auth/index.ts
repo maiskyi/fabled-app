@@ -16,6 +16,8 @@ export * from './hooks/useSignInWithCredentials';
 export * from './hooks/useSignInWithFacebook';
 export * from './hooks/useSignInWithGoogle';
 export * from './hooks/useSignOut';
+export * from './hooks/useUpdatePassword';
+export * from './hooks/useUpdateProfile';
 
 // Types
 export * from './types';

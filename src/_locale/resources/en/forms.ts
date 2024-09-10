@@ -6,6 +6,7 @@ export const forms = {
   mainCharacterWillBe: 'Main character <n /> will be a...',
   message: 'Message',
   moralLesson: 'Moral lesson',
+  name: 'Name',
   newPassword: 'New password',
   or: 'Or',
   password: 'Password',

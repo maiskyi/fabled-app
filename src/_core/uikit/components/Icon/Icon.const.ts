@@ -14,12 +14,15 @@ import {
   documentTextOutline,
   helpBuoyOutline,
   closeOutline,
+  arrowForwardOutline,
+  personOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
   add,
   apple: logoApple,
   'arrow-back': arrowBack,
+  'arrow-forward-outline': arrowForwardOutline,
   'book-outline': bookOutline,
   'chatbox-ellipses-outline': chatboxEllipsesOutline,
   'chevron-forward': chevronForward,
@@ -32,4 +35,5 @@ export const ICON = {
   'log-out-outline': logOutOutline,
   'mail-outline': mailOutline,
   'person-circle': personCircle,
+  'person-outline': personOutline,
 };

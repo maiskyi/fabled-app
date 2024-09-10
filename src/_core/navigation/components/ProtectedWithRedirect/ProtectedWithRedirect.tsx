@@ -1,9 +1,8 @@
-import { FC, PropsWithChildren } from 'react';
-import { Redirect } from 'react-router-dom';
+import { FC, PropsWithChildren, useContext } from 'react';
 import { intersection } from 'lodash';
-import { useContextSelector } from 'use-context-selector';
 
 import { NavigationContext } from '../../contexts/NavigationContext';
+import { Redirect } from '../Redirect';
 
 export type ProtectedWithRedirectProps = PropsWithChildren<{
   roles: string[];
@@ -13,20 +12,15 @@ export const ProtectedWithRedirect: FC<ProtectedWithRedirectProps> = ({
   roles,
   children,
 }) => {
-  const protectedRedirectPathname = useContextSelector(
-    NavigationContext,
-    ({ defaultProtectedRedirect }) => defaultProtectedRedirect
-  );
-
-  const currentRoles = useContextSelector(
-    NavigationContext,
-    ({ roles }) => roles
-  );
+  const {
+    roles: currentRoles,
+    defaultProtectedRedirect: protectedRedirectPathname,
+  } = useContext(NavigationContext);
 
   const isProtected = !intersection(currentRoles, roles)?.length;
 
   if (isProtected) {
-    return <Redirect to={{ pathname: protectedRedirectPathname }} />;
+    return <Redirect direction="root" pathname={protectedRedirectPathname} />;
   }
 
   return <>{children}</>;

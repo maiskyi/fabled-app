@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, useMemo } from 'react';
 
 import { NavigationContext } from '../../contexts/NavigationContext';
 
@@ -7,13 +7,20 @@ type NavigationProviderProps = PropsWithChildren<{
   defaultProtectedRedirect?: string;
 }>;
 
+const DEFAULT_ROLES: string[] = [];
+
 export const NavigationProvider: FC<NavigationProviderProps> = ({
-  roles = [],
+  roles = DEFAULT_ROLES,
   children,
   defaultProtectedRedirect,
 }) => {
+  const contextValue = useMemo(
+    () => ({ defaultProtectedRedirect, roles }),
+    [defaultProtectedRedirect, roles]
+  );
+
   return (
-    <NavigationContext.Provider value={{ defaultProtectedRedirect, roles }}>
+    <NavigationContext.Provider value={contextValue}>
       {children}
     </NavigationContext.Provider>
   );

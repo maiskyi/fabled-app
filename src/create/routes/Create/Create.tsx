@@ -7,9 +7,7 @@ import {
   Message,
   BOT_AVATAR_SRC,
   Animation,
-  View,
   ContentInstance,
-  Footer,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -32,7 +30,7 @@ export const Create = memo(function Create() {
 
   return (
     <Page>
-      <Header translucent>
+      <Header collapse="condense" translucent>
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content ref={content}>
@@ -51,12 +49,9 @@ export const Create = memo(function Create() {
           <Index />
         </Route>
         <Route path={RoutePath.CreateDetails}>
-          <View.DidEnter>
-            <Details onMessage={handleOnMessage} />
-          </View.DidEnter>
+          <Details onMessage={handleOnMessage} />
         </Route>
       </Content>
-      <Footer />
     </Page>
   );
 });

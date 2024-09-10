@@ -31,7 +31,9 @@ export const EmailVerification = memo<AuthActionModeProps>(function Action({
   const { isAuthenticated, reload } = useAuth();
   const { toast } = useUtils();
 
-  const [{ loading: isReloadingUser }, reloadUser] = useAsyncFn(() => reload());
+  const [{ loading: isReloadingUser }, reloadUser] = useAsyncFn(async () => {
+    await reload();
+  });
 
   const [, navigate] = useRoute();
 

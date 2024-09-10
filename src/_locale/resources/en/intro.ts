@@ -5,6 +5,7 @@ export const intro = {
     'We value your feedback! Please share your thoughts with us so we can continue to improve your experience. Thank you for helping us grow!',
   forgotPassword:
     "Can't remember your password? We've got you covered! Enter your email to receive a password reset link.",
+  home: 'Click here to set the fable outline',
   inquiry:
     "Feel free to reach out to us with any questions, feedback, or concerns. We're here to help and will get back to you as soon as possible!",
   resetPassword:
