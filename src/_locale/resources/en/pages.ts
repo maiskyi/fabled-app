@@ -1,5 +1,6 @@
 export const pages = {
   action: 'Invalid or unsupported link',
+  changePassword: 'Change password',
   contactUs: 'Contact us',
   feedback: 'Share your feedback',
   forgotPassword: 'Forgot password?',

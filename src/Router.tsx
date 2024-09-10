@@ -22,6 +22,7 @@ import { SignIn } from './sign-in/routes';
 import { ForgotPassword } from './forgot-password/routes';
 import { Action } from './action/routes';
 import { FablesProvider } from './home/providers';
+import { ChangePassword } from './change-password/routes';
 
 const USER_ROLES = [Role.User];
 
@@ -56,6 +57,11 @@ export const Router = memo(function Router() {
         <Route path={RoutePath.Fable}>
           <ProtectedWithRedirect roles={USER_ROLES}>
             <Fable />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.ChangePassword}>
+          <ProtectedWithRedirect roles={USER_ROLES}>
+            <ChangePassword />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.ContactUs}>

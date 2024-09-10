@@ -1,5 +1,6 @@
 export const actions = {
   cancel: 'Cancel',
+  changePassword: 'Change Password',
   clickToSelect: 'Click to select',
   confirm: 'Confirm',
   confirmNewPassword: 'Confirm new password',
@@ -21,6 +22,7 @@ export const actions = {
   readNow: 'Read now',
   requestNewLink: 'Request new link',
   sendResetLink: 'Send reset link',
+  settings: 'Settings',
   shareYourFeedback: 'Share your feedback',
   signIn: 'Sign in',
   signUp: 'Sign up',

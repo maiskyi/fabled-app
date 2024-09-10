@@ -34,7 +34,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({
 }) => {
   const [user, setUser] = useState<User>();
 
-  const { current: auth } = useRef(
+  useRef(
     (() => {
       if (Capacitor.isNativePlatform()) {
         return initializeAuth(getApp(), {
@@ -48,12 +48,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   const isAuthenticated = !!user;
 
   const reload = useCallback(async () => {
-    if (auth.currentUser) {
+    if (isAuthenticated) {
+      await FirebaseAuthentication.reload();
       const { user } = await FirebaseAuthentication.getCurrentUser();
       return setUser(() => ({ ...user }));
     }
     return Promise.resolve();
-  }, [auth]);
+  }, [isAuthenticated]);
 
   const contextValue = useMemo(
     () => ({ isAuthenticated, reload, user }),

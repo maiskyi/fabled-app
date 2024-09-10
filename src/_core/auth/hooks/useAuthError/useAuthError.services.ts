@@ -5,6 +5,7 @@ import { AuthErrorCode } from '../../types';
 interface AuthErrorFields {
   email?: string;
   password?: string;
+  newPassword?: string;
 }
 
 const EMAIL_ERROR_CODES: AuthErrorCode[] = [
@@ -31,6 +32,7 @@ export class AuthError extends Error {
 
     if (code === AuthErrorCodes.WEAK_PASSWORD) {
       this.fields = {
+        newPassword: message,
         password: message,
       };
     }
