@@ -1,0 +1,19 @@
+mutation createStory(
+  $uid: String!
+  $message: String!
+  $readTime: Int!
+  $contentPrompt: String!
+  $imagePrompt: String!
+) {
+  createStory(
+    data: {
+      firebaseUserId: $uid
+      message: $message
+      readTime: $readTime
+      contentPrompt: $contentPrompt
+      imagePrompt: $imagePrompt
+    }
+  ) {
+    id
+  }
+}

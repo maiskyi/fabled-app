@@ -5,14 +5,16 @@ import {
   ContentfulProvider,
   RequestInterceptorFulfilledFn,
 } from '@network/contentful';
+import { ApiProvider, ApiProviderProps } from '@network/api';
 
 import { NetworkContentfulProps } from './Network.types';
 
 export type NetworkProps = PropsWithChildren<{
   contentful: NetworkContentfulProps;
+  api: ApiProviderProps;
 }>;
 
-export const Network: FC<NetworkProps> = ({ children, contentful }) => {
+export const Network: FC<NetworkProps> = ({ children, contentful, api }) => {
   const requestInterceptorFulfilled: RequestInterceptorFulfilledFn = async (
     config
   ) => {
@@ -28,7 +30,7 @@ export const Network: FC<NetworkProps> = ({ children, contentful }) => {
       {...contentful}
       requestInterceptorFulfilled={requestInterceptorFulfilled}
     >
-      {children}
+      <ApiProvider {...api}>{children}</ApiProvider>
     </ContentfulProvider>
   );
 };

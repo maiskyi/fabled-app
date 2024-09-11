@@ -11,7 +11,8 @@
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint src --max-warnings=0 --fix",
-    "gen:contentful": "graphql-codegen --config ./graphql.codegen.ts && add-ts-nocheck --patterns '**/__generated__/*.ts'"
+    "gen:contentful": "graphql-codegen --config ./contentful.codegen.ts && add-ts-nocheck --patterns '**/__generated__/*.ts'",
+    "gen:api": "graphql-codegen --config ./api.codegen.ts && add-ts-nocheck --patterns '**/__generated__/*.ts'"
   },
   "dependencies": {
     "@capacitor-firebase/authentication": "^6.1.0",

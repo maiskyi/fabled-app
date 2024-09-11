@@ -49,6 +49,9 @@ const config: AppProps = {
       supportedLngs: [Language.en],
     },
     network: {
+      api: {
+        endpoint: import.meta.env.VITE_API_ENDPOINT,
+      },
       contentful: {
         apiKey: import.meta.env.VITE_CONTENTFUL_API_KEY,
         environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT,

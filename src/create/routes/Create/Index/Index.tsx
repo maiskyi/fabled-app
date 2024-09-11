@@ -1,13 +1,13 @@
 import { memo } from 'react';
 
 import { Header, Box, Form, Button, Animation } from '@core/uikit';
-import { FunctionName, RoutePath } from '@bootstrap/constants';
+import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
 import { useTemplate } from '@network/contentful';
-import { useMutationFunction } from '@core/functions';
-import { DTO } from '@bootstrap/dto';
+import { useCreateStory } from '@network/api';
+import { useAuth } from '@core/auth';
 
 import { FormField } from '../Create.const';
 
@@ -24,6 +24,9 @@ export const Index = memo(function Create() {
   const [, navigate] = useRoute();
   const { render } = useTemplate();
   const { characters, themes, scenes, readTimes } = useOptions();
+  const { user } = useAuth();
+
+  const { mutate, isPending, isSuccess, data } = useCreateStory();
 
   const {
     slug,
@@ -31,13 +34,6 @@ export const Index = memo(function Create() {
     textPrompt,
     imagePrompt,
   } = prompts.at(0);
-
-  const { data, isSuccess, isPending, mutate } = useMutationFunction<
-    DTO.CreateFableRequest,
-    DTO.CreateFableResponse
-  >({
-    name: FunctionName.OnFableRequest,
-  });
 
   const handleOnCancel = () => {
     navigate({ action: 'back', pathname: RoutePath.Index });
@@ -59,13 +55,6 @@ export const Index = memo(function Create() {
     const { value: readTimeValue, label: readTimeLabel } = readTimes.find(
       ({ value }) => value === form.readTime
     );
-
-    const request = {
-      character: characterLabel,
-      description: descriptionLabel,
-      readTime: readTimeLabel,
-      scene: sceneLabel,
-    };
 
     const message = render(promptDescription, {
       character: characterLabel,
@@ -90,19 +79,20 @@ export const Index = memo(function Create() {
     });
 
     mutate({
-      ...request,
+      contentPrompt,
+      imagePrompt: illustrationPrompt,
       message,
-      prompt: {
-        content: contentPrompt,
-        image: illustrationPrompt,
-      },
       readTime: readTimeValue,
+      uid: user?.uid,
     });
   };
 
   if (isSuccess) {
     return (
-      <Redirect params={{ id: data.id }} pathname={RoutePath.CreateDetails} />
+      <Redirect
+        params={{ id: data?.createStory.id }}
+        pathname={RoutePath.CreateDetails}
+      />
     );
   }
 
