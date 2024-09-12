@@ -4,8 +4,15 @@ import { createRoot } from 'react-dom/client';
 import { Language } from '@locale/constants';
 import { resources } from '@locale/resources';
 import { Splash } from '@bootstrap/components';
+import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 
 import { App, AppProps } from './App';
+
+if (import.meta.env.DEV) {
+  // Adds messages only in a dev environment
+  loadDevMessages();
+  loadErrorMessages();
+}
 
 const splash = <Splash />;
 
@@ -51,6 +58,7 @@ const config: AppProps = {
     network: {
       api: {
         endpoint: import.meta.env.VITE_API_ENDPOINT,
+        subscription: import.meta.env.VITE_API_SUBSCRIPTION,
       },
       contentful: {
         apiKey: import.meta.env.VITE_CONTENTFUL_API_KEY,

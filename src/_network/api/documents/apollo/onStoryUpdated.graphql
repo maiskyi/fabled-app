@@ -1,0 +1,7 @@
+subscription onStoryUpdated($id: ID!) {
+  storyUpdated(id: $id) {
+    id
+    message
+    status
+  }
+}

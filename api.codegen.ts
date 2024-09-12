@@ -7,6 +7,18 @@ const schema = 'http://localhost:3000/api/graphql';
 
 const config: CodegenConfig = {
   generates: {
+    './src/_network/api/__generated__/apollo.ts': {
+      config: {
+        omitOperationSuffix: true,
+        skipTypename: true,
+      },
+      documents: './src/_network/api/documents/apollo/*.graphql',
+      plugins: [
+        'typescript',
+        'typescript-operations',
+        'typescript-react-apollo',
+      ],
+    },
     './src/_network/api/__generated__/query.ts': {
       config: {
         addInfiniteQuery: true,

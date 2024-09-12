@@ -1,24 +1,38 @@
 // @ts-nocheck
 
-import { useMutation, useQuery, useInfiniteQuery, UseMutationOptions, UseQueryOptions, UseInfiniteQueryOptions, InfiniteData } from '@tanstack/react-query';
-import { useFetchData } from '../hooks/useFetchData/useFetchData.hook';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  DateTime: { input: any; output: any; }
-  JSON: { input: any; output: any; }
-  Upload: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  DateTime: { input: any; output: any };
+  JSON: { input: any; output: any };
+  Upload: { input: any; output: any };
 };
 
 export type AuthenticatedItem = User;
@@ -74,7 +88,6 @@ export type CloudinaryImage_File = {
   publicUrl?: Maybe<Scalars['String']['output']>;
   publicUrlTransformed?: Maybe<Scalars['String']['output']>;
 };
-
 
 export type CloudinaryImage_FilePublicUrlTransformedArgs = {
   transformation?: InputMaybe<CloudinaryImageFormat>;
@@ -169,7 +182,6 @@ export type KeystoneAdminMeta = {
   lists: Array<KeystoneAdminUiListMeta>;
 };
 
-
 export type KeystoneAdminMetaListArgs = {
   key: Scalars['String']['input'];
 };
@@ -196,7 +208,6 @@ export type KeystoneAdminUiFieldMeta = {
   viewsIndex: Scalars['Int']['output'];
 };
 
-
 export type KeystoneAdminUiFieldMetaItemViewArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -207,13 +218,13 @@ export type KeystoneAdminUiFieldMetaCreateView = {
 
 export enum KeystoneAdminUiFieldMetaCreateViewFieldMode {
   Edit = 'edit',
-  Hidden = 'hidden'
+  Hidden = 'hidden',
 }
 
 export enum KeystoneAdminUiFieldMetaIsNonNull {
   Create = 'create',
   Read = 'read',
-  Update = 'update'
+  Update = 'update',
 }
 
 export type KeystoneAdminUiFieldMetaItemView = {
@@ -224,12 +235,12 @@ export type KeystoneAdminUiFieldMetaItemView = {
 export enum KeystoneAdminUiFieldMetaItemViewFieldMode {
   Edit = 'edit',
   Hidden = 'hidden',
-  Read = 'read'
+  Read = 'read',
 }
 
 export enum KeystoneAdminUiFieldMetaItemViewFieldPosition {
   Form = 'form',
-  Sidebar = 'sidebar'
+  Sidebar = 'sidebar',
 }
 
 export type KeystoneAdminUiFieldMetaListView = {
@@ -238,7 +249,7 @@ export type KeystoneAdminUiFieldMetaListView = {
 
 export enum KeystoneAdminUiFieldMetaListViewFieldMode {
   Hidden = 'hidden',
-  Read = 'read'
+  Read = 'read',
 }
 
 export type KeystoneAdminUiGraphQl = {
@@ -297,7 +308,7 @@ export type KeystoneAdminUiSort = {
 
 export enum KeystoneAdminUiSortDirection {
   Asc = 'ASC',
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 export type KeystoneMeta = {
@@ -328,105 +339,85 @@ export type Mutation = {
   updateUsers?: Maybe<Array<Maybe<User>>>;
 };
 
-
 export type MutationAuthenticateUserWithPasswordArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
-
 export type MutationCreateFeedbackArgs = {
   data: FeedbackCreateInput;
 };
-
 
 export type MutationCreateFeedbacksArgs = {
   data: Array<FeedbackCreateInput>;
 };
 
-
 export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
-
 
 export type MutationCreateStoriesArgs = {
   data: Array<StoryCreateInput>;
 };
 
-
 export type MutationCreateStoryArgs = {
   data: StoryCreateInput;
 };
-
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
 
-
 export type MutationCreateUsersArgs = {
   data: Array<UserCreateInput>;
 };
-
 
 export type MutationDeleteFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
 
-
 export type MutationDeleteFeedbacksArgs = {
   where: Array<FeedbackWhereUniqueInput>;
 };
-
 
 export type MutationDeleteStoriesArgs = {
   where: Array<StoryWhereUniqueInput>;
 };
 
-
 export type MutationDeleteStoryArgs = {
   where: StoryWhereUniqueInput;
 };
-
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
 
-
 export type MutationDeleteUsersArgs = {
   where: Array<UserWhereUniqueInput>;
 };
-
 
 export type MutationUpdateFeedbackArgs = {
   data: FeedbackUpdateInput;
   where: FeedbackWhereUniqueInput;
 };
 
-
 export type MutationUpdateFeedbacksArgs = {
   data: Array<FeedbackUpdateArgs>;
 };
 
-
 export type MutationUpdateStoriesArgs = {
   data: Array<StoryUpdateArgs>;
 };
-
 
 export type MutationUpdateStoryArgs = {
   data: StoryUpdateInput;
   where: StoryWhereUniqueInput;
 };
 
-
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
-
 
 export type MutationUpdateUsersArgs = {
   data: Array<UserUpdateArgs>;
@@ -448,7 +439,7 @@ export type NestedStringFilter = {
 
 export enum OrderDirection {
   Asc = 'asc',
-  Desc = 'desc'
+  Desc = 'desc',
 }
 
 export type PasswordState = {
@@ -469,11 +460,9 @@ export type Query = {
   usersCount?: Maybe<Scalars['Int']['output']>;
 };
 
-
 export type QueryFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
-
 
 export type QueryFeedbacksArgs = {
   cursor?: InputMaybe<FeedbackWhereUniqueInput>;
@@ -483,11 +472,9 @@ export type QueryFeedbacksArgs = {
   where?: FeedbackWhereInput;
 };
 
-
 export type QueryFeedbacksCountArgs = {
   where?: FeedbackWhereInput;
 };
-
 
 export type QueryStoriesArgs = {
   cursor?: InputMaybe<StoryWhereUniqueInput>;
@@ -497,21 +484,17 @@ export type QueryStoriesArgs = {
   where?: StoryWhereInput;
 };
 
-
 export type QueryStoriesCountArgs = {
   where?: StoryWhereInput;
 };
-
 
 export type QueryStoryArgs = {
   where: StoryWhereUniqueInput;
 };
 
-
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
-
 
 export type QueryUsersArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -521,14 +504,13 @@ export type QueryUsersArgs = {
   where?: UserWhereInput;
 };
 
-
 export type QueryUsersCountArgs = {
   where?: UserWhereInput;
 };
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive'
+  Insensitive = 'insensitive',
 }
 
 export type Story = {
@@ -574,7 +556,7 @@ export enum StoryStatusType {
   ContentInProgress = 'contentInProgress',
   ImageInProgress = 'imageInProgress',
   Initialized = 'initialized',
-  Success = 'success'
+  Success = 'success',
 }
 
 export type StoryUpdateArgs = {
@@ -632,7 +614,6 @@ export type Subscription = {
   storyUpdated?: Maybe<Story>;
 };
 
-
 export type SubscriptionStoryUpdatedArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -649,7 +630,9 @@ export type UserAuthenticationWithPasswordFailure = {
   message: Scalars['String']['output'];
 };
 
-export type UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordFailure | UserAuthenticationWithPasswordSuccess;
+export type UserAuthenticationWithPasswordResult =
+  | UserAuthenticationWithPasswordFailure
+  | UserAuthenticationWithPasswordSuccess;
 
 export type UserAuthenticationWithPasswordSuccess = {
   item: User;
@@ -697,90 +680,139 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
-export type CreateStoryVariables = Exact<{
-  uid: Scalars['String']['input'];
-  message: Scalars['String']['input'];
-  readTime: Scalars['Int']['input'];
-  contentPrompt: Scalars['String']['input'];
-  imagePrompt: Scalars['String']['input'];
-}>;
-
-
-export type CreateStory = { createStory?: { id: string } | null };
-
 export type GetRequestVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
+export type GetRequest = {
+  story?: {
+    id: string;
+    message?: string | null;
+    status?: Array<StoryStatusType> | null;
+  } | null;
+};
 
-export type GetRequest = { story?: { id: string, message?: string | null, status?: Array<StoryStatusType> | null } | null };
+export type OnStoryUpdatedVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
 
+export type OnStoryUpdated = {
+  storyUpdated?: {
+    id: string;
+    message?: string | null;
+    status?: Array<StoryStatusType> | null;
+  } | null;
+};
 
-
-export const CreateStoryDocument = /*#__PURE__*/ `
-    mutation createStory($uid: String!, $message: String!, $readTime: Int!, $contentPrompt: String!, $imagePrompt: String!) {
-  createStory(
-    data: {firebaseUserId: $uid, message: $message, readTime: $readTime, contentPrompt: $contentPrompt, imagePrompt: $imagePrompt}
-  ) {
-    id
-  }
-}
-    `;
-
-export const useCreateStory = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateStory, TError, CreateStoryVariables, TContext>) => {
-    
-    return useMutation<CreateStory, TError, CreateStoryVariables, TContext>(
-      {
-    mutationKey: ['createStory'],
-    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(CreateStoryDocument),
-    ...options
-  }
-    )};
-
-export const GetRequestDocument = /*#__PURE__*/ `
-    query getRequest($id: ID!) {
-  story(where: {id: $id}) {
-    id
-    message
-    status
-  }
-}
-    `;
-
-export const useGetRequest = <
-      TData = GetRequest,
-      TError = unknown
-    >(
-      variables: GetRequestVariables,
-      options?: Omit<UseQueryOptions<GetRequest, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetRequest, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<GetRequest, TError, TData>(
-      {
-    queryKey: ['getRequest', variables],
-    queryFn: useFetchData<GetRequest, GetRequestVariables>(GetRequestDocument).bind(null, variables),
-    ...options
-  }
-    )};
-
-export const useInfiniteGetRequest = <
-      TData = InfiniteData<GetRequest>,
-      TError = unknown
-    >(
-      variables: GetRequestVariables,
-      options: Omit<UseInfiniteQueryOptions<GetRequest, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetRequest, TError, TData>['queryKey'] }
-    ) => {
-    const query = useFetchData<GetRequest, GetRequestVariables>(GetRequestDocument)
-    return useInfiniteQuery<GetRequest, TError, TData>(
-      (() => {
-    const { queryKey: optionsQueryKey, ...restOptions } = options;
-    return {
-      queryKey: optionsQueryKey ?? ['getRequest.infinite', variables],
-      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
-      ...restOptions
+export const GetRequestDocument = gql`
+  query getRequest($id: ID!) {
+    story(where: { id: $id }) {
+      id
+      message
+      status
     }
-  })()
-    )};
+  }
+`;
+
+/**
+ * __useGetRequest__
+ *
+ * To run a query within a React component, call `useGetRequest` and pass it any options that fit your needs.
+ * When your component renders, `useGetRequest` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetRequest({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetRequest(
+  baseOptions: Apollo.QueryHookOptions<GetRequest, GetRequestVariables> &
+    ({ variables: GetRequestVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetRequest, GetRequestVariables>(
+    GetRequestDocument,
+    options
+  );
+}
+export function useGetRequestLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<GetRequest, GetRequestVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetRequest, GetRequestVariables>(
+    GetRequestDocument,
+    options
+  );
+}
+export function useGetRequestSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<GetRequest, GetRequestVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetRequest, GetRequestVariables>(
+    GetRequestDocument,
+    options
+  );
+}
+export type GetRequestHookResult = ReturnType<typeof useGetRequest>;
+export type GetRequestLazyQueryHookResult = ReturnType<
+  typeof useGetRequestLazyQuery
+>;
+export type GetRequestSuspenseQueryHookResult = ReturnType<
+  typeof useGetRequestSuspenseQuery
+>;
+export type GetRequestQueryResult = Apollo.QueryResult<
+  GetRequest,
+  GetRequestVariables
+>;
+export const OnStoryUpdatedDocument = gql`
+  subscription onStoryUpdated($id: ID!) {
+    storyUpdated(id: $id) {
+      id
+      message
+      status
+    }
+  }
+`;
+
+/**
+ * __useOnStoryUpdated__
+ *
+ * To run a query within a React component, call `useOnStoryUpdated` and pass it any options that fit your needs.
+ * When your component renders, `useOnStoryUpdated` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnStoryUpdated({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useOnStoryUpdated(
+  baseOptions: Apollo.SubscriptionHookOptions<
+    OnStoryUpdated,
+    OnStoryUpdatedVariables
+  > &
+    ({ variables: OnStoryUpdatedVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSubscription<OnStoryUpdated, OnStoryUpdatedVariables>(
+    OnStoryUpdatedDocument,
+    options
+  );
+}
+export type OnStoryUpdatedHookResult = ReturnType<typeof useOnStoryUpdated>;
+export type OnStoryUpdatedSubscriptionResult =
+  Apollo.SubscriptionResult<OnStoryUpdated>;
