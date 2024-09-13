@@ -2,14 +2,16 @@ query getUserStories($uid: String!, $skip: Int!, $take: Int) {
   stories(
     skip: $skip
     take: $take
-    where: { firebaseUserId: { equals: $uid } }
+    where: { firebaseUserId: { equals: $uid }, isReady: { equals: true } }
   ) {
-    id,
+    id
     title
     readTime
     image {
       id
     }
   }
-  storiesCount(where: { firebaseUserId: { equals: $uid } })
+  storiesCount(
+    where: { firebaseUserId: { equals: $uid }, isReady: { equals: true } }
+  )
 }

@@ -1,46 +1,24 @@
 // @ts-nocheck
 
-import {
-  useMutation,
-  useQuery,
-  useInfiniteQuery,
-  UseMutationOptions,
-  UseQueryOptions,
-  UseInfiniteQueryOptions,
-  InfiniteData,
-} from '@tanstack/react-query';
-
+import { useMutation, useQuery, useInfiniteQuery, UseMutationOptions, UseQueryOptions, UseInfiniteQueryOptions, InfiniteData } from '@tanstack/react-query';
 import { useFetchData } from '../hooks/useFetchData/useFetchData.hook';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never };
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
-    };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
-  DateTime: { input: any; output: any };
-  JSON: { input: any; output: any };
-  Upload: { input: any; output: any };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
+  JSON: { input: any; output: any; }
+  Upload: { input: any; output: any; }
 };
 
 export type AuthenticatedItem = User;
@@ -96,6 +74,7 @@ export type CloudinaryImage_File = {
   publicUrl?: Maybe<Scalars['String']['output']>;
   publicUrlTransformed?: Maybe<Scalars['String']['output']>;
 };
+
 
 export type CloudinaryImage_FilePublicUrlTransformedArgs = {
   transformation?: InputMaybe<CloudinaryImageFormat>;
@@ -190,6 +169,7 @@ export type KeystoneAdminMeta = {
   lists: Array<KeystoneAdminUiListMeta>;
 };
 
+
 export type KeystoneAdminMetaListArgs = {
   key: Scalars['String']['input'];
 };
@@ -216,6 +196,7 @@ export type KeystoneAdminUiFieldMeta = {
   viewsIndex: Scalars['Int']['output'];
 };
 
+
 export type KeystoneAdminUiFieldMetaItemViewArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -226,13 +207,13 @@ export type KeystoneAdminUiFieldMetaCreateView = {
 
 export enum KeystoneAdminUiFieldMetaCreateViewFieldMode {
   Edit = 'edit',
-  Hidden = 'hidden',
+  Hidden = 'hidden'
 }
 
 export enum KeystoneAdminUiFieldMetaIsNonNull {
   Create = 'create',
   Read = 'read',
-  Update = 'update',
+  Update = 'update'
 }
 
 export type KeystoneAdminUiFieldMetaItemView = {
@@ -243,12 +224,12 @@ export type KeystoneAdminUiFieldMetaItemView = {
 export enum KeystoneAdminUiFieldMetaItemViewFieldMode {
   Edit = 'edit',
   Hidden = 'hidden',
-  Read = 'read',
+  Read = 'read'
 }
 
 export enum KeystoneAdminUiFieldMetaItemViewFieldPosition {
   Form = 'form',
-  Sidebar = 'sidebar',
+  Sidebar = 'sidebar'
 }
 
 export type KeystoneAdminUiFieldMetaListView = {
@@ -257,7 +238,7 @@ export type KeystoneAdminUiFieldMetaListView = {
 
 export enum KeystoneAdminUiFieldMetaListViewFieldMode {
   Hidden = 'hidden',
-  Read = 'read',
+  Read = 'read'
 }
 
 export type KeystoneAdminUiGraphQl = {
@@ -316,7 +297,7 @@ export type KeystoneAdminUiSort = {
 
 export enum KeystoneAdminUiSortDirection {
   Asc = 'ASC',
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 export type KeystoneMeta = {
@@ -347,85 +328,105 @@ export type Mutation = {
   updateUsers?: Maybe<Array<Maybe<User>>>;
 };
 
+
 export type MutationAuthenticateUserWithPasswordArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
+
 export type MutationCreateFeedbackArgs = {
   data: FeedbackCreateInput;
 };
+
 
 export type MutationCreateFeedbacksArgs = {
   data: Array<FeedbackCreateInput>;
 };
 
+
 export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
+
 
 export type MutationCreateStoriesArgs = {
   data: Array<StoryCreateInput>;
 };
 
+
 export type MutationCreateStoryArgs = {
   data: StoryCreateInput;
 };
+
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
 
+
 export type MutationCreateUsersArgs = {
   data: Array<UserCreateInput>;
 };
+
 
 export type MutationDeleteFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
 
+
 export type MutationDeleteFeedbacksArgs = {
   where: Array<FeedbackWhereUniqueInput>;
 };
+
 
 export type MutationDeleteStoriesArgs = {
   where: Array<StoryWhereUniqueInput>;
 };
 
+
 export type MutationDeleteStoryArgs = {
   where: StoryWhereUniqueInput;
 };
+
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
 
+
 export type MutationDeleteUsersArgs = {
   where: Array<UserWhereUniqueInput>;
 };
+
 
 export type MutationUpdateFeedbackArgs = {
   data: FeedbackUpdateInput;
   where: FeedbackWhereUniqueInput;
 };
 
+
 export type MutationUpdateFeedbacksArgs = {
   data: Array<FeedbackUpdateArgs>;
 };
 
+
 export type MutationUpdateStoriesArgs = {
   data: Array<StoryUpdateArgs>;
 };
+
 
 export type MutationUpdateStoryArgs = {
   data: StoryUpdateInput;
   where: StoryWhereUniqueInput;
 };
 
+
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
+
 
 export type MutationUpdateUsersArgs = {
   data: Array<UserUpdateArgs>;
@@ -447,7 +448,7 @@ export type NestedStringFilter = {
 
 export enum OrderDirection {
   Asc = 'asc',
-  Desc = 'desc',
+  Desc = 'desc'
 }
 
 export type PasswordState = {
@@ -468,9 +469,11 @@ export type Query = {
   usersCount?: Maybe<Scalars['Int']['output']>;
 };
 
+
 export type QueryFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
+
 
 export type QueryFeedbacksArgs = {
   cursor?: InputMaybe<FeedbackWhereUniqueInput>;
@@ -480,9 +483,11 @@ export type QueryFeedbacksArgs = {
   where?: FeedbackWhereInput;
 };
 
+
 export type QueryFeedbacksCountArgs = {
   where?: FeedbackWhereInput;
 };
+
 
 export type QueryStoriesArgs = {
   cursor?: InputMaybe<StoryWhereUniqueInput>;
@@ -492,17 +497,21 @@ export type QueryStoriesArgs = {
   where?: StoryWhereInput;
 };
 
+
 export type QueryStoriesCountArgs = {
   where?: StoryWhereInput;
 };
+
 
 export type QueryStoryArgs = {
   where: StoryWhereUniqueInput;
 };
 
+
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
+
 
 export type QueryUsersArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -512,13 +521,14 @@ export type QueryUsersArgs = {
   where?: UserWhereInput;
 };
 
+
 export type QueryUsersCountArgs = {
   where?: UserWhereInput;
 };
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive',
+  Insensitive = 'insensitive'
 }
 
 export type Story = {
@@ -564,7 +574,7 @@ export enum StoryStatusType {
   ContentInProgress = 'contentInProgress',
   ImageInProgress = 'imageInProgress',
   Initialized = 'initialized',
-  Success = 'success',
+  Success = 'success'
 }
 
 export type StoryUpdateArgs = {
@@ -622,6 +632,7 @@ export type Subscription = {
   storyUpdated?: Maybe<Story>;
 };
 
+
 export type SubscriptionStoryUpdatedArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -638,9 +649,7 @@ export type UserAuthenticationWithPasswordFailure = {
   message: Scalars['String']['output'];
 };
 
-export type UserAuthenticationWithPasswordResult =
-  | UserAuthenticationWithPasswordFailure
-  | UserAuthenticationWithPasswordSuccess;
+export type UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordFailure | UserAuthenticationWithPasswordSuccess;
 
 export type UserAuthenticationWithPasswordSuccess = {
   item: User;
@@ -696,6 +705,7 @@ export type CreateStoryVariables = Exact<{
   imagePrompt: Scalars['String']['input'];
 }>;
 
+
 export type CreateStory = { createStory?: { id: string } | null };
 
 export type GetUserStoriesVariables = Exact<{
@@ -704,15 +714,10 @@ export type GetUserStoriesVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
-export type GetUserStories = {
-  storiesCount?: number | null;
-  stories?: Array<{
-    id: string;
-    title?: string | null;
-    readTime?: number | null;
-    image?: { id?: string | null } | null;
-  }> | null;
-};
+
+export type GetUserStories = { storiesCount?: number | null, stories?: Array<{ id: string, title?: string | null, readTime?: number | null, image?: { id?: string | null } | null }> | null };
+
+
 
 export const CreateStoryDocument = /*#__PURE__*/ `
     mutation createStory($uid: String!, $message: String!, $readTime: Int!, $contentPrompt: String!, $imagePrompt: String!) {
@@ -724,26 +729,26 @@ export const CreateStoryDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useCreateStory = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    CreateStory,
-    TError,
-    CreateStoryVariables,
-    TContext
-  >
-) => {
-  return useMutation<CreateStory, TError, CreateStoryVariables, TContext>({
-    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(
-      CreateStoryDocument
-    ),
+export const useCreateStory = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateStory, TError, CreateStoryVariables, TContext>) => {
+    
+    return useMutation<CreateStory, TError, CreateStoryVariables, TContext>(
+      {
     mutationKey: ['createStory'],
-    ...options,
-  });
-};
+    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(CreateStoryDocument),
+    ...options
+  }
+    )};
 
 export const GetUserStoriesDocument = /*#__PURE__*/ `
     query getUserStories($uid: String!, $skip: Int!, $take: Int) {
-  stories(skip: $skip, take: $take, where: {firebaseUserId: {equals: $uid}}) {
+  stories(
+    skip: $skip
+    take: $take
+    where: {firebaseUserId: {equals: $uid}, isReady: {equals: true}}
+  ) {
     id
     title
     readTime
@@ -751,53 +756,41 @@ export const GetUserStoriesDocument = /*#__PURE__*/ `
       id
     }
   }
-  storiesCount(where: {firebaseUserId: {equals: $uid}})
+  storiesCount(where: {firebaseUserId: {equals: $uid}, isReady: {equals: true}})
 }
     `;
 
-export const useGetUserStories = <TData = GetUserStories, TError = unknown>(
-  variables: GetUserStoriesVariables,
-  options?: Omit<UseQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & {
-    queryKey?: UseQueryOptions<GetUserStories, TError, TData>['queryKey'];
-  }
-) => {
-  return useQuery<GetUserStories, TError, TData>({
-    queryFn: useFetchData<GetUserStories, GetUserStoriesVariables>(
-      GetUserStoriesDocument
-    ).bind(null, variables),
+export const useGetUserStories = <
+      TData = GetUserStories,
+      TError = unknown
+    >(
+      variables: GetUserStoriesVariables,
+      options?: Omit<UseQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetUserStories, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetUserStories, TError, TData>(
+      {
     queryKey: ['getUserStories', variables],
-    ...options,
-  });
-};
+    queryFn: useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument).bind(null, variables),
+    ...options
+  }
+    )};
 
 export const useInfiniteGetUserStories = <
-  TData = InfiniteData<GetUserStories>,
-  TError = unknown,
->(
-  variables: GetUserStoriesVariables,
-  options: Omit<
-    UseInfiniteQueryOptions<GetUserStories, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseInfiniteQueryOptions<
-      GetUserStories,
-      TError,
-      TData
-    >['queryKey'];
-  }
-) => {
-  const query = useFetchData<GetUserStories, GetUserStoriesVariables>(
-    GetUserStoriesDocument
-  );
-  return useInfiniteQuery<GetUserStories, TError, TData>(
-    (() => {
-      const { queryKey: optionsQueryKey, ...restOptions } = options;
-      return {
-        queryFn: (metaData) =>
-          query({ ...variables, ...(metaData.pageParam ?? {}) }),
-        queryKey: optionsQueryKey ?? ['getUserStories.infinite', variables],
-        ...restOptions,
-      };
-    })()
-  );
-};
+      TData = InfiniteData<GetUserStories>,
+      TError = unknown
+    >(
+      variables: GetUserStoriesVariables,
+      options: Omit<UseInfiniteQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetUserStories, TError, TData>['queryKey'] }
+    ) => {
+    const query = useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument)
+    return useInfiniteQuery<GetUserStories, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['getUserStories.infinite', variables],
+      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
+      ...restOptions
+    }
+  })()
+    )};
