@@ -2,7 +2,10 @@
 export * from './components/ApiProvider';
 
 // Hooks
-export { useCreateStory } from './__generated__/query';
+export {
+  useCreateStory,
+  useInfiniteGetUserStories,
+} from './__generated__/query';
 export { useGetRequest } from './__generated__/apollo';
 
 // Documents

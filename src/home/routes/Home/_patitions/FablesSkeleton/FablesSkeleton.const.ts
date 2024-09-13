@@ -1,20 +1,12 @@
-import { DTO } from '@bootstrap/dto';
+import { DTO } from '@network/api';
 
-export const SKELETON_INITIAL_DATA: DTO.Fable[] = Array.from({
+export const SKELETON_INITIAL_DATA: DTO.GetUserStories['stories'] = Array.from({
   length: 3,
-}).map(
-  (): DTO.Fable => ({
-    character: '',
-    createdAt: null,
-    description: '',
-    image: {
-      public_id: undefined,
-    },
-    message: '',
-    readTime: 0,
-    scene: '',
-    status: [],
-    title: '',
-    uid: '',
-  })
-);
+}).map((): DTO.GetUserStories['stories']['0'] => ({
+  id: '',
+  image: {
+    id: '',
+  },
+  readTime: 0,
+  title: '',
+}));

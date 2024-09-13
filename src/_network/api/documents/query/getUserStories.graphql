@@ -1,0 +1,14 @@
+query getUserStories($uid: String!, $skip: Int!, $take: Int) {
+  stories(
+    skip: $skip
+    take: $take
+    where: { firebaseUserId: { equals: $uid } }
+  ) {
+    id,
+    title
+    readTime
+    image {
+      id
+    }
+  }
+}

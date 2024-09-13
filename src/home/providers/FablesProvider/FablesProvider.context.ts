@@ -1,25 +1,21 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO } from '@bootstrap/dto';
-import { useGetCollectionInfinite } from '@core/firestore';
+import { DTO, useInfiniteGetUserStories } from '@network/api';
 
-type UseGetCollectionInfiniteReturnType = ReturnType<
-  typeof useGetCollectionInfinite<DTO.Fable>
+type UseInfiniteGetUserStoriesReturnType = ReturnType<
+  typeof useInfiniteGetUserStories
 >;
 
 export interface FablesProviderContextProps {
+  stories: DTO.GetUserStories['stories'];
   isLoading: boolean;
   hasNextPage: boolean;
-  fetchNextPage: UseGetCollectionInfiniteReturnType['fetchNextPage'];
-  data: UseGetCollectionInfiniteReturnType['data'];
+  fetchNextPage: UseInfiniteGetUserStoriesReturnType['fetchNextPage'];
 }
 
 export const FablesProviderContext = createContext<FablesProviderContextProps>({
-  data: {
-    pageParams: [],
-    pages: [],
-  },
   fetchNextPage: () => Promise.resolve(null),
   hasNextPage: false,
   isLoading: false,
+  stories: [],
 });

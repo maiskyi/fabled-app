@@ -1,7 +1,6 @@
 import { FC, PropsWithChildren, useMemo, useRef } from 'react';
 
 import {
-  useGetCollectionInfinite,
   UseGetCollectionInfiniteEveryParams,
   UseGetCollectionInfiniteOrderParams,
   useCollectionSnapshotListener,
@@ -9,6 +8,7 @@ import {
 import { DTO } from '@bootstrap/dto';
 import { Document } from '@bootstrap/constants';
 import { useUser } from '@common/hooks';
+import { useInfiniteGetUserStories } from '@network/api';
 
 import { FablesProviderContext } from './FablesProvider.context';
 
@@ -16,6 +16,17 @@ type FablesProviderProps = PropsWithChildren<{}>;
 
 export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
   const { uid } = useUser();
+
+  const { data, hasNextPage, fetchNextPage, isLoading, refetch } =
+    useInfiniteGetUserStories(
+      { skip: 0, take: 25, uid },
+      {
+        getNextPageParam: () => {
+          return undefined;
+        },
+        initialPageParam: 0,
+      }
+    );
 
   const { current: every } = useRef<
     UseGetCollectionInfiniteEveryParams<DTO.Fable>[]
@@ -41,16 +52,13 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
     field: 'createdAt',
   });
 
-  const { isLoading, hasNextPage, fetchNextPage, data, refetch } =
-    useGetCollectionInfinite<DTO.Fable>({
-      doc: Document.Fable,
-      every,
-      order,
-    });
+  const stories = useMemo(() => {
+    return data?.pages.flatMap(({ stories }) => stories);
+  }, [data]);
 
   const contextValue = useMemo(
-    () => ({ data, fetchNextPage, hasNextPage, isLoading }),
-    [isLoading, hasNextPage, fetchNextPage, data]
+    () => ({ data, fetchNextPage, hasNextPage, isLoading, stories }),
+    [isLoading, hasNextPage, fetchNextPage, data, stories]
   );
 
   useCollectionSnapshotListener(
