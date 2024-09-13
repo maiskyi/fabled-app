@@ -11,6 +11,10 @@ import { useUser } from '@common/hooks';
 import { useInfiniteGetUserStories } from '@network/api';
 
 import { FablesProviderContext } from './FablesProvider.context';
+import {
+  GET_USER_STORIES_SKIP_PARAM,
+  GET_USER_STORIES_TAKE_PARAM,
+} from './FablesProvider.const';
 
 type FablesProviderProps = PropsWithChildren<{}>;
 
@@ -19,12 +23,21 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
 
   const { data, hasNextPage, fetchNextPage, isLoading, refetch } =
     useInfiniteGetUserStories(
-      { skip: 0, take: 25, uid },
       {
-        getNextPageParam: () => {
-          return undefined;
+        skip: GET_USER_STORIES_SKIP_PARAM,
+        take: GET_USER_STORIES_TAKE_PARAM,
+        uid,
+      },
+      {
+        getNextPageParam: ({ storiesCount }, all) => {
+          const total = all.flatMap(({ stories }) => stories).length;
+          return storiesCount > total
+            ? { skip: all.length * GET_USER_STORIES_TAKE_PARAM }
+            : undefined;
         },
-        initialPageParam: 0,
+        initialPageParam: {
+          skip: GET_USER_STORIES_SKIP_PARAM,
+        },
       }
     );
 

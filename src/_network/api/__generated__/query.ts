@@ -705,6 +705,7 @@ export type GetUserStoriesVariables = Exact<{
 }>;
 
 export type GetUserStories = {
+  storiesCount?: number | null;
   stories?: Array<{
     id: string;
     title?: string | null;
@@ -750,6 +751,7 @@ export const GetUserStoriesDocument = /*#__PURE__*/ `
       id
     }
   }
+  storiesCount(where: {firebaseUserId: {equals: $uid}})
 }
     `;
 
