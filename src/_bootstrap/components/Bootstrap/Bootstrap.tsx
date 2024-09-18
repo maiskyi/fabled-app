@@ -8,10 +8,6 @@ import {
   LocalizationProvider,
   LocalizationProviderProps,
 } from '@core/localization';
-import {
-  CloudinaryProvider,
-  CloudinaryProviderProps,
-} from '@network/cloudinary';
 import { AppUrlListener } from '@core/navigation';
 
 import { Network, NetworkProps } from './Network';
@@ -25,7 +21,6 @@ export type BootstrapProps = PropsWithChildren<{
   localization: LocalizationProviderProps;
   network: NetworkProps;
   config: ConfigProps;
-  cloudinary: CloudinaryProviderProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
@@ -35,28 +30,25 @@ export const Bootstrap: FC<BootstrapProps> = ({
   localization,
   network,
   config,
-  cloudinary,
 }) => {
   return (
     <AppUrlListener>
       <ThemeProvider>
-        <CloudinaryProvider {...cloudinary}>
-          <NetworkProvider>
-            <Network {...network}>
-              <Config {...config}>
-                <LocalizationProvider {...localization}>
-                  <AppProvider {...app}>
-                    <AuthProvider>
-                      <FirestoreProvider {...firestore}>
-                        <Navigation>{children}</Navigation>
-                      </FirestoreProvider>
-                    </AuthProvider>
-                  </AppProvider>
-                </LocalizationProvider>
-              </Config>
-            </Network>
-          </NetworkProvider>
-        </CloudinaryProvider>
+        <NetworkProvider>
+          <Network {...network}>
+            <Config {...config}>
+              <LocalizationProvider {...localization}>
+                <AppProvider {...app}>
+                  <AuthProvider>
+                    <FirestoreProvider {...firestore}>
+                      <Navigation>{children}</Navigation>
+                    </FirestoreProvider>
+                  </AuthProvider>
+                </AppProvider>
+              </LocalizationProvider>
+            </Config>
+          </Network>
+        </NetworkProvider>
       </ThemeProvider>
     </AppUrlListener>
   );
