@@ -5,8 +5,7 @@ import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
-import { useTemplate } from '@network/contentful';
-import { useCreateStory } from '@network/api';
+import { useCreateStory, useTemplate } from '@network/api';
 import { useAuth } from '@core/auth';
 
 import { FormField } from '../Create.const';

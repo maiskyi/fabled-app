@@ -51,11 +51,6 @@ const config: AppProps = {
         endpoint: import.meta.env.VITE_API_ENDPOINT,
         subscription: import.meta.env.VITE_API_SUBSCRIPTION,
       },
-      contentful: {
-        apiKey: import.meta.env.VITE_CONTENTFUL_API_KEY,
-        environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT,
-        space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
-      },
     },
   },
 };
