@@ -3,6 +3,7 @@ export * from './components/ApiProvider';
 
 // Hooks
 export {
+  useCreateFeedback,
   useCreateStory,
   useGetStory,
   useInfiniteGetUserStories,

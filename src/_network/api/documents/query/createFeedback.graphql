@@ -1,0 +1,7 @@
+mutation createFeedback($comment: String!, $rating: Int!, $uid: String!) {
+  createFeedback(
+    data: { comment: $comment, rating: $rating, firebaseUserId: $uid }
+  ) {
+    id
+  }
+}

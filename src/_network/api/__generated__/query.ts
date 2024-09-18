@@ -100,6 +100,7 @@ export type DateTimeNullableFilter = {
 export type Feedback = {
   comment?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  firebaseUserId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   rating?: Maybe<Scalars['Int']['output']>;
 };
@@ -107,12 +108,14 @@ export type Feedback = {
 export type FeedbackCreateInput = {
   comment?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type FeedbackOrderByInput = {
   comment?: InputMaybe<OrderDirection>;
   createdAt?: InputMaybe<OrderDirection>;
+  firebaseUserId?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   rating?: InputMaybe<OrderDirection>;
 };
@@ -125,6 +128,7 @@ export type FeedbackUpdateArgs = {
 export type FeedbackUpdateInput = {
   comment?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -134,6 +138,7 @@ export type FeedbackWhereInput = {
   OR?: InputMaybe<Array<FeedbackWhereInput>>;
   comment?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
+  firebaseUserId?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
   rating?: InputMaybe<IntFilter>;
 };
@@ -702,6 +707,15 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
 
+export type CreateFeedbackVariables = Exact<{
+  comment: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+  uid: Scalars['String']['input'];
+}>;
+
+
+export type CreateFeedback = { createFeedback?: { id: string } | null };
+
 export type CreateStoryVariables = Exact<{
   uid: Scalars['String']['input'];
   message: Scalars['String']['input'];
@@ -733,6 +747,27 @@ export type GetUserStoriesVariables = Exact<{
 export type GetUserStories = { storiesCount?: number | null, stories?: Array<{ id: string, title?: string | null, readTime?: number | null, image?: { id?: string | null, publicUrlTransformed?: string | null } | null }> | null };
 
 
+
+export const CreateFeedbackDocument = /*#__PURE__*/ `
+    mutation createFeedback($comment: String!, $rating: Int!, $uid: String!) {
+  createFeedback(data: {comment: $comment, rating: $rating, firebaseUserId: $uid}) {
+    id
+  }
+}
+    `;
+
+export const useCreateFeedback = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateFeedback, TError, CreateFeedbackVariables, TContext>) => {
+    
+    return useMutation<CreateFeedback, TError, CreateFeedbackVariables, TContext>(
+      {
+    mutationKey: ['createFeedback'],
+    mutationFn: useFetchData<CreateFeedback, CreateFeedbackVariables>(CreateFeedbackDocument),
+    ...options
+  }
+    )};
 
 export const CreateStoryDocument = /*#__PURE__*/ `
     mutation createStory($uid: String!, $message: String!, $readTime: Int!, $contentPrompt: String!, $imagePrompt: String!, $file: Upload) {

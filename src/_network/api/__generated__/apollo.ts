@@ -101,6 +101,7 @@ export type DateTimeNullableFilter = {
 export type Feedback = {
   comment?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  firebaseUserId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   rating?: Maybe<Scalars['Int']['output']>;
 };
@@ -108,12 +109,14 @@ export type Feedback = {
 export type FeedbackCreateInput = {
   comment?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type FeedbackOrderByInput = {
   comment?: InputMaybe<OrderDirection>;
   createdAt?: InputMaybe<OrderDirection>;
+  firebaseUserId?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   rating?: InputMaybe<OrderDirection>;
 };
@@ -126,6 +129,7 @@ export type FeedbackUpdateArgs = {
 export type FeedbackUpdateInput = {
   comment?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
 };
 
@@ -135,6 +139,7 @@ export type FeedbackWhereInput = {
   OR?: InputMaybe<Array<FeedbackWhereInput>>;
   comment?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
+  firebaseUserId?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
   rating?: InputMaybe<IntFilter>;
 };
