@@ -1,4 +1,9 @@
-query getUserStories($uid: String!, $skip: Int!, $take: Int) {
+query getUserStories(
+  $uid: String!
+  $skip: Int!
+  $take: Int
+  $image: CloudinaryImageFormat
+) {
   stories(
     skip: $skip
     take: $take
@@ -9,6 +14,7 @@ query getUserStories($uid: String!, $skip: Int!, $take: Int) {
     readTime
     image {
       id
+      publicUrlTransformed (transformation: $image)
     }
   }
   storiesCount(

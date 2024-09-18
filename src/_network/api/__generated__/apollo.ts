@@ -533,6 +533,7 @@ export enum QueryMode {
 }
 
 export type Story = {
+  content?: Maybe<Scalars['String']['output']>;
   contentPrompt?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   firebaseUserId?: Maybe<Scalars['String']['output']>;
@@ -547,6 +548,7 @@ export type Story = {
 };
 
 export type StoryCreateInput = {
+  content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
@@ -560,6 +562,7 @@ export type StoryCreateInput = {
 };
 
 export type StoryOrderByInput = {
+  content?: InputMaybe<OrderDirection>;
   contentPrompt?: InputMaybe<OrderDirection>;
   createdAt?: InputMaybe<OrderDirection>;
   firebaseUserId?: InputMaybe<OrderDirection>;
@@ -584,6 +587,7 @@ export type StoryUpdateArgs = {
 };
 
 export type StoryUpdateInput = {
+  content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
@@ -600,6 +604,7 @@ export type StoryWhereInput = {
   AND?: InputMaybe<Array<StoryWhereInput>>;
   NOT?: InputMaybe<Array<StoryWhereInput>>;
   OR?: InputMaybe<Array<StoryWhereInput>>;
+  content?: InputMaybe<StringFilter>;
   contentPrompt?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   firebaseUserId?: InputMaybe<StringFilter>;

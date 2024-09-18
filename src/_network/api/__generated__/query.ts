@@ -532,6 +532,7 @@ export enum QueryMode {
 }
 
 export type Story = {
+  content?: Maybe<Scalars['String']['output']>;
   contentPrompt?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   firebaseUserId?: Maybe<Scalars['String']['output']>;
@@ -546,6 +547,7 @@ export type Story = {
 };
 
 export type StoryCreateInput = {
+  content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
@@ -559,6 +561,7 @@ export type StoryCreateInput = {
 };
 
 export type StoryOrderByInput = {
+  content?: InputMaybe<OrderDirection>;
   contentPrompt?: InputMaybe<OrderDirection>;
   createdAt?: InputMaybe<OrderDirection>;
   firebaseUserId?: InputMaybe<OrderDirection>;
@@ -583,6 +586,7 @@ export type StoryUpdateArgs = {
 };
 
 export type StoryUpdateInput = {
+  content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
@@ -599,6 +603,7 @@ export type StoryWhereInput = {
   AND?: InputMaybe<Array<StoryWhereInput>>;
   NOT?: InputMaybe<Array<StoryWhereInput>>;
   OR?: InputMaybe<Array<StoryWhereInput>>;
+  content?: InputMaybe<StringFilter>;
   contentPrompt?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   firebaseUserId?: InputMaybe<StringFilter>;
@@ -703,26 +708,35 @@ export type CreateStoryVariables = Exact<{
   readTime: Scalars['Int']['input'];
   contentPrompt: Scalars['String']['input'];
   imagePrompt: Scalars['String']['input'];
+  file?: InputMaybe<Scalars['Upload']['input']>;
 }>;
 
 
 export type CreateStory = { createStory?: { id: string } | null };
 
+export type GetStoryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetStory = { story?: { title?: string | null, content?: string | null } | null };
+
 export type GetUserStoriesVariables = Exact<{
   uid: Scalars['String']['input'];
   skip: Scalars['Int']['input'];
   take?: InputMaybe<Scalars['Int']['input']>;
+  image?: InputMaybe<CloudinaryImageFormat>;
 }>;
 
 
-export type GetUserStories = { storiesCount?: number | null, stories?: Array<{ id: string, title?: string | null, readTime?: number | null, image?: { id?: string | null } | null }> | null };
+export type GetUserStories = { storiesCount?: number | null, stories?: Array<{ id: string, title?: string | null, readTime?: number | null, image?: { id?: string | null, publicUrlTransformed?: string | null } | null }> | null };
 
 
 
 export const CreateStoryDocument = /*#__PURE__*/ `
-    mutation createStory($uid: String!, $message: String!, $readTime: Int!, $contentPrompt: String!, $imagePrompt: String!) {
+    mutation createStory($uid: String!, $message: String!, $readTime: Int!, $contentPrompt: String!, $imagePrompt: String!, $file: Upload) {
   createStory(
-    data: {firebaseUserId: $uid, message: $message, readTime: $readTime, contentPrompt: $contentPrompt, imagePrompt: $imagePrompt}
+    data: {firebaseUserId: $uid, message: $message, readTime: $readTime, contentPrompt: $contentPrompt, imagePrompt: $imagePrompt, image: $file}
   ) {
     id
   }
@@ -742,8 +756,52 @@ export const useCreateStory = <
   }
     )};
 
+export const GetStoryDocument = /*#__PURE__*/ `
+    query getStory($id: ID!) {
+  story(where: {id: $id}) {
+    title
+    content
+  }
+}
+    `;
+
+export const useGetStory = <
+      TData = GetStory,
+      TError = unknown
+    >(
+      variables: GetStoryVariables,
+      options?: Omit<UseQueryOptions<GetStory, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetStory, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetStory, TError, TData>(
+      {
+    queryKey: ['getStory', variables],
+    queryFn: useFetchData<GetStory, GetStoryVariables>(GetStoryDocument).bind(null, variables),
+    ...options
+  }
+    )};
+
+export const useInfiniteGetStory = <
+      TData = InfiniteData<GetStory>,
+      TError = unknown
+    >(
+      variables: GetStoryVariables,
+      options: Omit<UseInfiniteQueryOptions<GetStory, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetStory, TError, TData>['queryKey'] }
+    ) => {
+    const query = useFetchData<GetStory, GetStoryVariables>(GetStoryDocument)
+    return useInfiniteQuery<GetStory, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['getStory.infinite', variables],
+      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
+      ...restOptions
+    }
+  })()
+    )};
+
 export const GetUserStoriesDocument = /*#__PURE__*/ `
-    query getUserStories($uid: String!, $skip: Int!, $take: Int) {
+    query getUserStories($uid: String!, $skip: Int!, $take: Int, $image: CloudinaryImageFormat) {
   stories(
     skip: $skip
     take: $take
@@ -754,6 +812,7 @@ export const GetUserStoriesDocument = /*#__PURE__*/ `
     readTime
     image {
       id
+      publicUrlTransformed(transformation: $image)
     }
   }
   storiesCount(where: {firebaseUserId: {equals: $uid}, isReady: {equals: true}})

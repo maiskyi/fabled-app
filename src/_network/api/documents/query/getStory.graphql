@@ -1,0 +1,6 @@
+query getStory($id: ID!) {
+  story(where: { id: $id }) {
+    title
+    content
+  }
+}

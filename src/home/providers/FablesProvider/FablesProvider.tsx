@@ -9,6 +9,7 @@ import { DTO } from '@bootstrap/dto';
 import { Document } from '@bootstrap/constants';
 import { useUser } from '@common/hooks';
 import { useInfiniteGetUserStories } from '@network/api';
+import { useDevice } from '@core/uikit';
 
 import { FablesProviderContext } from './FablesProvider.context';
 import {
@@ -20,10 +21,16 @@ type FablesProviderProps = PropsWithChildren<{}>;
 
 export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
   const { uid } = useUser();
+  const { width } = useDevice();
 
   const { data, hasNextPage, fetchNextPage, isLoading, refetch } =
     useInfiniteGetUserStories(
       {
+        image: {
+          aspect_ratio: '4:3',
+          crop: 'thumb',
+          width: `${width}`,
+        },
         skip: GET_USER_STORIES_SKIP_PARAM,
         take: GET_USER_STORIES_TAKE_PARAM,
         uid,

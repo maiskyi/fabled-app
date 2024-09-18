@@ -4,6 +4,7 @@ mutation createStory(
   $readTime: Int!
   $contentPrompt: String!
   $imagePrompt: String!
+  $file: Upload
 ) {
   createStory(
     data: {
@@ -12,6 +13,7 @@ mutation createStory(
       readTime: $readTime
       contentPrompt: $contentPrompt
       imagePrompt: $imagePrompt
+      image: $file
     }
   ) {
     id

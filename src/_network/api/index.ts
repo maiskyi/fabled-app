@@ -4,6 +4,7 @@ export * from './components/ApiProvider';
 // Hooks
 export {
   useCreateStory,
+  useGetStory,
   useInfiniteGetUserStories,
 } from './__generated__/query';
 export { useGetRequest } from './__generated__/apollo';
