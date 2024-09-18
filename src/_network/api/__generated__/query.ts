@@ -716,10 +716,11 @@ export type CreateStory = { createStory?: { id: string } | null };
 
 export type GetStoryVariables = Exact<{
   id: Scalars['ID']['input'];
+  image?: InputMaybe<CloudinaryImageFormat>;
 }>;
 
 
-export type GetStory = { story?: { title?: string | null, content?: string | null } | null };
+export type GetStory = { story?: { title?: string | null, content?: string | null, image?: { publicUrlTransformed?: string | null } | null } | null };
 
 export type GetUserStoriesVariables = Exact<{
   uid: Scalars['String']['input'];
@@ -757,10 +758,13 @@ export const useCreateStory = <
     )};
 
 export const GetStoryDocument = /*#__PURE__*/ `
-    query getStory($id: ID!) {
+    query getStory($id: ID!, $image: CloudinaryImageFormat) {
   story(where: {id: $id}) {
     title
     content
+    image {
+      publicUrlTransformed(transformation: $image)
+    }
   }
 }
     `;
