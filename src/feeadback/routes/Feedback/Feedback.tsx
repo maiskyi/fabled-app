@@ -10,7 +10,7 @@ import { useUser } from '@common/hooks';
 export const Feedback: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
-  const { uid } = useUser();
+  const { uid, email } = useUser();
 
   const title = t('pages.feedback');
 
@@ -18,7 +18,7 @@ export const Feedback: FC = () => {
 
   const handleOnSubmit = async (form: DTO.CreateFeedbackVariables) => {
     await mutateAsync(
-      { uid, ...form },
+      { email, uid, ...form },
       {
         onError: () => {
           navigate({

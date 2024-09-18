@@ -1,6 +1,16 @@
-mutation createFeedback($comment: String!, $rating: Int!, $uid: String!) {
+mutation createFeedback(
+  $comment: String!
+  $rating: Int!
+  $uid: String!
+  $email: String!
+) {
   createFeedback(
-    data: { comment: $comment, rating: $rating, firebaseUserId: $uid }
+    data: {
+      comment: $comment
+      rating: $rating
+      firebaseUserId: $uid
+      email: $email
+    }
   ) {
     id
   }

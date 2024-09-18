@@ -4,6 +4,7 @@ export * from './components/ApiProvider';
 // Hooks
 export {
   useCreateFeedback,
+  useCreateInquiry,
   useCreateStory,
   useGetStory,
   useInfiniteGetUserStories,

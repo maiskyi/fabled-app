@@ -1,24 +1,46 @@
 // @ts-nocheck
 
-import { useMutation, useQuery, useInfiniteQuery, UseMutationOptions, UseQueryOptions, UseInfiniteQueryOptions, InfiniteData } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useInfiniteQuery,
+  UseMutationOptions,
+  UseQueryOptions,
+  UseInfiniteQueryOptions,
+  InfiniteData,
+} from '@tanstack/react-query';
+
 import { useFetchData } from '../hooks/useFetchData/useFetchData.hook';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  DateTime: { input: any; output: any; }
-  JSON: { input: any; output: any; }
-  Upload: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  DateTime: { input: any; output: any };
+  JSON: { input: any; output: any };
+  Upload: { input: any; output: any };
 };
 
 export type AuthenticatedItem = User;
@@ -75,7 +97,6 @@ export type CloudinaryImage_File = {
   publicUrlTransformed?: Maybe<Scalars['String']['output']>;
 };
 
-
 export type CloudinaryImage_FilePublicUrlTransformedArgs = {
   transformation?: InputMaybe<CloudinaryImageFormat>;
 };
@@ -100,6 +121,7 @@ export type DateTimeNullableFilter = {
 export type Feedback = {
   comment?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
   firebaseUserId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   rating?: Maybe<Scalars['Int']['output']>;
@@ -108,6 +130,7 @@ export type Feedback = {
 export type FeedbackCreateInput = {
   comment?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -115,6 +138,7 @@ export type FeedbackCreateInput = {
 export type FeedbackOrderByInput = {
   comment?: InputMaybe<OrderDirection>;
   createdAt?: InputMaybe<OrderDirection>;
+  email?: InputMaybe<OrderDirection>;
   firebaseUserId?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   rating?: InputMaybe<OrderDirection>;
@@ -128,6 +152,7 @@ export type FeedbackUpdateArgs = {
 export type FeedbackUpdateInput = {
   comment?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -138,6 +163,7 @@ export type FeedbackWhereInput = {
   OR?: InputMaybe<Array<FeedbackWhereInput>>;
   comment?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
+  email?: InputMaybe<StringFilter>;
   firebaseUserId?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
   rating?: InputMaybe<IntFilter>;
@@ -158,6 +184,56 @@ export type IdFilter = {
   notIn?: InputMaybe<Array<Scalars['ID']['input']>>;
 };
 
+export type Inquiry = {
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  message?: Maybe<Scalars['String']['output']>;
+  subject?: Maybe<Scalars['String']['output']>;
+};
+
+export type InquiryCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  subject?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type InquiryOrderByInput = {
+  createdAt?: InputMaybe<OrderDirection>;
+  email?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  message?: InputMaybe<OrderDirection>;
+  subject?: InputMaybe<OrderDirection>;
+};
+
+export type InquiryUpdateArgs = {
+  data: InquiryUpdateInput;
+  where: InquiryWhereUniqueInput;
+};
+
+export type InquiryUpdateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  subject?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type InquiryWhereInput = {
+  AND?: InputMaybe<Array<InquiryWhereInput>>;
+  NOT?: InputMaybe<Array<InquiryWhereInput>>;
+  OR?: InputMaybe<Array<InquiryWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  email?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  message?: InputMaybe<StringFilter>;
+  subject?: InputMaybe<StringFilter>;
+};
+
+export type InquiryWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type IntFilter = {
   equals?: InputMaybe<Scalars['Int']['input']>;
   gt?: InputMaybe<Scalars['Int']['input']>;
@@ -173,7 +249,6 @@ export type KeystoneAdminMeta = {
   list?: Maybe<KeystoneAdminUiListMeta>;
   lists: Array<KeystoneAdminUiListMeta>;
 };
-
 
 export type KeystoneAdminMetaListArgs = {
   key: Scalars['String']['input'];
@@ -201,7 +276,6 @@ export type KeystoneAdminUiFieldMeta = {
   viewsIndex: Scalars['Int']['output'];
 };
 
-
 export type KeystoneAdminUiFieldMetaItemViewArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -212,13 +286,13 @@ export type KeystoneAdminUiFieldMetaCreateView = {
 
 export enum KeystoneAdminUiFieldMetaCreateViewFieldMode {
   Edit = 'edit',
-  Hidden = 'hidden'
+  Hidden = 'hidden',
 }
 
 export enum KeystoneAdminUiFieldMetaIsNonNull {
   Create = 'create',
   Read = 'read',
-  Update = 'update'
+  Update = 'update',
 }
 
 export type KeystoneAdminUiFieldMetaItemView = {
@@ -229,12 +303,12 @@ export type KeystoneAdminUiFieldMetaItemView = {
 export enum KeystoneAdminUiFieldMetaItemViewFieldMode {
   Edit = 'edit',
   Hidden = 'hidden',
-  Read = 'read'
+  Read = 'read',
 }
 
 export enum KeystoneAdminUiFieldMetaItemViewFieldPosition {
   Form = 'form',
-  Sidebar = 'sidebar'
+  Sidebar = 'sidebar',
 }
 
 export type KeystoneAdminUiFieldMetaListView = {
@@ -243,7 +317,7 @@ export type KeystoneAdminUiFieldMetaListView = {
 
 export enum KeystoneAdminUiFieldMetaListViewFieldMode {
   Hidden = 'hidden',
-  Read = 'read'
+  Read = 'read',
 }
 
 export type KeystoneAdminUiGraphQl = {
@@ -302,7 +376,7 @@ export type KeystoneAdminUiSort = {
 
 export enum KeystoneAdminUiSortDirection {
   Asc = 'ASC',
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 export type KeystoneMeta = {
@@ -314,12 +388,16 @@ export type Mutation = {
   createFeedback?: Maybe<Feedback>;
   createFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
+  createInquiries?: Maybe<Array<Maybe<Inquiry>>>;
+  createInquiry?: Maybe<Inquiry>;
   createStories?: Maybe<Array<Maybe<Story>>>;
   createStory?: Maybe<Story>;
   createUser?: Maybe<User>;
   createUsers?: Maybe<Array<Maybe<User>>>;
   deleteFeedback?: Maybe<Feedback>;
   deleteFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
+  deleteInquiries?: Maybe<Array<Maybe<Inquiry>>>;
+  deleteInquiry?: Maybe<Inquiry>;
   deleteStories?: Maybe<Array<Maybe<Story>>>;
   deleteStory?: Maybe<Story>;
   deleteUser?: Maybe<User>;
@@ -327,111 +405,118 @@ export type Mutation = {
   endSession: Scalars['Boolean']['output'];
   updateFeedback?: Maybe<Feedback>;
   updateFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
+  updateInquiries?: Maybe<Array<Maybe<Inquiry>>>;
+  updateInquiry?: Maybe<Inquiry>;
   updateStories?: Maybe<Array<Maybe<Story>>>;
   updateStory?: Maybe<Story>;
   updateUser?: Maybe<User>;
   updateUsers?: Maybe<Array<Maybe<User>>>;
 };
 
-
 export type MutationAuthenticateUserWithPasswordArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
-
 export type MutationCreateFeedbackArgs = {
   data: FeedbackCreateInput;
 };
-
 
 export type MutationCreateFeedbacksArgs = {
   data: Array<FeedbackCreateInput>;
 };
 
-
 export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
 
+export type MutationCreateInquiriesArgs = {
+  data: Array<InquiryCreateInput>;
+};
+
+export type MutationCreateInquiryArgs = {
+  data: InquiryCreateInput;
+};
 
 export type MutationCreateStoriesArgs = {
   data: Array<StoryCreateInput>;
 };
 
-
 export type MutationCreateStoryArgs = {
   data: StoryCreateInput;
 };
-
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
 
-
 export type MutationCreateUsersArgs = {
   data: Array<UserCreateInput>;
 };
-
 
 export type MutationDeleteFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
 
-
 export type MutationDeleteFeedbacksArgs = {
   where: Array<FeedbackWhereUniqueInput>;
 };
 
+export type MutationDeleteInquiriesArgs = {
+  where: Array<InquiryWhereUniqueInput>;
+};
+
+export type MutationDeleteInquiryArgs = {
+  where: InquiryWhereUniqueInput;
+};
 
 export type MutationDeleteStoriesArgs = {
   where: Array<StoryWhereUniqueInput>;
 };
 
-
 export type MutationDeleteStoryArgs = {
   where: StoryWhereUniqueInput;
 };
-
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
 
-
 export type MutationDeleteUsersArgs = {
   where: Array<UserWhereUniqueInput>;
 };
-
 
 export type MutationUpdateFeedbackArgs = {
   data: FeedbackUpdateInput;
   where: FeedbackWhereUniqueInput;
 };
 
-
 export type MutationUpdateFeedbacksArgs = {
   data: Array<FeedbackUpdateArgs>;
 };
 
+export type MutationUpdateInquiriesArgs = {
+  data: Array<InquiryUpdateArgs>;
+};
+
+export type MutationUpdateInquiryArgs = {
+  data: InquiryUpdateInput;
+  where: InquiryWhereUniqueInput;
+};
 
 export type MutationUpdateStoriesArgs = {
   data: Array<StoryUpdateArgs>;
 };
-
 
 export type MutationUpdateStoryArgs = {
   data: StoryUpdateInput;
   where: StoryWhereUniqueInput;
 };
 
-
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
-
 
 export type MutationUpdateUsersArgs = {
   data: Array<UserUpdateArgs>;
@@ -453,7 +538,7 @@ export type NestedStringFilter = {
 
 export enum OrderDirection {
   Asc = 'asc',
-  Desc = 'desc'
+  Desc = 'desc',
 }
 
 export type PasswordState = {
@@ -465,6 +550,9 @@ export type Query = {
   feedback?: Maybe<Feedback>;
   feedbacks?: Maybe<Array<Feedback>>;
   feedbacksCount?: Maybe<Scalars['Int']['output']>;
+  inquiries?: Maybe<Array<Inquiry>>;
+  inquiriesCount?: Maybe<Scalars['Int']['output']>;
+  inquiry?: Maybe<Inquiry>;
   keystone: KeystoneMeta;
   stories?: Maybe<Array<Story>>;
   storiesCount?: Maybe<Scalars['Int']['output']>;
@@ -474,11 +562,9 @@ export type Query = {
   usersCount?: Maybe<Scalars['Int']['output']>;
 };
 
-
 export type QueryFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
-
 
 export type QueryFeedbacksArgs = {
   cursor?: InputMaybe<FeedbackWhereUniqueInput>;
@@ -488,11 +574,25 @@ export type QueryFeedbacksArgs = {
   where?: FeedbackWhereInput;
 };
 
-
 export type QueryFeedbacksCountArgs = {
   where?: FeedbackWhereInput;
 };
 
+export type QueryInquiriesArgs = {
+  cursor?: InputMaybe<InquiryWhereUniqueInput>;
+  orderBy?: Array<InquiryOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InquiryWhereInput;
+};
+
+export type QueryInquiriesCountArgs = {
+  where?: InquiryWhereInput;
+};
+
+export type QueryInquiryArgs = {
+  where: InquiryWhereUniqueInput;
+};
 
 export type QueryStoriesArgs = {
   cursor?: InputMaybe<StoryWhereUniqueInput>;
@@ -502,21 +602,17 @@ export type QueryStoriesArgs = {
   where?: StoryWhereInput;
 };
 
-
 export type QueryStoriesCountArgs = {
   where?: StoryWhereInput;
 };
-
 
 export type QueryStoryArgs = {
   where: StoryWhereUniqueInput;
 };
 
-
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
-
 
 export type QueryUsersArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -526,14 +622,13 @@ export type QueryUsersArgs = {
   where?: UserWhereInput;
 };
 
-
 export type QueryUsersCountArgs = {
   where?: UserWhereInput;
 };
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive'
+  Insensitive = 'insensitive',
 }
 
 export type Story = {
@@ -582,7 +677,7 @@ export enum StoryStatusType {
   ContentInProgress = 'contentInProgress',
   ImageInProgress = 'imageInProgress',
   Initialized = 'initialized',
-  Success = 'success'
+  Success = 'success',
 }
 
 export type StoryUpdateArgs = {
@@ -642,7 +737,6 @@ export type Subscription = {
   storyUpdated?: Maybe<Story>;
 };
 
-
 export type SubscriptionStoryUpdatedArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -659,7 +753,9 @@ export type UserAuthenticationWithPasswordFailure = {
   message: Scalars['String']['output'];
 };
 
-export type UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordFailure | UserAuthenticationWithPasswordSuccess;
+export type UserAuthenticationWithPasswordResult =
+  | UserAuthenticationWithPasswordFailure
+  | UserAuthenticationWithPasswordSuccess;
 
 export type UserAuthenticationWithPasswordSuccess = {
   item: User;
@@ -711,10 +807,18 @@ export type CreateFeedbackVariables = Exact<{
   comment: Scalars['String']['input'];
   rating: Scalars['Int']['input'];
   uid: Scalars['String']['input'];
+  email: Scalars['String']['input'];
 }>;
 
-
 export type CreateFeedback = { createFeedback?: { id: string } | null };
+
+export type CreateInquiryVariables = Exact<{
+  message: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  subject: Scalars['String']['input'];
+}>;
+
+export type CreateInquiry = { createInquiry?: { id: string } | null };
 
 export type CreateStoryVariables = Exact<{
   uid: Scalars['String']['input'];
@@ -725,7 +829,6 @@ export type CreateStoryVariables = Exact<{
   file?: InputMaybe<Scalars['Upload']['input']>;
 }>;
 
-
 export type CreateStory = { createStory?: { id: string } | null };
 
 export type GetStoryVariables = Exact<{
@@ -733,8 +836,13 @@ export type GetStoryVariables = Exact<{
   image?: InputMaybe<CloudinaryImageFormat>;
 }>;
 
-
-export type GetStory = { story?: { title?: string | null, content?: string | null, image?: { publicUrlTransformed?: string | null } | null } | null };
+export type GetStory = {
+  story?: {
+    title?: string | null;
+    content?: string | null;
+    image?: { publicUrlTransformed?: string | null } | null;
+  } | null;
+};
 
 export type GetUserStoriesVariables = Exact<{
   uid: Scalars['String']['input'];
@@ -743,31 +851,69 @@ export type GetUserStoriesVariables = Exact<{
   image?: InputMaybe<CloudinaryImageFormat>;
 }>;
 
-
-export type GetUserStories = { storiesCount?: number | null, stories?: Array<{ id: string, title?: string | null, readTime?: number | null, image?: { id?: string | null, publicUrlTransformed?: string | null } | null }> | null };
-
-
+export type GetUserStories = {
+  storiesCount?: number | null;
+  stories?: Array<{
+    id: string;
+    title?: string | null;
+    readTime?: number | null;
+    image?: { id?: string | null; publicUrlTransformed?: string | null } | null;
+  }> | null;
+};
 
 export const CreateFeedbackDocument = /*#__PURE__*/ `
-    mutation createFeedback($comment: String!, $rating: Int!, $uid: String!) {
-  createFeedback(data: {comment: $comment, rating: $rating, firebaseUserId: $uid}) {
+    mutation createFeedback($comment: String!, $rating: Int!, $uid: String!, $email: String!) {
+  createFeedback(
+    data: {comment: $comment, rating: $rating, firebaseUserId: $uid, email: $email}
+  ) {
     id
   }
 }
     `;
 
-export const useCreateFeedback = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateFeedback, TError, CreateFeedbackVariables, TContext>) => {
-    
-    return useMutation<CreateFeedback, TError, CreateFeedbackVariables, TContext>(
-      {
-    mutationKey: ['createFeedback'],
-    mutationFn: useFetchData<CreateFeedback, CreateFeedbackVariables>(CreateFeedbackDocument),
-    ...options
+export const useCreateFeedback = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<
+    CreateFeedback,
+    TError,
+    CreateFeedbackVariables,
+    TContext
+  >
+) => {
+  return useMutation<CreateFeedback, TError, CreateFeedbackVariables, TContext>(
+    {
+      mutationFn: useFetchData<CreateFeedback, CreateFeedbackVariables>(
+        CreateFeedbackDocument
+      ),
+      mutationKey: ['createFeedback'],
+      ...options,
+    }
+  );
+};
+
+export const CreateInquiryDocument = /*#__PURE__*/ `
+    mutation createInquiry($message: String!, $email: String!, $subject: String!) {
+  createInquiry(data: {message: $message, email: $email, subject: $subject}) {
+    id
   }
-    )};
+}
+    `;
+
+export const useCreateInquiry = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<
+    CreateInquiry,
+    TError,
+    CreateInquiryVariables,
+    TContext
+  >
+) => {
+  return useMutation<CreateInquiry, TError, CreateInquiryVariables, TContext>({
+    mutationFn: useFetchData<CreateInquiry, CreateInquiryVariables>(
+      CreateInquiryDocument
+    ),
+    mutationKey: ['createInquiry'],
+    ...options,
+  });
+};
 
 export const CreateStoryDocument = /*#__PURE__*/ `
     mutation createStory($uid: String!, $message: String!, $readTime: Int!, $contentPrompt: String!, $imagePrompt: String!, $file: Upload) {
@@ -779,18 +925,22 @@ export const CreateStoryDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useCreateStory = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateStory, TError, CreateStoryVariables, TContext>) => {
-    
-    return useMutation<CreateStory, TError, CreateStoryVariables, TContext>(
-      {
+export const useCreateStory = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<
+    CreateStory,
+    TError,
+    CreateStoryVariables,
+    TContext
+  >
+) => {
+  return useMutation<CreateStory, TError, CreateStoryVariables, TContext>({
+    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(
+      CreateStoryDocument
+    ),
     mutationKey: ['createStory'],
-    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(CreateStoryDocument),
-    ...options
-  }
-    )};
+    ...options,
+  });
+};
 
 export const GetStoryDocument = /*#__PURE__*/ `
     query getStory($id: ID!, $image: CloudinaryImageFormat) {
@@ -804,40 +954,47 @@ export const GetStoryDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useGetStory = <
-      TData = GetStory,
-      TError = unknown
-    >(
-      variables: GetStoryVariables,
-      options?: Omit<UseQueryOptions<GetStory, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetStory, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<GetStory, TError, TData>(
-      {
-    queryKey: ['getStory', variables],
-    queryFn: useFetchData<GetStory, GetStoryVariables>(GetStoryDocument).bind(null, variables),
-    ...options
+export const useGetStory = <TData = GetStory, TError = unknown>(
+  variables: GetStoryVariables,
+  options?: Omit<UseQueryOptions<GetStory, TError, TData>, 'queryKey'> & {
+    queryKey?: UseQueryOptions<GetStory, TError, TData>['queryKey'];
   }
-    )};
+) => {
+  return useQuery<GetStory, TError, TData>({
+    queryFn: useFetchData<GetStory, GetStoryVariables>(GetStoryDocument).bind(
+      null,
+      variables
+    ),
+    queryKey: ['getStory', variables],
+    ...options,
+  });
+};
 
 export const useInfiniteGetStory = <
-      TData = InfiniteData<GetStory>,
-      TError = unknown
-    >(
-      variables: GetStoryVariables,
-      options: Omit<UseInfiniteQueryOptions<GetStory, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetStory, TError, TData>['queryKey'] }
-    ) => {
-    const query = useFetchData<GetStory, GetStoryVariables>(GetStoryDocument)
-    return useInfiniteQuery<GetStory, TError, TData>(
-      (() => {
-    const { queryKey: optionsQueryKey, ...restOptions } = options;
-    return {
-      queryKey: optionsQueryKey ?? ['getStory.infinite', variables],
-      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
-      ...restOptions
-    }
-  })()
-    )};
+  TData = InfiniteData<GetStory>,
+  TError = unknown,
+>(
+  variables: GetStoryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetStory, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<GetStory, TError, TData>['queryKey'];
+  }
+) => {
+  const query = useFetchData<GetStory, GetStoryVariables>(GetStoryDocument);
+  return useInfiniteQuery<GetStory, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options;
+      return {
+        queryFn: (metaData) =>
+          query({ ...variables, ...(metaData.pageParam ?? {}) }),
+        queryKey: optionsQueryKey ?? ['getStory.infinite', variables],
+        ...restOptions,
+      };
+    })()
+  );
+};
 
 export const GetUserStoriesDocument = /*#__PURE__*/ `
     query getUserStories($uid: String!, $skip: Int!, $take: Int, $image: CloudinaryImageFormat) {
@@ -858,37 +1015,49 @@ export const GetUserStoriesDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useGetUserStories = <
-      TData = GetUserStories,
-      TError = unknown
-    >(
-      variables: GetUserStoriesVariables,
-      options?: Omit<UseQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetUserStories, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<GetUserStories, TError, TData>(
-      {
-    queryKey: ['getUserStories', variables],
-    queryFn: useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument).bind(null, variables),
-    ...options
+export const useGetUserStories = <TData = GetUserStories, TError = unknown>(
+  variables: GetUserStoriesVariables,
+  options?: Omit<UseQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & {
+    queryKey?: UseQueryOptions<GetUserStories, TError, TData>['queryKey'];
   }
-    )};
+) => {
+  return useQuery<GetUserStories, TError, TData>({
+    queryFn: useFetchData<GetUserStories, GetUserStoriesVariables>(
+      GetUserStoriesDocument
+    ).bind(null, variables),
+    queryKey: ['getUserStories', variables],
+    ...options,
+  });
+};
 
 export const useInfiniteGetUserStories = <
-      TData = InfiniteData<GetUserStories>,
-      TError = unknown
-    >(
-      variables: GetUserStoriesVariables,
-      options: Omit<UseInfiniteQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetUserStories, TError, TData>['queryKey'] }
-    ) => {
-    const query = useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument)
-    return useInfiniteQuery<GetUserStories, TError, TData>(
-      (() => {
-    const { queryKey: optionsQueryKey, ...restOptions } = options;
-    return {
-      queryKey: optionsQueryKey ?? ['getUserStories.infinite', variables],
-      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
-      ...restOptions
-    }
-  })()
-    )};
+  TData = InfiniteData<GetUserStories>,
+  TError = unknown,
+>(
+  variables: GetUserStoriesVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetUserStories, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetUserStories,
+      TError,
+      TData
+    >['queryKey'];
+  }
+) => {
+  const query = useFetchData<GetUserStories, GetUserStoriesVariables>(
+    GetUserStoriesDocument
+  );
+  return useInfiniteQuery<GetUserStories, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options;
+      return {
+        queryFn: (metaData) =>
+          query({ ...variables, ...(metaData.pageParam ?? {}) }),
+        queryKey: optionsQueryKey ?? ['getUserStories.infinite', variables],
+        ...restOptions,
+      };
+    })()
+  );
+};

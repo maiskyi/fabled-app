@@ -3,54 +3,46 @@ import { FC } from 'react';
 import { Page, Header, Content, Form, Text, Box } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
-import { useMutationFunction } from '@core/functions';
-import {
-  FunctionName,
-  NotificationType,
-  RoutePath,
-} from '@bootstrap/constants';
-import { DTO } from '@bootstrap/dto';
+import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useAuth } from '@core/auth';
+import { DTO, useCreateInquiry } from '@network/api';
 
 export const ContactUs: FC = () => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
   const { user } = useAuth();
 
+  const { isPending, mutateAsync } = useCreateInquiry();
+
   const title = t('pages.contactUs');
 
-  const { isPending, mutateAsync } = useMutationFunction<
-    DTO.ContactUsRequest,
-    DTO.ContactUsResponse
-  >({
-    name: FunctionName.OnContactUs,
-  });
-
-  const handleOnSubmit = async (data: DTO.ContactUsRequest) => {
-    try {
-      await mutateAsync(data);
-      navigate({
-        action: 'replace',
-        params: {
-          type: NotificationType.InquirySucceed,
-        },
-        pathname: RoutePath.Notification,
-      });
-    } catch (err) {
-      navigate({
-        action: 'replace',
-        params: {
-          type: NotificationType.InquiryFailed,
-        },
-        pathname: RoutePath.Notification,
-      });
-    }
+  const handleOnSubmit = async (data: DTO.CreateInquiryVariables) => {
+    mutateAsync(data, {
+      onError: () => {
+        navigate({
+          action: 'replace',
+          params: {
+            type: NotificationType.InquiryFailed,
+          },
+          pathname: RoutePath.Notification,
+        });
+      },
+      onSuccess: () => {
+        navigate({
+          action: 'replace',
+          params: {
+            type: NotificationType.InquirySucceed,
+          },
+          pathname: RoutePath.Notification,
+        });
+      },
+    });
   };
 
-  const defaultValues: DTO.ContactUsRequest = {
+  const defaultValues: DTO.CreateInquiryVariables = {
     email: user?.email,
+    message: '',
     subject: '',
-    text: '',
   };
 
   return (
@@ -66,7 +58,7 @@ export const ContactUs: FC = () => {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.inquiry')}</Text>
         </Box>
-        <Form<DTO.ContactUsRequest>
+        <Form<DTO.CreateInquiryVariables>
           defaultValues={defaultValues}
           onSubmit={handleOnSubmit}
         >
@@ -84,7 +76,7 @@ export const ContactUs: FC = () => {
             />
             <Form.Textarea
               label={t('forms.message')}
-              name="text"
+              name="message"
               validation={{ required: true }}
             />
           </Box>
