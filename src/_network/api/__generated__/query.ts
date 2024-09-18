@@ -1,46 +1,24 @@
 // @ts-nocheck
 
-import {
-  useMutation,
-  useQuery,
-  useInfiniteQuery,
-  UseMutationOptions,
-  UseQueryOptions,
-  UseInfiniteQueryOptions,
-  InfiniteData,
-} from '@tanstack/react-query';
-
+import { useMutation, useQuery, useInfiniteQuery, UseMutationOptions, UseQueryOptions, UseInfiniteQueryOptions, InfiniteData } from '@tanstack/react-query';
 import { useFetchData } from '../hooks/useFetchData/useFetchData.hook';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never };
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
-    };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
-  DateTime: { input: any; output: any };
-  JSON: { input: any; output: any };
-  Upload: { input: any; output: any };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
+  JSON: { input: any; output: any; }
+  Upload: { input: any; output: any; }
 };
 
 export type AuthenticatedItem = User;
@@ -70,7 +48,7 @@ export type CharacterCreateInput = {
 };
 
 export enum CharacterLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type CharacterLanguageTypeNullableFilter = {
@@ -165,6 +143,7 @@ export type CloudinaryImage_File = {
   publicUrl?: Maybe<Scalars['String']['output']>;
   publicUrlTransformed?: Maybe<Scalars['String']['output']>;
 };
+
 
 export type CloudinaryImage_FilePublicUrlTransformedArgs = {
   transformation?: InputMaybe<CloudinaryImageFormat>;
@@ -359,6 +338,7 @@ export type KeystoneAdminMeta = {
   lists: Array<KeystoneAdminUiListMeta>;
 };
 
+
 export type KeystoneAdminMetaListArgs = {
   key: Scalars['String']['input'];
 };
@@ -385,6 +365,7 @@ export type KeystoneAdminUiFieldMeta = {
   viewsIndex: Scalars['Int']['output'];
 };
 
+
 export type KeystoneAdminUiFieldMetaItemViewArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -395,13 +376,13 @@ export type KeystoneAdminUiFieldMetaCreateView = {
 
 export enum KeystoneAdminUiFieldMetaCreateViewFieldMode {
   Edit = 'edit',
-  Hidden = 'hidden',
+  Hidden = 'hidden'
 }
 
 export enum KeystoneAdminUiFieldMetaIsNonNull {
   Create = 'create',
   Read = 'read',
-  Update = 'update',
+  Update = 'update'
 }
 
 export type KeystoneAdminUiFieldMetaItemView = {
@@ -412,12 +393,12 @@ export type KeystoneAdminUiFieldMetaItemView = {
 export enum KeystoneAdminUiFieldMetaItemViewFieldMode {
   Edit = 'edit',
   Hidden = 'hidden',
-  Read = 'read',
+  Read = 'read'
 }
 
 export enum KeystoneAdminUiFieldMetaItemViewFieldPosition {
   Form = 'form',
-  Sidebar = 'sidebar',
+  Sidebar = 'sidebar'
 }
 
 export type KeystoneAdminUiFieldMetaListView = {
@@ -426,7 +407,7 @@ export type KeystoneAdminUiFieldMetaListView = {
 
 export enum KeystoneAdminUiFieldMetaListViewFieldMode {
   Hidden = 'hidden',
-  Read = 'read',
+  Read = 'read'
 }
 
 export type KeystoneAdminUiGraphQl = {
@@ -485,7 +466,7 @@ export type KeystoneAdminUiSort = {
 
 export enum KeystoneAdminUiSortDirection {
   Asc = 'ASC',
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 export type KeystoneMeta = {
@@ -510,7 +491,7 @@ export type MoralLessonCreateInput = {
 };
 
 export enum MoralLessonLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type MoralLessonLanguageTypeNullableFilter = {
@@ -618,235 +599,291 @@ export type Mutation = {
   updateUsers?: Maybe<Array<Maybe<User>>>;
 };
 
+
 export type MutationAuthenticateUserWithPasswordArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
+
 export type MutationCreateCharacterArgs = {
   data: CharacterCreateInput;
 };
+
 
 export type MutationCreateCharactersArgs = {
   data: Array<CharacterCreateInput>;
 };
 
+
 export type MutationCreateConfigArgs = {
   data: ConfigCreateInput;
 };
+
 
 export type MutationCreateConfigsArgs = {
   data: Array<ConfigCreateInput>;
 };
 
+
 export type MutationCreateFeedbackArgs = {
   data: FeedbackCreateInput;
 };
+
 
 export type MutationCreateFeedbacksArgs = {
   data: Array<FeedbackCreateInput>;
 };
 
+
 export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
+
 
 export type MutationCreateInquiriesArgs = {
   data: Array<InquiryCreateInput>;
 };
 
+
 export type MutationCreateInquiryArgs = {
   data: InquiryCreateInput;
 };
+
 
 export type MutationCreateMoralLessonArgs = {
   data: MoralLessonCreateInput;
 };
 
+
 export type MutationCreateMoralLessonsArgs = {
   data: Array<MoralLessonCreateInput>;
 };
+
 
 export type MutationCreatePlaceOfEventArgs = {
   data: PlaceOfEventCreateInput;
 };
 
+
 export type MutationCreatePlaceOfEventsArgs = {
   data: Array<PlaceOfEventCreateInput>;
 };
+
 
 export type MutationCreatePromptArgs = {
   data: PromptCreateInput;
 };
 
+
 export type MutationCreatePromptsArgs = {
   data: Array<PromptCreateInput>;
 };
+
 
 export type MutationCreateStoriesArgs = {
   data: Array<StoryCreateInput>;
 };
 
+
 export type MutationCreateStoryArgs = {
   data: StoryCreateInput;
 };
+
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
 
+
 export type MutationCreateUsersArgs = {
   data: Array<UserCreateInput>;
 };
+
 
 export type MutationDeleteCharacterArgs = {
   where: CharacterWhereUniqueInput;
 };
 
+
 export type MutationDeleteCharactersArgs = {
   where: Array<CharacterWhereUniqueInput>;
 };
+
 
 export type MutationDeleteConfigArgs = {
   where?: ConfigWhereUniqueInput;
 };
 
+
 export type MutationDeleteConfigsArgs = {
   where: Array<ConfigWhereUniqueInput>;
 };
+
 
 export type MutationDeleteFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
 
+
 export type MutationDeleteFeedbacksArgs = {
   where: Array<FeedbackWhereUniqueInput>;
 };
+
 
 export type MutationDeleteInquiriesArgs = {
   where: Array<InquiryWhereUniqueInput>;
 };
 
+
 export type MutationDeleteInquiryArgs = {
   where: InquiryWhereUniqueInput;
 };
+
 
 export type MutationDeleteMoralLessonArgs = {
   where: MoralLessonWhereUniqueInput;
 };
 
+
 export type MutationDeleteMoralLessonsArgs = {
   where: Array<MoralLessonWhereUniqueInput>;
 };
+
 
 export type MutationDeletePlaceOfEventArgs = {
   where: PlaceOfEventWhereUniqueInput;
 };
 
+
 export type MutationDeletePlaceOfEventsArgs = {
   where: Array<PlaceOfEventWhereUniqueInput>;
 };
+
 
 export type MutationDeletePromptArgs = {
   where: PromptWhereUniqueInput;
 };
 
+
 export type MutationDeletePromptsArgs = {
   where: Array<PromptWhereUniqueInput>;
 };
+
 
 export type MutationDeleteStoriesArgs = {
   where: Array<StoryWhereUniqueInput>;
 };
 
+
 export type MutationDeleteStoryArgs = {
   where: StoryWhereUniqueInput;
 };
+
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
 
+
 export type MutationDeleteUsersArgs = {
   where: Array<UserWhereUniqueInput>;
 };
+
 
 export type MutationUpdateCharacterArgs = {
   data: CharacterUpdateInput;
   where: CharacterWhereUniqueInput;
 };
 
+
 export type MutationUpdateCharactersArgs = {
   data: Array<CharacterUpdateArgs>;
 };
+
 
 export type MutationUpdateConfigArgs = {
   data: ConfigUpdateInput;
   where?: ConfigWhereUniqueInput;
 };
 
+
 export type MutationUpdateConfigsArgs = {
   data: Array<ConfigUpdateArgs>;
 };
+
 
 export type MutationUpdateFeedbackArgs = {
   data: FeedbackUpdateInput;
   where: FeedbackWhereUniqueInput;
 };
 
+
 export type MutationUpdateFeedbacksArgs = {
   data: Array<FeedbackUpdateArgs>;
 };
 
+
 export type MutationUpdateInquiriesArgs = {
   data: Array<InquiryUpdateArgs>;
 };
+
 
 export type MutationUpdateInquiryArgs = {
   data: InquiryUpdateInput;
   where: InquiryWhereUniqueInput;
 };
 
+
 export type MutationUpdateMoralLessonArgs = {
   data: MoralLessonUpdateInput;
   where: MoralLessonWhereUniqueInput;
 };
 
+
 export type MutationUpdateMoralLessonsArgs = {
   data: Array<MoralLessonUpdateArgs>;
 };
+
 
 export type MutationUpdatePlaceOfEventArgs = {
   data: PlaceOfEventUpdateInput;
   where: PlaceOfEventWhereUniqueInput;
 };
 
+
 export type MutationUpdatePlaceOfEventsArgs = {
   data: Array<PlaceOfEventUpdateArgs>;
 };
+
 
 export type MutationUpdatePromptArgs = {
   data: PromptUpdateInput;
   where: PromptWhereUniqueInput;
 };
 
+
 export type MutationUpdatePromptsArgs = {
   data: Array<PromptUpdateArgs>;
 };
 
+
 export type MutationUpdateStoriesArgs = {
   data: Array<StoryUpdateArgs>;
 };
+
 
 export type MutationUpdateStoryArgs = {
   data: StoryUpdateInput;
   where: StoryWhereUniqueInput;
 };
 
+
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
+
 
 export type MutationUpdateUsersArgs = {
   data: Array<UserUpdateArgs>;
@@ -868,7 +905,7 @@ export type NestedStringFilter = {
 
 export enum OrderDirection {
   Asc = 'asc',
-  Desc = 'desc',
+  Desc = 'desc'
 }
 
 export type PasswordState = {
@@ -893,7 +930,7 @@ export type PlaceOfEventCreateInput = {
 };
 
 export enum PlaceOfEventLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type PlaceOfEventLanguageTypeNullableFilter = {
@@ -959,7 +996,7 @@ export type PromptCreateInput = {
 };
 
 export enum PromptLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type PromptLanguageTypeNullableFilter = {
@@ -1042,9 +1079,11 @@ export type Query = {
   usersCount?: Maybe<Scalars['Int']['output']>;
 };
 
+
 export type QueryCharacterArgs = {
   where: CharacterWhereUniqueInput;
 };
+
 
 export type QueryCharactersArgs = {
   cursor?: InputMaybe<CharacterWhereUniqueInput>;
@@ -1054,13 +1093,16 @@ export type QueryCharactersArgs = {
   where?: CharacterWhereInput;
 };
 
+
 export type QueryCharactersCountArgs = {
   where?: CharacterWhereInput;
 };
 
+
 export type QueryConfigArgs = {
   where?: ConfigWhereUniqueInput;
 };
+
 
 export type QueryConfigsArgs = {
   cursor?: InputMaybe<ConfigWhereUniqueInput>;
@@ -1070,13 +1112,16 @@ export type QueryConfigsArgs = {
   where?: ConfigWhereInput;
 };
 
+
 export type QueryConfigsCountArgs = {
   where?: ConfigWhereInput;
 };
 
+
 export type QueryFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
+
 
 export type QueryFeedbacksArgs = {
   cursor?: InputMaybe<FeedbackWhereUniqueInput>;
@@ -1086,9 +1131,11 @@ export type QueryFeedbacksArgs = {
   where?: FeedbackWhereInput;
 };
 
+
 export type QueryFeedbacksCountArgs = {
   where?: FeedbackWhereInput;
 };
+
 
 export type QueryInquiriesArgs = {
   cursor?: InputMaybe<InquiryWhereUniqueInput>;
@@ -1098,17 +1145,21 @@ export type QueryInquiriesArgs = {
   where?: InquiryWhereInput;
 };
 
+
 export type QueryInquiriesCountArgs = {
   where?: InquiryWhereInput;
 };
+
 
 export type QueryInquiryArgs = {
   where: InquiryWhereUniqueInput;
 };
 
+
 export type QueryMoralLessonArgs = {
   where: MoralLessonWhereUniqueInput;
 };
+
 
 export type QueryMoralLessonsArgs = {
   cursor?: InputMaybe<MoralLessonWhereUniqueInput>;
@@ -1118,13 +1169,16 @@ export type QueryMoralLessonsArgs = {
   where?: MoralLessonWhereInput;
 };
 
+
 export type QueryMoralLessonsCountArgs = {
   where?: MoralLessonWhereInput;
 };
 
+
 export type QueryPlaceOfEventArgs = {
   where: PlaceOfEventWhereUniqueInput;
 };
+
 
 export type QueryPlaceOfEventsArgs = {
   cursor?: InputMaybe<PlaceOfEventWhereUniqueInput>;
@@ -1134,13 +1188,16 @@ export type QueryPlaceOfEventsArgs = {
   where?: PlaceOfEventWhereInput;
 };
 
+
 export type QueryPlaceOfEventsCountArgs = {
   where?: PlaceOfEventWhereInput;
 };
 
+
 export type QueryPromptArgs = {
   where: PromptWhereUniqueInput;
 };
+
 
 export type QueryPromptsArgs = {
   cursor?: InputMaybe<PromptWhereUniqueInput>;
@@ -1150,9 +1207,11 @@ export type QueryPromptsArgs = {
   where?: PromptWhereInput;
 };
 
+
 export type QueryPromptsCountArgs = {
   where?: PromptWhereInput;
 };
+
 
 export type QueryStoriesArgs = {
   cursor?: InputMaybe<StoryWhereUniqueInput>;
@@ -1162,17 +1221,21 @@ export type QueryStoriesArgs = {
   where?: StoryWhereInput;
 };
 
+
 export type QueryStoriesCountArgs = {
   where?: StoryWhereInput;
 };
+
 
 export type QueryStoryArgs = {
   where: StoryWhereUniqueInput;
 };
 
+
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
+
 
 export type QueryUsersArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -1182,13 +1245,14 @@ export type QueryUsersArgs = {
   where?: UserWhereInput;
 };
 
+
 export type QueryUsersCountArgs = {
   where?: UserWhereInput;
 };
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive',
+  Insensitive = 'insensitive'
 }
 
 export type Story = {
@@ -1237,7 +1301,7 @@ export enum StoryStatusType {
   ContentInProgress = 'contentInProgress',
   ImageInProgress = 'imageInProgress',
   Initialized = 'initialized',
-  Success = 'success',
+  Success = 'success'
 }
 
 export type StoryUpdateArgs = {
@@ -1297,6 +1361,7 @@ export type Subscription = {
   storyUpdated?: Maybe<Story>;
 };
 
+
 export type SubscriptionStoryUpdatedArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -1313,9 +1378,7 @@ export type UserAuthenticationWithPasswordFailure = {
   message: Scalars['String']['output'];
 };
 
-export type UserAuthenticationWithPasswordResult =
-  | UserAuthenticationWithPasswordFailure
-  | UserAuthenticationWithPasswordSuccess;
+export type UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordFailure | UserAuthenticationWithPasswordSuccess;
 
 export type UserAuthenticationWithPasswordSuccess = {
   item: User;
@@ -1370,6 +1433,7 @@ export type CreateFeedbackVariables = Exact<{
   email: Scalars['String']['input'];
 }>;
 
+
 export type CreateFeedback = { createFeedback?: { id: string } | null };
 
 export type CreateInquiryVariables = Exact<{
@@ -1377,6 +1441,7 @@ export type CreateInquiryVariables = Exact<{
   email: Scalars['String']['input'];
   subject: Scalars['String']['input'];
 }>;
+
 
 export type CreateInquiry = { createInquiry?: { id: string } | null };
 
@@ -1389,53 +1454,23 @@ export type CreateStoryVariables = Exact<{
   file?: InputMaybe<Scalars['Upload']['input']>;
 }>;
 
+
 export type CreateStory = { createStory?: { id: string } | null };
 
 export type GetBootstrapVariables = Exact<{
   image?: InputMaybe<CloudinaryImageFormat>;
 }>;
 
-export type GetBootstrap = {
-  moralLessons?: Array<{
-    id: string;
-    title?: string | null;
-    description?: string | null;
-  }> | null;
-  placeOfEvents?: Array<{
-    id: string;
-    title?: string | null;
-    image?: { publicUrlTransformed?: string | null } | null;
-  }> | null;
-  characters?: Array<{
-    id: string;
-    title?: string | null;
-    description?: string | null;
-    image?: { publicUrlTransformed?: string | null } | null;
-  }> | null;
-  prompts?: Array<{
-    id: string;
-    message?: string | null;
-    textPrompt?: string | null;
-    imagePrompt?: string | null;
-  }> | null;
-  config?: {
-    privacyPolicyUrl?: string | null;
-    termsAndConditionsUrl?: string | null;
-  } | null;
-};
+
+export type GetBootstrap = { moralLessons?: Array<{ id: string, title?: string | null, description?: string | null }> | null, placeOfEvents?: Array<{ id: string, title?: string | null, image?: { publicUrlTransformed?: string | null } | null }> | null, characters?: Array<{ id: string, title?: string | null, description?: string | null, image?: { publicUrlTransformed?: string | null } | null }> | null, prompts?: Array<{ id: string, message?: string | null, textPrompt?: string | null, imagePrompt?: string | null }> | null, config?: { privacyPolicyUrl?: string | null, termsAndConditionsUrl?: string | null } | null };
 
 export type GetStoryVariables = Exact<{
   id: Scalars['ID']['input'];
   image?: InputMaybe<CloudinaryImageFormat>;
 }>;
 
-export type GetStory = {
-  story?: {
-    title?: string | null;
-    content?: string | null;
-    image?: { publicUrlTransformed?: string | null } | null;
-  } | null;
-};
+
+export type GetStory = { story?: { title?: string | null, content?: string | null, image?: { publicUrlTransformed?: string | null } | null } | null };
 
 export type GetUserStoriesVariables = Exact<{
   uid: Scalars['String']['input'];
@@ -1444,15 +1479,10 @@ export type GetUserStoriesVariables = Exact<{
   image?: InputMaybe<CloudinaryImageFormat>;
 }>;
 
-export type GetUserStories = {
-  storiesCount?: number | null;
-  stories?: Array<{
-    id: string;
-    title?: string | null;
-    readTime?: number | null;
-    image?: { id?: string | null; publicUrlTransformed?: string | null } | null;
-  }> | null;
-};
+
+export type GetUserStories = { storiesCount?: number | null, stories?: Array<{ id: string, title?: string | null, readTime?: number | null, image?: { id?: string | null, publicUrlTransformed?: string | null } | null }> | null };
+
+
 
 export const CreateFeedbackDocument = /*#__PURE__*/ `
     mutation createFeedback($comment: String!, $rating: Int!, $uid: String!, $email: String!) {
@@ -1464,24 +1494,18 @@ export const CreateFeedbackDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useCreateFeedback = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    CreateFeedback,
-    TError,
-    CreateFeedbackVariables,
-    TContext
-  >
-) => {
-  return useMutation<CreateFeedback, TError, CreateFeedbackVariables, TContext>(
-    {
-      mutationFn: useFetchData<CreateFeedback, CreateFeedbackVariables>(
-        CreateFeedbackDocument
-      ),
-      mutationKey: ['createFeedback'],
-      ...options,
-    }
-  );
-};
+export const useCreateFeedback = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateFeedback, TError, CreateFeedbackVariables, TContext>) => {
+    
+    return useMutation<CreateFeedback, TError, CreateFeedbackVariables, TContext>(
+      {
+    mutationKey: ['createFeedback'],
+    mutationFn: useFetchData<CreateFeedback, CreateFeedbackVariables>(CreateFeedbackDocument),
+    ...options
+  }
+    )};
 
 export const CreateInquiryDocument = /*#__PURE__*/ `
     mutation createInquiry($message: String!, $email: String!, $subject: String!) {
@@ -1491,22 +1515,18 @@ export const CreateInquiryDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useCreateInquiry = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    CreateInquiry,
-    TError,
-    CreateInquiryVariables,
-    TContext
-  >
-) => {
-  return useMutation<CreateInquiry, TError, CreateInquiryVariables, TContext>({
-    mutationFn: useFetchData<CreateInquiry, CreateInquiryVariables>(
-      CreateInquiryDocument
-    ),
+export const useCreateInquiry = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateInquiry, TError, CreateInquiryVariables, TContext>) => {
+    
+    return useMutation<CreateInquiry, TError, CreateInquiryVariables, TContext>(
+      {
     mutationKey: ['createInquiry'],
-    ...options,
-  });
-};
+    mutationFn: useFetchData<CreateInquiry, CreateInquiryVariables>(CreateInquiryDocument),
+    ...options
+  }
+    )};
 
 export const CreateStoryDocument = /*#__PURE__*/ `
     mutation createStory($uid: String!, $message: String!, $readTime: Int!, $contentPrompt: String!, $imagePrompt: String!, $file: Upload) {
@@ -1518,22 +1538,18 @@ export const CreateStoryDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useCreateStory = <TError = unknown, TContext = unknown>(
-  options?: UseMutationOptions<
-    CreateStory,
-    TError,
-    CreateStoryVariables,
-    TContext
-  >
-) => {
-  return useMutation<CreateStory, TError, CreateStoryVariables, TContext>({
-    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(
-      CreateStoryDocument
-    ),
+export const useCreateStory = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<CreateStory, TError, CreateStoryVariables, TContext>) => {
+    
+    return useMutation<CreateStory, TError, CreateStoryVariables, TContext>(
+      {
     mutationKey: ['createStory'],
-    ...options,
-  });
-};
+    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(CreateStoryDocument),
+    ...options
+  }
+    )};
 
 export const GetBootstrapDocument = /*#__PURE__*/ `
     query getBootstrap($image: CloudinaryImageFormat) {
@@ -1570,52 +1586,40 @@ export const GetBootstrapDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useGetBootstrap = <TData = GetBootstrap, TError = unknown>(
-  variables?: GetBootstrapVariables,
-  options?: Omit<UseQueryOptions<GetBootstrap, TError, TData>, 'queryKey'> & {
-    queryKey?: UseQueryOptions<GetBootstrap, TError, TData>['queryKey'];
+export const useGetBootstrap = <
+      TData = GetBootstrap,
+      TError = unknown
+    >(
+      variables?: GetBootstrapVariables,
+      options?: Omit<UseQueryOptions<GetBootstrap, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetBootstrap, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetBootstrap, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['getBootstrap'] : ['getBootstrap', variables],
+    queryFn: useFetchData<GetBootstrap, GetBootstrapVariables>(GetBootstrapDocument).bind(null, variables),
+    ...options
   }
-) => {
-  return useQuery<GetBootstrap, TError, TData>({
-    queryFn: useFetchData<GetBootstrap, GetBootstrapVariables>(
-      GetBootstrapDocument
-    ).bind(null, variables),
-    queryKey:
-      variables === undefined ? ['getBootstrap'] : ['getBootstrap', variables],
-    ...options,
-  });
-};
+    )};
 
 export const useInfiniteGetBootstrap = <
-  TData = InfiniteData<GetBootstrap>,
-  TError = unknown,
->(
-  variables: GetBootstrapVariables,
-  options: Omit<
-    UseInfiniteQueryOptions<GetBootstrap, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseInfiniteQueryOptions<GetBootstrap, TError, TData>['queryKey'];
-  }
-) => {
-  const query = useFetchData<GetBootstrap, GetBootstrapVariables>(
-    GetBootstrapDocument
-  );
-  return useInfiniteQuery<GetBootstrap, TError, TData>(
-    (() => {
-      const { queryKey: optionsQueryKey, ...restOptions } = options;
-      return {
-        queryFn: (metaData) =>
-          query({ ...variables, ...(metaData.pageParam ?? {}) }),
-        queryKey:
-          (optionsQueryKey ?? variables === undefined)
-            ? ['getBootstrap.infinite']
-            : ['getBootstrap.infinite', variables],
-        ...restOptions,
-      };
-    })()
-  );
-};
+      TData = InfiniteData<GetBootstrap>,
+      TError = unknown
+    >(
+      variables: GetBootstrapVariables,
+      options: Omit<UseInfiniteQueryOptions<GetBootstrap, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetBootstrap, TError, TData>['queryKey'] }
+    ) => {
+    const query = useFetchData<GetBootstrap, GetBootstrapVariables>(GetBootstrapDocument)
+    return useInfiniteQuery<GetBootstrap, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? variables === undefined ? ['getBootstrap.infinite'] : ['getBootstrap.infinite', variables],
+      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
+      ...restOptions
+    }
+  })()
+    )};
 
 export const GetStoryDocument = /*#__PURE__*/ `
     query getStory($id: ID!, $image: CloudinaryImageFormat) {
@@ -1629,53 +1633,47 @@ export const GetStoryDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useGetStory = <TData = GetStory, TError = unknown>(
-  variables: GetStoryVariables,
-  options?: Omit<UseQueryOptions<GetStory, TError, TData>, 'queryKey'> & {
-    queryKey?: UseQueryOptions<GetStory, TError, TData>['queryKey'];
-  }
-) => {
-  return useQuery<GetStory, TError, TData>({
-    queryFn: useFetchData<GetStory, GetStoryVariables>(GetStoryDocument).bind(
-      null,
-      variables
-    ),
+export const useGetStory = <
+      TData = GetStory,
+      TError = unknown
+    >(
+      variables: GetStoryVariables,
+      options?: Omit<UseQueryOptions<GetStory, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetStory, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetStory, TError, TData>(
+      {
     queryKey: ['getStory', variables],
-    ...options,
-  });
-};
+    queryFn: useFetchData<GetStory, GetStoryVariables>(GetStoryDocument).bind(null, variables),
+    ...options
+  }
+    )};
 
 export const useInfiniteGetStory = <
-  TData = InfiniteData<GetStory>,
-  TError = unknown,
->(
-  variables: GetStoryVariables,
-  options: Omit<
-    UseInfiniteQueryOptions<GetStory, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseInfiniteQueryOptions<GetStory, TError, TData>['queryKey'];
-  }
-) => {
-  const query = useFetchData<GetStory, GetStoryVariables>(GetStoryDocument);
-  return useInfiniteQuery<GetStory, TError, TData>(
-    (() => {
-      const { queryKey: optionsQueryKey, ...restOptions } = options;
-      return {
-        queryFn: (metaData) =>
-          query({ ...variables, ...(metaData.pageParam ?? {}) }),
-        queryKey: optionsQueryKey ?? ['getStory.infinite', variables],
-        ...restOptions,
-      };
-    })()
-  );
-};
+      TData = InfiniteData<GetStory>,
+      TError = unknown
+    >(
+      variables: GetStoryVariables,
+      options: Omit<UseInfiniteQueryOptions<GetStory, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetStory, TError, TData>['queryKey'] }
+    ) => {
+    const query = useFetchData<GetStory, GetStoryVariables>(GetStoryDocument)
+    return useInfiniteQuery<GetStory, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['getStory.infinite', variables],
+      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
+      ...restOptions
+    }
+  })()
+    )};
 
 export const GetUserStoriesDocument = /*#__PURE__*/ `
     query getUserStories($uid: String!, $skip: Int!, $take: Int, $image: CloudinaryImageFormat) {
   stories(
     skip: $skip
     take: $take
+    orderBy: {createdAt: desc}
     where: {firebaseUserId: {equals: $uid}, isReady: {equals: true}}
   ) {
     id
@@ -1690,49 +1688,37 @@ export const GetUserStoriesDocument = /*#__PURE__*/ `
 }
     `;
 
-export const useGetUserStories = <TData = GetUserStories, TError = unknown>(
-  variables: GetUserStoriesVariables,
-  options?: Omit<UseQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & {
-    queryKey?: UseQueryOptions<GetUserStories, TError, TData>['queryKey'];
-  }
-) => {
-  return useQuery<GetUserStories, TError, TData>({
-    queryFn: useFetchData<GetUserStories, GetUserStoriesVariables>(
-      GetUserStoriesDocument
-    ).bind(null, variables),
+export const useGetUserStories = <
+      TData = GetUserStories,
+      TError = unknown
+    >(
+      variables: GetUserStoriesVariables,
+      options?: Omit<UseQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetUserStories, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<GetUserStories, TError, TData>(
+      {
     queryKey: ['getUserStories', variables],
-    ...options,
-  });
-};
+    queryFn: useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument).bind(null, variables),
+    ...options
+  }
+    )};
 
 export const useInfiniteGetUserStories = <
-  TData = InfiniteData<GetUserStories>,
-  TError = unknown,
->(
-  variables: GetUserStoriesVariables,
-  options: Omit<
-    UseInfiniteQueryOptions<GetUserStories, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseInfiniteQueryOptions<
-      GetUserStories,
-      TError,
-      TData
-    >['queryKey'];
-  }
-) => {
-  const query = useFetchData<GetUserStories, GetUserStoriesVariables>(
-    GetUserStoriesDocument
-  );
-  return useInfiniteQuery<GetUserStories, TError, TData>(
-    (() => {
-      const { queryKey: optionsQueryKey, ...restOptions } = options;
-      return {
-        queryFn: (metaData) =>
-          query({ ...variables, ...(metaData.pageParam ?? {}) }),
-        queryKey: optionsQueryKey ?? ['getUserStories.infinite', variables],
-        ...restOptions,
-      };
-    })()
-  );
-};
+      TData = InfiniteData<GetUserStories>,
+      TError = unknown
+    >(
+      variables: GetUserStoriesVariables,
+      options: Omit<UseInfiniteQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetUserStories, TError, TData>['queryKey'] }
+    ) => {
+    const query = useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument)
+    return useInfiniteQuery<GetUserStories, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['getUserStories.infinite', variables],
+      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
+      ...restOptions
+    }
+  })()
+    )};

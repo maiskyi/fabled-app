@@ -4,35 +4,22 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never };
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
-    };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
-  DateTime: { input: any; output: any };
-  JSON: { input: any; output: any };
-  Upload: { input: any; output: any };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
+  JSON: { input: any; output: any; }
+  Upload: { input: any; output: any; }
 };
 
 export type AuthenticatedItem = User;
@@ -62,7 +49,7 @@ export type CharacterCreateInput = {
 };
 
 export enum CharacterLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type CharacterLanguageTypeNullableFilter = {
@@ -157,6 +144,7 @@ export type CloudinaryImage_File = {
   publicUrl?: Maybe<Scalars['String']['output']>;
   publicUrlTransformed?: Maybe<Scalars['String']['output']>;
 };
+
 
 export type CloudinaryImage_FilePublicUrlTransformedArgs = {
   transformation?: InputMaybe<CloudinaryImageFormat>;
@@ -351,6 +339,7 @@ export type KeystoneAdminMeta = {
   lists: Array<KeystoneAdminUiListMeta>;
 };
 
+
 export type KeystoneAdminMetaListArgs = {
   key: Scalars['String']['input'];
 };
@@ -377,6 +366,7 @@ export type KeystoneAdminUiFieldMeta = {
   viewsIndex: Scalars['Int']['output'];
 };
 
+
 export type KeystoneAdminUiFieldMetaItemViewArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -387,13 +377,13 @@ export type KeystoneAdminUiFieldMetaCreateView = {
 
 export enum KeystoneAdminUiFieldMetaCreateViewFieldMode {
   Edit = 'edit',
-  Hidden = 'hidden',
+  Hidden = 'hidden'
 }
 
 export enum KeystoneAdminUiFieldMetaIsNonNull {
   Create = 'create',
   Read = 'read',
-  Update = 'update',
+  Update = 'update'
 }
 
 export type KeystoneAdminUiFieldMetaItemView = {
@@ -404,12 +394,12 @@ export type KeystoneAdminUiFieldMetaItemView = {
 export enum KeystoneAdminUiFieldMetaItemViewFieldMode {
   Edit = 'edit',
   Hidden = 'hidden',
-  Read = 'read',
+  Read = 'read'
 }
 
 export enum KeystoneAdminUiFieldMetaItemViewFieldPosition {
   Form = 'form',
-  Sidebar = 'sidebar',
+  Sidebar = 'sidebar'
 }
 
 export type KeystoneAdminUiFieldMetaListView = {
@@ -418,7 +408,7 @@ export type KeystoneAdminUiFieldMetaListView = {
 
 export enum KeystoneAdminUiFieldMetaListViewFieldMode {
   Hidden = 'hidden',
-  Read = 'read',
+  Read = 'read'
 }
 
 export type KeystoneAdminUiGraphQl = {
@@ -477,7 +467,7 @@ export type KeystoneAdminUiSort = {
 
 export enum KeystoneAdminUiSortDirection {
   Asc = 'ASC',
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 export type KeystoneMeta = {
@@ -502,7 +492,7 @@ export type MoralLessonCreateInput = {
 };
 
 export enum MoralLessonLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type MoralLessonLanguageTypeNullableFilter = {
@@ -610,235 +600,291 @@ export type Mutation = {
   updateUsers?: Maybe<Array<Maybe<User>>>;
 };
 
+
 export type MutationAuthenticateUserWithPasswordArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
+
 export type MutationCreateCharacterArgs = {
   data: CharacterCreateInput;
 };
+
 
 export type MutationCreateCharactersArgs = {
   data: Array<CharacterCreateInput>;
 };
 
+
 export type MutationCreateConfigArgs = {
   data: ConfigCreateInput;
 };
+
 
 export type MutationCreateConfigsArgs = {
   data: Array<ConfigCreateInput>;
 };
 
+
 export type MutationCreateFeedbackArgs = {
   data: FeedbackCreateInput;
 };
+
 
 export type MutationCreateFeedbacksArgs = {
   data: Array<FeedbackCreateInput>;
 };
 
+
 export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
+
 
 export type MutationCreateInquiriesArgs = {
   data: Array<InquiryCreateInput>;
 };
 
+
 export type MutationCreateInquiryArgs = {
   data: InquiryCreateInput;
 };
+
 
 export type MutationCreateMoralLessonArgs = {
   data: MoralLessonCreateInput;
 };
 
+
 export type MutationCreateMoralLessonsArgs = {
   data: Array<MoralLessonCreateInput>;
 };
+
 
 export type MutationCreatePlaceOfEventArgs = {
   data: PlaceOfEventCreateInput;
 };
 
+
 export type MutationCreatePlaceOfEventsArgs = {
   data: Array<PlaceOfEventCreateInput>;
 };
+
 
 export type MutationCreatePromptArgs = {
   data: PromptCreateInput;
 };
 
+
 export type MutationCreatePromptsArgs = {
   data: Array<PromptCreateInput>;
 };
+
 
 export type MutationCreateStoriesArgs = {
   data: Array<StoryCreateInput>;
 };
 
+
 export type MutationCreateStoryArgs = {
   data: StoryCreateInput;
 };
+
 
 export type MutationCreateUserArgs = {
   data: UserCreateInput;
 };
 
+
 export type MutationCreateUsersArgs = {
   data: Array<UserCreateInput>;
 };
+
 
 export type MutationDeleteCharacterArgs = {
   where: CharacterWhereUniqueInput;
 };
 
+
 export type MutationDeleteCharactersArgs = {
   where: Array<CharacterWhereUniqueInput>;
 };
+
 
 export type MutationDeleteConfigArgs = {
   where?: ConfigWhereUniqueInput;
 };
 
+
 export type MutationDeleteConfigsArgs = {
   where: Array<ConfigWhereUniqueInput>;
 };
+
 
 export type MutationDeleteFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
 
+
 export type MutationDeleteFeedbacksArgs = {
   where: Array<FeedbackWhereUniqueInput>;
 };
+
 
 export type MutationDeleteInquiriesArgs = {
   where: Array<InquiryWhereUniqueInput>;
 };
 
+
 export type MutationDeleteInquiryArgs = {
   where: InquiryWhereUniqueInput;
 };
+
 
 export type MutationDeleteMoralLessonArgs = {
   where: MoralLessonWhereUniqueInput;
 };
 
+
 export type MutationDeleteMoralLessonsArgs = {
   where: Array<MoralLessonWhereUniqueInput>;
 };
+
 
 export type MutationDeletePlaceOfEventArgs = {
   where: PlaceOfEventWhereUniqueInput;
 };
 
+
 export type MutationDeletePlaceOfEventsArgs = {
   where: Array<PlaceOfEventWhereUniqueInput>;
 };
+
 
 export type MutationDeletePromptArgs = {
   where: PromptWhereUniqueInput;
 };
 
+
 export type MutationDeletePromptsArgs = {
   where: Array<PromptWhereUniqueInput>;
 };
+
 
 export type MutationDeleteStoriesArgs = {
   where: Array<StoryWhereUniqueInput>;
 };
 
+
 export type MutationDeleteStoryArgs = {
   where: StoryWhereUniqueInput;
 };
+
 
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
 
+
 export type MutationDeleteUsersArgs = {
   where: Array<UserWhereUniqueInput>;
 };
+
 
 export type MutationUpdateCharacterArgs = {
   data: CharacterUpdateInput;
   where: CharacterWhereUniqueInput;
 };
 
+
 export type MutationUpdateCharactersArgs = {
   data: Array<CharacterUpdateArgs>;
 };
+
 
 export type MutationUpdateConfigArgs = {
   data: ConfigUpdateInput;
   where?: ConfigWhereUniqueInput;
 };
 
+
 export type MutationUpdateConfigsArgs = {
   data: Array<ConfigUpdateArgs>;
 };
+
 
 export type MutationUpdateFeedbackArgs = {
   data: FeedbackUpdateInput;
   where: FeedbackWhereUniqueInput;
 };
 
+
 export type MutationUpdateFeedbacksArgs = {
   data: Array<FeedbackUpdateArgs>;
 };
 
+
 export type MutationUpdateInquiriesArgs = {
   data: Array<InquiryUpdateArgs>;
 };
+
 
 export type MutationUpdateInquiryArgs = {
   data: InquiryUpdateInput;
   where: InquiryWhereUniqueInput;
 };
 
+
 export type MutationUpdateMoralLessonArgs = {
   data: MoralLessonUpdateInput;
   where: MoralLessonWhereUniqueInput;
 };
 
+
 export type MutationUpdateMoralLessonsArgs = {
   data: Array<MoralLessonUpdateArgs>;
 };
+
 
 export type MutationUpdatePlaceOfEventArgs = {
   data: PlaceOfEventUpdateInput;
   where: PlaceOfEventWhereUniqueInput;
 };
 
+
 export type MutationUpdatePlaceOfEventsArgs = {
   data: Array<PlaceOfEventUpdateArgs>;
 };
+
 
 export type MutationUpdatePromptArgs = {
   data: PromptUpdateInput;
   where: PromptWhereUniqueInput;
 };
 
+
 export type MutationUpdatePromptsArgs = {
   data: Array<PromptUpdateArgs>;
 };
 
+
 export type MutationUpdateStoriesArgs = {
   data: Array<StoryUpdateArgs>;
 };
+
 
 export type MutationUpdateStoryArgs = {
   data: StoryUpdateInput;
   where: StoryWhereUniqueInput;
 };
 
+
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
+
 
 export type MutationUpdateUsersArgs = {
   data: Array<UserUpdateArgs>;
@@ -860,7 +906,7 @@ export type NestedStringFilter = {
 
 export enum OrderDirection {
   Asc = 'asc',
-  Desc = 'desc',
+  Desc = 'desc'
 }
 
 export type PasswordState = {
@@ -885,7 +931,7 @@ export type PlaceOfEventCreateInput = {
 };
 
 export enum PlaceOfEventLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type PlaceOfEventLanguageTypeNullableFilter = {
@@ -951,7 +997,7 @@ export type PromptCreateInput = {
 };
 
 export enum PromptLanguageType {
-  En = 'en',
+  En = 'en'
 }
 
 export type PromptLanguageTypeNullableFilter = {
@@ -1034,9 +1080,11 @@ export type Query = {
   usersCount?: Maybe<Scalars['Int']['output']>;
 };
 
+
 export type QueryCharacterArgs = {
   where: CharacterWhereUniqueInput;
 };
+
 
 export type QueryCharactersArgs = {
   cursor?: InputMaybe<CharacterWhereUniqueInput>;
@@ -1046,13 +1094,16 @@ export type QueryCharactersArgs = {
   where?: CharacterWhereInput;
 };
 
+
 export type QueryCharactersCountArgs = {
   where?: CharacterWhereInput;
 };
 
+
 export type QueryConfigArgs = {
   where?: ConfigWhereUniqueInput;
 };
+
 
 export type QueryConfigsArgs = {
   cursor?: InputMaybe<ConfigWhereUniqueInput>;
@@ -1062,13 +1113,16 @@ export type QueryConfigsArgs = {
   where?: ConfigWhereInput;
 };
 
+
 export type QueryConfigsCountArgs = {
   where?: ConfigWhereInput;
 };
 
+
 export type QueryFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
+
 
 export type QueryFeedbacksArgs = {
   cursor?: InputMaybe<FeedbackWhereUniqueInput>;
@@ -1078,9 +1132,11 @@ export type QueryFeedbacksArgs = {
   where?: FeedbackWhereInput;
 };
 
+
 export type QueryFeedbacksCountArgs = {
   where?: FeedbackWhereInput;
 };
+
 
 export type QueryInquiriesArgs = {
   cursor?: InputMaybe<InquiryWhereUniqueInput>;
@@ -1090,17 +1146,21 @@ export type QueryInquiriesArgs = {
   where?: InquiryWhereInput;
 };
 
+
 export type QueryInquiriesCountArgs = {
   where?: InquiryWhereInput;
 };
+
 
 export type QueryInquiryArgs = {
   where: InquiryWhereUniqueInput;
 };
 
+
 export type QueryMoralLessonArgs = {
   where: MoralLessonWhereUniqueInput;
 };
+
 
 export type QueryMoralLessonsArgs = {
   cursor?: InputMaybe<MoralLessonWhereUniqueInput>;
@@ -1110,13 +1170,16 @@ export type QueryMoralLessonsArgs = {
   where?: MoralLessonWhereInput;
 };
 
+
 export type QueryMoralLessonsCountArgs = {
   where?: MoralLessonWhereInput;
 };
 
+
 export type QueryPlaceOfEventArgs = {
   where: PlaceOfEventWhereUniqueInput;
 };
+
 
 export type QueryPlaceOfEventsArgs = {
   cursor?: InputMaybe<PlaceOfEventWhereUniqueInput>;
@@ -1126,13 +1189,16 @@ export type QueryPlaceOfEventsArgs = {
   where?: PlaceOfEventWhereInput;
 };
 
+
 export type QueryPlaceOfEventsCountArgs = {
   where?: PlaceOfEventWhereInput;
 };
 
+
 export type QueryPromptArgs = {
   where: PromptWhereUniqueInput;
 };
+
 
 export type QueryPromptsArgs = {
   cursor?: InputMaybe<PromptWhereUniqueInput>;
@@ -1142,9 +1208,11 @@ export type QueryPromptsArgs = {
   where?: PromptWhereInput;
 };
 
+
 export type QueryPromptsCountArgs = {
   where?: PromptWhereInput;
 };
+
 
 export type QueryStoriesArgs = {
   cursor?: InputMaybe<StoryWhereUniqueInput>;
@@ -1154,17 +1222,21 @@ export type QueryStoriesArgs = {
   where?: StoryWhereInput;
 };
 
+
 export type QueryStoriesCountArgs = {
   where?: StoryWhereInput;
 };
+
 
 export type QueryStoryArgs = {
   where: StoryWhereUniqueInput;
 };
 
+
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
+
 
 export type QueryUsersArgs = {
   cursor?: InputMaybe<UserWhereUniqueInput>;
@@ -1174,13 +1246,14 @@ export type QueryUsersArgs = {
   where?: UserWhereInput;
 };
 
+
 export type QueryUsersCountArgs = {
   where?: UserWhereInput;
 };
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive',
+  Insensitive = 'insensitive'
 }
 
 export type Story = {
@@ -1229,7 +1302,7 @@ export enum StoryStatusType {
   ContentInProgress = 'contentInProgress',
   ImageInProgress = 'imageInProgress',
   Initialized = 'initialized',
-  Success = 'success',
+  Success = 'success'
 }
 
 export type StoryUpdateArgs = {
@@ -1289,6 +1362,7 @@ export type Subscription = {
   storyUpdated?: Maybe<Story>;
 };
 
+
 export type SubscriptionStoryUpdatedArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
 };
@@ -1305,9 +1379,7 @@ export type UserAuthenticationWithPasswordFailure = {
   message: Scalars['String']['output'];
 };
 
-export type UserAuthenticationWithPasswordResult =
-  | UserAuthenticationWithPasswordFailure
-  | UserAuthenticationWithPasswordSuccess;
+export type UserAuthenticationWithPasswordResult = UserAuthenticationWithPasswordFailure | UserAuthenticationWithPasswordSuccess;
 
 export type UserAuthenticationWithPasswordSuccess = {
   item: User;
@@ -1359,35 +1431,26 @@ export type GetRequestVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
-export type GetRequest = {
-  story?: {
-    id: string;
-    message?: string | null;
-    status?: Array<StoryStatusType> | null;
-  } | null;
-};
+
+export type GetRequest = { story?: { id: string, message?: string | null, status?: Array<StoryStatusType> | null } | null };
 
 export type OnStoryUpdatedVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
-export type OnStoryUpdated = {
-  storyUpdated?: {
-    id: string;
-    message?: string | null;
-    status?: Array<StoryStatusType> | null;
-  } | null;
-};
+
+export type OnStoryUpdated = { storyUpdated?: { id: string, message?: string | null, status?: Array<StoryStatusType> | null } | null };
+
 
 export const GetRequestDocument = gql`
-  query getRequest($id: ID!) {
-    story(where: { id: $id }) {
-      id
-      message
-      status
-    }
+    query getRequest($id: ID!) {
+  story(where: {id: $id}) {
+    id
+    message
+    status
   }
-`;
+}
+    `;
 
 /**
  * __useGetRequest__
@@ -1405,59 +1468,31 @@ export const GetRequestDocument = gql`
  *   },
  * });
  */
-export function useGetRequest(
-  baseOptions: Apollo.QueryHookOptions<GetRequest, GetRequestVariables> &
-    ({ variables: GetRequestVariables; skip?: boolean } | { skip: boolean })
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<GetRequest, GetRequestVariables>(
-    GetRequestDocument,
-    options
-  );
-}
-export function useGetRequestLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<GetRequest, GetRequestVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<GetRequest, GetRequestVariables>(
-    GetRequestDocument,
-    options
-  );
-}
-export function useGetRequestSuspenseQuery(
-  baseOptions?:
-    | Apollo.SkipToken
-    | Apollo.SuspenseQueryHookOptions<GetRequest, GetRequestVariables>
-) {
-  const options =
-    baseOptions === Apollo.skipToken
-      ? baseOptions
-      : { ...defaultOptions, ...baseOptions };
-  return Apollo.useSuspenseQuery<GetRequest, GetRequestVariables>(
-    GetRequestDocument,
-    options
-  );
-}
+export function useGetRequest(baseOptions: Apollo.QueryHookOptions<GetRequest, GetRequestVariables> & ({ variables: GetRequestVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetRequest, GetRequestVariables>(GetRequestDocument, options);
+      }
+export function useGetRequestLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetRequest, GetRequestVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetRequest, GetRequestVariables>(GetRequestDocument, options);
+        }
+export function useGetRequestSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetRequest, GetRequestVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetRequest, GetRequestVariables>(GetRequestDocument, options);
+        }
 export type GetRequestHookResult = ReturnType<typeof useGetRequest>;
-export type GetRequestLazyQueryHookResult = ReturnType<
-  typeof useGetRequestLazyQuery
->;
-export type GetRequestSuspenseQueryHookResult = ReturnType<
-  typeof useGetRequestSuspenseQuery
->;
-export type GetRequestQueryResult = Apollo.QueryResult<
-  GetRequest,
-  GetRequestVariables
->;
+export type GetRequestLazyQueryHookResult = ReturnType<typeof useGetRequestLazyQuery>;
+export type GetRequestSuspenseQueryHookResult = ReturnType<typeof useGetRequestSuspenseQuery>;
+export type GetRequestQueryResult = Apollo.QueryResult<GetRequest, GetRequestVariables>;
 export const OnStoryUpdatedDocument = gql`
-  subscription onStoryUpdated($id: ID!) {
-    storyUpdated(id: $id) {
-      id
-      message
-      status
-    }
+    subscription onStoryUpdated($id: ID!) {
+  storyUpdated(id: $id) {
+    id
+    message
+    status
   }
-`;
+}
+    `;
 
 /**
  * __useOnStoryUpdated__
@@ -1475,19 +1510,9 @@ export const OnStoryUpdatedDocument = gql`
  *   },
  * });
  */
-export function useOnStoryUpdated(
-  baseOptions: Apollo.SubscriptionHookOptions<
-    OnStoryUpdated,
-    OnStoryUpdatedVariables
-  > &
-    ({ variables: OnStoryUpdatedVariables; skip?: boolean } | { skip: boolean })
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useSubscription<OnStoryUpdated, OnStoryUpdatedVariables>(
-    OnStoryUpdatedDocument,
-    options
-  );
-}
+export function useOnStoryUpdated(baseOptions: Apollo.SubscriptionHookOptions<OnStoryUpdated, OnStoryUpdatedVariables> & ({ variables: OnStoryUpdatedVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OnStoryUpdated, OnStoryUpdatedVariables>(OnStoryUpdatedDocument, options);
+      }
 export type OnStoryUpdatedHookResult = ReturnType<typeof useOnStoryUpdated>;
-export type OnStoryUpdatedSubscriptionResult =
-  Apollo.SubscriptionResult<OnStoryUpdated>;
+export type OnStoryUpdatedSubscriptionResult = Apollo.SubscriptionResult<OnStoryUpdated>;
