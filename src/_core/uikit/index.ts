@@ -16,6 +16,7 @@ export * from './components/InfiniteScroll';
 export * from './components/List';
 export * from './components/Message';
 export * from './components/Page';
+export * from './components/SafeArea';
 export * from './components/Swiper';
 export * from './components/Text';
 export * from './components/ThemeProvider';

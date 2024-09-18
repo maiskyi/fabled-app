@@ -7,7 +7,7 @@ import {
   Card,
   Box,
   useDevice,
-  Footer,
+  SafeArea,
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
@@ -36,25 +36,26 @@ export const Fable = memo(function Fable() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content fullscreen>
-        <Box
-          aspectRatio={1}
-          borderRadius={8}
-          marginInline={20}
-          overflow="hidden"
-        >
-          <img
-            alt={data?.story.title}
-            src={data?.story.image.publicUrlTransformed}
-          />
-        </Box>
-        <Card.Header>
-          <Card.Title>{data?.story?.title}</Card.Title>
-        </Card.Header>
-        <Box marginInline={20} whiteSpace="pre-wrap">
-          {data?.story?.content}
-        </Box>
+        <SafeArea bottom>
+          <Box
+            aspectRatio={1}
+            borderRadius={8}
+            marginInline={20}
+            overflow="hidden"
+          >
+            <img
+              alt={data?.story.title}
+              src={data?.story.image.publicUrlTransformed}
+            />
+          </Box>
+          <Card.Header>
+            <Card.Title>{data?.story?.title}</Card.Title>
+          </Card.Header>
+          <Box marginInline={20} whiteSpace="pre-wrap">
+            {data?.story?.content}
+          </Box>
+        </SafeArea>
       </Content>
-      <Footer />
     </Page>
   );
 });
