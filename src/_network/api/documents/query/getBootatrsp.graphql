@@ -1,0 +1,32 @@
+query getBootstrap($image: CloudinaryImageFormat) {
+  moralLessons(where: { isPublished: { equals: true } }) {
+    id
+    title
+    description
+  }
+  placeOfEvents(where: { isPublished: { equals: true } }) {
+    id
+    title
+    image {
+      publicUrlTransformed(transformation: $image)
+    }
+  }
+  characters(where: { isPublished: { equals: true } }) {
+    id
+    title
+    description
+    image {
+      publicUrlTransformed(transformation: $image)
+    }
+  }
+  prompts {
+    id
+    message
+    textPrompt
+    imagePrompt
+  }
+  config(where: { id: "1" }) {
+    privacyPolicyUrl
+    termsAndConditionsUrl
+  }
+}

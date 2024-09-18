@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback } from 'react';
 
 import { RoutePath } from '@bootstrap/constants';
 import { Page, Content, InfiniteScroll, Header, Box } from '@core/uikit';
@@ -24,11 +24,7 @@ export const Home = memo(function Home() {
 
   const fetchNextPage = useFablesContext(({ fetchNextPage }) => fetchNextPage);
 
-  const data = useFablesContext(({ data }) => data);
-
-  const records = useMemo(() => {
-    return data?.pages.flatMap((item) => item);
-  }, [data]);
+  const records = useFablesContext(({ stories }) => stories);
 
   const handleOnCreateClick: FablesCreateOnClickFn = useCallback(() => {
     navigate({ action: 'push', pathname: RoutePath.Create });

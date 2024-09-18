@@ -7,13 +7,11 @@ import {
   Card,
   Box,
   useDevice,
-  Footer,
+  SafeArea,
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
-import { useGetDocument } from '@core/firestore';
-import { Document, RoutePath } from '@bootstrap/constants';
-import { DTO } from '@bootstrap/dto';
-import { CloudinaryImage } from '@network/cloudinary';
+import { RoutePath } from '@bootstrap/constants';
+import { useGetStory } from '@network/api';
 
 export const Fable = memo(function Fable() {
   const [
@@ -24,9 +22,12 @@ export const Fable = memo(function Fable() {
 
   const { width } = useDevice();
 
-  const { data } = useGetDocument<DTO.Fable>({
-    doc: Document.Fable,
+  const { data } = useGetStory({
     id,
+    image: {
+      aspect_ratio: '1:1',
+      width: `${width}`,
+    },
   });
 
   return (
@@ -35,26 +36,26 @@ export const Fable = memo(function Fable() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content fullscreen>
-        <Box
-          aspectRatio={1}
-          borderRadius={8}
-          marginInline={20}
-          overflow="hidden"
-        >
-          <CloudinaryImage
-            aspectRatio="1:1"
-            publicId={data?.data.image.public_id}
-            width={width}
-          />
-        </Box>
-        <Card.Header>
-          <Card.Title>{data?.data?.title}</Card.Title>
-        </Card.Header>
-        <Box marginInline={20}>
-          {data?.data?.content.map((str, index) => <p key={index}>{str}</p>)}
-        </Box>
+        <SafeArea bottom>
+          <Box
+            aspectRatio={1}
+            borderRadius={8}
+            marginInline={20}
+            overflow="hidden"
+          >
+            <img
+              alt={data?.story.title}
+              src={data?.story.image.publicUrlTransformed}
+            />
+          </Box>
+          <Card.Header>
+            <Card.Title>{data?.story?.title}</Card.Title>
+          </Card.Header>
+          <Box marginInline={20} whiteSpace="pre-wrap">
+            {data?.story?.content}
+          </Box>
+        </SafeArea>
       </Content>
-      <Footer />
     </Page>
   );
 });

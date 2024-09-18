@@ -11,5 +11,5 @@ export const useUser = () => {
 
   const avatar = user?.photoUrl || USER_AVATAR_SRC;
 
-  return { avatar, displayName, uid: user?.uid };
+  return { avatar, displayName, email: user?.email, uid: user?.uid };
 };

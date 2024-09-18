@@ -1,13 +1,12 @@
 import { memo } from 'react';
 
 import { Header, Box, Form, Button, Animation } from '@core/uikit';
-import { FunctionName, RoutePath } from '@bootstrap/constants';
+import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
-import { useTemplate } from '@network/contentful';
-import { useMutationFunction } from '@core/functions';
-import { DTO } from '@bootstrap/dto';
+import { useCreateStory, useTemplate } from '@network/api';
+import { useAuth } from '@core/auth';
 
 import { FormField } from '../Create.const';
 
@@ -24,20 +23,11 @@ export const Index = memo(function Create() {
   const [, navigate] = useRoute();
   const { render } = useTemplate();
   const { characters, themes, scenes, readTimes } = useOptions();
+  const { user } = useAuth();
 
-  const {
-    slug,
-    description: promptDescription,
-    textPrompt,
-    imagePrompt,
-  } = prompts.at(0);
+  const { mutate, isPending, isSuccess, data } = useCreateStory();
 
-  const { data, isSuccess, isPending, mutate } = useMutationFunction<
-    DTO.CreateFableRequest,
-    DTO.CreateFableResponse
-  >({
-    name: FunctionName.OnFableRequest,
-  });
+  const { message: outline, textPrompt, imagePrompt } = prompts.at(0);
 
   const handleOnCancel = () => {
     navigate({ action: 'back', pathname: RoutePath.Index });
@@ -60,14 +50,7 @@ export const Index = memo(function Create() {
       ({ value }) => value === form.readTime
     );
 
-    const request = {
-      character: characterLabel,
-      description: descriptionLabel,
-      readTime: readTimeLabel,
-      scene: sceneLabel,
-    };
-
-    const message = render(promptDescription, {
+    const message = render(outline, {
       character: characterLabel,
       description: descriptionLabel,
       readTime: readTimeLabel,
@@ -90,26 +73,35 @@ export const Index = memo(function Create() {
     });
 
     mutate({
-      ...request,
+      contentPrompt,
+      imagePrompt: illustrationPrompt,
       message,
-      prompt: {
-        content: contentPrompt,
-        image: illustrationPrompt,
-      },
       readTime: readTimeValue,
+      uid: user?.uid,
     });
   };
 
   if (isSuccess) {
     return (
-      <Redirect params={{ id: data.id }} pathname={RoutePath.CreateDetails} />
+      <Redirect
+        params={{ id: data?.createStory.id }}
+        pathname={RoutePath.CreateDetails}
+      />
     );
   }
 
   return (
     <Animation.Message>
       <Box>
-        <Form<IndexForm> onSubmit={handleOnSubmit}>
+        <Form<IndexForm>
+          defaultValues={{
+            character: characters[0].value,
+            description: themes[0].value,
+            readTime: readTimes[0].value,
+            scene: scenes[0].value,
+          }}
+          onSubmit={handleOnSubmit}
+        >
           <Header.Title size="large" wrap>
             <Translate
               components={{
@@ -150,8 +142,8 @@ export const Index = memo(function Create() {
                   />
                 ),
               }}
-              defaults={promptDescription}
-              id={slug}
+              defaults={outline}
+              id="slug"
             />
           </Header.Title>
           <Box

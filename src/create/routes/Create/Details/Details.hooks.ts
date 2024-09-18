@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
+import { useMount } from 'react-use';
 
-import { DTO } from '@bootstrap/dto';
 import { useUser } from '@common/hooks';
-import { useDocumentSnapshotListener } from '@core/firestore';
-import { Document } from '@bootstrap/constants';
 import { BOT_AVATAR_SRC } from '@core/uikit';
 import { useTranslation } from '@core/localization';
+import { useGetRequest, DTO, OnStoryUpdatedDocument } from '@network/api';
 
 import { ThreadItem } from './Details.types';
 
@@ -19,20 +18,19 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
   const { t } = useTranslation();
   const { displayName, avatar } = useUser();
 
-  const { data } = useDocumentSnapshotListener<DTO.Fable>({
-    doc: Document.Fable,
-    id,
+  const { data, subscribeToMore } = useGetRequest({
+    variables: { id },
   });
 
   const thread = useMemo((): ThreadItem[] => {
-    const copyIndex = data?.message.length % 10;
+    const copyIndex = data?.story.message.length % 10;
 
     const userMessage: ThreadItem[] = [
       {
         id: 'userMessage',
         props: {
           avatar: avatar,
-          children: data?.message,
+          children: data?.story.message,
           origin: 'me',
           title: displayName,
         },
@@ -41,7 +39,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     ];
 
     const contentMessage: ThreadItem[] = (() => {
-      if (data?.status.includes(DTO.FableStatus.ContentInProgress)) {
+      if (data?.story.status.includes(DTO.StoryStatusType.ContentInProgress)) {
         return [
           {
             id: 'contentMessage',
@@ -59,7 +57,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const imageMessage: ThreadItem[] = (() => {
-      if (data?.status.includes(DTO.FableStatus.ImageInProgress)) {
+      if (data?.story.status.includes(DTO.StoryStatusType.ImageInProgress)) {
         return [
           {
             id: 'imageMessage',
@@ -76,8 +74,26 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
       return [];
     })();
 
+    const progressMessage: ThreadItem[] = (() => {
+      if (!data?.story.status.includes(DTO.StoryStatusType.Success)) {
+        return [
+          {
+            id: 'imageMessage',
+            props: {
+              avatar: BOT_AVATAR_SRC,
+              children: '123',
+              origin: 'companion',
+              title: t('bot.fabledAi'),
+            },
+            type: 'message',
+          },
+        ];
+      }
+      return [];
+    })();
+
     const successMessage: ThreadItem[] = (() => {
-      if (data?.status.includes(DTO.FableStatus.Success)) {
+      if (data?.story.status.includes(DTO.StoryStatusType.Success)) {
         return [
           {
             id: 'successMessage',
@@ -95,7 +111,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const successActions: ThreadItem[] = (() => {
-      if (data?.status.includes(DTO.FableStatus.Success)) {
+      if (data?.story.status.includes(DTO.StoryStatusType.Success)) {
         return [
           {
             id: 'successActions',
@@ -121,10 +137,23 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
       ...userMessage,
       ...contentMessage,
       ...imageMessage,
+      ...progressMessage,
       ...successMessage,
       ...successActions,
     ];
   }, [displayName, avatar, data, t, onReadNow, onReadLater]);
+
+  useMount(() => {
+    subscribeToMore({
+      document: OnStoryUpdatedDocument,
+      updateQuery: (prev, { subscriptionData }) => {
+        const { data } = subscriptionData;
+        if (!data) return prev;
+        return prev;
+      },
+      variables: { id },
+    });
+  });
 
   return { thread };
 };

@@ -1,0 +1,9 @@
+query getStory($id: ID!, $image: CloudinaryImageFormat) {
+  story(where: { id: $id }) {
+    title
+    content
+    image {
+      publicUrlTransformed(transformation: $image)
+    }
+  }
+}

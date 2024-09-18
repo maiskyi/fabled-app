@@ -4,8 +4,15 @@ import { createRoot } from 'react-dom/client';
 import { Language } from '@locale/constants';
 import { resources } from '@locale/resources';
 import { Splash } from '@bootstrap/components';
+import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 
 import { App, AppProps } from './App';
+
+if (import.meta.env.DEV) {
+  // Adds messages only in a dev environment
+  loadDevMessages();
+  loadErrorMessages();
+}
 
 const splash = <Splash />;
 
@@ -23,9 +30,6 @@ const config: AppProps = {
     auth: {
       fallback: splash,
     },
-    cloudinary: {
-      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
-    },
     config: {
       fallback: splash,
       version: import.meta.env.PACKAGE_VERSION,
@@ -36,13 +40,6 @@ const config: AppProps = {
         port: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT,
       },
     },
-
-    functions: {
-      emulator: {
-        host: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_HOST,
-        port: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_PORT,
-      },
-    },
     localization: {
       fallback: splash,
       fallbackLng: Language.en,
@@ -50,10 +47,9 @@ const config: AppProps = {
       supportedLngs: [Language.en],
     },
     network: {
-      contentful: {
-        apiKey: import.meta.env.VITE_CONTENTFUL_API_KEY,
-        environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT,
-        space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+      api: {
+        endpoint: import.meta.env.VITE_API_ENDPOINT,
+        subscription: import.meta.env.VITE_API_SUBSCRIPTION,
       },
     },
   },

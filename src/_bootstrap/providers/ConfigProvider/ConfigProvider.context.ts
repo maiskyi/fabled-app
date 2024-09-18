@@ -1,15 +1,15 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO } from '@network/contentful';
+import { DTO } from '@network/api';
 
 interface ConfigContextProps {
   version: string;
   privacyPolicyUrl: string;
   termsAndConditionsUrl: string;
-  characters: DTO.GetBootstrapQuery['characterCollection']['items'];
-  prompts: DTO.GetBootstrapQuery['promptCollection']['items'];
-  scenes: DTO.GetBootstrapQuery['sceneCollection']['items'];
-  themes: DTO.GetBootstrapQuery['themeCollection']['items'];
+  characters: DTO.GetBootstrap['characters'];
+  prompts: DTO.GetBootstrap['prompts'];
+  scenes: DTO.GetBootstrap['placeOfEvents'];
+  themes: DTO.GetBootstrap['moralLessons'];
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({
