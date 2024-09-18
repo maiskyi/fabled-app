@@ -28,12 +28,7 @@ export const Index = memo(function Create() {
 
   const { mutate, isPending, isSuccess, data } = useCreateStory();
 
-  const {
-    slug,
-    description: promptDescription,
-    textPrompt,
-    imagePrompt,
-  } = prompts.at(0);
+  const { message: outline, textPrompt, imagePrompt } = prompts.at(0);
 
   const handleOnCancel = () => {
     navigate({ action: 'back', pathname: RoutePath.Index });
@@ -56,7 +51,7 @@ export const Index = memo(function Create() {
       ({ value }) => value === form.readTime
     );
 
-    const message = render(promptDescription, {
+    const message = render(outline, {
       character: characterLabel,
       description: descriptionLabel,
       readTime: readTimeLabel,
@@ -148,8 +143,8 @@ export const Index = memo(function Create() {
                   />
                 ),
               }}
-              defaults={promptDescription}
-              id={slug}
+              defaults={outline}
+              id="slug"
             />
           </Header.Title>
           <Box

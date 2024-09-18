@@ -3,4 +3,5 @@ export type {
   GetUserStories,
   CreateFeedbackVariables,
   CreateInquiryVariables,
+  GetBootstrap,
 } from '../__generated__/query';

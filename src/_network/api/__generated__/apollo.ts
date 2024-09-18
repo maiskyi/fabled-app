@@ -42,6 +42,75 @@ export type BooleanFilter = {
   not?: InputMaybe<BooleanFilter>;
 };
 
+export type Character = {
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  image?: Maybe<CloudinaryImage_File>;
+  isPublished?: Maybe<Scalars['Boolean']['output']>;
+  language?: Maybe<CharacterLanguageType>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+export type CharacterCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['Upload']['input']>;
+  isPublished?: InputMaybe<Scalars['Boolean']['input']>;
+  language?: InputMaybe<CharacterLanguageType>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum CharacterLanguageType {
+  En = 'en',
+}
+
+export type CharacterLanguageTypeNullableFilter = {
+  equals?: InputMaybe<CharacterLanguageType>;
+  in?: InputMaybe<Array<CharacterLanguageType>>;
+  not?: InputMaybe<CharacterLanguageTypeNullableFilter>;
+  notIn?: InputMaybe<Array<CharacterLanguageType>>;
+};
+
+export type CharacterOrderByInput = {
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  isPublished?: InputMaybe<OrderDirection>;
+  language?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+};
+
+export type CharacterUpdateArgs = {
+  data: CharacterUpdateInput;
+  where: CharacterWhereUniqueInput;
+};
+
+export type CharacterUpdateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['Upload']['input']>;
+  isPublished?: InputMaybe<Scalars['Boolean']['input']>;
+  language?: InputMaybe<CharacterLanguageType>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CharacterWhereInput = {
+  AND?: InputMaybe<Array<CharacterWhereInput>>;
+  NOT?: InputMaybe<Array<CharacterWhereInput>>;
+  OR?: InputMaybe<Array<CharacterWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  isPublished?: InputMaybe<BooleanFilter>;
+  language?: InputMaybe<CharacterLanguageTypeNullableFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type CharacterWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 /**
  * Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
  * All options are strings as they ultimately end up in a URL.
@@ -375,30 +444,120 @@ export type KeystoneMeta = {
   adminMeta: KeystoneAdminMeta;
 };
 
+export type MoralLesson = {
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  isPublished?: Maybe<Scalars['Boolean']['output']>;
+  language?: Maybe<MoralLessonLanguageType>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+export type MoralLessonCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  isPublished?: InputMaybe<Scalars['Boolean']['input']>;
+  language?: InputMaybe<MoralLessonLanguageType>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum MoralLessonLanguageType {
+  En = 'en',
+}
+
+export type MoralLessonLanguageTypeNullableFilter = {
+  equals?: InputMaybe<MoralLessonLanguageType>;
+  in?: InputMaybe<Array<MoralLessonLanguageType>>;
+  not?: InputMaybe<MoralLessonLanguageTypeNullableFilter>;
+  notIn?: InputMaybe<Array<MoralLessonLanguageType>>;
+};
+
+export type MoralLessonOrderByInput = {
+  createdAt?: InputMaybe<OrderDirection>;
+  description?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  isPublished?: InputMaybe<OrderDirection>;
+  language?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+};
+
+export type MoralLessonUpdateArgs = {
+  data: MoralLessonUpdateInput;
+  where: MoralLessonWhereUniqueInput;
+};
+
+export type MoralLessonUpdateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  isPublished?: InputMaybe<Scalars['Boolean']['input']>;
+  language?: InputMaybe<MoralLessonLanguageType>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MoralLessonWhereInput = {
+  AND?: InputMaybe<Array<MoralLessonWhereInput>>;
+  NOT?: InputMaybe<Array<MoralLessonWhereInput>>;
+  OR?: InputMaybe<Array<MoralLessonWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  isPublished?: InputMaybe<BooleanFilter>;
+  language?: InputMaybe<MoralLessonLanguageTypeNullableFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type MoralLessonWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type Mutation = {
   authenticateUserWithPassword?: Maybe<UserAuthenticationWithPasswordResult>;
+  createCharacter?: Maybe<Character>;
+  createCharacters?: Maybe<Array<Maybe<Character>>>;
   createFeedback?: Maybe<Feedback>;
   createFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
   createInquiries?: Maybe<Array<Maybe<Inquiry>>>;
   createInquiry?: Maybe<Inquiry>;
+  createMoralLesson?: Maybe<MoralLesson>;
+  createMoralLessons?: Maybe<Array<Maybe<MoralLesson>>>;
+  createPlaceOfEvent?: Maybe<PlaceOfEvent>;
+  createPlaceOfEvents?: Maybe<Array<Maybe<PlaceOfEvent>>>;
+  createPrompt?: Maybe<Prompt>;
+  createPrompts?: Maybe<Array<Maybe<Prompt>>>;
   createStories?: Maybe<Array<Maybe<Story>>>;
   createStory?: Maybe<Story>;
   createUser?: Maybe<User>;
   createUsers?: Maybe<Array<Maybe<User>>>;
+  deleteCharacter?: Maybe<Character>;
+  deleteCharacters?: Maybe<Array<Maybe<Character>>>;
   deleteFeedback?: Maybe<Feedback>;
   deleteFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
   deleteInquiries?: Maybe<Array<Maybe<Inquiry>>>;
   deleteInquiry?: Maybe<Inquiry>;
+  deleteMoralLesson?: Maybe<MoralLesson>;
+  deleteMoralLessons?: Maybe<Array<Maybe<MoralLesson>>>;
+  deletePlaceOfEvent?: Maybe<PlaceOfEvent>;
+  deletePlaceOfEvents?: Maybe<Array<Maybe<PlaceOfEvent>>>;
+  deletePrompt?: Maybe<Prompt>;
+  deletePrompts?: Maybe<Array<Maybe<Prompt>>>;
   deleteStories?: Maybe<Array<Maybe<Story>>>;
   deleteStory?: Maybe<Story>;
   deleteUser?: Maybe<User>;
   deleteUsers?: Maybe<Array<Maybe<User>>>;
   endSession: Scalars['Boolean']['output'];
+  updateCharacter?: Maybe<Character>;
+  updateCharacters?: Maybe<Array<Maybe<Character>>>;
   updateFeedback?: Maybe<Feedback>;
   updateFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
   updateInquiries?: Maybe<Array<Maybe<Inquiry>>>;
   updateInquiry?: Maybe<Inquiry>;
+  updateMoralLesson?: Maybe<MoralLesson>;
+  updateMoralLessons?: Maybe<Array<Maybe<MoralLesson>>>;
+  updatePlaceOfEvent?: Maybe<PlaceOfEvent>;
+  updatePlaceOfEvents?: Maybe<Array<Maybe<PlaceOfEvent>>>;
+  updatePrompt?: Maybe<Prompt>;
+  updatePrompts?: Maybe<Array<Maybe<Prompt>>>;
   updateStories?: Maybe<Array<Maybe<Story>>>;
   updateStory?: Maybe<Story>;
   updateUser?: Maybe<User>;
@@ -408,6 +567,14 @@ export type Mutation = {
 export type MutationAuthenticateUserWithPasswordArgs = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+export type MutationCreateCharacterArgs = {
+  data: CharacterCreateInput;
+};
+
+export type MutationCreateCharactersArgs = {
+  data: Array<CharacterCreateInput>;
 };
 
 export type MutationCreateFeedbackArgs = {
@@ -430,6 +597,30 @@ export type MutationCreateInquiryArgs = {
   data: InquiryCreateInput;
 };
 
+export type MutationCreateMoralLessonArgs = {
+  data: MoralLessonCreateInput;
+};
+
+export type MutationCreateMoralLessonsArgs = {
+  data: Array<MoralLessonCreateInput>;
+};
+
+export type MutationCreatePlaceOfEventArgs = {
+  data: PlaceOfEventCreateInput;
+};
+
+export type MutationCreatePlaceOfEventsArgs = {
+  data: Array<PlaceOfEventCreateInput>;
+};
+
+export type MutationCreatePromptArgs = {
+  data: PromptCreateInput;
+};
+
+export type MutationCreatePromptsArgs = {
+  data: Array<PromptCreateInput>;
+};
+
 export type MutationCreateStoriesArgs = {
   data: Array<StoryCreateInput>;
 };
@@ -444,6 +635,14 @@ export type MutationCreateUserArgs = {
 
 export type MutationCreateUsersArgs = {
   data: Array<UserCreateInput>;
+};
+
+export type MutationDeleteCharacterArgs = {
+  where: CharacterWhereUniqueInput;
+};
+
+export type MutationDeleteCharactersArgs = {
+  where: Array<CharacterWhereUniqueInput>;
 };
 
 export type MutationDeleteFeedbackArgs = {
@@ -462,6 +661,30 @@ export type MutationDeleteInquiryArgs = {
   where: InquiryWhereUniqueInput;
 };
 
+export type MutationDeleteMoralLessonArgs = {
+  where: MoralLessonWhereUniqueInput;
+};
+
+export type MutationDeleteMoralLessonsArgs = {
+  where: Array<MoralLessonWhereUniqueInput>;
+};
+
+export type MutationDeletePlaceOfEventArgs = {
+  where: PlaceOfEventWhereUniqueInput;
+};
+
+export type MutationDeletePlaceOfEventsArgs = {
+  where: Array<PlaceOfEventWhereUniqueInput>;
+};
+
+export type MutationDeletePromptArgs = {
+  where: PromptWhereUniqueInput;
+};
+
+export type MutationDeletePromptsArgs = {
+  where: Array<PromptWhereUniqueInput>;
+};
+
 export type MutationDeleteStoriesArgs = {
   where: Array<StoryWhereUniqueInput>;
 };
@@ -476,6 +699,15 @@ export type MutationDeleteUserArgs = {
 
 export type MutationDeleteUsersArgs = {
   where: Array<UserWhereUniqueInput>;
+};
+
+export type MutationUpdateCharacterArgs = {
+  data: CharacterUpdateInput;
+  where: CharacterWhereUniqueInput;
+};
+
+export type MutationUpdateCharactersArgs = {
+  data: Array<CharacterUpdateArgs>;
 };
 
 export type MutationUpdateFeedbackArgs = {
@@ -494,6 +726,33 @@ export type MutationUpdateInquiriesArgs = {
 export type MutationUpdateInquiryArgs = {
   data: InquiryUpdateInput;
   where: InquiryWhereUniqueInput;
+};
+
+export type MutationUpdateMoralLessonArgs = {
+  data: MoralLessonUpdateInput;
+  where: MoralLessonWhereUniqueInput;
+};
+
+export type MutationUpdateMoralLessonsArgs = {
+  data: Array<MoralLessonUpdateArgs>;
+};
+
+export type MutationUpdatePlaceOfEventArgs = {
+  data: PlaceOfEventUpdateInput;
+  where: PlaceOfEventWhereUniqueInput;
+};
+
+export type MutationUpdatePlaceOfEventsArgs = {
+  data: Array<PlaceOfEventUpdateArgs>;
+};
+
+export type MutationUpdatePromptArgs = {
+  data: PromptUpdateInput;
+  where: PromptWhereUniqueInput;
+};
+
+export type MutationUpdatePromptsArgs = {
+  data: Array<PromptUpdateArgs>;
 };
 
 export type MutationUpdateStoriesArgs = {
@@ -537,8 +796,146 @@ export type PasswordState = {
   isSet: Scalars['Boolean']['output'];
 };
 
+export type PlaceOfEvent = {
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  image?: Maybe<CloudinaryImage_File>;
+  isPublished?: Maybe<Scalars['Boolean']['output']>;
+  language?: Maybe<PlaceOfEventLanguageType>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+export type PlaceOfEventCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  image?: InputMaybe<Scalars['Upload']['input']>;
+  isPublished?: InputMaybe<Scalars['Boolean']['input']>;
+  language?: InputMaybe<PlaceOfEventLanguageType>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum PlaceOfEventLanguageType {
+  En = 'en',
+}
+
+export type PlaceOfEventLanguageTypeNullableFilter = {
+  equals?: InputMaybe<PlaceOfEventLanguageType>;
+  in?: InputMaybe<Array<PlaceOfEventLanguageType>>;
+  not?: InputMaybe<PlaceOfEventLanguageTypeNullableFilter>;
+  notIn?: InputMaybe<Array<PlaceOfEventLanguageType>>;
+};
+
+export type PlaceOfEventOrderByInput = {
+  createdAt?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  isPublished?: InputMaybe<OrderDirection>;
+  language?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+};
+
+export type PlaceOfEventUpdateArgs = {
+  data: PlaceOfEventUpdateInput;
+  where: PlaceOfEventWhereUniqueInput;
+};
+
+export type PlaceOfEventUpdateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  image?: InputMaybe<Scalars['Upload']['input']>;
+  isPublished?: InputMaybe<Scalars['Boolean']['input']>;
+  language?: InputMaybe<PlaceOfEventLanguageType>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PlaceOfEventWhereInput = {
+  AND?: InputMaybe<Array<PlaceOfEventWhereInput>>;
+  NOT?: InputMaybe<Array<PlaceOfEventWhereInput>>;
+  OR?: InputMaybe<Array<PlaceOfEventWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  id?: InputMaybe<IdFilter>;
+  isPublished?: InputMaybe<BooleanFilter>;
+  language?: InputMaybe<PlaceOfEventLanguageTypeNullableFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type PlaceOfEventWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type Prompt = {
+  createdAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  imagePrompt?: Maybe<Scalars['String']['output']>;
+  language?: Maybe<PromptLanguageType>;
+  message?: Maybe<Scalars['String']['output']>;
+  textPrompt?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+export type PromptCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  imagePrompt?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<PromptLanguageType>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  textPrompt?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum PromptLanguageType {
+  En = 'en',
+}
+
+export type PromptLanguageTypeNullableFilter = {
+  equals?: InputMaybe<PromptLanguageType>;
+  in?: InputMaybe<Array<PromptLanguageType>>;
+  not?: InputMaybe<PromptLanguageTypeNullableFilter>;
+  notIn?: InputMaybe<Array<PromptLanguageType>>;
+};
+
+export type PromptOrderByInput = {
+  createdAt?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  imagePrompt?: InputMaybe<OrderDirection>;
+  language?: InputMaybe<OrderDirection>;
+  message?: InputMaybe<OrderDirection>;
+  textPrompt?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+};
+
+export type PromptUpdateArgs = {
+  data: PromptUpdateInput;
+  where: PromptWhereUniqueInput;
+};
+
+export type PromptUpdateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  imagePrompt?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<PromptLanguageType>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  textPrompt?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PromptWhereInput = {
+  AND?: InputMaybe<Array<PromptWhereInput>>;
+  NOT?: InputMaybe<Array<PromptWhereInput>>;
+  OR?: InputMaybe<Array<PromptWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  id?: InputMaybe<IdFilter>;
+  imagePrompt?: InputMaybe<StringFilter>;
+  language?: InputMaybe<PromptLanguageTypeNullableFilter>;
+  message?: InputMaybe<StringFilter>;
+  textPrompt?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type PromptWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type Query = {
   authenticatedItem?: Maybe<AuthenticatedItem>;
+  character?: Maybe<Character>;
+  characters?: Maybe<Array<Character>>;
+  charactersCount?: Maybe<Scalars['Int']['output']>;
   feedback?: Maybe<Feedback>;
   feedbacks?: Maybe<Array<Feedback>>;
   feedbacksCount?: Maybe<Scalars['Int']['output']>;
@@ -546,12 +943,37 @@ export type Query = {
   inquiriesCount?: Maybe<Scalars['Int']['output']>;
   inquiry?: Maybe<Inquiry>;
   keystone: KeystoneMeta;
+  moralLesson?: Maybe<MoralLesson>;
+  moralLessons?: Maybe<Array<MoralLesson>>;
+  moralLessonsCount?: Maybe<Scalars['Int']['output']>;
+  placeOfEvent?: Maybe<PlaceOfEvent>;
+  placeOfEvents?: Maybe<Array<PlaceOfEvent>>;
+  placeOfEventsCount?: Maybe<Scalars['Int']['output']>;
+  prompt?: Maybe<Prompt>;
+  prompts?: Maybe<Array<Prompt>>;
+  promptsCount?: Maybe<Scalars['Int']['output']>;
   stories?: Maybe<Array<Story>>;
   storiesCount?: Maybe<Scalars['Int']['output']>;
   story?: Maybe<Story>;
   user?: Maybe<User>;
   users?: Maybe<Array<User>>;
   usersCount?: Maybe<Scalars['Int']['output']>;
+};
+
+export type QueryCharacterArgs = {
+  where: CharacterWhereUniqueInput;
+};
+
+export type QueryCharactersArgs = {
+  cursor?: InputMaybe<CharacterWhereUniqueInput>;
+  orderBy?: Array<CharacterOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: CharacterWhereInput;
+};
+
+export type QueryCharactersCountArgs = {
+  where?: CharacterWhereInput;
 };
 
 export type QueryFeedbackArgs = {
@@ -584,6 +1006,54 @@ export type QueryInquiriesCountArgs = {
 
 export type QueryInquiryArgs = {
   where: InquiryWhereUniqueInput;
+};
+
+export type QueryMoralLessonArgs = {
+  where: MoralLessonWhereUniqueInput;
+};
+
+export type QueryMoralLessonsArgs = {
+  cursor?: InputMaybe<MoralLessonWhereUniqueInput>;
+  orderBy?: Array<MoralLessonOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: MoralLessonWhereInput;
+};
+
+export type QueryMoralLessonsCountArgs = {
+  where?: MoralLessonWhereInput;
+};
+
+export type QueryPlaceOfEventArgs = {
+  where: PlaceOfEventWhereUniqueInput;
+};
+
+export type QueryPlaceOfEventsArgs = {
+  cursor?: InputMaybe<PlaceOfEventWhereUniqueInput>;
+  orderBy?: Array<PlaceOfEventOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PlaceOfEventWhereInput;
+};
+
+export type QueryPlaceOfEventsCountArgs = {
+  where?: PlaceOfEventWhereInput;
+};
+
+export type QueryPromptArgs = {
+  where: PromptWhereUniqueInput;
+};
+
+export type QueryPromptsArgs = {
+  cursor?: InputMaybe<PromptWhereUniqueInput>;
+  orderBy?: Array<PromptOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: PromptWhereInput;
+};
+
+export type QueryPromptsCountArgs = {
+  where?: PromptWhereInput;
 };
 
 export type QueryStoriesArgs = {

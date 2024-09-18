@@ -6,6 +6,7 @@ export {
   useCreateFeedback,
   useCreateInquiry,
   useCreateStory,
+  useGetBootstrap,
   useGetStory,
   useInfiniteGetUserStories,
 } from './__generated__/query';
