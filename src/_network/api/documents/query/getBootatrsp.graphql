@@ -25,4 +25,8 @@ query getBootstrap($image: CloudinaryImageFormat) {
     textPrompt
     imagePrompt
   }
+  config(where: { id: "1" }) {
+    privacyPolicyUrl
+    termsAndConditionsUrl
+  }
 }

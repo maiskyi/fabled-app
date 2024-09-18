@@ -170,6 +170,46 @@ export type CloudinaryImage_FilePublicUrlTransformedArgs = {
   transformation?: InputMaybe<CloudinaryImageFormat>;
 };
 
+export type Config = {
+  id: Scalars['ID']['output'];
+  privacyPolicyUrl?: Maybe<Scalars['String']['output']>;
+  termsAndConditionsUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type ConfigCreateInput = {
+  privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
+  termsAndConditionsUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ConfigOrderByInput = {
+  id?: InputMaybe<OrderDirection>;
+  privacyPolicyUrl?: InputMaybe<OrderDirection>;
+  termsAndConditionsUrl?: InputMaybe<OrderDirection>;
+};
+
+export type ConfigUpdateArgs = {
+  data: ConfigUpdateInput;
+  where?: ConfigWhereUniqueInput;
+};
+
+export type ConfigUpdateInput = {
+  privacyPolicyUrl?: InputMaybe<Scalars['String']['input']>;
+  termsAndConditionsUrl?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ConfigWhereInput = {
+  AND?: InputMaybe<Array<ConfigWhereInput>>;
+  NOT?: InputMaybe<Array<ConfigWhereInput>>;
+  OR?: InputMaybe<Array<ConfigWhereInput>>;
+  id?: InputMaybe<IdFilter>;
+  privacyPolicyUrl?: InputMaybe<StringFilter>;
+  termsAndConditionsUrl?: InputMaybe<StringFilter>;
+};
+
+export type ConfigWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+};
+
 export type CreateInitialUserInput = {
   email?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -522,6 +562,8 @@ export type Mutation = {
   authenticateUserWithPassword?: Maybe<UserAuthenticationWithPasswordResult>;
   createCharacter?: Maybe<Character>;
   createCharacters?: Maybe<Array<Maybe<Character>>>;
+  createConfig?: Maybe<Config>;
+  createConfigs?: Maybe<Array<Maybe<Config>>>;
   createFeedback?: Maybe<Feedback>;
   createFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
@@ -539,6 +581,8 @@ export type Mutation = {
   createUsers?: Maybe<Array<Maybe<User>>>;
   deleteCharacter?: Maybe<Character>;
   deleteCharacters?: Maybe<Array<Maybe<Character>>>;
+  deleteConfig?: Maybe<Config>;
+  deleteConfigs?: Maybe<Array<Maybe<Config>>>;
   deleteFeedback?: Maybe<Feedback>;
   deleteFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
   deleteInquiries?: Maybe<Array<Maybe<Inquiry>>>;
@@ -556,6 +600,8 @@ export type Mutation = {
   endSession: Scalars['Boolean']['output'];
   updateCharacter?: Maybe<Character>;
   updateCharacters?: Maybe<Array<Maybe<Character>>>;
+  updateConfig?: Maybe<Config>;
+  updateConfigs?: Maybe<Array<Maybe<Config>>>;
   updateFeedback?: Maybe<Feedback>;
   updateFeedbacks?: Maybe<Array<Maybe<Feedback>>>;
   updateInquiries?: Maybe<Array<Maybe<Inquiry>>>;
@@ -583,6 +629,14 @@ export type MutationCreateCharacterArgs = {
 
 export type MutationCreateCharactersArgs = {
   data: Array<CharacterCreateInput>;
+};
+
+export type MutationCreateConfigArgs = {
+  data: ConfigCreateInput;
+};
+
+export type MutationCreateConfigsArgs = {
+  data: Array<ConfigCreateInput>;
 };
 
 export type MutationCreateFeedbackArgs = {
@@ -653,6 +707,14 @@ export type MutationDeleteCharactersArgs = {
   where: Array<CharacterWhereUniqueInput>;
 };
 
+export type MutationDeleteConfigArgs = {
+  where?: ConfigWhereUniqueInput;
+};
+
+export type MutationDeleteConfigsArgs = {
+  where: Array<ConfigWhereUniqueInput>;
+};
+
 export type MutationDeleteFeedbackArgs = {
   where: FeedbackWhereUniqueInput;
 };
@@ -716,6 +778,15 @@ export type MutationUpdateCharacterArgs = {
 
 export type MutationUpdateCharactersArgs = {
   data: Array<CharacterUpdateArgs>;
+};
+
+export type MutationUpdateConfigArgs = {
+  data: ConfigUpdateInput;
+  where?: ConfigWhereUniqueInput;
+};
+
+export type MutationUpdateConfigsArgs = {
+  data: Array<ConfigUpdateArgs>;
 };
 
 export type MutationUpdateFeedbackArgs = {
@@ -944,6 +1015,9 @@ export type Query = {
   character?: Maybe<Character>;
   characters?: Maybe<Array<Character>>;
   charactersCount?: Maybe<Scalars['Int']['output']>;
+  config?: Maybe<Config>;
+  configs?: Maybe<Array<Config>>;
+  configsCount?: Maybe<Scalars['Int']['output']>;
   feedback?: Maybe<Feedback>;
   feedbacks?: Maybe<Array<Feedback>>;
   feedbacksCount?: Maybe<Scalars['Int']['output']>;
@@ -982,6 +1056,22 @@ export type QueryCharactersArgs = {
 
 export type QueryCharactersCountArgs = {
   where?: CharacterWhereInput;
+};
+
+export type QueryConfigArgs = {
+  where?: ConfigWhereUniqueInput;
+};
+
+export type QueryConfigsArgs = {
+  cursor?: InputMaybe<ConfigWhereUniqueInput>;
+  orderBy?: Array<ConfigOrderByInput>;
+  skip?: Scalars['Int']['input'];
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: ConfigWhereInput;
+};
+
+export type QueryConfigsCountArgs = {
+  where?: ConfigWhereInput;
 };
 
 export type QueryFeedbackArgs = {
@@ -1328,6 +1418,10 @@ export type GetBootstrap = {
     textPrompt?: string | null;
     imagePrompt?: string | null;
   }> | null;
+  config?: {
+    privacyPolicyUrl?: string | null;
+    termsAndConditionsUrl?: string | null;
+  } | null;
 };
 
 export type GetStoryVariables = Exact<{
@@ -1468,6 +1562,10 @@ export const GetBootstrapDocument = /*#__PURE__*/ `
     message
     textPrompt
     imagePrompt
+  }
+  config(where: {id: "1"}) {
+    privacyPolicyUrl
+    termsAndConditionsUrl
   }
 }
     `;

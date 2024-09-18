@@ -1,7 +1,6 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { useMount } from 'react-use';
 
-import { useGetBootstrapQuery } from '@network/contentful';
 import { useGetBootstrap } from '@network/api';
 import { useDevice } from '@core/uikit';
 
@@ -18,7 +17,6 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
   fallback = null,
 }) => {
   const { width } = useDevice();
-  const config = useGetBootstrapQuery({ version });
 
   const { isSuccess, data, refetch } = useGetBootstrap(
     {
@@ -51,12 +49,10 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
     <ConfigContext.Provider
       value={{
         characters: data.characters,
-        privacyPolicyUrl:
-          config.data?.configCollection.items[0]?.privacyPolicyUrl,
+        privacyPolicyUrl: data?.config.privacyPolicyUrl,
         prompts: data.prompts,
         scenes: data.placeOfEvents,
-        termsAndConditionsUrl:
-          config.data?.configCollection.items[0]?.termsAndConditionsUrl,
+        termsAndConditionsUrl: data?.config.termsAndConditionsUrl,
         themes: data.moralLessons,
         version,
       }}
