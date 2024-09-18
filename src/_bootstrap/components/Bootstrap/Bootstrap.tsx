@@ -4,7 +4,6 @@ import { AuthProvider, AuthProviderProps } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
 import { FirestoreProvider, FirestoreProviderProps } from '@core/firestore';
 import { NetworkProvider, AppProvider, AppProviderProps } from '@core/app';
-import { FunctionsProvider, FunctionsProviderProps } from '@core/functions';
 import {
   LocalizationProvider,
   LocalizationProviderProps,
@@ -22,7 +21,6 @@ import { Config, ConfigProps } from './Config';
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
   auth: AuthProviderProps;
-  functions: FunctionsProviderProps;
   firestore: FirestoreProviderProps;
   localization: LocalizationProviderProps;
   network: NetworkProps;
@@ -33,7 +31,6 @@ export type BootstrapProps = PropsWithChildren<{
 export const Bootstrap: FC<BootstrapProps> = ({
   app,
   children,
-  functions,
   firestore,
   localization,
   network,
@@ -51,9 +48,7 @@ export const Bootstrap: FC<BootstrapProps> = ({
                   <AppProvider {...app}>
                     <AuthProvider>
                       <FirestoreProvider {...firestore}>
-                        <FunctionsProvider {...functions}>
-                          <Navigation>{children}</Navigation>
-                        </FunctionsProvider>
+                        <Navigation>{children}</Navigation>
                       </FirestoreProvider>
                     </AuthProvider>
                   </AppProvider>

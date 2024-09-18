@@ -43,12 +43,6 @@ const config: AppProps = {
         port: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT,
       },
     },
-    functions: {
-      emulator: {
-        host: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_HOST,
-        port: import.meta.env.VITE_FIREBASE_FUNCTIONS_EMULATOR_PORT,
-      },
-    },
     localization: {
       fallback: splash,
       fallbackLng: Language.en,
