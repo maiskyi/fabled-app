@@ -68,6 +68,17 @@ export type CharacterOrderByInput = {
   title?: InputMaybe<OrderDirection>;
 };
 
+export type CharacterRelateToOneForCreateInput = {
+  connect?: InputMaybe<CharacterWhereUniqueInput>;
+  create?: InputMaybe<CharacterCreateInput>;
+};
+
+export type CharacterRelateToOneForUpdateInput = {
+  connect?: InputMaybe<CharacterWhereUniqueInput>;
+  create?: InputMaybe<CharacterCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CharacterUpdateArgs = {
   data: CharacterUpdateInput;
   where: CharacterWhereUniqueInput;
@@ -511,6 +522,17 @@ export type MoralLessonOrderByInput = {
   title?: InputMaybe<OrderDirection>;
 };
 
+export type MoralLessonRelateToOneForCreateInput = {
+  connect?: InputMaybe<MoralLessonWhereUniqueInput>;
+  create?: InputMaybe<MoralLessonCreateInput>;
+};
+
+export type MoralLessonRelateToOneForUpdateInput = {
+  connect?: InputMaybe<MoralLessonWhereUniqueInput>;
+  create?: InputMaybe<MoralLessonCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type MoralLessonUpdateArgs = {
   data: MoralLessonUpdateInput;
   where: MoralLessonWhereUniqueInput;
@@ -949,6 +971,17 @@ export type PlaceOfEventOrderByInput = {
   title?: InputMaybe<OrderDirection>;
 };
 
+export type PlaceOfEventRelateToOneForCreateInput = {
+  connect?: InputMaybe<PlaceOfEventWhereUniqueInput>;
+  create?: InputMaybe<PlaceOfEventCreateInput>;
+};
+
+export type PlaceOfEventRelateToOneForUpdateInput = {
+  connect?: InputMaybe<PlaceOfEventWhereUniqueInput>;
+  create?: InputMaybe<PlaceOfEventCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type PlaceOfEventUpdateArgs = {
   data: PlaceOfEventUpdateInput;
   where: PlaceOfEventWhereUniqueInput;
@@ -1257,6 +1290,7 @@ export enum QueryMode {
 }
 
 export type Story = {
+  character?: Maybe<Character>;
   content?: Maybe<Scalars['String']['output']>;
   contentPrompt?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1266,12 +1300,15 @@ export type Story = {
   imagePrompt?: Maybe<Scalars['String']['output']>;
   isReady?: Maybe<Scalars['Boolean']['output']>;
   message?: Maybe<Scalars['String']['output']>;
+  moralLesson?: Maybe<MoralLesson>;
+  placeOfEvent?: Maybe<PlaceOfEvent>;
   readTime?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Array<StoryStatusType>>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
 export type StoryCreateInput = {
+  character?: InputMaybe<CharacterRelateToOneForCreateInput>;
   content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1280,6 +1317,8 @@ export type StoryCreateInput = {
   imagePrompt?: InputMaybe<Scalars['String']['input']>;
   isReady?: InputMaybe<Scalars['Boolean']['input']>;
   message?: InputMaybe<Scalars['String']['input']>;
+  moralLesson?: InputMaybe<MoralLessonRelateToOneForCreateInput>;
+  placeOfEvent?: InputMaybe<PlaceOfEventRelateToOneForCreateInput>;
   readTime?: InputMaybe<Scalars['Int']['input']>;
   status?: InputMaybe<Array<StoryStatusType>>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1311,6 +1350,7 @@ export type StoryUpdateArgs = {
 };
 
 export type StoryUpdateInput = {
+  character?: InputMaybe<CharacterRelateToOneForUpdateInput>;
   content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1319,6 +1359,8 @@ export type StoryUpdateInput = {
   imagePrompt?: InputMaybe<Scalars['String']['input']>;
   isReady?: InputMaybe<Scalars['Boolean']['input']>;
   message?: InputMaybe<Scalars['String']['input']>;
+  moralLesson?: InputMaybe<MoralLessonRelateToOneForUpdateInput>;
+  placeOfEvent?: InputMaybe<PlaceOfEventRelateToOneForUpdateInput>;
   readTime?: InputMaybe<Scalars['Int']['input']>;
   status?: InputMaybe<Array<StoryStatusType>>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1328,6 +1370,7 @@ export type StoryWhereInput = {
   AND?: InputMaybe<Array<StoryWhereInput>>;
   NOT?: InputMaybe<Array<StoryWhereInput>>;
   OR?: InputMaybe<Array<StoryWhereInput>>;
+  character?: InputMaybe<CharacterWhereInput>;
   content?: InputMaybe<StringFilter>;
   contentPrompt?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
@@ -1336,6 +1379,8 @@ export type StoryWhereInput = {
   imagePrompt?: InputMaybe<StringFilter>;
   isReady?: InputMaybe<BooleanFilter>;
   message?: InputMaybe<StringFilter>;
+  moralLesson?: InputMaybe<MoralLessonWhereInput>;
+  placeOfEvent?: InputMaybe<PlaceOfEventWhereInput>;
   readTime?: InputMaybe<IntFilter>;
   title?: InputMaybe<StringFilter>;
 };

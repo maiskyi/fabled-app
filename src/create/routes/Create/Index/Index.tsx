@@ -73,11 +73,22 @@ export const Index = memo(function Create() {
     });
 
     mutate({
-      contentPrompt,
-      imagePrompt: illustrationPrompt,
-      message,
-      readTime: readTimeValue,
-      uid: user?.uid,
+      data: {
+        character: {
+          connect: { id: form.character },
+        },
+        contentPrompt,
+        firebaseUserId: user?.uid,
+        imagePrompt: illustrationPrompt,
+        message,
+        moralLesson: {
+          connect: { id: form.description },
+        },
+        placeOfEvent: {
+          connect: { id: form.scene },
+        },
+        readTime: readTimeValue,
+      },
     });
   };
 
