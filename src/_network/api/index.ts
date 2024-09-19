@@ -10,7 +10,10 @@ export {
   useGetStory,
   useInfiniteGetUserStories,
 } from './__generated__/query';
-export { useGetRequest } from './__generated__/apollo';
+export {
+  useGetRequest,
+  useOnUserStoriesCountUpdated,
+} from './__generated__/apollo';
 export { useTemplate } from './hooks/useTemplate';
 
 // Documents

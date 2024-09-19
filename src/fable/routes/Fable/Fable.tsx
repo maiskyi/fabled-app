@@ -8,6 +8,7 @@ import {
   Box,
   useDevice,
   SafeArea,
+  Image,
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
@@ -26,7 +27,7 @@ export const Fable = memo(function Fable() {
     id,
     image: {
       aspect_ratio: '1:1',
-      width: `${width}`,
+      width: `${width + 5}`,
     },
   });
 
@@ -42,11 +43,10 @@ export const Fable = memo(function Fable() {
             borderRadius={8}
             marginInline={20}
             overflow="hidden"
+            position="relative"
           >
-            <img
-              alt={data?.story.title}
-              src={data?.story.image.publicUrlTransformed}
-            />
+            <Image src={data?.story.image.publicUrlTransformed} />
+            {/* <img alt={data?.story.title} /> */}
           </Box>
           <Card.Header>
             <Card.Title>{data?.story?.title}</Card.Title>

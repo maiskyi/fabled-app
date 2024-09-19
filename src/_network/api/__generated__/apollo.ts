@@ -81,6 +81,17 @@ export type CharacterOrderByInput = {
   title?: InputMaybe<OrderDirection>;
 };
 
+export type CharacterRelateToOneForCreateInput = {
+  connect?: InputMaybe<CharacterWhereUniqueInput>;
+  create?: InputMaybe<CharacterCreateInput>;
+};
+
+export type CharacterRelateToOneForUpdateInput = {
+  connect?: InputMaybe<CharacterWhereUniqueInput>;
+  create?: InputMaybe<CharacterCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CharacterUpdateArgs = {
   data: CharacterUpdateInput;
   where: CharacterWhereUniqueInput;
@@ -521,6 +532,17 @@ export type MoralLessonOrderByInput = {
   title?: InputMaybe<OrderDirection>;
 };
 
+export type MoralLessonRelateToOneForCreateInput = {
+  connect?: InputMaybe<MoralLessonWhereUniqueInput>;
+  create?: InputMaybe<MoralLessonCreateInput>;
+};
+
+export type MoralLessonRelateToOneForUpdateInput = {
+  connect?: InputMaybe<MoralLessonWhereUniqueInput>;
+  create?: InputMaybe<MoralLessonCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type MoralLessonUpdateArgs = {
   data: MoralLessonUpdateInput;
   where: MoralLessonWhereUniqueInput;
@@ -903,6 +925,17 @@ export type PlaceOfEventOrderByInput = {
   title?: InputMaybe<OrderDirection>;
 };
 
+export type PlaceOfEventRelateToOneForCreateInput = {
+  connect?: InputMaybe<PlaceOfEventWhereUniqueInput>;
+  create?: InputMaybe<PlaceOfEventCreateInput>;
+};
+
+export type PlaceOfEventRelateToOneForUpdateInput = {
+  connect?: InputMaybe<PlaceOfEventWhereUniqueInput>;
+  create?: InputMaybe<PlaceOfEventCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type PlaceOfEventUpdateArgs = {
   data: PlaceOfEventUpdateInput;
   where: PlaceOfEventWhereUniqueInput;
@@ -1184,6 +1217,7 @@ export enum QueryMode {
 }
 
 export type Story = {
+  character?: Maybe<Character>;
   content?: Maybe<Scalars['String']['output']>;
   contentPrompt?: Maybe<Scalars['String']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1193,12 +1227,15 @@ export type Story = {
   imagePrompt?: Maybe<Scalars['String']['output']>;
   isReady?: Maybe<Scalars['Boolean']['output']>;
   message?: Maybe<Scalars['String']['output']>;
+  moralLesson?: Maybe<MoralLesson>;
+  placeOfEvent?: Maybe<PlaceOfEvent>;
   readTime?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Array<StoryStatusType>>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
 export type StoryCreateInput = {
+  character?: InputMaybe<CharacterRelateToOneForCreateInput>;
   content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1207,6 +1244,8 @@ export type StoryCreateInput = {
   imagePrompt?: InputMaybe<Scalars['String']['input']>;
   isReady?: InputMaybe<Scalars['Boolean']['input']>;
   message?: InputMaybe<Scalars['String']['input']>;
+  moralLesson?: InputMaybe<MoralLessonRelateToOneForCreateInput>;
+  placeOfEvent?: InputMaybe<PlaceOfEventRelateToOneForCreateInput>;
   readTime?: InputMaybe<Scalars['Int']['input']>;
   status?: InputMaybe<Array<StoryStatusType>>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1238,6 +1277,7 @@ export type StoryUpdateArgs = {
 };
 
 export type StoryUpdateInput = {
+  character?: InputMaybe<CharacterRelateToOneForUpdateInput>;
   content?: InputMaybe<Scalars['String']['input']>;
   contentPrompt?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1246,6 +1286,8 @@ export type StoryUpdateInput = {
   imagePrompt?: InputMaybe<Scalars['String']['input']>;
   isReady?: InputMaybe<Scalars['Boolean']['input']>;
   message?: InputMaybe<Scalars['String']['input']>;
+  moralLesson?: InputMaybe<MoralLessonRelateToOneForUpdateInput>;
+  placeOfEvent?: InputMaybe<PlaceOfEventRelateToOneForUpdateInput>;
   readTime?: InputMaybe<Scalars['Int']['input']>;
   status?: InputMaybe<Array<StoryStatusType>>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1255,6 +1297,7 @@ export type StoryWhereInput = {
   AND?: InputMaybe<Array<StoryWhereInput>>;
   NOT?: InputMaybe<Array<StoryWhereInput>>;
   OR?: InputMaybe<Array<StoryWhereInput>>;
+  character?: InputMaybe<CharacterWhereInput>;
   content?: InputMaybe<StringFilter>;
   contentPrompt?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
@@ -1263,6 +1306,8 @@ export type StoryWhereInput = {
   imagePrompt?: InputMaybe<StringFilter>;
   isReady?: InputMaybe<BooleanFilter>;
   message?: InputMaybe<StringFilter>;
+  moralLesson?: InputMaybe<MoralLessonWhereInput>;
+  placeOfEvent?: InputMaybe<PlaceOfEventWhereInput>;
   readTime?: InputMaybe<IntFilter>;
   title?: InputMaybe<StringFilter>;
 };
@@ -1287,10 +1332,15 @@ export type StringFilter = {
 
 export type Subscription = {
   storyUpdated?: Maybe<Story>;
+  userStoriesCountUpdated?: Maybe<Scalars['Int']['output']>;
 };
 
 export type SubscriptionStoryUpdatedArgs = {
-  id?: InputMaybe<Scalars['ID']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SubscriptionUserStoriesCountUpdatedArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type User = {
@@ -1368,7 +1418,7 @@ export type GetRequest = {
 };
 
 export type OnStoryUpdatedVariables = Exact<{
-  id: Scalars['ID']['input'];
+  id: Scalars['String']['input'];
 }>;
 
 export type OnStoryUpdated = {
@@ -1377,6 +1427,14 @@ export type OnStoryUpdated = {
     message?: string | null;
     status?: Array<StoryStatusType> | null;
   } | null;
+};
+
+export type OnUserStoriesCountUpdatedVariables = Exact<{
+  uid: Scalars['String']['input'];
+}>;
+
+export type OnUserStoriesCountUpdated = {
+  userStoriesCountUpdated?: number | null;
 };
 
 export const GetRequestDocument = gql`
@@ -1450,7 +1508,7 @@ export type GetRequestQueryResult = Apollo.QueryResult<
   GetRequestVariables
 >;
 export const OnStoryUpdatedDocument = gql`
-  subscription onStoryUpdated($id: ID!) {
+  subscription onStoryUpdated($id: String!) {
     storyUpdated(id: $id) {
       id
       message
@@ -1491,3 +1549,46 @@ export function useOnStoryUpdated(
 export type OnStoryUpdatedHookResult = ReturnType<typeof useOnStoryUpdated>;
 export type OnStoryUpdatedSubscriptionResult =
   Apollo.SubscriptionResult<OnStoryUpdated>;
+export const OnUserStoriesCountUpdatedDocument = gql`
+  subscription onUserStoriesCountUpdated($uid: String!) {
+    userStoriesCountUpdated(id: $uid)
+  }
+`;
+
+/**
+ * __useOnUserStoriesCountUpdated__
+ *
+ * To run a query within a React component, call `useOnUserStoriesCountUpdated` and pass it any options that fit your needs.
+ * When your component renders, `useOnUserStoriesCountUpdated` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnUserStoriesCountUpdated({
+ *   variables: {
+ *      uid: // value for 'uid'
+ *   },
+ * });
+ */
+export function useOnUserStoriesCountUpdated(
+  baseOptions: Apollo.SubscriptionHookOptions<
+    OnUserStoriesCountUpdated,
+    OnUserStoriesCountUpdatedVariables
+  > &
+    (
+      | { variables: OnUserStoriesCountUpdatedVariables; skip?: boolean }
+      | { skip: boolean }
+    )
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSubscription<
+    OnUserStoriesCountUpdated,
+    OnUserStoriesCountUpdatedVariables
+  >(OnUserStoriesCountUpdatedDocument, options);
+}
+export type OnUserStoriesCountUpdatedHookResult = ReturnType<
+  typeof useOnUserStoriesCountUpdated
+>;
+export type OnUserStoriesCountUpdatedSubscriptionResult =
+  Apollo.SubscriptionResult<OnUserStoriesCountUpdated>;

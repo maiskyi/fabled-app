@@ -1,7 +1,7 @@
 import { memo, useCallback, useLayoutEffect, useRef } from 'react';
 import { noop } from 'lodash';
 
-import { Animation, Box, Button, Message } from '@core/uikit';
+import { Animation, Box, Button, Message, SafeArea } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 
@@ -16,7 +16,7 @@ export const Details = memo<DetailsProps>(function Details({
   onMessage = noop,
 }: DetailsProps) {
   const [{ params }, navigate] = useRoute<RouteParams>();
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>();
 
   const onReadNow = useCallback(() => {
     navigate({ action: 'replace', params, pathname: RoutePath.Fable });
@@ -43,7 +43,7 @@ export const Details = memo<DetailsProps>(function Details({
   }, [onMessage]);
 
   return (
-    <Box ref={ref}>
+    <SafeArea bottom ref={ref}>
       {thread.map((item) => {
         return (
           <Animation.Message key={item.id}>
@@ -71,6 +71,6 @@ export const Details = memo<DetailsProps>(function Details({
           </Animation.Message>
         );
       })}
-    </Box>
+    </SafeArea>
   );
 });

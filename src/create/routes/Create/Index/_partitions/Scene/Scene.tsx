@@ -6,7 +6,7 @@ import {
   Swiper,
   Form,
   Content,
-  Footer,
+  SafeArea,
 } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 
@@ -80,12 +80,13 @@ export const Scene: FormPickerComponent<string> = ({
               </Form.RadioGroup>
             </Box>
             <Box paddingInline={80}>
-              <Form.Submit>{t('actions.confirm')}</Form.Submit>
+              <SafeArea bottom>
+                <Form.Submit>{t('actions.confirm')}</Form.Submit>
+              </SafeArea>
             </Box>
           </Box>
         </Box>
       </Content>
-      <Footer />
     </Form>
   );
 };

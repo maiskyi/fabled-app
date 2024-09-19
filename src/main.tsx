@@ -34,12 +34,6 @@ const config: AppProps = {
       fallback: splash,
       version: import.meta.env.PACKAGE_VERSION,
     },
-    firestore: {
-      emulator: {
-        host: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_HOST,
-        port: import.meta.env.VITE_FIREBASE_FIRESTORE_EMULATOR_PORT,
-      },
-    },
     localization: {
       fallback: splash,
       fallbackLng: Language.en,

@@ -2,7 +2,6 @@ import { FC, PropsWithChildren } from 'react';
 
 import { AuthProvider, AuthProviderProps } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
-import { FirestoreProvider, FirestoreProviderProps } from '@core/firestore';
 import { NetworkProvider, AppProvider, AppProviderProps } from '@core/app';
 import {
   LocalizationProvider,
@@ -17,7 +16,6 @@ import { Config, ConfigProps } from './Config';
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
   auth: AuthProviderProps;
-  firestore: FirestoreProviderProps;
   localization: LocalizationProviderProps;
   network: NetworkProps;
   config: ConfigProps;
@@ -26,7 +24,6 @@ export type BootstrapProps = PropsWithChildren<{
 export const Bootstrap: FC<BootstrapProps> = ({
   app,
   children,
-  firestore,
   localization,
   network,
   config,
@@ -40,9 +37,7 @@ export const Bootstrap: FC<BootstrapProps> = ({
               <LocalizationProvider {...localization}>
                 <AppProvider {...app}>
                   <AuthProvider>
-                    <FirestoreProvider {...firestore}>
-                      <Navigation>{children}</Navigation>
-                    </FirestoreProvider>
+                    <Navigation>{children}</Navigation>
                   </AuthProvider>
                 </AppProvider>
               </LocalizationProvider>

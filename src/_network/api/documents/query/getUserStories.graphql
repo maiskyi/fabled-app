@@ -7,6 +7,7 @@ query getUserStories(
   stories(
     skip: $skip
     take: $take
+    orderBy: { createdAt: desc }
     where: { firebaseUserId: { equals: $uid }, isReady: { equals: true } }
   ) {
     id
@@ -14,7 +15,7 @@ query getUserStories(
     readTime
     image {
       id
-      publicUrlTransformed (transformation: $image)
+      publicUrlTransformed(transformation: $image)
     }
   }
   storiesCount(

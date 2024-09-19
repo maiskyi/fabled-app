@@ -1,7 +1,14 @@
 import { memo, useCallback } from 'react';
 
 import { RoutePath } from '@bootstrap/constants';
-import { Page, Content, InfiniteScroll, Header, Box } from '@core/uikit';
+import {
+  Page,
+  Content,
+  InfiniteScroll,
+  Header,
+  Box,
+  SafeArea,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 
@@ -48,19 +55,21 @@ export const Home = memo(function Home() {
       </Header>
       <Content fullscreen inset={false}>
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
-          <Box display="flex" flexDirection="column" minHeight="100%">
-            <Box flex={0}>
-              <Header collapse="condense">
-                <Header.Title size="large">{title}</Header.Title>
-              </Header>
+          <SafeArea>
+            <Box display="flex" flexDirection="column" minHeight="100%">
+              <Box flex={0}>
+                <Header collapse="condense">
+                  <Header.Title size="large">{title}</Header.Title>
+                </Header>
+              </Box>
+              <FablesCreate onClick={handleOnCreateClick} />
+              {isLoading && <FablesSkeleton />}
+              {!isLoading && !records?.length && <FablesEmpty />}
+              {!isLoading && !!records?.length && (
+                <FablesList data={records} onClick={handleOnFableClick} />
+              )}
             </Box>
-            <FablesCreate onClick={handleOnCreateClick} />
-            {isLoading && <FablesSkeleton />}
-            {!isLoading && !records?.length && <FablesEmpty />}
-            {!isLoading && !!records?.length && (
-              <FablesList data={records} onClick={handleOnFableClick} />
-            )}
-          </Box>
+          </SafeArea>
         </InfiniteScroll>
       </Content>
     </Page>

@@ -1,12 +1,5 @@
 /* eslint-disable react/prop-types */
-import {
-  Box,
-  Content,
-  Footer,
-  Form,
-  FormPickerComponent,
-  Header,
-} from '@core/uikit';
+import { Box, Content, Form, FormPickerComponent, Header } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 import { FormField } from '../../../Create.const';
@@ -48,7 +41,6 @@ export const ReadTime: FormPickerComponent<number> = ({
           <Form.Submit>{t('actions.confirm')}</Form.Submit>
         </Box>
       </Content>
-      <Footer />
     </Form>
   );
 };

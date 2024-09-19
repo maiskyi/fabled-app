@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useMount } from 'react-use';
 
 import { useUser } from '@common/hooks';
-import { BOT_AVATAR_SRC } from '@core/uikit';
+import { BOT_AVATAR_SRC, Spinner } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useGetRequest, DTO, OnStoryUpdatedDocument } from '@network/api';
 
@@ -81,7 +81,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
             id: 'imageMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: '123',
+              children: <Spinner color="light" variant="dots" />,
               origin: 'companion',
               title: t('bot.fabledAi'),
             },
