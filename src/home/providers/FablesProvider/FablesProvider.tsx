@@ -1,14 +1,11 @@
-import { FC, PropsWithChildren, useMemo, useRef } from 'react';
+import { FC, PropsWithChildren, useEffect, useMemo } from 'react';
+import { get } from 'lodash';
 
-import {
-  UseGetCollectionInfiniteEveryParams,
-  UseGetCollectionInfiniteOrderParams,
-  useCollectionSnapshotListener,
-} from '@core/firestore';
-import { DTO } from '@bootstrap/dto';
-import { Document } from '@bootstrap/constants';
 import { useUser } from '@common/hooks';
-import { useInfiniteGetUserStories } from '@network/api';
+import {
+  useInfiniteGetUserStories,
+  useOnUserStoriesCountUpdated,
+} from '@network/api';
 import { useDevice } from '@core/uikit';
 
 import { FablesProviderContext } from './FablesProvider.context';
@@ -23,74 +20,55 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
   const { uid } = useUser();
   const { width } = useDevice();
 
-  const { data, hasNextPage, fetchNextPage, isLoading, refetch } =
-    useInfiniteGetUserStories(
-      {
-        image: {
-          aspect_ratio: '4:3',
-          crop: 'thumb',
-          width: `${width}`,
-        },
-        skip: GET_USER_STORIES_SKIP_PARAM,
-        take: GET_USER_STORIES_TAKE_PARAM,
-        uid,
+  const {
+    data: stories,
+    hasNextPage,
+    fetchNextPage,
+    isLoading,
+    refetch,
+  } = useInfiniteGetUserStories(
+    {
+      image: {
+        aspect_ratio: '4:3',
+        crop: 'thumb',
+        width: `${width}`,
       },
-      {
-        getNextPageParam: ({ storiesCount }, all) => {
-          const total = all.flatMap(({ stories }) => stories).length;
-          return storiesCount > total
-            ? { skip: all.length * GET_USER_STORIES_TAKE_PARAM }
-            : undefined;
-        },
-        initialPageParam: {
-          skip: GET_USER_STORIES_SKIP_PARAM,
-        },
-      }
-    );
-
-  const { current: every } = useRef<
-    UseGetCollectionInfiniteEveryParams<DTO.Fable>[]
-  >([
-    {
-      fieldPath: 'status',
-      opStr: 'array-contains',
-      type: 'where',
-      value: DTO.FableStatus.Success,
+      skip: GET_USER_STORIES_SKIP_PARAM,
+      take: GET_USER_STORIES_TAKE_PARAM,
+      uid,
     },
     {
-      fieldPath: 'uid',
-      opStr: '==',
-      type: 'where',
-      value: uid,
-    },
-  ]);
-
-  const { current: order } = useRef<
-    UseGetCollectionInfiniteOrderParams<DTO.Fable>
-  >({
-    direction: 'desc',
-    field: 'createdAt',
-  });
-
-  const stories = useMemo(() => {
-    return data?.pages.flatMap(({ stories }) => stories);
-  }, [data]);
-
-  const contextValue = useMemo(
-    () => ({ data, fetchNextPage, hasNextPage, isLoading, stories }),
-    [isLoading, hasNextPage, fetchNextPage, data, stories]
-  );
-
-  useCollectionSnapshotListener(
-    {
-      doc: Document.Fable,
-      every,
-      order,
-    },
-    () => {
-      refetch();
+      getNextPageParam: ({ storiesCount }, all) => {
+        const total = all.flatMap(({ stories }) => stories).length;
+        return storiesCount > total
+          ? { skip: all.length * GET_USER_STORIES_TAKE_PARAM }
+          : undefined;
+      },
+      initialPageParam: {
+        skip: GET_USER_STORIES_SKIP_PARAM,
+      },
     }
   );
+
+  const { data } = useOnUserStoriesCountUpdated({ variables: { uid } });
+
+  const total = get(stories, ['pages', 0, 'storiesCount'], 0);
+  const count = get(data, ['userStoriesCountUpdated'], 0);
+
+  const contextValue = useMemo(
+    () => ({
+      data: stories,
+      fetchNextPage,
+      hasNextPage,
+      isLoading,
+      stories: stories?.pages.flatMap(({ stories }) => stories),
+    }),
+    [isLoading, hasNextPage, fetchNextPage, stories]
+  );
+
+  useEffect(() => {
+    if (total !== count) refetch();
+  }, [total, count, refetch]);
 
   return (
     <FablesProviderContext.Provider value={contextValue}>

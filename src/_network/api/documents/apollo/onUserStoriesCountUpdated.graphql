@@ -1,0 +1,3 @@
+subscription onUserStoriesCountUpdated($uid: String!) {
+  userStoriesCountUpdated(id: $uid)
+}
