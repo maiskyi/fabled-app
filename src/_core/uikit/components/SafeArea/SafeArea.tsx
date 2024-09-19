@@ -1,11 +1,12 @@
-import { FC, forwardRef, PropsWithChildren } from 'react';
+import { FC, forwardRef, PropsWithChildren, RefAttributes } from 'react';
 import classNames from 'classnames';
 
 import styles from './SafeArea.module.scss';
 
 export type SafeAreaProps = PropsWithChildren<{
   bottom?: boolean;
-}>;
+}> &
+  RefAttributes<HTMLDivElement>;
 
 export const SafeArea: FC<SafeAreaProps> = forwardRef<
   HTMLDivElement,
