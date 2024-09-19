@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect, useMemo } from 'react';
+import { FC, PropsWithChildren, useMemo } from 'react';
 import { get } from 'lodash';
 
 import { useUser } from '@common/hooks';
@@ -50,10 +50,7 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
     }
   );
 
-  const { data } = useOnUserStoriesCountUpdated({ variables: { uid } });
-
   const total = get(stories, ['pages', 0, 'storiesCount'], 0);
-  const count = get(data, ['userStoriesCountUpdated'], 0);
 
   const contextValue = useMemo(
     () => ({
@@ -66,9 +63,16 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
     [isLoading, hasNextPage, fetchNextPage, stories]
   );
 
-  useEffect(() => {
-    if (total !== count) refetch();
-  }, [total, count, refetch]);
+  useOnUserStoriesCountUpdated({
+    onData: ({
+      data: {
+        data: { userStoriesCountUpdated },
+      },
+    }) => {
+      if (total !== userStoriesCountUpdated) refetch();
+    },
+    variables: { uid },
+  });
 
   return (
     <FablesProviderContext.Provider value={contextValue}>
