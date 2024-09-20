@@ -37,7 +37,12 @@ export const Scene: FormPickerComponent<string> = ({
       onSubmit={handleOnSubmit}
     >
       <Content>
-        <Box display="flex" flexDirection="column" minHeight="100%">
+        <SafeArea
+          display="flex"
+          flexDirection="column"
+          minHeight="100%"
+          safe={['bottom']}
+        >
           <Box flex={0}>
             <Header collapse="condense">
               <Header.Title size="large" wrap>
@@ -80,12 +85,10 @@ export const Scene: FormPickerComponent<string> = ({
               </Form.RadioGroup>
             </Box>
             <Box paddingInline={80}>
-              <SafeArea bottom>
-                <Form.Submit>{t('actions.confirm')}</Form.Submit>
-              </SafeArea>
+              <Form.Submit>{t('actions.confirm')}</Form.Submit>
             </Box>
           </Box>
-        </Box>
+        </SafeArea>
       </Content>
     </Form>
   );

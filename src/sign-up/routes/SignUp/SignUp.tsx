@@ -102,7 +102,7 @@ export const SignUp: FC = () => {
           <Box padding={16} paddingInline={20}>
             <Form.Submit loading={isPending}>{t('actions.signUp')}</Form.Submit>
           </Box>
-          <Box paddingBottom={12} paddingTop={12} textAlign="center">
+          <Box padding={12} paddingInline={20} textAlign="center">
             <Disclaimer />
           </Box>
         </Form>

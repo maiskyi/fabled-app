@@ -23,6 +23,7 @@ export const Image = memo<ImageProps>(function Image({ src }: ImageProps) {
         className={classNames({
           [styles.hidden]: !ready,
         })}
+        loading="lazy"
         onLoad={() => setReady(() => true)}
         ref={ref}
         src={src}

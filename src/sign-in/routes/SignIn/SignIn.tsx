@@ -104,7 +104,7 @@ export const SignIn: FC = () => {
               {t('actions.forgotPassword')}
             </Button>
           </Box>
-          <Box paddingBottom={12} textAlign="center">
+          <Box paddingBottom={12} paddingInline={20} textAlign="center">
             <Disclaimer />
           </Box>
         </Form>

@@ -43,7 +43,7 @@ export const Details = memo<DetailsProps>(function Details({
   }, [onMessage]);
 
   return (
-    <SafeArea bottom ref={ref}>
+    <SafeArea ref={ref} safe={['bottom']}>
       {thread.map((item) => {
         return (
           <Animation.Message key={item.id}>

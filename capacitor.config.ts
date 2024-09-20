@@ -10,6 +10,10 @@ const config: CapacitorConfig = {
       providers: ['google.com', 'apple.com', 'facebook.com'],
       skipNativeAuth: false,
     },
+    SplashScreen: {
+      launchAutoHide: false,
+      launchShowDuration: 3000,
+    },
   },
   webDir: 'dist',
 };

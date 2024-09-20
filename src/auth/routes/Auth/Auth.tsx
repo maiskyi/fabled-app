@@ -1,6 +1,14 @@
 import { memo } from 'react';
 
-import { Page, Content, Box, Button, Divider, Header } from '@core/uikit';
+import {
+  Page,
+  Content,
+  Box,
+  Button,
+  Divider,
+  Header,
+  SafeArea,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { RoutePath } from '@bootstrap/constants';
 import { useRoute } from '@core/navigation';
@@ -45,13 +53,14 @@ export const Auth = memo(function Index() {
         </Header.Actions>
       </Header>
       <Content>
-        <Box
+        <SafeArea
           display="flex"
           flexDirection="column"
           height="100%"
           justifyContent="center"
           minHeight="100%"
           padding={20}
+          safe={['bottom']}
         >
           <Header collapse="condense" />
           <Box
@@ -79,11 +88,11 @@ export const Auth = memo(function Index() {
             <Box>
               <FederatedLogin />
             </Box>
-            <Box paddingBottom={12} paddingTop={12} textAlign="center">
+            <Box paddingTop={12} textAlign="center">
               <Disclaimer />
             </Box>
           </Box>
-        </Box>
+        </SafeArea>
       </Content>
     </Page>
   );
