@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "ios": "ionic cap run ios -l --external",
+    "ios": "xcrun simctl erase all && ionic cap run ios -l --external",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "assets": "capacitor-assets generate --ios",
