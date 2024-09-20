@@ -8,8 +8,7 @@
     "ios": "ionic cap run ios -l --external",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test.e2e": "cypress run",
-    "test.unit": "vitest",
+    "assets": "capacitor-assets generate --ios",
     "lint": "eslint src --max-warnings=0 --fix",
     "gen:api": "graphql-codegen --config ./api.codegen.ts && add-ts-nocheck --patterns '**/__generated__/*.ts'"
   },
@@ -22,6 +21,7 @@
     "@capacitor/device": "^6.0.1",
     "@capacitor/haptics": "6.0.0",
     "@capacitor/keyboard": "6.0.1",
+    "@capacitor/splash-screen": "^6.0.2",
     "@capacitor/status-bar": "6.0.0",
     "@ionic/core": "^8.2.6",
     "@ionic/react": "^8.0.0",
@@ -54,6 +54,7 @@
     "use-context-selector": "^2.0.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "6.1.1",
     "@capacitor/ios": "^6.1.2",
     "@faker-js/faker": "^8.4.1",

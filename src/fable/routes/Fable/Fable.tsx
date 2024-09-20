@@ -37,7 +37,7 @@ export const Fable = memo(function Fable() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content fullscreen>
-        <SafeArea bottom>
+        <SafeArea safe={['bottom']}>
           <Box
             aspectRatio={1}
             borderRadius={8}

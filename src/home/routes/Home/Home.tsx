@@ -55,20 +55,23 @@ export const Home = memo(function Home() {
       </Header>
       <Content fullscreen inset={false}>
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>
-          <SafeArea>
-            <Box display="flex" flexDirection="column" minHeight="100%">
-              <Box flex={0}>
-                <Header collapse="condense">
-                  <Header.Title size="large">{title}</Header.Title>
-                </Header>
-              </Box>
-              <FablesCreate onClick={handleOnCreateClick} />
-              {isLoading && <FablesSkeleton />}
-              {!isLoading && !records?.length && <FablesEmpty />}
-              {!isLoading && !!records?.length && (
-                <FablesList data={records} onClick={handleOnFableClick} />
-              )}
+          <SafeArea
+            display="flex"
+            flexDirection="column"
+            minHeight="100%"
+            safe={['bottom']}
+          >
+            <Box flex={0}>
+              <Header collapse="condense">
+                <Header.Title size="large">{title}</Header.Title>
+              </Header>
             </Box>
+            <FablesCreate onClick={handleOnCreateClick} />
+            {isLoading && <FablesSkeleton />}
+            {!isLoading && !records?.length && <FablesEmpty />}
+            {!isLoading && !!records?.length && (
+              <FablesList data={records} onClick={handleOnFableClick} />
+            )}
           </SafeArea>
         </InfiniteScroll>
       </Content>
