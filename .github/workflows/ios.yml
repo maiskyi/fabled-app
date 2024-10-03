@@ -99,7 +99,7 @@ jobs:
 
       - name: Export .ipa
         env:
-          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PLIST }}
+          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
         run: |
           EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode -o $EXPORT_PLIST_PATH
