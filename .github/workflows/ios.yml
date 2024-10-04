@@ -9,7 +9,7 @@ on:
 jobs:
   ios:
     name: Build and Push
-    runs-on: macos-latest
+    runs-on: macos-14
     environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout code
