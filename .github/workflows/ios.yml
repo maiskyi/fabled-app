@@ -110,7 +110,8 @@ jobs:
           xcodebuild -exportArchive \
             -archivePath ${{ github.workspace }}/Actions.xcarchive \
             -exportOptionsPlist $EXPORT_PLIST_PATH \
-            -exportPath $RUNNER_TEMP/export
+            -exportPath $RUNNER_TEMP/export \
+            -allowProvisioningUpdates
           ls $RUNNER_TEMP/export
 
       - name: Decode auth API Key file and save it
