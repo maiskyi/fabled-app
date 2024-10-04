@@ -30,6 +30,9 @@ jobs:
         id: version
         uses: beaconbrigade/package-json-version@v0.3.2
 
+      - name: Print app version
+        run: echo "The version was ${{ steps.version.outputs.version }}"
+
       - name: Install dependencies
         run: yarn
 
@@ -115,10 +118,7 @@ jobs:
             -archivePath ${{ github.workspace }}/Actions.xcarchive \
             -exportOptionsPlist $EXPORT_PLIST_PATH \
             -exportPath $RUNNER_TEMP/export \
-            -allowProvisioningUpdates \
-            -authenticationKeyPath ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8 \
-            -authenticationKeyIssuerID ${{ secrets.APPSTORE_ISSUER_ID }} \
-            -authenticationKeyID ${{ secrets.APPSTORE_API_KEY_ID }}
+            -allowProvisioningUpdates
           ls $RUNNER_TEMP/export
 
       - name: Push to TestFlight
