@@ -1,4 +1,4 @@
-name: iOS
+name: Disptibtute iOS
 
 on:
   workflow_dispatch:
@@ -91,10 +91,6 @@ jobs:
       - name: Pod install
         run: pod install --project-directory=${{ github.workspace }}/ios/App
 
-      # - name: Grant rights
-      #   run: |
-      #     chmod a+x "ios/App/Pods/Target Support Files/Pods-App/Pods-App-frameworks.sh"
-
       - name: Build Release
         run: |
           xcodebuild -quiet -workspace ${{ github.workspace }}/ios/App/App.xcworkspace -scheme "App" clean archive -archivePath "Actions" -configuration "Release"
@@ -109,8 +105,7 @@ jobs:
           xcodebuild -exportArchive \
             -archivePath ${{ github.workspace }}/Actions.xcarchive \
             -exportOptionsPlist $EXPORT_PLIST_PATH \
-            -exportPath $RUNNER_TEMP/export \
-            -allowProvisioningUpdates
+            -exportPath $RUNNER_TEMP/export
           ls $RUNNER_TEMP/export
 
       - name: Decode auth API Key file and save it
