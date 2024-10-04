@@ -9,7 +9,7 @@ on:
 jobs:
   ios:
     name: Build and Push
-    runs-on: macos-latest
+    runs-on: macos-14
     environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout code
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "yarn"
+          cache: yarn
 
       - name: Setup CocoaPods
         uses: maxim-lobanov/setup-cocoapods@v1
