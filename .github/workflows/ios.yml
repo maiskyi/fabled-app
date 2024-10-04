@@ -82,6 +82,7 @@ jobs:
 
           # import certificate to keychain
           security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
           security list-keychain -d user -s $KEYCHAIN_PATH
 
           # apply provisioning profile
@@ -100,14 +101,6 @@ jobs:
           xcodebuild -quiet -workspace ${{ github.workspace }}/ios/App/App.xcworkspace -scheme "App" clean archive -archivePath "Actions" -configuration "Release"
           ls ${{ github.workspace }}
 
-      - name: Decode auth API Key file and save it
-        env:
-          API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/private_keys
-          echo -n "$API_KEY_BASE64" | base64 --decode -o ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
-          ls ~/private_keys
-
       - name: Export .ipa
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
@@ -117,9 +110,16 @@ jobs:
           xcodebuild -exportArchive \
             -archivePath ${{ github.workspace }}/Actions.xcarchive \
             -exportOptionsPlist $EXPORT_PLIST_PATH \
-            -exportPath $RUNNER_TEMP/export \
-            -allowProvisioningUpdates
+            -exportPath $RUNNER_TEMP/export
           ls $RUNNER_TEMP/export
+
+      - name: Decode auth API Key file and save it
+        env:
+          API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/private_keys
+          echo -n "$API_KEY_BASE64" | base64 --decode -o ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
+          ls ~/private_keys
 
       - name: Push to TestFlight
         run: |
