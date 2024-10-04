@@ -114,7 +114,7 @@ jobs:
           xcodebuild -exportArchive \
             -archivePath ${{ github.workspace }}/Actions.xcarchive \
             -exportOptionsPlist $EXPORT_PLIST_PATH \
-            -exportPath $RUNNER_TEMP/export
+            -exportPath $RUNNER_TEMP/export \
             -allowProvisioningUpdates \
             -apiKeyPath ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8 \
             -apiKeyIssuer ${{ secrets.APPSTORE_ISSUER_ID }} \
