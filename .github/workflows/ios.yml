@@ -1,10 +1,7 @@
 name: Distribute iOS
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        type: environment
+  workflow_dispatch
 
 jobs:
   ios:
