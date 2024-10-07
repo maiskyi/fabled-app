@@ -1,12 +1,16 @@
 name: Deploy iOS
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
 
 jobs:
   ios:
     name: Build and Push
     runs-on: macos-latest
+    environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
