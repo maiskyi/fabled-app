@@ -15,7 +15,6 @@ trap finish EXIT
 
 SDK="${SDK:-iphoneos}"
 WORKSPACE="${WORKSPACE:-ios/App/App.xcworkspace}"
-# PROJECT="${PROJECT:-MyApp.xcodeproj}"
 SCHEME="${SCHEME:-App}"
 CONFIGURATION=${CONFIGURATION:-Release}
 
@@ -31,7 +30,6 @@ rm -rf "${RESULT_BUNDLE_PATH}"
 
 xcrun xcodebuild \
     -workspace "${WORKSPACE}" \
-    # -project "${PROJECT}" \
     -scheme "${SCHEME}" \
     -configuration "${CONFIGURATION}" \
     -sdk "${SDK}" \
