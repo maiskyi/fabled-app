@@ -48,7 +48,7 @@ jobs:
       - name: Bump build number
         uses: ults-io/mobile-version-bump-action@v2
         with:
-          # build-number: ${{github.run_number}}
+          build-number: ${{ github.run_number }}
           app-version: ${{ steps.version.outputs.version }}
           ios-project-path: ./ios/App
 
@@ -61,7 +61,7 @@ jobs:
       - name: Download provisioning
         uses: apple-actions/download-provisioning-profiles@v1
         with:
-          bundle-id: app.fabled.space
+          bundle-id: ${{ vars.IOS_BUNDLE_ID }}
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
