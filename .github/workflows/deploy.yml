@@ -13,7 +13,7 @@ jobs:
   web:
     name: Build and Deploy
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ github.event.inputs.environment || 'development' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
