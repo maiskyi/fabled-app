@@ -10,7 +10,6 @@ jobs:
   ios:
     name: Build and Push
     runs-on: macos-14
-    environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
