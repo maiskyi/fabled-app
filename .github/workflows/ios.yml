@@ -8,7 +8,7 @@ on:
 
 jobs:
   ios:
-    name: Build and Push
+    name: Build and Deploy
     runs-on: macos-latest
     environment: ${{ github.event.inputs.environment }}
     steps:
