@@ -31,13 +31,7 @@ xcrun xcodebuild -quiet \
     -workspace "${WORKSPACE}" \
     -scheme "${SCHEME}" \
     -configuration "${CONFIGURATION}" \
-    -sdk "${SDK}" \
-    -parallelizeTargets \
-    -showBuildTimingSummary \
-    -disableAutomaticPackageResolution \
-    -derivedDataPath "${DERIVED_DATA_PATH}" \
     -archivePath "${ARCHIVE_PATH}" \
-    -resultBundlePath "${RESULT_BUNDLE_PATH}" \
     archive
 
 xcrun xcodebuild \
