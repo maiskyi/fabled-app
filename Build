@@ -14,9 +14,9 @@ function finish() {
 trap finish EXIT
 
 SDK="${SDK:-iphoneos}"
-WORKSPACE="${WORKSPACE:-MyApp.xcworkspace}"
+WORKSPACE="${WORKSPACE:-ios/App/App.xcworkspace}"
 # PROJECT="${PROJECT:-MyApp.xcodeproj}"
-SCHEME="${SCHEME:-MyApp}"
+SCHEME="${SCHEME:-App}"
 CONFIGURATION=${CONFIGURATION:-Release}
 
 BUILD_DIR=${BUILD_DIR:-.build}
@@ -25,7 +25,7 @@ RESULT_BUNDLE_PATH="${ARTIFACT_PATH}/${SCHEME}.xcresult"
 ARCHIVE_PATH=${ARCHIVE_PATH:-${BUILD_DIR}/Archives/${SCHEME}.xcarchive}
 DERIVED_DATA_PATH=${DERIVED_DATA_PATH:-${BUILD_DIR}/DerivedData}
 CURRENT_PROJECT_VERSION=${BUILD_NUMBER:-0}
-EXPORT_OPTIONS_FILE="Support/ExportOptions.plist"
+EXPORT_OPTIONS_FILE="ExportOptions.plist"
 
 rm -rf "${RESULT_BUNDLE_PATH}"
 
