@@ -4,9 +4,9 @@ on:
   workflow_dispatch
 
 jobs:
-  ios:
+  qwe:
     name: Build and Push
-    runs-on: macos-14
+    runs-on: macos-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -59,7 +59,7 @@ jobs:
           p12-password: ${{ secrets.IOS_PROD_CERTIFICATE_PASSWORD }}
 
       - name: Download provisioning
-        uses: Apple-Actions/download-provisioning-profiles@v1
+        uses: apple-actions/download-provisioning-profiles@v1
         with:
           bundle-id: app.fabled.space
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
@@ -71,8 +71,16 @@ jobs:
 
       - name: Build Release
         run: |
-          chmod +x ./Build
-          ./Build
+          chmod +x ./ios/Build
+          ./ios/Build
+
+      - name: Upload to TestFlight
+        uses: apple-actions/upload-testflight-build@v1
+        with:
+          app-path: .build/Artifacts/App.ipa
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
 
       # - name: Install the Apple certificate and provisioning profile
       #   env:
