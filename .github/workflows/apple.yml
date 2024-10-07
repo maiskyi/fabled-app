@@ -70,7 +70,9 @@ jobs:
         run: pod install --project-directory=${{ github.workspace }}/ios/App
 
       - name: Build Release
-        run: ./Build
+        run: |
+          chmod +x ./Build
+          ./Build
 
       # - name: Install the Apple certificate and provisioning profile
       #   env:
