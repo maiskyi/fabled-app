@@ -10,6 +10,7 @@ interface ConfigContextProps {
   prompts: DTO.GetBootstrap['prompts'];
   scenes: DTO.GetBootstrap['placeOfEvents'];
   themes: DTO.GetBootstrap['moralLessons'];
+  subscriptions: DTO.GetBootstrap['config']['subscriptions'];
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({
@@ -17,6 +18,7 @@ export const ConfigContext = createContext<ConfigContextProps>({
   privacyPolicyUrl: '/',
   prompts: [],
   scenes: [],
+  subscriptions: [],
   termsAndConditionsUrl: '/',
   themes: [],
   version: '1.0.0',

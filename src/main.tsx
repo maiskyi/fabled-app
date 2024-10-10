@@ -46,6 +46,9 @@ const config: AppProps = {
         subscription: import.meta.env.VITE_API_SUBSCRIPTION,
       },
     },
+    purchases: {
+      apiKey: import.meta.env.VITE_REVENUECAT_API_KEY,
+    },
   },
 };
 
