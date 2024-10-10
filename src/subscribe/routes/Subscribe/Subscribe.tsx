@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Content, Header, Page } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
-import { useGetProducts } from '@core/purchases';
+import { useGetProducts, useGetOfferings } from '@core/purchases';
 import { useConfig } from '@bootstrap/providers';
 
 export const Subscribe: FC = () => {
@@ -13,6 +13,10 @@ export const Subscribe: FC = () => {
       ({ appleProductId }) => appleProductId
     ),
   });
+
+  const { data: q, error } = useGetOfferings();
+
+  console.log(error);
 
   return (
     <Page>
