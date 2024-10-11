@@ -1,8 +1,10 @@
 import { memo } from 'react';
 
 import { PurchasesPackage } from '@core/purchases';
-import { Card, Form } from '@core/uikit';
+import { Card, Form, Icon } from '@core/uikit';
 import { useTranslation } from '@core/localization';
+
+import styles from './PackageCard.module.scss';
 
 export const PackageCard = memo<PurchasesPackage>(function PackageCard({
   product,
@@ -15,22 +17,32 @@ export const PackageCard = memo<PurchasesPackage>(function PackageCard({
   return (
     <Form.RadioGroup.Custom value={identifier}>
       {({ value, onSelect }) => {
+        const selected = value === identifier;
+
         return (
-          <Card onClick={onSelect} outline={value === identifier && 'primary'}>
-            <Card.Header>
-              <Card.Subtitle>
-                {t('help.subscribe', {
-                  price: priceString,
-                  subscriptionPeriod: t(
-                    `constants.subscriptionPeriod.${subscriptionPeriod}.short`
-                  ),
-                })}
-              </Card.Subtitle>
-              <Card.Title>
-                {t(`constants.subscriptionPeriod.${subscriptionPeriod}.full`)}
-              </Card.Title>
-            </Card.Header>
-          </Card>
+          <div className={styles.root}>
+            <Icon
+              className={styles.icon}
+              name={selected ? 'checkmark-circle' : 'ellipse'}
+              size="large"
+              slot="start"
+            />
+            <Card onClick={onSelect} outline={selected && 'primary'}>
+              <Card.Header className={styles.header}>
+                <Card.Subtitle>
+                  {t('help.subscribe', {
+                    price: priceString,
+                    subscriptionPeriod: t(
+                      `constants.subscriptionPeriod.${subscriptionPeriod}.short`
+                    ),
+                  })}
+                </Card.Subtitle>
+                <Card.Title className={styles.title}>
+                  {t(`constants.subscriptionPeriod.${subscriptionPeriod}.full`)}
+                </Card.Title>
+              </Card.Header>
+            </Card>
+          </div>
         );
       }}
     </Form.RadioGroup.Custom>
