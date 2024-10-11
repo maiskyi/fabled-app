@@ -1,13 +1,17 @@
 import { createContext } from 'use-context-selector';
 
-import { PurchasesOffering } from '@revenuecat/purchases-capacitor';
+import {
+  PurchasesOffering,
+  PurchasesStoreProduct,
+} from '@revenuecat/purchases-capacitor';
 
 export interface PurchasesContextProps {
   offering: PurchasesOffering;
-  activeSubscriptions: string[];
+  activeSubscriptions: PurchasesStoreProduct[];
   refetch: () => Promise<{
     offering: PurchasesOffering;
     ready: boolean;
+    activeSubscriptions: PurchasesStoreProduct[];
   }>;
 }
 
@@ -16,6 +20,7 @@ export const PurchasesContext = createContext<PurchasesContextProps>({
   offering: null,
   refetch: () =>
     Promise.resolve({
+      activeSubscriptions: [],
       offering: null,
       ready: false,
     }),

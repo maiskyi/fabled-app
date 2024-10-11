@@ -40,9 +40,11 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     async () => {
       const { current: offering } = await Purchases.getOfferings();
 
-      const {
-        customerInfo: { activeSubscriptions },
-      } = await Purchases.getCustomerInfo();
+      const { customerInfo } = await Purchases.getCustomerInfo();
+
+      const { products: activeSubscriptions } = await Purchases.getProducts({
+        productIdentifiers: customerInfo.activeSubscriptions,
+      });
 
       return { activeSubscriptions, offering, ready: true };
     },

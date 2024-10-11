@@ -5,6 +5,7 @@ export * from './components/PurchasesProvider';
 export * from './hooks/useGetProducts';
 export * from './hooks/useGetOfferings';
 export * from './hooks/usePurchases';
+export * from './hooks/usePurchaseStoreProduct';
 
 // Constants
 export * from './constants/subscriptionPeriod.const';

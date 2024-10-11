@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Box, Content, Form, Header, Page, Text } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
-import { usePurchases } from '@core/purchases';
+import { usePurchases, usePurchaseStoreProduct } from '@core/purchases';
 import { useTranslation } from '@core/localization';
 
 import { PackageCard } from './_partitions/PackageCard';
@@ -12,7 +12,13 @@ export const Subscribe: FC = () => {
   const { t } = useTranslation();
   const { offering, activeSubscriptions } = usePurchases();
 
+  const { isPending, mutate } = usePurchaseStoreProduct();
+
   const title = t('pages.subscribe');
+
+  const defaultValues: SubscribeFrom = {
+    [SubscribeFromField.Product]: offering.availablePackages[0].identifier,
+  };
 
   const hightestMonthlyPrice = offering.availablePackages.reduce(
     (acc, { product }) => {
@@ -21,7 +27,20 @@ export const Subscribe: FC = () => {
     0
   );
 
-  const handleOnSubmit = () => {};
+  const handleOnSubmit = ({ product: value }: SubscribeFrom) => {
+    const product = offering.availablePackages.find(
+      ({ identifier }) => identifier === value
+    )?.product;
+    mutate(
+      { product },
+      {
+        onError: (...args) => {
+          console.log(...args);
+        },
+        onSuccess: () => {},
+      }
+    );
+  };
 
   return (
     <Page>
@@ -36,13 +55,11 @@ export const Subscribe: FC = () => {
           </Header.Title>
         </Header>
         <Box padding={16} paddingInline={20}>
+          {JSON.stringify(activeSubscriptions)}
           <Text>{t('intro.subscribe')}</Text>
         </Box>
         <Form<SubscribeFrom>
-          defaultValues={{
-            [SubscribeFromField.Product]:
-              offering.availablePackages[0].identifier,
-          }}
+          defaultValues={defaultValues}
           onSubmit={handleOnSubmit}
         >
           <Form.RadioGroup name={SubscribeFromField.Product}>
@@ -63,7 +80,9 @@ export const Subscribe: FC = () => {
             padding={16}
             paddingInline={20}
           >
-            <Form.Submit>{t('actions.subscribe')}</Form.Submit>
+            <Form.Submit loading={isPending}>
+              {t('actions.subscribe')}
+            </Form.Submit>
           </Box>
         </Form>
       </Content>
