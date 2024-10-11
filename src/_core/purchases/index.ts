@@ -6,5 +6,11 @@ export * from './hooks/useGetProducts';
 export * from './hooks/useGetOfferings';
 export * from './hooks/usePurchases';
 
+// Constants
+export * from './constants/subscriptionPeriod.const';
+
 // Types
-export type { PurchasesPackage } from '@revenuecat/purchases-capacitor';
+export type {
+  PurchasesPackage,
+  PurchasesStoreProduct,
+} from '@revenuecat/purchases-capacitor';

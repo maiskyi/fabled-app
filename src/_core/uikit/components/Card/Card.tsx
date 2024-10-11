@@ -12,6 +12,7 @@ import { CardTitle } from './CardTitle/CardTitle';
 import { CardAvatar } from './CardAvatar/CardAvatar';
 import { CardContent } from './CardContent/CardContent';
 import { CardFooter } from './CardFooter/CardFooter';
+import { CardBadge } from './CardBadge/CardBadge';
 import { CardContext } from './Card.context';
 
 import styles from './Card.module.scss';
@@ -33,6 +34,7 @@ interface CardComponent {
   Avatar: typeof CardAvatar;
   Content: typeof CardContent;
   Footer: typeof CardFooter;
+  Badge: typeof CardBadge;
 }
 
 export const Card: CardComponent = ({
@@ -75,3 +77,4 @@ Card.Title = CardTitle;
 Card.Avatar = CardAvatar;
 Card.Content = CardContent;
 Card.Footer = CardFooter;
+Card.Badge = CardBadge;

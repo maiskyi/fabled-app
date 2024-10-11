@@ -1,18 +1,28 @@
 import { memo } from 'react';
 
-import { PurchasesPackage } from '@core/purchases';
+import { PurchasesPackage, SubscriptionPeriod } from '@core/purchases';
 import { Card, Form, Icon } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
+import { calcDiscount } from './PackageCard.utils';
+
 import styles from './PackageCard.module.scss';
 
-export const PackageCard = memo<PurchasesPackage>(function PackageCard({
-  product,
-  identifier,
-}: PurchasesPackage) {
+interface PackageCardProps {
+  hightestMonthlyPrice: number;
+  package: PurchasesPackage;
+}
+
+export const PackageCard = memo<PackageCardProps>(function PackageCard({
+  hightestMonthlyPrice,
+  package: {
+    product: { title, subscriptionPeriod, priceString, pricePerMonth },
+    identifier,
+  },
+}: PackageCardProps) {
   const { t } = useTranslation();
 
-  const { subscriptionPeriod, priceString } = product;
+  console.log(pricePerMonth);
 
   return (
     <Form.RadioGroup.Custom value={identifier}>
@@ -30,6 +40,13 @@ export const PackageCard = memo<PurchasesPackage>(function PackageCard({
             />
             <Card onClick={onSelect} outline={selected && 'primary'}>
               <Card.Header className={styles.header}>
+                {hightestMonthlyPrice !== pricePerMonth && (
+                  <Card.Badge color="danger">
+                    {t('help.discountOff', {
+                      value: calcDiscount(hightestMonthlyPrice, pricePerMonth),
+                    })}
+                  </Card.Badge>
+                )}
                 <Card.Subtitle>
                   {t('help.subscribe', {
                     price: priceString,
@@ -38,9 +55,7 @@ export const PackageCard = memo<PurchasesPackage>(function PackageCard({
                     ),
                   })}
                 </Card.Subtitle>
-                <Card.Title className={styles.title}>
-                  {t(`constants.subscriptionPeriod.${subscriptionPeriod}.full`)}
-                </Card.Title>
+                <Card.Title className={styles.title}>{title}</Card.Title>
               </Card.Header>
             </Card>
           </div>

@@ -23,6 +23,7 @@ export * from './components/Swiper';
 export * from './components/Text';
 export * from './components/ThemeProvider';
 export * from './components/View';
+export * from './components/Badge';
 
 // Hooks
 export * from './hooks/useUtils';
