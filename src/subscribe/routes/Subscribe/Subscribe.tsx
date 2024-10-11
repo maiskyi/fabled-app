@@ -1,17 +1,20 @@
 import { FC } from 'react';
 
-import { Box, Content, Header, Page, Text } from '@core/uikit';
+import { Box, Content, Form, Header, Page, Text } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { usePurchases } from '@core/purchases';
 import { useTranslation } from '@core/localization';
 
 import { PackageCard } from './_partitions/PackageCard';
+import { SubscribeFrom, SubscribeFromField } from './Subscribe.types';
 
 export const Subscribe: FC = () => {
   const { t } = useTranslation();
   const { offering } = usePurchases();
 
   const title = t('pages.subscribe');
+
+  const handleOnSubmit = () => {};
 
   return (
     <Page>
@@ -28,9 +31,19 @@ export const Subscribe: FC = () => {
         <Box padding={16} paddingInline={20}>
           <Text>{t('intro.subscribe')}</Text>
         </Box>
-        {offering.availablePackages.map((item) => {
-          return <PackageCard key={item.identifier} {...item} />;
-        })}
+        <Form<SubscribeFrom>
+          defaultValues={{
+            [SubscribeFromField.Product]:
+              offering.availablePackages[0].identifier,
+          }}
+          onSubmit={handleOnSubmit}
+        >
+          <Form.RadioGroup name={SubscribeFromField.Product}>
+            {offering.availablePackages.map((item) => {
+              return <PackageCard key={item.identifier} {...item} />;
+            })}
+          </Form.RadioGroup>
+        </Form>
       </Content>
     </Page>
   );

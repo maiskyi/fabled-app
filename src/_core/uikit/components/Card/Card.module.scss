@@ -1,3 +1,9 @@
+.root {
+  &.outlinePrimary {
+    box-shadow: 0px 0px 0px 3px var(--ion-color-primary);
+  }
+}
+
 .header {
   .avatar {
     position: absolute;
