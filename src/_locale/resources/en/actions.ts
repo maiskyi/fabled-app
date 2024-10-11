@@ -29,6 +29,7 @@ export const actions = {
   signIn: 'Sign in',
   signUp: 'Sign up',
   submit: 'Submit',
+  subscribe: 'Subscribe',
   support: 'Support',
   termsAndConditions: 'Terms and conditions',
   writeFable: 'Write a Fable',

@@ -43,6 +43,14 @@ export const Subscribe: FC = () => {
               return <PackageCard key={item.identifier} {...item} />;
             })}
           </Form.RadioGroup>
+          <Box
+            display="flex"
+            flexDirection="column"
+            padding={16}
+            paddingInline={20}
+          >
+            <Form.Submit>{t('actions.subscribe')}</Form.Submit>
+          </Box>
         </Form>
       </Content>
     </Page>
