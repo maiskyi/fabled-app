@@ -23,6 +23,7 @@ export const PackageCard = memo<PurchasesPackage>(function PackageCard({
           <div className={styles.root}>
             <Icon
               className={styles.icon}
+              color={selected ? 'primary' : 'medium'}
               name={selected ? 'checkmark-circle' : 'ellipse'}
               size="large"
               slot="start"
