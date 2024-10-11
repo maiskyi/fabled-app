@@ -40,12 +40,17 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     async () => {
       const { current: offering } = await Purchases.getOfferings();
 
-      return { offering, ready: true };
+      const {
+        customerInfo: { activeSubscriptions },
+      } = await Purchases.getCustomerInfo();
+
+      return { activeSubscriptions, offering, ready: true };
     },
     [],
     {
       loading: false,
       value: {
+        activeSubscriptions: [],
         offering: null,
         ready: false,
       },
@@ -61,7 +66,11 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
 
   return (
     <PurchasesContext.Provider
-      value={{ offering: data?.offering, refetch: init }}
+      value={{
+        activeSubscriptions: data.activeSubscriptions,
+        offering: data?.offering,
+        refetch: init,
+      }}
     >
       {ready ? children : fallback}
     </PurchasesContext.Provider>

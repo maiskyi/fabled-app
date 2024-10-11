@@ -10,7 +10,7 @@ import { SubscribeFrom, SubscribeFromField } from './Subscribe.types';
 
 export const Subscribe: FC = () => {
   const { t } = useTranslation();
-  const { offering } = usePurchases();
+  const { offering, activeSubscriptions } = usePurchases();
 
   const title = t('pages.subscribe');
 
