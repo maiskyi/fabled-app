@@ -1,29 +1,37 @@
 import { FC } from 'react';
 
-import { Content, Header, Page } from '@core/uikit';
+import { Box, Content, Header, Page, Text } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
-import { useGetProducts, useGetOfferings } from '@core/purchases';
-import { useConfig } from '@bootstrap/providers';
+import { usePurchases } from '@core/purchases';
+import { useTranslation } from '@core/localization';
+
+import { PackageCard } from './_partitions/PackageCard';
 
 export const Subscribe: FC = () => {
-  const { subscriptions } = useConfig();
+  const { t } = useTranslation();
+  const { offering } = usePurchases();
 
-  const { data } = useGetProducts({
-    productIdentifiers: subscriptions.map(
-      ({ appleProductId }) => appleProductId
-    ),
-  });
-
-  const { data: q, error } = useGetOfferings();
-
-  console.log(error);
+  const title = t('pages.subscribe');
 
   return (
     <Page>
-      <Header>
+      <Header translucent>
         <Header.Back pathname={RoutePath.Index} />
+        <Header.Title>{title}</Header.Title>
       </Header>
-      <Content>{JSON.stringify(data)}</Content>
+      <Content>
+        <Header collapse="condense">
+          <Header.Title size="large" wrap>
+            {title}
+          </Header.Title>
+        </Header>
+        <Box padding={16} paddingInline={20}>
+          <Text>{t('intro.subscribe')}</Text>
+        </Box>
+        {offering.availablePackages.map((item) => {
+          return <PackageCard key={item.identifier} {...item} />;
+        })}
+      </Content>
     </Page>
   );
 };

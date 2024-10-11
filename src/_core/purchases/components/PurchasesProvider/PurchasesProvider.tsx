@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
-import { useAsync } from 'react-use';
+import { useAsyncFn, useMount } from 'react-use';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 
@@ -15,21 +15,55 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   apiKey,
   fallback = null,
 }) => {
-  const { value } = useAsync(async () => {
-    await Purchases.setLogLevel({
-      level: LOG_LEVEL.DEBUG,
-    });
+  const [{ value: config }, configure] = useAsyncFn(
+    async () => {
+      await Purchases.setLogLevel({
+        level: LOG_LEVEL.DEBUG,
+      });
 
-    await Purchases.configure({
-      apiKey,
-    });
+      await Purchases.configure({
+        apiKey,
+      });
 
-    return { ready: true };
+      return { ready: true };
+    },
+    [],
+    {
+      loading: false,
+      value: {
+        ready: false,
+      },
+    }
+  );
+
+  const [{ value: data }, init] = useAsyncFn(
+    async () => {
+      const { current: offering } = await Purchases.getOfferings();
+
+      return { offering, ready: true };
+    },
+    [],
+    {
+      loading: false,
+      value: {
+        offering: null,
+        ready: false,
+      },
+    }
+  );
+
+  const ready = config?.ready && data?.ready;
+
+  useMount(async () => {
+    await configure();
+    await init();
   });
 
   return (
-    <PurchasesContext.Provider value={{}}>
-      {value?.ready ? children : fallback}
+    <PurchasesContext.Provider
+      value={{ offering: data?.offering, refetch: init }}
+    >
+      {ready ? children : fallback}
     </PurchasesContext.Provider>
   );
 };
