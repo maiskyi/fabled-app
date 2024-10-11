@@ -43,8 +43,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
       const { customerInfo } = await Purchases.getCustomerInfo();
 
       const { products: activeSubscriptions } = await Purchases.getProducts({
-        // productIdentifiers: customerInfo.activeSubscriptions,
-        productIdentifiers: ['app.fabled.space.unlimited.monthly'],
+        productIdentifiers: customerInfo.activeSubscriptions,
       });
 
       return { activeSubscriptions, offering, ready: true };
