@@ -5,11 +5,17 @@ import { IonItem } from '@ionic/react';
 type ListItemProps = PropsWithChildren<{
   button?: boolean;
   onClick?: () => void;
+  lines?: 'full' | 'inset' | 'none';
 }>;
 
-export const ListItem: FC<ListItemProps> = ({ button, children, onClick }) => {
+export const ListItem: FC<ListItemProps> = ({
+  button,
+  children,
+  onClick,
+  lines,
+}) => {
   return (
-    <IonItem button={button} onClick={onClick}>
+    <IonItem button={button} lines={lines} onClick={onClick}>
       {children}
     </IonItem>
   );

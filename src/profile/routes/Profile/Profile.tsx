@@ -1,22 +1,20 @@
 import { memo } from 'react';
 import { entries } from 'lodash';
 
-import { Header, Page, Content, Card, List, useUtils } from '@core/uikit';
-import { useAuth, useSignOut } from '@core/auth';
+import { Header, Page, Content, List, useUtils, Text } from '@core/uikit';
+import { useSignOut } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
-import { useUser } from '@common/hooks';
 
+import { ProfileUserCard } from './_partitions/ProfileUserCard';
 import { useProfileMenu } from './Profile.hooks';
 
 export const Profile = memo(function Profile() {
-  const { user } = useAuth();
   const { confirm } = useUtils();
   const { t } = useTranslation();
   const { mutateAsync: signOut } = useSignOut();
-  const { displayName: userDisplayName, avatar: userAvatar } = useUser();
 
-  const { menu } = useProfileMenu();
+  const { menu, plans } = useProfileMenu();
 
   const title = t('pages.profile');
 
@@ -41,21 +39,33 @@ export const Profile = memo(function Profile() {
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Card>
-          <Card.Header>
-            <Card.Avatar src={userAvatar} />
-            <Card.Title>{userDisplayName}</Card.Title>
-            <Card.Subtitle>{user?.email}</Card.Subtitle>
-          </Card.Header>
-        </Card>
+        <ProfileUserCard />
+        {entries(plans).map(([title, items]) => {
+          return (
+            <List key={title}>
+              <List.Header>{title}</List.Header>
+              {items.map(({ label, onClick, icon, note }) => (
+                <List.Item button={!!onClick} key={label} onClick={onClick}>
+                  <List.Icon name={icon} />
+                  <List.Label>
+                    <Text>{label}</Text>
+                    <List.Note>{note}</List.Note>
+                  </List.Label>
+                </List.Item>
+              ))}
+            </List>
+          );
+        })}
         {entries(menu).map(([title, items]) => {
           return (
             <List key={title}>
               <List.Header>{title}</List.Header>
               {items.map(({ label, onClick, icon }) => (
-                <List.Item button key={label} onClick={onClick}>
+                <List.Item button={!!onClick} key={label} onClick={onClick}>
                   <List.Icon name={icon} />
-                  <List.Label>{label}</List.Label>
+                  <List.Label>
+                    <Text>{label}</Text>
+                  </List.Label>
                 </List.Item>
               ))}
             </List>

@@ -18,6 +18,7 @@ export const actions = {
   legal: 'Legal',
   logOut: 'Log out',
   ok: 'OK',
+  plan: 'Plan',
   privacyPolicy: 'Privacy policy',
   readLater: 'Read later',
   readNow: 'Read now',

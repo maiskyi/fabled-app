@@ -6,16 +6,40 @@ import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 import { useLegal } from '@common/hooks';
 import { useAuth } from '@core/auth';
+import { usePurchases, PurchasesStoreProduct } from '@core/purchases';
 
 import { ProfileMenuItem } from './Profile.types';
+
+export const useProfileSubscription = () => {
+  const { activeSubscriptions } = usePurchases();
+
+  const defaultSubscriptions: PurchasesStoreProduct[] = [];
+
+  const subscriptions = activeSubscriptions.length
+    ? activeSubscriptions
+    : defaultSubscriptions;
+
+  return { subscriptions };
+};
 
 export const useProfileMenu = () => {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
   const { openPrivacyPolicy, openTermsAndConditions } = useLegal();
   const { user } = useAuth();
+  const { subscriptions } = useProfileSubscription();
 
-  const items = useMemo((): ProfileMenuItem[] => {
+  const planItems = useMemo((): ProfileMenuItem[] => {
+    return subscriptions.map(({ title, description }) => ({
+      active: true,
+      group: t('actions.plan'),
+      icon: 'diamond-outline',
+      label: title,
+      note: description,
+    }));
+  }, [t, subscriptions]);
+
+  const menuItems = useMemo((): ProfileMenuItem[] => {
     return [
       {
         active: user.providerData[0].providerId === 'password',
@@ -66,7 +90,15 @@ export const useProfileMenu = () => {
     ].filter(({ active }) => active);
   }, [t, navigate, openPrivacyPolicy, openTermsAndConditions, user]);
 
-  const menu = useMemo(() => groupBy(items, ({ group }) => group), [items]);
+  const menu = useMemo(
+    () => groupBy(menuItems, ({ group }) => group),
+    [menuItems]
+  );
 
-  return { menu };
+  const plans = useMemo(
+    () => groupBy(planItems, ({ group }) => group),
+    [planItems]
+  );
+
+  return { menu, plans };
 };

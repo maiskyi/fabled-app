@@ -18,6 +18,7 @@ import {
   personOutline,
   ellipse,
   checkmarkCircle,
+  diamondOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
@@ -30,6 +31,7 @@ export const ICON = {
   'checkmark-circle': checkmarkCircle,
   'chevron-forward': chevronForward,
   'close-outline': closeOutline,
+  'diamond-outline': diamondOutline,
   'document-text-outline': documentTextOutline,
   ellipse,
   facebook: logoFacebook,
