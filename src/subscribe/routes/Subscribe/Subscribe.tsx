@@ -10,7 +10,7 @@ import { SubscribeFrom, SubscribeFromField } from './Subscribe.types';
 
 export const Subscribe: FC = () => {
   const { t } = useTranslation();
-  const { offering, activeSubscriptions } = usePurchases();
+  const { offering } = usePurchases();
 
   const { isPending, mutate } = usePurchaseStoreProduct();
 
@@ -34,9 +34,7 @@ export const Subscribe: FC = () => {
     mutate(
       { product },
       {
-        onError: (...args) => {
-          console.log(...args);
-        },
+        onError: () => {},
         onSuccess: () => {},
       }
     );

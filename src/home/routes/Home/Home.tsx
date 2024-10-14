@@ -34,8 +34,7 @@ export const Home = memo(function Home() {
   const records = useFablesContext(({ stories }) => stories);
 
   const handleOnCreateClick: FablesCreateOnClickFn = useCallback(() => {
-    // navigate({ action: 'push', pathname: RoutePath.Create });
-    navigate({ action: 'push', pathname: RoutePath.Subscribe });
+    navigate({ action: 'push', pathname: RoutePath.Create });
   }, [navigate]);
 
   const handleOnProfileClick = () => {

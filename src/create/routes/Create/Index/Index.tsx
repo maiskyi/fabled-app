@@ -104,15 +104,7 @@ export const Index = memo(function Create() {
   return (
     <Animation.Message>
       <Box>
-        <Form<IndexForm>
-          defaultValues={{
-            character: characters[0].value,
-            description: themes[0].value,
-            readTime: readTimes[0].value,
-            scene: scenes[0].value,
-          }}
-          onSubmit={handleOnSubmit}
-        >
+        <Form<IndexForm> defaultValues={{}} onSubmit={handleOnSubmit}>
           <Header.Title size="large" wrap>
             <Translate
               components={{

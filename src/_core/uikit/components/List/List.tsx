@@ -1,7 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
 import { IonList } from '@ionic/react';
-import { Color } from '@ionic/core';
 
 import { ListItem } from './ListItem/ListItem';
 import { ListHeader } from './ListHeader/ListHeader';
@@ -9,9 +8,7 @@ import { ListLabel } from './ListLabel/ListLabel';
 import { ListIcon } from './ListIcon/ListIcon';
 import { ListNote } from './ListNote/ListNote';
 
-export type ListProps = PropsWithChildren<{
-  color?: Color;
-}>;
+export type ListProps = PropsWithChildren<{}>;
 
 interface ListComponent {
   (props: ListProps): ReactElement;
@@ -22,7 +19,7 @@ interface ListComponent {
   Note: typeof ListNote;
 }
 
-export const List: ListComponent = ({ children, color }: ListProps) => {
+export const List: ListComponent = ({ children }: ListProps) => {
   return <IonList>{children}</IonList>;
 };
 

@@ -52,7 +52,6 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
         privacyPolicyUrl: data?.config.privacyPolicyUrl,
         prompts: data.prompts,
         scenes: data.placeOfEvents,
-        subscriptions: data.config.subscriptions,
         termsAndConditionsUrl: data?.config.termsAndConditionsUrl,
         themes: data.moralLessons,
         version,

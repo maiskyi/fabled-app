@@ -28,8 +28,5 @@ query getBootstrap($image: CloudinaryImageFormat) {
   config(where: { id: "1" }) {
     privacyPolicyUrl
     termsAndConditionsUrl
-    subscriptions {
-      appleProductId
-    }
   }
 }
