@@ -2,6 +2,7 @@ import { FC, PropsWithChildren, ReactNode } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
+import { Capacitor } from '@capacitor/core';
 
 import { PurchasesContext } from '../../contexts/PurchasesContext';
 
@@ -17,13 +18,15 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
 }) => {
   const [{ value: config }, configure] = useAsyncFn(
     async () => {
-      await Purchases.setLogLevel({
-        level: LOG_LEVEL.DEBUG,
-      });
+      if (Capacitor.isNativePlatform()) {
+        await Purchases.setLogLevel({
+          level: LOG_LEVEL.DEBUG,
+        });
 
-      await Purchases.configure({
-        apiKey,
-      });
+        await Purchases.configure({
+          apiKey,
+        });
+      }
 
       return { ready: true };
     },
@@ -38,15 +41,18 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
 
   const [{ value: data }, init] = useAsyncFn(
     async () => {
-      const { current: offering } = await Purchases.getOfferings();
+      if (Capacitor.isNativePlatform()) {
+        const { current: offering } = await Purchases.getOfferings();
 
-      const { customerInfo } = await Purchases.getCustomerInfo();
+        const { customerInfo } = await Purchases.getCustomerInfo();
 
-      const { products: activeSubscriptions } = await Purchases.getProducts({
-        productIdentifiers: customerInfo.activeSubscriptions,
-      });
+        const { products: activeSubscriptions } = await Purchases.getProducts({
+          productIdentifiers: customerInfo.activeSubscriptions,
+        });
 
-      return { activeSubscriptions, offering, ready: true };
+        return { activeSubscriptions, offering, ready: true };
+      }
+      return { activeSubscriptions: [], offering: null, ready: true };
     },
     [],
     {
