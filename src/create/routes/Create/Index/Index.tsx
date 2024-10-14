@@ -75,17 +75,28 @@ export const Index = memo(function Create() {
     mutate({
       data: {
         character: {
-          connect: { id: form.character },
+          connect: {
+            id: form.character,
+          },
         },
         contentPrompt,
         firebaseUserId: user?.uid,
         imagePrompt: illustrationPrompt,
         message,
         moralLesson: {
-          connect: { id: form.description },
+          connect: {
+            id: form.description,
+          },
         },
         placeOfEvent: {
-          connect: { id: form.scene },
+          connect: {
+            id: form.scene,
+          },
+        },
+        prompt: {
+          connect: {
+            id: prompts.at(0).id,
+          },
         },
         readTime: readTimeValue,
       },
