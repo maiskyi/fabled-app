@@ -12,26 +12,12 @@ import { ProfileMenuItem } from './Profile.types';
 
 export const useProfileSubscription = () => {
   const { activeSubscriptions } = usePurchases();
+  const { t } = useTranslation();
 
-  const defaultSubscriptions: PurchasesStoreProduct[] = [
+  const defaultSubscriptions: Partial<PurchasesStoreProduct>[] = [
     {
-      currencyCode: 'USD',
-      description: 'Unlock unlimited access to all features',
-      discounts: [],
-      identifier: 'app.fabled.space.unlimited.monthly',
-      introPrice: null,
-      price: 5.99,
-      pricePerMonth: 5.99,
-      pricePerMonthString: '0,00 US$',
-      pricePerWeek: 1.38,
-      pricePerWeekString: '0,00 US$',
-      pricePerYear: 71.88,
-      pricePerYearString: '00,00 US$',
-      priceString: '00,00 USD',
-      productCategory: 'SUBSCRIPTION',
-      productType: 'AUTO_RENEWABLE_SUBSCRIPTION',
-      subscriptionPeriod: 'P1M',
-      title: 'Free',
+      description: t('defaults.planDescription'),
+      title: t('defaults.plan'),
     },
   ];
 
@@ -48,8 +34,6 @@ export const useProfileMenu = () => {
   const { openPrivacyPolicy, openTermsAndConditions } = useLegal();
   const { user } = useAuth();
   const { subscriptions } = useProfileSubscription();
-
-  console.log(JSON.stringify(subscriptions));
 
   const planItems = useMemo((): ProfileMenuItem[] => {
     return subscriptions.map(({ title, description }) => ({
