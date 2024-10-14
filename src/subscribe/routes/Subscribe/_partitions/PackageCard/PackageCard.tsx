@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { PurchasesPackage, SubscriptionPeriod } from '@core/purchases';
+import { PurchasesPackage } from '@core/purchases';
 import { Card, Form, Icon } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
@@ -16,13 +16,11 @@ interface PackageCardProps {
 export const PackageCard = memo<PackageCardProps>(function PackageCard({
   hightestMonthlyPrice,
   package: {
-    product: { title, subscriptionPeriod, priceString, pricePerMonth },
+    product: { subscriptionPeriod, priceString, pricePerMonth },
     identifier,
   },
 }: PackageCardProps) {
   const { t } = useTranslation();
-
-  console.log(pricePerMonth);
 
   return (
     <Form.RadioGroup.Custom value={identifier}>
@@ -55,7 +53,9 @@ export const PackageCard = memo<PackageCardProps>(function PackageCard({
                     ),
                   })}
                 </Card.Subtitle>
-                <Card.Title className={styles.title}>{title}</Card.Title>
+                <Card.Title className={styles.title}>
+                  {t(`constants.subscriptionPeriod.${subscriptionPeriod}.full`)}
+                </Card.Title>
               </Card.Header>
             </Card>
           </div>

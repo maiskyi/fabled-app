@@ -55,7 +55,6 @@ export const Subscribe: FC = () => {
           </Header.Title>
         </Header>
         <Box padding={16} paddingInline={20}>
-          {JSON.stringify(activeSubscriptions)}
           <Text>{t('intro.subscribe')}</Text>
         </Box>
         <Form<SubscribeFrom>
