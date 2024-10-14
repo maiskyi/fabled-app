@@ -34,6 +34,9 @@ export const Create = memo(function Create() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content fullscreen ref={content}>
+        <Header collapse="condense">
+          <Header.Title size="large">{t('pages.create')}</Header.Title>
+        </Header>
         <Animation.Message>
           <Message
             avatar={BOT_AVATAR_SRC}
