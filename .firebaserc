@@ -1,5 +1,19 @@
 {
   "projects": {
     "default": "fabled-976c8"
-  }
+  },
+  "targets": {
+    "fabled-976c8": {
+      "hosting": {
+        "dev": [
+          "fabled-dev-976c8"
+        ],
+        "prod": [
+          "fabled-976c8"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
