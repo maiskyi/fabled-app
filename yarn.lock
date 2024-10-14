@@ -3339,6 +3339,18 @@
   resolved "https://registry.yarnpkg.com/@repeaterjs/repeater/-/repeater-3.0.6.tgz#be23df0143ceec3c69f8b6c2517971a5578fdaa2"
   integrity sha512-Javneu5lsuhwNCryN+pXH93VPQ8g0dBX7wItHFgYiwQmzE1sVdg5tWHiOgHywzL2W21XQopa7IwIEnNbmeUJYA==
 
+"@revenuecat/purchases-capacitor@^9.0.3":
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/@revenuecat/purchases-capacitor/-/purchases-capacitor-9.0.3.tgz#bf9cc908e313b138691f6aab8f1a28835b75954d"
+  integrity sha512-/dT9M2k+jl9HGW46FYoZ+kJL2i4sGKdsUoTaR29I+7Rwf+giWRlA73i365lFXqdQTRVION7ny8Ez8zWREiuKwA==
+  dependencies:
+    "@revenuecat/purchases-typescript-internal-esm" "13.3.0"
+
+"@revenuecat/purchases-typescript-internal-esm@13.3.0":
+  version "13.3.0"
+  resolved "https://registry.yarnpkg.com/@revenuecat/purchases-typescript-internal-esm/-/purchases-typescript-internal-esm-13.3.0.tgz#48c5ebab575f00ea82431afa4bc79036982f7ff3"
+  integrity sha512-pnf3KV2CKl/DdnBM8FkZPb9YTO4iYcimpkVk982xGCq6AEhCkK4VbeZ1BBtJskB3EKb8kRucqbKsTgN1zN1F8A==
+
 "@rollup/rollup-android-arm-eabi@4.19.0":
   version "4.19.0"
   resolved "https://registry.yarnpkg.com/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.19.0.tgz#3d9fd50164b94964f5de68c3c4ce61933b3a338d"

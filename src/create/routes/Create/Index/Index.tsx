@@ -5,7 +5,7 @@ import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
-import { useCreateStory, useTemplate } from '@network/api';
+import { useCreateStory } from '@network/api';
 import { useAuth } from '@core/auth';
 
 import { FormField } from '../Create.const';
@@ -21,71 +21,44 @@ export const Index = memo(function Create() {
   const { t } = useTranslation();
   const { prompts } = useConfig();
   const [, navigate] = useRoute();
-  const { render } = useTemplate();
   const { characters, themes, scenes, readTimes } = useOptions();
   const { user } = useAuth();
 
   const { mutate, isPending, isSuccess, data } = useCreateStory();
 
-  const { message: outline, textPrompt, imagePrompt } = prompts.at(0);
+  const { message: outline } = prompts.at(0);
 
   const handleOnCancel = () => {
     navigate({ action: 'back', pathname: RoutePath.Index });
   };
 
   const handleOnSubmit = (form: IndexForm) => {
-    const { label: characterLabel, note: characterNote } = characters.find(
-      ({ value }) => value === form.character
-    );
-
-    const { label: sceneLabel } = scenes.find(
-      ({ value }) => value === form.scene
-    );
-
-    const { label: descriptionLabel, note: descriptionNote } = themes.find(
-      ({ value }) => value === form.description
-    );
-
-    const { value: readTimeValue, label: readTimeLabel } = readTimes.find(
+    const { value: readTimeValue } = readTimes.find(
       ({ value }) => value === form.readTime
     );
-
-    const message = render(outline, {
-      character: characterLabel,
-      description: descriptionLabel,
-      readTime: readTimeLabel,
-      scene: sceneLabel,
-    });
-
-    const contentPrompt = render(textPrompt, {
-      character: characterLabel,
-      characterNote: characterNote && `(${characterNote})`,
-      contentLength: readTimeValue * 150,
-      description: descriptionLabel,
-      descriptionNote: descriptionNote && `(${descriptionNote})`,
-      scene: sceneLabel,
-    });
-
-    const illustrationPrompt = render(imagePrompt, {
-      character: characterLabel,
-      characterNote: characterNote && `(${characterNote})`,
-      scene: sceneLabel,
-    });
 
     mutate({
       data: {
         character: {
-          connect: { id: form.character },
+          connect: {
+            id: form.character,
+          },
         },
-        contentPrompt,
         firebaseUserId: user?.uid,
-        imagePrompt: illustrationPrompt,
-        message,
         moralLesson: {
-          connect: { id: form.description },
+          connect: {
+            id: form.description,
+          },
         },
         placeOfEvent: {
-          connect: { id: form.scene },
+          connect: {
+            id: form.scene,
+          },
+        },
+        prompt: {
+          connect: {
+            id: prompts.at(0).id,
+          },
         },
         readTime: readTimeValue,
       },
@@ -104,15 +77,7 @@ export const Index = memo(function Create() {
   return (
     <Animation.Message>
       <Box>
-        <Form<IndexForm>
-          defaultValues={{
-            character: characters[0].value,
-            description: themes[0].value,
-            readTime: readTimes[0].value,
-            scene: scenes[0].value,
-          }}
-          onSubmit={handleOnSubmit}
-        >
+        <Form<IndexForm> defaultValues={{}} onSubmit={handleOnSubmit}>
           <Header.Title size="large" wrap>
             <Translate
               components={{

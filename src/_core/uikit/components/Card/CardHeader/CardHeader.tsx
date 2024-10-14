@@ -5,11 +5,13 @@ import { IonCardHeader } from '@ionic/react';
 
 import styles from '../Card.module.scss';
 
-type CardHeaderProps = PropsWithChildren<{}>;
+type CardHeaderProps = PropsWithChildren<{
+  className?: string;
+}>;
 
-export const CardHeader: FC<CardHeaderProps> = ({ children }) => {
+export const CardHeader: FC<CardHeaderProps> = ({ children, className }) => {
   return (
-    <IonCardHeader className={classNames(styles.header)}>
+    <IonCardHeader className={classNames(styles.header, className)}>
       {children}
     </IonCardHeader>
   );

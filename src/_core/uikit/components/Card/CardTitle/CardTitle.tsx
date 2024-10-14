@@ -7,13 +7,15 @@ import { CardContext } from '../Card.context';
 
 import styles from './CardTitle.module.scss';
 
-export type CardTitleProps = PropsWithChildren<{}>;
+export type CardTitleProps = PropsWithChildren<{
+  className?: string;
+}>;
 
-export const CardTitle: FC<CardTitleProps> = ({ children }) => {
+export const CardTitle: FC<CardTitleProps> = ({ children, className }) => {
   const loading = useContextSelector(CardContext, ({ loading }) => loading);
 
   return (
-    <IonCardTitle>
+    <IonCardTitle className={className}>
       {loading ? (
         <Fragment>
           <IonSkeletonText

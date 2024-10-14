@@ -1,6 +1,7 @@
-import { FC, ComponentProps, forwardRef } from 'react';
+import { FC, ComponentProps, forwardRef, CSSProperties } from 'react';
 
 import { IonIcon } from '@ionic/react';
+import { Color } from '@ionic/core';
 
 import { IconName } from './Icon.types';
 import { ICON } from './Icon.const';
@@ -10,12 +11,17 @@ export interface IconProps {
   name: IconName;
   className?: string;
   size?: ComponentProps<typeof IonIcon>['size'];
+  color?: Color;
 }
 
 export const Icon: FC<IconProps> = forwardRef<any, IconProps>(function Icon(
-  { size, name, slot, className },
+  { size, name, slot, className, color },
   ref
 ) {
+  const colorStyles: CSSProperties = color
+    ? { color: `var(--ion-color-${color})` }
+    : {};
+
   return (
     <IonIcon
       className={className}
@@ -23,6 +29,7 @@ export const Icon: FC<IconProps> = forwardRef<any, IconProps>(function Icon(
       ref={ref}
       size={size}
       slot={slot}
+      style={{ ...colorStyles }}
     />
   );
 });

@@ -2,12 +2,13 @@ import { FC, PropsWithChildren } from 'react';
 
 import { AuthProvider, AuthProviderProps } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
-import { NetworkProvider, AppProvider, AppProviderProps } from '@core/app';
+import { QueryProvider, AppProvider, AppProviderProps } from '@core/app';
 import {
   LocalizationProvider,
   LocalizationProviderProps,
 } from '@core/localization';
 import { AppUrlListener } from '@core/navigation';
+import { PurchasesProvider, PurchasesProviderProps } from '@core/purchases';
 
 import { Network, NetworkProps } from './Network';
 import { Navigation } from './Navigation';
@@ -19,6 +20,7 @@ export type BootstrapProps = PropsWithChildren<{
   localization: LocalizationProviderProps;
   network: NetworkProps;
   config: ConfigProps;
+  purchases: PurchasesProviderProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
@@ -27,23 +29,26 @@ export const Bootstrap: FC<BootstrapProps> = ({
   localization,
   network,
   config,
+  purchases,
 }) => {
   return (
     <AppUrlListener>
       <ThemeProvider>
-        <NetworkProvider>
-          <Network {...network}>
-            <Config {...config}>
-              <LocalizationProvider {...localization}>
-                <AppProvider {...app}>
-                  <AuthProvider>
-                    <Navigation>{children}</Navigation>
-                  </AuthProvider>
-                </AppProvider>
-              </LocalizationProvider>
-            </Config>
-          </Network>
-        </NetworkProvider>
+        <PurchasesProvider {...purchases}>
+          <QueryProvider>
+            <Network {...network}>
+              <Config {...config}>
+                <LocalizationProvider {...localization}>
+                  <AppProvider {...app}>
+                    <AuthProvider>
+                      <Navigation>{children}</Navigation>
+                    </AuthProvider>
+                  </AppProvider>
+                </LocalizationProvider>
+              </Config>
+            </Network>
+          </QueryProvider>
+        </PurchasesProvider>
       </ThemeProvider>
     </AppUrlListener>
   );

@@ -1,5 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { noop } from 'lodash';
+import { camelCase, noop } from 'lodash';
+import classNames from 'classnames';
 
 import { IonCard } from '@ionic/react';
 import { Color } from '@ionic/core';
@@ -11,13 +12,17 @@ import { CardTitle } from './CardTitle/CardTitle';
 import { CardAvatar } from './CardAvatar/CardAvatar';
 import { CardContent } from './CardContent/CardContent';
 import { CardFooter } from './CardFooter/CardFooter';
+import { CardBadge } from './CardBadge/CardBadge';
 import { CardContext } from './Card.context';
+
+import styles from './Card.module.scss';
 
 export type CardProps = PropsWithChildren<{
   loading?: boolean;
   onClick?: () => void;
   color?: Color;
   className?: string;
+  outline?: Color;
 }>;
 
 interface CardComponent {
@@ -29,6 +34,7 @@ interface CardComponent {
   Avatar: typeof CardAvatar;
   Content: typeof CardContent;
   Footer: typeof CardFooter;
+  Badge: typeof CardBadge;
 }
 
 export const Card: CardComponent = ({
@@ -37,14 +43,27 @@ export const Card: CardComponent = ({
   color,
   onClick = noop,
   className,
+  outline,
 }: CardProps) => {
   const handleOnClick = () => {
     if (!loading) onClick();
   };
 
+  const outlineClassName = styles[camelCase(`outline ${outline}`)];
+
   return (
     <CardContext.Provider value={{ loading }}>
-      <IonCard className={className} color={color} onClick={handleOnClick}>
+      <IonCard
+        className={classNames(
+          styles.root,
+          {
+            [outlineClassName]: !!outline,
+          },
+          className
+        )}
+        color={color}
+        onClick={handleOnClick}
+      >
         {children}
       </IonCard>
     </CardContext.Provider>
@@ -58,3 +77,4 @@ Card.Title = CardTitle;
 Card.Avatar = CardAvatar;
 Card.Content = CardContent;
 Card.Footer = CardFooter;
+Card.Badge = CardBadge;

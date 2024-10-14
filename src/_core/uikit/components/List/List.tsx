@@ -6,6 +6,7 @@ import { ListItem } from './ListItem/ListItem';
 import { ListHeader } from './ListHeader/ListHeader';
 import { ListLabel } from './ListLabel/ListLabel';
 import { ListIcon } from './ListIcon/ListIcon';
+import { ListNote } from './ListNote/ListNote';
 
 export type ListProps = PropsWithChildren<{}>;
 
@@ -15,6 +16,7 @@ interface ListComponent {
   Header: typeof ListHeader;
   Label: typeof ListLabel;
   Icon: typeof ListIcon;
+  Note: typeof ListNote;
 }
 
 export const List: ListComponent = ({ children }: ListProps) => {
@@ -25,3 +27,4 @@ List.Item = ListItem;
 List.Header = ListHeader;
 List.Label = ListLabel;
 List.Icon = ListIcon;
+List.Note = ListNote;

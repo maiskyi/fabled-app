@@ -3,6 +3,7 @@ export const pages = {
   changeName: 'Change name',
   changePassword: 'Change password',
   contactUs: 'Contact us',
+  create: 'Create a new fable',
   feedback: 'Share your feedback',
   forgotPassword: 'Forgot password?',
   home: 'My Fables',
@@ -10,5 +11,6 @@ export const pages = {
   resetPassword: 'Create a new password',
   signIn: 'Sign in',
   signUp: 'Sign Up',
+  subscribe: 'Get started with our unlimited plan',
   verifyEmail: 'Verify your email',
 };

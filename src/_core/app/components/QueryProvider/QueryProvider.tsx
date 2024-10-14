@@ -11,8 +11,8 @@ const client = new QueryClient({
   },
 });
 
-export type NetworkProviderProps = PropsWithChildren<{}>;
+export type QueryProviderProps = PropsWithChildren<{}>;
 
-export const NetworkProvider: FC<NetworkProviderProps> = ({ children }) => {
+export const QueryProvider: FC<QueryProviderProps> = ({ children }) => {
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 };

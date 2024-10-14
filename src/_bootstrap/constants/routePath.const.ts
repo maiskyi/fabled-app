@@ -2,8 +2,8 @@ export enum RoutePath {
   Action = '/action',
   Any = '*',
   Auth = '/auth',
-  ChangePassword = '/change-password',
   ChangeName = '/change-name',
+  ChangePassword = '/change-password',
   ContactUs = '/contact-us',
   Create = '/create',
   CreateDetails = '/create/:id',
@@ -17,5 +17,6 @@ export enum RoutePath {
   Request = '/request/:id',
   SignIn = '/sign-in',
   SignUp = '/sign-up',
+  Subscribe = '/subscribe',
   VerifyEmail = '/verify-email',
 }
