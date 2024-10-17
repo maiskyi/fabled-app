@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "act": "act -j ios --secret-file .secrets --env-file .env -P macos-latest=-self-hosted",
+    "act": "act -j ios --secret-file .secrets --var-file .env -P macos-latest=-self-hosted",
     "assets": "capacitor-assets generate --ios",
     "build": "tsc && vite build",
     "gen:api": "graphql-codegen --config ./api.codegen.ts && add-ts-nocheck --patterns '**/__generated__/*.ts'",
