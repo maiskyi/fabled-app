@@ -50,7 +50,7 @@ jobs:
         run: npx cap sync
 
       - name: Bump build number
-        uses: ults-io/mobile-version-bump-action@v2
+        uses: r5n-labs/mobile-version-bump-action@v2
         with:
           build-number: ${{ github.run_number }}
           app-version: ${{ steps.version.outputs.version }}
