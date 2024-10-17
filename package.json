@@ -11,7 +11,7 @@
     "lint": "eslint src --max-warnings=0 --fix",
     "preview": "vite preview",
     "erase": "xcrun simctl erase all",
-    "run:ios": "ionic cap run ios -l --external",
+    "ios": "ionic cap run ios -l --external",
     "start": "vite"
   },
   "dependencies": {
@@ -76,6 +76,7 @@
     "@types/qs": "^6.9.15",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-legacy": "^5.0.0",
     "@vitejs/plugin-react": "^4.0.1",
     "cypress": "^13.5.0",
