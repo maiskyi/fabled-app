@@ -17,7 +17,7 @@
 		713C1BF92C6E7C35001E3E29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 713C1BF82C6E7C35001E3E29 /* GoogleService-Info.plist */; };
 		71A6CADA2CB88A080003A6C9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A6CAD92CB88A080003A6C9 /* StoreKit.framework */; };
 		71A6CAE22CB978B40003A6C9 /* Testing.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 71A6CAE12CB978B40003A6C9 /* Testing.storekit */; };
-		71A6CAE42CB9797E0003A6C9 /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 71A6CAE32CB9797E0003A6C9 /* StoreKitTestCertificate.cer */; };
+		71F92C842CC17C3F00A6EB96 /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 71F92C832CC17C3F00A6EB96 /* StoreKitTestCertificate.cer */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +35,7 @@
 		714B1ED32C6E7637001F512D /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		71A6CAD92CB88A080003A6C9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		71A6CAE12CB978B40003A6C9 /* Testing.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Testing.storekit; sourceTree = "<group>"; };
-		71A6CAE32CB9797E0003A6C9 /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = StoreKitTestCertificate.cer; path = ../../../../../../Downloads/StoreKitTestCertificate.cer; sourceTree = "<group>"; };
+		71F92C832CC17C3F00A6EB96 /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				71A6CAE12CB978B40003A6C9 /* Testing.storekit */,
-				71A6CAE32CB9797E0003A6C9 /* StoreKitTestCertificate.cer */,
+				71F92C832CC17C3F00A6EB96 /* StoreKitTestCertificate.cer */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
 			);
@@ -177,7 +177,7 @@
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
-				71A6CAE42CB9797E0003A6C9 /* StoreKitTestCertificate.cer in Resources */,
+				71F92C842CC17C3F00A6EB96 /* StoreKitTestCertificate.cer in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
 				713C1BF92C6E7C35001E3E29 /* GoogleService-Info.plist in Resources */,
