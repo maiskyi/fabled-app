@@ -34,6 +34,12 @@ const config: AppProps = {
       fallback: splash,
       version: import.meta.env.PACKAGE_VERSION,
     },
+    errorBoundary: {
+      dsn: import.meta.env.VITE_SENTRY_DNS,
+      enabled: true,
+      environment: import.meta.env.VITE_ENVIRONMENT,
+      release: import.meta.env.PACKAGE_VERSION,
+    },
     localization: {
       fallback: splash,
       fallbackLng: Language.en,
