@@ -1,7 +1,12 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { useMount } from 'react-use';
 
-import * as Sentry from '@sentry/react';
+import {
+  init,
+  browserTracingIntegration,
+  replayIntegration,
+  ErrorBoundary,
+} from '@sentry/react';
 
 export type ErrorBoundaryProviderProps = PropsWithChildren<{
   fallback?: ReactNode;
@@ -11,7 +16,7 @@ export type ErrorBoundaryProviderProps = PropsWithChildren<{
   enabled?: boolean;
 }>;
 
-let instance: ReturnType<typeof Sentry.init>;
+let instance: ReturnType<typeof init>;
 
 export const ErrorBoundaryProvider: FC<ErrorBoundaryProviderProps> = ({
   children,
@@ -23,14 +28,11 @@ export const ErrorBoundaryProvider: FC<ErrorBoundaryProviderProps> = ({
 }) => {
   useMount(() => {
     if (!instance) {
-      instance = Sentry.init({
+      instance = init({
         dsn,
         enabled,
         environment,
-        integrations: [
-          Sentry.browserTracingIntegration(),
-          Sentry.replayIntegration(),
-        ],
+        integrations: [browserTracingIntegration(), replayIntegration()],
         release,
         replaysOnErrorSampleRate: 1.0,
         replaysSessionSampleRate: 0.1,
@@ -39,5 +41,7 @@ export const ErrorBoundaryProvider: FC<ErrorBoundaryProviderProps> = ({
     }
   });
 
-  return <>{children}</>;
+  return (
+    <ErrorBoundary fallback={() => <>{fallback}</>}>{children}</ErrorBoundary>
+  );
 };

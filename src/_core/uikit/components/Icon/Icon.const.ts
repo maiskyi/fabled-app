@@ -19,10 +19,12 @@ import {
   ellipse,
   checkmarkCircle,
   diamondOutline,
+  alertCircleOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
   add,
+  'alert-circle-outline': alertCircleOutline,
   apple: logoApple,
   'arrow-back': arrowBack,
   'arrow-forward-outline': arrowForwardOutline,

@@ -9,14 +9,14 @@ import {
 } from '@core/localization';
 import { AppUrlListener } from '@core/navigation';
 import { PurchasesProvider, PurchasesProviderProps } from '@core/purchases';
-import {
-  ErrorBoundaryProvider,
-  ErrorBoundaryProviderProps,
-} from '@core/analytics';
 
 import { Network, NetworkProps } from './Network';
 import { Navigation } from './Navigation';
 import { Config, ConfigProps } from './Config';
+import {
+  ErrorBoundary,
+  ErrorBoundaryProps,
+} from './ErrorBoundary/ErrorBoundary';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -25,7 +25,7 @@ export type BootstrapProps = PropsWithChildren<{
   network: NetworkProps;
   config: ConfigProps;
   purchases: PurchasesProviderProps;
-  errorBoundary: ErrorBoundaryProviderProps;
+  errorBoundary: ErrorBoundaryProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
@@ -38,26 +38,26 @@ export const Bootstrap: FC<BootstrapProps> = ({
   errorBoundary,
 }) => {
   return (
-    <ErrorBoundaryProvider {...errorBoundary}>
-      <AppUrlListener>
-        <ThemeProvider>
-          <PurchasesProvider {...purchases}>
-            <QueryProvider>
-              <Network {...network}>
-                <Config {...config}>
-                  <LocalizationProvider {...localization}>
+    <ThemeProvider>
+      <LocalizationProvider {...localization}>
+        <ErrorBoundary {...errorBoundary}>
+          <AppUrlListener>
+            <PurchasesProvider {...purchases}>
+              <QueryProvider>
+                <Network {...network}>
+                  <Config {...config}>
                     <AppProvider {...app}>
                       <AuthProvider>
                         <Navigation>{children}</Navigation>
                       </AuthProvider>
                     </AppProvider>
-                  </LocalizationProvider>
-                </Config>
-              </Network>
-            </QueryProvider>
-          </PurchasesProvider>
-        </ThemeProvider>
-      </AppUrlListener>
-    </ErrorBoundaryProvider>
+                  </Config>
+                </Network>
+              </QueryProvider>
+            </PurchasesProvider>
+          </AppUrlListener>
+        </ErrorBoundary>
+      </LocalizationProvider>
+    </ThemeProvider>
   );
 };

@@ -4,6 +4,7 @@ export const pages = {
   changePassword: 'Change password',
   contactUs: 'Contact us',
   create: 'Create a new fable',
+  errorBoundary: 'Oops! Something went wrong :(',
   feedback: 'Share your feedback',
   forgotPassword: 'Forgot password?',
   home: 'My Fables',
