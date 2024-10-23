@@ -1,12 +1,15 @@
 import { useAsyncFn } from 'react-use';
 
-import { AppUpdateProviderFallbackComponent } from '@core/app';
+import {
+  AppUpdateProviderFallbackComponent,
+  AppUpdateProviderFallbackComponentProps,
+} from '@core/app';
 import { Box, Button, Content, Empty, Footer, Header, Page } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
   openAppStore,
-}) => {
+}: AppUpdateProviderFallbackComponentProps) => {
   const { t } = useTranslation();
 
   const [{ loading }, handleOnUpdateNow] = useAsyncFn(() => openAppStore());

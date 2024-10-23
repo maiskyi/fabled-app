@@ -1,5 +1,11 @@
-import { memo } from 'react';
+import { FC } from 'react';
 
-export const Splash = memo(function Splash() {
-  return <>123</>;
-});
+import { Content, Page } from '@core/uikit';
+
+export const Splash: FC = () => {
+  return (
+    <Page>
+      <Content>Loading</Content>
+    </Page>
+  );
+};

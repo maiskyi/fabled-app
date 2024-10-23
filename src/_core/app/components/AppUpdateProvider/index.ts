@@ -3,5 +3,5 @@ export type { AppUpdateProviderProps } from './AppUpdateProvider';
 export type {
   AppUpdateProviderFallbackComponent,
   AppUpdateProviderLoaderComponent,
-  AppUpdateProviderFallbackProps,
+  AppUpdateProviderFallbackComponentProps,
 } from './AppUpdateProvider.types';
