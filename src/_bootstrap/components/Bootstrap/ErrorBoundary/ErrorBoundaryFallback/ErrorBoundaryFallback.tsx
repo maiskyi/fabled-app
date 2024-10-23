@@ -24,7 +24,6 @@ export const ErrorBoundaryFallback: FC = () => {
             flex={1}
             justifyContent="center"
             minHeight="100%"
-            paddingBottom={188}
           >
             <Empty
               description={t('empty.errorBoundary.description')}

@@ -17,6 +17,7 @@ import {
   ErrorBoundary,
   ErrorBoundaryProps,
 } from './ErrorBoundary/ErrorBoundary';
+import { AppUpdate } from './AppUpdate';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -41,21 +42,23 @@ export const Bootstrap: FC<BootstrapProps> = ({
     <ThemeProvider>
       <LocalizationProvider {...localization}>
         <ErrorBoundary {...errorBoundary}>
-          <AppUrlListener>
-            <PurchasesProvider {...purchases}>
-              <QueryProvider>
-                <Network {...network}>
-                  <Config {...config}>
-                    <AppProvider {...app}>
-                      <AuthProvider>
-                        <Navigation>{children}</Navigation>
-                      </AuthProvider>
-                    </AppProvider>
-                  </Config>
-                </Network>
-              </QueryProvider>
-            </PurchasesProvider>
-          </AppUrlListener>
+          <AppUpdate>
+            <AppUrlListener>
+              <PurchasesProvider {...purchases}>
+                <QueryProvider>
+                  <Network {...network}>
+                    <Config {...config}>
+                      <AppProvider {...app}>
+                        <AuthProvider>
+                          <Navigation>{children}</Navigation>
+                        </AuthProvider>
+                      </AppProvider>
+                    </Config>
+                  </Network>
+                </QueryProvider>
+              </PurchasesProvider>
+            </AppUrlListener>
+          </AppUpdate>
         </ErrorBoundary>
       </LocalizationProvider>
     </ThemeProvider>

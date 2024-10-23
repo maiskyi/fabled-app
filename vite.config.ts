@@ -5,7 +5,7 @@ import path from 'path';
 import legacy from '@vitejs/plugin-legacy';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import basicSsl from '@vitejs/plugin-basic-ssl';
+// import basicSsl from '@vitejs/plugin-basic-ssl';
 
 import packageJson from './package.json';
 
@@ -13,7 +13,11 @@ export default defineConfig({
   define: {
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(packageJson.version),
   },
-  plugins: [react(), legacy(), basicSsl()],
+  plugins: [
+    react(),
+    legacy(),
+    // basicSsl()
+  ],
   resolve: {
     alias: {
       '@bootstrap': path.resolve(__dirname, './src/_bootstrap'),

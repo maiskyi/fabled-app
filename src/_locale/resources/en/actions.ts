@@ -33,5 +33,6 @@ export const actions = {
   subscribe: 'Subscribe',
   support: 'Support',
   termsAndConditions: 'Terms and conditions',
+  updateNow: 'Update now',
   writeFable: 'Write a Fable',
 };

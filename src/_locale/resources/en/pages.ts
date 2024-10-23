@@ -1,5 +1,6 @@
 export const pages = {
   action: 'Invalid or unsupported link',
+  appUpdate: 'Update Available!',
   changeName: 'Change name',
   changePassword: 'Change password',
   contactUs: 'Contact us',

@@ -20,6 +20,7 @@ import {
   checkmarkCircle,
   diamondOutline,
   alertCircleOutline,
+  cloudDownloadOutline,
 } from 'ionicons/icons';
 
 export const ICON = {
@@ -33,6 +34,7 @@ export const ICON = {
   'checkmark-circle': checkmarkCircle,
   'chevron-forward': chevronForward,
   'close-outline': closeOutline,
+  'cloud-download-outline': cloudDownloadOutline,
   'diamond-outline': diamondOutline,
   'document-text-outline': documentTextOutline,
   ellipse,
