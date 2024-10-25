@@ -1,18 +1,30 @@
-import { useAsyncFn } from 'react-use';
+import { useAsyncFn, useMount } from 'react-use';
 
 import {
   AppUpdateProviderFallbackComponent,
   AppUpdateProviderFallbackComponentProps,
 } from '@core/app';
-import { Box, Button, Content, Empty, Footer, Header, Page } from '@core/uikit';
+import {
+  Box,
+  Button,
+  Content,
+  Empty,
+  Footer,
+  Header,
+  Page,
+  useSplashScreen,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
   openAppStore,
 }: AppUpdateProviderFallbackComponentProps) => {
   const { t } = useTranslation();
+  const [, { hide }] = useSplashScreen();
 
   const [{ loading }, handleOnUpdateNow] = useAsyncFn(() => openAppStore());
+
+  useMount(hide);
 
   return (
     <Page>

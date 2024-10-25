@@ -14,8 +14,6 @@ if (import.meta.env.DEV) {
   loadErrorMessages();
 }
 
-const splash = <Splash />;
-
 const config: AppProps = {
   bootstrap: {
     app: {
@@ -28,10 +26,10 @@ const config: AppProps = {
       storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
     },
     auth: {
-      fallback: splash,
+      Loader: Splash,
     },
     config: {
-      fallback: splash,
+      Loader: Splash,
       version: import.meta.env.PACKAGE_VERSION,
     },
     errorBoundary: {
@@ -41,7 +39,7 @@ const config: AppProps = {
       release: import.meta.env.PACKAGE_VERSION,
     },
     localization: {
-      fallback: splash,
+      Loader: Splash,
       fallbackLng: Language.en,
       resources,
       supportedLngs: [Language.en],
@@ -53,6 +51,7 @@ const config: AppProps = {
       },
     },
     purchases: {
+      Loader: Splash,
       apiKey: import.meta.env.VITE_REVENUECAT_API_KEY,
     },
   },

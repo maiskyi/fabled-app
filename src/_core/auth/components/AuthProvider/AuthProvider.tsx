@@ -1,7 +1,7 @@
 import {
   FC,
+  Fragment,
   PropsWithChildren,
-  ReactNode,
   useCallback,
   useMemo,
   useRef,
@@ -25,12 +25,12 @@ import {
 import { AuthContext } from '../../contexts/AuthContext';
 
 export type AuthProviderProps = PropsWithChildren<{
-  fallback?: ReactNode;
+  Loader?: FC;
 }>;
 
 export const AuthProvider: FC<AuthProviderProps> = ({
   children,
-  fallback = null,
+  Loader = Fragment,
 }) => {
   const [user, setUser] = useState<User>();
 
@@ -69,7 +69,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({
 
   return (
     <AuthContext.Provider value={contextValue}>
-      {isUndefined(user) ? fallback : children}
+      {isUndefined(user) ? <Loader /> : children}
     </AuthContext.Provider>
   );
 };
