@@ -39,7 +39,9 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     ];
 
     const contentMessage: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.ContentInProgress)) {
+      if (
+        data?.story.statusLog.includes(DTO.StoryStatusLogType.ContentInProgress)
+      ) {
         return [
           {
             id: 'contentMessage',
@@ -57,7 +59,9 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const imageMessage: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.ImageInProgress)) {
+      if (
+        data?.story.statusLog.includes(DTO.StoryStatusLogType.ImageInProgress)
+      ) {
         return [
           {
             id: 'imageMessage',
@@ -75,7 +79,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const progressMessage: ThreadItem[] = (() => {
-      if (!data?.story.status.includes(DTO.StoryStatusType.Success)) {
+      if (data?.story.status === DTO.StoryStatusType.Inprogress) {
         return [
           {
             id: 'imageMessage',
@@ -93,7 +97,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const successMessage: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.Success)) {
+      if (data?.story.status === DTO.StoryStatusType.Success) {
         return [
           {
             id: 'successMessage',
@@ -111,7 +115,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const successActions: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.Success)) {
+      if (data?.story.status === DTO.StoryStatusType.Success) {
         return [
           {
             id: 'successActions',

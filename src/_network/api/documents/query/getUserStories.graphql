@@ -8,7 +8,7 @@ query getUserStories(
     skip: $skip
     take: $take
     orderBy: { createdAt: desc }
-    where: { firebaseUserId: { equals: $uid }, isReady: { equals: true } }
+    where: { firebaseUserId: { equals: $uid }, status: { equals: success } }
   ) {
     id
     title
@@ -19,6 +19,6 @@ query getUserStories(
     }
   }
   storiesCount(
-    where: { firebaseUserId: { equals: $uid }, isReady: { equals: true } }
+    where: { firebaseUserId: { equals: $uid }, status: { equals: success } }
   )
 }

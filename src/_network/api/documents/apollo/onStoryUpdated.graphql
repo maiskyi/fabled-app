@@ -3,5 +3,6 @@ subscription onStoryUpdated($id: String!) {
     id
     message
     status
+    statusLog
   }
 }
