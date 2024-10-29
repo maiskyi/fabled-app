@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useMount } from 'react-use';
+import { useAsyncFn, useMount } from 'react-use';
 import { isUndefined } from 'lodash';
 
 import {
@@ -45,6 +45,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({
     })()
   );
 
+  const [, getIdToken] = useAsyncFn(() => {
+    return FirebaseAuthentication.getIdToken();
+  });
+
   const isAuthenticated = !!user;
 
   const reload = useCallback(async () => {
@@ -57,8 +61,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   }, [isAuthenticated]);
 
   const contextValue = useMemo(
-    () => ({ isAuthenticated, reload, user }),
-    [user, reload, isAuthenticated]
+    () => ({ getIdToken, isAuthenticated, reload, user }),
+    [user, reload, isAuthenticated, getIdToken]
   );
 
   useMount(() => {

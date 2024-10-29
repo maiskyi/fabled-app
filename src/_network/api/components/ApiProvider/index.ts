@@ -1,3 +1,6 @@
 export { ApiProvider } from './ApiProvider';
 export type { ApiProviderProps } from './ApiProvider';
-export type { OnResponseFulfilledCallback } from './ApiProvider.types';
+export type {
+  OnResponseFulfilledCallback,
+  OnRequestFulfilledCallback,
+} from './ApiProvider.types';
