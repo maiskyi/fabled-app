@@ -46,15 +46,15 @@ export const Bootstrap: FC<BootstrapProps> = ({
             <AppUrlListener>
               <PurchasesProvider {...purchases}>
                 <QueryProvider>
-                  <Network {...network}>
-                    <Config {...config}>
-                      <AppProvider {...app}>
-                        <AuthProvider>
+                  <AppProvider {...app}>
+                    <AuthProvider>
+                      <Network {...network}>
+                        <Config {...config}>
                           <Navigation>{children}</Navigation>
-                        </AuthProvider>
-                      </AppProvider>
-                    </Config>
-                  </Network>
+                        </Config>
+                      </Network>
+                    </AuthProvider>
+                  </AppProvider>
                 </QueryProvider>
               </PurchasesProvider>
             </AppUrlListener>

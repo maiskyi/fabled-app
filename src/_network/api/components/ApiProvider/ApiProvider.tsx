@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useRef } from 'react';
+import { FC, PropsWithChildren, useLayoutEffect, useRef } from 'react';
 import axios from 'axios';
 import { stringify } from 'qs';
 
@@ -15,15 +15,19 @@ import { getMainDefinition } from '@apollo/client/utilities';
 
 import { ApiContext } from '../../contexts/ApiContext';
 
+import { OnResponseFulfilledCallback } from './ApiProvider.types';
+
 export type ApiProviderProps = PropsWithChildren<{
   endpoint: string;
   subscription: string;
+  onResponseFulfilled?: OnResponseFulfilledCallback<any>;
 }>;
 
 export const ApiProvider: FC<ApiProviderProps> = ({
   children,
   endpoint,
   subscription,
+  onResponseFulfilled = null,
 }) => {
   const { current: instance } = useRef(
     axios.create({
@@ -67,6 +71,13 @@ export const ApiProvider: FC<ApiProviderProps> = ({
       link: splitLink,
     })
   );
+
+  useLayoutEffect(() => {
+    const response = instance.interceptors.response.use(onResponseFulfilled);
+    return () => {
+      instance.interceptors.response.eject(response);
+    };
+  }, [instance, onResponseFulfilled]);
 
   return (
     <ApiContext.Provider value={{ instance }}>
