@@ -7,17 +7,11 @@ export {
   useCreateInquiry,
   useCreateStory,
   useGetBootstrap,
+  useGetRequest,
   useGetStory,
   useInfiniteGetUserStories,
 } from './__generated__/query';
-export {
-  useGetRequest,
-  useOnUserStoriesCountUpdated,
-} from './__generated__/apollo';
 export { useTemplate } from './hooks/useTemplate';
-
-// Documents
-export { OnStoryUpdatedDocument } from './__generated__/apollo';
 
 // Types
 export { DTO } from './types';

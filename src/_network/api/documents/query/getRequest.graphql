@@ -3,5 +3,6 @@ query getRequest($id: ID!) {
     id
     message
     status
+    statusLog
   }
 }

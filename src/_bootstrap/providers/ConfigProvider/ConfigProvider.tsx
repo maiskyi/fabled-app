@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { FC, Fragment, PropsWithChildren } from 'react';
 import { useMount } from 'react-use';
 
 import { useGetBootstrap } from '@network/api';
@@ -7,14 +7,14 @@ import { useDevice } from '@core/uikit';
 import { ConfigContext } from './ConfigProvider.context';
 
 export type ConfigProviderProps = PropsWithChildren<{
-  fallback: ReactNode;
   version: string;
+  Loader: FC;
 }>;
 
 export const ConfigProvider: FC<ConfigProviderProps> = ({
   children,
   version,
-  fallback = null,
+  Loader = Fragment,
 }) => {
   const { width } = useDevice();
 
@@ -60,6 +60,6 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
       {children}
     </ConfigContext.Provider>
   ) : (
-    <>{fallback}</>
+    <Loader />
   );
 };

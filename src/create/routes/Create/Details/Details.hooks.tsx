@@ -1,10 +1,9 @@
 import { useMemo } from 'react';
-import { useMount } from 'react-use';
 
 import { useUser } from '@common/hooks';
 import { BOT_AVATAR_SRC, Spinner } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { useGetRequest, DTO, OnStoryUpdatedDocument } from '@network/api';
+import { useGetRequest, DTO } from '@network/api';
 
 import { ThreadItem } from './Details.types';
 
@@ -18,9 +17,19 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
   const { t } = useTranslation();
   const { displayName, avatar } = useUser();
 
-  const { data, subscribeToMore } = useGetRequest({
-    variables: { id },
-  });
+  const { data } = useGetRequest(
+    {
+      id,
+    },
+    {
+      refetchInterval: ({ state: { data } }) => {
+        if (data?.story?.status === DTO.StoryStatusType.Inprogress) {
+          return 3000;
+        }
+        return false;
+      },
+    }
+  );
 
   const thread = useMemo((): ThreadItem[] => {
     const copyIndex = data?.story.message.length % 10;
@@ -39,7 +48,9 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     ];
 
     const contentMessage: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.ContentInProgress)) {
+      if (
+        data?.story.statusLog.includes(DTO.StoryStatusLogType.ContentInProgress)
+      ) {
         return [
           {
             id: 'contentMessage',
@@ -57,7 +68,9 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const imageMessage: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.ImageInProgress)) {
+      if (
+        data?.story.statusLog.includes(DTO.StoryStatusLogType.ImageInProgress)
+      ) {
         return [
           {
             id: 'imageMessage',
@@ -75,7 +88,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const progressMessage: ThreadItem[] = (() => {
-      if (!data?.story.status.includes(DTO.StoryStatusType.Success)) {
+      if (data?.story.status === DTO.StoryStatusType.Inprogress) {
         return [
           {
             id: 'imageMessage',
@@ -93,7 +106,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const successMessage: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.Success)) {
+      if (data?.story.status === DTO.StoryStatusType.Success) {
         return [
           {
             id: 'successMessage',
@@ -111,7 +124,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
     })();
 
     const successActions: ThreadItem[] = (() => {
-      if (data?.story.status.includes(DTO.StoryStatusType.Success)) {
+      if (data?.story.status === DTO.StoryStatusType.Success) {
         return [
           {
             id: 'successActions',
@@ -142,18 +155,6 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
       ...successActions,
     ];
   }, [displayName, avatar, data, t, onReadNow, onReadLater]);
-
-  useMount(() => {
-    subscribeToMore({
-      document: OnStoryUpdatedDocument,
-      updateQuery: (prev, { subscriptionData }) => {
-        const { data } = subscriptionData;
-        if (!data) return prev;
-        return prev;
-      },
-      variables: { id },
-    });
-  });
 
   return { thread };
 };

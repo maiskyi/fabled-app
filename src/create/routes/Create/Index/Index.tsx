@@ -5,7 +5,7 @@ import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
-import { useCreateStory } from '@network/api';
+import { DTO, useCreateStory } from '@network/api';
 import { useAuth } from '@core/auth';
 
 import { FormField } from '../Create.const';
@@ -24,9 +24,20 @@ export const Index = memo(function Create() {
   const { characters, themes, scenes, readTimes } = useOptions();
   const { user } = useAuth();
 
-  const { mutate, isPending, isSuccess, data } = useCreateStory();
+  const {
+    mutate,
+    isPending,
+    isSuccess,
+    isError,
+    error = [],
+    data,
+  } = useCreateStory<DTO.Errors>();
 
   const { message: outline } = prompts.at(0);
+
+  const isAccessDenied = error?.some(
+    ({ extensions: { code } }) => code === DTO.ExtensionCode.KS_ACCESS_DENIED
+  );
 
   const handleOnCancel = () => {
     navigate({ action: 'back', pathname: RoutePath.Index });
@@ -72,6 +83,10 @@ export const Index = memo(function Create() {
         pathname={RoutePath.CreateDetails}
       />
     );
+  }
+
+  if (isError && isAccessDenied) {
+    return <Redirect pathname={RoutePath.Subscribe} />;
   }
 
   return (

@@ -1244,13 +1244,13 @@ export type Story = {
   id: Scalars['ID']['output'];
   image?: Maybe<CloudinaryImage_File>;
   imagePrompt?: Maybe<Scalars['String']['output']>;
-  isReady?: Maybe<Scalars['Boolean']['output']>;
   message?: Maybe<Scalars['String']['output']>;
   moralLesson?: Maybe<MoralLesson>;
   placeOfEvent?: Maybe<PlaceOfEvent>;
   prompt?: Maybe<Prompt>;
   readTime?: Maybe<Scalars['Int']['output']>;
-  status?: Maybe<Array<StoryStatusType>>;
+  status?: Maybe<StoryStatusType>;
+  statusLog?: Maybe<Array<StoryStatusLogType>>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -1262,13 +1262,13 @@ export type StoryCreateInput = {
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['Upload']['input']>;
   imagePrompt?: InputMaybe<Scalars['String']['input']>;
-  isReady?: InputMaybe<Scalars['Boolean']['input']>;
   message?: InputMaybe<Scalars['String']['input']>;
   moralLesson?: InputMaybe<MoralLessonRelateToOneForCreateInput>;
   placeOfEvent?: InputMaybe<PlaceOfEventRelateToOneForCreateInput>;
   prompt?: InputMaybe<PromptRelateToOneForCreateInput>;
   readTime?: InputMaybe<Scalars['Int']['input']>;
-  status?: InputMaybe<Array<StoryStatusType>>;
+  status?: InputMaybe<StoryStatusType>;
+  statusLog?: InputMaybe<Array<StoryStatusLogType>>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1279,18 +1279,39 @@ export type StoryOrderByInput = {
   firebaseUserId?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   imagePrompt?: InputMaybe<OrderDirection>;
-  isReady?: InputMaybe<OrderDirection>;
   message?: InputMaybe<OrderDirection>;
   readTime?: InputMaybe<OrderDirection>;
+  status?: InputMaybe<OrderDirection>;
   title?: InputMaybe<OrderDirection>;
 };
 
-export enum StoryStatusType {
+export enum StoryStatusLogType {
   ContentInProgress = 'contentInProgress',
+  CreateStoryRequestFailed = 'createStoryRequestFailed',
   ImageInProgress = 'imageInProgress',
   Initialized = 'initialized',
+  StoryContentGenerationFailed = 'storyContentGenerationFailed',
+  StoryContentGenerationFailedWithNoResult = 'storyContentGenerationFailedWithNoResult',
+  StoryGenerationFailed = 'storyGenerationFailed',
+  StoryImageGenerationFailed = 'storyImageGenerationFailed',
+  StoryImageGenerationFailedWithNoResult = 'storyImageGenerationFailedWithNoResult',
+  StoryImageUploadFailed = 'storyImageUploadFailed',
+  StoryImageUploadingToCloudinaryFailed = 'storyImageUploadingToCloudinaryFailed',
   Success = 'success',
 }
+
+export enum StoryStatusType {
+  Failed = 'failed',
+  Inprogress = 'inprogress',
+  Success = 'success',
+}
+
+export type StoryStatusTypeNullableFilter = {
+  equals?: InputMaybe<StoryStatusType>;
+  in?: InputMaybe<Array<StoryStatusType>>;
+  not?: InputMaybe<StoryStatusTypeNullableFilter>;
+  notIn?: InputMaybe<Array<StoryStatusType>>;
+};
 
 export type StoryUpdateArgs = {
   data: StoryUpdateInput;
@@ -1305,13 +1326,13 @@ export type StoryUpdateInput = {
   firebaseUserId?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['Upload']['input']>;
   imagePrompt?: InputMaybe<Scalars['String']['input']>;
-  isReady?: InputMaybe<Scalars['Boolean']['input']>;
   message?: InputMaybe<Scalars['String']['input']>;
   moralLesson?: InputMaybe<MoralLessonRelateToOneForUpdateInput>;
   placeOfEvent?: InputMaybe<PlaceOfEventRelateToOneForUpdateInput>;
   prompt?: InputMaybe<PromptRelateToOneForUpdateInput>;
   readTime?: InputMaybe<Scalars['Int']['input']>;
-  status?: InputMaybe<Array<StoryStatusType>>;
+  status?: InputMaybe<StoryStatusType>;
+  statusLog?: InputMaybe<Array<StoryStatusLogType>>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1326,12 +1347,12 @@ export type StoryWhereInput = {
   firebaseUserId?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
   imagePrompt?: InputMaybe<StringFilter>;
-  isReady?: InputMaybe<BooleanFilter>;
   message?: InputMaybe<StringFilter>;
   moralLesson?: InputMaybe<MoralLessonWhereInput>;
   placeOfEvent?: InputMaybe<PlaceOfEventWhereInput>;
   prompt?: InputMaybe<PromptWhereInput>;
   readTime?: InputMaybe<IntFilter>;
+  status?: InputMaybe<StoryStatusTypeNullableFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
@@ -1348,18 +1369,14 @@ export type StringFilter = {
   in?: InputMaybe<Array<Scalars['String']['input']>>;
   lt?: InputMaybe<Scalars['String']['input']>;
   lte?: InputMaybe<Scalars['String']['input']>;
+  mode?: InputMaybe<QueryMode>;
   not?: InputMaybe<NestedStringFilter>;
   notIn?: InputMaybe<Array<Scalars['String']['input']>>;
   startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Subscription = {
-  storyUpdated?: Maybe<Story>;
   userStoriesCountUpdated?: Maybe<Scalars['Int']['output']>;
-};
-
-export type SubscriptionStoryUpdatedArgs = {
-  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type SubscriptionUserStoriesCountUpdatedArgs = {
@@ -1370,6 +1387,7 @@ export type User = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  isAdmin?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   password?: Maybe<PasswordState>;
 };
@@ -1390,6 +1408,7 @@ export type UserAuthenticationWithPasswordSuccess = {
 export type UserCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  isAdmin?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1398,6 +1417,7 @@ export type UserOrderByInput = {
   createdAt?: InputMaybe<OrderDirection>;
   email?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
+  isAdmin?: InputMaybe<OrderDirection>;
   name?: InputMaybe<OrderDirection>;
 };
 
@@ -1409,6 +1429,7 @@ export type UserUpdateArgs = {
 export type UserUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  isAdmin?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1420,6 +1441,7 @@ export type UserWhereInput = {
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
+  isAdmin?: InputMaybe<BooleanFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
@@ -1481,6 +1503,19 @@ export type GetBootstrap = {
   config?: {
     privacyPolicyUrl?: string | null;
     termsAndConditionsUrl?: string | null;
+  } | null;
+};
+
+export type GetRequestVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+export type GetRequest = {
+  story?: {
+    id: string;
+    message?: string | null;
+    status?: StoryStatusType | null;
+    statusLog?: Array<StoryStatusLogType> | null;
   } | null;
 };
 
@@ -1675,6 +1710,60 @@ export const useInfiniteGetBootstrap = <
   );
 };
 
+export const GetRequestDocument = /*#__PURE__*/ `
+    query getRequest($id: ID!) {
+  story(where: {id: $id}) {
+    id
+    message
+    status
+    statusLog
+  }
+}
+    `;
+
+export const useGetRequest = <TData = GetRequest, TError = unknown>(
+  variables: GetRequestVariables,
+  options?: Omit<UseQueryOptions<GetRequest, TError, TData>, 'queryKey'> & {
+    queryKey?: UseQueryOptions<GetRequest, TError, TData>['queryKey'];
+  }
+) => {
+  return useQuery<GetRequest, TError, TData>({
+    queryFn: useFetchData<GetRequest, GetRequestVariables>(
+      GetRequestDocument
+    ).bind(null, variables),
+    queryKey: ['getRequest', variables],
+    ...options,
+  });
+};
+
+export const useInfiniteGetRequest = <
+  TData = InfiniteData<GetRequest>,
+  TError = unknown,
+>(
+  variables: GetRequestVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetRequest, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<GetRequest, TError, TData>['queryKey'];
+  }
+) => {
+  const query = useFetchData<GetRequest, GetRequestVariables>(
+    GetRequestDocument
+  );
+  return useInfiniteQuery<GetRequest, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options;
+      return {
+        queryFn: (metaData) =>
+          query({ ...variables, ...(metaData.pageParam ?? {}) }),
+        queryKey: optionsQueryKey ?? ['getRequest.infinite', variables],
+        ...restOptions,
+      };
+    })()
+  );
+};
+
 export const GetStoryDocument = /*#__PURE__*/ `
     query getStory($id: ID!, $image: CloudinaryImageFormat) {
   story(where: {id: $id}) {
@@ -1735,7 +1824,7 @@ export const GetUserStoriesDocument = /*#__PURE__*/ `
     skip: $skip
     take: $take
     orderBy: {createdAt: desc}
-    where: {firebaseUserId: {equals: $uid}, isReady: {equals: true}}
+    where: {firebaseUserId: {equals: $uid}, status: {equals: success}}
   ) {
     id
     title
@@ -1745,7 +1834,7 @@ export const GetUserStoriesDocument = /*#__PURE__*/ `
       publicUrlTransformed(transformation: $image)
     }
   }
-  storiesCount(where: {firebaseUserId: {equals: $uid}, isReady: {equals: true}})
+  storiesCount(where: {firebaseUserId: {equals: $uid}, status: {equals: success}})
 }
     `;
 

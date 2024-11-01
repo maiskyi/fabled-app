@@ -1,10 +1,22 @@
 import { FC } from 'react';
+import { useMount } from 'react-use';
 
-import { Box, Content, Empty, Footer, Header, Page } from '@core/uikit';
+import {
+  Box,
+  Content,
+  Empty,
+  Footer,
+  Header,
+  Page,
+  useSplashScreen,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 export const ErrorBoundaryFallback: FC = () => {
   const { t } = useTranslation();
+  const [, { hide }] = useSplashScreen();
+
+  useMount(hide);
 
   return (
     <Page>

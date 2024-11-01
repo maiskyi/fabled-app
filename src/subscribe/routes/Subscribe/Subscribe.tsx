@@ -17,10 +17,10 @@ export const Subscribe: FC = () => {
   const title = t('pages.subscribe');
 
   const defaultValues: SubscribeFrom = {
-    [SubscribeFromField.Product]: offering.availablePackages[0].identifier,
+    [SubscribeFromField.Product]: offering?.availablePackages.at(0)?.identifier,
   };
 
-  const hightestMonthlyPrice = offering.availablePackages.reduce(
+  const hightestMonthlyPrice = offering?.availablePackages?.reduce(
     (acc, { product }) => {
       return product.pricePerMonth > acc ? product.pricePerMonth : acc;
     },
@@ -60,7 +60,7 @@ export const Subscribe: FC = () => {
           onSubmit={handleOnSubmit}
         >
           <Form.RadioGroup name={SubscribeFromField.Product}>
-            {offering.availablePackages.map((item) => {
+            {offering?.availablePackages.map((item) => {
               return (
                 <PackageCard
                   hightestMonthlyPrice={hightestMonthlyPrice}

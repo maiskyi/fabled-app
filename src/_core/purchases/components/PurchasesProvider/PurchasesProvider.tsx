@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from 'react';
+import { FC, Fragment, PropsWithChildren } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
@@ -8,13 +8,13 @@ import { PurchasesContext } from '../../contexts/PurchasesContext';
 
 export type PurchasesProviderProps = PropsWithChildren<{
   apiKey: string;
-  fallback?: ReactNode;
+  Loader?: FC;
 }>;
 
 export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   children,
   apiKey,
-  fallback = null,
+  Loader = Fragment,
 }) => {
   const [{ value: config }, configure] = useAsyncFn(
     async () => {
@@ -80,7 +80,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
         refetch: init,
       }}
     >
-      {ready ? children : fallback}
+      {ready ? children : <Loader />}
     </PurchasesContext.Provider>
   );
 };

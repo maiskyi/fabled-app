@@ -1,7 +1,0 @@
-subscription onStoryUpdated($id: String!) {
-  storyUpdated(id: $id) {
-    id
-    message
-    status
-  }
-}
