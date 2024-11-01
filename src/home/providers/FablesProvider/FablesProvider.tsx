@@ -1,11 +1,7 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
-import { get } from 'lodash';
 
 import { useUser } from '@common/hooks';
-import {
-  useInfiniteGetUserStories,
-  useOnUserStoriesCountUpdated,
-} from '@network/api';
+import { useInfiniteGetUserStories } from '@network/api';
 import { useDevice } from '@core/uikit';
 
 import { FablesProviderContext } from './FablesProvider.context';
@@ -50,29 +46,17 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
     }
   );
 
-  const total = get(stories, ['pages', 0, 'storiesCount'], 0);
-
   const contextValue = useMemo(
     () => ({
       data: stories,
       fetchNextPage,
       hasNextPage,
       isLoading,
+      refetch,
       stories: stories?.pages.flatMap(({ stories }) => stories),
     }),
-    [isLoading, hasNextPage, fetchNextPage, stories]
+    [isLoading, hasNextPage, fetchNextPage, stories, refetch]
   );
-
-  useOnUserStoriesCountUpdated({
-    onData: ({
-      data: {
-        data: { userStoriesCountUpdated },
-      },
-    }) => {
-      if (total !== userStoriesCountUpdated) refetch();
-    },
-    variables: { uid },
-  });
 
   return (
     <FablesProviderContext.Provider value={contextValue}>

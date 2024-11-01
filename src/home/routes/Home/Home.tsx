@@ -8,6 +8,7 @@ import {
   Header,
   Box,
   SafeArea,
+  useViewDidEnter,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -31,6 +32,8 @@ export const Home = memo(function Home() {
 
   const fetchNextPage = useFablesContext(({ fetchNextPage }) => fetchNextPage);
 
+  const refetch = useFablesContext(({ refetch }) => refetch);
+
   const records = useFablesContext(({ stories }) => stories);
 
   const handleOnCreateClick: FablesCreateOnClickFn = useCallback(() => {
@@ -44,6 +47,10 @@ export const Home = memo(function Home() {
   const handleOnFableClick = (id: string) => {
     navigate({ action: 'push', params: { id }, pathname: RoutePath.Fable });
   };
+
+  useViewDidEnter(() => {
+    refetch();
+  });
 
   return (
     <Page>
