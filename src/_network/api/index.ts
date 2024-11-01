@@ -11,7 +11,6 @@ export {
   useGetStory,
   useInfiniteGetUserStories,
 } from './__generated__/query';
-export { useOnUserStoriesCountUpdated } from './__generated__/apollo';
 export { useTemplate } from './hooks/useTemplate';
 
 // Types
