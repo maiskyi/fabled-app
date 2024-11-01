@@ -1441,13 +1441,7 @@ export type StringFilter = {
 };
 
 export type Subscription = {
-  storyUpdated?: Maybe<Story>;
   userStoriesCountUpdated?: Maybe<Scalars['Int']['output']>;
-};
-
-
-export type SubscriptionStoryUpdatedArgs = {
-  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -1459,6 +1453,7 @@ export type User = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  isAdmin?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   password?: Maybe<PasswordState>;
 };
@@ -1477,6 +1472,7 @@ export type UserAuthenticationWithPasswordSuccess = {
 export type UserCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  isAdmin?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1485,6 +1481,7 @@ export type UserOrderByInput = {
   createdAt?: InputMaybe<OrderDirection>;
   email?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
+  isAdmin?: InputMaybe<OrderDirection>;
   name?: InputMaybe<OrderDirection>;
 };
 
@@ -1496,6 +1493,7 @@ export type UserUpdateArgs = {
 export type UserUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  isAdmin?: InputMaybe<Scalars['Boolean']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1507,6 +1505,7 @@ export type UserWhereInput = {
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
+  isAdmin?: InputMaybe<BooleanFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
@@ -1521,13 +1520,6 @@ export type GetRequestVariables = Exact<{
 
 
 export type GetRequest = { story?: { id: string, message?: string | null, status?: StoryStatusType | null, statusLog?: Array<StoryStatusLogType> | null } | null };
-
-export type OnStoryUpdatedVariables = Exact<{
-  id: Scalars['String']['input'];
-}>;
-
-
-export type OnStoryUpdated = { storyUpdated?: { id: string, message?: string | null, status?: StoryStatusType | null, statusLog?: Array<StoryStatusLogType> | null } | null };
 
 export type OnUserStoriesCountUpdatedVariables = Exact<{
   uid: Scalars['String']['input'];
@@ -1580,39 +1572,6 @@ export type GetRequestHookResult = ReturnType<typeof useGetRequest>;
 export type GetRequestLazyQueryHookResult = ReturnType<typeof useGetRequestLazyQuery>;
 export type GetRequestSuspenseQueryHookResult = ReturnType<typeof useGetRequestSuspenseQuery>;
 export type GetRequestQueryResult = Apollo.QueryResult<GetRequest, GetRequestVariables>;
-export const OnStoryUpdatedDocument = gql`
-    subscription onStoryUpdated($id: String!) {
-  storyUpdated(id: $id) {
-    id
-    message
-    status
-    statusLog
-  }
-}
-    `;
-
-/**
- * __useOnStoryUpdated__
- *
- * To run a query within a React component, call `useOnStoryUpdated` and pass it any options that fit your needs.
- * When your component renders, `useOnStoryUpdated` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useOnStoryUpdated({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useOnStoryUpdated(baseOptions: Apollo.SubscriptionHookOptions<OnStoryUpdated, OnStoryUpdatedVariables> & ({ variables: OnStoryUpdatedVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<OnStoryUpdated, OnStoryUpdatedVariables>(OnStoryUpdatedDocument, options);
-      }
-export type OnStoryUpdatedHookResult = ReturnType<typeof useOnStoryUpdated>;
-export type OnStoryUpdatedSubscriptionResult = Apollo.SubscriptionResult<OnStoryUpdated>;
 export const OnUserStoriesCountUpdatedDocument = gql`
     subscription onUserStoriesCountUpdated($uid: String!) {
   userStoriesCountUpdated(id: $uid)
