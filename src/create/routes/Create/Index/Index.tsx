@@ -86,7 +86,7 @@ export const Index = memo(function Create() {
   }
 
   if (isError && isAccessDenied) {
-    return <Redirect pathname={RoutePath.Subscribe} />;
+    return <Redirect action="push" pathname={RoutePath.Subscribe} />;
   }
 
   return (
