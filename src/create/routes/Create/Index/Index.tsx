@@ -24,20 +24,9 @@ export const Index = memo(function Create() {
   const { characters, themes, scenes, readTimes } = useOptions();
   const { user } = useAuth();
 
-  const {
-    mutate,
-    isPending,
-    isSuccess,
-    isError,
-    error = [],
-    data,
-  } = useCreateStory<DTO.Errors>();
+  const { mutate, isPending, isSuccess, data } = useCreateStory<DTO.Errors>();
 
   const { message: outline } = prompts.at(0);
-
-  const isAccessDenied = error?.some(
-    ({ extensions: { code } }) => code === DTO.ExtensionCode.KS_ACCESS_DENIED
-  );
 
   const handleOnCancel = () => {
     navigate({ action: 'back', pathname: RoutePath.Index });
@@ -48,32 +37,45 @@ export const Index = memo(function Create() {
       ({ value }) => value === form.readTime
     );
 
-    mutate({
-      data: {
-        character: {
-          connect: {
-            id: form.character,
+    mutate(
+      {
+        data: {
+          character: {
+            connect: {
+              id: form.character,
+            },
           },
-        },
-        firebaseUserId: user?.uid,
-        moralLesson: {
-          connect: {
-            id: form.description,
+          firebaseUserId: user?.uid,
+          moralLesson: {
+            connect: {
+              id: form.description,
+            },
           },
-        },
-        placeOfEvent: {
-          connect: {
-            id: form.scene,
+          placeOfEvent: {
+            connect: {
+              id: form.scene,
+            },
           },
-        },
-        prompt: {
-          connect: {
-            id: prompts.at(0).id,
+          prompt: {
+            connect: {
+              id: prompts.at(0).id,
+            },
           },
+          readTime: readTimeValue,
         },
-        readTime: readTimeValue,
       },
-    });
+      {
+        onError: (error) => {
+          const isAccessDenied = error?.some(
+            ({ extensions: { code } }) =>
+              code === DTO.ExtensionCode.KS_ACCESS_DENIED
+          );
+          if (isAccessDenied) {
+            navigate({ action: 'push', pathname: RoutePath.Subscribe });
+          }
+        },
+      }
+    );
   };
 
   if (isSuccess) {
@@ -83,10 +85,6 @@ export const Index = memo(function Create() {
         pathname={RoutePath.CreateDetails}
       />
     );
-  }
-
-  if (isError && isAccessDenied) {
-    return <Redirect action="push" pathname={RoutePath.Subscribe} />;
   }
 
   return (

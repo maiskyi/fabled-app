@@ -32,7 +32,7 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
   );
 
   const thread = useMemo((): ThreadItem[] => {
-    const copyIndex = data?.story.message.length % 10;
+    const copyIndex = new Date(data?.story.createdAt).getMilliseconds() % 10;
 
     const userMessage: ThreadItem[] = [
       {
