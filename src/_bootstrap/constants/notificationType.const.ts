@@ -9,7 +9,6 @@ export enum NotificationType {
   SendVerificationLinkFailed = 'send-verification-link-failed',
   SendVerificationLinkSucceed = 'send-verification-link-succeed',
   SubscriptionSucceed = 'subscription-succeed',
-  SubscriptionFailed = 'subscription-failed',
   UpdatePasswordSucceed = 'update-password-succeed',
   UpdateProfileSucceed = 'update-profile-succeed',
 }
