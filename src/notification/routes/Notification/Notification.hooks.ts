@@ -14,15 +14,16 @@ interface UseNotificationParams {
 }
 
 const TYPES: NotificationType[] = [
-  NotificationType.SendPasswordResetEmailSucceed,
-  NotificationType.ConfirmPasswordResetSucceed,
   NotificationType.ConfirmPasswordResetFailed,
-  NotificationType.InquirySucceed,
-  NotificationType.InquiryFailed,
+  NotificationType.ConfirmPasswordResetSucceed,
   NotificationType.FeedbackFailed,
   NotificationType.FeedbackSucceed,
-  NotificationType.SendVerificationLinkSucceed,
+  NotificationType.InquiryFailed,
+  NotificationType.InquirySucceed,
+  NotificationType.SendPasswordResetEmailSucceed,
   NotificationType.SendVerificationLinkFailed,
+  NotificationType.SendVerificationLinkSucceed,
+  NotificationType.SubscriptionSucceed,
   NotificationType.UpdatePasswordSucceed,
   NotificationType.UpdateProfileSucceed,
 ];
@@ -91,6 +92,7 @@ export const useNotification = ({
       [NotificationType.SendVerificationLinkFailed]: t('actions.ok'),
       [NotificationType.UpdatePasswordSucceed]: t('actions.ok'),
       [NotificationType.UpdateProfileSucceed]: t('actions.ok'),
+      [NotificationType.SubscriptionSucceed]: t('actions.ok'),
     }),
     [t]
   );
@@ -143,7 +145,12 @@ export const useNotification = ({
       [NotificationType.UpdateProfileSucceed]: () =>
         navigate({
           action: 'back',
-          pathname: RoutePath.Auth,
+          pathname: RoutePath.Profile,
+        }),
+      [NotificationType.SubscriptionSucceed]: () =>
+        navigate({
+          action: 'back',
+          pathname: RoutePath.Create,
         }),
     }),
     [navigate]

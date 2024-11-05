@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Purchases } from '@revenuecat/purchases-capacitor';
+import { Capacitor } from '@capacitor/core';
 
 import {
   UseGetAppUserIdKey,
@@ -15,9 +16,12 @@ export const useGetAppUserId = () => {
   >({
     enabled: false,
     queryFn: async () => {
-      const { appUserID } = await Purchases.getAppUserID();
+      if (Capacitor.isNativePlatform()) {
+        const { appUserID } = await Purchases.getAppUserID();
+        return { appUserId: appUserID };
+      }
 
-      return { appUserId: appUserID };
+      return { appUserId: null };
     },
     queryKey: ['useGetAppUserId'],
   });

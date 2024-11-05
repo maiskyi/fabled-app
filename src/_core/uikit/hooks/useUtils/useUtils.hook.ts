@@ -28,6 +28,7 @@ export const useUtils = () => {
           },
         ],
         color: COLOR_MAPPING[variant],
+        cssClass: styles.toast,
         header: title,
         icon: ICON_MAPPING[variant],
         message,
