@@ -2,6 +2,11 @@ import { NotificationType } from '@bootstrap/constants';
 import { AuthErrorCodes } from '@core/auth';
 
 export const notifications = {
+  [NotificationType.SubscriptionSucceed]: {
+    message:
+      'Thank you for subscribing! You’re all set to enjoy exclusive content and updates. We’ll keep you updated with the latest news and features.',
+    title: 'You’re Subscribed!',
+  },
   [NotificationType.UpdateProfileSucceed]: {
     message:
       'Your name has been updated. The changes will be reflected in your profile.',

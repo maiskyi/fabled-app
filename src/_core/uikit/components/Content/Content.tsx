@@ -3,6 +3,8 @@ import classNames from 'classnames';
 
 import { IonContent } from '@ionic/react';
 
+import { Selector } from '../../constants';
+
 import { ContentInstance } from './Content.types';
 
 export type ContentProps = PropsWithChildren<{
@@ -19,6 +21,7 @@ export const Content = forwardRef<ContentInstance, ContentProps>(
           'ion-padding': inset,
         })}
         fullscreen={fullscreen}
+        id={Selector.Content}
         ref={ref}
       >
         {children}

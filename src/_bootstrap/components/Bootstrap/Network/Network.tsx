@@ -9,6 +9,7 @@ import {
   OnRequestFulfilledCallback,
 } from '@network/api';
 import { useAuth } from '@core/auth';
+import { useGetAppUserId } from '@core/purchases';
 
 export type NetworkProps = PropsWithChildren<{
   api: ApiProviderProps;
@@ -16,18 +17,23 @@ export type NetworkProps = PropsWithChildren<{
 
 export const Network: FC<NetworkProps> = ({ children, api }) => {
   const { getIdToken } = useAuth();
+  const { refetch: getUserId } = useGetAppUserId();
 
   const handleOnRequestFulfilled: OnRequestFulfilledCallback = useCallback(
     async (config) => {
       const { token } = await getIdToken();
+      const {
+        data: { appUserId },
+      } = await getUserId();
 
       return merge({}, config, {
         headers: {
           Authorization: `Bearer ${token}`,
+          'Rc-User-Id': appUserId,
         },
       });
     },
-    [getIdToken]
+    [getIdToken, getUserId]
   );
 
   const handleOnResponseFulfilled: OnResponseFulfilledCallback<{

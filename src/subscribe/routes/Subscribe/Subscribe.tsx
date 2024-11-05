@@ -1,18 +1,20 @@
 import { FC } from 'react';
 
-import { Box, Content, Form, Header, Page, Text } from '@core/uikit';
-import { RoutePath } from '@bootstrap/constants';
+import { Box, Content, Form, Header, Page, Text, useUtils } from '@core/uikit';
+import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { usePurchases, usePurchaseStoreProduct } from '@core/purchases';
 import { useTranslation } from '@core/localization';
+import { Redirect } from '@core/navigation';
 
 import { PackageCard } from './_partitions/PackageCard';
 import { SubscribeFrom, SubscribeFromField } from './Subscribe.types';
 
 export const Subscribe: FC = () => {
   const { t } = useTranslation();
+  const { toast } = useUtils();
   const { offering } = usePurchases();
 
-  const { isPending, mutate } = usePurchaseStoreProduct();
+  const { isSuccess, isPending, mutate } = usePurchaseStoreProduct();
 
   const title = t('pages.subscribe');
 
@@ -34,11 +36,24 @@ export const Subscribe: FC = () => {
     mutate(
       { product },
       {
-        onError: () => {},
-        onSuccess: () => {},
+        onError: (error) => {
+          toast({
+            message: error.message,
+            variant: 'error',
+          });
+        },
       }
     );
   };
+
+  if (isSuccess) {
+    return (
+      <Redirect
+        params={{ type: NotificationType.SubscriptionSucceed }}
+        pathname={RoutePath.Notification}
+      />
+    );
+  }
 
   return (
     <Page>

@@ -1516,6 +1516,7 @@ export type GetRequest = {
     message?: string | null;
     status?: StoryStatusType | null;
     statusLog?: Array<StoryStatusLogType> | null;
+    createdAt?: any | null;
   } | null;
 };
 
@@ -1717,6 +1718,7 @@ export const GetRequestDocument = /*#__PURE__*/ `
     message
     status
     statusLog
+    createdAt
   }
 }
     `;

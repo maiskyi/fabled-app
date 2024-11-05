@@ -4,5 +4,6 @@ query getRequest($id: ID!) {
     message
     status
     statusLog
+    createdAt
   }
 }
