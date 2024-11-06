@@ -1,6 +1,7 @@
 // Components
 
 export * from './components/Animation';
+export * from './components/Badge';
 export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
@@ -15,6 +16,7 @@ export * from './components/Icon';
 export * from './components/Image';
 export * from './components/InfiniteScroll';
 export * from './components/List';
+export * from './components/Logo';
 export * from './components/Message';
 export * from './components/Page';
 export * from './components/SafeArea';
@@ -23,7 +25,6 @@ export * from './components/Swiper';
 export * from './components/Text';
 export * from './components/ThemeProvider';
 export * from './components/View';
-export * from './components/Badge';
 
 // Hooks
 export * from './hooks/useUtils';
