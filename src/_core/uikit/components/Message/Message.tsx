@@ -18,6 +18,7 @@ export type MessageProps = PropsWithChildren<{
   title: string;
   origin: MessageOrigin;
   avatar?: string;
+  color?: Color;
 }>;
 
 export const Message: FC<MessageProps> = ({
@@ -25,8 +26,12 @@ export const Message: FC<MessageProps> = ({
   origin,
   children,
   avatar,
+  color: initialColor,
 }) => {
-  const color: Color = origin === 'companion' ? 'tertiary' : 'dark';
+  const color: Color = (() => {
+    if (initialColor) return initialColor;
+    return origin === 'companion' ? 'tertiary' : 'dark';
+  })();
 
   return (
     <div className={classNames(styles.root, styles[origin])}>

@@ -105,6 +105,48 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
       return [];
     })();
 
+    const errorMessage: ThreadItem[] = (() => {
+      if (data?.story.status === DTO.StoryStatusType.Failed) {
+        return [
+          {
+            id: 'errorMessage',
+            props: {
+              avatar: BOT_AVATAR_SRC,
+              children: t(`bot.error.${copyIndex}`),
+              color: 'danger',
+              origin: 'companion',
+              title: t('bot.fabledAi'),
+            },
+            type: 'message',
+          },
+        ];
+      }
+      return [];
+    })();
+
+    const errorActions: ThreadItem[] = (() => {
+      if (data?.story.status === DTO.StoryStatusType.Failed) {
+        return [
+          {
+            id: 'errorActions',
+            props: [
+              {
+                children: t('actions.cancel'),
+                fill: 'outline',
+                onClick: onReadLater,
+              },
+              {
+                children: t('actions.retry'),
+                onClick: onReadNow,
+              },
+            ],
+            type: 'actions',
+          },
+        ];
+      }
+      return [];
+    })();
+
     const successMessage: ThreadItem[] = (() => {
       if (data?.story.status === DTO.StoryStatusType.Success) {
         return [
@@ -151,6 +193,8 @@ export const useThread = ({ id, onReadNow, onReadLater }: UseThreadParams) => {
       ...contentMessage,
       ...imageMessage,
       ...progressMessage,
+      ...errorMessage,
+      ...errorActions,
       ...successMessage,
       ...successActions,
     ];

@@ -23,6 +23,7 @@ export const actions = {
   readLater: 'Read later',
   readNow: 'Read now',
   requestNewLink: 'Request new link',
+  retry: 'Retry',
   save: 'Save',
   sendResetLink: 'Send reset link',
   settings: 'Settings',

@@ -13,6 +13,18 @@ export const bot = {
   },
   createFableAiGreeting:
     'Hi, {{displayName}}. What should I tell you a fable about today?',
+  error: {
+    0: "Uh-oh! 🧙‍♂️ Something magical went astray while crafting your Fable. Fear not, we're casting another spell to fix it!",
+    1: "It seems a little goblin hid our magic ink! 🧚 Please try again, and we'll bring your story to life.",
+    2: 'Our fairy tale weavers encountered a snag! 🧚‍♂️ Recasting spells now to finish your story.',
+    3: 'The enchanted forest is a bit foggy today! 🌫️ We’re clearing it up to complete your Fable. Try again soon!',
+    4: 'Oh dear, a riddle disrupted our magic! 🧩 Please try again, and your Fable will be ready shortly.',
+    5: "A sleepy spellcaster dozed off! 😴 We're waking them up to finish your enchanting tale. Please try once more.",
+    6: "Oops! The winds of magic shifted. 🌪️ We're realigning the enchantment to create your Fable shortly.",
+    7: 'Oh dear! 🦄 A miscast spell interrupted the creation of your Fable. Give us a moment to work our magic once more.',
+    8: "Oops! 🪄 Our fairies took a quick break. Something went wrong, but we're calling them back to create your Fable!",
+    9: "A dragon’s sneeze disrupted the magic! 🐉✨ We're on it and will have your story crafted in no time.",
+  },
   fableReady: {
     0: 'All set! 🎉✨ Your Fable is finished and ready for you to explore. Let the magic begin!',
     1: 'Your magical Fable is ready! 🌟✨ Dive into your enchanted story and let the adventure begin!',

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Header, Box, Form, Button, Animation } from '@core/uikit';
+import { Header, Box, Form, Button, Animation, useUtils } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
@@ -23,6 +23,7 @@ export const Index = memo(function Create() {
   const [, navigate] = useRoute();
   const { characters, themes, scenes, readTimes } = useOptions();
   const { user } = useAuth();
+  const { toast } = useUtils();
 
   const { mutate, isPending, isSuccess, data } = useCreateStory<DTO.Errors>();
 
@@ -72,6 +73,11 @@ export const Index = memo(function Create() {
           );
           if (isAccessDenied) {
             navigate({ action: 'push', pathname: RoutePath.Subscribe });
+          } else {
+            toast({
+              message: error[0].message,
+              variant: 'error',
+            });
           }
         },
       }

@@ -48,13 +48,7 @@ export const Details = memo<DetailsProps>(function Details({
         return (
           <Animation.Message key={item.id}>
             {item.type === 'message' && (
-              <Message
-                avatar={item.props.avatar}
-                origin={item.props.origin}
-                title={item.props.title}
-              >
-                {item.props.children}
-              </Message>
+              <Message {...item.props}>{item.props.children}</Message>
             )}
             {item.type === 'actions' && (
               <Box
