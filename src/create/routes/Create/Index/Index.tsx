@@ -1,6 +1,14 @@
 import { memo } from 'react';
 
-import { Header, Box, Form, Button, Animation, useUtils } from '@core/uikit';
+import {
+  Header,
+  Box,
+  Form,
+  Button,
+  Animation,
+  useUtils,
+  Spinner,
+} from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
@@ -17,7 +25,11 @@ import { ReadTime } from './_partitions/ReadTime';
 import { IndexForm } from './Index.type';
 import { useOptions } from './Index.hooks';
 
-export const Index = memo(function Create() {
+interface IndexProps {
+  loading: boolean;
+}
+
+export const Index = memo<IndexProps>(function Create({ loading }: IndexProps) {
   const { t } = useTranslation();
   const { prompts } = useConfig();
   const [, navigate] = useRoute();
@@ -83,6 +95,19 @@ export const Index = memo(function Create() {
       }
     );
   };
+
+  if (loading) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        padding={16}
+        paddingInline={20}
+      >
+        <Spinner />
+      </Box>
+    );
+  }
 
   if (isSuccess) {
     return (

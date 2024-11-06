@@ -1,14 +1,15 @@
 query getUserStories(
   $uid: String!
-  $skip: Int!
+  $skip: Int
   $take: Int
   $image: CloudinaryImageFormat
+  $status: StoryStatusType!
 ) {
   stories(
     skip: $skip
     take: $take
     orderBy: { createdAt: desc }
-    where: { firebaseUserId: { equals: $uid }, status: { equals: success } }
+    where: { firebaseUserId: { equals: $uid }, status: { equals: $status } }
   ) {
     id
     title
@@ -19,6 +20,6 @@ query getUserStories(
     }
   }
   storiesCount(
-    where: { firebaseUserId: { equals: $uid }, status: { equals: success } }
+    where: { firebaseUserId: { equals: $uid }, status: { equals: $status } }
   )
 }
