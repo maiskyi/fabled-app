@@ -1,0 +1,22 @@
+query getRequest($id: ID!) {
+  story(where: { id: $id }) {
+    id
+    message
+    status
+    statusLog
+    createdAt
+    character {
+      id
+    }
+    moralLesson {
+      id
+    }
+    placeOfEvent {
+      id
+    }
+    prompt {
+      id
+    }
+    readTime
+  }
+}

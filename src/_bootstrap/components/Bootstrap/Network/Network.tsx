@@ -7,7 +7,7 @@ import {
   ApiProviderProps,
   OnResponseFulfilledCallback,
   OnRequestFulfilledCallback,
-} from '@network/api';
+} from '@network/admin';
 import { useAuth } from '@core/auth';
 import { useGetAppUserId } from '@core/purchases';
 

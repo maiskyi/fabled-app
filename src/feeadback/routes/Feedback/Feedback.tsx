@@ -4,7 +4,7 @@ import { Page, Header, Content, Text, Form, Box } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
-import { DTO, useCreateFeedback } from '@network/api';
+import { DTO, useCreateFeedback } from '@network/admin';
 import { useUser } from '@common/hooks';
 
 export const Feedback: FC = () => {

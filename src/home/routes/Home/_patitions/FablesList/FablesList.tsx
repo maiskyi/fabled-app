@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { Box } from '@core/uikit';
-import { DTO } from '@network/api';
+import { DTO } from '@network/admin';
 
 import { FableCard } from '../FableCard';
 

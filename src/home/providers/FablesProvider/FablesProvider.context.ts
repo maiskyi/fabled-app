@@ -1,6 +1,6 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO, useInfiniteGetUserStories } from '@network/api';
+import { DTO, useInfiniteGetUserStories } from '@network/admin';
 
 type UseInfiniteGetUserStoriesReturnType = ReturnType<
   typeof useInfiniteGetUserStories

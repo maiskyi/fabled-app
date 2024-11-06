@@ -1,6 +1,6 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO } from '@network/api';
+import { DTO } from '@network/admin';
 
 interface ConfigContextProps {
   version: string;

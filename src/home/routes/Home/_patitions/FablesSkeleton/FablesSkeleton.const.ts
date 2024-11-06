@@ -1,4 +1,4 @@
-import { DTO } from '@network/api';
+import { DTO } from '@network/admin';
 
 export const SKELETON_INITIAL_DATA: DTO.GetUserStories['stories'] = Array.from({
   length: 3,

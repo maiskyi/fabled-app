@@ -5,7 +5,7 @@ import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useAuth } from '@core/auth';
-import { DTO, useCreateInquiry } from '@network/api';
+import { DTO, useCreateInquiry } from '@network/admin';
 
 export const ContactUs: FC = () => {
   const [, navigate] = useRoute();

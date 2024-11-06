@@ -12,7 +12,7 @@ import {
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
-import { useGetStory } from '@network/api';
+import { useGetStory } from '@network/admin';
 
 export const Fable = memo(function Fable() {
   const [
