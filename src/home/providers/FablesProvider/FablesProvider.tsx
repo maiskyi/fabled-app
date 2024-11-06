@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
 
 import { useUser } from '@common/hooks';
-import { useInfiniteGetUserStories } from '@network/admin';
+import { DTO, useInfiniteGetUserStories } from '@network/admin';
 import { useDevice } from '@core/uikit';
 
 import { FablesProviderContext } from './FablesProvider.context';
@@ -30,6 +30,7 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
         width: `${width}`,
       },
       skip: GET_USER_STORIES_SKIP_PARAM,
+      status: DTO.StoryStatusType.Success,
       take: GET_USER_STORIES_TAKE_PARAM,
       uid,
     },

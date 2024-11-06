@@ -8,11 +8,14 @@ import {
   BOT_AVATAR_SRC,
   Animation,
   ContentInstance,
+  useDevice,
+  useViewWillEnter,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useUser } from '@common/hooks';
-import { Route } from '@core/navigation';
+import { Route, useRoute } from '@core/navigation';
+import { DTO, useGetUserStories } from '@network/admin';
 
 import { Index } from './Index/Index';
 import { Details } from './Details/Details';
@@ -20,13 +23,43 @@ import { Details } from './Details/Details';
 export const Create = memo(function Create() {
   const content = useRef<ContentInstance>();
   const { t } = useTranslation();
-  const { displayName: userDisplayName } = useUser();
+  const { displayName: userDisplayName, uid } = useUser();
+  const { width } = useDevice();
+  const [, navigate] = useRoute();
+
+  const { isFetching, refetch } = useGetUserStories(
+    {
+      image: {
+        aspect_ratio: '4:3',
+        crop: 'thumb',
+        width: `${width}`,
+      },
+      status: DTO.StoryStatusType.Inprogress,
+      uid,
+    },
+    {
+      enabled: false,
+    }
+  );
 
   const handleOnMessage = useCallback(() => {
     if (content.current) {
-      setTimeout(() => content.current.scrollToBottom(300), 100);
+      setTimeout(() => content.current?.scrollToBottom(300), 100);
     }
   }, []);
+
+  useViewWillEnter(() => {
+    (async () => {
+      const { data } = await refetch();
+      if (data.storiesCount > 0) {
+        navigate({
+          action: 'replace',
+          params: { id: data?.stories[0]?.id },
+          pathname: RoutePath.CreateDetails,
+        });
+      }
+    })();
+  });
 
   return (
     <Page>
@@ -49,7 +82,7 @@ export const Create = memo(function Create() {
           </Message>
         </Animation.Message>
         <Route exact path={RoutePath.Create}>
-          <Index />
+          <Index loading={isFetching} />
         </Route>
         <Route path={RoutePath.CreateDetails}>
           <Details onMessage={handleOnMessage} />

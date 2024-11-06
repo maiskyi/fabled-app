@@ -157,7 +157,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
       if (request?.story.status === DTO.StoryStatusType.Inprogress) {
         return [
           {
-            id: 'imageMessage',
+            id: 'progressMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
               children: <Spinner color="light" variant="dots" />,

@@ -31,7 +31,10 @@ export * from './hooks/useBrowser';
 export * from './hooks/useModal';
 export * from './hooks/useDevice';
 export * from './hooks/useSplashScreen';
-export { useIonViewDidEnter as useViewDidEnter } from '@ionic/react';
+export {
+  useIonViewDidEnter as useViewDidEnter,
+  useIonViewWillEnter as useViewWillEnter,
+} from '@ionic/react';
 
 // Constants
 export * from './constants';

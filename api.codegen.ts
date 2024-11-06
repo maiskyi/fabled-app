@@ -7,19 +7,7 @@ const schema = 'http://localhost:3000/api/graphql';
 
 const config: CodegenConfig = {
   generates: {
-    // './src/_network/api/__generated__/apollo.ts': {
-    //   config: {
-    //     omitOperationSuffix: true,
-    //     skipTypename: true,
-    //   },
-    //   documents: './src/_network/api/documents/apollo/*.graphql',
-    //   plugins: [
-    //     'typescript',
-    //     'typescript-operations',
-    //     'typescript-react-apollo',
-    //   ],
-    // },
-    './src/_network/api/__generated__/query.ts': {
+    './src/_network/admin/__generated__/query.ts': {
       config: {
         addInfiniteQuery: true,
         fetcher: {
@@ -32,7 +20,7 @@ const config: CodegenConfig = {
         skipTypename: true,
         withHooks: true,
       },
-      documents: ['./src/_network/api/documents/query/*.graphql'],
+      documents: ['./src/_network/admin/documents/query/*.graphql'],
       plugins: [
         'typescript',
         'typescript-operations',
