@@ -59,10 +59,11 @@ export const Auth = memo(function Index() {
           height="100%"
           justifyContent="center"
           minHeight="100%"
-          padding={20}
           safe={['bottom']}
         >
-          <Header collapse="condense" />
+          <Header collapse="condense">
+            <Header.Title size="large">{t('pages.auth')}</Header.Title>
+          </Header>
           <Box
             alignItems="center"
             display="flex"
@@ -71,7 +72,13 @@ export const Auth = memo(function Index() {
           >
             Logo goes here
           </Box>
-          <Box display="flex" flex={0} flexDirection="column" gap={12}>
+          <Box
+            display="flex"
+            flex={0}
+            flexDirection="column"
+            gap={12}
+            paddingInline={20}
+          >
             <Box display="flex" gap={12}>
               <Box flex={1}>
                 <Button color="tertiary" onClick={handleOnSignIn}>
