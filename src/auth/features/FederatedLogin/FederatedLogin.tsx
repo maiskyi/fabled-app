@@ -5,7 +5,7 @@ import { useTranslation } from '@core/localization';
 import {
   useSignInWithGoogle,
   useSignInWithApple,
-  useSignInWithFacebook,
+  // useSignInWithFacebook,
   AuthError,
 } from '@core/auth';
 
@@ -23,8 +23,8 @@ export const FederatedLogin = memo(function FederatedLogin() {
     toast({ message, title, variant: 'error' });
   };
 
-  const { isPending: isSigningInWithFacebook, mutate: signInWithFacebook } =
-    useSignInWithFacebook();
+  // const { isPending: isSigningInWithFacebook, mutate: signInWithFacebook } =
+  //   useSignInWithFacebook();
 
   const handleOnSignInWithGoogle = () => {
     signInWithGoogle(undefined, {
@@ -38,11 +38,11 @@ export const FederatedLogin = memo(function FederatedLogin() {
     });
   };
 
-  const handleOnSignInWithFacebook = () => {
-    signInWithFacebook(undefined, {
-      onError: (error) => signInErrorHandler(error),
-    });
-  };
+  // const handleOnSignInWithFacebook = () => {
+  //   signInWithFacebook(undefined, {
+  //     onError: (error) => signInErrorHandler(error),
+  //   });
+  // };
 
   return (
     <Box display="flex" flexDirection="column">
@@ -62,14 +62,14 @@ export const FederatedLogin = memo(function FederatedLogin() {
       >
         {t('actions.continueWithApple')}
       </Button.Social>
-      <Button.Social
+      {/* <Button.Social
         expand="block"
         loading={isSigningInWithFacebook}
         name="facebook"
         onClick={handleOnSignInWithFacebook}
       >
         {t('actions.continueWithFacebook')}
-      </Button.Social>
+      </Button.Social> */}
     </Box>
   );
 });
