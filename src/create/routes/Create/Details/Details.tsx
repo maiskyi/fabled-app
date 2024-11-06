@@ -22,12 +22,12 @@ export const Details = memo<DetailsProps>(function Details({
     navigate({ action: 'replace', params, pathname: RoutePath.Fable });
   }, [navigate, params]);
 
-  const onReadLater = useCallback(() => {
+  const onCancel = useCallback(() => {
     navigate({ action: 'back', pathname: RoutePath.Index });
   }, [navigate]);
 
   const { thread } = useThread({
-    onReadLater,
+    onCancel,
     onReadNow,
     ...params,
   });

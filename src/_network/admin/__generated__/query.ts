@@ -1517,6 +1517,11 @@ export type GetRequest = {
     status?: StoryStatusType | null;
     statusLog?: Array<StoryStatusLogType> | null;
     createdAt?: any | null;
+    readTime?: number | null;
+    character?: { id: string } | null;
+    moralLesson?: { id: string } | null;
+    placeOfEvent?: { id: string } | null;
+    prompt?: { id: string } | null;
   } | null;
 };
 
@@ -1719,6 +1724,19 @@ export const GetRequestDocument = /*#__PURE__*/ `
     status
     statusLog
     createdAt
+    character {
+      id
+    }
+    moralLesson {
+      id
+    }
+    placeOfEvent {
+      id
+    }
+    prompt {
+      id
+    }
+    readTime
   }
 }
     `;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Card, Image } from '@core/uikit';
-import { DTO } from '@network/api';
+import { DTO } from '@network/admin';
 
 interface FableCardProps {
   loading?: boolean;

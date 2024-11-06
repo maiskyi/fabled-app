@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
 
 import { useUser } from '@common/hooks';
-import { useInfiniteGetUserStories } from '@network/api';
+import { useInfiniteGetUserStories } from '@network/admin';
 import { useDevice } from '@core/uikit';
 
 import { FablesProviderContext } from './FablesProvider.context';

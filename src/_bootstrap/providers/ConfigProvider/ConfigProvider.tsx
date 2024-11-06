@@ -1,7 +1,7 @@
 import { FC, Fragment, PropsWithChildren } from 'react';
 import { useMount } from 'react-use';
 
-import { useGetBootstrap } from '@network/api';
+import { useGetBootstrap } from '@network/admin';
 import { useDevice } from '@core/uikit';
 
 import { ConfigContext } from './ConfigProvider.context';
