@@ -9,6 +9,7 @@ import {
   Box,
   SafeArea,
   useViewDidEnter,
+  Logo,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -55,6 +56,11 @@ export const Home = memo(function Home() {
   return (
     <Page>
       <Header translucent>
+        <Header.Actions slot="start">
+          <Box paddingLeft={12}>
+            <Logo height={20} />
+          </Box>
+        </Header.Actions>
         <Header.Title>{title}</Header.Title>
         <Header.Actions>
           <Header.Action icons="person-circle" onClick={handleOnProfileClick} />
