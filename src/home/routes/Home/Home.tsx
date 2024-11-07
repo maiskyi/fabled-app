@@ -58,7 +58,7 @@ export const Home = memo(function Home() {
       <Header translucent>
         <Header.Actions slot="start">
           <Box paddingLeft={12}>
-            <Logo height={20} />
+            <Logo height={26} />
           </Box>
         </Header.Actions>
         <Header.Title>{title}</Header.Title>

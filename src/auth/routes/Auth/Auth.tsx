@@ -16,6 +16,8 @@ import { Disclaimer } from '@common/features';
 
 import { FederatedLogin } from '../../features';
 
+import { Wallpaper } from './_partitions/Wallpaper';
+
 export const Auth = memo(function Index() {
   const { t } = useTranslation();
 
@@ -70,7 +72,7 @@ export const Auth = memo(function Index() {
             flex={1}
             justifyContent="center"
           >
-            Logo goes here
+            <Wallpaper />
           </Box>
           <Box
             display="flex"
