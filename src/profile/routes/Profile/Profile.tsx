@@ -1,7 +1,15 @@
 import { memo } from 'react';
 import { entries } from 'lodash';
 
-import { Header, Page, Content, List, useUtils, Text } from '@core/uikit';
+import {
+  Header,
+  Page,
+  Content,
+  List,
+  useUtils,
+  Text,
+  SafeArea,
+} from '@core/uikit';
 import { useSignOut } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -36,47 +44,49 @@ export const Profile = memo(function Profile() {
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content fullscreen inset={false}>
-        <Header collapse="condense">
-          <Header.Title size="large">{title}</Header.Title>
-        </Header>
-        <ProfileUserCard />
-        {entries(plans).map(([title, items]) => {
-          return (
-            <List key={title}>
-              <List.Header>{title}</List.Header>
-              {items.map(({ label, onClick, icon, note }) => (
-                <List.Item button={!!onClick} key={label} onClick={onClick}>
-                  <List.Icon name={icon} />
-                  <List.Label>
-                    <Text>{label}</Text>
-                    <List.Note>{note}</List.Note>
-                  </List.Label>
-                </List.Item>
-              ))}
-            </List>
-          );
-        })}
-        {entries(menu).map(([title, items]) => {
-          return (
-            <List key={title}>
-              <List.Header>{title}</List.Header>
-              {items.map(({ label, onClick, icon }) => (
-                <List.Item button={!!onClick} key={label} onClick={onClick}>
-                  <List.Icon name={icon} />
-                  <List.Label>
-                    <Text>{label}</Text>
-                  </List.Label>
-                </List.Item>
-              ))}
-            </List>
-          );
-        })}
-        <List>
-          <List.Header />
-          <List.Item onClick={handleOnLogout}>
-            <List.Label color="danger">Log out</List.Label>
-          </List.Item>
-        </List>
+        <SafeArea safe={['bottom']}>
+          <Header collapse="condense">
+            <Header.Title size="large">{title}</Header.Title>
+          </Header>
+          <ProfileUserCard />
+          {entries(plans).map(([title, items]) => {
+            return (
+              <List key={title}>
+                <List.Header>{title}</List.Header>
+                {items.map(({ label, onClick, icon, note }) => (
+                  <List.Item button={!!onClick} key={label} onClick={onClick}>
+                    <List.Icon name={icon} />
+                    <List.Label>
+                      <Text>{label}</Text>
+                      <List.Note>{note}</List.Note>
+                    </List.Label>
+                  </List.Item>
+                ))}
+              </List>
+            );
+          })}
+          {entries(menu).map(([title, items]) => {
+            return (
+              <List key={title}>
+                <List.Header>{title}</List.Header>
+                {items.map(({ label, onClick, icon }) => (
+                  <List.Item button={!!onClick} key={label} onClick={onClick}>
+                    <List.Icon name={icon} />
+                    <List.Label>
+                      <Text>{label}</Text>
+                    </List.Label>
+                  </List.Item>
+                ))}
+              </List>
+            );
+          })}
+          <List>
+            <List.Header />
+            <List.Item onClick={handleOnLogout}>
+              <List.Label color="danger">Log out</List.Label>
+            </List.Item>
+          </List>
+        </SafeArea>
       </Content>
     </Page>
   );
