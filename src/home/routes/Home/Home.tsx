@@ -8,8 +8,8 @@ import {
   Header,
   Box,
   SafeArea,
-  useViewDidEnter,
   Logo,
+  useViewWillEnter,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -49,7 +49,7 @@ export const Home = memo(function Home() {
     navigate({ action: 'push', params: { id }, pathname: RoutePath.Fable });
   };
 
-  useViewDidEnter(() => {
+  useViewWillEnter(() => {
     refetch();
   });
 

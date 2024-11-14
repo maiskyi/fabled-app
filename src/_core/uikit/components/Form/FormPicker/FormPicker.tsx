@@ -104,7 +104,7 @@ export const FormPicker: FormPickerComponent = ({
                 <IonToolbar>
                   <IonTitle>{props.label}</IonTitle>
                   <IonButtons slot="end">
-                    <IonButton onClick={handleOnDismiss}>
+                    <IonButton color="dark" onClick={handleOnDismiss}>
                       <IonIcon icon={ICON['close-outline']} slot="icon-only" />
                     </IonButton>
                   </IonButtons>
