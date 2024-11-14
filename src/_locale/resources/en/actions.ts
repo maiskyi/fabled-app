@@ -13,6 +13,7 @@ export const actions = {
   continueWithGoogle: 'Continue with Google',
   createNewFable: 'Create a new fable',
   createYourFirstFable: 'Create your first Fable',
+  deleteAccount: 'Delete account',
   forgotPassword: 'Forgot password?',
   goToFabledSpace: 'Go to Fabled Space',
   legal: 'Legal',

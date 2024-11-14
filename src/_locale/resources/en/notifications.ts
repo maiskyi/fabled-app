@@ -29,6 +29,11 @@ export const notifications = {
       'Your password has been successfully updated. You can now sign in with your new password.',
     title: 'Password reset successful',
   },
+  accountDeletionSucceed: {
+    message:
+      "Your account has been successfully deleted. If you ever change your mind, we'll be here to welcome you back.",
+    title: 'Goodbye for Now!',
+  },
   emailVerificationFailed: {
     error:
       'The email validation link is either invalid or has already been used. Please request a new verification link if needed.',
