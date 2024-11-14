@@ -8,6 +8,7 @@ export * from './hooks/useAuth';
 export * from './hooks/useAuthError';
 export * from './hooks/useConfirmPasswordReset';
 export * from './hooks/useCreateUserWithEmailAndPassword';
+export * from './hooks/useDeleteUser';
 export * from './hooks/useGetCurrentUser';
 export * from './hooks/useSendEmailVerification';
 export * from './hooks/useSendPasswordResetEmail';

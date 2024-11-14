@@ -10,7 +10,7 @@ import {
   Text,
   SafeArea,
 } from '@core/uikit';
-import { useSignOut } from '@core/auth';
+import { useSignOut, useDeleteUser } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 
@@ -18,13 +18,33 @@ import { ProfileUserCard } from './_partitions/ProfileUserCard';
 import { useProfileMenu } from './Profile.hooks';
 
 export const Profile = memo(function Profile() {
-  const { confirm } = useUtils();
+  const { confirm, toast } = useUtils();
   const { t } = useTranslation();
+
   const { mutateAsync: signOut } = useSignOut();
+  const { mutateAsync: deleteAccountAsync } = useDeleteUser();
 
   const { menu, plans } = useProfileMenu();
 
   const title = t('pages.profile');
+
+  const deleteAccount = async () => {
+    await deleteAccountAsync(null, {
+      onError: ({ message }) => {
+        toast({
+          message,
+          variant: 'error',
+        });
+      },
+      onSuccess: () => {
+        toast({
+          message: t('notifications.accountDeletionSucceed.message'),
+          title: t('notifications.accountDeletionSucceed.title'),
+          variant: 'success',
+        });
+      },
+    });
+  };
 
   const handleOnLogout = () => {
     confirm({
@@ -33,6 +53,17 @@ export const Profile = memo(function Profile() {
       message: t('confirms.logout.message'),
       onConfirm: () => signOut(),
       title: t('confirms.logout.title'),
+      variant: 'primary',
+    });
+  };
+
+  const handleOnDelete = () => {
+    confirm({
+      confirmBtn: t('actions.deleteAccount'),
+      icon: 'log-out-outline',
+      message: t('confirms.deleteAccount.message'),
+      onConfirm: () => deleteAccount(),
+      title: t('confirms.deleteAccount.title'),
       variant: 'danger',
     });
   };
@@ -83,7 +114,16 @@ export const Profile = memo(function Profile() {
           <List>
             <List.Header />
             <List.Item onClick={handleOnLogout}>
-              <List.Label color="danger">Log out</List.Label>
+              <List.Icon name="log-out-outline" />
+              <List.Label>{t('actions.logOut')}</List.Label>
+            </List.Item>
+          </List>
+          <List>
+            <List.Header />
+            <List.Item onClick={handleOnDelete}>
+              <List.Label color="danger">
+                {t('actions.deleteAccount')}
+              </List.Label>
             </List.Item>
           </List>
         </SafeArea>
