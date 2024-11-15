@@ -1,4 +1,4 @@
-import { Fragment, memo, useLayoutEffect, useRef, useState } from 'react';
+import { Fragment, memo, useLayoutEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { Spinner } from '../Spinner';
@@ -10,7 +10,6 @@ export interface ImageProps {
 }
 
 export const Image = memo<ImageProps>(function Image({ src }: ImageProps) {
-  const ref = useRef<HTMLImageElement>();
   const [ready, setReady] = useState(false);
 
   useLayoutEffect(() => {}, []);
@@ -25,7 +24,6 @@ export const Image = memo<ImageProps>(function Image({ src }: ImageProps) {
         })}
         loading="lazy"
         onLoad={() => setReady(() => true)}
-        ref={ref}
         src={src}
       />
     </Fragment>

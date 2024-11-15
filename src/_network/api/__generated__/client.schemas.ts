@@ -24,7 +24,7 @@ export type GetStoriesParams = {
 };
 
 export interface StoryImage {
-  id: string;
+  publicId: string;
 }
 
 export interface StoriesItem {

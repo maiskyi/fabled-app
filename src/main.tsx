@@ -28,6 +28,9 @@ const config: AppProps = {
     auth: {
       Loader: Splash,
     },
+    cloudinary: {
+      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+    },
     config: {
       Loader: Splash,
       version: import.meta.env.PACKAGE_VERSION,
