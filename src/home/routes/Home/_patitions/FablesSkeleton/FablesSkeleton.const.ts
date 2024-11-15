@@ -1,12 +1,14 @@
-import { DTO } from '@network/admin';
+import { DTO } from '@network/api';
 
-export const SKELETON_INITIAL_DATA: DTO.GetUserStories['stories'] = Array.from({
+export const SKELETON_INITIAL_DATA: DTO.StoriesItem[] = Array.from({
   length: 3,
-}).map((): DTO.GetUserStories['stories']['0'] => ({
-  id: '',
-  image: {
+}).map(
+  (): DTO.StoriesItem => ({
     id: '',
-  },
-  readTime: 0,
-  title: '',
-}));
+    image: {
+      publicId: '',
+    },
+    readTime: 0,
+    title: '',
+  })
+);

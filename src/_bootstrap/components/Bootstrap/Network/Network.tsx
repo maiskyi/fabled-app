@@ -3,19 +3,21 @@ import { merge } from 'lodash';
 
 import {
   DTO,
-  ApiProvider,
-  ApiProviderProps,
+  ApiProvider as AdminProvider,
+  ApiProviderProps as AdminProviderProps,
   OnResponseFulfilledCallback,
   OnRequestFulfilledCallback,
 } from '@network/admin';
 import { useAuth } from '@core/auth';
 import { useGetAppUserId } from '@core/purchases';
+import { ApiProvider, ApiProviderProps } from '@network/api';
 
 export type NetworkProps = PropsWithChildren<{
+  admin: AdminProviderProps;
   api: ApiProviderProps;
 }>;
 
-export const Network: FC<NetworkProps> = ({ children, api }) => {
+export const Network: FC<NetworkProps> = ({ children, admin, api }) => {
   const { getIdToken } = useAuth();
   const { refetch: getUserId } = useGetAppUserId();
 
@@ -46,12 +48,18 @@ export const Network: FC<NetworkProps> = ({ children, api }) => {
   }, []);
 
   return (
-    <ApiProvider
-      {...api}
+    <AdminProvider
+      {...admin}
       onRequestFulfilled={handleOnRequestFulfilled}
       onResponseFulfilled={handleOnResponseFulfilled}
     >
-      {children}
-    </ApiProvider>
+      <ApiProvider
+        {...api}
+        onRequestFulfilled={handleOnRequestFulfilled}
+        onResponseFulfilled={handleOnResponseFulfilled}
+      >
+        {children}
+      </ApiProvider>
+    </AdminProvider>
   );
 };

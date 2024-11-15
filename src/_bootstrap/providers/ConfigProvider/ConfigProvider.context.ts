@@ -1,15 +1,15 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO } from '@network/admin';
+import { DTO } from '@network/api';
 
 interface ConfigContextProps {
   version: string;
   privacyPolicyUrl: string;
   termsAndConditionsUrl: string;
-  characters: DTO.GetBootstrap['characters'];
-  prompts: DTO.GetBootstrap['prompts'];
-  scenes: DTO.GetBootstrap['placeOfEvents'];
-  themes: DTO.GetBootstrap['moralLessons'];
+  characters: DTO.CharacterItem[];
+  prompts: DTO.PromptItem[];
+  scenes: DTO.PlaceOfEventItem[];
+  themes: DTO.MoralLessonsItem[];
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({

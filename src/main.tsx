@@ -28,13 +28,16 @@ const config: AppProps = {
     auth: {
       Loader: Splash,
     },
+    cloudinary: {
+      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
+    },
     config: {
       Loader: Splash,
       version: import.meta.env.PACKAGE_VERSION,
     },
     errorBoundary: {
       dsn: import.meta.env.VITE_SENTRY_DNS,
-      enabled: true,
+      enabled: import.meta.env.VITE_ENVIRONMENT !== 'local',
       environment: import.meta.env.VITE_ENVIRONMENT,
       release: import.meta.env.PACKAGE_VERSION,
     },
@@ -45,9 +48,12 @@ const config: AppProps = {
       supportedLngs: [Language.en],
     },
     network: {
+      admin: {
+        endpoint: import.meta.env.VITE_ADMIN_ENDPOINT,
+        subscription: import.meta.env.VITE_ADMIN_SUBSCRIPTION,
+      },
       api: {
         endpoint: import.meta.env.VITE_API_ENDPOINT,
-        subscription: import.meta.env.VITE_API_SUBSCRIPTION,
       },
     },
     purchases: {

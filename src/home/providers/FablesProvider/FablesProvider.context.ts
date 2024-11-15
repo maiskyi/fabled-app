@@ -1,17 +1,15 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO, useInfiniteGetUserStories } from '@network/admin';
+import { DTO, useGetStoriesInfinite } from '@network/api';
 
-type UseInfiniteGetUserStoriesReturnType = ReturnType<
-  typeof useInfiniteGetUserStories
->;
+type UseGetStoriesInfiniteReturnType = ReturnType<typeof useGetStoriesInfinite>;
 
 export interface FablesProviderContextProps {
-  stories: DTO.GetUserStories['stories'];
+  stories: DTO.StoriesItem[];
   isLoading: boolean;
   hasNextPage: boolean;
-  fetchNextPage: UseInfiniteGetUserStoriesReturnType['fetchNextPage'];
-  refetch: UseInfiniteGetUserStoriesReturnType['refetch'];
+  fetchNextPage: UseGetStoriesInfiniteReturnType['fetchNextPage'];
+  refetch: UseGetStoriesInfiniteReturnType['refetch'];
 }
 
 export const FablesProviderContext = createContext<FablesProviderContextProps>({
