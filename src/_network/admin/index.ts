@@ -8,7 +8,6 @@ export {
   useCreateStory,
   useGetBootstrap,
   useGetRequest,
-  useGetStory,
 } from './__generated__/query';
 export { useTemplate } from './hooks/useTemplate';
 
