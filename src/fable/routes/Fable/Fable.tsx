@@ -8,11 +8,12 @@ import {
   Box,
   useDevice,
   SafeArea,
-  Image,
+  Spinner,
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
-import { useGetStory } from '@network/admin';
+import { useGetStory } from '@network/api';
+import { Image } from '@core/cloudinary';
 
 export const Fable = memo(function Fable() {
   const [
@@ -23,13 +24,7 @@ export const Fable = memo(function Fable() {
 
   const { width } = useDevice();
 
-  const { data } = useGetStory({
-    id,
-    image: {
-      aspect_ratio: '1:1',
-      width: `${width + 5}`,
-    },
-  });
+  const { data } = useGetStory(id);
 
   return (
     <Page>
@@ -45,14 +40,18 @@ export const Fable = memo(function Fable() {
             overflow="hidden"
             position="relative"
           >
-            <Image src={data?.story.image.publicUrlTransformed} />
-            {/* <img alt={data?.story.title} /> */}
+            <Image
+              aspectRatio="1:1"
+              id={data?.image.publicId}
+              spinner={<Spinner />}
+              width={width}
+            />
           </Box>
           <Card.Header>
-            <Card.Title>{data?.story?.title}</Card.Title>
+            <Card.Title>{data?.title}</Card.Title>
           </Card.Header>
           <Box marginInline={20} whiteSpace="pre-wrap">
-            {data?.story?.content}
+            {data?.content}
           </Box>
         </SafeArea>
       </Content>

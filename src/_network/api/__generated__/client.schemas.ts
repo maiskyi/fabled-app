@@ -18,13 +18,21 @@ export const GetStoriesStatus = {
 } as const;
 
 export type GetStoriesParams = {
-  skip?: number;
-  take?: number;
   status?: GetStoriesStatus;
+  take?: number;
+  skip?: number;
 };
 
 export interface StoryImage {
   publicId: string;
+}
+
+export interface Story {
+  content: string;
+  id: string;
+  image: StoryImage;
+  readTime: number;
+  title: string;
 }
 
 export interface StoriesItem {

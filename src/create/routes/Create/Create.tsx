@@ -8,14 +8,13 @@ import {
   BOT_AVATAR_SRC,
   Animation,
   ContentInstance,
-  useDevice,
   useViewWillEnter,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useUser } from '@common/hooks';
 import { Route, useRoute } from '@core/navigation';
-import { DTO, useGetUserStories } from '@network/admin';
+import { DTO, useGetStories } from '@network/api';
 
 import { Index } from './Index/Index';
 import { Details } from './Details/Details';
@@ -23,22 +22,17 @@ import { Details } from './Details/Details';
 export const Create = memo(function Create() {
   const content = useRef<ContentInstance>();
   const { t } = useTranslation();
-  const { displayName: userDisplayName, uid } = useUser();
-  const { width } = useDevice();
+  const { displayName: userDisplayName } = useUser();
   const [, navigate] = useRoute();
 
-  const { isFetching, refetch } = useGetUserStories(
+  const { isFetching, refetch } = useGetStories(
     {
-      image: {
-        aspect_ratio: '4:3',
-        crop: 'thumb',
-        width: `${width}`,
-      },
-      status: DTO.StoryStatusType.Inprogress,
-      uid,
+      status: DTO.GetStoriesStatus.inprogress,
     },
     {
-      enabled: false,
+      query: {
+        enabled: false,
+      },
     }
   );
 
@@ -51,10 +45,10 @@ export const Create = memo(function Create() {
   useViewWillEnter(() => {
     (async () => {
       const { data } = await refetch();
-      if (data.storiesCount > 0) {
+      if (data.total > 0) {
         navigate({
           action: 'replace',
-          params: { id: data?.stories[0]?.id },
+          params: { id: data?.data[0]?.id },
           pathname: RoutePath.CreateDetails,
         });
       }

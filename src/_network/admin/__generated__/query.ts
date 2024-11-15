@@ -1561,17 +1561,6 @@ export type GetStoryVariables = Exact<{
 
 export type GetStory = { story?: { title?: string | null, content?: string | null, image?: { publicUrlTransformed?: string | null } | null } | null };
 
-export type GetUserStoriesVariables = Exact<{
-  uid: Scalars['String']['input'];
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  take?: InputMaybe<Scalars['Int']['input']>;
-  image?: InputMaybe<CloudinaryImageFormat>;
-  status: StoryStatusType;
-}>;
-
-
-export type GetUserStories = { storiesCount?: number | null, stories?: Array<{ id: string, title?: string | null, readTime?: number | null, image?: { id?: string | null, publicUrlTransformed?: string | null } | null }> | null };
-
 
 
 export const CreateFeedbackDocument = /*#__PURE__*/ `
@@ -1810,61 +1799,6 @@ export const useInfiniteGetStory = <
     const { queryKey: optionsQueryKey, ...restOptions } = options;
     return {
       queryKey: optionsQueryKey ?? ['getStory.infinite', variables],
-      queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
-      ...restOptions
-    }
-  })()
-    )};
-
-export const GetUserStoriesDocument = /*#__PURE__*/ `
-    query getUserStories($uid: String!, $skip: Int, $take: Int, $image: CloudinaryImageFormat, $status: StoryStatusType!) {
-  stories(
-    skip: $skip
-    take: $take
-    orderBy: {createdAt: desc}
-    where: {firebaseUserId: {equals: $uid}, status: {equals: $status}}
-  ) {
-    id
-    title
-    readTime
-    image {
-      id
-      publicUrlTransformed(transformation: $image)
-    }
-  }
-  storiesCount(where: {firebaseUserId: {equals: $uid}, status: {equals: $status}})
-}
-    `;
-
-export const useGetUserStories = <
-      TData = GetUserStories,
-      TError = unknown
-    >(
-      variables: GetUserStoriesVariables,
-      options?: Omit<UseQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<GetUserStories, TError, TData>['queryKey'] }
-    ) => {
-    
-    return useQuery<GetUserStories, TError, TData>(
-      {
-    queryKey: ['getUserStories', variables],
-    queryFn: useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument).bind(null, variables),
-    ...options
-  }
-    )};
-
-export const useInfiniteGetUserStories = <
-      TData = InfiniteData<GetUserStories>,
-      TError = unknown
-    >(
-      variables: GetUserStoriesVariables,
-      options: Omit<UseInfiniteQueryOptions<GetUserStories, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<GetUserStories, TError, TData>['queryKey'] }
-    ) => {
-    const query = useFetchData<GetUserStories, GetUserStoriesVariables>(GetUserStoriesDocument)
-    return useInfiniteQuery<GetUserStories, TError, TData>(
-      (() => {
-    const { queryKey: optionsQueryKey, ...restOptions } = options;
-    return {
-      queryKey: optionsQueryKey ?? ['getUserStories.infinite', variables],
       queryFn: (metaData) => query({...variables, ...(metaData.pageParam ?? {})}),
       ...restOptions
     }

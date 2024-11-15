@@ -37,7 +37,7 @@ const config: AppProps = {
     },
     errorBoundary: {
       dsn: import.meta.env.VITE_SENTRY_DNS,
-      enabled: true,
+      enabled: import.meta.env.VITE_ENVIRONMENT !== 'local',
       environment: import.meta.env.VITE_ENVIRONMENT,
       release: import.meta.env.PACKAGE_VERSION,
     },

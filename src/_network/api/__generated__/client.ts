@@ -7,10 +7,7 @@
  * Fabled API Documentation
  * OpenAPI spec version: 1.0
  */
-import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-
-import { useCustomInstance } from '../hooks/useCustomInstance/index';
-
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import type {
   InfiniteData,
   MutationFunction,
@@ -21,13 +18,14 @@ import type {
   UseMutationOptions,
   UseQueryOptions,
   UseQueryResult,
-} from '@tanstack/react-query';
-import type { GetStoriesParams, Stories } from './client.schemas';
+} from "@tanstack/react-query";
+import type { GetStoriesParams, Stories, Story } from "./client.schemas";
+import { useCustomInstance } from "../hooks/useCustomInstance/index";
 
 // eslint-disable-next-line
 type SecondParameter<T extends (...args: any) => any> = T extends (
   config: any,
-  args: infer P
+  args: infer P,
 ) => any
   ? P
   : never;
@@ -41,11 +39,11 @@ export const useGetStoriesHook = () => {
   return (
     params?: GetStoriesParams,
     options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) => {
     return getStories(
-      { method: 'get', params, signal, url: `/api/stories` },
-      options
+      { url: `/api/stories`, method: "get", params, signal },
+      options,
     );
   };
 };
@@ -57,7 +55,7 @@ export const getGetStoriesQueryKey = (params?: GetStoriesParams) => {
 export const useGetStoriesInfiniteQueryOptions = <
   TData = InfiniteData<
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    GetStoriesParams['skip']
+    GetStoriesParams["skip"]
   >,
   TError = unknown,
 >(
@@ -70,11 +68,11 @@ export const useGetStoriesInfiniteQueryOptions = <
         TData,
         Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
         QueryKey,
-        GetStoriesParams['skip']
+        GetStoriesParams["skip"]
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  }
+  },
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -85,14 +83,14 @@ export const useGetStoriesInfiniteQueryOptions = <
   const queryFn: QueryFunction<
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
     QueryKey,
-    GetStoriesParams['skip']
+    GetStoriesParams["skip"]
   > = ({ signal, pageParam }) =>
     getStories({ skip: pageParam, ...params }, requestOptions, signal);
 
   return {
-    cacheTime: 0,
-    queryFn,
     queryKey,
+    queryFn,
+    cacheTime: 0,
     refetchOnWindowFocus: false,
     ...queryOptions,
   } as UseInfiniteQueryOptions<
@@ -101,7 +99,7 @@ export const useGetStoriesInfiniteQueryOptions = <
     TData,
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
     QueryKey,
-    GetStoriesParams['skip']
+    GetStoriesParams["skip"]
   > & { queryKey: QueryKey };
 };
 
@@ -116,7 +114,7 @@ export type GetStoriesInfiniteQueryError = unknown;
 export const useGetStoriesInfinite = <
   TData = InfiniteData<
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    GetStoriesParams['skip']
+    GetStoriesParams["skip"]
   >,
   TError = unknown,
 >(
@@ -129,11 +127,11 @@ export const useGetStoriesInfinite = <
         TData,
         Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
         QueryKey,
-        GetStoriesParams['skip']
+        GetStoriesParams["skip"]
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  }
+  },
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = useGetStoriesInfiniteQueryOptions(params, options);
 
@@ -161,7 +159,7 @@ export const useGetStoriesQueryOptions = <
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  }
+  },
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -174,9 +172,9 @@ export const useGetStoriesQueryOptions = <
   > = ({ signal }) => getStories(params, requestOptions, signal);
 
   return {
-    cacheTime: 0,
-    queryFn,
     queryKey,
+    queryFn,
+    cacheTime: 0,
     refetchOnWindowFocus: false,
     ...queryOptions,
   } as UseQueryOptions<
@@ -208,7 +206,7 @@ export const useGetStories = <
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  }
+  },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = useGetStoriesQueryOptions(params, options);
 
@@ -226,8 +224,8 @@ export const useCreateStoryControllerCreateStoryHook = () => {
 
   return (options?: SecondParameter<ReturnType<typeof useCustomInstance>>) => {
     return createStoryControllerCreateStory(
-      { method: 'post', url: `/api/stories` },
-      options
+      { url: `/api/stories`, method: "post" },
+      options,
     );
   };
 };
@@ -298,4 +296,177 @@ export const useCreateStoryControllerCreateStory = <
     useCreateStoryControllerCreateStoryMutationOptions(options);
 
   return useMutation(mutationOptions);
+};
+
+/**
+ * @summary Get user story
+ */
+export const useGetStoryHook = () => {
+  const getStory = useCustomInstance<Story>();
+
+  return (
+    id: unknown,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal,
+  ) => {
+    return getStory(
+      { url: `/api/stories/${id}`, method: "get", signal },
+      options,
+    );
+  };
+};
+
+export const getGetStoryQueryKey = (id: unknown) => {
+  return [`/api/stories/${id}`] as const;
+};
+
+export const useGetStoryInfiniteQueryOptions = <
+  TData = InfiniteData<Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>>,
+  TError = unknown,
+>(
+  id: unknown,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id);
+
+  const getStory = useGetStoryHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
+  > = ({ signal }) => getStory(id, requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetStoryInfiniteQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
+>;
+export type GetStoryInfiniteQueryError = unknown;
+
+/**
+ * @summary Get user story
+ */
+export const useGetStoryInfinite = <
+  TData = InfiniteData<Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>>,
+  TError = unknown,
+>(
+  id: unknown,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetStoryInfiniteQueryOptions(id, options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetStoryQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+  TError = unknown,
+>(
+  id: unknown,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id);
+
+  const getStory = useGetStoryHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
+  > = ({ signal }) => getStory(id, requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetStoryQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
+>;
+export type GetStoryQueryError = unknown;
+
+/**
+ * @summary Get user story
+ */
+export const useGetStory = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+  TError = unknown,
+>(
+  id: unknown,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetStoryQueryOptions(id, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
 };
