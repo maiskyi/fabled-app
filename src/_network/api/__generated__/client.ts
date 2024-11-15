@@ -21,6 +21,7 @@ import type {
 } from "@tanstack/react-query";
 import type {
   Bootstrap,
+  GetBootstrapParams,
   GetStoriesParams,
   Stories,
   Story,
@@ -42,44 +43,55 @@ export const useGetBootstrapHook = () => {
   const getBootstrap = useCustomInstance<Bootstrap>();
 
   return (
+    params?: GetBootstrapParams,
     options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
     signal?: AbortSignal,
   ) => {
     return getBootstrap(
-      { url: `/api/bootstrap`, method: "get", signal },
+      { url: `/api/bootstrap`, method: "get", params, signal },
       options,
     );
   };
 };
 
-export const getGetBootstrapQueryKey = () => {
-  return [`/api/bootstrap`] as const;
+export const getGetBootstrapQueryKey = (params?: GetBootstrapParams) => {
+  return [`/api/bootstrap`, ...(params ? [params] : [])] as const;
 };
 
 export const useGetBootstrapInfiniteQueryOptions = <
   TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    GetBootstrapParams["skip"]
   >,
   TError = unknown,
->(options?: {
-  query?: Partial<
-    UseInfiniteQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}) => {
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        QueryKey,
+        GetBootstrapParams["skip"]
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey(params);
 
   const getBootstrap = useGetBootstrapHook();
 
   const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
-  > = ({ signal }) => getBootstrap(requestOptions, signal);
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    QueryKey,
+    GetBootstrapParams["skip"]
+  > = ({ signal, pageParam }) =>
+    getBootstrap({ skip: pageParam, ...params }, requestOptions, signal);
 
   return {
     queryKey,
@@ -90,7 +102,10 @@ export const useGetBootstrapInfiniteQueryOptions = <
   } as UseInfiniteQueryOptions<
     Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
     TError,
-    TData
+    TData,
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    QueryKey,
+    GetBootstrapParams["skip"]
   > & { queryKey: QueryKey };
 };
 
@@ -104,20 +119,27 @@ export type GetBootstrapInfiniteQueryError = unknown;
  */
 export const useGetBootstrapInfinite = <
   TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    GetBootstrapParams["skip"]
   >,
   TError = unknown,
->(options?: {
-  query?: Partial<
-    UseInfiniteQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetBootstrapInfiniteQueryOptions(options);
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        QueryKey,
+        GetBootstrapParams["skip"]
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetBootstrapInfiniteQueryOptions(params, options);
 
   const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
     TData,
@@ -132,25 +154,28 @@ export const useGetBootstrapInfinite = <
 export const useGetBootstrapQueryOptions = <
   TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
   TError = unknown,
->(options?: {
-  query?: Partial<
-    UseQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}) => {
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey();
+  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey(params);
 
   const getBootstrap = useGetBootstrapHook();
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
-  > = ({ signal }) => getBootstrap(requestOptions, signal);
+  > = ({ signal }) => getBootstrap(params, requestOptions, signal);
 
   return {
     queryKey,
@@ -176,17 +201,20 @@ export type GetBootstrapQueryError = unknown;
 export const useGetBootstrap = <
   TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
   TError = unknown,
->(options?: {
-  query?: Partial<
-    UseQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetBootstrapQueryOptions(options);
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetBootstrapQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

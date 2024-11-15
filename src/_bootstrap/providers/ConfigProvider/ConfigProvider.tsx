@@ -1,7 +1,5 @@
 import { FC, Fragment, PropsWithChildren } from 'react';
-import { useMount } from 'react-use';
 
-import { useGetBootstrap as useGet } from '@network/admin';
 import { useDevice } from '@core/uikit';
 import { useGetBootstrap } from '@network/api';
 
@@ -19,44 +17,29 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
 }) => {
   const { width } = useDevice();
 
-  const { data: bootstrap } = useGetBootstrap();
-
-  console.log(bootstrap);
-
-  const { isSuccess, data, refetch } = useGet(
-    {
-      image: {
-        crop: 'thumb',
-        height: `${width}`,
-        width: `${width}`,
-      },
+  const { isSuccess, data: bootstrap } = useGetBootstrap({
+    image: {
+      crop: 'thumb',
+      height: width,
+      width: width,
     },
-    {
-      enabled: false,
-    }
-  );
+  });
 
-  useMount(async () => {
-    const {
-      data: { characters, placeOfEvents },
-    } = await refetch();
+  bootstrap?.characters.forEach(({ image }) => {
+    new Image().src = image;
+  });
 
-    characters.forEach(({ image: { publicUrlTransformed } }) => {
-      new Image().src = publicUrlTransformed;
-    });
-
-    placeOfEvents.forEach(({ image: { publicUrlTransformed } }) => {
-      new Image().src = publicUrlTransformed;
-    });
+  bootstrap?.placeOfEvents.forEach(({ image }) => {
+    new Image().src = image;
   });
 
   return isSuccess ? (
     <ConfigContext.Provider
       value={{
-        characters: data.characters,
+        characters: bootstrap?.characters,
         privacyPolicyUrl: bootstrap?.config.privacyPolicyUrl,
         prompts: bootstrap?.prompts,
-        scenes: data.placeOfEvents,
+        scenes: bootstrap?.placeOfEvents,
         termsAndConditionsUrl: bootstrap?.config.termsAndConditionsUrl,
         themes: bootstrap?.moralLessons,
         version,

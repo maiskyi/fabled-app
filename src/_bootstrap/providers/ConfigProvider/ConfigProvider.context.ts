@@ -1,15 +1,14 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO as BDTO } from '@network/admin';
 import { DTO } from '@network/api';
 
 interface ConfigContextProps {
   version: string;
   privacyPolicyUrl: string;
   termsAndConditionsUrl: string;
-  characters: BDTO.GetBootstrap['characters'];
+  characters: DTO.CharacterItem[];
   prompts: DTO.PromptItem[];
-  scenes: BDTO.GetBootstrap['placeOfEvents'];
+  scenes: DTO.PlaceOfEventItem[];
   themes: DTO.MoralLessonsItem[];
 }
 

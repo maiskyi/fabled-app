@@ -23,6 +23,10 @@ export type GetStoriesParams = {
   skip?: number;
 };
 
+export type GetBootstrapParams = {
+  image?: ImageTransformationQuery;
+};
+
 export interface StoryImage {
   publicId: string;
 }
@@ -57,6 +61,19 @@ export interface PromptItem {
   message: string;
 }
 
+export interface PlaceOfEventItem {
+  id: string;
+  image: string;
+  title: string;
+}
+
+export interface CharacterItem {
+  description: string;
+  id: string;
+  image: string;
+  title: string;
+}
+
 export interface MoralLessonsItem {
   description: string;
   id: string;
@@ -64,7 +81,35 @@ export interface MoralLessonsItem {
 }
 
 export interface Bootstrap {
+  characters: CharacterItem[];
   config: Config;
   moralLessons: MoralLessonsItem[];
+  placeOfEvents: PlaceOfEventItem[];
   prompts: PromptItem[];
+}
+
+export type ImageTransformationQueryCrop =
+  (typeof ImageTransformationQueryCrop)[keyof typeof ImageTransformationQueryCrop];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ImageTransformationQueryCrop = {
+  scale: "scale",
+  fit: "fit",
+  limit: "limit",
+  mfit: "mfit",
+  fill: "fill",
+  lfill: "lfill",
+  pad: "pad",
+  lpad: "lpad",
+  mpad: "mpad",
+  crop: "crop",
+  thumb: "thumb",
+  imagga_crop: "imagga_crop",
+  imagga_scale: "imagga_scale",
+} as const;
+
+export interface ImageTransformationQuery {
+  crop?: ImageTransformationQueryCrop;
+  height?: number;
+  width?: number;
 }
