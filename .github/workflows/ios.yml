@@ -40,7 +40,8 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_VITE_API_ENDPOINT: ${{ vars.API_ENDPOINT }}
-          envkey_VITE_API_SUBSCRIPTION: ${{ vars.API_SUBSCRIPTION }}
+          envkey_VITE_ADMIN_SUBSCRIPTION: ${{ vars.ADMIN_SUBSCRIPTION }}
+          envkey_VITE_ADMIN_ENDPOINT: ${{ vars.ADMIN_ENDPOINT }}
           envkey_VITE_ENVIRONMENT: ${{ github.event.inputs.environment }}
           envkey_VITE_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
           envkey_VITE_FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
