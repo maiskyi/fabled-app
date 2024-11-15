@@ -19,7 +19,12 @@ import type {
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
-import type { GetStoriesParams, Stories, Story } from "./client.schemas";
+import type {
+  Bootstrap,
+  GetStoriesParams,
+  Stories,
+  Story,
+} from "./client.schemas";
 import { useCustomInstance } from "../hooks/useCustomInstance/index";
 
 // eslint-disable-next-line
@@ -29,6 +34,330 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
 ) => any
   ? P
   : never;
+
+/**
+ * @summary Get app bootstrap data
+ */
+export const useGetBootstrapHook = () => {
+  const getBootstrap = useCustomInstance<Bootstrap>();
+
+  return (
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal,
+  ) => {
+    return getBootstrap(
+      { url: `/api/bootstrap`, method: "get", signal },
+      options,
+    );
+  };
+};
+
+export const getGetBootstrapQueryKey = () => {
+  return [`/api/bootstrap`] as const;
+};
+
+export const useGetBootstrapInfiniteQueryOptions = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey();
+
+  const getBootstrap = useGetBootstrapHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+  > = ({ signal }) => getBootstrap(requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetBootstrapInfiniteQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+>;
+export type GetBootstrapInfiniteQueryError = unknown;
+
+/**
+ * @summary Get app bootstrap data
+ */
+export const useGetBootstrapInfinite = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetBootstrapInfiniteQueryOptions(options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetBootstrapQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey();
+
+  const getBootstrap = useGetBootstrapHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+  > = ({ signal }) => getBootstrap(requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetBootstrapQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+>;
+export type GetBootstrapQueryError = unknown;
+
+/**
+ * @summary Get app bootstrap data
+ */
+export const useGetBootstrap = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetBootstrapQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+/**
+ * @summary Get health check status
+ */
+export const useGetHealthCheckHook = () => {
+  const getHealthCheck = useCustomInstance<string>();
+
+  return (
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal,
+  ) => {
+    return getHealthCheck(
+      { url: `/api/health-check`, method: "get", signal },
+      options,
+    );
+  };
+};
+
+export const getGetHealthCheckQueryKey = () => {
+  return [`/api/health-check`] as const;
+};
+
+export const useGetHealthCheckInfiniteQueryOptions = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetHealthCheckQueryKey();
+
+  const getHealthCheck = useGetHealthCheckHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  > = ({ signal }) => getHealthCheck(requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetHealthCheckInfiniteQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+>;
+export type GetHealthCheckInfiniteQueryError = unknown;
+
+/**
+ * @summary Get health check status
+ */
+export const useGetHealthCheckInfinite = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetHealthCheckInfiniteQueryOptions(options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetHealthCheckQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetHealthCheckQueryKey();
+
+  const getHealthCheck = useGetHealthCheckHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  > = ({ signal }) => getHealthCheck(requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetHealthCheckQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+>;
+export type GetHealthCheckQueryError = unknown;
+
+/**
+ * @summary Get health check status
+ */
+export const useGetHealthCheck = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetHealthCheckQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
 
 /**
  * @summary Get user stories
@@ -305,7 +634,7 @@ export const useGetStoryHook = () => {
   const getStory = useCustomInstance<Story>();
 
   return (
-    id: unknown,
+    id: string,
     options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
     signal?: AbortSignal,
   ) => {
@@ -316,7 +645,7 @@ export const useGetStoryHook = () => {
   };
 };
 
-export const getGetStoryQueryKey = (id: unknown) => {
+export const getGetStoryQueryKey = (id: string) => {
   return [`/api/stories/${id}`] as const;
 };
 
@@ -324,7 +653,7 @@ export const useGetStoryInfiniteQueryOptions = <
   TData = InfiniteData<Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>>,
   TError = unknown,
 >(
-  id: unknown,
+  id: string,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
@@ -372,7 +701,7 @@ export const useGetStoryInfinite = <
   TData = InfiniteData<Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>>,
   TError = unknown,
 >(
-  id: unknown,
+  id: string,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
@@ -400,7 +729,7 @@ export const useGetStoryQueryOptions = <
   TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
   TError = unknown,
 >(
-  id: unknown,
+  id: string,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -448,7 +777,7 @@ export const useGetStory = <
   TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
   TError = unknown,
 >(
-  id: unknown,
+  id: string,
   options?: {
     query?: Partial<
       UseQueryOptions<

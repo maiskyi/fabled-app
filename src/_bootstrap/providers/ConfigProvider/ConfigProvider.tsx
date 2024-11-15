@@ -3,6 +3,7 @@ import { useMount } from 'react-use';
 
 import { useGetBootstrap } from '@network/admin';
 import { useDevice } from '@core/uikit';
+import { useGetBootstrap as useGet } from '@network/api';
 
 import { ConfigContext } from './ConfigProvider.context';
 
@@ -17,6 +18,10 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
   Loader = Fragment,
 }) => {
   const { width } = useDevice();
+
+  const { data: bootstrap } = useGet();
+
+  console.log(bootstrap);
 
   const { isSuccess, data, refetch } = useGetBootstrap(
     {
@@ -49,11 +54,11 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
     <ConfigContext.Provider
       value={{
         characters: data.characters,
-        privacyPolicyUrl: data?.config.privacyPolicyUrl,
+        privacyPolicyUrl: bootstrap?.config.privacyPolicyUrl,
         prompts: data.prompts,
         scenes: data.placeOfEvents,
-        termsAndConditionsUrl: data?.config.termsAndConditionsUrl,
-        themes: data.moralLessons,
+        termsAndConditionsUrl: bootstrap?.config.termsAndConditionsUrl,
+        themes: bootstrap?.moralLessons,
         version,
       }}
     >

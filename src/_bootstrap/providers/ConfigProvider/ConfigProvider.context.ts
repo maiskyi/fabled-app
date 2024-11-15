@@ -1,15 +1,16 @@
 import { createContext } from 'use-context-selector';
 
-import { DTO } from '@network/admin';
+import { DTO as BDTO } from '@network/admin';
+import { DTO } from '@network/api';
 
 interface ConfigContextProps {
   version: string;
   privacyPolicyUrl: string;
   termsAndConditionsUrl: string;
-  characters: DTO.GetBootstrap['characters'];
-  prompts: DTO.GetBootstrap['prompts'];
-  scenes: DTO.GetBootstrap['placeOfEvents'];
-  themes: DTO.GetBootstrap['moralLessons'];
+  characters: BDTO.GetBootstrap['characters'];
+  prompts: BDTO.GetBootstrap['prompts'];
+  scenes: BDTO.GetBootstrap['placeOfEvents'];
+  themes: DTO.MoralLessonsItem[];
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({

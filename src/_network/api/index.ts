@@ -9,6 +9,7 @@ export {
   useGetStories,
   useGetStoriesInfinite,
   useGetStory,
+  useGetBootstrap,
 } from './__generated__/client';
 
 export { DTO };

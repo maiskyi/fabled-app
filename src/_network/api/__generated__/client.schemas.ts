@@ -46,3 +46,19 @@ export interface Stories {
   data: StoriesItem[];
   total: number;
 }
+
+export interface Config {
+  privacyPolicyUrl: string;
+  termsAndConditionsUrl: string;
+}
+
+export interface MoralLessonsItem {
+  description: string;
+  id: string;
+  title: string;
+}
+
+export interface Bootstrap {
+  config: Config;
+  moralLessons: MoralLessonsItem[];
+}
