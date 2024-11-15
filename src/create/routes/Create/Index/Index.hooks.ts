@@ -10,14 +10,12 @@ export const useOptions = () => {
 
   const charactersOptions = useMemo(
     (): FormInputOptionProps<string>[] =>
-      characters.map(
-        ({ id, title, description, image: { publicUrlTransformed } }) => ({
-          image: publicUrlTransformed,
-          label: title,
-          note: description,
-          value: id,
-        })
-      ),
+      characters.map(({ id, title, description, image }) => ({
+        image,
+        label: title,
+        note: description,
+        value: id,
+      })),
     [characters]
   );
 
@@ -33,8 +31,8 @@ export const useOptions = () => {
 
   const scenesOptions = useMemo(
     (): FormInputOptionProps<string>[] =>
-      scenes.map(({ id, title, image: { publicUrlTransformed } }) => ({
-        image: publicUrlTransformed,
+      scenes.map(({ id, title, image }) => ({
+        image,
         label: title,
         value: id,
       })),
