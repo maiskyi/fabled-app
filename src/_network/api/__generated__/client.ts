@@ -7,7 +7,10 @@
  * Fabled API Documentation
  * OpenAPI spec version: 1.0
  */
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+
+import { useCustomInstance } from '../hooks/useCustomInstance/index';
+
 import type {
   InfiniteData,
   MutationFunction,
@@ -18,14 +21,13 @@ import type {
   UseMutationOptions,
   UseQueryOptions,
   UseQueryResult,
-} from "@tanstack/react-query";
-import type { GetStoriesParams, Stories } from "./client.schemas";
-import { useCustomInstance } from "../hooks/useCustomInstance/index";
+} from '@tanstack/react-query';
+import type { GetStoriesParams, Stories } from './client.schemas';
 
 // eslint-disable-next-line
 type SecondParameter<T extends (...args: any) => any> = T extends (
   config: any,
-  args: infer P,
+  args: infer P
 ) => any
   ? P
   : never;
@@ -39,11 +41,11 @@ export const useGetStoriesHook = () => {
   return (
     params?: GetStoriesParams,
     options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) => {
     return getStories(
-      { url: `/api/stories`, method: "get", params, signal },
-      options,
+      { method: 'get', params, signal, url: `/api/stories` },
+      options
     );
   };
 };
@@ -55,7 +57,7 @@ export const getGetStoriesQueryKey = (params?: GetStoriesParams) => {
 export const useGetStoriesInfiniteQueryOptions = <
   TData = InfiniteData<
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    GetStoriesParams["skip"]
+    GetStoriesParams['skip']
   >,
   TError = unknown,
 >(
@@ -68,11 +70,11 @@ export const useGetStoriesInfiniteQueryOptions = <
         TData,
         Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
         QueryKey,
-        GetStoriesParams["skip"]
+        GetStoriesParams['skip']
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -83,14 +85,14 @@ export const useGetStoriesInfiniteQueryOptions = <
   const queryFn: QueryFunction<
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
     QueryKey,
-    GetStoriesParams["skip"]
+    GetStoriesParams['skip']
   > = ({ signal, pageParam }) =>
     getStories({ skip: pageParam, ...params }, requestOptions, signal);
 
   return {
-    queryKey,
-    queryFn,
     cacheTime: 0,
+    queryFn,
+    queryKey,
     refetchOnWindowFocus: false,
     ...queryOptions,
   } as UseInfiniteQueryOptions<
@@ -99,7 +101,7 @@ export const useGetStoriesInfiniteQueryOptions = <
     TData,
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
     QueryKey,
-    GetStoriesParams["skip"]
+    GetStoriesParams['skip']
   > & { queryKey: QueryKey };
 };
 
@@ -114,7 +116,7 @@ export type GetStoriesInfiniteQueryError = unknown;
 export const useGetStoriesInfinite = <
   TData = InfiniteData<
     Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    GetStoriesParams["skip"]
+    GetStoriesParams['skip']
   >,
   TError = unknown,
 >(
@@ -127,11 +129,11 @@ export const useGetStoriesInfinite = <
         TData,
         Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
         QueryKey,
-        GetStoriesParams["skip"]
+        GetStoriesParams['skip']
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
+  }
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = useGetStoriesInfiniteQueryOptions(params, options);
 
@@ -159,7 +161,7 @@ export const useGetStoriesQueryOptions = <
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -172,9 +174,9 @@ export const useGetStoriesQueryOptions = <
   > = ({ signal }) => getStories(params, requestOptions, signal);
 
   return {
-    queryKey,
-    queryFn,
     cacheTime: 0,
+    queryFn,
+    queryKey,
     refetchOnWindowFocus: false,
     ...queryOptions,
   } as UseQueryOptions<
@@ -206,7 +208,7 @@ export const useGetStories = <
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
+  }
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = useGetStoriesQueryOptions(params, options);
 
@@ -224,8 +226,8 @@ export const useCreateStoryControllerCreateStoryHook = () => {
 
   return (options?: SecondParameter<ReturnType<typeof useCustomInstance>>) => {
     return createStoryControllerCreateStory(
-      { url: `/api/stories`, method: "post" },
-      options,
+      { method: 'post', url: `/api/stories` },
+      options
     );
   };
 };
