@@ -1,12 +1,12 @@
 import { memo } from 'react';
 
 import { Box } from '@core/uikit';
-import { DTO } from '@network/admin';
+import { DTO } from '@network/api';
 
 import { FableCard } from '../FableCard';
 
 interface FablesListProps {
-  data: DTO.GetUserStories['stories'];
+  data: DTO.StoriesItem[];
   onClick: (id: string) => void;
 }
 
