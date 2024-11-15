@@ -1,9 +1,9 @@
 import { FC, Fragment, PropsWithChildren } from 'react';
 import { useMount } from 'react-use';
 
-import { useGetBootstrap } from '@network/admin';
+import { useGetBootstrap as useGet } from '@network/admin';
 import { useDevice } from '@core/uikit';
-import { useGetBootstrap as useGet } from '@network/api';
+import { useGetBootstrap } from '@network/api';
 
 import { ConfigContext } from './ConfigProvider.context';
 
@@ -19,11 +19,11 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
 }) => {
   const { width } = useDevice();
 
-  const { data: bootstrap } = useGet();
+  const { data: bootstrap } = useGetBootstrap();
 
   console.log(bootstrap);
 
-  const { isSuccess, data, refetch } = useGetBootstrap(
+  const { isSuccess, data, refetch } = useGet(
     {
       image: {
         crop: 'thumb',
@@ -55,7 +55,7 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
       value={{
         characters: data.characters,
         privacyPolicyUrl: bootstrap?.config.privacyPolicyUrl,
-        prompts: data.prompts,
+        prompts: bootstrap?.prompts,
         scenes: data.placeOfEvents,
         termsAndConditionsUrl: bootstrap?.config.termsAndConditionsUrl,
         themes: bootstrap?.moralLessons,

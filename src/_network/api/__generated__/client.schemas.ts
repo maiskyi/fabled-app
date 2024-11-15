@@ -52,6 +52,11 @@ export interface Config {
   termsAndConditionsUrl: string;
 }
 
+export interface PromptItem {
+  id: string;
+  message: string;
+}
+
 export interface MoralLessonsItem {
   description: string;
   id: string;
@@ -61,4 +66,5 @@ export interface MoralLessonsItem {
 export interface Bootstrap {
   config: Config;
   moralLessons: MoralLessonsItem[];
+  prompts: PromptItem[];
 }

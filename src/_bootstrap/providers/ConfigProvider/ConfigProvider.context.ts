@@ -8,7 +8,7 @@ interface ConfigContextProps {
   privacyPolicyUrl: string;
   termsAndConditionsUrl: string;
   characters: BDTO.GetBootstrap['characters'];
-  prompts: BDTO.GetBootstrap['prompts'];
+  prompts: DTO.PromptItem[];
   scenes: BDTO.GetBootstrap['placeOfEvents'];
   themes: DTO.MoralLessonsItem[];
 }
