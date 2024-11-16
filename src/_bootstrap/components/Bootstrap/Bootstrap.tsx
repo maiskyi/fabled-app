@@ -9,7 +9,6 @@ import {
 } from '@core/localization';
 import { AppUrlListener } from '@core/navigation';
 import { PurchasesProvider, PurchasesProviderProps } from '@core/purchases';
-import { CloudinaryProvider, CloudinaryProviderProps } from '@core/cloudinary';
 
 import { Network, NetworkProps } from './Network';
 import { Navigation } from './Navigation';
@@ -28,7 +27,6 @@ export type BootstrapProps = PropsWithChildren<{
   config: ConfigProps;
   purchases: PurchasesProviderProps;
   errorBoundary: ErrorBoundaryProps;
-  cloudinary: CloudinaryProviderProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
@@ -39,7 +37,6 @@ export const Bootstrap: FC<BootstrapProps> = ({
   config,
   purchases,
   errorBoundary,
-  cloudinary,
 }) => {
   return (
     <ThemeProvider>
@@ -47,21 +44,19 @@ export const Bootstrap: FC<BootstrapProps> = ({
         <ErrorBoundary {...errorBoundary}>
           <AppUpdate>
             <AppUrlListener>
-              <CloudinaryProvider {...cloudinary}>
-                <PurchasesProvider {...purchases}>
-                  <QueryProvider>
-                    <AppProvider {...app}>
-                      <AuthProvider>
-                        <Network {...network}>
-                          <Config {...config}>
-                            <Navigation>{children}</Navigation>
-                          </Config>
-                        </Network>
-                      </AuthProvider>
-                    </AppProvider>
-                  </QueryProvider>
-                </PurchasesProvider>
-              </CloudinaryProvider>
+              <PurchasesProvider {...purchases}>
+                <QueryProvider>
+                  <AppProvider {...app}>
+                    <AuthProvider>
+                      <Network {...network}>
+                        <Config {...config}>
+                          <Navigation>{children}</Navigation>
+                        </Config>
+                      </Network>
+                    </AuthProvider>
+                  </AppProvider>
+                </QueryProvider>
+              </PurchasesProvider>
             </AppUrlListener>
           </AppUpdate>
         </ErrorBoundary>
