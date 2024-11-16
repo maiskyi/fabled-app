@@ -7,14 +7,18 @@
  * Fabled API Documentation
  * OpenAPI spec version: 1.0
  */
+export type GetStoryParams = {
+  image?: ImageTransformationQuery;
+};
+
 export type GetStoriesStatus =
   (typeof GetStoriesStatus)[keyof typeof GetStoriesStatus];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetStoriesStatus = {
-  failed: 'failed',
-  inprogress: 'inprogress',
-  success: 'success',
+  inprogress: "inprogress",
+  success: "success",
+  failed: "failed",
 } as const;
 
 export type GetStoriesParams = {
@@ -28,14 +32,10 @@ export type GetBootstrapParams = {
   image?: ImageTransformationQuery;
 };
 
-export interface StoryImage {
-  publicId: string;
-}
-
 export interface Story {
   content: string;
   id: string;
-  image: StoryImage;
+  image: string;
   readTime: number;
   title: string;
 }
@@ -93,19 +93,19 @@ export type ImageTransformationQueryCrop =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ImageTransformationQueryCrop = {
-  fill: 'fill',
-  crop: 'crop',
-  fit: 'fit',
-  imagga_crop: 'imagga_crop',
-  lfill: 'lfill',
-  imagga_scale: 'imagga_scale',
-  limit: 'limit',
-  lpad: 'lpad',
-  mfit: 'mfit',
-  mpad: 'mpad',
   scale: "scale",
-  pad: 'pad',
-  thumb: 'thumb',
+  fit: "fit",
+  limit: "limit",
+  mfit: "mfit",
+  fill: "fill",
+  lfill: "lfill",
+  pad: "pad",
+  lpad: "lpad",
+  mpad: "mpad",
+  crop: "crop",
+  thumb: "thumb",
+  imagga_crop: "imagga_crop",
+  imagga_scale: "imagga_scale",
 } as const;
 
 export type ImageTransformationQueryAspectRatio =
@@ -113,12 +113,12 @@ export type ImageTransformationQueryAspectRatio =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ImageTransformationQueryAspectRatio = {
-  '16:9': '16:9',
-  '1:1': '1:1',
-  '3:1': '3:1',
-  '3:2': '3:2',
-  '4:3': '4:3',
-  '5:4': '5:4',
+  "1:1": "1:1",
+  "5:4": "5:4",
+  "3:1": "3:1",
+  "3:2": "3:2",
+  "4:3": "4:3",
+  "16:9": "16:9",
 } as const;
 
 export interface ImageTransformationQuery {

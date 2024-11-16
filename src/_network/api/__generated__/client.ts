@@ -23,6 +23,7 @@ import type {
   Bootstrap,
   GetBootstrapParams,
   GetStoriesParams,
+  GetStoryParams,
   Stories,
   Story,
 } from "./client.schemas";
@@ -663,31 +664,39 @@ export const useGetStoryHook = () => {
 
   return (
     id: string,
+    params?: GetStoryParams,
     options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
     signal?: AbortSignal,
   ) => {
     return getStory(
-      { url: `/api/stories/${id}`, method: "get", signal },
+      { url: `/api/stories/${id}`, method: "get", params, signal },
       options,
     );
   };
 };
 
-export const getGetStoryQueryKey = (id: string) => {
-  return [`/api/stories/${id}`] as const;
+export const getGetStoryQueryKey = (id: string, params?: GetStoryParams) => {
+  return [`/api/stories/${id}`, ...(params ? [params] : [])] as const;
 };
 
 export const useGetStoryInfiniteQueryOptions = <
-  TData = InfiniteData<Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>>,
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    GetStoryParams["skip"]
+  >,
   TError = unknown,
 >(
   id: string,
+  params?: GetStoryParams,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
         Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
         TError,
-        TData
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        QueryKey,
+        GetStoryParams["skip"]
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
@@ -695,13 +704,16 @@ export const useGetStoryInfiniteQueryOptions = <
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id);
+  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id, params);
 
   const getStory = useGetStoryHook();
 
   const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
-  > = ({ signal }) => getStory(id, requestOptions, signal);
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    QueryKey,
+    GetStoryParams["skip"]
+  > = ({ signal, pageParam }) =>
+    getStory(id, { skip: pageParam, ...params }, requestOptions, signal);
 
   return {
     queryKey,
@@ -713,7 +725,10 @@ export const useGetStoryInfiniteQueryOptions = <
   } as UseInfiniteQueryOptions<
     Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
     TError,
-    TData
+    TData,
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    QueryKey,
+    GetStoryParams["skip"]
   > & { queryKey: QueryKey };
 };
 
@@ -726,22 +741,29 @@ export type GetStoryInfiniteQueryError = unknown;
  * @summary Get user story
  */
 export const useGetStoryInfinite = <
-  TData = InfiniteData<Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>>,
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    GetStoryParams["skip"]
+  >,
   TError = unknown,
 >(
   id: string,
+  params?: GetStoryParams,
   options?: {
     query?: Partial<
       UseInfiniteQueryOptions<
         Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
         TError,
-        TData
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        QueryKey,
+        GetStoryParams["skip"]
       >
     >;
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
   },
 ): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetStoryInfiniteQueryOptions(id, options);
+  const queryOptions = useGetStoryInfiniteQueryOptions(id, params, options);
 
   const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
     TData,
@@ -758,6 +780,7 @@ export const useGetStoryQueryOptions = <
   TError = unknown,
 >(
   id: string,
+  params?: GetStoryParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -771,13 +794,13 @@ export const useGetStoryQueryOptions = <
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id);
+  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id, params);
 
   const getStory = useGetStoryHook();
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
-  > = ({ signal }) => getStory(id, requestOptions, signal);
+  > = ({ signal }) => getStory(id, params, requestOptions, signal);
 
   return {
     queryKey,
@@ -806,6 +829,7 @@ export const useGetStory = <
   TError = unknown,
 >(
   id: string,
+  params?: GetStoryParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -817,7 +841,7 @@ export const useGetStory = <
     request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetStoryQueryOptions(id, options);
+  const queryOptions = useGetStoryQueryOptions(id, params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
