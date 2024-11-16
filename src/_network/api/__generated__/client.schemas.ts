@@ -1,4 +1,3 @@
-/* eslint-disable no-redeclare */
 // @ts-nocheck
 
 /**
@@ -13,15 +12,16 @@ export type GetStoriesStatus =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetStoriesStatus = {
-  failed: 'failed',
-  inprogress: 'inprogress',
-  success: 'success',
+  inprogress: "inprogress",
+  success: "success",
+  failed: "failed",
 } as const;
 
 export type GetStoriesParams = {
-  status?: GetStoriesStatus;
-  take?: number;
   skip?: number;
+  take?: number;
+  status?: GetStoriesStatus;
+  image?: ImageTransformationQuery;
 };
 
 export type GetBootstrapParams = {
@@ -40,15 +40,15 @@ export interface Story {
   title: string;
 }
 
-export interface StoriesItem {
+export interface StoryItem {
   id: string;
-  image: StoryImage;
+  image: string;
   readTime: number;
   title: string;
 }
 
 export interface Stories {
-  data: StoriesItem[];
+  data: StoryItem[];
   total: number;
 }
 
@@ -69,7 +69,6 @@ export interface PlaceOfEventItem {
 }
 
 export interface CharacterItem {
-  description: string;
   id: string;
   image: string;
   title: string;
@@ -94,22 +93,36 @@ export type ImageTransformationQueryCrop =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ImageTransformationQueryCrop = {
-  crop: 'crop',
-  fill: 'fill',
-  fit: 'fit',
-  imagga_crop: 'imagga_crop',
-  imagga_scale: 'imagga_scale',
-  lfill: 'lfill',
-  limit: 'limit',
-  lpad: 'lpad',
-  mfit: 'mfit',
-  mpad: 'mpad',
-  pad: 'pad',
-  scale: 'scale',
-  thumb: 'thumb',
+  scale: "scale",
+  fit: "fit",
+  limit: "limit",
+  mfit: "mfit",
+  fill: "fill",
+  lfill: "lfill",
+  pad: "pad",
+  lpad: "lpad",
+  mpad: "mpad",
+  crop: "crop",
+  thumb: "thumb",
+  imagga_crop: "imagga_crop",
+  imagga_scale: "imagga_scale",
+} as const;
+
+export type ImageTransformationQueryAspectRatio =
+  (typeof ImageTransformationQueryAspectRatio)[keyof typeof ImageTransformationQueryAspectRatio];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ImageTransformationQueryAspectRatio = {
+  "1:1": "1:1",
+  "5:4": "5:4",
+  "3:1": "3:1",
+  "3:2": "3:2",
+  "4:3": "4:3",
+  "16:9": "16:9",
 } as const;
 
 export interface ImageTransformationQuery {
+  aspectRatio?: ImageTransformationQueryAspectRatio;
   crop?: ImageTransformationQueryCrop;
   height?: number;
   width?: number;
