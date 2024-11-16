@@ -1,5 +1,0 @@
-mutation createStory($data: StoryCreateInput!) {
-  createStory(data: $data) {
-    id
-  }
-}

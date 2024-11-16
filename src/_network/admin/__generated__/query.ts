@@ -1439,15 +1439,6 @@ export type StringFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Subscription = {
-  userStoriesCountUpdated?: Maybe<Scalars['Int']['output']>;
-};
-
-
-export type SubscriptionUserStoriesCountUpdatedArgs = {
-  id?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type User = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -1532,13 +1523,6 @@ export type CreateInquiryVariables = Exact<{
 
 export type CreateInquiry = { createInquiry?: { id: string } | null };
 
-export type CreateStoryVariables = Exact<{
-  data: StoryCreateInput;
-}>;
-
-
-export type CreateStory = { createStory?: { id: string } | null };
-
 export type GetBootstrapVariables = Exact<{
   image?: InputMaybe<CloudinaryImageFormat>;
 }>;
@@ -1595,27 +1579,6 @@ export const useCreateInquiry = <
       {
     mutationKey: ['createInquiry'],
     mutationFn: useFetchData<CreateInquiry, CreateInquiryVariables>(CreateInquiryDocument),
-    ...options
-  }
-    )};
-
-export const CreateStoryDocument = /*#__PURE__*/ `
-    mutation createStory($data: StoryCreateInput!) {
-  createStory(data: $data) {
-    id
-  }
-}
-    `;
-
-export const useCreateStory = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<CreateStory, TError, CreateStoryVariables, TContext>) => {
-    
-    return useMutation<CreateStory, TError, CreateStoryVariables, TContext>(
-      {
-    mutationKey: ['createStory'],
-    mutationFn: useFetchData<CreateStory, CreateStoryVariables>(CreateStoryDocument),
     ...options
   }
     )};
