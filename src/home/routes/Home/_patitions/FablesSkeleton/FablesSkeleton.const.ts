@@ -1,13 +1,11 @@
 import { DTO } from '@network/api';
 
-export const SKELETON_INITIAL_DATA: DTO.StoriesItem[] = Array.from({
+export const SKELETON_INITIAL_DATA: DTO.StoryItem[] = Array.from({
   length: 3,
 }).map(
-  (): DTO.StoriesItem => ({
+  (): DTO.StoryItem => ({
     id: '',
-    image: {
-      publicId: '',
-    },
+    image: '',
     readTime: 0,
     title: '',
   })

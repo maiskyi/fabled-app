@@ -6,7 +6,7 @@ import { DTO } from '@network/api';
 import { FableCard } from '../FableCard';
 
 interface FablesListProps {
-  data: DTO.StoriesItem[];
+  data: DTO.StoryItem[];
   onClick: (id: string) => void;
 }
 

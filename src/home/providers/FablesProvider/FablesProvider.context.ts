@@ -5,7 +5,7 @@ import { DTO, useGetStoriesInfinite } from '@network/api';
 type UseGetStoriesInfiniteReturnType = ReturnType<typeof useGetStoriesInfinite>;
 
 export interface FablesProviderContextProps {
-  stories: DTO.StoriesItem[];
+  stories: DTO.StoryItem[];
   isLoading: boolean;
   hasNextPage: boolean;
   fetchNextPage: UseGetStoriesInfiniteReturnType['fetchNextPage'];
