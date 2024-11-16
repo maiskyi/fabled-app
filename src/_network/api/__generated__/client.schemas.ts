@@ -8,6 +8,10 @@
  * Fabled API Documentation
  * OpenAPI spec version: 1.0
  */
+export type GetStoryParams = {
+  image?: ImageTransformationQuery;
+};
+
 export type GetStoriesStatus =
   (typeof GetStoriesStatus)[keyof typeof GetStoriesStatus];
 
@@ -19,36 +23,33 @@ export const GetStoriesStatus = {
 } as const;
 
 export type GetStoriesParams = {
-  status?: GetStoriesStatus;
-  take?: number;
   skip?: number;
+  take?: number;
+  status?: GetStoriesStatus;
+  image?: ImageTransformationQuery;
 };
 
 export type GetBootstrapParams = {
   image?: ImageTransformationQuery;
 };
 
-export interface StoryImage {
-  publicId: string;
-}
-
 export interface Story {
   content: string;
   id: string;
-  image: StoryImage;
+  image: string;
   readTime: number;
   title: string;
 }
 
-export interface StoriesItem {
+export interface StoryItem {
   id: string;
-  image: StoryImage;
+  image: string;
   readTime: number;
   title: string;
 }
 
 export interface Stories {
-  data: StoriesItem[];
+  data: StoryItem[];
   total: number;
 }
 
@@ -69,7 +70,6 @@ export interface PlaceOfEventItem {
 }
 
 export interface CharacterItem {
-  description: string;
   id: string;
   image: string;
   title: string;
@@ -109,7 +109,21 @@ export const ImageTransformationQueryCrop = {
   thumb: 'thumb',
 } as const;
 
+export type ImageTransformationQueryAspectRatio =
+  (typeof ImageTransformationQueryAspectRatio)[keyof typeof ImageTransformationQueryAspectRatio];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ImageTransformationQueryAspectRatio = {
+  '16:9': '16:9',
+  '1:1': '1:1',
+  '3:1': '3:1',
+  '3:2': '3:2',
+  '4:3': '4:3',
+  '5:4': '5:4',
+} as const;
+
 export interface ImageTransformationQuery {
+  aspectRatio?: ImageTransformationQueryAspectRatio;
   crop?: ImageTransformationQueryCrop;
   height?: number;
   width?: number;

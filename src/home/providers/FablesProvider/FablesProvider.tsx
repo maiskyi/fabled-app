@@ -1,6 +1,7 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
 
 import { useGetStoriesInfinite } from '@network/api';
+import { useDevice } from '@core/uikit';
 
 import { FablesProviderContext } from './FablesProvider.context';
 import {
@@ -11,6 +12,8 @@ import {
 type FablesProviderProps = PropsWithChildren<{}>;
 
 export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
+  const { width } = useDevice();
+
   const {
     data: stories,
     hasNextPage,
@@ -19,6 +22,11 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
     refetch,
   } = useGetStoriesInfinite(
     {
+      image: {
+        aspectRatio: '4:3',
+        crop: 'thumb',
+        width,
+      },
       skip: GET_USER_STORIES_SKIP_PARAM,
       take: GET_USER_STORIES_TAKE_PARAM,
     },
