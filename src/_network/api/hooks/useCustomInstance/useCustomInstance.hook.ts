@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { useContextSelector } from 'use-context-selector';
+import { get } from 'lodash';
 
 import { QueryFunctionContext } from '@tanstack/react-query';
 
@@ -18,7 +19,7 @@ export const useCustomInstance = <T>(): ((
     })
       .then(({ data }) => data)
       .catch((error) => {
-        throw error;
+        return Promise.reject(get(error, ['response', 'data']));
       });
   };
 };

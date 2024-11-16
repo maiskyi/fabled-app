@@ -13,8 +13,7 @@ import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
-import { DTO, useCreateStory } from '@network/admin';
-import { useAuth } from '@core/auth';
+import { useCreateStory } from '@network/api';
 
 import { FormField } from '../Create.const';
 
@@ -34,10 +33,9 @@ export const Index = memo<IndexProps>(function Create({ loading }: IndexProps) {
   const { prompts } = useConfig();
   const [, navigate] = useRoute();
   const { characters, themes, scenes, readTimes } = useOptions();
-  const { user } = useAuth();
   const { toast } = useUtils();
 
-  const { mutate, isPending, isSuccess, data } = useCreateStory<DTO.Errors>();
+  const { data, isPending, isSuccess, mutate } = useCreateStory();
 
   const { message: outline } = prompts.at(0);
 
@@ -46,48 +44,26 @@ export const Index = memo<IndexProps>(function Create({ loading }: IndexProps) {
   };
 
   const handleOnSubmit = (form: IndexForm) => {
-    const { value: readTimeValue } = readTimes.find(
-      ({ value }) => value === form.readTime
-    );
-
     mutate(
       {
         data: {
-          character: {
-            connect: {
-              id: form.character,
-            },
-          },
-          firebaseUserId: user?.uid,
-          moralLesson: {
-            connect: {
-              id: form.description,
-            },
-          },
-          placeOfEvent: {
-            connect: {
-              id: form.scene,
-            },
-          },
-          prompt: {
-            connect: {
-              id: prompts.at(0).id,
-            },
-          },
-          readTime: readTimeValue,
+          characterId: form.character,
+          moralLessonId: form.description,
+          placeOfEventId: form.scene,
+          promptId: prompts.at(0).id,
+          readTime: form.readTime,
         },
       },
       {
-        onError: (error) => {
-          const isAccessDenied = error?.some(
-            ({ extensions: { code } }) =>
-              code === DTO.ExtensionCode.KS_ACCESS_DENIED
-          );
-          if (isAccessDenied) {
-            navigate({ action: 'push', pathname: RoutePath.Subscribe });
+        onError: ({ statusCode, message }) => {
+          if (statusCode === 403) {
+            navigate({
+              action: 'push',
+              pathname: RoutePath.Subscribe,
+            });
           } else {
             toast({
-              message: error[0].message,
+              message: Array.isArray(message) ? message[0] : message,
               variant: 'error',
             });
           }
@@ -111,10 +87,7 @@ export const Index = memo<IndexProps>(function Create({ loading }: IndexProps) {
 
   if (isSuccess) {
     return (
-      <Redirect
-        params={{ id: data?.createStory.id }}
-        pathname={RoutePath.CreateDetails}
-      />
+      <Redirect params={{ id: data?.id }} pathname={RoutePath.CreateDetails} />
     );
   }
 
