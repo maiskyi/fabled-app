@@ -41,6 +41,26 @@ export interface Story {
   title: string;
 }
 
+export type HttpExceptionResponseMessage = string | string[];
+
+export interface HttpExceptionResponse {
+  error: string;
+  message: HttpExceptionResponseMessage;
+  statusCode: number;
+}
+
+export interface CreateStoryResponse {
+  id: string;
+}
+
+export interface CreateStoryRequest {
+  characterId: string;
+  moralLessonId: string;
+  placeOfEventId: string;
+  promptId: string;
+  readTime: number;
+}
+
 export interface StoryItem {
   id: string;
   image: string;

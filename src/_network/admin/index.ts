@@ -5,7 +5,6 @@ export * from './components/ApiProvider';
 export {
   useCreateFeedback,
   useCreateInquiry,
-  useCreateStory,
   useGetBootstrap,
   useGetRequest,
 } from './__generated__/query';

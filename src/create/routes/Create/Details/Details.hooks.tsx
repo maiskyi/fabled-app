@@ -3,10 +3,10 @@ import { useCallback, useMemo } from 'react';
 import { useUser } from '@common/hooks';
 import { BOT_AVATAR_SRC, Spinner, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { useCreateStory, useGetRequest, DTO } from '@network/admin';
-import { useAuth } from '@core/auth';
+import { useGetRequest, DTO } from '@network/admin';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
+import { useCreateStory } from '@network/api';
 
 import { ThreadItem } from './Details.types';
 
@@ -19,11 +19,10 @@ interface UseThreadParams {
 export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
   const { t } = useTranslation();
   const { displayName, avatar } = useUser();
-  const { user } = useAuth();
   const [, navigate] = useRoute();
   const { toast } = useUtils();
 
-  const { isPending, mutate: create } = useCreateStory<DTO.Errors>();
+  const { isPending, mutate: create } = useCreateStory();
 
   const { data: request } = useGetRequest(
     {
@@ -43,46 +42,28 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     create(
       {
         data: {
-          character: {
-            connect: {
-              id: request.story.character.id,
-            },
-          },
-          firebaseUserId: user?.uid,
-          moralLesson: {
-            connect: {
-              id: request.story.moralLesson.id,
-            },
-          },
-          placeOfEvent: {
-            connect: {
-              id: request.story.placeOfEvent.id,
-            },
-          },
-          prompt: {
-            connect: {
-              id: request.story.prompt.id,
-            },
-          },
+          characterId: request.story.character.id,
+          moralLessonId: request.story.moralLesson.id,
+          placeOfEventId: request.story.placeOfEvent.id,
+          promptId: request.story.prompt.id,
           readTime: request.story.readTime,
         },
       },
       {
-        onError: (error) => {
-          const isAccessDenied = error?.some(
-            ({ extensions: { code } }) =>
-              code === DTO.ExtensionCode.KS_ACCESS_DENIED
-          );
-          if (isAccessDenied) {
-            navigate({ action: 'push', pathname: RoutePath.Subscribe });
+        onError: ({ statusCode, message }) => {
+          if (statusCode === 403) {
+            navigate({
+              action: 'push',
+              pathname: RoutePath.Subscribe,
+            });
           } else {
             toast({
-              message: error[0].message,
+              message: Array.isArray(message) ? message[0] : message,
               variant: 'error',
             });
           }
         },
-        onSuccess: ({ createStory: { id } }) => {
+        onSuccess: ({ id }) => {
           navigate({
             action: 'replace',
             params: { id },
@@ -91,7 +72,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
         },
       }
     );
-  }, [create, request, user, navigate, toast]);
+  }, [create, request, navigate, toast]);
 
   const thread = useMemo((): ThreadItem[] => {
     const copyIndex = new Date(request?.story.createdAt).getMilliseconds() % 10;

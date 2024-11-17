@@ -24,9 +24,12 @@ import type {
 } from '@tanstack/react-query';
 import type {
   Bootstrap,
+  CreateStoryRequest,
+  CreateStoryResponse,
   GetBootstrapParams,
   GetStoriesParams,
   GetStoryParams,
+  HttpExceptionResponse,
   Stories,
   Story,
 } from './client.schemas';
@@ -579,81 +582,83 @@ export const useGetStories = <
   return query;
 };
 
-export const useCreateStoryControllerCreateStoryHook = () => {
-  const createStoryControllerCreateStory = useCustomInstance<void>();
+/**
+ * @summary Create user story
+ */
+export const useCreateStoryHook = () => {
+  const createStory = useCustomInstance<CreateStoryResponse>();
 
-  return (options?: SecondParameter<ReturnType<typeof useCustomInstance>>) => {
-    return createStoryControllerCreateStory(
-      { method: 'post', url: `/api/stories` },
+  return (
+    createStoryRequest: CreateStoryRequest,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>
+  ) => {
+    return createStory(
+      {
+        data: createStoryRequest,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `/api/stories`,
+      },
       options
     );
   };
 };
 
-export const useCreateStoryControllerCreateStoryMutationOptions = <
-  TError = unknown,
-  TVariables = void,
+export const useCreateStoryMutationOptions = <
+  TError = HttpExceptionResponse,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
-    Awaited<
-      ReturnType<ReturnType<typeof useCreateStoryControllerCreateStoryHook>>
-    >,
+    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
     TError,
-    TVariables,
+    { data: CreateStoryRequest },
     TContext
   >;
   request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
 }): UseMutationOptions<
-  Awaited<
-    ReturnType<ReturnType<typeof useCreateStoryControllerCreateStoryHook>>
-  >,
+  Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
   TError,
-  TVariables,
+  { data: CreateStoryRequest },
   TContext
 > => {
   const { mutation: mutationOptions, request: requestOptions } = options ?? {};
 
-  const createStoryControllerCreateStory =
-    useCreateStoryControllerCreateStoryHook();
+  const createStory = useCreateStoryHook();
 
   const mutationFn: MutationFunction<
-    Awaited<
-      ReturnType<ReturnType<typeof useCreateStoryControllerCreateStoryHook>>
-    >,
-    TVariables
-  > = () => {
-    return createStoryControllerCreateStory(requestOptions);
+    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
+    { data: CreateStoryRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createStory(data, requestOptions);
   };
 
   return { mutationFn, ...mutationOptions };
 };
 
-export type CreateStoryControllerCreateStoryMutationResult = NonNullable<
-  Awaited<
-    ReturnType<ReturnType<typeof useCreateStoryControllerCreateStoryHook>>
-  >
+export type CreateStoryMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>
 >;
+export type CreateStoryMutationBody = CreateStoryRequest;
+export type CreateStoryMutationError = HttpExceptionResponse;
 
-export type CreateStoryControllerCreateStoryMutationError = unknown;
-
-export const useCreateStoryControllerCreateStory = <
-  TError = unknown,
-  TVariables = void,
+/**
+ * @summary Create user story
+ */
+export const useCreateStory = <
+  TError = HttpExceptionResponse,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
-    Awaited<
-      ReturnType<ReturnType<typeof useCreateStoryControllerCreateStoryHook>>
-    >,
+    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
     TError,
-    TVariables,
+    { data: CreateStoryRequest },
     TContext
   >;
   request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
 }) => {
-  const mutationOptions =
-    useCreateStoryControllerCreateStoryMutationOptions(options);
+  const mutationOptions = useCreateStoryMutationOptions(options);
 
   return useMutation(mutationOptions);
 };
