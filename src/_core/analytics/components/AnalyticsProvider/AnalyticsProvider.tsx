@@ -8,6 +8,7 @@ export type AnalyticsProviderProps = PropsWithChildren<{
   writeKey: string;
   dataUrl: string;
   version: string;
+  enabled: boolean;
   environment: 'local' | 'development' | 'production';
 }>;
 
@@ -15,13 +16,13 @@ export const AnalyticsProvider: FC<AnalyticsProviderProps> = ({
   children,
   writeKey,
   dataUrl,
-  environment,
-  version,
+  enabled,
+  ...config
 }) => {
   useMount(() => {
     Analytics.load(writeKey, dataUrl, {
       integrations: {
-        All: environment === 'production',
+        All: enabled,
       },
       onLoaded: () => {
         // eslint-disable-next-line no-console
@@ -48,7 +49,7 @@ export const AnalyticsProvider: FC<AnalyticsProviderProps> = ({
   });
 
   return (
-    <AnalyticsContext.Provider value={{ environment, version }}>
+    <AnalyticsContext.Provider value={config}>
       {children}
     </AnalyticsContext.Provider>
   );
