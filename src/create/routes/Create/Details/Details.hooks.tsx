@@ -1,14 +1,15 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { merge } from 'lodash';
 
 import { useUser } from '@common/hooks';
-import { BOT_AVATAR_SRC, Spinner, useUtils } from '@core/uikit';
+import { BOT_AVATAR_SRC, Spinner, Typist, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useGetRequest, DTO } from '@network/admin';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 import { useCreateStory } from '@network/api';
 
-import { ThreadItem } from './Details.types';
+import { ThreadItem, TypistState } from './Details.types';
 
 interface UseThreadParams {
   id: string;
@@ -21,6 +22,27 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
   const { displayName, avatar } = useUser();
   const [, navigate] = useRoute();
   const { toast } = useUtils();
+
+  const [
+    {
+      inProgress: isTypistInProgress,
+      messages: {
+        contentMessage: isContentMessageTyped,
+        imageMessage: isImageMessageTyped,
+        successMessage: isSuccessMessageTyped,
+        errorMessage: isErrorMessageTyped,
+      },
+    },
+    setTypistState,
+  ] = useState<TypistState>({
+    inProgress: false,
+    messages: {
+      contentMessage: false,
+      errorMessage: false,
+      imageMessage: false,
+      successMessage: false,
+    },
+  });
 
   const { isPending, mutate: create } = useCreateStory();
 
@@ -74,6 +96,28 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     );
   }, [create, request, navigate, toast]);
 
+  const handleOnTypingComplete = useCallback(
+    (key: keyof TypistState['messages']) => {
+      setTypistState((prev) =>
+        merge({}, prev, {
+          inProgress: false,
+          messages: {
+            [key]: true,
+          },
+        })
+      );
+    },
+    []
+  );
+
+  const handleOnTypingStart = useCallback(() => {
+    setTypistState((prev) =>
+      merge({}, prev, {
+        inProgress: true,
+      })
+    );
+  }, []);
+
   const thread = useMemo((): ThreadItem[] => {
     const copyIndex = new Date(request?.story.createdAt).getMilliseconds() % 10;
 
@@ -101,7 +145,14 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
             id: 'contentMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: t(`bot.contentInProgress.${copyIndex}`),
+              children: (
+                <Typist
+                  onComplete={() => handleOnTypingComplete('contentMessage')}
+                  onStart={handleOnTypingStart}
+                >
+                  {t(`bot.contentInProgress.${copyIndex}`)}
+                </Typist>
+              ),
               origin: 'companion',
               title: t('bot.fabledAi'),
             },
@@ -116,14 +167,22 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
       if (
         request?.story.statusLog.includes(
           DTO.StoryStatusLogType.ImageInProgress
-        )
+        ) &&
+        isContentMessageTyped
       ) {
         return [
           {
             id: 'imageMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: t(`bot.imageInProgress.${copyIndex}`),
+              children: (
+                <Typist
+                  onComplete={() => handleOnTypingComplete('imageMessage')}
+                  onStart={handleOnTypingStart}
+                >
+                  {t(`bot.imageInProgress.${copyIndex}`)}
+                </Typist>
+              ),
               origin: 'companion',
               title: t('bot.fabledAi'),
             },
@@ -135,7 +194,10 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const progressMessage: ThreadItem[] = (() => {
-      if (request?.story.status === DTO.StoryStatusType.Inprogress) {
+      if (
+        request?.story.status === DTO.StoryStatusType.Inprogress &&
+        !isTypistInProgress
+      ) {
         return [
           {
             id: 'progressMessage',
@@ -153,13 +215,23 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const errorMessage: ThreadItem[] = (() => {
-      if (request?.story.status === DTO.StoryStatusType.Failed) {
+      if (
+        request?.story.status === DTO.StoryStatusType.Failed &&
+        !isTypistInProgress
+      ) {
         return [
           {
             id: 'errorMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: t(`bot.error.${copyIndex}`),
+              children: (
+                <Typist
+                  onComplete={() => handleOnTypingComplete('errorMessage')}
+                  onStart={handleOnTypingStart}
+                >
+                  {t(`bot.error.${copyIndex}`)}
+                </Typist>
+              ),
               color: 'danger',
               origin: 'companion',
               title: t('bot.fabledAi'),
@@ -172,7 +244,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const errorActions: ThreadItem[] = (() => {
-      if (request?.story.status === DTO.StoryStatusType.Failed) {
+      if (isErrorMessageTyped) {
         return [
           {
             id: 'errorActions',
@@ -197,13 +269,23 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const successMessage: ThreadItem[] = (() => {
-      if (request?.story.status === DTO.StoryStatusType.Success) {
+      if (
+        request?.story.status === DTO.StoryStatusType.Success &&
+        isImageMessageTyped
+      ) {
         return [
           {
             id: 'successMessage',
             props: {
               avatar: BOT_AVATAR_SRC,
-              children: t(`bot.fableReady.${copyIndex}`),
+              children: (
+                <Typist
+                  onComplete={() => handleOnTypingComplete('successMessage')}
+                  onStart={handleOnTypingStart}
+                >
+                  {t(`bot.fableReady.${copyIndex}`)}
+                </Typist>
+              ),
               origin: 'companion',
               title: t('bot.fabledAi'),
             },
@@ -215,7 +297,10 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const successActions: ThreadItem[] = (() => {
-      if (request?.story.status === DTO.StoryStatusType.Success) {
+      if (
+        request?.story.status === DTO.StoryStatusType.Success &&
+        isSuccessMessageTyped
+      ) {
         return [
           {
             id: 'successActions',
@@ -256,6 +341,13 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     onCancel,
     isPending,
     onRetry,
+    handleOnTypingComplete,
+    isContentMessageTyped,
+    isImageMessageTyped,
+    isSuccessMessageTyped,
+    isErrorMessageTyped,
+    handleOnTypingStart,
+    isTypistInProgress,
   ]);
 
   return { thread };
