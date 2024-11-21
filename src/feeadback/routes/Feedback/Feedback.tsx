@@ -6,8 +6,12 @@ import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { DTO, useCreateFeedback } from '@network/admin';
 import { useUser } from '@common/hooks';
+import { withLoad } from '@core/analytics';
 
-export const Feedback: FC = () => {
+export const Feedback: FC = withLoad({
+  category: 'Profile',
+  name: 'Feedback',
+})(() => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
   const { uid, email } = useUser();
@@ -71,4 +75,4 @@ export const Feedback: FC = () => {
       </Content>
     </Page>
   );
-};
+});

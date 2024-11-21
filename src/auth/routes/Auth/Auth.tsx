@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import {
   Page,
   Content,
@@ -13,12 +11,16 @@ import { useTranslation } from '@core/localization';
 import { RoutePath } from '@bootstrap/constants';
 import { useRoute } from '@core/navigation';
 import { Disclaimer } from '@common/features';
+import { withLoad } from '@core/analytics';
 
 import { FederatedLogin } from '../../features';
 
 import { Wallpaper } from './_partitions/Wallpaper';
 
-export const Auth = memo(function Index() {
+export const Auth = withLoad({
+  category: 'Auth',
+  name: 'Auth',
+})(function Index() {
   const { t } = useTranslation();
 
   const [, navigate] = useRoute();

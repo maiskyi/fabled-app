@@ -5,11 +5,15 @@ import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { usePurchases, usePurchaseStoreProduct } from '@core/purchases';
 import { useTranslation } from '@core/localization';
 import { Redirect } from '@core/navigation';
+import { withLoad } from '@core/analytics';
 
 import { PackageCard } from './_partitions/PackageCard';
 import { SubscribeFrom, SubscribeFromField } from './Subscribe.types';
 
-export const Subscribe: FC = () => {
+export const Subscribe: FC = withLoad({
+  category: 'Subscribe',
+  name: 'Subscribe',
+})(() => {
   const { t } = useTranslation();
   const { toast } = useUtils();
   const { offering } = usePurchases();
@@ -100,4 +104,4 @@ export const Subscribe: FC = () => {
       </Content>
     </Page>
   );
-};
+});

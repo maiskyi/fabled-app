@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { useAsyncFn } from 'react-use';
 
 import {
@@ -19,14 +18,16 @@ import {
 } from '@core/auth';
 import { useTranslation } from '@core/localization';
 import { RoutePath } from '@bootstrap/constants';
+import { withLoad } from '@core/analytics';
 
 import { AuthActionModeProps } from '../../Action.types';
 
 import { useEmailVerificationCopy } from './EmailVerification.hooks';
 
-export const EmailVerification = memo<AuthActionModeProps>(function Action({
-  oobCode,
-}: AuthActionModeProps) {
+export const EmailVerification = withLoad({
+  category: 'Auth',
+  name: 'Email Verification Action',
+})(function Action({ oobCode }: AuthActionModeProps) {
   const { t } = useTranslation();
   const { isAuthenticated, reload } = useAuth();
   const { toast } = useUtils();

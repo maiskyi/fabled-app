@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import {
   Content,
   Header,
@@ -13,8 +11,12 @@ import {
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 import { useGetStory } from '@network/api';
+import { withLoad } from '@core/analytics';
 
-export const Fable = memo(function Fable() {
+export const Fable = withLoad({
+  category: 'Fable',
+  name: 'Fable Details',
+})(function Fable() {
   const [
     {
       params: { id },

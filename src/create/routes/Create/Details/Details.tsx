@@ -1,9 +1,10 @@
-import { memo, useCallback, useLayoutEffect, useRef } from 'react';
+import { FC, useCallback, useLayoutEffect, useRef } from 'react';
 import { noop } from 'lodash';
 
 import { Animation, Box, Button, Message, SafeArea } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
+import { withLoad } from '@core/analytics';
 
 import { useThread } from './Details.hooks';
 import { RouteParams } from './Details.types';
@@ -12,9 +13,10 @@ interface DetailsProps {
   onMessage?: () => void;
 }
 
-export const Details = memo<DetailsProps>(function Details({
-  onMessage = noop,
-}: DetailsProps) {
+export const Details: FC<DetailsProps> = withLoad({
+  category: 'Fable',
+  name: 'Create Fable Details',
+})(function Details({ onMessage = noop }) {
   const [{ params }, navigate] = useRoute<RouteParams>();
   const ref = useRef<HTMLDivElement>();
 

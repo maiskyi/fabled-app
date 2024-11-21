@@ -8,17 +8,25 @@ export type AnalyticsProviderProps = PropsWithChildren<{
   writeKey: string;
   dataUrl: string;
   version: string;
-  environment: string;
+  environment: 'local' | 'development' | 'production';
 }>;
 
 export const AnalyticsProvider: FC<AnalyticsProviderProps> = ({
   children,
   writeKey,
   dataUrl,
+  environment,
+  version,
 }) => {
   useMount(() => {
     Analytics.load(writeKey, dataUrl, {
-      integrations: { All: true },
+      integrations: {
+        All: environment === 'production',
+      },
+      onLoaded: () => {
+        // eslint-disable-next-line no-console
+        console.log('RudderStack JavaScript SDK loaded successfully');
+      },
       plugins: [
         'BeaconQueue',
         'CustomConsentManager',
@@ -40,6 +48,8 @@ export const AnalyticsProvider: FC<AnalyticsProviderProps> = ({
   });
 
   return (
-    <AnalyticsContext.Provider value={{}}>{children}</AnalyticsContext.Provider>
+    <AnalyticsContext.Provider value={{ environment, version }}>
+      {children}
+    </AnalyticsContext.Provider>
   );
 };

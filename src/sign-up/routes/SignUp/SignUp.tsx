@@ -18,8 +18,12 @@ import {
 } from '@core/auth';
 import { RoutePath, VALIDATION_PATTERNS } from '@bootstrap/constants';
 import { Disclaimer } from '@common/features';
+import { withLoad } from '@core/analytics';
 
-export const SignUp: FC = () => {
+export const SignUp: FC = withLoad({
+  category: 'Auth',
+  name: 'Sign Up',
+})(() => {
   const { t } = useTranslation();
   const form = useRef<FormInstance<CreateUserWithEmailAndPasswordRequest>>();
   const { toast } = useUtils();
@@ -109,4 +113,4 @@ export const SignUp: FC = () => {
       </Content>
     </Page>
   );
-};
+});
