@@ -9,6 +9,7 @@ import {
 } from '@core/localization';
 import { AppUrlListener } from '@core/navigation';
 import { PurchasesProvider, PurchasesProviderProps } from '@core/purchases';
+import { AnalyticsProvider, AnalyticsProviderProps } from '@core/analytics';
 
 import { Network, NetworkProps } from './Network';
 import { Navigation } from './Navigation';
@@ -27,6 +28,7 @@ export type BootstrapProps = PropsWithChildren<{
   config: ConfigProps;
   purchases: PurchasesProviderProps;
   errorBoundary: ErrorBoundaryProps;
+  analytics: AnalyticsProviderProps;
 }>;
 
 export const Bootstrap: FC<BootstrapProps> = ({
@@ -37,28 +39,31 @@ export const Bootstrap: FC<BootstrapProps> = ({
   config,
   purchases,
   errorBoundary,
+  analytics,
 }) => {
   return (
     <ThemeProvider>
       <LocalizationProvider {...localization}>
         <ErrorBoundary {...errorBoundary}>
-          <AppUpdate>
-            <AppUrlListener>
-              <PurchasesProvider {...purchases}>
-                <QueryProvider>
-                  <AppProvider {...app}>
-                    <AuthProvider>
-                      <Network {...network}>
-                        <Config {...config}>
-                          <Navigation>{children}</Navigation>
-                        </Config>
-                      </Network>
-                    </AuthProvider>
-                  </AppProvider>
-                </QueryProvider>
-              </PurchasesProvider>
-            </AppUrlListener>
-          </AppUpdate>
+          <AnalyticsProvider {...analytics}>
+            <AppUpdate>
+              <AppUrlListener>
+                <PurchasesProvider {...purchases}>
+                  <QueryProvider>
+                    <AppProvider {...app}>
+                      <AuthProvider>
+                        <Network {...network}>
+                          <Config {...config}>
+                            <Navigation>{children}</Navigation>
+                          </Config>
+                        </Network>
+                      </AuthProvider>
+                    </AppProvider>
+                  </QueryProvider>
+                </PurchasesProvider>
+              </AppUrlListener>
+            </AppUpdate>
+          </AnalyticsProvider>
         </ErrorBoundary>
       </LocalizationProvider>
     </ThemeProvider>
