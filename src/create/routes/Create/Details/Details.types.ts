@@ -12,6 +12,13 @@ interface ThreadActionsItem {
   props: ButtonProps[];
 }
 
+export interface TypistState {
+  contentMessage: boolean;
+  imageMessage: boolean;
+  successMessage: boolean;
+  errorMessage: boolean;
+}
+
 export type ThreadItem = ThreadMessageItem | ThreadActionsItem;
 
 export interface RouteParams {

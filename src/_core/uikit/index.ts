@@ -24,6 +24,7 @@ export * from './components/Spinner';
 export * from './components/Swiper';
 export * from './components/Text';
 export * from './components/ThemeProvider';
+export * from './components/Typist';
 export * from './components/View';
 
 // Hooks
