@@ -16,6 +16,13 @@ if (import.meta.env.DEV) {
 
 const config: AppProps = {
   bootstrap: {
+    analytics: {
+      dataUrl: import.meta.env.VITE_RUDDERSTACK_DATA_URL,
+      enabled: import.meta.env.VITE_ENVIRONMENT === 'production',
+      environment: import.meta.env.VITE_ENVIRONMENT,
+      version: import.meta.env.PACKAGE_VERSION,
+      writeKey: import.meta.env.VITE_RUDDERSTACK_WRITE_KEY,
+    },
     app: {
       apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
       appId: import.meta.env.VITE_FIREBASE_APP_ID,

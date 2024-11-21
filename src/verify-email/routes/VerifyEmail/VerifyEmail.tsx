@@ -13,8 +13,12 @@ import { Translate, useTranslation } from '@core/localization';
 import { useAuth, useSendEmailVerification } from '@core/auth';
 import { useRoute } from '@core/navigation';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
+import { withLoad } from '@core/analytics';
 
-export const VerifyEmail: FC = () => {
+export const VerifyEmail: FC = withLoad({
+  category: 'Auth',
+  name: 'Verify Email',
+})(() => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const [, navigate] = useRoute();
@@ -77,4 +81,4 @@ export const VerifyEmail: FC = () => {
       </Content>
     </Page>
   );
-};
+});

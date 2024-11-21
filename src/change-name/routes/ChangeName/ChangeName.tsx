@@ -1,12 +1,14 @@
-import { memo } from 'react';
-
 import { Box, Content, Form, Header, Page } from '@core/uikit';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useUpdateProfile, UpdateProfileRequest, useAuth } from '@core/auth';
 import { useRoute } from '@core/navigation';
+import { withLoad } from '@core/analytics';
 
-export const ChangeName = memo(function ChangeName() {
+export const ChangeName = withLoad({
+  category: 'Profile',
+  name: 'Change Name',
+})(function ChangeName() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const [, navigate] = useRoute();

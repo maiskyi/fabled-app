@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { FC } from 'react';
 
 import {
   Header,
@@ -14,6 +14,7 @@ import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
 import { useCreateStory } from '@network/api';
+import { withLoad } from '@core/analytics';
 
 import { FormField } from '../Create.const';
 
@@ -28,7 +29,10 @@ interface IndexProps {
   loading: boolean;
 }
 
-export const Index = memo<IndexProps>(function Create({ loading }: IndexProps) {
+export const Index: FC<IndexProps> = withLoad({
+  category: 'Fable',
+  name: 'Create Fable Index',
+})(function Create({ loading }) {
   const { t } = useTranslation();
   const { prompts } = useConfig();
   const [, navigate] = useRoute();

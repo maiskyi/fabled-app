@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { useRef } from 'react';
 
 import {
   Box,
@@ -18,8 +18,12 @@ import {
   useSendPasswordResetEmail,
   SendPasswordResetEmailRequest,
 } from '@core/auth';
+import { withLoad } from '@core/analytics';
 
-export const ForgotPassword = memo(function ForgotPassword() {
+export const ForgotPassword = withLoad({
+  category: 'Auth',
+  name: 'Forgot Password',
+})(function ForgotPassword() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
   const form = useRef<FormInstance<SendPasswordResetEmailRequest>>();

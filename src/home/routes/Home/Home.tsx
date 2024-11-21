@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { RoutePath } from '@bootstrap/constants';
 import {
@@ -13,15 +13,22 @@ import {
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
+import { withLoad } from '@core/analytics';
 
 import { useFablesContext } from '../../providers';
 
-import { FablesSkeleton } from './_patitions/FablesSkeleton';
-import { FablesEmpty } from './_patitions/FablesEmpty';
-import { FablesList } from './_patitions/FablesList';
-import { FablesCreate, FablesCreateOnClickFn } from './_patitions/FablesCreate';
+import { FablesSkeleton } from './_partitions/FablesSkeleton';
+import { FablesEmpty } from './_partitions/FablesEmpty';
+import { FablesList } from './_partitions/FablesList';
+import {
+  FablesCreate,
+  FablesCreateOnClickFn,
+} from './_partitions/FablesCreate';
 
-export const Home = memo(function Home() {
+export const Home = withLoad({
+  category: 'Home',
+  name: 'Home',
+})(function Home() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
 

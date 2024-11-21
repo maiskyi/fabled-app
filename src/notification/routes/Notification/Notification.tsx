@@ -1,8 +1,7 @@
-import { memo } from 'react';
-
 import { Box, Button, Content, Header, Page, Text } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
+import { withLoad } from '@core/analytics';
 
 import {
   NotificationRouteParams,
@@ -10,7 +9,10 @@ import {
 } from './Notification.types';
 import { useNotification } from './Notification.hooks';
 
-export const Notification = memo(function Success() {
+export const Notification = withLoad({
+  category: 'Notification',
+  name: 'Notification',
+})(function Success() {
   const [
     {
       search: { code },

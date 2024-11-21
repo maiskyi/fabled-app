@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { useRef } from 'react';
 
 import {
   Box,
@@ -17,8 +17,12 @@ import {
 } from '@bootstrap/constants';
 import { useUpdatePassword, UpdatePasswordRequest } from '@core/auth';
 import { useRoute } from '@core/navigation';
+import { withLoad } from '@core/analytics';
 
-export const ChangePassword = memo(function ChangePassword() {
+export const ChangePassword = withLoad({
+  category: 'Profile',
+  name: 'Change Password',
+})(function ChangePassword() {
   const { t } = useTranslation();
   const form = useRef<FormInstance<UpdatePasswordRequest>>();
   const { toast } = useUtils();

@@ -6,8 +6,12 @@ import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useAuth } from '@core/auth';
 import { DTO, useCreateInquiry } from '@network/admin';
+import { withLoad } from '@core/analytics';
 
-export const ContactUs: FC = () => {
+export const ContactUs: FC = withLoad({
+  category: 'Contact Us',
+  name: 'Contact Us',
+})(() => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
   const { user } = useAuth();
@@ -87,4 +91,4 @@ export const ContactUs: FC = () => {
       </Content>
     </Page>
   );
-};
+});

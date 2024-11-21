@@ -19,8 +19,12 @@ import {
 } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { Disclaimer } from '@common/features';
+import { withLoad } from '@core/analytics';
 
-export const SignIn: FC = () => {
+export const SignIn: FC = withLoad({
+  category: 'Auth',
+  name: 'Sign In',
+})(() => {
   const { t } = useTranslation();
   const [{ search }, navigate] = useRoute<
     {},
@@ -111,4 +115,4 @@ export const SignIn: FC = () => {
       </Content>
     </Page>
   );
-};
+});

@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { entries } from 'lodash';
 
 import {
@@ -13,11 +12,15 @@ import {
 import { useSignOut, useDeleteUser } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
+import { withLoad } from '@core/analytics';
 
 import { ProfileUserCard } from './_partitions/ProfileUserCard';
 import { useProfileMenu } from './Profile.hooks';
 
-export const Profile = memo(function Profile() {
+export const Profile = withLoad({
+  category: 'Profile',
+  name: 'Profile',
+})(function Profile() {
   const { confirm, toast } = useUtils();
   const { t } = useTranslation();
 

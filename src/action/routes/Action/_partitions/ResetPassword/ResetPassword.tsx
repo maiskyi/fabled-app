@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import { Box, Content, Form, Header, Page, Text } from '@core/uikit';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -8,12 +6,14 @@ import {
   ConfirmPasswordResetRequest,
 } from '@core/auth';
 import { useRoute } from '@core/navigation';
+import { withLoad } from '@core/analytics';
 
 import { AuthActionModeProps } from '../../Action.types';
 
-export const ResetPassword = memo<AuthActionModeProps>(function ResetPassword({
-  oobCode,
-}: AuthActionModeProps) {
+export const ResetPassword = withLoad({
+  category: 'Auth',
+  name: 'Reset Password Action',
+})(function ResetPassword({ oobCode }: AuthActionModeProps) {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
 
