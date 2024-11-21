@@ -52,6 +52,8 @@ jobs:
           envkey_VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
           envkey_VITE_REVENUECAT_API_KEY: ${{ secrets.REVENUECAT_API_KEY }}
           envkey_VITE_SENTRY_DNS: ${{ vars.SENTRY_DNS }}
+          envkey_VITE_RUDDERSTACK_WRITE_KEY: ${{ vars.RUDDERSTACK_WRITE_KEY }}
+          envkey_VITE_RUDDERSTACK_DATA_URL: ${{ vars.RUDDERSTACK_DATA_URL }}
 
       - name: Build application
         run: yarn build
