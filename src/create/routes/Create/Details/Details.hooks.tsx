@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+import { merge } from 'lodash';
 
 import { useUser } from '@common/hooks';
 import { BOT_AVATAR_SRC, Spinner, Typist, useUtils } from '@core/uikit';
@@ -24,17 +25,23 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
 
   const [
     {
-      contentMessage: isContentMessageTyped,
-      imageMessage: isImageMessageTyped,
-      successMessage: isSuccessMessageTyped,
-      errorMessage: isErrorMessageTyped,
+      inProgress: isTypistInProgress,
+      messages: {
+        contentMessage: isContentMessageTyped,
+        imageMessage: isImageMessageTyped,
+        successMessage: isSuccessMessageTyped,
+        errorMessage: isErrorMessageTyped,
+      },
     },
     setTypistState,
   ] = useState<TypistState>({
-    contentMessage: false,
-    errorMessage: false,
-    imageMessage: false,
-    successMessage: false,
+    inProgress: false,
+    messages: {
+      contentMessage: false,
+      errorMessage: false,
+      imageMessage: false,
+      successMessage: false,
+    },
   });
 
   const { isPending, mutate: create } = useCreateStory();
@@ -89,8 +96,26 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     );
   }, [create, request, navigate, toast]);
 
-  const handleOnTypingCompleted = useCallback((key: keyof TypistState) => {
-    setTypistState((prev) => ({ ...prev, [key]: true }));
+  const handleOnTypingComplete = useCallback(
+    (key: keyof TypistState['messages']) => {
+      setTypistState((prev) =>
+        merge({}, prev, {
+          inProgress: false,
+          messages: {
+            [key]: true,
+          },
+        })
+      );
+    },
+    []
+  );
+
+  const handleOnTypingStart = useCallback(() => {
+    setTypistState((prev) =>
+      merge({}, prev, {
+        inProgress: true,
+      })
+    );
   }, []);
 
   const thread = useMemo((): ThreadItem[] => {
@@ -122,7 +147,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
               avatar: BOT_AVATAR_SRC,
               children: (
                 <Typist
-                  onComplete={() => handleOnTypingCompleted('contentMessage')}
+                  onComplete={() => handleOnTypingComplete('contentMessage')}
+                  onStart={handleOnTypingStart}
                 >
                   {t(`bot.contentInProgress.${copyIndex}`)}
                 </Typist>
@@ -151,7 +177,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
               avatar: BOT_AVATAR_SRC,
               children: (
                 <Typist
-                  onComplete={() => handleOnTypingCompleted('imageMessage')}
+                  onComplete={() => handleOnTypingComplete('imageMessage')}
+                  onStart={handleOnTypingStart}
                 >
                   {t(`bot.imageInProgress.${copyIndex}`)}
                 </Typist>
@@ -167,7 +194,10 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const progressMessage: ThreadItem[] = (() => {
-      if (request?.story.status === DTO.StoryStatusType.Inprogress) {
+      if (
+        request?.story.status === DTO.StoryStatusType.Inprogress &&
+        !isTypistInProgress
+      ) {
         return [
           {
             id: 'progressMessage',
@@ -185,7 +215,10 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const errorMessage: ThreadItem[] = (() => {
-      if (request?.story.status === DTO.StoryStatusType.Failed) {
+      if (
+        request?.story.status === DTO.StoryStatusType.Failed &&
+        !isTypistInProgress
+      ) {
         return [
           {
             id: 'errorMessage',
@@ -193,7 +226,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
               avatar: BOT_AVATAR_SRC,
               children: (
                 <Typist
-                  onComplete={() => handleOnTypingCompleted('errorMessage')}
+                  onComplete={() => handleOnTypingComplete('errorMessage')}
+                  onStart={handleOnTypingStart}
                 >
                   {t(`bot.error.${copyIndex}`)}
                 </Typist>
@@ -210,10 +244,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const errorActions: ThreadItem[] = (() => {
-      if (
-        request?.story.status === DTO.StoryStatusType.Failed &&
-        isErrorMessageTyped
-      ) {
+      if (isErrorMessageTyped) {
         return [
           {
             id: 'errorActions',
@@ -249,7 +280,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
               avatar: BOT_AVATAR_SRC,
               children: (
                 <Typist
-                  onComplete={() => handleOnTypingCompleted('successMessage')}
+                  onComplete={() => handleOnTypingComplete('successMessage')}
+                  onStart={handleOnTypingStart}
                 >
                   {t(`bot.fableReady.${copyIndex}`)}
                 </Typist>
@@ -309,11 +341,13 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     onCancel,
     isPending,
     onRetry,
-    handleOnTypingCompleted,
+    handleOnTypingComplete,
     isContentMessageTyped,
     isImageMessageTyped,
     isSuccessMessageTyped,
     isErrorMessageTyped,
+    handleOnTypingStart,
+    isTypistInProgress,
   ]);
 
   return { thread };

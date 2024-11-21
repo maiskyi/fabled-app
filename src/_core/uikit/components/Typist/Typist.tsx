@@ -4,15 +4,20 @@ import { TypeAnimation } from 'react-type-animation';
 
 export interface TypistProps {
   children: string;
+  onStart?: () => void;
   onComplete?: () => void;
 }
 
-export const Typist: FC<TypistProps> = ({ children, onComplete = noop }) => {
+export const Typist: FC<TypistProps> = ({
+  children,
+  onStart = noop,
+  onComplete = noop,
+}) => {
   return (
     <TypeAnimation
       className="css"
       cursor={false}
-      sequence={[children, onComplete]}
+      sequence={[onStart, children, onComplete]}
     />
   );
 };
