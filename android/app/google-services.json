@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "325556814897-g69kdkuns144hfnfctba5m0re0eecrbu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.fabled.space",
+            "certificate_hash": "a67ada41668906555a3f994094c9751a90da8261"
+          }
+        },
+        {
           "client_id": "325556814897-1vsupi6umd5chtstl1hpk0obr2mktit9.apps.googleusercontent.com",
           "client_type": 3
         }
