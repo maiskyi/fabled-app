@@ -1,7 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Fabled Space</string>
-    <string name="title_activity_main">Fabled Space</string>
+    <string name="app_name">Fabled</string>
+    <string name="title_activity_main">Fabled</string>
     <string name="package_name">app.fabled.space</string>
     <string name="custom_url_scheme">app.fabled.space</string>
+    <string name="facebook_app_id">737096644832993</string>
+    <string name="fb_login_protocol_scheme">fb737096644832993</string>
+    <string name="facebook_client_token">1b4a7b2d86ec4f49dda61d5a47993f6e</string>
 </resources>
