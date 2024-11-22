@@ -21,7 +21,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
 }) => {
   const [{ value: config }, configure] = useAsyncFn(
     async () => {
-      if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
+      if (Capacitor.isNativePlatform()) {
         const apiKey = get(apiKeys, Capacitor.getPlatform());
 
         await Purchases.setLogLevel({
@@ -46,16 +46,23 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
 
   const [{ value: data }, init] = useAsyncFn(
     async () => {
-      if (Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios') {
-        const { current: offering } = await Purchases.getOfferings();
+      if (Capacitor.isNativePlatform()) {
+        try {
+          const { current: offering } = await Purchases.getOfferings();
 
-        const { customerInfo } = await Purchases.getCustomerInfo();
+          const { customerInfo } = await Purchases.getCustomerInfo();
 
-        const { products: activeSubscriptions } = await Purchases.getProducts({
-          productIdentifiers: customerInfo.activeSubscriptions,
-        });
+          const { products: activeSubscriptions } = await Purchases.getProducts(
+            {
+              productIdentifiers: customerInfo.activeSubscriptions,
+            }
+          );
 
-        return { activeSubscriptions, offering, ready: true };
+          return { activeSubscriptions, offering, ready: true };
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        }
       }
       return { activeSubscriptions: [], offering: null, ready: true };
     },
