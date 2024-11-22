@@ -62,7 +62,10 @@ const config: AppProps = {
     },
     purchases: {
       Loader: Splash,
-      apiKey: import.meta.env.VITE_REVENUECAT_API_KEY,
+      apiKeys: {
+        android: import.meta.env.VITE_REVENUECAT_ANDROID_API_KEY,
+        ios: import.meta.env.VITE_REVENUECAT_IOS_API_KEY,
+      },
     },
   },
 };
