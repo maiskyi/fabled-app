@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "act": "act -j ios --env-file .env --secret-file .secrets --var-file .env -P macos-latest=-self-hosted",
-    "assets": "capacitor-assets generate --ios",
+    "assets:ios": "capacitor-assets generate --ios",
+    "assets:android": "capacitor-assets generate --android",
     "build": "tsc && vite build",
     "erase": "xcrun simctl erase all",
     "gen:admin": "graphql-codegen --config ./api.codegen.ts && add-ts-nocheck --patterns 'src/_network/admin/__generated__/*.ts'",
