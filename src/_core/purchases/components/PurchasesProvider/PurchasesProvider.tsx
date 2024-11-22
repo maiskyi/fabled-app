@@ -42,15 +42,22 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   const [{ value: data }, init] = useAsyncFn(
     async () => {
       if (Capacitor.isNativePlatform()) {
-        const { current: offering } = await Purchases.getOfferings();
+        try {
+          const { current: offering } = await Purchases.getOfferings();
 
-        const { customerInfo } = await Purchases.getCustomerInfo();
+          const { customerInfo } = await Purchases.getCustomerInfo();
 
-        const { products: activeSubscriptions } = await Purchases.getProducts({
-          productIdentifiers: customerInfo.activeSubscriptions,
-        });
+          const { products: activeSubscriptions } = await Purchases.getProducts(
+            {
+              productIdentifiers: customerInfo.activeSubscriptions,
+            }
+          );
 
-        return { activeSubscriptions, offering, ready: true };
+          return { activeSubscriptions, offering, ready: true };
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error(error);
+        }
       }
       return { activeSubscriptions: [], offering: null, ready: true };
     },

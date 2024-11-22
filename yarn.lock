@@ -1428,6 +1428,11 @@
   resolved "https://registry.yarnpkg.com/@capacitor-firebase/authentication/-/authentication-6.1.0.tgz#ae2b32351477d070eabfd4d53c1ea8d64004b841"
   integrity sha512-mJbbCJFhKi/aKNuoDKAgC98EgRSfg0LxoM5lDoGqQrMwp75WDvOSxsjMUMtuuKFKJ9ASofnVYvJ3aigCpLyssw==
 
+"@capacitor/android@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-6.2.0.tgz#4cbb29e45457839dfd391ff0744b437ef4d4034b"
+  integrity sha512-3YIDPylV0Q2adEQ/H568p496QdYG0jK/XGMdx7OGSqdBZen92ciAsYdyhLtyl91UVsN1lBhDi5H6j3T2KS6aJg==
+
 "@capacitor/app@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@capacitor/app/-/app-6.0.0.tgz#b383c97543e2fb9462e8bd69c0f512c33bba0089"

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Box, Button, useUtils } from '@core/uikit';
+import { Box, Button, useDevice, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import {
   useSignInWithGoogle,
@@ -12,6 +12,7 @@ import {
 export const FederatedLogin = memo(function FederatedLogin() {
   const { t } = useTranslation();
   const { toast } = useUtils();
+  const { platform } = useDevice();
 
   const { isPending: isSigningInWithGoogle, mutate: signInWithGoogle } =
     useSignInWithGoogle();
@@ -54,14 +55,16 @@ export const FederatedLogin = memo(function FederatedLogin() {
       >
         {t('actions.continueWithGoogle')}
       </Button.Social>
-      <Button.Social
-        expand="block"
-        loading={isSigningInWithApple}
-        name="apple"
-        onClick={handleOnSignInWithApple}
-      >
-        {t('actions.continueWithApple')}
-      </Button.Social>
+      {(platform === 'ios' || platform === 'web') && (
+        <Button.Social
+          expand="block"
+          loading={isSigningInWithApple}
+          name="apple"
+          onClick={handleOnSignInWithApple}
+        >
+          {t('actions.continueWithApple')}
+        </Button.Social>
+      )}
       {/* <Button.Social
         expand="block"
         loading={isSigningInWithFacebook}
