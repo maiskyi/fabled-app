@@ -11,6 +11,7 @@ export {
   useGetStory,
   useGetBootstrap,
   useCreateStory,
+  useCreateInquiry,
 } from './__generated__/client';
 
 export { DTO };

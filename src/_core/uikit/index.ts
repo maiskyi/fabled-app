@@ -11,6 +11,7 @@ export * from './components/Empty';
 export * from './components/Fab';
 export * from './components/Footer';
 export * from './components/Form';
+export * from './components/Grid';
 export * from './components/Header';
 export * from './components/Icon';
 export * from './components/Image';
