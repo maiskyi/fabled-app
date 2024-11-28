@@ -33,6 +33,15 @@ export type GetBootstrapParams = {
   image?: ImageTransformationQuery;
 };
 
+export interface CreateFeedbackResponse {
+  id: string;
+}
+
+export interface CreateFeedbackRequest {
+  comment: string;
+  rating: number;
+}
+
 export interface CreateInquiryRequest {
   email: string;
   message: string;
