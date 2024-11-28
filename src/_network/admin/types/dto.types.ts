@@ -1,7 +1,6 @@
 export { StoryStatusType, StoryStatusLogType } from '../__generated__/query';
 export type {
   CreateFeedbackVariables,
-  CreateInquiryVariables,
   GetBootstrap,
 } from '../__generated__/query';
 
