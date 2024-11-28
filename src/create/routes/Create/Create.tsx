@@ -9,6 +9,7 @@ import {
   Animation,
   ContentInstance,
   useViewWillEnter,
+  Grid,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -61,26 +62,36 @@ export const Create = memo(function Create() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content fullscreen ref={content}>
-        <Header collapse="condense">
-          <Header.Title size="large">{t('pages.create')}</Header.Title>
-        </Header>
-        <Animation.Message>
-          <Message
-            avatar={BOT_AVATAR_SRC}
-            origin="companion"
-            title={t('bot.fabledAi')}
-          >
-            {t('bot.createFableAiGreeting', {
-              displayName: userDisplayName,
-            })}
-          </Message>
-        </Animation.Message>
-        <Route exact path={RoutePath.Create}>
-          <Index loading={isFetching} />
-        </Route>
-        <Route path={RoutePath.CreateDetails}>
-          <Details onMessage={handleOnMessage} />
-        </Route>
+        <Grid fixed>
+          <Grid.Row>
+            <Grid.Cell>
+              <Header collapse="condense">
+                <Header.Title size="large">{t('pages.create')}</Header.Title>
+              </Header>
+            </Grid.Cell>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Cell>
+              <Animation.Message>
+                <Message
+                  avatar={BOT_AVATAR_SRC}
+                  origin="companion"
+                  title={t('bot.fabledAi')}
+                >
+                  {t('bot.createFableAiGreeting', {
+                    displayName: userDisplayName,
+                  })}
+                </Message>
+              </Animation.Message>
+            </Grid.Cell>
+          </Grid.Row>
+          <Route exact path={RoutePath.Create}>
+            <Index loading={isFetching} />
+          </Route>
+          <Route path={RoutePath.CreateDetails}>
+            <Details onMessage={handleOnMessage} />
+          </Route>
+        </Grid>
       </Content>
     </Page>
   );

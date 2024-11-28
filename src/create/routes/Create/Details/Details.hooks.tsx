@@ -4,10 +4,9 @@ import { merge } from 'lodash';
 import { useUser } from '@common/hooks';
 import { BOT_AVATAR_SRC, Spinner, Typist, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-import { useGetRequest, DTO } from '@network/admin';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
-import { useCreateStory } from '@network/api';
+import { DTO, useCreateStory, useGetStory } from '@network/api';
 
 import { ThreadItem, TypistState } from './Details.types';
 
@@ -46,16 +45,17 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
 
   const { isPending, mutate: create } = useCreateStory();
 
-  const { data: request } = useGetRequest(
+  const { data: request } = useGetStory(
+    id,
+    {},
     {
-      id,
-    },
-    {
-      refetchInterval: ({ state: { data } }) => {
-        if (data?.story?.status === DTO.StoryStatusType.Inprogress) {
-          return 3000;
-        }
-        return false;
+      query: {
+        refetchInterval: ({ state: { data } }) => {
+          if (data?.status === DTO.StoryStatus.inprogress) {
+            return 3000;
+          }
+          return false;
+        },
       },
     }
   );
@@ -64,11 +64,11 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     create(
       {
         data: {
-          characterId: request.story.character.id,
-          moralLessonId: request.story.moralLesson.id,
-          placeOfEventId: request.story.placeOfEvent.id,
-          promptId: request.story.prompt.id,
-          readTime: request.story.readTime,
+          characterId: request.character.id,
+          moralLessonId: request.moralLesson.id,
+          placeOfEventId: request.placeOfEvent.id,
+          promptId: request.prompt.id,
+          readTime: request.readTime,
         },
       },
       {
@@ -119,14 +119,14 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
   }, []);
 
   const thread = useMemo((): ThreadItem[] => {
-    const copyIndex = new Date(request?.story.createdAt).getMilliseconds() % 10;
+    const copyIndex = new Date(request?.createdAt).getMilliseconds() % 10;
 
     const userMessage: ThreadItem[] = [
       {
         id: 'userMessage',
         props: {
           avatar: avatar,
-          children: request?.story.message,
+          children: request?.message,
           origin: 'me',
           title: displayName,
         },
@@ -136,9 +136,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
 
     const contentMessage: ThreadItem[] = (() => {
       if (
-        request?.story.statusLog.includes(
-          DTO.StoryStatusLogType.ContentInProgress
-        )
+        request?.statusLog.includes(DTO.StoryStatusLogItem.contentInProgress)
       ) {
         return [
           {
@@ -165,9 +163,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
 
     const imageMessage: ThreadItem[] = (() => {
       if (
-        request?.story.statusLog.includes(
-          DTO.StoryStatusLogType.ImageInProgress
-        ) &&
+        request?.statusLog.includes(DTO.StoryStatusLogItem.imageInProgress) &&
         isContentMessageTyped
       ) {
         return [
@@ -195,7 +191,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
 
     const progressMessage: ThreadItem[] = (() => {
       if (
-        request?.story.status === DTO.StoryStatusType.Inprogress &&
+        request?.status === DTO.StoryStatus.inprogress &&
         !isTypistInProgress
       ) {
         return [
@@ -215,10 +211,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const errorMessage: ThreadItem[] = (() => {
-      if (
-        request?.story.status === DTO.StoryStatusType.Failed &&
-        !isTypistInProgress
-      ) {
+      if (request?.status === DTO.StoryStatus.failed && !isTypistInProgress) {
         return [
           {
             id: 'errorMessage',
@@ -269,10 +262,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
     })();
 
     const successMessage: ThreadItem[] = (() => {
-      if (
-        request?.story.status === DTO.StoryStatusType.Success &&
-        isImageMessageTyped
-      ) {
+      if (request?.status === DTO.StoryStatus.success && isImageMessageTyped) {
         return [
           {
             id: 'successMessage',
@@ -298,7 +288,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
 
     const successActions: ThreadItem[] = (() => {
       if (
-        request?.story.status === DTO.StoryStatusType.Success &&
+        request?.status === DTO.StoryStatus.success &&
         isSuccessMessageTyped
       ) {
         return [
