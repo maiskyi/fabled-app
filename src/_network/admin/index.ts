@@ -4,7 +4,6 @@ export * from './components/ApiProvider';
 // Hooks
 export {
   useCreateFeedback,
-  useCreateInquiry,
   useGetBootstrap,
   useGetRequest,
 } from './__generated__/query';
