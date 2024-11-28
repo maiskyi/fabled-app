@@ -1,5 +1,0 @@
-mutation createInquiry($message: String!, $email: String!, $subject: String!) {
-  createInquiry(data: { message: $message, email: $email, subject: $subject }) {
-    id
-  }
-}

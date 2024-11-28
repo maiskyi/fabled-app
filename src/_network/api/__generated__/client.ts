@@ -24,6 +24,7 @@ import type {
 } from '@tanstack/react-query';
 import type {
   Bootstrap,
+  CreateInquiryRequest,
   CreateStoryRequest,
   CreateStoryResponse,
   GetBootstrapParams,
@@ -857,4 +858,85 @@ export const useGetStory = <
   query.queryKey = queryOptions.queryKey;
 
   return query;
+};
+
+/**
+ * @summary Create inquiry
+ */
+export const useCreateInquiryHook = () => {
+  const createInquiry = useCustomInstance<void>();
+
+  return (
+    createInquiryRequest: CreateInquiryRequest,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>
+  ) => {
+    return createInquiry(
+      {
+        data: createInquiryRequest,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `/api/inquiries`,
+      },
+      options
+    );
+  };
+};
+
+export const useCreateInquiryMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+    TError,
+    { data: CreateInquiryRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+  TError,
+  { data: CreateInquiryRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const createInquiry = useCreateInquiryHook();
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+    { data: CreateInquiryRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createInquiry(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateInquiryMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>
+>;
+export type CreateInquiryMutationBody = CreateInquiryRequest;
+export type CreateInquiryMutationError = unknown;
+
+/**
+ * @summary Create inquiry
+ */
+export const useCreateInquiry = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+    TError,
+    { data: CreateInquiryRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const mutationOptions = useCreateInquiryMutationOptions(options);
+
+  return useMutation(mutationOptions);
 };

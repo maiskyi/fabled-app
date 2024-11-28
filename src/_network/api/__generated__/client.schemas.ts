@@ -33,6 +33,12 @@ export type GetBootstrapParams = {
   image?: ImageTransformationQuery;
 };
 
+export interface CreateInquiryRequest {
+  email: string;
+  message: string;
+  subject: string;
+}
+
 export interface Story {
   content: string;
   id: string;
