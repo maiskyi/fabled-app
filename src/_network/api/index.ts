@@ -12,6 +12,7 @@ export {
   useGetBootstrap,
   useCreateStory,
   useCreateInquiry,
+  useCreateFeedback,
 } from './__generated__/client';
 
 export { DTO };

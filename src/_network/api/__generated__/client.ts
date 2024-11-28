@@ -24,6 +24,8 @@ import type {
 } from '@tanstack/react-query';
 import type {
   Bootstrap,
+  CreateFeedbackRequest,
+  CreateFeedbackResponse,
   CreateInquiryRequest,
   CreateStoryRequest,
   CreateStoryResponse,
@@ -864,7 +866,7 @@ export const useGetStory = <
  * @summary Create inquiry
  */
 export const useCreateInquiryHook = () => {
-  const createInquiry = useCustomInstance<void>();
+  const createInquiry = useCustomInstance<unknown>();
 
   return (
     createInquiryRequest: CreateInquiryRequest,
@@ -883,7 +885,7 @@ export const useCreateInquiryHook = () => {
 };
 
 export const useCreateInquiryMutationOptions = <
-  TError = unknown,
+  TError = HttpExceptionResponse,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
@@ -919,13 +921,13 @@ export type CreateInquiryMutationResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>
 >;
 export type CreateInquiryMutationBody = CreateInquiryRequest;
-export type CreateInquiryMutationError = unknown;
+export type CreateInquiryMutationError = HttpExceptionResponse;
 
 /**
  * @summary Create inquiry
  */
 export const useCreateInquiry = <
-  TError = unknown,
+  TError = HttpExceptionResponse,
   TContext = unknown,
 >(options?: {
   mutation?: UseMutationOptions<
@@ -937,6 +939,87 @@ export const useCreateInquiry = <
   request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
 }) => {
   const mutationOptions = useCreateInquiryMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+/**
+ * @summary Create feedback
+ */
+export const useCreateFeedbackHook = () => {
+  const createFeedback = useCustomInstance<CreateFeedbackResponse>();
+
+  return (
+    createFeedbackRequest: CreateFeedbackRequest,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>
+  ) => {
+    return createFeedback(
+      {
+        data: createFeedbackRequest,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `/api/feedbacks`,
+      },
+      options
+    );
+  };
+};
+
+export const useCreateFeedbackMutationOptions = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+    TError,
+    { data: CreateFeedbackRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+  TError,
+  { data: CreateFeedbackRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const createFeedback = useCreateFeedbackHook();
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+    { data: CreateFeedbackRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createFeedback(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateFeedbackMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>
+>;
+export type CreateFeedbackMutationBody = CreateFeedbackRequest;
+export type CreateFeedbackMutationError = HttpExceptionResponse;
+
+/**
+ * @summary Create feedback
+ */
+export const useCreateFeedback = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+    TError,
+    { data: CreateFeedbackRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const mutationOptions = useCreateFeedbackMutationOptions(options);
 
   return useMutation(mutationOptions);
 };

@@ -1,8 +1,4 @@
 export { StoryStatusType, StoryStatusLogType } from '../__generated__/query';
-export type {
-  CreateFeedbackVariables,
-  GetBootstrap,
-} from '../__generated__/query';
 
 export enum ExtensionCode {
   KS_ACCESS_DENIED = 'KS_ACCESS_DENIED',

@@ -1,11 +1,10 @@
 import { FC } from 'react';
 
-import { Page, Header, Content, Text, Form, Box } from '@core/uikit';
+import { Page, Header, Content, Text, Form, Box, Grid } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
-import { DTO, useCreateFeedback } from '@network/admin';
-import { useUser } from '@common/hooks';
+import { DTO, useCreateFeedback } from '@network/api';
 import { withLoad } from '@core/analytics';
 
 export const Feedback: FC = withLoad({
@@ -14,15 +13,14 @@ export const Feedback: FC = withLoad({
 })(() => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
-  const { uid, email } = useUser();
 
   const title = t('pages.feedback');
 
   const { isPending, mutateAsync } = useCreateFeedback();
 
-  const handleOnSubmit = async (form: DTO.CreateFeedbackVariables) => {
+  const handleOnSubmit = async (data: DTO.CreateFeedbackRequest) => {
     await mutateAsync(
-      { email, uid, ...form },
+      { data },
       {
         onError: () => {
           navigate({
@@ -49,28 +47,48 @@ export const Feedback: FC = withLoad({
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content fullscreen inset={false}>
-        <Header collapse="condense">
-          <Header.Title size="large">{title}</Header.Title>
-        </Header>
-        <Box padding={16} paddingInline={20}>
-          <Text>{t('intro.feedback')}</Text>
-        </Box>
-        <Form<DTO.CreateFeedbackVariables> onSubmit={handleOnSubmit}>
-          <Form.StarRating
-            label={t('forms.rateUs')}
-            name="rating"
-            validation={{ required: true }}
-          />
-          <Box padding={16} paddingInline={20}>
-            <Form.Textarea
-              label={t('forms.message')}
-              name="comment"
-              validation={{ required: true }}
-            />
-          </Box>
-          <Box padding={16} paddingInline={20}>
-            <Form.Submit loading={isPending}>{t('actions.submit')}</Form.Submit>
-          </Box>
+        <Form<DTO.CreateFeedbackRequest> onSubmit={handleOnSubmit}>
+          <Grid fixed>
+            <Grid.Row>
+              <Grid.Cell>
+                <Header collapse="condense">
+                  <Header.Title size="large">{title}</Header.Title>
+                </Header>
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Cell>
+                <Box padding={16} paddingInline={20}>
+                  <Text>{t('intro.feedback')}</Text>
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Cell>
+                <Form.StarRating
+                  label={t('forms.rateUs')}
+                  name="rating"
+                  validation={{ required: true }}
+                />
+                <Box padding={16} paddingInline={20}>
+                  <Form.Textarea
+                    label={t('forms.message')}
+                    name="comment"
+                    validation={{ required: true }}
+                  />
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Cell>
+                <Box padding={16} paddingInline={20}>
+                  <Form.Submit loading={isPending}>
+                    {t('actions.submit')}
+                  </Form.Submit>
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
         </Form>
       </Content>
     </Page>

@@ -8,6 +8,7 @@ import {
   useUtils,
   Text,
   SafeArea,
+  Grid,
 } from '@core/uikit';
 import { useSignOut, useDeleteUser } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
@@ -79,56 +80,76 @@ export const Profile = withLoad({
       </Header>
       <Content fullscreen inset={false}>
         <SafeArea safe={['bottom']}>
-          <Header collapse="condense">
-            <Header.Title size="large">{title}</Header.Title>
-          </Header>
-          <ProfileUserCard />
-          {entries(plans).map(([title, items]) => {
-            return (
-              <List key={title}>
-                <List.Header>{title}</List.Header>
-                {items.map(({ label, onClick, icon, note }) => (
-                  <List.Item button={!!onClick} key={label} onClick={onClick}>
-                    <List.Icon name={icon} />
-                    <List.Label>
-                      <Text>{label}</Text>
-                      <List.Note>{note}</List.Note>
+          <Grid fixed>
+            <Grid.Row>
+              <Grid.Cell>
+                <Header collapse="condense">
+                  <Header.Title size="large">{title}</Header.Title>
+                </Header>
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Cell>
+                <ProfileUserCard />
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Cell>
+                {entries(plans).map(([title, items]) => {
+                  return (
+                    <List key={title}>
+                      <List.Header>{title}</List.Header>
+                      {items.map(({ label, onClick, icon, note }) => (
+                        <List.Item
+                          button={!!onClick}
+                          key={label}
+                          onClick={onClick}
+                        >
+                          <List.Icon name={icon} />
+                          <List.Label>
+                            <Text>{label}</Text>
+                            <List.Note>{note}</List.Note>
+                          </List.Label>
+                        </List.Item>
+                      ))}
+                    </List>
+                  );
+                })}
+                {entries(menu).map(([title, items]) => {
+                  return (
+                    <List key={title}>
+                      <List.Header>{title}</List.Header>
+                      {items.map(({ label, onClick, icon }) => (
+                        <List.Item
+                          button={!!onClick}
+                          key={label}
+                          onClick={onClick}
+                        >
+                          <List.Icon name={icon} />
+                          <List.Label>{label}</List.Label>
+                        </List.Item>
+                      ))}
+                    </List>
+                  );
+                })}
+                <List>
+                  <List.Header />
+                  <List.Item onClick={handleOnLogout}>
+                    <List.Icon name="log-out-outline" />
+                    <List.Label>{t('actions.logOut')}</List.Label>
+                  </List.Item>
+                </List>
+                <List>
+                  <List.Header />
+                  <List.Item onClick={handleOnDelete}>
+                    <List.Label color="danger">
+                      {t('actions.deleteAccount')}
                     </List.Label>
                   </List.Item>
-                ))}
-              </List>
-            );
-          })}
-          {entries(menu).map(([title, items]) => {
-            return (
-              <List key={title}>
-                <List.Header>{title}</List.Header>
-                {items.map(({ label, onClick, icon }) => (
-                  <List.Item button={!!onClick} key={label} onClick={onClick}>
-                    <List.Icon name={icon} />
-                    <List.Label>
-                      <Text>{label}</Text>
-                    </List.Label>
-                  </List.Item>
-                ))}
-              </List>
-            );
-          })}
-          <List>
-            <List.Header />
-            <List.Item onClick={handleOnLogout}>
-              <List.Icon name="log-out-outline" />
-              <List.Label>{t('actions.logOut')}</List.Label>
-            </List.Item>
-          </List>
-          <List>
-            <List.Header />
-            <List.Item onClick={handleOnDelete}>
-              <List.Label color="danger">
-                {t('actions.deleteAccount')}
-              </List.Label>
-            </List.Item>
-          </List>
+                </List>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
         </SafeArea>
       </Content>
     </Page>
