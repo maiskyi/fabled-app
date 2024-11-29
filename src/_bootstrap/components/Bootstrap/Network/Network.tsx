@@ -1,23 +1,19 @@
 import { FC, PropsWithChildren, useCallback } from 'react';
 import { merge } from 'lodash';
 
-import {
-  DTO,
-  ApiProvider as AdminProvider,
-  ApiProviderProps as AdminProviderProps,
-  OnResponseFulfilledCallback,
-  OnRequestFulfilledCallback,
-} from '@network/admin';
 import { useAuth } from '@core/auth';
 import { useGetAppUserId } from '@core/purchases';
-import { ApiProvider, ApiProviderProps } from '@network/api';
+import {
+  ApiProvider,
+  ApiProviderProps,
+  OnRequestFulfilledCallback,
+} from '@network/api';
 
 export type NetworkProps = PropsWithChildren<{
-  admin: AdminProviderProps;
   api: ApiProviderProps;
 }>;
 
-export const Network: FC<NetworkProps> = ({ children, admin, api }) => {
+export const Network: FC<NetworkProps> = ({ children, api }) => {
   const { getIdToken } = useAuth();
   const { refetch: getUserId } = useGetAppUserId();
 
@@ -38,28 +34,9 @@ export const Network: FC<NetworkProps> = ({ children, admin, api }) => {
     [getIdToken, getUserId]
   );
 
-  const handleOnResponseFulfilled: OnResponseFulfilledCallback<{
-    errors: DTO.AccessError[];
-  }> = useCallback((response) => {
-    if (response.data?.errors?.length) {
-      return Promise.reject(response.data?.errors);
-    }
-    return Promise.resolve(response);
-  }, []);
-
   return (
-    <AdminProvider
-      {...admin}
-      onRequestFulfilled={handleOnRequestFulfilled}
-      onResponseFulfilled={handleOnResponseFulfilled}
-    >
-      <ApiProvider
-        {...api}
-        onRequestFulfilled={handleOnRequestFulfilled}
-        onResponseFulfilled={handleOnResponseFulfilled}
-      >
-        {children}
-      </ApiProvider>
-    </AdminProvider>
+    <ApiProvider {...api} onRequestFulfilled={handleOnRequestFulfilled}>
+      {children}
+    </ApiProvider>
   );
 };
