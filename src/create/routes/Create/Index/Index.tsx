@@ -8,6 +8,7 @@ import {
   Animation,
   useUtils,
   Spinner,
+  Grid,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
@@ -96,70 +97,74 @@ export const Index: FC<IndexProps> = withLoad({
   }
 
   return (
-    <Animation.Message>
-      <Box>
-        <Form<IndexForm> defaultValues={{}} onSubmit={handleOnSubmit}>
-          <Header.Title size="large" wrap>
-            <Translate
-              components={{
-                character: (
-                  <Form.Picker<string>
-                    component={Character}
-                    label={t('forms.mainCharacter')}
-                    name={FormField.Character}
-                    options={characters}
-                    validation={{ required: true }}
-                  />
-                ),
-                description: (
-                  <Form.Picker<string>
-                    component={Theme}
-                    label={t('forms.moralLesson')}
-                    name={FormField.Description}
-                    options={themes}
-                    validation={{ required: true }}
-                  />
-                ),
-                readTime: (
-                  <Form.Picker<number>
-                    component={ReadTime}
-                    label={t('forms.readingTime')}
-                    name={FormField.ReadTime}
-                    options={readTimes}
-                    validation={{ required: true }}
-                  />
-                ),
-                scene: (
-                  <Form.Picker<string>
-                    component={Scene}
-                    label={t('forms.placeOfEvents')}
-                    name={FormField.Scene}
-                    options={scenes}
-                    validation={{ required: true }}
-                  />
-                ),
-              }}
-              defaults={outline}
-              id="slug"
-            />
-          </Header.Title>
-          <Box
-            display="flex"
-            flex={0}
-            gap={8}
-            justifyContent="flex-end"
-            padding={16}
-            paddingInline={20}
-          >
-            <Button fill="outline" onClick={handleOnCancel}>
-              {t('actions.cancel')}
-            </Button>
-            <Form.Submit loading={isPending}>
-              {t('actions.writeFable')}
-            </Form.Submit>
+    <Grid.Row>
+      <Grid.Cell>
+        <Animation.Message>
+          <Box>
+            <Form<IndexForm> defaultValues={{}} onSubmit={handleOnSubmit}>
+              <Header.Title size="large" wrap>
+                <Translate
+                  components={{
+                    character: (
+                      <Form.Picker<string>
+                        component={Character}
+                        label={t('forms.mainCharacter')}
+                        name={FormField.Character}
+                        options={characters}
+                        validation={{ required: true }}
+                      />
+                    ),
+                    description: (
+                      <Form.Picker<string>
+                        component={Theme}
+                        label={t('forms.moralLesson')}
+                        name={FormField.Description}
+                        options={themes}
+                        validation={{ required: true }}
+                      />
+                    ),
+                    readTime: (
+                      <Form.Picker<number>
+                        component={ReadTime}
+                        label={t('forms.readingTime')}
+                        name={FormField.ReadTime}
+                        options={readTimes}
+                        validation={{ required: true }}
+                      />
+                    ),
+                    scene: (
+                      <Form.Picker<string>
+                        component={Scene}
+                        label={t('forms.placeOfEvents')}
+                        name={FormField.Scene}
+                        options={scenes}
+                        validation={{ required: true }}
+                      />
+                    ),
+                  }}
+                  defaults={outline}
+                  id="slug"
+                />
+              </Header.Title>
+              <Box
+                display="flex"
+                flex={0}
+                gap={8}
+                justifyContent="flex-end"
+                padding={16}
+                paddingInline={20}
+              >
+                <Button fill="outline" onClick={handleOnCancel}>
+                  {t('actions.cancel')}
+                </Button>
+                <Form.Submit loading={isPending}>
+                  {t('actions.writeFable')}
+                </Form.Submit>
+              </Box>
+            </Form>
           </Box>
-        </Form>
-      </Box>
-    </Animation.Message>
+        </Animation.Message>
+      </Grid.Cell>
+    </Grid.Row>
   );
 });

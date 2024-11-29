@@ -48,11 +48,66 @@ export interface CreateInquiryRequest {
   subject: string;
 }
 
-export interface Story {
-  content: string;
+export type StoryStatusLogItem =
+  (typeof StoryStatusLogItem)[keyof typeof StoryStatusLogItem];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const StoryStatusLogItem = {
+  contentInProgress: 'contentInProgress',
+  createStoryRequestFailed: 'createStoryRequestFailed',
+  imageInProgress: 'imageInProgress',
+  initialized: 'initialized',
+  storyContentGenerationFailed: 'storyContentGenerationFailed',
+  storyContentGenerationFailedWithNoResult:
+    'storyContentGenerationFailedWithNoResult',
+  storyGenerationFailed: 'storyGenerationFailed',
+  storyImageGenerationFailed: 'storyImageGenerationFailed',
+  storyImageGenerationFailedWithNoResult:
+    'storyImageGenerationFailedWithNoResult',
+  storyImageUploadFailed: 'storyImageUploadFailed',
+  storyImageUploadingToCloudinaryFailed:
+    'storyImageUploadingToCloudinaryFailed',
+  success: 'success',
+} as const;
+
+export type StoryStatus = (typeof StoryStatus)[keyof typeof StoryStatus];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const StoryStatus = {
+  failed: 'failed',
+  inprogress: 'inprogress',
+  success: 'success',
+} as const;
+
+export interface StoryPrompt {
   id: string;
-  image: string;
+}
+
+export interface StoryPlaceOfEvent {
+  id: string;
+}
+
+export interface StoryMoralLesson {
+  id: string;
+}
+
+export interface StoryCharacter {
+  id: string;
+}
+
+export interface Story {
+  character: StoryCharacter;
+  content: string;
+  createdAt: string;
+  id: string;
+  image?: string;
+  message: string;
+  moralLesson: StoryMoralLesson;
+  placeOfEvent: StoryPlaceOfEvent;
+  prompt: StoryPrompt;
   readTime: number;
+  status: StoryStatus;
+  statusLog: StoryStatusLogItem[];
   title: string;
 }
 

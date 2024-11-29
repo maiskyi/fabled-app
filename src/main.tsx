@@ -52,10 +52,6 @@ const config: AppProps = {
       supportedLngs: [Language.en],
     },
     network: {
-      admin: {
-        endpoint: import.meta.env.VITE_ADMIN_ENDPOINT,
-        subscription: import.meta.env.VITE_ADMIN_SUBSCRIPTION,
-      },
       api: {
         endpoint: import.meta.env.VITE_API_ENDPOINT,
       },

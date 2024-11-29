@@ -1,7 +1,7 @@
 import { FC, useCallback, useLayoutEffect, useRef } from 'react';
 import { noop } from 'lodash';
 
-import { Animation, Box, Button, Message, SafeArea } from '@core/uikit';
+import { Animation, Box, Button, Grid, Message, SafeArea } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 import { withLoad } from '@core/analytics';
@@ -45,28 +45,32 @@ export const Details: FC<DetailsProps> = withLoad({
   }, [onMessage]);
 
   return (
-    <SafeArea ref={ref} safe={['bottom']}>
-      {thread.map((item) => {
-        return (
-          <Animation.Message key={item.id}>
-            {item.type === 'message' && (
-              <Message {...item.props}>{item.props.children}</Message>
-            )}
-            {item.type === 'actions' && (
-              <Box
-                display="flex"
-                gap={8}
-                justifyContent="flex-end"
-                paddingInline={20}
-              >
-                {item.props.map((props, index) => {
-                  return <Button key={index} {...props} />;
-                })}
-              </Box>
-            )}
-          </Animation.Message>
-        );
-      })}
-    </SafeArea>
+    <Grid.Row>
+      <Grid.Cell>
+        <SafeArea ref={ref} safe={['bottom']}>
+          {thread.map((item) => {
+            return (
+              <Animation.Message key={item.id}>
+                {item.type === 'message' && (
+                  <Message {...item.props}>{item.props.children}</Message>
+                )}
+                {item.type === 'actions' && (
+                  <Box
+                    display="flex"
+                    gap={8}
+                    justifyContent="flex-end"
+                    paddingInline={20}
+                  >
+                    {item.props.map((props, index) => {
+                      return <Button key={index} {...props} />;
+                    })}
+                  </Box>
+                )}
+              </Animation.Message>
+            );
+          })}
+        </SafeArea>
+      </Grid.Cell>
+    </Grid.Row>
   );
 });
