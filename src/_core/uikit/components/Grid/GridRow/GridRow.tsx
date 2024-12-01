@@ -1,9 +1,9 @@
-import { FC, PropsWithChildren } from 'react';
+import { CSSProperties, FC, PropsWithChildren } from 'react';
 
 import { IonRow } from '@ionic/react';
 
-type GridRowProps = PropsWithChildren<{}>;
+type GridRowProps = PropsWithChildren<CSSProperties>;
 
-export const GridRow: FC<GridRowProps> = ({ children }) => {
-  return <IonRow>{children}</IonRow>;
+export const GridRow: FC<GridRowProps> = ({ children, ...style }) => {
+  return <IonRow style={style}>{children}</IonRow>;
 };

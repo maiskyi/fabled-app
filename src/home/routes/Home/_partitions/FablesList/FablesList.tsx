@@ -1,6 +1,6 @@
-import { memo } from 'react';
+import { Fragment, memo } from 'react';
 
-import { Box } from '@core/uikit';
+import { Grid } from '@core/uikit';
 import { DTO } from '@network/api';
 
 import { FableCard } from '../FableCard';
@@ -15,16 +15,14 @@ export const FablesList = memo<FablesListProps>(function FablesList({
   onClick,
 }: FablesListProps) {
   return (
-    <Box flex={1}>
+    <Fragment>
       {data.map((item) => {
         return (
-          <FableCard
-            item={item}
-            key={item.id}
-            onClick={() => onClick(item.id)}
-          />
+          <Grid.Cell key={item.id} lg="6" md="6" sm="12" xl="4" xs="12">
+            <FableCard item={item} onClick={() => onClick(item.id)} />
+          </Grid.Cell>
         );
       })}
-    </Box>
+    </Fragment>
   );
 });

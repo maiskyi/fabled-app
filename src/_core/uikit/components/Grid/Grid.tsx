@@ -5,6 +5,8 @@ import { IonGrid } from '@ionic/react';
 import { GridRow } from './GridRow/GridRow';
 import { GridCell } from './GridCell/GridCell';
 
+import styles from './Grid.module.scss';
+
 export type GridProps = PropsWithChildren<{
   fixed?: boolean;
 }>;
@@ -16,7 +18,11 @@ interface GridComponent {
 }
 
 export const Grid: GridComponent = ({ children, fixed }: GridProps) => {
-  return <IonGrid fixed={fixed}>{children}</IonGrid>;
+  return (
+    <IonGrid className={styles.root} fixed={fixed}>
+      {children}
+    </IonGrid>
+  );
 };
 
 Grid.Row = GridRow;
