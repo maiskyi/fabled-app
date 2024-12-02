@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Content,
+  Grid,
   Header,
   Page,
   Text,
@@ -97,45 +98,51 @@ export const EmailVerification = withLoad({
             {title}
           </Header.Title>
         </Header>
-        <Box padding={16} paddingInline={20}>
-          <Text>{message}</Text>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection="column"
-          gap={12}
-          padding={16}
-          paddingInline={20}
-        >
-          {isAuthenticated && isSuccess && (
-            <Button
-              fill="solid"
-              loading={isReloadingUser}
-              onClick={handleOnGoToFabledSpace}
-            >
-              {t('actions.goToFabledSpace')}
-            </Button>
-          )}
-          {!isAuthenticated && isSuccess && (
-            <Button fill="solid" onClick={handleSignIn}>
-              {t('actions.signIn')}
-            </Button>
-          )}
-          {isAuthenticated && isError && (
-            <Button
-              fill="solid"
-              loading={isSendingEmailVerification}
-              onClick={handleOnRequestNewLink}
-            >
-              {t('actions.requestNewLink')}
-            </Button>
-          )}
-          {isError && (
-            <Button fill="outline" onClick={handleOnContactSupport}>
-              {t('actions.contactSupport')}
-            </Button>
-          )}
-        </Box>
+        <Grid fixed>
+          <Grid.Row>
+            <Grid.Cell>
+              <Box padding={16} paddingInline={20}>
+                <Text>{message}</Text>
+              </Box>
+              <Box
+                display="flex"
+                flexDirection="column"
+                gap={12}
+                padding={16}
+                paddingInline={20}
+              >
+                {isAuthenticated && isSuccess && (
+                  <Button
+                    fill="solid"
+                    loading={isReloadingUser}
+                    onClick={handleOnGoToFabledSpace}
+                  >
+                    {t('actions.goToFabledSpace')}
+                  </Button>
+                )}
+                {!isAuthenticated && isSuccess && (
+                  <Button fill="solid" onClick={handleSignIn}>
+                    {t('actions.signIn')}
+                  </Button>
+                )}
+                {isAuthenticated && isError && (
+                  <Button
+                    fill="solid"
+                    loading={isSendingEmailVerification}
+                    onClick={handleOnRequestNewLink}
+                  >
+                    {t('actions.requestNewLink')}
+                  </Button>
+                )}
+                {isError && (
+                  <Button fill="outline" onClick={handleOnContactSupport}>
+                    {t('actions.contactSupport')}
+                  </Button>
+                )}
+              </Box>
+            </Grid.Cell>
+          </Grid.Row>
+        </Grid>
       </Content>
     </Page>
   );

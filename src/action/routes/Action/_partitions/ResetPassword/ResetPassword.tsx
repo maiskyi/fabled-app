@@ -1,4 +1,4 @@
-import { Box, Content, Form, Header, Page, Text } from '@core/uikit';
+import { Box, Content, Form, Grid, Header, Page, Text } from '@core/uikit';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import {
@@ -59,24 +59,32 @@ export const ResetPassword = withLoad({
             {title}
           </Header.Title>
         </Header>
-        <Box padding={16} paddingInline={20}>
-          <Text>{t('intro.resetPassword')}</Text>
-        </Box>
-        <Form<Partial<ConfirmPasswordResetRequest>> onSubmit={handleOnSubmit}>
-          <Box padding={16} paddingInline={20}>
-            <Form.Password
-              icon="lock-closed-outline"
-              label={t('forms.newPassword')}
-              name="newPassword"
-              validation={{ minLength: 8, required: true }}
-            />
-          </Box>
-          <Box padding={16} paddingInline={20}>
-            <Form.Submit loading={isPending}>
-              {t('actions.confirmNewPassword')}
-            </Form.Submit>
-          </Box>
-        </Form>
+        <Grid fixed>
+          <Grid.Row>
+            <Grid.Cell>
+              <Box padding={16} paddingInline={20}>
+                <Text>{t('intro.resetPassword')}</Text>
+              </Box>
+              <Form<Partial<ConfirmPasswordResetRequest>>
+                onSubmit={handleOnSubmit}
+              >
+                <Box padding={16} paddingInline={20}>
+                  <Form.Password
+                    icon="lock-closed-outline"
+                    label={t('forms.newPassword')}
+                    name="newPassword"
+                    validation={{ minLength: 8, required: true }}
+                  />
+                </Box>
+                <Box padding={16} paddingInline={20}>
+                  <Form.Submit loading={isPending}>
+                    {t('actions.confirmNewPassword')}
+                  </Form.Submit>
+                </Box>
+              </Form>
+            </Grid.Cell>
+          </Grid.Row>
+        </Grid>
       </Content>
     </Page>
   );

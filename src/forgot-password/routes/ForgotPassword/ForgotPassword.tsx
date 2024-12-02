@@ -6,6 +6,7 @@ import {
   Content,
   Form,
   FormInstance,
+  Grid,
   Header,
   Page,
   Text,
@@ -67,36 +68,42 @@ export const ForgotPassword = withLoad({
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Box padding={16} paddingInline={20}>
-          <Text>{t('intro.forgotPassword')}</Text>
-        </Box>
-        <Form<SendPasswordResetEmailRequest>
-          onSubmit={handleOnSubmit}
-          ref={form}
-        >
-          <Box padding={16} paddingInline={20}>
-            <Form.Text
-              icon="mail-outline"
-              label={t('forms.email')}
-              name="email"
-              validation={{ email: true, required: true }}
-            />
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            gap={12}
-            padding={16}
-            paddingInline={20}
-          >
-            <Form.Submit loading={isPending}>
-              {t('actions.sendResetLink')}
-            </Form.Submit>
-            <Button fill="outline" onClick={handleOnContactSupport}>
-              {t('actions.contactSupport')}
-            </Button>
-          </Box>
-        </Form>
+        <Grid fixed>
+          <Grid.Row>
+            <Grid.Cell>
+              <Box padding={16} paddingInline={20}>
+                <Text>{t('intro.forgotPassword')}</Text>
+              </Box>
+              <Form<SendPasswordResetEmailRequest>
+                onSubmit={handleOnSubmit}
+                ref={form}
+              >
+                <Box padding={16} paddingInline={20}>
+                  <Form.Text
+                    icon="mail-outline"
+                    label={t('forms.email')}
+                    name="email"
+                    validation={{ email: true, required: true }}
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  gap={12}
+                  padding={16}
+                  paddingInline={20}
+                >
+                  <Form.Submit loading={isPending}>
+                    {t('actions.sendResetLink')}
+                  </Form.Submit>
+                  <Button fill="outline" onClick={handleOnContactSupport}>
+                    {t('actions.contactSupport')}
+                  </Button>
+                </Box>
+              </Form>
+            </Grid.Cell>
+          </Grid.Row>
+        </Grid>
       </Content>
     </Page>
   );

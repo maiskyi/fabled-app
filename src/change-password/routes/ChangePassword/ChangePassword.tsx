@@ -5,6 +5,7 @@ import {
   Content,
   Form,
   FormInstance,
+  Grid,
   Header,
   Page,
   useUtils,
@@ -62,46 +63,52 @@ export const ChangePassword = withLoad({
           <Header collapse="condense">
             <Header.Title size="large">{title}</Header.Title>
           </Header>
-          <Box padding={16} paddingInline={20}>
-            <Form.Password
-              errors={{
-                pattern: [
-                  t('validation.containsNumber', {
-                    label: t('forms.password'),
-                  }),
-                  t('validation.containsUppercaseLetter', {
-                    label: t('forms.password'),
-                  }),
-                  t('validation.containsSpecialCharacter', {
-                    label: t('forms.password'),
-                  }),
-                ],
-              }}
-              help={t('help.password')}
-              icon="lock-closed-outline"
-              label={t('forms.newPassword')}
-              name="newPassword"
-              validation={{
-                minLength: 8,
-                pattern: [
-                  VALIDATION_PATTERNS.CONTAINS_NUMBER,
-                  VALIDATION_PATTERNS.CONTAINS_UPPERCASE_LETTER,
-                  VALIDATION_PATTERNS.CONTAINS_SPECIAL_CHARACTER,
-                ],
-                required: true,
-              }}
-            />
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            padding={16}
-            paddingInline={20}
-          >
-            <Form.Submit loading={isPending}>
-              {t('actions.confirmNewPassword')}
-            </Form.Submit>
-          </Box>
+          <Grid fixed>
+            <Grid.Row>
+              <Grid.Cell>
+                <Box padding={16} paddingInline={20}>
+                  <Form.Password
+                    errors={{
+                      pattern: [
+                        t('validation.containsNumber', {
+                          label: t('forms.password'),
+                        }),
+                        t('validation.containsUppercaseLetter', {
+                          label: t('forms.password'),
+                        }),
+                        t('validation.containsSpecialCharacter', {
+                          label: t('forms.password'),
+                        }),
+                      ],
+                    }}
+                    help={t('help.password')}
+                    icon="lock-closed-outline"
+                    label={t('forms.newPassword')}
+                    name="newPassword"
+                    validation={{
+                      minLength: 8,
+                      pattern: [
+                        VALIDATION_PATTERNS.CONTAINS_NUMBER,
+                        VALIDATION_PATTERNS.CONTAINS_UPPERCASE_LETTER,
+                        VALIDATION_PATTERNS.CONTAINS_SPECIAL_CHARACTER,
+                      ],
+                      required: true,
+                    }}
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  padding={16}
+                  paddingInline={20}
+                >
+                  <Form.Submit loading={isPending}>
+                    {t('actions.confirmNewPassword')}
+                  </Form.Submit>
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
         </Form>
       </Content>
     </Page>

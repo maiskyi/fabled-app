@@ -1,4 +1,4 @@
-import { Box, Button, Content, Header, Page, Text } from '@core/uikit';
+import { Box, Button, Content, Grid, Header, Page, Text } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 import { withLoad } from '@core/analytics';
@@ -33,12 +33,18 @@ export const Notification = withLoad({
             {title}
           </Header.Title>
         </Header>
-        <Box padding={16} paddingInline={20}>
-          <Text>{message}</Text>
-        </Box>
-        <Box padding={16} paddingInline={20}>
-          <Button onClick={dispatch}>{cta}</Button>
-        </Box>
+        <Grid fixed>
+          <Grid.Row>
+            <Grid.Cell>
+              <Box padding={16} paddingInline={20}>
+                <Text>{message}</Text>
+              </Box>
+              <Box padding={16} paddingInline={20}>
+                <Button onClick={dispatch}>{cta}</Button>
+              </Box>
+            </Grid.Cell>
+          </Grid.Row>
+        </Grid>
       </Content>
     </Page>
   );
