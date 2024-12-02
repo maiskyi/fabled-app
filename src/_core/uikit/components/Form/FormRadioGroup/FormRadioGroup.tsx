@@ -6,7 +6,6 @@ import { IonRadioGroup } from '@ionic/react';
 import { FormControl, FormControlBaseProps } from '../FormControl';
 
 import { FormRadioGroupValidation } from './FormRadioGroup.types';
-import { FormRadioGroupCard } from './FormRadioGroupCard/FormRadioGroupCard';
 import { FormRadioGroupItem } from './FormRadioGroupItem/FormRadioGroupItem';
 import { FormRadioGroupCustom } from './FormRadioGroupCustom/FormRadioGroupCustom';
 import { FormRadioGroupContext } from './FormRadioGroup.context';
@@ -23,7 +22,6 @@ type FormRadioGroupProps =
 
 interface FormRadioGroupComponent {
   (props: FormRadioGroupProps): ReactElement;
-  Card: typeof FormRadioGroupCard;
   Item: typeof FormRadioGroupItem;
   Custom: typeof FormRadioGroupCustom;
 }
@@ -57,6 +55,5 @@ export const FormRadioGroup: FormRadioGroupComponent = ({
   );
 };
 
-FormRadioGroup.Card = FormRadioGroupCard;
 FormRadioGroup.Item = FormRadioGroupItem;
 FormRadioGroup.Custom = FormRadioGroupCustom;

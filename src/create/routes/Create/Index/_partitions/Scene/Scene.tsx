@@ -11,10 +11,11 @@ import {
 import { Translate, useTranslation } from '@core/localization';
 
 import { FormField } from '../../../Create.const';
+import { Slide } from '../Slide';
 
 import { CharacterForm } from './Scene.types';
 
-import styles from './Scene.module.scss';
+import styles from '../_partitions.module.scss';
 
 export const Scene: FormPickerComponent<string> = ({
   dismiss,
@@ -66,18 +67,21 @@ export const Scene: FormPickerComponent<string> = ({
                   initialSlide={initialSlide}
                   pagination={{ dynamicBullets: true }}
                 >
-                  {options.map(({ label, image, value }) => {
+                  {options.map(({ label, image, value: v }) => {
                     return (
                       <Swiper.Slide className={styles.slide} key={value}>
-                        <Form.RadioGroup.Card
-                          key={label}
-                          thumb={{
-                            aspectRatio: 1,
-                            caption: label,
-                            children: <img alt={label} src={image} />,
+                        <Form.RadioGroup.Custom value={v}>
+                          {({ onSelect, value }) => {
+                            return (
+                              <Slide
+                                caption={label}
+                                checked={v === value}
+                                onClick={onSelect}
+                                src={image}
+                              />
+                            );
                           }}
-                          value={value}
-                        />
+                        </Form.RadioGroup.Custom>
                       </Swiper.Slide>
                     );
                   })}

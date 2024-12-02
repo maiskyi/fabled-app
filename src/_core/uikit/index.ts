@@ -5,6 +5,7 @@ export * from './components/Badge';
 export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
+export * from './components/Checkbox';
 export * from './components/Content';
 export * from './components/Divider';
 export * from './components/Empty';
