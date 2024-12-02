@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react';
+import { memo } from 'react';
 
 import { Grid } from '@core/uikit';
 import { DTO } from '@network/api';
@@ -15,7 +15,7 @@ export const FablesList = memo<FablesListProps>(function FablesList({
   onClick,
 }: FablesListProps) {
   return (
-    <Fragment>
+    <Grid.Row>
       {data.map((item) => {
         return (
           <Grid.Cell key={item.id} lg="6" md="6" sm="12" xl="4" xs="12">
@@ -23,6 +23,6 @@ export const FablesList = memo<FablesListProps>(function FablesList({
           </Grid.Cell>
         );
       })}
-    </Fragment>
+    </Grid.Row>
   );
 });

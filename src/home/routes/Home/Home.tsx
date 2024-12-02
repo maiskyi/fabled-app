@@ -97,13 +97,11 @@ export const Home = withLoad({
                   <FablesCreate onClick={handleOnCreateClick} />
                 </Grid.Cell>
               </Grid.Row>
-              <Grid.Row flex={1}>
-                {isLoading && <FablesSkeleton />}
-                {!isLoading && !records?.length && <FablesEmpty />}
-                {!isLoading && !!records?.length && (
-                  <FablesList data={records} onClick={handleOnFableClick} />
-                )}
-              </Grid.Row>
+              {isLoading && <FablesSkeleton />}
+              {!isLoading && !records?.length && <FablesEmpty />}
+              {!isLoading && !!records?.length && (
+                <FablesList data={records} onClick={handleOnFableClick} />
+              )}
             </Grid>
           </SafeArea>
         </InfiniteScroll>

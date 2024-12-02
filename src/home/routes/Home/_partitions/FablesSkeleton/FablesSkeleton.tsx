@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react';
+import { memo } from 'react';
 import { noop } from 'lodash';
 
 import { Grid } from '@core/uikit';
@@ -9,7 +9,7 @@ import { SKELETON_INITIAL_DATA } from './FablesSkeleton.const';
 
 export const FablesSkeleton = memo(function FableSkeleton() {
   return (
-    <Fragment>
+    <Grid.Row>
       {SKELETON_INITIAL_DATA.map((item, index) => {
         return (
           <Grid.Cell key={index} lg="6" md="6" sm="12" xl="4" xs="12">
@@ -17,6 +17,6 @@ export const FablesSkeleton = memo(function FableSkeleton() {
           </Grid.Cell>
         );
       })}
-    </Fragment>
+    </Grid.Row>
   );
 });

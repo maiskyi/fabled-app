@@ -13,6 +13,7 @@ export const forms = {
   pickReadingTime: 'Pick reading time',
   placeOfEvents: 'Place of events',
   rateUs: 'Rate Us',
+  readTimeMin: 'Read time: {{min}} min',
   readingTime: 'Reading time',
   subject: 'Subject',
 };
