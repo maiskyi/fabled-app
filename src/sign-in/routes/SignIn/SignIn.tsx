@@ -6,6 +6,7 @@ import {
   Content,
   Form,
   FormInstance,
+  Grid,
   Header,
   Page,
   Text,
@@ -72,46 +73,54 @@ export const SignIn: FC = withLoad({
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Box padding={16} paddingInline={20}>
-          <Text>{t('intro.signIn')}</Text>
-        </Box>
-        <Form<SignInWithEmailAndPasswordRequest>
-          defaultValues={search}
-          onSubmit={handleOnSubmit}
-          ref={form}
-        >
-          <Box padding={16} paddingInline={20}>
-            <Form.Text
-              icon="mail-outline"
-              label={t('forms.email')}
-              name="email"
-              validation={{
-                email: true,
-                required: true,
-              }}
-            />
-            <Form.Password
-              icon="lock-closed-outline"
-              label={t('forms.password')}
-              name="password"
-              validation={{ required: true }}
-            />
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            padding={16}
-            paddingInline={20}
-          >
-            <Form.Submit loading={isPending}>{t('actions.signIn')}</Form.Submit>
-            <Button fill="clear" onClick={handleOnForgotPassword}>
-              {t('actions.forgotPassword')}
-            </Button>
-          </Box>
-          <Box paddingBottom={12} paddingInline={20} textAlign="center">
-            <Disclaimer />
-          </Box>
-        </Form>
+        <Grid fixed>
+          <Grid.Row>
+            <Grid.Cell>
+              <Box padding={16} paddingInline={20}>
+                <Text>{t('intro.signIn')}</Text>
+              </Box>
+              <Form<SignInWithEmailAndPasswordRequest>
+                defaultValues={search}
+                onSubmit={handleOnSubmit}
+                ref={form}
+              >
+                <Box padding={16} paddingInline={20}>
+                  <Form.Text
+                    icon="mail-outline"
+                    label={t('forms.email')}
+                    name="email"
+                    validation={{
+                      email: true,
+                      required: true,
+                    }}
+                  />
+                  <Form.Password
+                    icon="lock-closed-outline"
+                    label={t('forms.password')}
+                    name="password"
+                    validation={{ required: true }}
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  padding={16}
+                  paddingInline={20}
+                >
+                  <Form.Submit loading={isPending}>
+                    {t('actions.signIn')}
+                  </Form.Submit>
+                  <Button fill="clear" onClick={handleOnForgotPassword}>
+                    {t('actions.forgotPassword')}
+                  </Button>
+                </Box>
+                <Box paddingBottom={12} paddingInline={20} textAlign="center">
+                  <Disclaimer />
+                </Box>
+              </Form>
+            </Grid.Cell>
+          </Grid.Row>
+        </Grid>
       </Content>
     </Page>
   );

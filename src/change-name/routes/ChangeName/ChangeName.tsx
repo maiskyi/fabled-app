@@ -1,4 +1,4 @@
-import { Box, Content, Form, Header, Page } from '@core/uikit';
+import { Box, Content, Form, Grid, Header, Page } from '@core/uikit';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useUpdateProfile, UpdateProfileRequest, useAuth } from '@core/auth';
@@ -43,24 +43,32 @@ export const ChangeName = withLoad({
           <Header collapse="condense">
             <Header.Title size="large">{title}</Header.Title>
           </Header>
-          <Box padding={16} paddingInline={20}>
-            <Form.Text
-              icon="person-outline"
-              label={t('forms.name')}
-              name="displayName"
-              validation={{
-                required: true,
-              }}
-            />
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            padding={16}
-            paddingInline={20}
-          >
-            <Form.Submit loading={isPending}>{t('actions.save')}</Form.Submit>
-          </Box>
+          <Grid fixed>
+            <Grid.Row>
+              <Grid.Cell>
+                <Box padding={16} paddingInline={20}>
+                  <Form.Text
+                    icon="person-outline"
+                    label={t('forms.name')}
+                    name="displayName"
+                    validation={{
+                      required: true,
+                    }}
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  padding={16}
+                  paddingInline={20}
+                >
+                  <Form.Submit loading={isPending}>
+                    {t('actions.save')}
+                  </Form.Submit>
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
         </Form>
       </Content>
     </Page>

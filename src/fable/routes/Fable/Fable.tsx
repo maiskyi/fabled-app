@@ -7,6 +7,7 @@ import {
   useDevice,
   SafeArea,
   Image,
+  Grid,
 } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
@@ -39,21 +40,27 @@ export const Fable = withLoad({
       </Header>
       <Content fullscreen>
         <SafeArea safe={['bottom']}>
-          <Box
-            aspectRatio={1}
-            borderRadius={8}
-            marginInline={20}
-            overflow="hidden"
-            position="relative"
-          >
-            <Image src={data?.image} />
-          </Box>
-          <Card.Header>
-            <Card.Title>{data?.title}</Card.Title>
-          </Card.Header>
-          <Box marginInline={20} whiteSpace="pre-wrap">
-            {data?.content}
-          </Box>
+          <Grid fixed>
+            <Grid.Row>
+              <Grid.Cell>
+                <Box
+                  aspectRatio={1}
+                  borderRadius={8}
+                  marginInline={20}
+                  overflow="hidden"
+                  position="relative"
+                >
+                  <Image src={data?.image} />
+                </Box>
+                <Card.Header>
+                  <Card.Title>{data?.title}</Card.Title>
+                </Card.Header>
+                <Box marginInline={20} whiteSpace="pre-wrap">
+                  {data?.content}
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
         </SafeArea>
       </Content>
     </Page>

@@ -6,6 +6,7 @@ import {
   Divider,
   Header,
   SafeArea,
+  Grid,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { RoutePath } from '@bootstrap/constants';
@@ -65,44 +66,61 @@ export const Auth = withLoad({
           minHeight="100%"
           safe={['bottom']}
         >
-          <Header collapse="condense">
-            <Header.Title size="large">{t('pages.auth')}</Header.Title>
-          </Header>
-          <Box
-            alignItems="center"
-            display="flex"
-            flex={1}
-            justifyContent="center"
-          >
-            <Wallpaper />
-          </Box>
-          <Box
-            display="flex"
-            flex={0}
-            flexDirection="column"
-            gap={12}
-            paddingInline={20}
-          >
-            <Box display="flex" gap={12}>
-              <Box flex={1}>
-                <Button color="tertiary" onClick={handleOnSignIn}>
-                  {t('actions.signIn')}
-                </Button>
-              </Box>
-              <Box flex={1}>
-                <Button onClick={handleOnSignUp}>{t('actions.signUp')}</Button>
-              </Box>
-            </Box>
-            <Box paddingInline={26}>
-              <Divider>{t('forms.or')}</Divider>
-            </Box>
-            <Box>
-              <FederatedLogin />
-            </Box>
-            <Box paddingTop={12} textAlign="center">
-              <Disclaimer />
-            </Box>
-          </Box>
+          <Grid fixed>
+            <Grid.Row flex={0}>
+              <Grid.Cell>
+                <Header collapse="condense">
+                  <Header.Title size="large">{t('pages.auth')}</Header.Title>
+                </Header>
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row flex={1}>
+              <Grid.Cell>
+                <Box
+                  alignItems="center"
+                  display="flex"
+                  height="100%"
+                  justifyContent="center"
+                >
+                  <Wallpaper />
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Cell>
+                <Box
+                  display="flex"
+                  flex={0}
+                  flexDirection="column"
+                  gap={12}
+                  margin="0 auto"
+                  paddingInline={20}
+                >
+                  <Box display="flex" gap={12}>
+                    <Box flex={1}>
+                      <Button color="tertiary" onClick={handleOnSignIn}>
+                        {t('actions.signIn')}
+                      </Button>
+                    </Box>
+                    <Box flex={1}>
+                      <Button onClick={handleOnSignUp}>
+                        {t('actions.signUp')}
+                      </Button>
+                    </Box>
+                  </Box>
+                  <Box paddingInline={26}>
+                    <Divider>{t('forms.or')}</Divider>
+                  </Box>
+                  <Box>
+                    <FederatedLogin />
+                  </Box>
+                  <Box paddingTop={12} textAlign="center">
+                    <Disclaimer />
+                  </Box>
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
         </SafeArea>
       </Content>
     </Page>
