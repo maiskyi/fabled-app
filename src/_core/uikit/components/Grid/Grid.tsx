@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react';
+import classNames from 'classnames';
 
 import { IonGrid } from '@ionic/react';
 
@@ -19,7 +20,10 @@ interface GridComponent {
 
 export const Grid: GridComponent = ({ children, fixed }: GridProps) => {
   return (
-    <IonGrid className={styles.root} fixed={fixed}>
+    <IonGrid
+      className={classNames('ion-no-padding', styles.root)}
+      fixed={fixed}
+    >
       {children}
     </IonGrid>
   );

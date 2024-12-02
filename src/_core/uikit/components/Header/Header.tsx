@@ -6,7 +6,7 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
-import { IonHeader, IonToolbar } from '@ionic/react';
+import { IonCol, IonGrid, IonHeader, IonRow, IonToolbar } from '@ionic/react';
 
 import { Selector } from '../../constants/selector.const';
 
@@ -42,7 +42,13 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
       ref={ref}
       translucent={translucent}
     >
-      <IonToolbar>{children}</IonToolbar>
+      <IonGrid className="ion-no-padding" fixed>
+        <IonRow>
+          <IonCol className="ion-no-padding">
+            <IonToolbar>{children}</IonToolbar>
+          </IonCol>
+        </IonRow>
+      </IonGrid>
     </IonHeader>
   );
 }) as unknown as HeaderComponent;
