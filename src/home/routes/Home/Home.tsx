@@ -10,6 +10,7 @@ import {
   SafeArea,
   Logo,
   useViewWillEnter,
+  Grid,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -81,17 +82,27 @@ export const Home = withLoad({
             minHeight="100%"
             safe={['bottom']}
           >
-            <Box flex={0}>
-              <Header collapse="condense">
-                <Header.Title size="large">{title}</Header.Title>
-              </Header>
-            </Box>
-            <FablesCreate onClick={handleOnCreateClick} />
-            {isLoading && <FablesSkeleton />}
-            {!isLoading && !records?.length && <FablesEmpty />}
-            {!isLoading && !!records?.length && (
-              <FablesList data={records} onClick={handleOnFableClick} />
-            )}
+            <Grid fixed>
+              <Grid.Row flex={0}>
+                <Grid.Cell>
+                  <Box flex={0}>
+                    <Header collapse="condense">
+                      <Header.Title size="large">{title}</Header.Title>
+                    </Header>
+                  </Box>
+                </Grid.Cell>
+              </Grid.Row>
+              <Grid.Row flex={0}>
+                <Grid.Cell>
+                  <FablesCreate onClick={handleOnCreateClick} />
+                </Grid.Cell>
+              </Grid.Row>
+              {isLoading && <FablesSkeleton />}
+              {!isLoading && !records?.length && <FablesEmpty />}
+              {!isLoading && !!records?.length && (
+                <FablesList data={records} onClick={handleOnFableClick} />
+              )}
+            </Grid>
           </SafeArea>
         </InfiniteScroll>
       </Content>

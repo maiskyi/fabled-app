@@ -11,10 +11,11 @@ import {
 import { Translate, useTranslation } from '@core/localization';
 
 import { FormField } from '../../../Create.const';
+import { Slide } from '../Slide';
 
 import { CharacterForm } from './Character.types';
 
-import styles from './Character.module.scss';
+import styles from '../_partitions.module.scss';
 
 export const Character: FormPickerComponent<string> = ({
   dismiss,
@@ -58,26 +59,26 @@ export const Character: FormPickerComponent<string> = ({
             justifyContent="center"
           >
             <Box>
-              <Form.RadioGroup
-                name={FormField.Character}
-                validation={{ required: true }}
-              >
+              <Form.RadioGroup name={FormField.Character}>
                 <Swiper
                   initialSlide={initialSlide}
                   pagination={{ dynamicBullets: true }}
                 >
-                  {options.map(({ value, label, image }) => {
+                  {options.map(({ value: v, label, image }) => {
                     return (
                       <Swiper.Slide className={styles.slide} key={value}>
-                        <Form.RadioGroup.Card
-                          key={value}
-                          thumb={{
-                            aspectRatio: 1,
-                            caption: label,
-                            children: <img alt={label} src={image} />,
+                        <Form.RadioGroup.Custom value={v}>
+                          {({ onSelect, value }) => {
+                            return (
+                              <Slide
+                                caption={label}
+                                checked={v === value}
+                                onClick={onSelect}
+                                src={image}
+                              />
+                            );
                           }}
-                          value={value}
-                        />
+                        </Form.RadioGroup.Custom>
                       </Swiper.Slide>
                     );
                   })}
