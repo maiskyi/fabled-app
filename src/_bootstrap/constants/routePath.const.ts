@@ -18,6 +18,5 @@ export enum RoutePath {
   Request = '/request/:id',
   SignIn = '/sign-in',
   SignUp = '/sign-up',
-  Subscribe = '/subscribe',
   VerifyEmail = '/verify-email',
 }

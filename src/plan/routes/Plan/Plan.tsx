@@ -43,7 +43,7 @@ export const Plan: FC = withLoad({
   const { defaultValues } = usePlanDefaultValues({ action });
 
   const title = t(PLAN_HEADER_MAPPING[action], {
-    title: offering.identifier,
+    title: offering?.identifier,
   });
 
   const hightestMonthlyPrice = offering?.availablePackages?.reduce(
