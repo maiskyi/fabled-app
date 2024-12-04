@@ -23,6 +23,7 @@ import {
   PLAN_HEADER_MAPPING,
   PLAN_INTRO_MAPPING,
 } from './Plan.const';
+import { usePlanDefaultValues } from './Plan.hook';
 
 export const Plan: FC = withLoad({
   category: 'Subscribe',
@@ -39,11 +40,11 @@ export const Plan: FC = withLoad({
 
   const { isSuccess, isPending, mutate } = usePurchaseStoreProduct();
 
-  const title = t(PLAN_HEADER_MAPPING[action]);
+  const { defaultValues } = usePlanDefaultValues({ action });
 
-  const defaultValues: PlanFrom = {
-    [PlanFromField.Product]: offering?.availablePackages.at(0)?.identifier,
-  };
+  const title = t(PLAN_HEADER_MAPPING[action], {
+    title: offering.identifier,
+  });
 
   const hightestMonthlyPrice = offering?.availablePackages?.reduce(
     (acc, { product }) => {
@@ -100,7 +101,10 @@ export const Plan: FC = withLoad({
                 defaultValues={defaultValues}
                 onSubmit={handleOnSubmit}
               >
-                <Form.RadioGroup name={PlanFromField.Product}>
+                <Form.RadioGroup
+                  name={PlanFromField.Product}
+                  validation={{ required: true }}
+                >
                   {offering?.availablePackages.map((item) => {
                     return (
                       <PackageCard

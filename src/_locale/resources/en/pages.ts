@@ -15,6 +15,6 @@ export const pages = {
   resetPassword: 'Create a new password',
   signIn: 'Sign in',
   signUp: 'Sign Up',
-  subscribe: 'Get started with our unlimited plan',
+  subscribe: 'Get started with our {{title}} plan',
   verifyEmail: 'Verify your email',
 };
