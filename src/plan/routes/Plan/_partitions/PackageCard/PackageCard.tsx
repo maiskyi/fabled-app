@@ -16,7 +16,7 @@ interface PackageCardProps {
 export const PackageCard = memo<PackageCardProps>(function PackageCard({
   hightestMonthlyPrice,
   package: {
-    product: { subscriptionPeriod, priceString, pricePerMonth },
+    product: { subscriptionPeriod, priceString, pricePerMonth, description },
     identifier,
   },
 }: PackageCardProps) {
@@ -45,8 +45,11 @@ export const PackageCard = memo<PackageCardProps>(function PackageCard({
                     })}
                   </Card.Badge>
                 )}
-                <Card.Subtitle>
+                <Card.Subtitle className={styles.subheader}>
+                  {description}
+                  <br />
                   {t('help.subscribe', {
+                    description,
                     price: priceString,
                     subscriptionPeriod: t(
                       `constants.subscriptionPeriod.${subscriptionPeriod}.short`

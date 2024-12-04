@@ -1,5 +1,6 @@
 import { FC, Fragment, PropsWithChildren } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
+import { get } from 'lodash';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 import { Capacitor } from '@capacitor/core';
@@ -43,7 +44,9 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     async () => {
       if (Capacitor.isNativePlatform()) {
         try {
-          const { current: offering } = await Purchases.getOfferings();
+          const { all } = await Purchases.getOfferings();
+
+          const offering = get(all, 'Plus');
 
           const { customerInfo } = await Purchases.getCustomerInfo();
 

@@ -5,7 +5,7 @@ import { useUser } from '@common/hooks';
 import { BOT_AVATAR_SRC, Spinner, Typist, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
-import { RoutePath } from '@bootstrap/constants';
+import { PlanAction, RoutePath } from '@bootstrap/constants';
 import { DTO, useCreateStory, useGetStory } from '@network/api';
 
 import { ThreadItem, TypistState } from './Details.types';
@@ -76,7 +76,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           if (statusCode === 403) {
             navigate({
               action: 'push',
-              pathname: RoutePath.Subscribe,
+              params: { action: PlanAction.Subscribe },
+              pathname: RoutePath.Plan,
             });
           } else {
             toast({

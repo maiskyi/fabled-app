@@ -69,7 +69,7 @@ export const Scene: FormPickerComponent<string> = ({
                 >
                   {options.map(({ label, image, value: v }) => {
                     return (
-                      <Swiper.Slide className={styles.slide} key={value}>
+                      <Swiper.Slide className={styles.slide} key={v}>
                         <Form.RadioGroup.Custom value={v}>
                           {({ onSelect, value }) => {
                             return (

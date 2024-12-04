@@ -10,10 +10,11 @@ export const pages = {
   feedback: 'Share your feedback',
   forgotPassword: 'Forgot password?',
   home: 'My Fables',
+  manageYourPlan: 'Manage your plan',
   profile: 'Profile',
   resetPassword: 'Create a new password',
   signIn: 'Sign in',
   signUp: 'Sign Up',
-  subscribe: 'Get started with our unlimited plan',
+  subscribe: 'Get started with our {{title}} plan',
   verifyEmail: 'Verify your email',
 };

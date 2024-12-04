@@ -10,7 +10,7 @@ import {
   Spinner,
   Grid,
 } from '@core/uikit';
-import { RoutePath } from '@bootstrap/constants';
+import { PlanAction, RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
@@ -64,7 +64,8 @@ export const Index: FC<IndexProps> = withLoad({
           if (statusCode === 403) {
             navigate({
               action: 'push',
-              pathname: RoutePath.Subscribe,
+              params: { action: PlanAction.Subscribe },
+              pathname: RoutePath.Plan,
             });
           } else {
             toast({

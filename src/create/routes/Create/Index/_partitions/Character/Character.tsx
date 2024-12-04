@@ -66,13 +66,14 @@ export const Character: FormPickerComponent<string> = ({
                 >
                   {options.map(({ value: v, label, image }) => {
                     return (
-                      <Swiper.Slide className={styles.slide} key={value}>
+                      <Swiper.Slide className={styles.slide} key={v}>
                         <Form.RadioGroup.Custom value={v}>
                           {({ onSelect, value }) => {
                             return (
                               <Slide
                                 caption={label}
                                 checked={v === value}
+                                key={v}
                                 onClick={onSelect}
                                 src={image}
                               />
