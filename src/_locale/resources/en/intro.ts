@@ -8,6 +8,8 @@ export const intro = {
   home: 'Click here to set the fable outline',
   inquiry:
     "Feel free to reach out to us with any questions, feedback, or concerns. We're here to help and will get back to you as soon as possible!",
+  manageYourPlan:
+    'Easily view, update, or customize your plan to suit your needs. Stay in control of your subscription with just a few taps!',
   resetPassword:
     "You're just a step away from accessing your account. Set a new password below.",
   signIn: 'Please enter your credentials to access your account.',

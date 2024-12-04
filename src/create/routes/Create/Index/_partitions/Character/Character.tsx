@@ -73,6 +73,7 @@ export const Character: FormPickerComponent<string> = ({
                               <Slide
                                 caption={label}
                                 checked={v === value}
+                                key={v}
                                 onClick={onSelect}
                                 src={image}
                               />

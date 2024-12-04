@@ -1,0 +1,24 @@
+.root {
+  position: relative;
+}
+
+.title {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  display: block;
+  z-index: 2;
+  left: 36px;
+  top: 20px;
+}
+
+.header {
+  padding-left: 68px;
+  padding-bottom: 20px;
+}
+
+.subheader {
+  white-space: pre-wrap;
+}

@@ -2,6 +2,7 @@ export const actions = {
   cancel: 'Cancel',
   changeName: 'Change name',
   changePassword: 'Change password',
+  changePlan: 'Change plan',
   clickToSelect: 'Click to select',
   confirm: 'Confirm',
   confirmNewPassword: 'Confirm new password',

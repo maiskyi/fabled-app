@@ -3,5 +3,5 @@ export const help = {
   password:
     'Password must contain at least one number, one uppercase letter, and one special character',
   planName: 'Plan: {{title}}',
-  subscribe: 'Full access for just {{price}}/{{subscriptionPeriod}}',
+  subscribe: 'For just {{price}}/{{subscriptionPeriod}}',
 };

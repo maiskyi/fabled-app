@@ -25,6 +25,7 @@ import { FablesProvider } from './home/providers';
 import { ChangePassword } from './change-password/routes';
 import { ChangeName } from './change-name/routes';
 import { Subscribe } from './subscribe/routes';
+import { Plan } from './plan/routes';
 
 const USER_ROLES = [Role.User];
 
@@ -74,6 +75,11 @@ export const Router = memo(function Router() {
         <Route path={RoutePath.Subscribe}>
           <ProtectedWithRedirect roles={USER_ROLES}>
             <Subscribe />
+          </ProtectedWithRedirect>
+        </Route>
+        <Route path={RoutePath.Plan}>
+          <ProtectedWithRedirect roles={USER_ROLES}>
+            <Plan />
           </ProtectedWithRedirect>
         </Route>
         <Route path={RoutePath.ContactUs}>

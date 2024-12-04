@@ -7,7 +7,9 @@ import { CardContext } from '../Card.context';
 
 import styles from './CardSubtitle.module.css';
 
-type CardSubtitleProps = PropsWithChildren<{}>;
+type CardSubtitleProps = PropsWithChildren<{
+  className?: string;
+}>;
 
 export const CardSubtitle: FC<CardSubtitleProps> = ({ children }) => {
   const loading = useContextSelector(CardContext, ({ loading }) => loading);

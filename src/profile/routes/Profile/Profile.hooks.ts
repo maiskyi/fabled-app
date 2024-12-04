@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
-import { RoutePath } from '@bootstrap/constants';
+import { PlanAction, RoutePath } from '@bootstrap/constants';
 import { useLegal } from '@common/hooks';
 import { useAuth } from '@core/auth';
 import { usePurchases, PurchasesStoreProduct } from '@core/purchases';
@@ -42,8 +42,16 @@ export const useProfileMenu = () => {
       icon: 'diamond-outline',
       label: title,
       note: description,
+      onClick: () =>
+        navigate({
+          action: 'push',
+          params: {
+            action: PlanAction.Manage,
+          },
+          pathname: RoutePath.Plan,
+        }),
     }));
-  }, [t, subscriptions]);
+  }, [t, subscriptions, navigate]);
 
   const menuItems = useMemo((): ProfileMenuItem[] => {
     return [
