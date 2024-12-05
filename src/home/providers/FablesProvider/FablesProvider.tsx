@@ -4,10 +4,7 @@ import { useGetStoriesInfinite } from '@network/api';
 import { useDevice } from '@core/uikit';
 
 import { FablesProviderContext } from './FablesProvider.context';
-import {
-  GET_USER_STORIES_SKIP_PARAM,
-  GET_USER_STORIES_TAKE_PARAM,
-} from './FablesProvider.const';
+import { GET_USER_STORIES_TAKE_PARAM } from './FablesProvider.const';
 
 type FablesProviderProps = PropsWithChildren<{}>;
 
@@ -27,7 +24,6 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
         crop: 'thumb',
         width,
       },
-      skip: GET_USER_STORIES_SKIP_PARAM,
       take: GET_USER_STORIES_TAKE_PARAM,
     },
     {

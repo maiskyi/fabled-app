@@ -45,6 +45,204 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
   ? P
   : never;
 
+export const useGetAllPromptsControllerGetAllPromptsHook = () => {
+  const getAllPromptsControllerGetAllPrompts = useCustomInstance<void>();
+
+  return (
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal
+  ) => {
+    return getAllPromptsControllerGetAllPrompts(
+      { method: 'get', signal, url: `/api/system/prompts` },
+      options
+    );
+  };
+};
+
+export const getGetAllPromptsControllerGetAllPromptsQueryKey = () => {
+  return [`/api/system/prompts`] as const;
+};
+
+export const useGetAllPromptsControllerGetAllPromptsInfiniteQueryOptions = <
+  TData = InfiniteData<
+    Awaited<
+      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    >
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<
+        ReturnType<
+          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+        >
+      >,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetAllPromptsControllerGetAllPromptsQueryKey();
+
+  const getAllPromptsControllerGetAllPrompts =
+    useGetAllPromptsControllerGetAllPromptsHook();
+
+  const queryFn: QueryFunction<
+    Awaited<
+      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    >
+  > = ({ signal }) =>
+    getAllPromptsControllerGetAllPrompts(requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<
+      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    >,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetAllPromptsControllerGetAllPromptsInfiniteQueryResult =
+  NonNullable<
+    Awaited<
+      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    >
+  >;
+export type GetAllPromptsControllerGetAllPromptsInfiniteQueryError = unknown;
+
+export const useGetAllPromptsControllerGetAllPromptsInfinite = <
+  TData = InfiniteData<
+    Awaited<
+      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    >
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<
+        ReturnType<
+          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+        >
+      >,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions =
+    useGetAllPromptsControllerGetAllPromptsInfiniteQueryOptions(options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetAllPromptsControllerGetAllPromptsQueryOptions = <
+  TData = Awaited<
+    ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<
+        ReturnType<
+          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+        >
+      >,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetAllPromptsControllerGetAllPromptsQueryKey();
+
+  const getAllPromptsControllerGetAllPrompts =
+    useGetAllPromptsControllerGetAllPromptsHook();
+
+  const queryFn: QueryFunction<
+    Awaited<
+      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    >
+  > = ({ signal }) =>
+    getAllPromptsControllerGetAllPrompts(requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<
+      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    >,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetAllPromptsControllerGetAllPromptsQueryResult = NonNullable<
+  Awaited<
+    ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+  >
+>;
+export type GetAllPromptsControllerGetAllPromptsQueryError = unknown;
+
+export const useGetAllPromptsControllerGetAllPrompts = <
+  TData = Awaited<
+    ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<
+        ReturnType<
+          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+        >
+      >,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions =
+    useGetAllPromptsControllerGetAllPromptsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
 /**
  * @summary Get app bootstrap data
  */
