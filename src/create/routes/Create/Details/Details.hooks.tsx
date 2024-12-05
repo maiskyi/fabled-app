@@ -54,7 +54,6 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           if (data?.status === DTO.StoryStatus.inprogress) {
             return 3000;
           }
-          return false;
         },
       },
     }
@@ -221,7 +220,6 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
               children: (
                 <Typist
                   onComplete={() => handleOnTypingComplete('errorMessage')}
-                  onStart={handleOnTypingStart}
                 >
                   {t(`bot.error.${copyIndex}`)}
                 </Typist>
