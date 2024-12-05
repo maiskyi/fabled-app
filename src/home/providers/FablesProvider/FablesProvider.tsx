@@ -34,7 +34,7 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
       query: {
         getNextPageParam: ({ total }, all) => {
           const count = all.flatMap(({ data }) => data).length;
-          return count > total
+          return count < total
             ? all.length * GET_USER_STORIES_TAKE_PARAM
             : undefined;
         },

@@ -29,6 +29,7 @@ export const Fable = withLoad({
   const { data } = useGetStory(id, {
     image: {
       aspectRatio: '1:1',
+      crop: 'thumb',
       width,
     },
   });
