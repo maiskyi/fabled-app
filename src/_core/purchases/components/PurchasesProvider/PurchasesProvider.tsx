@@ -1,11 +1,13 @@
 import { FC, Fragment, PropsWithChildren } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
-import { get } from 'lodash';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 import { Capacitor } from '@capacitor/core';
 
-import { PurchasesContext } from '../../contexts/PurchasesContext';
+import {
+  PurchasesContext,
+  DEFAULT_PURCHASES_OFFERINGS,
+} from '../../contexts/PurchasesContext';
 
 export type PurchasesProviderProps = PropsWithChildren<{
   apiKey: string;
@@ -44,9 +46,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     async () => {
       if (Capacitor.isNativePlatform()) {
         try {
-          const { all } = await Purchases.getOfferings();
-
-          const offering = get(all, 'Plus');
+          const offerings = await Purchases.getOfferings();
 
           const { customerInfo } = await Purchases.getCustomerInfo();
 
@@ -56,20 +56,24 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
             }
           );
 
-          return { activeSubscriptions, offering, ready: true };
+          return { activeSubscriptions, offerings, ready: true };
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error(error);
         }
       }
-      return { activeSubscriptions: [], offering: null, ready: true };
+      return {
+        activeSubscriptions: [],
+        offerings: DEFAULT_PURCHASES_OFFERINGS,
+        ready: true,
+      };
     },
     [],
     {
       loading: false,
       value: {
         activeSubscriptions: [],
-        offering: null,
+        offerings: DEFAULT_PURCHASES_OFFERINGS,
         ready: false,
       },
     }
@@ -86,7 +90,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     <PurchasesContext.Provider
       value={{
         activeSubscriptions: data.activeSubscriptions,
-        offering: data?.offering,
+        offerings: data.offerings,
         refetch: init,
       }}
     >

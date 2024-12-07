@@ -25,6 +25,7 @@ const config = defineConfig({
           },
           useInfinite: true,
           useInfiniteQueryParam: 'skip',
+          version: 5,
         },
       },
       target: './src/_network/api/__generated__/client.ts',

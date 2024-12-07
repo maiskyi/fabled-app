@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { get } from 'lodash';
 
 import {
   Box,
@@ -17,13 +18,17 @@ import { Redirect, useRoute } from '@core/navigation';
 import { withLoad } from '@core/analytics';
 
 import { PackageCard } from './_partitions/PackageCard';
-import { PlanFrom, PlanFromField, PlanRouteParams } from './Plan.types';
+import {
+  PlanFrom,
+  PlanFromField,
+  PlanRouteParams,
+  PlanRouteSearch,
+} from './Plan.types';
 import {
   PLAN_ACTION_MAPPING,
   PLAN_HEADER_MAPPING,
   PLAN_INTRO_MAPPING,
 } from './Plan.const';
-import { usePlanDefaultValues } from './Plan.hook';
 
 export const Plan: FC = withLoad({
   category: 'Subscribe',
@@ -31,16 +36,17 @@ export const Plan: FC = withLoad({
 })(() => {
   const { t } = useTranslation();
   const { toast } = useUtils();
-  const { offering } = usePurchases();
+  const { offerings } = usePurchases();
   const [
     {
-      params: { action },
+      search: { productId },
+      params: { action, identifier },
     },
-  ] = useRoute<PlanRouteParams>();
+  ] = useRoute<PlanRouteParams, PlanRouteSearch>();
 
   const { isSuccess, isPending, mutate } = usePurchaseStoreProduct();
 
-  const { defaultValues } = usePlanDefaultValues({ action });
+  const offering = get(offerings, ['all', identifier]);
 
   const title = t(PLAN_HEADER_MAPPING[action], {
     title: offering?.identifier,
@@ -55,7 +61,7 @@ export const Plan: FC = withLoad({
 
   const handleOnSubmit = ({ product: value }: PlanFrom) => {
     const product = offering.availablePackages.find(
-      ({ identifier }) => identifier === value
+      ({ product: { identifier } }) => identifier === value
     )?.product;
     mutate(
       { product },
@@ -98,7 +104,7 @@ export const Plan: FC = withLoad({
                 <Text>{t(PLAN_INTRO_MAPPING[action])}</Text>
               </Box>
               <Form<PlanFrom>
-                defaultValues={defaultValues}
+                defaultValues={{ [PlanFromField.Product]: productId }}
                 onSubmit={handleOnSubmit}
               >
                 <Form.RadioGroup

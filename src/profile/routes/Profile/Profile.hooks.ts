@@ -11,21 +11,40 @@ import { usePurchases, PurchasesStoreProduct } from '@core/purchases';
 import { ProfileMenuItem } from './Profile.types';
 
 export const useProfileSubscription = () => {
-  const { activeSubscriptions } = usePurchases();
+  const { activeSubscriptions, offerings } = usePurchases();
   const { t } = useTranslation();
 
-  const defaultSubscriptions: Partial<PurchasesStoreProduct>[] = [
-    {
-      description: t('defaults.planDescription'),
-      title: t('defaults.plan'),
-    },
-  ];
+  const subscriptionOfferingMapping = useMemo((): Record<string, string> => {
+    return Object.entries(offerings.all).reduce(
+      (all, [, { identifier, availablePackages }]) => {
+        return availablePackages.reduce(
+          (res, { product }) => ({ ...res, [product.identifier]: identifier }),
+          all
+        );
+      },
+      {}
+    );
+  }, [offerings]);
 
-  const subscriptions = activeSubscriptions.length
-    ? activeSubscriptions
-    : defaultSubscriptions;
+  const defaultSubscriptions: Partial<PurchasesStoreProduct>[] = useMemo(
+    () => [
+      {
+        description: t('defaults.planDescription'),
+        identifier:
+          offerings?.current?.availablePackages[0]?.product?.identifier,
+        title: t('defaults.plan'),
+      },
+    ],
+    [t, offerings]
+  );
 
-  return { subscriptions };
+  const subscriptions = useMemo(() => {
+    return activeSubscriptions.length
+      ? activeSubscriptions
+      : defaultSubscriptions;
+  }, [activeSubscriptions, defaultSubscriptions]);
+
+  return { subscriptionOfferingMapping, subscriptions };
 };
 
 export const useProfileMenu = () => {
@@ -33,10 +52,11 @@ export const useProfileMenu = () => {
   const [, navigate] = useRoute();
   const { openPrivacyPolicy, openTermsAndConditions } = useLegal();
   const { user } = useAuth();
-  const { subscriptions } = useProfileSubscription();
+  const { subscriptions, subscriptionOfferingMapping } =
+    useProfileSubscription();
 
   const planItems = useMemo((): ProfileMenuItem[] => {
-    return subscriptions.map(({ title, description }) => ({
+    return subscriptions.map(({ title, description, identifier }) => ({
       active: true,
       group: t('actions.plan'),
       icon: 'diamond-outline',
@@ -47,11 +67,15 @@ export const useProfileMenu = () => {
           action: 'push',
           params: {
             action: PlanAction.Manage,
+            identifier: subscriptionOfferingMapping[identifier],
           },
           pathname: RoutePath.Plan,
+          search: {
+            productId: identifier,
+          },
         }),
     }));
-  }, [t, subscriptions, navigate]);
+  }, [t, subscriptions, navigate, subscriptionOfferingMapping]);
 
   const menuItems = useMemo((): ProfileMenuItem[] => {
     return [

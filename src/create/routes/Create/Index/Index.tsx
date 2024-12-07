@@ -16,6 +16,7 @@ import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
 import { useCreateStory } from '@network/api';
 import { withLoad } from '@core/analytics';
+import { usePurchases } from '@core/purchases';
 
 import { FormField } from '../Create.const';
 
@@ -39,6 +40,7 @@ export const Index: FC<IndexProps> = withLoad({
   const [, navigate] = useRoute();
   const { characters, themes, scenes, readTimes } = useOptions();
   const { toast } = useUtils();
+  const { offerings } = usePurchases();
 
   const { data, isPending, isSuccess, mutate } = useCreateStory();
 
@@ -64,8 +66,15 @@ export const Index: FC<IndexProps> = withLoad({
           if (statusCode === 403) {
             navigate({
               action: 'push',
-              params: { action: PlanAction.Subscribe },
+              params: {
+                action: PlanAction.Subscribe,
+                identifier: offerings?.current?.identifier,
+              },
               pathname: RoutePath.Plan,
+              search: {
+                productId:
+                  offerings?.current?.availablePackages[0]?.product?.identifier,
+              },
             });
           } else {
             toast({
