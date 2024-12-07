@@ -30,10 +30,12 @@ export const useProfileSubscription = () => {
     () => [
       {
         description: t('defaults.planDescription'),
+        identifier:
+          offerings?.current?.availablePackages[0]?.product?.identifier,
         title: t('defaults.plan'),
       },
     ],
-    [t]
+    [t, offerings]
   );
 
   const subscriptions = useMemo(() => {
