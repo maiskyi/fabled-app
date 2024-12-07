@@ -10,4 +10,9 @@ export interface PlanFrom {
 
 export interface PlanRouteParams {
   action: PlanAction;
+  identifier: string;
+}
+
+export interface PlanRouteSearch {
+  productId: string;
 }

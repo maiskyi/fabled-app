@@ -16,8 +16,13 @@ interface PackageCardProps {
 export const PackageCard = memo<PackageCardProps>(function PackageCard({
   hightestMonthlyPrice,
   package: {
-    product: { subscriptionPeriod, priceString, pricePerMonth, description },
-    identifier,
+    product: {
+      subscriptionPeriod,
+      priceString,
+      pricePerMonth,
+      description,
+      identifier,
+    },
   },
 }: PackageCardProps) {
   const { t } = useTranslation();

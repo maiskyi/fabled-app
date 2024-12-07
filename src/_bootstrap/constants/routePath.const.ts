@@ -13,7 +13,7 @@ export enum RoutePath {
   ForgotPassword = '/forgot-password',
   Index = '/',
   Notification = '/notification/:type',
-  Plan = '/plan/:action',
+  Plan = '/plan/:identifier/:action',
   Profile = '/profile',
   Request = '/request/:id',
   SignIn = '/sign-in',
