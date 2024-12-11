@@ -18,6 +18,7 @@ export * from './components/Icon';
 export * from './components/Image';
 export * from './components/InfiniteScroll';
 export * from './components/List';
+export * from './components/Loading';
 export * from './components/Logo';
 export * from './components/Message';
 export * from './components/Page';

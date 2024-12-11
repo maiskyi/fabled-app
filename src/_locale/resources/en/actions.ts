@@ -22,6 +22,7 @@ export const actions = {
   ok: 'OK',
   plan: 'Plan',
   privacyPolicy: 'Privacy policy',
+  readFable: 'Read Fable',
   readLater: 'Read later',
   readNow: 'Read now',
   requestNewLink: 'Request new link',
