@@ -85,8 +85,12 @@ export const Index: FC = () => {
                         overflow="auto"
                         paddingInline={20}
                       >
-                        {chips.map(({ id, title }) => {
-                          return <Chip key={id}>{title}</Chip>;
+                        {chips.map(({ id, title, emoji }) => {
+                          return (
+                            <Chip emoji={emoji} key={id}>
+                              {title}
+                            </Chip>
+                          );
                         })}
                       </Box>
                       <Box paddingInline={20}>
