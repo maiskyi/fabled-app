@@ -5,15 +5,19 @@ import {
   ReactElement,
 } from 'react';
 import classNames from 'classnames';
+import { useContextSelector } from 'use-context-selector';
 
 import { IonCol, IonGrid, IonHeader, IonRow, IonToolbar } from '@ionic/react';
 
 import { Selector } from '../../constants/selector.const';
+import { PageContext } from '../../contexts/PageContext';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';
 import { HeaderActions } from './HeaderActions/HeaderActions';
 import { HeaderAction } from './HeaderAction/HeaderAction';
+
+import styles from './Header.module.scss';
 
 export type HeaderProps = PropsWithChildren<{
   className?: string;
@@ -34,9 +38,21 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
   { children, className, translucent, collapse },
   ref
 ) {
+  const withCover = useContextSelector(
+    PageContext,
+    ({ withCover }) => withCover
+  );
+
   return (
     <IonHeader
-      className={classNames('ion-no-border', className)}
+      className={classNames(
+        styles.root,
+        'ion-no-border',
+        {
+          [styles.transparent]: withCover,
+        },
+        className
+      )}
       collapse={collapse}
       id={Selector.Header}
       ref={ref}
@@ -45,7 +61,13 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
       <IonGrid className="ion-no-padding" fixed>
         <IonRow>
           <IonCol className="ion-no-padding">
-            <IonToolbar>{children}</IonToolbar>
+            <IonToolbar
+              className={classNames(styles.toolbar, {
+                [styles.transparent]: withCover,
+              })}
+            >
+              {children}
+            </IonToolbar>
           </IonCol>
         </IonRow>
       </IonGrid>

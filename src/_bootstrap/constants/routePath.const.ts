@@ -9,6 +9,7 @@ export enum RoutePath {
   CreateDetails = '/create/:id',
   CreateScene = '/create/scene',
   Fable = '/fables/:id',
+  FableRead = '/fables/:id/read',
   Feedback = '/feedback',
   ForgotPassword = '/forgot-password',
   Index = '/',

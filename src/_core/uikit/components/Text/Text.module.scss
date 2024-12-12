@@ -17,4 +17,11 @@
   &.h5 {
     font-weight: bold;
   }
+
+  &.truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--truncate);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
