@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 // @ts-nocheck
 
 /**
@@ -16,9 +17,9 @@ export type GetStoriesStatus =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const GetStoriesStatus = {
-  inprogress: "inprogress",
-  success: "success",
-  failed: "failed",
+  failed: 'failed',
+  inprogress: 'inprogress',
+  success: 'success',
 } as const;
 
 export type GetStoriesParams = {
@@ -52,30 +53,30 @@ export type StoryStatusLogItem =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const StoryStatusLogItem = {
-  contentInProgress: "contentInProgress",
-  createStoryRequestFailed: "createStoryRequestFailed",
-  imageInProgress: "imageInProgress",
-  initialized: "initialized",
-  storyContentGenerationFailed: "storyContentGenerationFailed",
+  contentInProgress: 'contentInProgress',
+  createStoryRequestFailed: 'createStoryRequestFailed',
+  imageInProgress: 'imageInProgress',
+  initialized: 'initialized',
+  storyContentGenerationFailed: 'storyContentGenerationFailed',
   storyContentGenerationFailedWithNoResult:
-    "storyContentGenerationFailedWithNoResult",
-  storyGenerationFailed: "storyGenerationFailed",
-  storyImageGenerationFailed: "storyImageGenerationFailed",
+    'storyContentGenerationFailedWithNoResult',
+  storyGenerationFailed: 'storyGenerationFailed',
+  storyImageGenerationFailed: 'storyImageGenerationFailed',
   storyImageGenerationFailedWithNoResult:
-    "storyImageGenerationFailedWithNoResult",
-  storyImageUploadFailed: "storyImageUploadFailed",
+    'storyImageGenerationFailedWithNoResult',
+  storyImageUploadFailed: 'storyImageUploadFailed',
   storyImageUploadingToCloudinaryFailed:
-    "storyImageUploadingToCloudinaryFailed",
-  success: "success",
+    'storyImageUploadingToCloudinaryFailed',
+  success: 'success',
 } as const;
 
 export type StoryStatus = (typeof StoryStatus)[keyof typeof StoryStatus];
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const StoryStatus = {
-  inprogress: "inprogress",
-  success: "success",
-  failed: "failed",
+  failed: 'failed',
+  inprogress: 'inprogress',
+  success: 'success',
 } as const;
 
 export interface StoryPrompt {
@@ -189,19 +190,19 @@ export type ImageTransformationQueryCrop =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ImageTransformationQueryCrop = {
-  scale: "scale",
-  fit: "fit",
-  limit: "limit",
-  mfit: "mfit",
-  fill: "fill",
-  lfill: "lfill",
-  pad: "pad",
-  lpad: "lpad",
-  mpad: "mpad",
-  crop: "crop",
-  thumb: "thumb",
-  imagga_crop: "imagga_crop",
-  imagga_scale: "imagga_scale",
+  crop: 'crop',
+  fill: 'fill',
+  fit: 'fit',
+  imagga_crop: 'imagga_crop',
+  imagga_scale: 'imagga_scale',
+  lfill: 'lfill',
+  limit: 'limit',
+  lpad: 'lpad',
+  mfit: 'mfit',
+  mpad: 'mpad',
+  pad: 'pad',
+  scale: 'scale',
+  thumb: 'thumb',
 } as const;
 
 export type ImageTransformationQueryAspectRatio =
@@ -209,12 +210,12 @@ export type ImageTransformationQueryAspectRatio =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ImageTransformationQueryAspectRatio = {
-  "1:1": "1:1",
-  "5:4": "5:4",
-  "3:1": "3:1",
-  "3:2": "3:2",
-  "4:3": "4:3",
-  "16:9": "16:9",
+  '16:9': '16:9',
+  '1:1': '1:1',
+  '3:1': '3:1',
+  '3:2': '3:2',
+  '4:3': '4:3',
+  '5:4': '5:4',
 } as const;
 
 export interface ImageTransformationQuery {
