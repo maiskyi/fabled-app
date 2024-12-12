@@ -11,6 +11,7 @@ import {
   SafeArea,
   Card,
   Text,
+  Chip,
 } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -27,6 +28,12 @@ export const Index: FC = () => {
   const cover = isReady ? story?.image : undefined;
 
   const description = story?.content.split('\n')[0].trim();
+
+  const chips = [
+    story?.character,
+    story?.placeOfEvent,
+    story?.moralLesson,
+  ].filter((v) => !!v);
 
   const handleOnRead = () => {
     navigate({
@@ -62,9 +69,23 @@ export const Index: FC = () => {
                 <Card.Header>
                   <Card.Title>{story?.title}</Card.Title>
                 </Card.Header>
+
                 <Box display="flex" flexDirection="column" gap={16}>
-                  <Box paddingInline={20}>
-                    <Text truncate={5}>{description}</Text>
+                  <Box display="flex" flexDirection="column" gap={8}>
+                    <Box
+                      display="flex"
+                      flexWrap="nowrap"
+                      gap={4}
+                      overflow="auto"
+                      paddingInline={20}
+                    >
+                      {chips.map(({ id, title }) => {
+                        return <Chip key={id}>{title}</Chip>;
+                      })}
+                    </Box>
+                    <Box paddingInline={20}>
+                      <Text truncate={5}>{description}</Text>
+                    </Box>
                   </Box>
                   <Box paddingInline={20}>
                     <Button onClick={handleOnRead}>

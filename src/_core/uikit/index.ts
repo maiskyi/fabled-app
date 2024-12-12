@@ -29,6 +29,7 @@ export * from './components/Text';
 export * from './components/ThemeProvider';
 export * from './components/Typist';
 export * from './components/View';
+export * from './components/Chip';
 
 // Hooks
 export * from './hooks/useUtils';
