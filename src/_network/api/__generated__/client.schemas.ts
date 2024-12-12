@@ -84,15 +84,21 @@ export interface StoryPrompt {
 }
 
 export interface StoryPlaceOfEvent {
+  emoji: string;
   id: string;
+  title: string;
 }
 
 export interface StoryMoralLesson {
+  emoji: string;
   id: string;
+  title: string;
 }
 
 export interface StoryCharacter {
+  emoji: string;
   id: string;
+  title: string;
 }
 
 export interface Story {

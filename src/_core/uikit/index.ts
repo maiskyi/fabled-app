@@ -18,6 +18,7 @@ export * from './components/Icon';
 export * from './components/Image';
 export * from './components/InfiniteScroll';
 export * from './components/List';
+export * from './components/Loading';
 export * from './components/Logo';
 export * from './components/Message';
 export * from './components/Page';
@@ -28,6 +29,7 @@ export * from './components/Text';
 export * from './components/ThemeProvider';
 export * from './components/Typist';
 export * from './components/View';
+export * from './components/Chip';
 
 // Hooks
 export * from './hooks/useUtils';

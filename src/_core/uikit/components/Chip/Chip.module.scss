@@ -1,0 +1,13 @@
+.root {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.label {
+  white-space: nowrap;
+  &.withEmoji {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}

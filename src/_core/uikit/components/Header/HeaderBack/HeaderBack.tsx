@@ -2,12 +2,17 @@ import { FC } from 'react';
 
 import { IonButtons, IonButton, IonIcon, useIonRouter } from '@ionic/react';
 import { arrowBack } from 'ionicons/icons';
+import { Color } from '@ionic/core';
 
 interface HeaderBackProps {
   pathname?: string;
+  color?: Color;
 }
 
-export const HeaderBack: FC<HeaderBackProps> = ({ pathname }) => {
+export const HeaderBack: FC<HeaderBackProps> = ({
+  pathname,
+  color = 'tertiary',
+}) => {
   const router = useIonRouter();
 
   const handleOnClick = () => {
@@ -21,7 +26,7 @@ export const HeaderBack: FC<HeaderBackProps> = ({ pathname }) => {
 
   return (
     <IonButtons slot="start">
-      <IonButton color="dark" mode="md" onClick={handleOnClick}>
+      <IonButton color={color} mode="md" onClick={handleOnClick}>
         <IonIcon icon={arrowBack} slot="icon-only" />
       </IonButton>
     </IonButtons>
