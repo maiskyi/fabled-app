@@ -1,34 +1,21 @@
 import { FC } from 'react';
-// import { useContext } from 'use-context-selector';
+import { useContext } from 'use-context-selector';
 
-import {
-  Content,
-  Header,
-  Page,
-  // Loading,
-  // Box,
-  // Button,
-  // SafeArea,
-  // Card,
-} from '@core/uikit';
-import { RoutePath } from '@bootstrap/constants';
-// import { useTranslation } from '@core/localization';
-// import { useRoute } from '@core/navigation';
+import { Content, Page } from '@core/uikit';
 
-// import { FableContext } from '../Fable.context';
+import { FableContext } from '../Fable.context';
+import { Container } from '../_partitions/Container';
 
 export const Read: FC = () => {
-  // const { t } = useTranslation();
-  // const [, navigate] = useRoute();
+  const { isReady, story } = useContext(FableContext);
 
-  // const { isLoading, isReady, story } = useContext(FableContext);
+  const cover = isReady ? story?.image : undefined;
 
   return (
-    <Page>
-      <Header collapse="condense">
-        <Header.Back pathname={RoutePath.Index} />
-      </Header>
-      <Content>123</Content>
+    <Page cover={cover}>
+      <Content>
+        <Container isReady={isReady}>123</Container>
+      </Content>
     </Page>
   );
 };

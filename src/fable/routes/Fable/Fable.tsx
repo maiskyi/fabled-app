@@ -77,37 +77,4 @@ export const Fable = withLoad({
       </FableContext.Provider>
     </Page>
   );
-
-  // return (
-  //   <Page>
-  //     <Header collapse="fade" fixed>
-  //       <Header.Back pathname={RoutePath.Index} />
-  //     </Header>
-  //     <Content fullscreen>
-  //       <SafeArea safe={['bottom']}>
-  //         <Grid fixed>
-  //           <Grid.Row>
-  //             <Grid.Cell>
-  //               <Box
-  //                 aspectRatio={1}
-  //                 borderRadius={8}
-  //                 marginInline={20}
-  //                 overflow="hidden"
-  //                 position="relative"
-  //               >
-  //                 <Image src={data?.image} />
-  //               </Box>
-  //               <Card.Header>
-  //                 <Card.Title>{data?.title}</Card.Title>
-  //               </Card.Header>
-  //               <Box marginInline={20} whiteSpace="pre-wrap">
-  //                 {data?.content}
-  //               </Box>
-  //             </Grid.Cell>
-  //           </Grid.Row>
-  //         </Grid>
-  //       </SafeArea>
-  //     </Content>
-  //   </Page>
-  // );
 });
