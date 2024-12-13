@@ -62,7 +62,7 @@ export const Reader: FC<ReaderProps> = ({ children = '' }) => {
         onInit={handleOnInit}
         onSlideChange={handleOnSlideChange}
         pagination={{
-          dynamicBullets: true,
+          el: `.${styles.swiperPagination}`,
         }}
         ref={swiper}
       >
@@ -81,7 +81,9 @@ export const Reader: FC<ReaderProps> = ({ children = '' }) => {
         })}
       </Swiper>
       <div className={styles.bottom}>
-        <div className={styles.pagination}></div>
+        <div className={styles.pagination}>
+          <div className={styles.swiperPagination} />
+        </div>
         <div className={styles.navigation}>
           <IonFabButton
             className={classNames(styles.prev)}
