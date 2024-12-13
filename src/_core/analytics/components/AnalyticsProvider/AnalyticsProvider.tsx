@@ -49,7 +49,7 @@ export const AnalyticsProvider: FC<AnalyticsProviderProps> = ({
   });
 
   return (
-    <AnalyticsContext.Provider value={config}>
+    <AnalyticsContext.Provider value={{ enabled, ...config }}>
       {children}
     </AnalyticsContext.Provider>
   );
