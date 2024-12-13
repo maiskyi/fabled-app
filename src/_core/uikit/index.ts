@@ -6,6 +6,7 @@ export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
 export * from './components/Checkbox';
+export * from './components/Chip';
 export * from './components/Content';
 export * from './components/Divider';
 export * from './components/Empty';
@@ -22,6 +23,7 @@ export * from './components/Loading';
 export * from './components/Logo';
 export * from './components/Message';
 export * from './components/Page';
+export * from './components/Reader';
 export * from './components/SafeArea';
 export * from './components/Spinner';
 export * from './components/Swiper';
@@ -29,7 +31,6 @@ export * from './components/Text';
 export * from './components/ThemeProvider';
 export * from './components/Typist';
 export * from './components/View';
-export * from './components/Chip';
 
 // Hooks
 export * from './hooks/useUtils';

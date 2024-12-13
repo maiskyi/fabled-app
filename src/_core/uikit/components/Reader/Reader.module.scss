@@ -1,0 +1,38 @@
+.slide {
+  align-self: flex-end;
+}
+
+.text {
+  display: block;
+  letter-spacing: 1px;
+  + .text {
+    margin-top: 16px;
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-top: 12px;
+}
+
+.pagination {
+  flex: 1 0 auto;
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.prev {
+  &.disabled {
+    opacity: 0;
+  }
+}
+
+.transparent {
+  opacity: 0;
+}
