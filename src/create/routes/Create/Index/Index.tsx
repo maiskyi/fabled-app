@@ -136,7 +136,7 @@ export const Index: FC<IndexProps> = withLoad({
                     readTime: (
                       <Form.Picker<number>
                         component={ReadTime}
-                        label={t('forms.readingTime')}
+                        label={t('forms.readTime')}
                         name={FormField.ReadTime}
                         options={readTimes}
                         validation={{ required: true }}
