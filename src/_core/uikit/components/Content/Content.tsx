@@ -15,10 +15,11 @@ export type ContentProps = PropsWithChildren<{
   inset?: boolean;
   className?: string;
   fullscreen?: boolean;
+  scrollY?: boolean;
 }>;
 
 export const Content = forwardRef<ContentInstance, ContentProps>(
-  function Content({ children, fullscreen, inset = false }, ref) {
+  function Content({ children, fullscreen, inset = false, ...props }, ref) {
     const withCover = useContextSelector(
       PageContext,
       ({ withCover }) => withCover
@@ -33,6 +34,7 @@ export const Content = forwardRef<ContentInstance, ContentProps>(
         fullscreen={fullscreen}
         id={Selector.Content}
         ref={ref}
+        {...props}
       >
         {children}
       </IonContent>

@@ -1,7 +1,16 @@
 import { useAsyncFn } from 'react-use';
 
-import { Page, useDevice, useViewDidEnter } from '@core/uikit';
-import { Route, RouterOutlet, useRoute } from '@core/navigation';
+import {
+  Box,
+  Content,
+  Header,
+  Loading,
+  Page,
+  SafeArea,
+  useDevice,
+  useViewDidEnter,
+} from '@core/uikit';
+import { Route, useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 import { useGetStory } from '@network/api';
 import { withLoad } from '@core/analytics';
@@ -56,6 +65,8 @@ export const Fable = withLoad({
 
   const isReady = isStorySuccess && isImageSuccess;
 
+  const cover = isReady ? story.image : undefined;
+
   useViewDidEnter(() => {
     refetch().then(({ data }) => {
       load(data?.image);
@@ -63,17 +74,61 @@ export const Fable = withLoad({
   });
 
   return (
-    <Page>
-      <FableContext.Provider value={{ isReady, story }}>
-        <RouterOutlet>
-          <Route exact path={RoutePath.Fable}>
-            <Index />
-          </Route>
-          <Route path={RoutePath.FableRead}>
-            <Read />
-          </Route>
-        </RouterOutlet>
-      </FableContext.Provider>
+    <Page cover={cover}>
+      <Header collapse="condense">
+        <Header.Back color="dark" pathname={RoutePath.Index} />
+      </Header>
+      <Content scrollY={false}>
+        <Loading isOpen={!isReady} />
+        {isReady && (
+          <Box
+            display="flex"
+            flex="1 1 auto"
+            flexDirection="column"
+            height="100%"
+            justifyContent="flex-end"
+          >
+            <SafeArea
+              background="linear-gradient(to top, rgba(0, 0, 0, 1), transparent)"
+              display="flex"
+              flex="0 0 70%"
+              flexDirection="column"
+              justifyContent="flex-end"
+              safe={['bottom']}
+            >
+              <FableContext.Provider value={{ isReady, story }}>
+                <Route exact path={RoutePath.Fable}>
+                  <Index />
+                </Route>
+                <Route path={RoutePath.FableRead}>
+                  <Read />
+                </Route>
+              </FableContext.Provider>
+            </SafeArea>
+          </Box>
+        )}
+      </Content>
     </Page>
   );
 });
+
+// export const Fable = withLoad({
+//   category: 'Fable',
+//   name: 'Fable Details',
+// })(() => {
+
+//   return (
+//     <Page>
+//       <FableContext.Provider value={{ isReady, story }}>
+//         <RouterOutlet>
+//           <Route exact path={RoutePath.Fable}>
+//             <Index />
+//           </Route>
+//           <Route path={RoutePath.FableRead}>
+//             <Read />
+//           </Route>
+//         </RouterOutlet>
+//       </FableContext.Provider>
+//     </Page>
+//   );
+// });
