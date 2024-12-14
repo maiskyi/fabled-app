@@ -6,6 +6,8 @@ import { Pagination } from 'swiper/modules';
 import { SwiperSlide } from './SwiperSlide/SwiperSlide';
 import { SwiperPaginationProps } from './Swiper.types';
 
+import styles from './Swiper.module.scss';
+
 export type SwiperProps = PropsWithChildren<{
   gap?: number;
   initialSlide?: number;
@@ -26,6 +28,7 @@ export const Swiper: SwiperComponent = ({
   return (
     <ReactSwiper
       centeredSlides
+      className={styles.root}
       initialSlide={initialSlide}
       modules={[Pagination]}
       pagination={pagination}

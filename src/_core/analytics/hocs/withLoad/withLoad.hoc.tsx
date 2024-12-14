@@ -18,13 +18,18 @@ export const withLoad = ({
 }: WithLoadParams) => {
   return <P extends object>(Component: ComponentType<P>) => {
     const Wrapper: FC<P> = (props) => {
-      const config = useContextSelector(AnalyticsContext, (config) => config);
+      const { enabled, ...config } = useContextSelector(
+        AnalyticsContext,
+        (config) => config
+      );
 
       useMount(() => {
-        Analytics.page(category, name, {
-          ...config,
-          ...properties,
-        });
+        if (enabled) {
+          Analytics.page(category, name, {
+            ...config,
+            ...properties,
+          });
+        }
       });
 
       return <Component {...props} />;

@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { AuthProvider, AuthProviderProps } from '@core/auth';
 import { ThemeProvider } from '@core/uikit';
 import { QueryProvider, AppProvider, AppProviderProps } from '@core/app';
 import {
@@ -19,10 +18,11 @@ import {
   ErrorBoundaryProps,
 } from './ErrorBoundary/ErrorBoundary';
 import { AppUpdate } from './AppUpdate';
+import { Auth, AuthProps } from './Auth';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
-  auth: AuthProviderProps;
+  auth: AuthProps;
   localization: LocalizationProviderProps;
   network: NetworkProps;
   config: ConfigProps;
@@ -51,13 +51,13 @@ export const Bootstrap: FC<BootstrapProps> = ({
                 <PurchasesProvider {...purchases}>
                   <QueryProvider>
                     <AppProvider {...app}>
-                      <AuthProvider>
+                      <Auth>
                         <Network {...network}>
                           <Config {...config}>
                             <Navigation>{children}</Navigation>
                           </Config>
                         </Network>
-                      </AuthProvider>
+                      </Auth>
                     </AppProvider>
                   </QueryProvider>
                 </PurchasesProvider>

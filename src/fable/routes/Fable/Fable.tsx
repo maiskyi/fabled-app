@@ -42,7 +42,6 @@ export const Fable = withLoad({
     id,
     {
       image: {
-        aspectRatio: '1:1',
         crop: 'thumb',
         height,
         width,
