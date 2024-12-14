@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
-import { isUndefined } from 'lodash';
+import { isUndefined, noop } from 'lodash';
 
 import {
   getAuth,
@@ -24,13 +24,17 @@ import {
 
 import { AuthContext } from '../../contexts/AuthContext';
 
+import { AuthStateChangeParams } from './AuthProvider.types';
+
 export type AuthProviderProps = PropsWithChildren<{
   Loader?: FC;
+  onAuthStateChange?: (state: AuthStateChangeParams) => void;
 }>;
 
 export const AuthProvider: FC<AuthProviderProps> = ({
   children,
   Loader = Fragment,
+  onAuthStateChange = noop,
 }) => {
   const [user, setUser] = useState<User>();
 
@@ -66,8 +70,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   );
 
   useMount(() => {
-    FirebaseAuthentication.addListener('authStateChange', ({ user }) => {
-      setUser(user);
+    FirebaseAuthentication.addListener('authStateChange', (state) => {
+      setUser(state?.user);
+      onAuthStateChange(state);
     });
   });
 
