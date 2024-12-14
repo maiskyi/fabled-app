@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { useContext } from 'use-context-selector';
 
-import { Box, Button, Text, Chip } from '@core/uikit';
+import { Box, Button, Text, Chip, Card } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -31,30 +31,35 @@ export const Index: FC = () => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap={16}>
-      <Box display="flex" flexDirection="column" gap={8}>
-        <Box
-          display="flex"
-          flexWrap="nowrap"
-          gap={4}
-          overflow="auto"
-          paddingInline={20}
-        >
-          {chips.map(({ id, title, emoji }) => {
-            return (
-              <Chip emoji={emoji} key={id}>
-                {title}
-              </Chip>
-            );
-          })}
+    <Fragment>
+      <Card.Header>
+        <Card.Title>{story?.title}</Card.Title>
+      </Card.Header>
+      <Box display="flex" flexDirection="column" gap={16}>
+        <Box display="flex" flexDirection="column" gap={8}>
+          <Box
+            display="flex"
+            flexWrap="nowrap"
+            gap={4}
+            overflow="auto"
+            paddingInline={20}
+          >
+            {chips.map(({ id, title, emoji }) => {
+              return (
+                <Chip emoji={emoji} key={id}>
+                  {title}
+                </Chip>
+              );
+            })}
+          </Box>
+          <Box paddingInline={20}>
+            <Text truncate={5}>{description}</Text>
+          </Box>
         </Box>
         <Box paddingInline={20}>
-          <Text truncate={5}>{description}</Text>
+          <Button onClick={handleOnRead}>{t('actions.readFable')}</Button>
         </Box>
       </Box>
-      <Box paddingInline={20}>
-        <Button onClick={handleOnRead}>{t('actions.readFable')}</Button>
-      </Box>
-    </Box>
+    </Fragment>
   );
 };

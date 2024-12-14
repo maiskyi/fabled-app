@@ -1,11 +1,11 @@
 import { forwardRef, PropsWithChildren } from 'react';
 import classNames from 'classnames';
-import { useContextSelector } from 'use-context-selector';
+import { useContext } from 'use-context-selector';
 
 import { IonContent } from '@ionic/react';
 
 import { Selector } from '../../constants';
-import { PageContext } from '../../contexts/PageContext';
+import { CoverContext } from '../../contexts/CoverContext';
 
 import { ContentInstance } from './Content.types';
 
@@ -20,22 +20,25 @@ export type ContentProps = PropsWithChildren<{
 
 export const Content = forwardRef<ContentInstance, ContentProps>(
   function Content({ children, fullscreen, inset = false, ...props }, ref) {
-    const withCover = useContextSelector(
-      PageContext,
-      ({ withCover }) => withCover
-    );
+    const { src, withCover } = useContext(CoverContext);
 
     return (
       <IonContent
         className={classNames(styles.root, {
           'ion-padding': inset,
-          [styles.transparent]: withCover,
+          [styles.withCover]: withCover,
         })}
         fullscreen={fullscreen}
         id={Selector.Content}
         ref={ref}
         {...props}
       >
+        {withCover && (
+          <div
+            className={styles.cover}
+            style={{ backgroundImage: `url(${src})` }}
+          />
+        )}
         {children}
       </IonContent>
     );
