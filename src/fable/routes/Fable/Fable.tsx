@@ -10,6 +10,7 @@ import {
   SafeArea,
   useDevice,
   useViewDidEnter,
+  Animation,
 } from '@core/uikit';
 import { Route, useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
@@ -98,10 +99,14 @@ export const Fable = withLoad({
               >
                 <FableContext.Provider value={{ isReady, story }}>
                   <Route exact path={RoutePath.Fable}>
-                    <Index />
+                    <Animation.Message>
+                      <Index />
+                    </Animation.Message>
                   </Route>
                   <Route path={RoutePath.FableRead}>
-                    <Read />
+                    <Animation.Message>
+                      <Read />
+                    </Animation.Message>
                   </Route>
                 </FableContext.Provider>
               </SafeArea>
