@@ -75,10 +75,10 @@ export const Fable = withLoad({
   return (
     <Cover src={isReady ? story.image : undefined}>
       <Page>
-        <Header collapse="condense">
+        <Header>
           <Header.Back color="dark" pathname={RoutePath.Index} />
         </Header>
-        <Content scrollY={false}>
+        <Content fullscreen scrollY={false}>
           <Loading isOpen={!isReady} />
           {isReady && (
             <Box
@@ -112,24 +112,3 @@ export const Fable = withLoad({
     </Cover>
   );
 });
-
-// export const Fable = withLoad({
-//   category: 'Fable',
-//   name: 'Fable Details',
-// })(() => {
-
-//   return (
-//     <Page>
-//       <FableContext.Provider value={{ isReady, story }}>
-//         <RouterOutlet>
-//           <Route exact path={RoutePath.Fable}>
-//             <Index />
-//           </Route>
-//           <Route path={RoutePath.FableRead}>
-//             <Read />
-//           </Route>
-//         </RouterOutlet>
-//       </FableContext.Provider>
-//     </Page>
-//   );
-// });
