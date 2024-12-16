@@ -18,7 +18,7 @@ const config: AppProps = {
   bootstrap: {
     analytics: {
       dataUrl: import.meta.env.VITE_RUDDERSTACK_DATA_URL,
-      enabled: import.meta.env.VITE_ENVIRONMENT === 'production',
+      enabled: import.meta.env.VITE_ENVIRONMENT !== 'local',
       environment: import.meta.env.VITE_ENVIRONMENT,
       version: import.meta.env.PACKAGE_VERSION,
       writeKey: import.meta.env.VITE_RUDDERSTACK_WRITE_KEY,
