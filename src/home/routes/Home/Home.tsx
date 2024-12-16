@@ -83,16 +83,14 @@ export const Home = withLoad({
             safe={['bottom']}
           >
             <Grid>
-              <Grid.Row flex={0}>
+              <Grid.Row flex="0 0 auto">
                 <Grid.Cell>
-                  <Box flex={0}>
-                    <Header collapse="condense">
-                      <Header.Title size="large">{title}</Header.Title>
-                    </Header>
-                  </Box>
+                  <Header collapse="condense">
+                    <Header.Title size="large">{title}</Header.Title>
+                  </Header>
                 </Grid.Cell>
               </Grid.Row>
-              <Grid.Row flex={0}>
+              <Grid.Row flex="0 0 auto">
                 <Grid.Cell>
                   <FablesCreate onClick={handleOnCreateClick} />
                 </Grid.Cell>

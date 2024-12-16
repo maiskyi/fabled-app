@@ -39,6 +39,7 @@ export * from './hooks/useBrowser';
 export * from './hooks/useModal';
 export * from './hooks/useDevice';
 export * from './hooks/useSplashScreen';
+export * from './hooks/useMediaSwitch';
 export {
   useIonViewDidEnter as useViewDidEnter,
   useIonViewWillEnter as useViewWillEnter,
