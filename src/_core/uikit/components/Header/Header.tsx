@@ -10,7 +10,7 @@ import { useContextSelector } from 'use-context-selector';
 import { IonCol, IonGrid, IonHeader, IonRow, IonToolbar } from '@ionic/react';
 
 import { Selector } from '../../constants/selector.const';
-import { PageContext } from '../../contexts/PageContext';
+import { CoverContext } from '../../contexts/CoverContext';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';
@@ -39,7 +39,7 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
   ref
 ) {
   const withCover = useContextSelector(
-    PageContext,
+    CoverContext,
     ({ withCover }) => withCover
   );
 

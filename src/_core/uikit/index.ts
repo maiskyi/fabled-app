@@ -8,6 +8,7 @@ export * from './components/Card';
 export * from './components/Checkbox';
 export * from './components/Chip';
 export * from './components/Content';
+export * from './components/Cover';
 export * from './components/Divider';
 export * from './components/Empty';
 export * from './components/Fab';
