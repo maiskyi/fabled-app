@@ -98,7 +98,7 @@ export const EmailVerification = withLoad({
             {title}
           </Header.Title>
         </Header>
-        <Grid fixed>
+        <Grid>
           <Grid.Row>
             <Grid.Cell>
               <Box padding={16} paddingInline={20}>

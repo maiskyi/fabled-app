@@ -62,7 +62,7 @@ export const Create = memo(function Create() {
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content fullscreen ref={content}>
-        <Grid fixed>
+        <Grid>
           <Grid.Row>
             <Grid.Cell>
               <Header collapse="condense">

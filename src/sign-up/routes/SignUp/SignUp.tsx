@@ -61,7 +61,7 @@ export const SignUp: FC = withLoad({
         <Header collapse="condense">
           <Header.Title size="large">{title}</Header.Title>
         </Header>
-        <Grid fixed>
+        <Grid>
           <Grid.Row>
             <Grid.Cell>
               <Box padding={16} paddingInline={20}>

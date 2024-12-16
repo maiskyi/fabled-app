@@ -97,7 +97,7 @@ export const Plan: FC = withLoad({
             {title}
           </Header.Title>
         </Header>
-        <Grid fixed>
+        <Grid>
           <Grid.Row>
             <Grid.Cell>
               <Box padding={16} paddingInline={20}>

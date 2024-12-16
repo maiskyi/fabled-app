@@ -4,21 +4,14 @@ import { createRoot } from 'react-dom/client';
 import { Language } from '@locale/constants';
 import { resources } from '@locale/resources';
 import { Splash } from '@bootstrap/components';
-import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 
 import { App, AppProps } from './App';
-
-if (import.meta.env.DEV) {
-  // Adds messages only in a dev environment
-  loadDevMessages();
-  loadErrorMessages();
-}
 
 const config: AppProps = {
   bootstrap: {
     analytics: {
       dataUrl: import.meta.env.VITE_RUDDERSTACK_DATA_URL,
-      enabled: import.meta.env.VITE_ENVIRONMENT !== 'local',
+      enabled: import.meta.env.VITE_ENVIRONMENT === 'production',
       environment: import.meta.env.VITE_ENVIRONMENT,
       version: import.meta.env.PACKAGE_VERSION,
       writeKey: import.meta.env.VITE_RUDDERSTACK_WRITE_KEY,

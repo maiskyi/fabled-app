@@ -11,6 +11,7 @@ import { IonCol, IonGrid, IonHeader, IonRow, IonToolbar } from '@ionic/react';
 
 import { Selector } from '../../constants/selector.const';
 import { CoverContext } from '../../contexts/CoverContext';
+import { DeviceContext } from '../../contexts/DeviceContext';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';
@@ -43,6 +44,11 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
     ({ withCover }) => withCover
   );
 
+  const isDesktop = useContextSelector(
+    DeviceContext,
+    ({ isDesktop }) => isDesktop
+  );
+
   return (
     <IonHeader
       className={classNames(
@@ -58,7 +64,7 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
       ref={ref}
       translucent={translucent}
     >
-      <IonGrid className="ion-no-padding" fixed>
+      <IonGrid className="ion-no-padding" fixed={isDesktop}>
         <IonRow>
           <IonCol className="ion-no-padding">
             <IonToolbar
