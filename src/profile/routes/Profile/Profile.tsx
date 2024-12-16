@@ -80,7 +80,7 @@ export const Profile = withLoad({
       </Header>
       <Content fullscreen inset={false}>
         <SafeArea safe={['bottom']}>
-          <Grid fixed>
+          <Grid>
             <Grid.Row>
               <Grid.Cell>
                 <Header collapse="condense">

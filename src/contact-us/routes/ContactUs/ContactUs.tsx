@@ -63,7 +63,7 @@ export const ContactUs: FC = withLoad({
           defaultValues={defaultValues}
           onSubmit={handleOnSubmit}
         >
-          <Grid fixed>
+          <Grid>
             <Grid.Row>
               <Grid.Cell>
                 <Header collapse="condense">

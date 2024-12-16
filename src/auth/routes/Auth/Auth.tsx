@@ -66,7 +66,7 @@ export const Auth = withLoad({
           minHeight="100%"
           safe={['bottom']}
         >
-          <Grid fixed>
+          <Grid>
             <Grid.Row flex={0}>
               <Grid.Cell>
                 <Header collapse="condense">

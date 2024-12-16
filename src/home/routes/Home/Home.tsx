@@ -82,7 +82,7 @@ export const Home = withLoad({
             minHeight="100%"
             safe={['bottom']}
           >
-            <Grid fixed>
+            <Grid>
               <Grid.Row flex={0}>
                 <Grid.Cell>
                   <Box flex={0}>

@@ -48,7 +48,7 @@ export const Feedback: FC = withLoad({
       </Header>
       <Content fullscreen inset={false}>
         <Form<DTO.CreateFeedbackRequest> onSubmit={handleOnSubmit}>
-          <Grid fixed>
+          <Grid>
             <Grid.Row>
               <Grid.Cell>
                 <Header collapse="condense">

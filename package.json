@@ -13,7 +13,7 @@
     "gen:api": "orval && add-ts-nocheck --patterns 'src/_network/api/__generated__/*.ts'",
     "ios": "ionic cap run ios -l --external",
     "android": "ionic cap run android -l --external",
-    "lint": "eslint src --max-warnings=0 --fix",
+    "lint": "eslint ./src --max-warnings=0 --fix",
     "preview": "vite preview",
     "start": "vite"
   },
