@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
 import { Capacitor } from '@capacitor/core';
-import { IonApp, setupIonicReact } from '@ionic/react';
+import { IonApp, isPlatform, setupIonicReact } from '@ionic/react';
 
 import { DeviceContext, DevicePlatform } from '../../contexts/DeviceContext';
 
@@ -16,9 +16,16 @@ export type ThemeProviderProps = PropsWithChildren<{}>;
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const platform = Capacitor.getPlatform() as DevicePlatform;
 
+  const isDesktop = isPlatform('desktop');
+
   return (
     <DeviceContext.Provider
-      value={{ height: window.innerHeight, platform, width: window.innerWidth }}
+      value={{
+        height: window.innerHeight,
+        isDesktop,
+        platform,
+        width: window.innerWidth,
+      }}
     >
       <IonApp>{children}</IonApp>
     </DeviceContext.Provider>
