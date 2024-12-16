@@ -27,7 +27,9 @@ export const Grid: GridComponent = ({ children }: GridProps) => {
 
   return (
     <IonGrid
-      className={classNames('ion-no-padding', styles.root)}
+      className={classNames('ion-no-padding', styles.root, {
+        [styles.full]: !isDesktop,
+      })}
       fixed={isDesktop}
     >
       {children}
