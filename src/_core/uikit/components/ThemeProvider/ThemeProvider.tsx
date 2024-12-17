@@ -17,12 +17,14 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const platform = Capacitor.getPlatform() as DevicePlatform;
 
   const isDesktop = isPlatform('desktop');
+  const isMobile = isPlatform('mobile');
 
   return (
     <DeviceContext.Provider
       value={{
         height: window.innerHeight,
         isDesktop,
+        isMobile,
         platform,
         width: window.innerWidth,
       }}
