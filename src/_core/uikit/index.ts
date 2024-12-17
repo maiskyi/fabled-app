@@ -34,12 +34,13 @@ export * from './components/Typist';
 export * from './components/View';
 
 // Hooks
-export * from './hooks/useUtils';
 export * from './hooks/useBrowser';
-export * from './hooks/useModal';
 export * from './hooks/useDevice';
-export * from './hooks/useSplashScreen';
+export * from './hooks/useInAppReview';
 export * from './hooks/useMediaSwitch';
+export * from './hooks/useModal';
+export * from './hooks/useSplashScreen';
+export * from './hooks/useUtils';
 export {
   useIonViewDidEnter as useViewDidEnter,
   useIonViewWillEnter as useViewWillEnter,

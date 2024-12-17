@@ -17,7 +17,7 @@ import styles from './Reader.module.scss';
 
 export interface ReaderProps {
   children?: string;
-  onCompleted?: () => void;
+  onCompleted?: () => Promise<void>;
 }
 
 export const Reader: FC<ReaderProps> = ({
