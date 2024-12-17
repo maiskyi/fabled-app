@@ -1,10 +1,15 @@
 import { FC, useRef, useState } from 'react';
 import classNames from 'classnames';
+import { noop } from 'lodash';
 
 import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { IonFabButton, IonIcon, IonText } from '@ionic/react';
-import { chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
+import {
+  chevronBackSharp,
+  chevronForwardSharp,
+  checkmarkSharp,
+} from 'ionicons/icons';
 
 import { groupParagraphs } from './Reader.utils';
 
@@ -12,13 +17,17 @@ import styles from './Reader.module.scss';
 
 export interface ReaderProps {
   children?: string;
+  onCompleted?: () => void;
 }
 
-export const Reader: FC<ReaderProps> = ({ children = '' }) => {
+export const Reader: FC<ReaderProps> = ({
+  children = '',
+  onCompleted = noop,
+}) => {
   const swiper = useRef<SwiperRef>();
 
   const [{ isBeginning, isEnd }, setState] = useState({
-    isBeginning: false,
+    isBeginning: true,
     isEnd: false,
   });
 
@@ -29,14 +38,6 @@ export const Reader: FC<ReaderProps> = ({ children = '' }) => {
 
   const groups = groupParagraphs(paragraphs, 400);
 
-  const handleOnInit = (swiper: SwiperClass) => {
-    setState((prev) => ({
-      ...prev,
-      isBeginning: swiper.isBeginning,
-      isEnd: swiper.isEnd,
-    }));
-  };
-
   const handleOnSlideChange = (swiper: SwiperClass) => {
     setState((prev) => ({
       ...prev,
@@ -46,7 +47,8 @@ export const Reader: FC<ReaderProps> = ({ children = '' }) => {
   };
 
   const handleOnNext = () => {
-    swiper.current.swiper.slideNext();
+    if (isEnd) onCompleted();
+    else swiper.current.swiper.slideNext();
   };
 
   const handleOnPrev = () => {
@@ -59,7 +61,6 @@ export const Reader: FC<ReaderProps> = ({ children = '' }) => {
         effect="fade"
         loop={false}
         modules={[Navigation, Pagination]}
-        onInit={handleOnInit}
         onSlideChange={handleOnSlideChange}
         pagination={{
           el: `.${styles.swiperPagination}`,
@@ -86,20 +87,25 @@ export const Reader: FC<ReaderProps> = ({ children = '' }) => {
         </div>
         <div className={styles.navigation}>
           <IonFabButton
-            className={classNames(styles.prev)}
+            className={classNames(styles.prev, {
+              [styles.disabled]: isBeginning,
+            })}
             color="tertiary"
             disabled={isBeginning}
             onClick={handleOnPrev}
           >
-            <IonIcon icon={chevronBackOutline} />
+            <IonIcon icon={chevronBackSharp} />
           </IonFabButton>
-          <IonFabButton
-            color="tertiary"
-            disabled={isEnd}
-            onClick={handleOnNext}
-          >
-            <IonIcon icon={chevronForwardOutline} />
-          </IonFabButton>
+          {!isEnd && (
+            <IonFabButton color="tertiary" onClick={handleOnNext}>
+              <IonIcon icon={chevronForwardSharp} />
+            </IonFabButton>
+          )}
+          {isEnd && (
+            <IonFabButton color="tertiary" onClick={handleOnNext}>
+              <IonIcon icon={checkmarkSharp} />
+            </IonFabButton>
+          )}
         </div>
       </div>
     </div>
