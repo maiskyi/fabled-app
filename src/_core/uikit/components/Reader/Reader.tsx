@@ -1,17 +1,17 @@
 import { FC, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { noop } from 'lodash';
+import { useAsyncFn } from 'react-use';
 
 import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-import { IonFabButton, IonIcon, IonText } from '@ionic/react';
+import { IonFabButton, IonIcon, IonSpinner, IonText } from '@ionic/react';
 import {
   chevronBackSharp,
   chevronForwardSharp,
   checkmarkSharp,
 } from 'ionicons/icons';
 
-import { groupParagraphs } from './Reader.utils';
+import { groupParagraphs, defaultOnCompleted } from './Reader.utils';
 
 import styles from './Reader.module.scss';
 
@@ -22,9 +22,13 @@ export interface ReaderProps {
 
 export const Reader: FC<ReaderProps> = ({
   children = '',
-  onCompleted = noop,
+  onCompleted = defaultOnCompleted,
 }) => {
   const swiper = useRef<SwiperRef>();
+
+  const [{ loading: isCompleting }] = useAsyncFn(async () => {
+    await onCompleted();
+  });
 
   const [{ isBeginning, isEnd }, setState] = useState({
     isBeginning: true,
@@ -103,7 +107,11 @@ export const Reader: FC<ReaderProps> = ({
           )}
           {isEnd && (
             <IonFabButton color="tertiary" onClick={handleOnNext}>
-              <IonIcon icon={checkmarkSharp} />
+              {isCompleting ? (
+                <IonSpinner name="circular" />
+              ) : (
+                <IonIcon icon={checkmarkSharp} />
+              )}
             </IonFabButton>
           )}
         </div>

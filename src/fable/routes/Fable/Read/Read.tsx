@@ -14,7 +14,7 @@ export const Read: FC = () => {
   const story = useContextSelector(FableContext, ({ story }) => story);
 
   const handleOnCompleted = async () => {
-    inAppReview();
+    await inAppReview();
     navigate({
       action: 'back',
       pathname: RoutePath.Index,
