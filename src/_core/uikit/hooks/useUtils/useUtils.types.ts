@@ -13,3 +13,6 @@ export interface ToastParams {
 }
 
 export type ConfirmParams = Omit<ConfirmModalParams, 'dismiss'>;
+
+export type ConfirmBreakpoints = [number, number] | undefined;
+export type ConfirmInitialBreakpoint = number | undefined;

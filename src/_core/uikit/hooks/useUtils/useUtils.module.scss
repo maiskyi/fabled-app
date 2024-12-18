@@ -1,6 +1,9 @@
 .confirm {
   --height: auto;
   --border-radius: 24px;
+  &.fixed {
+    --width: 390px;
+  }
 }
 
 .toast {
