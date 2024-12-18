@@ -1,3 +1,5 @@
+export const defaultOnCompleted = () => Promise.resolve();
+
 export const groupParagraphs = (
   paragraphs: string[],
   maxLength = 150,

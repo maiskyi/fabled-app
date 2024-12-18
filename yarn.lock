@@ -1403,6 +1403,11 @@
     "@babel/helper-validator-identifier" "^7.24.7"
     to-fast-properties "^2.0.0"
 
+"@capacitor-community/in-app-review@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@capacitor-community/in-app-review/-/in-app-review-6.0.0.tgz#9d7d71ab4748fc6dd58b3181f351c19af5957dde"
+  integrity sha512-k4GxGepsNV7YFf/GdAG0+M05U4Ew3SbzvrWVNUut+0tdTqxvLPCMzVBA41dolDSgRW7iDt923AKcRkKTJcv5FA==
+
 "@capacitor-firebase/authentication@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@capacitor-firebase/authentication/-/authentication-6.1.0.tgz#ae2b32351477d070eabfd4d53c1ea8d64004b841"
