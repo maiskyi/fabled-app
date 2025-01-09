@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useMemo } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { useMount } from 'react-use';
 
 import { NavigationProvider } from '@core/navigation';
@@ -17,7 +17,7 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
 
   const emailVerified = user?.emailVerified;
 
-  const roles = useMemo(() => {
+  const roles = (() => {
     if (isAuthenticated && emailVerified) {
       return USER;
     }
@@ -25,16 +25,13 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
       return UNVERIFIED;
     }
     return NONE;
-  }, [isAuthenticated, emailVerified]);
+  })();
 
   const defaultProtectedRedirect = (() => {
-    if (isAuthenticated && user?.emailVerified) {
+    if (isAuthenticated) {
       return RoutePath.Index;
     }
-    if (isAuthenticated && !user?.emailVerified) {
-      return RoutePath.VerifyEmail;
-    }
-    return RoutePath.Auth;
+    return RoutePath.Onbording;
   })();
 
   useMount(() => hide());
