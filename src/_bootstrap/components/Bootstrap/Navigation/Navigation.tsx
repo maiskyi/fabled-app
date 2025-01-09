@@ -7,7 +7,7 @@ import { useSplashScreen } from '@core/uikit';
 
 import { RoutePath } from '../../../constants';
 
-import { NONE, UNVERIFIED, USER } from './Navigation.const';
+import { NONE, UNVERIFIED, USER, ANONYMOUS } from './Navigation.const';
 
 export type NavigationProps = PropsWithChildren<{}>;
 
@@ -15,13 +15,14 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
   const [, { hide }] = useSplashScreen();
 
-  const emailVerified = user?.emailVerified;
-
   const roles = (() => {
-    if (isAuthenticated && emailVerified) {
+    if (isAuthenticated && user?.isAnonymous) {
+      return ANONYMOUS;
+    }
+    if (isAuthenticated && user?.emailVerified) {
       return USER;
     }
-    if (isAuthenticated && emailVerified) {
+    if (isAuthenticated && !user?.emailVerified) {
       return UNVERIFIED;
     }
     return NONE;

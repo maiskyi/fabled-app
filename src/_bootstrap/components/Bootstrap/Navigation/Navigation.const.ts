@@ -6,4 +6,4 @@ export const NONE = [Role.None];
 
 export const UNVERIFIED = [Role.Unverified];
 
-export const ANONYMUS = [Role.Anonymus];
+export const ANONYMOUS = [Role.Anonymous];

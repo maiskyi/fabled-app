@@ -2,5 +2,5 @@ export enum Role {
   None = 'None',
   User = 'User',
   Unverified = 'Unverified',
-  Anonymus = 'Anonymus',
+  Anonymous = 'Anonymous',
 }

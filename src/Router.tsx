@@ -27,9 +27,9 @@ import { ChangeName } from './change-name/routes';
 import { Plan } from './plan/routes';
 import { Onboarding } from './onboarding/routes';
 
-const USER_ROLES = [Role.User];
+const USER_ROLES = [Role.User, Role.Anonymous];
 
-// const AUTH_ROLES = [Role.None, Role.Unverified];
+// const AUTH_ROLES = [Role.None, Role.Unverified, Role.Anonymous];
 
 const ONBOARDING_ROLES = [Role.None];
 
