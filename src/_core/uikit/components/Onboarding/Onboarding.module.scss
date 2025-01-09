@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100%;
+  height: 100%;
+}
+
+.slides {
+  flex: 1 0 auto;
+}
+
+.nav {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+}

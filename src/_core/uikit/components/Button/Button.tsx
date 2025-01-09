@@ -42,7 +42,6 @@ export const Button: ButtonComponent = ({
       disabled={disabled}
       expand={block ? 'block' : undefined}
       fill={fill}
-      mode="ios"
       onClick={onClick}
       shape="round"
       type={type}
