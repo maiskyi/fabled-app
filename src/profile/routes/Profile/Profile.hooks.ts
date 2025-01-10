@@ -5,7 +5,7 @@ import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { PlanAction, RoutePath } from '@bootstrap/constants';
 import { useLegal } from '@common/hooks';
-import { useAuth } from '@core/auth';
+// import { useAuth } from '@core/auth';
 import { usePurchases, PurchasesStoreProduct } from '@core/purchases';
 
 import { ProfileMenuItem } from './Profile.types';
@@ -51,7 +51,7 @@ export const useProfileMenu = () => {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
   const { openPrivacyPolicy, openTermsAndConditions } = useLegal();
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const { subscriptions, subscriptionOfferingMapping } =
     useProfileSubscription();
 
@@ -80,15 +80,7 @@ export const useProfileMenu = () => {
   const menuItems = useMemo((): ProfileMenuItem[] => {
     return [
       {
-        active: user.providerData[0].providerId === 'password',
-        group: t('actions.settings'),
-        icon: 'lock-closed-outline',
-        label: t('actions.changePassword'),
-        onClick: () =>
-          navigate({ action: 'push', pathname: RoutePath.ChangePassword }),
-      } as ProfileMenuItem,
-      {
-        active: user.providerData[0].providerId === 'password',
+        active: true,
         group: t('actions.settings'),
         icon: 'person-outline',
         label: t('actions.changeName'),
@@ -126,7 +118,7 @@ export const useProfileMenu = () => {
         onClick: openTermsAndConditions,
       } as ProfileMenuItem,
     ].filter(({ active }) => active);
-  }, [t, navigate, openPrivacyPolicy, openTermsAndConditions, user]);
+  }, [t, navigate, openPrivacyPolicy, openTermsAndConditions]);
 
   const menu = useMemo(
     () => groupBy(menuItems, ({ group }) => group),

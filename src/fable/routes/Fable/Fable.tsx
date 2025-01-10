@@ -76,7 +76,7 @@ export const Fable = withLoad({
   return (
     <Cover src={isReady ? story.image : undefined}>
       <Page>
-        <Header>
+        <Header transparent>
           <Header.Back color="dark" pathname={RoutePath.Index} />
         </Header>
         <Content fullscreen scrollY={false}>

@@ -5,12 +5,12 @@ import {
   Page,
   Content,
   List,
-  useUtils,
+  // useUtils,
   Text,
   SafeArea,
   Grid,
 } from '@core/uikit';
-import { useSignOut, useDeleteUser } from '@core/auth';
+// import { useSignOut, useDeleteUser } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { withLoad } from '@core/analytics';
@@ -22,55 +22,55 @@ export const Profile = withLoad({
   category: 'Profile',
   name: 'Profile',
 })(function Profile() {
-  const { confirm, toast } = useUtils();
+  // const { confirm, toast } = useUtils();
   const { t } = useTranslation();
 
-  const { mutateAsync: signOut } = useSignOut();
-  const { mutateAsync: deleteAccountAsync } = useDeleteUser();
+  // const { mutateAsync: signOut } = useSignOut();
+  // const { mutateAsync: deleteAccountAsync } = useDeleteUser();
 
   const { menu, plans } = useProfileMenu();
 
   const title = t('pages.profile');
 
-  const deleteAccount = async () => {
-    await deleteAccountAsync(null, {
-      onError: ({ message }) => {
-        toast({
-          message,
-          variant: 'error',
-        });
-      },
-      onSuccess: () => {
-        toast({
-          message: t('notifications.accountDeletionSucceed.message'),
-          title: t('notifications.accountDeletionSucceed.title'),
-          variant: 'success',
-        });
-      },
-    });
-  };
+  // const deleteAccount = async () => {
+  //   await deleteAccountAsync(null, {
+  //     onError: ({ message }) => {
+  //       toast({
+  //         message,
+  //         variant: 'error',
+  //       });
+  //     },
+  //     onSuccess: () => {
+  //       toast({
+  //         message: t('notifications.accountDeletionSucceed.message'),
+  //         title: t('notifications.accountDeletionSucceed.title'),
+  //         variant: 'success',
+  //       });
+  //     },
+  //   });
+  // };
 
-  const handleOnLogout = () => {
-    confirm({
-      confirmBtn: t('actions.logOut'),
-      icon: 'log-out-outline',
-      message: t('confirms.logout.message'),
-      onConfirm: () => signOut(),
-      title: t('confirms.logout.title'),
-      variant: 'primary',
-    });
-  };
+  // const handleOnLogout = () => {
+  //   confirm({
+  //     confirmBtn: t('actions.logOut'),
+  //     icon: 'log-out-outline',
+  //     message: t('confirms.logout.message'),
+  //     onConfirm: () => signOut(),
+  //     title: t('confirms.logout.title'),
+  //     variant: 'primary',
+  //   });
+  // };
 
-  const handleOnDelete = () => {
-    confirm({
-      confirmBtn: t('actions.deleteAccount'),
-      icon: 'log-out-outline',
-      message: t('confirms.deleteAccount.message'),
-      onConfirm: () => deleteAccount(),
-      title: t('confirms.deleteAccount.title'),
-      variant: 'danger',
-    });
-  };
+  // const handleOnDelete = () => {
+  //   confirm({
+  //     confirmBtn: t('actions.deleteAccount'),
+  //     icon: 'log-out-outline',
+  //     message: t('confirms.deleteAccount.message'),
+  //     onConfirm: () => deleteAccount(),
+  //     title: t('confirms.deleteAccount.title'),
+  //     variant: 'danger',
+  //   });
+  // };
 
   return (
     <Page>
@@ -132,7 +132,7 @@ export const Profile = withLoad({
                     </List>
                   );
                 })}
-                <List>
+                {/* <List>
                   <List.Header />
                   <List.Item onClick={handleOnLogout}>
                     <List.Icon name="log-out-outline" />
@@ -146,7 +146,7 @@ export const Profile = withLoad({
                       {t('actions.deleteAccount')}
                     </List.Label>
                   </List.Item>
-                </List>
+                </List> */}
               </Grid.Cell>
             </Grid.Row>
           </Grid>

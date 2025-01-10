@@ -34,17 +34,21 @@ export const Onboarding: FC<OnboardingProps> = ({
     <div className={classNames(styles.root, className)}>
       <div className={styles.slides}>{children}</div>
       <div className={styles.nav}>
-        <Button
-          color="tertiary"
-          fill="outline"
-          loading={isSkipping}
-          onClick={handleOnSkip}
-        >
-          Skip
-        </Button>
-        <Button loading={isCompleting} onClick={handleOnComplete}>
-          Next
-        </Button>
+        <div>
+          <Button
+            color="tertiary"
+            fill="outline"
+            loading={isSkipping}
+            onClick={handleOnSkip}
+          >
+            Skip
+          </Button>
+        </div>
+        <div className={styles.primary}>
+          <Button loading={isCompleting} onClick={handleOnComplete}>
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );
