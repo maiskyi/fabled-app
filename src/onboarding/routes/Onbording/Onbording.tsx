@@ -60,6 +60,8 @@ export const Onboarding = withLoad({
                 <Box height="100%" minHeight="100%" paddingInline={20}>
                   <Slides onCompleted={mutateAsync} onSkip={mutateAsync}>
                     <Slides.Item>123</Slides.Item>
+                    <Slides.Item>123</Slides.Item>
+                    <Slides.Item>123</Slides.Item>
                   </Slides>
                 </Box>
               </Grid.Cell>

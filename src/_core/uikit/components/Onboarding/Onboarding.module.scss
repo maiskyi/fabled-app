@@ -1,13 +1,19 @@
 .root {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   min-height: 100%;
   height: 100%;
+  --swiper-pagination-bullet-inactive-color: var(--ion-color-dark);
+  --swiper-pagination-color: var(--ion-color-tertiary);
+  --swiper-pagination-bullet-horizontal-gap: 2px
 }
 
 .slides {
   flex: 1 0 auto;
+}
+
+.slide {
+  padding-bottom: 32px;
 }
 
 .nav {
