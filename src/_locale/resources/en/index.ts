@@ -12,3 +12,4 @@ export { options } from './options';
 export { bot } from './bot';
 export { empty } from './empty';
 export { constants } from './constants';
+export { onboarding } from './onboarding';

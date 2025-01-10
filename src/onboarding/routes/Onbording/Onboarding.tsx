@@ -14,6 +14,8 @@ import { RoutePath } from '@bootstrap/constants';
 import { useRoute } from '@core/navigation';
 import { useSignInAnonymously } from '@core/auth';
 
+import { OnboardingWelome } from './_partitions/OnboardingWelome';
+
 export const Onboarding = withLoad({
   category: 'Onbording',
   name: 'Onbording',
@@ -48,18 +50,13 @@ export const Onboarding = withLoad({
           safe={['bottom']}
         >
           <Grid>
-            <Grid.Row flex="0 0 auto">
-              <Grid.Cell>
-                <Header collapse="condense">
-                  <Header.Title size="large">1</Header.Title>
-                </Header>
-              </Grid.Cell>
-            </Grid.Row>
             <Grid.Row flex="1 0 auto">
               <Grid.Cell>
                 <Box height="100%" minHeight="100%" paddingInline={20}>
                   <Slides onCompleted={mutateAsync} onSkip={mutateAsync}>
-                    <Slides.Item>123</Slides.Item>
+                    <Slides.Item>
+                      <OnboardingWelome />
+                    </Slides.Item>
                     <Slides.Item>123</Slides.Item>
                     <Slides.Item>123</Slides.Item>
                   </Slides>
