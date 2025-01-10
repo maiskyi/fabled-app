@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Box, Header, Onboarding } from '@core/uikit';
+import { Box, Onboarding } from '@core/uikit';
 
 import { OnboardingItemImage } from '../../Onboarding.types';
 
@@ -19,30 +19,37 @@ export const OnboardingSlide: FC<OnboardingSlideProps> = ({
 }) => {
   return (
     <Box
+      alignItems="center"
       display="flex"
       flexDirection="column"
+      gap={24}
       height="100%"
       justifyContent="center"
     >
-      <Box flex={0} marginInline={-16}>
-        <Header collapse="condense">
-          <Header.Title size="large" wrap>
-            {title}
-          </Header.Title>
-        </Header>
-      </Box>
-      <Box flex="0 0 300px">
-        <Image className={styles.image} />
-      </Box>
       <Box
         alignItems="center"
+        aspectRatio={1}
         display="flex"
-        flex={0}
-        flexDirection="column"
         justifyContent="center"
-        textAlign="center"
       >
-        <Onboarding.Item.Description>{description}</Onboarding.Item.Description>
+        <Image className={styles.image} />
+      </Box>
+      <Box display="flex" flexDirection="column" gap={8}>
+        <Box flex={0} textAlign="center">
+          <Onboarding.Item.Title>{title}</Onboarding.Item.Title>
+        </Box>
+        <Box
+          alignItems="center"
+          display="flex"
+          flex={0}
+          flexDirection="column"
+          justifyContent="center"
+          textAlign="center"
+        >
+          <Onboarding.Item.Description>
+            {description}
+          </Onboarding.Item.Description>
+        </Box>
       </Box>
     </Box>
   );

@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { SwiperSlide } from 'swiper/react';
 
 import { OnboardingItemDescription } from './OnboardingItemDescription/OnboardingItemDescription';
+import { OnboardingItemTitle } from './OnboardingItemTitle/OnboardingItemTitle';
 
 import styles from '../Onboarding.module.scss';
 
@@ -14,6 +15,7 @@ type OnboardingItemProps = PropsWithChildren<{
 interface OnboardingItemDescriptionComponent {
   (props: OnboardingItemProps): ReactElement;
   displayName: string;
+  Title: typeof OnboardingItemTitle;
   Description: typeof OnboardingItemDescription;
 }
 
@@ -29,4 +31,5 @@ export const OnboardingItem: OnboardingItemDescriptionComponent = ({
 };
 
 OnboardingItem.displayName = 'SwiperSlide';
+OnboardingItem.Title = OnboardingItemTitle;
 OnboardingItem.Description = OnboardingItemDescription;
