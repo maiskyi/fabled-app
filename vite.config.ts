@@ -5,6 +5,7 @@ import path from 'path';
 import legacy from '@vitejs/plugin-legacy';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 // import basicSsl from '@vitejs/plugin-basic-ssl';
 
 import packageJson from './package.json';
@@ -16,6 +17,7 @@ export default defineConfig({
   plugins: [
     react(),
     legacy(),
+    svgr(),
     // basicSsl()
   ],
   resolve: {

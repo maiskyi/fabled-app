@@ -24,8 +24,7 @@
       "@network/*": ["./src/_network/*"],
       "@locale/*": ["./src/_locale/*"]
     },
-    "types": ["@ionic/core/dist/types"]
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

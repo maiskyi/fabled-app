@@ -15,12 +15,16 @@ import { useRoute } from '@core/navigation';
 import { useSignInAnonymously } from '@core/auth';
 
 import { OnboardingWelome } from './_partitions/OnboardingWelome';
+import { OnboardingSlide } from './_partitions/OnboardingSlide';
+import { useOnboarding } from './Onboarding.hooks';
 
 export const Onboarding = withLoad({
   category: 'Onbording',
   name: 'Onbording',
 })(() => {
   const [, navigate] = useRoute();
+
+  const { onboarding } = useOnboarding();
 
   const { mutateAsync } = useSignInAnonymously();
 
@@ -57,8 +61,13 @@ export const Onboarding = withLoad({
                     <Slides.Item>
                       <OnboardingWelome />
                     </Slides.Item>
-                    <Slides.Item>123</Slides.Item>
-                    <Slides.Item>123</Slides.Item>
+                    {onboarding.map((item) => {
+                      return (
+                        <Slides.Item key={item.title}>
+                          <OnboardingSlide {...item} />
+                        </Slides.Item>
+                      );
+                    })}
                   </Slides>
                 </Box>
               </Grid.Cell>
