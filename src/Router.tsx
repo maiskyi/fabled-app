@@ -8,7 +8,7 @@ import {
   Router as NavRouter,
 } from '@core/navigation';
 
-// import { Auth } from './auth/routes';
+import { Auth } from './auth/routes';
 import { Create } from './create/routes';
 import { Home } from './home/routes';
 import { Profile } from './profile/routes';
@@ -16,11 +16,11 @@ import { ContactUs } from './contact-us/routes';
 import { Feedback } from './feeadback/routes';
 import { Fable } from './fable/routes';
 import { Notification } from './notification/routes';
-// import { SignUp } from './sign-up/routes';
-// import { VerifyEmail } from './verify-email/routes';
-// import { SignIn } from './sign-in/routes';
-// import { ForgotPassword } from './forgot-password/routes';
-// import { Action } from './action/routes';
+import { SignUp } from './sign-up/routes';
+import { VerifyEmail } from './verify-email/routes';
+import { SignIn } from './sign-in/routes';
+import { ForgotPassword } from './forgot-password/routes';
+import { Action } from './action/routes';
 import { FablesProvider } from './home/providers';
 import { ChangePassword } from './change-password/routes';
 import { ChangeName } from './change-name/routes';
@@ -29,7 +29,7 @@ import { Onboarding } from './onboarding/routes';
 
 const USER_ROLES = [Role.User, Role.Anonymous];
 
-// const AUTH_ROLES = [Role.None, Role.Unverified, Role.Anonymous];
+const AUTH_ROLES = [Role.None, Role.Unverified];
 
 const ONBOARDING_ROLES = [Role.None];
 
@@ -92,7 +92,7 @@ export const Router = memo(function Router() {
         </Route>
 
         {/* Auth */}
-        {/* <Route path={RoutePath.Auth}>
+        <Route path={RoutePath.Auth}>
           <ProtectedWithRedirect roles={AUTH_ROLES}>
             <Auth />
           </ProtectedWithRedirect>
@@ -121,7 +121,7 @@ export const Router = memo(function Router() {
           <ProtectedWithRedirect roles={AUTH_ROLES}>
             <Action />
           </ProtectedWithRedirect>
-        </Route> */}
+        </Route>
       </RouterOutlet>
     </NavRouter>
   );
