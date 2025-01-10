@@ -1,10 +1,11 @@
-import { FC, PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 import classNames from 'classnames';
 import { useAsyncFn } from 'react-use';
 
 import { Button } from '../Button';
 
 import { defaultOnSkip, defaultOnCompleted } from './Onboarding.utils';
+import { OnboardingItem } from './OnboardingItem/OnboardingItem';
 
 import styles from './Onboarding.module.scss';
 
@@ -14,12 +15,17 @@ export type OnboardingProps = PropsWithChildren<{
   onCompleted?: () => Promise<unknown>;
 }>;
 
-export const Onboarding: FC<OnboardingProps> = ({
+interface OnboardingComponent {
+  (props: OnboardingProps): ReactElement;
+  Item: typeof OnboardingItem;
+}
+
+export const Onboarding: OnboardingComponent = ({
   children,
   className,
   onSkip = defaultOnSkip,
   onCompleted = defaultOnCompleted,
-}) => {
+}: OnboardingProps) => {
   const [{ loading: isSkipping }, handleOnSkip] = useAsyncFn(async () => {
     await onSkip();
     return true;
@@ -53,3 +59,5 @@ export const Onboarding: FC<OnboardingProps> = ({
     </div>
   );
 };
+
+Onboarding.Item = OnboardingItem;

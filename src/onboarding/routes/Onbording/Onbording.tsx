@@ -2,6 +2,7 @@ import { withLoad } from '@core/analytics';
 import {
   Box,
   Content,
+  Footer,
   Grid,
   Header,
   Page,
@@ -54,23 +55,23 @@ export const Onboarding = withLoad({
                 </Header>
               </Grid.Cell>
             </Grid.Row>
-            <Grid.Row flex="1 0 auto" paddingBottom={16}>
+            <Grid.Row flex="1 0 auto">
               <Grid.Cell>
                 <Box height="100%" minHeight="100%" paddingInline={20}>
                   <Slides onCompleted={mutateAsync} onSkip={mutateAsync}>
-                    123
+                    <Slides.Item>123</Slides.Item>
                   </Slides>
                 </Box>
-              </Grid.Cell>
-            </Grid.Row>
-            <Grid.Row flex="0 0 auto" paddingInline={20} textAlign="center">
-              <Grid.Cell>
-                <Disclaimer />
               </Grid.Cell>
             </Grid.Row>
           </Grid>
         </SafeArea>
       </Content>
+      <Footer>
+        <Box paddingInline={20} textAlign="center">
+          <Disclaimer />
+        </Box>
+      </Footer>
     </Page>
   );
 });
