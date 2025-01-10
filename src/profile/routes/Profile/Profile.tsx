@@ -10,10 +10,11 @@ import {
   SafeArea,
   Grid,
 } from '@core/uikit';
-import { useSignOut, useDeleteUser } from '@core/auth';
+import { useSignOut, useDeleteUser, useAuth } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { withLoad } from '@core/analytics';
+import { Fragment } from 'react/jsx-runtime';
 
 import { ProfileUserCard } from './_partitions/ProfileUserCard';
 import { useProfileMenu } from './Profile.hooks';
@@ -24,6 +25,7 @@ export const Profile = withLoad({
 })(function Profile() {
   const { confirm, toast } = useUtils();
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   const { mutateAsync: signOut } = useSignOut();
   const { mutateAsync: deleteAccountAsync } = useDeleteUser();
@@ -132,21 +134,25 @@ export const Profile = withLoad({
                     </List>
                   );
                 })}
-                <List>
-                  <List.Header />
-                  <List.Item onClick={handleOnLogout}>
-                    <List.Icon name="log-out-outline" />
-                    <List.Label>{t('actions.logOut')}</List.Label>
-                  </List.Item>
-                </List>
-                <List>
-                  <List.Header />
-                  <List.Item onClick={handleOnDelete}>
-                    <List.Label color="danger">
-                      {t('actions.deleteAccount')}
-                    </List.Label>
-                  </List.Item>
-                </List>
+                {!user?.isAnonymous && (
+                  <Fragment>
+                    <List>
+                      <List.Header />
+                      <List.Item onClick={handleOnLogout}>
+                        <List.Icon name="log-out-outline" />
+                        <List.Label>{t('actions.logOut')}</List.Label>
+                      </List.Item>
+                    </List>
+                    <List>
+                      <List.Header />
+                      <List.Item onClick={handleOnDelete}>
+                        <List.Label color="danger">
+                          {t('actions.deleteAccount')}
+                        </List.Label>
+                      </List.Item>
+                    </List>
+                  </Fragment>
+                )}
               </Grid.Cell>
             </Grid.Row>
           </Grid>

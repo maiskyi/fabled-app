@@ -25,10 +25,13 @@ import { FablesProvider } from './home/providers';
 import { ChangePassword } from './change-password/routes';
 import { ChangeName } from './change-name/routes';
 import { Plan } from './plan/routes';
+import { Onboarding } from './onboarding/routes';
 
-const USER_ROLES = [Role.User];
+const USER_ROLES = [Role.User, Role.Anonymous];
 
 const AUTH_ROLES = [Role.None, Role.Unverified];
+
+const ONBOARDING_ROLES = [Role.None];
 
 export const Router = memo(function Router() {
   return (
@@ -81,6 +84,11 @@ export const Router = memo(function Router() {
         </Route>
         <Route path={RoutePath.Notification}>
           <Notification />
+        </Route>
+        <Route path={RoutePath.Onbording}>
+          <ProtectedWithRedirect roles={ONBOARDING_ROLES}>
+            <Onboarding />
+          </ProtectedWithRedirect>
         </Route>
 
         {/* Auth */}

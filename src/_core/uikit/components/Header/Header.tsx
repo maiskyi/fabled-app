@@ -25,6 +25,7 @@ export type HeaderProps = PropsWithChildren<{
   translucent?: boolean;
   fixed?: boolean;
   collapse?: ComponentProps<typeof IonHeader>['collapse'];
+  transparent?: boolean;
 }>;
 
 interface HeaderComponent {
@@ -36,7 +37,7 @@ interface HeaderComponent {
 }
 
 export const Header = forwardRef<any, HeaderProps>(function Header(
-  { children, className, translucent, collapse },
+  { children, className, translucent, collapse, transparent },
   ref
 ) {
   const withCover = useContextSelector(
@@ -69,7 +70,7 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
           <IonCol className="ion-no-padding">
             <IonToolbar
               className={classNames(styles.toolbar, {
-                [styles.transparent]: withCover,
+                [styles.transparent]: withCover || transparent,
               })}
             >
               {children}

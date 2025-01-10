@@ -14,6 +14,7 @@ export enum RoutePath {
   ForgotPassword = '/forgot-password',
   Index = '/',
   Notification = '/notification/:type',
+  Onbording = '/onboarding',
   Plan = '/plan/:identifier/:action',
   Profile = '/profile',
   Request = '/request/:id',

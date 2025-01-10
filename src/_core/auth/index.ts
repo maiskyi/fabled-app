@@ -19,6 +19,7 @@ export * from './hooks/useSignInWithGoogle';
 export * from './hooks/useSignOut';
 export * from './hooks/useUpdatePassword';
 export * from './hooks/useUpdateProfile';
+export * from './hooks/useSignInAnonymously';
 
 // Types
 export * from './types';

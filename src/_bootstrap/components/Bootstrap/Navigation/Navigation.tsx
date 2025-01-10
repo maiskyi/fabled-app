@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useMemo } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { useMount } from 'react-use';
 
 import { NavigationProvider } from '@core/navigation';
@@ -7,7 +7,7 @@ import { useSplashScreen } from '@core/uikit';
 
 import { RoutePath } from '../../../constants';
 
-import { NONE, UNVERIFIED, USER } from './Navigation.const';
+import { NONE, UNVERIFIED, USER, ANONYMOUS } from './Navigation.const';
 
 export type NavigationProps = PropsWithChildren<{}>;
 
@@ -15,26 +15,24 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
   const [, { hide }] = useSplashScreen();
 
-  const emailVerified = user?.emailVerified;
-
-  const roles = useMemo(() => {
-    if (isAuthenticated && emailVerified) {
+  const roles = (() => {
+    if (isAuthenticated && user?.isAnonymous) {
+      return ANONYMOUS;
+    }
+    if (isAuthenticated && user?.emailVerified) {
       return USER;
     }
-    if (isAuthenticated && emailVerified) {
+    if (isAuthenticated && !user?.emailVerified) {
       return UNVERIFIED;
     }
     return NONE;
-  }, [isAuthenticated, emailVerified]);
+  })();
 
   const defaultProtectedRedirect = (() => {
-    if (isAuthenticated && user?.emailVerified) {
+    if (isAuthenticated) {
       return RoutePath.Index;
     }
-    if (isAuthenticated && !user?.emailVerified) {
-      return RoutePath.VerifyEmail;
-    }
-    return RoutePath.Auth;
+    return RoutePath.Onbording;
   })();
 
   useMount(() => hide());

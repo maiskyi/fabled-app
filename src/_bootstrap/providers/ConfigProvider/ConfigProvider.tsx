@@ -37,6 +37,7 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
     <ConfigContext.Provider
       value={{
         characters: bootstrap?.characters,
+
         privacyPolicyUrl: bootstrap?.config.privacyPolicyUrl,
         prompts: bootstrap?.prompts,
         scenes: bootstrap?.placeOfEvents,

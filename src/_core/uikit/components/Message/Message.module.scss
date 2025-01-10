@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
 
   &.companion {
     padding-left: 16px;
@@ -15,7 +15,7 @@
 .avatar {
   flex-grow: 0;
   flex-shrink: 0;
-  margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .message {
@@ -41,13 +41,13 @@
   
   &.companion {
     left: 0px;
-    bottom: 44px;
+    top: 44px;
     transform: rotate(-90deg);
   }
 
   &.me {
     right: 0;
-    bottom: 44px;
+    top: 44px;
     transform: rotate(90deg);
   }
 
