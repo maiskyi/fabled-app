@@ -1,6 +1,6 @@
 import { FunctionComponent, SVGProps } from 'react';
 
-export type OnboardingItemImage = FunctionComponent<
+export type SvgFunctionComponent = FunctionComponent<
   SVGProps<SVGSVGElement> & {
     title?: string;
     titleId?: string;
@@ -9,9 +9,3 @@ export type OnboardingItemImage = FunctionComponent<
     className?: string;
   }
 >;
-
-export interface OnboardingItem {
-  title: string;
-  description: string;
-  image: OnboardingItemImage;
-}

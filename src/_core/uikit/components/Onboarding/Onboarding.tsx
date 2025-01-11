@@ -78,7 +78,7 @@ export const Onboarding: OnboardingComponent = ({
       <div className={styles.nav}>
         <div>
           <Button
-            color="tertiary"
+            color="medium"
             fill="outline"
             loading={isSkipping}
             onClick={handleOnSkip}

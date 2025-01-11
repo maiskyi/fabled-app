@@ -5,6 +5,7 @@ import { SwiperSlide } from 'swiper/react';
 
 import { OnboardingItemDescription } from './OnboardingItemDescription/OnboardingItemDescription';
 import { OnboardingItemTitle } from './OnboardingItemTitle/OnboardingItemTitle';
+import { OnboardingItemSvg } from './OnboardingItemSvg/OnboardingItemSvg';
 
 import styles from '../Onboarding.module.scss';
 
@@ -17,6 +18,7 @@ interface OnboardingItemDescriptionComponent {
   displayName: string;
   Title: typeof OnboardingItemTitle;
   Description: typeof OnboardingItemDescription;
+  Svg: typeof OnboardingItemSvg;
 }
 
 export const OnboardingItem: OnboardingItemDescriptionComponent = ({
@@ -32,4 +34,5 @@ export const OnboardingItem: OnboardingItemDescriptionComponent = ({
 
 OnboardingItem.displayName = 'SwiperSlide';
 OnboardingItem.Title = OnboardingItemTitle;
+OnboardingItem.Svg = OnboardingItemSvg;
 OnboardingItem.Description = OnboardingItemDescription;

@@ -1,15 +1,16 @@
 import { FC } from 'react';
 
-import { Box, Onboarding } from '@core/uikit';
+import {
+  Box,
+  Onboarding,
+  useMediaSwitch,
+  SvgFunctionComponent,
+} from '@core/uikit';
 
-import { OnboardingItemImage } from '../../Onboarding.types';
-
-import styles from './OnboardingSlide.module.scss';
-
-interface OnboardingSlideProps {
+export interface OnboardingSlideProps {
   title: string;
   description: string;
-  image: OnboardingItemImage;
+  image: SvgFunctionComponent;
 }
 
 export const OnboardingSlide: FC<OnboardingSlideProps> = ({
@@ -17,6 +18,14 @@ export const OnboardingSlide: FC<OnboardingSlideProps> = ({
   description,
   image: Image,
 }) => {
+  const { value: width } = useMediaSwitch({
+    lg: 600,
+    md: 500,
+    sm: 300,
+    xl: 600,
+    xs: 300,
+  });
+
   return (
     <Box
       alignItems="center"
@@ -31,8 +40,9 @@ export const OnboardingSlide: FC<OnboardingSlideProps> = ({
         aspectRatio={1}
         display="flex"
         justifyContent="center"
+        width={width}
       >
-        <Image className={styles.image} />
+        <Onboarding.Item.Svg Svg={Image} height="auto" width="auto" />
       </Box>
       <Box display="flex" flexDirection="column" gap={8}>
         <Box flex={0} textAlign="center">
