@@ -42,6 +42,12 @@ export const Feedback: FC = withLoad({
     );
   };
 
+  const defaultValues: DTO.CreateFeedbackRequest = {
+    comment: '',
+    email: user?.email,
+    rating: 0,
+  };
+
   return (
     <Page>
       <Header translucent>
@@ -49,7 +55,10 @@ export const Feedback: FC = withLoad({
         <Header.Title>{title}</Header.Title>
       </Header>
       <Content fullscreen inset={false}>
-        <Form<DTO.CreateFeedbackRequest> onSubmit={handleOnSubmit}>
+        <Form<DTO.CreateFeedbackRequest>
+          defaultValues={defaultValues}
+          onSubmit={handleOnSubmit}
+        >
           <Grid>
             <Grid.Row>
               <Grid.Cell>
@@ -70,7 +79,7 @@ export const Feedback: FC = withLoad({
                 <Form.StarRating
                   label={t('forms.rateUs')}
                   name="rating"
-                  validation={{ required: true }}
+                  validation={{ max: 5, min: 1, required: true }}
                 />
                 <Box padding={16} paddingInline={20}>
                   <Form.Text
