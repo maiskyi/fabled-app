@@ -18,6 +18,12 @@ const minLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
 const maxLengthInputError: FormValidationErrorFn = ({ name, label, value }) =>
   `${label || name} must be not more then ${value} characters`;
 
+const minError: FormValidationErrorFn = ({ name, label, value }) =>
+  `${label || name} must be at least ${value}`;
+
+const maxError: FormValidationErrorFn = ({ name, label, value }) =>
+  `${label || name} must be not more then ${value}`;
+
 export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
   confirm: {
     cancelText: 'Cancel',
@@ -70,6 +76,8 @@ export const LOCALIZATION_CONTEXT_DEFAULT: LocalizationContextProps = {
     starRating: {
       errors: {
         generic: genericError,
+        max: maxError,
+        min: minError,
         required: requiredInputError,
       },
     },
