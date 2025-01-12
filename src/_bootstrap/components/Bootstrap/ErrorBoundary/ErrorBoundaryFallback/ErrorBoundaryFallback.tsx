@@ -12,6 +12,8 @@ import {
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
+import Icon from './ErrorBoundaryFallback.svg?react';
+
 export const ErrorBoundaryFallback: FC = () => {
   const { t } = useTranslation();
   const [, { hide }] = useSplashScreen();
@@ -38,8 +40,8 @@ export const ErrorBoundaryFallback: FC = () => {
             minHeight="100%"
           >
             <Empty
+              Icon={Icon}
               description={t('empty.errorBoundary.description')}
-              icon="alert-circle-outline"
               title={t('empty.errorBoundary.title')}
               variant="danger"
             ></Empty>

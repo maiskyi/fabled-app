@@ -6,6 +6,7 @@ import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
 import { DTO, useCreateFeedback } from '@network/api';
 import { withLoad } from '@core/analytics';
+import { useAuth } from '@core/auth';
 
 export const Feedback: FC = withLoad({
   category: 'Profile',
@@ -13,6 +14,7 @@ export const Feedback: FC = withLoad({
 })(() => {
   const [, navigate] = useRoute();
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   const title = t('pages.feedback');
 
@@ -71,6 +73,12 @@ export const Feedback: FC = withLoad({
                   validation={{ required: true }}
                 />
                 <Box padding={16} paddingInline={20}>
+                  <Form.Text
+                    disabled={!!user?.email}
+                    label={t('forms.email')}
+                    name="email"
+                    validation={{ email: true, required: true }}
+                  />
                   <Form.Textarea
                     label={t('forms.message')}
                     name="comment"

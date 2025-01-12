@@ -16,6 +16,8 @@ import {
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
+import Icon from './AppUpdateFallback.svg?react';
+
 export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
   openAppStore,
 }: AppUpdateProviderFallbackComponentProps) => {
@@ -46,8 +48,8 @@ export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
             minHeight="100%"
           >
             <Empty
+              Icon={Icon}
               description={t('empty.appUpdate.description')}
-              icon="cloud-download-outline"
               title={t('empty.appUpdate.title')}
             >
               <Button loading={loading} onClick={handleOnUpdateNow}>

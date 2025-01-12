@@ -6,11 +6,13 @@ import { Color } from '@ionic/core';
 
 import { Box } from '../Box';
 import { IconName, ICON } from '../Icon';
+import { SvgFunctionComponent } from '../../types';
 
 import styles from './Empty.module.scss';
 
 export type EmptyProps = PropsWithChildren<{
-  icon: IconName;
+  icon?: IconName;
+  Icon?: SvgFunctionComponent;
   title: string;
   description?: string;
   variant?: Color;
@@ -22,6 +24,7 @@ export const Empty: FC<EmptyProps> = ({
   title,
   description,
   variant,
+  Icon,
 }) => {
   return (
     <Box
@@ -32,7 +35,20 @@ export const Empty: FC<EmptyProps> = ({
       paddingInline={20}
     >
       <Box>
-        <IonIcon className={styles.icon} color={variant} icon={ICON[icon]} />
+        {!!icon && (
+          <IonIcon className={styles.icon} color={variant} icon={ICON[icon]} />
+        )}
+        {!!Icon && (
+          <Box aspectRatio={1} width={200}>
+            <Icon
+              className={classNames(
+                styles.svg,
+                styles.tertiary,
+                styles[variant]
+              )}
+            />
+          </Box>
+        )}
       </Box>
       <Box display="flex" flexDirection="column" gap={8}>
         <Box>
