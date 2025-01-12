@@ -85,7 +85,7 @@ export const ContactUs: FC = withLoad({
                     disabled={!!user?.email}
                     label={t('forms.email')}
                     name="email"
-                    validation={{ required: true }}
+                    validation={{ email: true, required: true }}
                   />
                   <Form.Text
                     label={t('forms.subject')}
