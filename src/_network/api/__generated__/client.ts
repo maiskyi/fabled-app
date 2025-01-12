@@ -30,6 +30,7 @@ import type {
   CreateStoryRequest,
   CreateStoryResponse,
   GetBootstrapParams,
+  GetDatabaseUrlResponse,
   GetStoriesParams,
   GetStoryParams,
   HttpExceptionResponse,
@@ -45,28 +46,31 @@ type SecondParameter<T extends (...args: any) => any> = T extends (
   ? P
   : never;
 
-export const useGetAllPromptsControllerGetAllPromptsHook = () => {
-  const getAllPromptsControllerGetAllPrompts = useCustomInstance<void>();
+export const useGetDatabaseUrlControllerGetDatabaseUrlHook = () => {
+  const getDatabaseUrlControllerGetDatabaseUrl =
+    useCustomInstance<GetDatabaseUrlResponse>();
 
   return (
     options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
     signal?: AbortSignal
   ) => {
-    return getAllPromptsControllerGetAllPrompts(
-      { method: 'get', signal, url: `/api/system/prompts` },
+    return getDatabaseUrlControllerGetDatabaseUrl(
+      { method: 'get', signal, url: `/api/system/database-url` },
       options
     );
   };
 };
 
-export const getGetAllPromptsControllerGetAllPromptsQueryKey = () => {
-  return [`/api/system/prompts`] as const;
+export const getGetDatabaseUrlControllerGetDatabaseUrlQueryKey = () => {
+  return [`/api/system/database-url`] as const;
 };
 
-export const useGetAllPromptsControllerGetAllPromptsInfiniteQueryOptions = <
+export const useGetDatabaseUrlControllerGetDatabaseUrlInfiniteQueryOptions = <
   TData = InfiniteData<
     Awaited<
-      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+      ReturnType<
+        ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
+      >
     >
   >,
   TError = unknown,
@@ -75,7 +79,7 @@ export const useGetAllPromptsControllerGetAllPromptsInfiniteQueryOptions = <
     UseInfiniteQueryOptions<
       Awaited<
         ReturnType<
-          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+          ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
         >
       >,
       TError,
@@ -87,17 +91,20 @@ export const useGetAllPromptsControllerGetAllPromptsInfiniteQueryOptions = <
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getGetAllPromptsControllerGetAllPromptsQueryKey();
+    queryOptions?.queryKey ??
+    getGetDatabaseUrlControllerGetDatabaseUrlQueryKey();
 
-  const getAllPromptsControllerGetAllPrompts =
-    useGetAllPromptsControllerGetAllPromptsHook();
+  const getDatabaseUrlControllerGetDatabaseUrl =
+    useGetDatabaseUrlControllerGetDatabaseUrlHook();
 
   const queryFn: QueryFunction<
     Awaited<
-      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+      ReturnType<
+        ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
+      >
     >
   > = ({ signal }) =>
-    getAllPromptsControllerGetAllPrompts(requestOptions, signal);
+    getDatabaseUrlControllerGetDatabaseUrl(requestOptions, signal);
 
   return {
     cacheTime: 0,
@@ -107,25 +114,31 @@ export const useGetAllPromptsControllerGetAllPromptsInfiniteQueryOptions = <
     ...queryOptions,
   } as UseInfiniteQueryOptions<
     Awaited<
-      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+      ReturnType<
+        ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
+      >
     >,
     TError,
     TData
   > & { queryKey: QueryKey };
 };
 
-export type GetAllPromptsControllerGetAllPromptsInfiniteQueryResult =
+export type GetDatabaseUrlControllerGetDatabaseUrlInfiniteQueryResult =
   NonNullable<
     Awaited<
-      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+      ReturnType<
+        ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
+      >
     >
   >;
-export type GetAllPromptsControllerGetAllPromptsInfiniteQueryError = unknown;
+export type GetDatabaseUrlControllerGetDatabaseUrlInfiniteQueryError = unknown;
 
-export const useGetAllPromptsControllerGetAllPromptsInfinite = <
+export const useGetDatabaseUrlControllerGetDatabaseUrlInfinite = <
   TData = InfiniteData<
     Awaited<
-      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+      ReturnType<
+        ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
+      >
     >
   >,
   TError = unknown,
@@ -134,7 +147,7 @@ export const useGetAllPromptsControllerGetAllPromptsInfinite = <
     UseInfiniteQueryOptions<
       Awaited<
         ReturnType<
-          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+          ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
         >
       >,
       TError,
@@ -144,7 +157,7 @@ export const useGetAllPromptsControllerGetAllPromptsInfinite = <
   request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
 }): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions =
-    useGetAllPromptsControllerGetAllPromptsInfiniteQueryOptions(options);
+    useGetDatabaseUrlControllerGetDatabaseUrlInfiniteQueryOptions(options);
 
   const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
     TData,
@@ -156,9 +169,9 @@ export const useGetAllPromptsControllerGetAllPromptsInfinite = <
   return query;
 };
 
-export const useGetAllPromptsControllerGetAllPromptsQueryOptions = <
+export const useGetDatabaseUrlControllerGetDatabaseUrlQueryOptions = <
   TData = Awaited<
-    ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    ReturnType<ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>>
   >,
   TError = unknown,
 >(options?: {
@@ -166,7 +179,7 @@ export const useGetAllPromptsControllerGetAllPromptsQueryOptions = <
     UseQueryOptions<
       Awaited<
         ReturnType<
-          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+          ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
         >
       >,
       TError,
@@ -178,17 +191,20 @@ export const useGetAllPromptsControllerGetAllPromptsQueryOptions = <
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
   const queryKey =
-    queryOptions?.queryKey ?? getGetAllPromptsControllerGetAllPromptsQueryKey();
+    queryOptions?.queryKey ??
+    getGetDatabaseUrlControllerGetDatabaseUrlQueryKey();
 
-  const getAllPromptsControllerGetAllPrompts =
-    useGetAllPromptsControllerGetAllPromptsHook();
+  const getDatabaseUrlControllerGetDatabaseUrl =
+    useGetDatabaseUrlControllerGetDatabaseUrlHook();
 
   const queryFn: QueryFunction<
     Awaited<
-      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+      ReturnType<
+        ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
+      >
     >
   > = ({ signal }) =>
-    getAllPromptsControllerGetAllPrompts(requestOptions, signal);
+    getDatabaseUrlControllerGetDatabaseUrl(requestOptions, signal);
 
   return {
     cacheTime: 0,
@@ -198,23 +214,25 @@ export const useGetAllPromptsControllerGetAllPromptsQueryOptions = <
     ...queryOptions,
   } as UseQueryOptions<
     Awaited<
-      ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+      ReturnType<
+        ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
+      >
     >,
     TError,
     TData
   > & { queryKey: QueryKey };
 };
 
-export type GetAllPromptsControllerGetAllPromptsQueryResult = NonNullable<
+export type GetDatabaseUrlControllerGetDatabaseUrlQueryResult = NonNullable<
   Awaited<
-    ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    ReturnType<ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>>
   >
 >;
-export type GetAllPromptsControllerGetAllPromptsQueryError = unknown;
+export type GetDatabaseUrlControllerGetDatabaseUrlQueryError = unknown;
 
-export const useGetAllPromptsControllerGetAllPrompts = <
+export const useGetDatabaseUrlControllerGetDatabaseUrl = <
   TData = Awaited<
-    ReturnType<ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>>
+    ReturnType<ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>>
   >,
   TError = unknown,
 >(options?: {
@@ -222,7 +240,7 @@ export const useGetAllPromptsControllerGetAllPrompts = <
     UseQueryOptions<
       Awaited<
         ReturnType<
-          ReturnType<typeof useGetAllPromptsControllerGetAllPromptsHook>
+          ReturnType<typeof useGetDatabaseUrlControllerGetDatabaseUrlHook>
         >
       >,
       TError,
@@ -232,7 +250,7 @@ export const useGetAllPromptsControllerGetAllPrompts = <
   request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions =
-    useGetAllPromptsControllerGetAllPromptsQueryOptions(options);
+    useGetDatabaseUrlControllerGetDatabaseUrlQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

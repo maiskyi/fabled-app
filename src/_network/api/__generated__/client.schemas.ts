@@ -39,6 +39,7 @@ export interface CreateFeedbackResponse {
 
 export interface CreateFeedbackRequest {
   comment: string;
+  email?: string;
   rating: number;
 }
 
@@ -214,7 +215,6 @@ export const ImageTransformationQueryAspectRatio = {
   '1:1': '1:1',
   '3:1': '3:1',
   '3:2': '3:2',
-  '3:4': '3:4',
   '4:3': '4:3',
   '5:4': '5:4',
 } as const;
@@ -224,4 +224,8 @@ export interface ImageTransformationQuery {
   crop?: ImageTransformationQueryCrop;
   height?: number;
   width?: number;
+}
+
+export interface GetDatabaseUrlResponse {
+  url: string;
 }
