@@ -40,7 +40,13 @@ export const Empty: FC<EmptyProps> = ({
         )}
         {!!Icon && (
           <Box aspectRatio={1} width={200}>
-            <Icon className={classNames(styles.svg, styles[variant])} />
+            <Icon
+              className={classNames(
+                styles.svg,
+                styles.tertiary,
+                styles[variant]
+              )}
+            />
           </Box>
         )}
       </Box>

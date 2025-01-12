@@ -18,6 +18,9 @@
   width: auto;
   height: auto;
   fill: var(--color);
+  &.tertiary {
+    fill: var(--ion-color-tertiary);
+  }
   &.danger {
     fill: var(--ion-color-danger);
   }
