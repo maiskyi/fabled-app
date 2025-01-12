@@ -3,6 +3,8 @@ import { memo } from 'react';
 import { Box, Empty, Grid } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
+import Icon from './FablesEmpty.svg?react';
+
 export const FablesEmpty = memo(function FableEmpty() {
   const { t } = useTranslation();
 
@@ -17,8 +19,8 @@ export const FablesEmpty = memo(function FableEmpty() {
         paddingBottom={188}
       >
         <Empty
+          Icon={Icon}
           description={t('empty.noFables.description')}
-          icon="book-outline"
           title={t('empty.noFables.title')}
         ></Empty>
       </Box>
