@@ -5,14 +5,14 @@ import { IonButton } from '@ionic/react';
 import { Icon, IconName } from '../../Icon';
 
 interface HeaderActionProps {
-  icons: IconName;
+  icon: IconName;
   onClick?: () => void;
 }
 
-export const HeaderAction: FC<HeaderActionProps> = ({ icons, onClick }) => {
+export const HeaderAction: FC<HeaderActionProps> = ({ icon, onClick }) => {
   return (
     <IonButton color="tertiary" onClick={onClick}>
-      <Icon name={icons} slot="icon-only" />
+      <Icon name={icon} slot="icon-only" />
     </IonButton>
   );
 };

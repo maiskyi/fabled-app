@@ -1,0 +1,1 @@
+export { UsePromptToSubscribe } from './UsePromptToSubscribe';

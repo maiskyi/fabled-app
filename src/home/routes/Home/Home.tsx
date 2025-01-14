@@ -15,6 +15,7 @@ import {
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { withLoad } from '@core/analytics';
+import { usePromptToSubscribe } from '@common/hooks';
 
 import { useFablesContext } from '../../providers';
 
@@ -33,6 +34,8 @@ export const Home = withLoad({
   const { t } = useTranslation();
   const [, navigate] = useRoute();
 
+  const [, subscribe] = usePromptToSubscribe();
+
   const title = t('pages.home');
 
   const isLoading = useFablesContext(({ isLoading }) => isLoading);
@@ -46,8 +49,12 @@ export const Home = withLoad({
   const records = useFablesContext(({ stories }) => stories);
 
   const handleOnCreateClick: FablesCreateOnClickFn = useCallback(() => {
-    navigate({ action: 'push', pathname: RoutePath.Create });
-  }, [navigate]);
+    subscribe();
+    // navigate({ action: 'push', pathname: RoutePath.Create });
+  }, [
+    // navigate,
+    subscribe,
+  ]);
 
   const handleOnProfileClick = () => {
     navigate({ action: 'push', pathname: RoutePath.Profile });
