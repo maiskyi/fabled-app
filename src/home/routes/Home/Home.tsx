@@ -78,7 +78,7 @@ export const Home = withLoad({
         </Header.Actions>
         <Header.Title>{title}</Header.Title>
         <Header.Actions>
-          <Header.Action icons="person-circle" onClick={handleOnProfileClick} />
+          <Header.Action icon="person-circle" onClick={handleOnProfileClick} />
         </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>
