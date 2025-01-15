@@ -13,7 +13,10 @@ import {
   Form,
   Grid,
   Header,
+  Banner,
 } from '@core/uikit';
+
+import Icon from './PromptToSubscribe.svg?react';
 
 export const PromptToSubscribe: PromptToSubscribeComponent = ({
   dismiss,
@@ -60,7 +63,19 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
               </Grid.Cell>
             </Grid.Row>
             <Grid.Row flex={1}>
-              <Grid.Cell>123</Grid.Cell>
+              <Grid.Cell>
+                <Box
+                  alignItems="center"
+                  display="flex"
+                  flexDirection="column"
+                  height="100%"
+                  justifyContent="center"
+                >
+                  <Banner>
+                    <Banner.Svg Component={Icon} />
+                  </Banner>
+                </Box>
+              </Grid.Cell>
             </Grid.Row>
             <Grid.Row flex={0}>
               <Grid.Cell>
