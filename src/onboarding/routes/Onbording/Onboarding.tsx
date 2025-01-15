@@ -35,6 +35,10 @@ export const Onboarding = withLoad({
     });
   };
 
+  const handleOnCompletedSkip = async () => {
+    await mutateAsync();
+  };
+
   return (
     <Page>
       <Header translucent>
@@ -54,7 +58,10 @@ export const Onboarding = withLoad({
             <Grid.Row flex="1 0 auto">
               <Grid.Cell>
                 <Box height="100%" minHeight="100%" paddingInline={20}>
-                  <Slides onCompleted={mutateAsync} onSkip={mutateAsync}>
+                  <Slides
+                    onCompleted={handleOnCompletedSkip}
+                    onSkip={handleOnCompletedSkip}
+                  >
                     <Slides.Item>
                       <OnboardingWelome />
                     </Slides.Item>

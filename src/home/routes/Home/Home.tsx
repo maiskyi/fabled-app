@@ -11,6 +11,7 @@ import {
   Logo,
   useViewWillEnter,
   Grid,
+  useViewDidEnter,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -49,12 +50,8 @@ export const Home = withLoad({
   const records = useFablesContext(({ stories }) => stories);
 
   const handleOnCreateClick: FablesCreateOnClickFn = useCallback(() => {
-    subscribe();
-    // navigate({ action: 'push', pathname: RoutePath.Create });
-  }, [
-    // navigate,
-    subscribe,
-  ]);
+    navigate({ action: 'push', pathname: RoutePath.Create });
+  }, [navigate]);
 
   const handleOnProfileClick = () => {
     navigate({ action: 'push', pathname: RoutePath.Profile });
@@ -66,6 +63,10 @@ export const Home = withLoad({
 
   useViewWillEnter(() => {
     refetch();
+  });
+
+  useViewDidEnter(() => {
+    subscribe();
   });
 
   return (
