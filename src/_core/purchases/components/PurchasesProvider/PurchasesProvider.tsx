@@ -1,4 +1,4 @@
-import { FC, Fragment, PropsWithChildren } from 'react';
+import { FC, Fragment, PropsWithChildren, useCallback, useState } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
@@ -19,6 +19,10 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   apiKey,
   Loader = Fragment,
 }) => {
+  const [{ promptedToSubscribe }, setState] = useState({
+    promptedToSubscribe: false,
+  });
+
   const [{ value: config }, configure] = useAsyncFn(
     async () => {
       if (Capacitor.isNativePlatform()) {
@@ -81,6 +85,13 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
 
   const ready = config?.ready && data?.ready;
 
+  const dissmissPromptToSubscribe = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      promptedToSubscribe: true,
+    }));
+  }, []);
+
   useMount(async () => {
     await configure();
     await init();
@@ -90,7 +101,9 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     <PurchasesContext.Provider
       value={{
         activeSubscriptions: data.activeSubscriptions,
+        dissmissPromptToSubscribe,
         offerings: data.offerings,
+        promptedToSubscribe,
         refetch: init,
       }}
     >

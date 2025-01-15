@@ -64,6 +64,7 @@ export const Home = withLoad({
   });
 
   usePromptToSubscribe({
+    auto: true,
     component: PromptToSubscribe,
   });
 
