@@ -1,4 +1,5 @@
 import { useAsync } from 'react-use';
+import { get } from 'lodash';
 
 import {
   PromptToSubscribeComponent,
@@ -13,18 +14,21 @@ import {
   Form,
   Grid,
   Header,
+  useDevice,
   Banner,
 } from '@core/uikit';
 
+import { PlanFrom, PlanFromField } from './PromptToSubscribe.types';
 import Icon from './PromptToSubscribe.svg?react';
+import { PromptToSubscribeOption } from './PromptToSubscribeOption';
 
 export const PromptToSubscribe: PromptToSubscribeComponent = ({
   dismiss,
   dissmissTimeout,
+  offerings,
 }: PromptToSubscribeComponentProps) => {
   const { t } = useTranslation();
-
-  const title = t('forms.unlockPremiumFeatures');
+  const { isMobile } = useDevice();
 
   const { value: canClose } = useAsync(async () => {
     return new Promise<boolean>((resolve) => {
@@ -32,10 +36,17 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
     });
   });
 
+  const packages = offerings.current.availablePackages;
+
+  const defaultProduct = get(packages, [0, 'product', 'identifier']);
+
+  const hightestMonthlyPrice = packages.reduce((acc, { product }) => {
+    return product.pricePerMonth > acc ? product.pricePerMonth : acc;
+  }, 0);
+
   return (
-    <Form>
+    <Form<PlanFrom> defaultValues={{ [PlanFromField.Product]: defaultProduct }}>
       <Header translucent>
-        <Header.Title>{title}</Header.Title>
         {canClose && (
           <Header.Actions slot="end">
             <Header.Action
@@ -57,24 +68,26 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
               <Grid.Cell>
                 <Header collapse="condense">
                   <Header.Title size="large" wrap>
-                    {title}
+                    {t('forms.unlockPremiumFeatures')}
                   </Header.Title>
                 </Header>
               </Grid.Cell>
             </Grid.Row>
             <Grid.Row flex={1}>
               <Grid.Cell>
-                <Box
-                  alignItems="center"
-                  display="flex"
-                  flexDirection="column"
-                  height="100%"
-                  justifyContent="center"
-                >
-                  <Banner>
-                    <Banner.Svg Component={Icon} />
-                  </Banner>
-                </Box>
+                {!isMobile && (
+                  <Box
+                    alignItems="center"
+                    display="flex"
+                    flexDirection="column"
+                    height="100%"
+                    justifyContent="center"
+                  >
+                    <Banner>
+                      <Banner.Svg Component={Icon} />
+                    </Banner>
+                  </Box>
+                )}
               </Grid.Cell>
             </Grid.Row>
             <Grid.Row flex={0}>
@@ -96,7 +109,24 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
             </Grid.Row>
             <Grid.Row flex={0}>
               <Grid.Cell>
-                <Box paddingInline={20}>1</Box>
+                <Box padding={16} paddingInline={20}>
+                  <Form.RadioGroup
+                    name={PlanFromField.Product}
+                    validation={{ required: true }}
+                  >
+                    <Box display="flex" flexDirection="column" gap={8}>
+                      {packages.map((item) => {
+                        return (
+                          <PromptToSubscribeOption
+                            hightestMonthlyPrice={hightestMonthlyPrice}
+                            key={item.identifier}
+                            package={item}
+                          />
+                        );
+                      })}
+                    </Box>
+                  </Form.RadioGroup>
+                </Box>
               </Grid.Cell>
             </Grid.Row>
           </Grid>

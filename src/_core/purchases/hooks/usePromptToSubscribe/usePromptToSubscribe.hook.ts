@@ -39,6 +39,11 @@ export const usePromptToSubscribe = ({
     ({ dissmissPromptToSubscribe }) => dissmissPromptToSubscribe
   );
 
+  const offerings = useContextSelector(
+    PurchasesContext,
+    ({ offerings }) => offerings
+  );
+
   const [{ value: canDismiss }, unlock] = useAsyncFn(
     async () => {
       return new Promise<boolean>((resolve) => {
@@ -62,6 +67,7 @@ export const usePromptToSubscribe = ({
       }
     },
     dissmissTimeout: DISSMISS_TIMEOUT,
+    offerings,
   });
 
   const state = useMemo(() => ({}), []);
