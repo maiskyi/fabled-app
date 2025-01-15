@@ -1,7 +1,32 @@
 import { FC, PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
-type AttributeListItemProps = PropsWithChildren<{}>;
+import { IonIcon } from '@ionic/react';
+import { checkmarkCircle } from 'ionicons/icons';
 
-export const AttributeListItem: FC<AttributeListItemProps> = ({ children }) => {
-  return <li>{children}</li>;
+import styles from '../AttributeList.module.scss';
+
+type AttributeListItemProps = PropsWithChildren<{
+  active?: boolean;
+}>;
+
+export const AttributeListItem: FC<AttributeListItemProps> = ({
+  children,
+  active = true,
+}) => {
+  return (
+    <li
+      className={classNames(styles.item, {
+        [styles.active]: active,
+      })}
+    >
+      <IonIcon
+        className={classNames(styles.icon, {
+          [styles.active]: active,
+        })}
+        icon={checkmarkCircle}
+      />
+      {children}
+    </li>
+  );
 };

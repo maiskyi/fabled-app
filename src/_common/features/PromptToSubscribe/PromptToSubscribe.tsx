@@ -4,7 +4,7 @@ import {
   PromptToSubscribeComponent,
   PromptToSubscribeComponentProps,
 } from '@core/purchases';
-import { useTranslation } from '@core/localization';
+import { useTranslation, Translate } from '@core/localization';
 import {
   AttributeList,
   Box,
@@ -60,18 +60,21 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
               </Grid.Cell>
             </Grid.Row>
             <Grid.Row flex={1}>
+              <Grid.Cell>123</Grid.Cell>
+            </Grid.Row>
+            <Grid.Row flex={0}>
               <Grid.Cell>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  height="100%"
-                  justifyContent="flex-end"
-                  paddingInline={20}
-                >
+                <Box paddingInline={20}>
                   <AttributeList>
-                    <AttributeList.Item>1</AttributeList.Item>
-                    <AttributeList.Item>1</AttributeList.Item>
-                    <AttributeList.Item>1</AttributeList.Item>
+                    <AttributeList.Item>
+                      <Translate id="features.ad" />
+                    </AttributeList.Item>
+                    <AttributeList.Item>
+                      <Translate id="features.speed" />
+                    </AttributeList.Item>
+                    <AttributeList.Item>
+                      <Translate id="features.storiesGereric" />
+                    </AttributeList.Item>
                   </AttributeList>
                 </Box>
               </Grid.Cell>
