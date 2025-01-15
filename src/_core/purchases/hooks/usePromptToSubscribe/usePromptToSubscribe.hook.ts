@@ -1,9 +1,13 @@
-import { useCallback, useMemo, useRef } from 'react';
 import { useAsyncFn } from 'react-use';
+import { useCallback, useMemo, useRef } from 'react';
 
-import { useModal } from '@core/uikit';
+import { useIonModal } from '@ionic/react';
 
-import { UsePromptToSubscribe } from './UsePromptToSubscribe';
+import { PromptToSubscribeComponent } from './usePromptToSubscribe.types';
+
+interface UsePromptToSubscribeParams {
+  component: PromptToSubscribeComponent;
+}
 
 interface UsePromptToSubscribeState {}
 
@@ -14,7 +18,9 @@ type UsePromptToSubscribeReturnType = [
   UsePromptToSubscribeDispatch,
 ];
 
-export const usePromptToSubscribe = (): UsePromptToSubscribeReturnType => {
+export const usePromptToSubscribe = ({
+  component,
+}: UsePromptToSubscribeParams): UsePromptToSubscribeReturnType => {
   const unlocked = useRef(false);
 
   const [{ value: canDismiss }, unlock] = useAsyncFn(
@@ -32,8 +38,8 @@ export const usePromptToSubscribe = (): UsePromptToSubscribeReturnType => {
 
   unlocked.current = canDismiss;
 
-  const [open, dismiss] = useModal(UsePromptToSubscribe, {
-    dismiss: (data: string, role: string) => dismiss(data, role),
+  const [open, dismiss] = useIonModal(component, {
+    dismiss: () => dismiss(),
   });
 
   const state = useMemo(() => ({}), []);

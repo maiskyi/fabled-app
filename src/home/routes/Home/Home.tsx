@@ -11,12 +11,12 @@ import {
   Logo,
   useViewWillEnter,
   Grid,
-  useViewDidEnter,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { withLoad } from '@core/analytics';
-import { usePromptToSubscribe } from '@common/hooks';
+import { usePromptToSubscribe } from '@core/purchases';
+import { PromptToSubscribe } from '@common/features';
 
 import { useFablesContext } from '../../providers';
 
@@ -34,8 +34,6 @@ export const Home = withLoad({
 })(function Home() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
-
-  const [, subscribe] = usePromptToSubscribe();
 
   const title = t('pages.home');
 
@@ -65,8 +63,8 @@ export const Home = withLoad({
     refetch();
   });
 
-  useViewDidEnter(() => {
-    subscribe();
+  usePromptToSubscribe({
+    component: PromptToSubscribe,
   });
 
   return (

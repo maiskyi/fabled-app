@@ -1,33 +1,31 @@
-import { FC } from 'react';
 import { useAsync } from 'react-use';
 
 import {
+  PromptToSubscribeComponent,
+  PromptToSubscribeComponentProps,
+} from '@core/purchases';
+import { useTranslation } from '@core/localization';
+import {
+  AttributeList,
   Box,
   Content,
   Footer,
+  Form,
   Grid,
   Header,
-  Form,
-  AttributeList,
 } from '@core/uikit';
-import { useTranslation } from '@core/localization';
 
-import { DISMISS_TIMEOUT } from '../usePromptToSubscribe.const';
-
-interface UsePromptToSubscribeProps {
-  dismiss: () => void;
-}
-
-export const UsePromptToSubscribe: FC<UsePromptToSubscribeProps> = ({
+export const PromptToSubscribe: PromptToSubscribeComponent = ({
   dismiss,
-}) => {
+  dissmissTimeout,
+}: PromptToSubscribeComponentProps) => {
   const { t } = useTranslation();
 
   const title = t('forms.unlockPremiumFeatures');
 
   const { value: canClose } = useAsync(async () => {
     return new Promise<boolean>((resolve) => {
-      setTimeout(() => resolve(true), DISMISS_TIMEOUT);
+      setTimeout(() => resolve(true), dissmissTimeout);
     });
   });
 
