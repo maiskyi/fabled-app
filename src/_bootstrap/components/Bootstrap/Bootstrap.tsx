@@ -7,7 +7,6 @@ import {
   LocalizationProviderProps,
 } from '@core/localization';
 import { AppUrlListener } from '@core/navigation';
-import { PurchasesProvider, PurchasesProviderProps } from '@core/purchases';
 import { AnalyticsProvider, AnalyticsProviderProps } from '@core/analytics';
 
 import { Network, NetworkProps } from './Network';
@@ -19,6 +18,7 @@ import {
 } from './ErrorBoundary/ErrorBoundary';
 import { AppUpdate } from './AppUpdate';
 import { Auth, AuthProps } from './Auth';
+import { Purchases, PurchasesProps } from './Purchases';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -26,7 +26,7 @@ export type BootstrapProps = PropsWithChildren<{
   localization: LocalizationProviderProps;
   network: NetworkProps;
   config: ConfigProps;
-  purchases: PurchasesProviderProps;
+  purchases: PurchasesProps;
   errorBoundary: ErrorBoundaryProps;
   analytics: AnalyticsProviderProps;
 }>;
@@ -48,7 +48,7 @@ export const Bootstrap: FC<BootstrapProps> = ({
           <AnalyticsProvider {...analytics}>
             <AppUpdate>
               <AppUrlListener>
-                <PurchasesProvider {...purchases}>
+                <Purchases {...purchases}>
                   <QueryProvider>
                     <AppProvider {...app}>
                       <Auth>
@@ -60,7 +60,7 @@ export const Bootstrap: FC<BootstrapProps> = ({
                       </Auth>
                     </AppProvider>
                   </QueryProvider>
-                </PurchasesProvider>
+                </Purchases>
               </AppUrlListener>
             </AppUpdate>
           </AnalyticsProvider>

@@ -12,15 +12,17 @@ import {
 export type PurchasesProviderProps = PropsWithChildren<{
   apiKey: string;
   Loader?: FC;
+  shouldPromptedToSubscribe?: boolean;
 }>;
 
 export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   children,
   apiKey,
   Loader = Fragment,
+  shouldPromptedToSubscribe = true,
 }) => {
   const [{ promptedToSubscribe }, setState] = useState({
-    promptedToSubscribe: false,
+    promptedToSubscribe: !shouldPromptedToSubscribe,
   });
 
   const [{ value: config }, configure] = useAsyncFn(

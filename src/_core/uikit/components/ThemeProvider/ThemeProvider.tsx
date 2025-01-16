@@ -26,6 +26,8 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   const isMobile = isPlatform('mobile');
 
+  const isNativePlatform = Capacitor.isNativePlatform();
+
   return value ? (
     <DeviceContext.Provider
       value={{
@@ -33,6 +35,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
         height: window.innerHeight,
         isDesktop,
         isMobile,
+        isNativePlatform,
         platform,
         width: window.innerWidth,
       }}
