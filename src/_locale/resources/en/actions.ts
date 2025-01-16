@@ -33,6 +33,7 @@ export const actions = {
   shareYourFeedback: 'Share your feedback',
   signIn: 'Sign in',
   signUp: 'Sign up',
+  startYourTrial: 'Start your {{days}}-day free trial',
   submit: 'Submit',
   subscribe: 'Subscribe',
   support: 'Support',

@@ -39,6 +39,7 @@ export * from './components/View';
 // Hooks
 export * from './hooks/useBrowser';
 export * from './hooks/useDevice';
+export * from './hooks/useFormControl';
 export * from './hooks/useInAppReview';
 export * from './hooks/useMediaSwitch';
 export * from './hooks/useModal';

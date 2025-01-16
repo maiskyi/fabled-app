@@ -135,7 +135,10 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
         </Box>
       </Content>
       <Footer>
-        <PromptToSubscribeSubmit introEligibility={introEligibility} />
+        <PromptToSubscribeSubmit
+          introEligibility={introEligibility}
+          packages={packages}
+        />
       </Footer>
     </Form>
   );
