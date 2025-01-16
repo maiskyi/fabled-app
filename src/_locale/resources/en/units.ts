@@ -1,1 +1,3 @@
-export const units = {};
+export const units = {
+  day: 'Day',
+};
