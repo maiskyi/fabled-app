@@ -51,10 +51,7 @@ export const Auth = withLoad({
     <Page>
       <Header translucent>
         <Header.Actions>
-          <Header.Action
-            icons="help-buoy-outline"
-            onClick={handleOnContactUs}
-          />
+          <Header.Action icon="help-buoy-outline" onClick={handleOnContactUs} />
         </Header.Actions>
       </Header>
       <Content>

@@ -1,4 +1,4 @@
-import { FC, Fragment, PropsWithChildren } from 'react';
+import { FC, Fragment, PropsWithChildren, useCallback, useState } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
@@ -19,6 +19,10 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   apiKey,
   Loader = Fragment,
 }) => {
+  const [{ promptedToSubscribe }, setState] = useState({
+    promptedToSubscribe: false,
+  });
+
   const [{ value: config }, configure] = useAsyncFn(
     async () => {
       if (Capacitor.isNativePlatform()) {
@@ -46,17 +50,42 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     async () => {
       if (Capacitor.isNativePlatform()) {
         try {
-          const offerings = await Purchases.getOfferings();
+          const offeringsRequest = Purchases.getOfferings();
+          const customerInfoRequest = Purchases.getCustomerInfo();
 
-          const { customerInfo } = await Purchases.getCustomerInfo();
+          const [offerings, { customerInfo }] = await Promise.all([
+            offeringsRequest,
+            customerInfoRequest,
+          ]);
 
-          const { products: activeSubscriptions } = await Purchases.getProducts(
-            {
-              productIdentifiers: customerInfo.activeSubscriptions,
-            }
+          const productIdentifiers = Object.values(offerings.all).reduce(
+            (res, { availablePackages }) => {
+              return [
+                ...res,
+                ...availablePackages.map((pkg) => pkg.product.identifier),
+              ];
+            },
+            []
           );
 
-          return { activeSubscriptions, offerings, ready: true };
+          const productsRequest = Purchases.getProducts({
+            productIdentifiers: customerInfo.activeSubscriptions,
+          });
+
+          const trialEligibilityRequest =
+            Purchases.checkTrialOrIntroductoryPriceEligibility({
+              productIdentifiers,
+            });
+
+          const [{ products: activeSubscriptions }, introEligibility] =
+            await Promise.all([productsRequest, trialEligibilityRequest]);
+
+          return {
+            activeSubscriptions,
+            introEligibility,
+            offerings,
+            ready: true,
+          };
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error(error);
@@ -64,6 +93,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
       }
       return {
         activeSubscriptions: [],
+        introEligibility: {},
         offerings: DEFAULT_PURCHASES_OFFERINGS,
         ready: true,
       };
@@ -73,6 +103,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
       loading: false,
       value: {
         activeSubscriptions: [],
+        introEligibility: {},
         offerings: DEFAULT_PURCHASES_OFFERINGS,
         ready: false,
       },
@@ -80,6 +111,13 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   );
 
   const ready = config?.ready && data?.ready;
+
+  const dissmissPromptToSubscribe = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      promptedToSubscribe: true,
+    }));
+  }, []);
 
   useMount(async () => {
     await configure();
@@ -90,7 +128,10 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     <PurchasesContext.Provider
       value={{
         activeSubscriptions: data.activeSubscriptions,
+        dissmissPromptToSubscribe,
+        introEligibility: data.introEligibility,
         offerings: data.offerings,
+        promptedToSubscribe,
         refetch: init,
       }}
     >

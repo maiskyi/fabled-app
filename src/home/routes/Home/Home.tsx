@@ -15,6 +15,8 @@ import {
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { withLoad } from '@core/analytics';
+import { usePromptToSubscribe } from '@core/purchases';
+import { PromptToSubscribe } from '@common/features';
 
 import { useFablesContext } from '../../providers';
 
@@ -61,6 +63,11 @@ export const Home = withLoad({
     refetch();
   });
 
+  usePromptToSubscribe({
+    auto: true,
+    component: PromptToSubscribe,
+  });
+
   return (
     <Page>
       <Header translucent>
@@ -71,7 +78,7 @@ export const Home = withLoad({
         </Header.Actions>
         <Header.Title>{title}</Header.Title>
         <Header.Actions>
-          <Header.Action icons="person-circle" onClick={handleOnProfileClick} />
+          <Header.Action icon="person-circle" onClick={handleOnProfileClick} />
         </Header.Actions>
       </Header>
       <Content fullscreen inset={false}>

@@ -1,5 +1,14 @@
 import { useContext } from 'use-context-selector';
 
-import { PurchasesContext } from '../../contexts/PurchasesContext';
+import {
+  PurchasesContext,
+  PurchasesContextProps,
+} from '../../contexts/PurchasesContext';
 
-export const usePurchases = () => useContext(PurchasesContext);
+type UsePurchasesReturnType = Omit<
+  PurchasesContextProps,
+  'promptedToSubscribe'
+>;
+
+export const usePurchases = (): UsePurchasesReturnType =>
+  useContext(PurchasesContext);

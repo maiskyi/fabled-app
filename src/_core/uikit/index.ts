@@ -1,7 +1,9 @@
 // Components
 
 export * from './components/Animation';
+export * from './components/AttributeList';
 export * from './components/Badge';
+export * from './components/Banner';
 export * from './components/Box';
 export * from './components/Button';
 export * from './components/Card';
@@ -37,12 +39,14 @@ export * from './components/View';
 // Hooks
 export * from './hooks/useBrowser';
 export * from './hooks/useDevice';
+export * from './hooks/useFormControl';
 export * from './hooks/useInAppReview';
 export * from './hooks/useMediaSwitch';
 export * from './hooks/useModal';
 export * from './hooks/useSplashScreen';
 export * from './hooks/useUtils';
 export {
+  useIonModal as useModal,
   useIonViewDidEnter as useViewDidEnter,
   useIonViewWillEnter as useViewWillEnter,
 } from '@ionic/react';

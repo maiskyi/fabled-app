@@ -1,0 +1,26 @@
+.root {
+  list-style: none;
+  padding-inline: 0;
+  list-style-position: inside;
+}
+
+.item {
+  position: relative;
+  padding-left: 32px;
+
+  & + .item {
+    margin-top: 16px;
+  }
+}
+
+.icon {
+  position: absolute;
+  left: 0;
+  font-size: 24px;
+  top: -4px;
+  color: var();
+  
+  &.active {
+    color: var(--ion-color-tertiary);
+  }
+}

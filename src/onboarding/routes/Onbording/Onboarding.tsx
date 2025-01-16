@@ -35,14 +35,15 @@ export const Onboarding = withLoad({
     });
   };
 
+  const handleOnCompletedSkip = async () => {
+    await mutateAsync();
+  };
+
   return (
     <Page>
       <Header translucent>
         <Header.Actions>
-          <Header.Action
-            icons="help-buoy-outline"
-            onClick={handleOnContactUs}
-          />
+          <Header.Action icon="help-buoy-outline" onClick={handleOnContactUs} />
         </Header.Actions>
       </Header>
       <Content>
@@ -57,7 +58,10 @@ export const Onboarding = withLoad({
             <Grid.Row flex="1 0 auto">
               <Grid.Cell>
                 <Box height="100%" minHeight="100%" paddingInline={20}>
-                  <Slides onCompleted={mutateAsync} onSkip={mutateAsync}>
+                  <Slides
+                    onCompleted={handleOnCompletedSkip}
+                    onSkip={handleOnCompletedSkip}
+                  >
                     <Slides.Item>
                       <OnboardingWelome />
                     </Slides.Item>
