@@ -1,10 +1,7 @@
 import { useAsync } from 'react-use';
 import { get } from 'lodash';
 
-import {
-  PromptToSubscribeComponent,
-  PromptToSubscribeComponentProps,
-} from '@core/purchases';
+import { PromptToSubscribeComponent } from '@core/purchases';
 import { useTranslation, Translate } from '@core/localization';
 import {
   AttributeList,
@@ -16,6 +13,7 @@ import {
   Header,
   useDevice,
   Banner,
+  Text,
 } from '@core/uikit';
 import { Fragment } from 'react/jsx-runtime';
 
@@ -24,12 +22,13 @@ import Icon from './PromptToSubscribe.svg?react';
 import { PromptToSubscribeOption } from './PromptToSubscribeOption';
 import { PromptToSubscribeSubmit } from './PromptToSubscribeSubmit';
 
-export const PromptToSubscribe: PromptToSubscribeComponent = ({
-  dismiss,
-  dissmissTimeout,
-  offerings,
-  introEligibility,
-}: PromptToSubscribeComponentProps) => {
+interface PromptToSubscribeProps {
+  message?: string;
+}
+
+export const PromptToSubscribe: PromptToSubscribeComponent<
+  PromptToSubscribeProps
+> = ({ dismiss, dissmissTimeout, offerings, introEligibility, message }) => {
   const { t } = useTranslation();
   const { isMobile } = useDevice();
 
@@ -79,6 +78,15 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
                   </Header>
                 </Grid.Cell>
               </Grid.Row>
+              {!!message && (
+                <Grid.Row flex={0}>
+                  <Grid.Cell>
+                    <Box paddingInline={20}>
+                      <Text>{message}</Text>
+                    </Box>
+                  </Grid.Cell>
+                </Grid.Row>
+              )}
               <Grid.Row flex={1}>
                 <Grid.Cell>
                   {!isMobile && (

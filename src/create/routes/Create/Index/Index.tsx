@@ -10,13 +10,14 @@ import {
   Spinner,
   Grid,
 } from '@core/uikit';
-import { PlanAction, RoutePath } from '@bootstrap/constants';
+import { RoutePath } from '@bootstrap/constants';
 import { useTranslation, Translate } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
 import { Redirect, useRoute } from '@core/navigation';
 import { useCreateStory } from '@network/api';
 import { withLoad } from '@core/analytics';
-import { usePurchases } from '@core/purchases';
+import { usePromptToSubscribe } from '@core/purchases';
+import { PromptToSubscribe } from '@common/features';
 
 import { FormField } from '../Create.const';
 
@@ -40,7 +41,9 @@ export const Index: FC<IndexProps> = withLoad({
   const [, navigate] = useRoute();
   const { characters, themes, scenes, readTimes } = useOptions();
   const { toast } = useUtils();
-  const { offerings } = usePurchases();
+  const [, subscribe] = usePromptToSubscribe({
+    component: PromptToSubscribe,
+  });
 
   const { data, isPending, isSuccess, mutate } = useCreateStory();
 
@@ -64,17 +67,8 @@ export const Index: FC<IndexProps> = withLoad({
       {
         onError: ({ statusCode, message }) => {
           if (statusCode === 403) {
-            navigate({
-              action: 'push',
-              params: {
-                action: PlanAction.Subscribe,
-                identifier: offerings?.current?.identifier,
-              },
-              pathname: RoutePath.Plan,
-              search: {
-                productId:
-                  offerings?.current?.availablePackages[0]?.product?.identifier,
-              },
+            subscribe({
+              message: t('intro.subscribe'),
             });
           } else {
             toast({
