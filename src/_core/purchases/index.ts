@@ -16,4 +16,6 @@ export * from './constants/subscriptionPeriod.const';
 export type {
   PurchasesPackage,
   PurchasesStoreProduct,
+  IntroEligibility,
 } from '@revenuecat/purchases-capacitor';
+export { INTRO_ELIGIBILITY_STATUS } from '@revenuecat/purchases-capacitor';

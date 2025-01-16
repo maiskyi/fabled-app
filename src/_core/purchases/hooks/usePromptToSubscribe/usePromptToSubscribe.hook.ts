@@ -44,6 +44,16 @@ export const usePromptToSubscribe = ({
     ({ offerings }) => offerings
   );
 
+  const introEligibility = useContextSelector(
+    PurchasesContext,
+    ({ introEligibility }) => introEligibility
+  );
+
+  const activeSubscriptions = useContextSelector(
+    PurchasesContext,
+    ({ activeSubscriptions }) => activeSubscriptions
+  );
+
   const [{ value: canDismiss }, unlock] = useAsyncFn(
     async () => {
       return new Promise<boolean>((resolve) => {
@@ -57,6 +67,8 @@ export const usePromptToSubscribe = ({
     }
   );
 
+  const hasActiveSubscriptions = !!activeSubscriptions.length;
+
   unlocked.current = canDismiss;
 
   const [open, dismiss] = useIonModal(component, {
@@ -67,6 +79,7 @@ export const usePromptToSubscribe = ({
       }
     },
     dissmissTimeout: DISSMISS_TIMEOUT,
+    introEligibility,
     offerings,
   });
 
@@ -84,8 +97,8 @@ export const usePromptToSubscribe = ({
   }, [open, unlock]);
 
   useIonViewDidEnter(() => {
-    if (auto && !promptedToSubscribe) dispatch();
-  }, [promptedToSubscribe]);
+    if (auto && !promptedToSubscribe && !hasActiveSubscriptions) dispatch();
+  }, [promptedToSubscribe, hasActiveSubscriptions]);
 
   return [state, dispatch];
 };

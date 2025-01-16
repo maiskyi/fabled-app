@@ -50,17 +50,42 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     async () => {
       if (Capacitor.isNativePlatform()) {
         try {
-          const offerings = await Purchases.getOfferings();
+          const offeringsRequest = Purchases.getOfferings();
+          const customerInfoRequest = Purchases.getCustomerInfo();
 
-          const { customerInfo } = await Purchases.getCustomerInfo();
+          const [offerings, { customerInfo }] = await Promise.all([
+            offeringsRequest,
+            customerInfoRequest,
+          ]);
 
-          const { products: activeSubscriptions } = await Purchases.getProducts(
-            {
-              productIdentifiers: customerInfo.activeSubscriptions,
-            }
+          const productIdentifiers = Object.values(offerings.all).reduce(
+            (res, { availablePackages }) => {
+              return [
+                ...res,
+                ...availablePackages.map((pkg) => pkg.product.identifier),
+              ];
+            },
+            []
           );
 
-          return { activeSubscriptions, offerings, ready: true };
+          const productsRequest = Purchases.getProducts({
+            productIdentifiers: customerInfo.activeSubscriptions,
+          });
+
+          const trialEligibilityRequest =
+            Purchases.checkTrialOrIntroductoryPriceEligibility({
+              productIdentifiers,
+            });
+
+          const [{ products: activeSubscriptions }, introEligibility] =
+            await Promise.all([productsRequest, trialEligibilityRequest]);
+
+          return {
+            activeSubscriptions,
+            introEligibility,
+            offerings,
+            ready: true,
+          };
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error(error);
@@ -68,6 +93,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
       }
       return {
         activeSubscriptions: [],
+        introEligibility: {},
         offerings: DEFAULT_PURCHASES_OFFERINGS,
         ready: true,
       };
@@ -77,6 +103,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
       loading: false,
       value: {
         activeSubscriptions: [],
+        introEligibility: {},
         offerings: DEFAULT_PURCHASES_OFFERINGS,
         ready: false,
       },
@@ -102,6 +129,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
       value={{
         activeSubscriptions: data.activeSubscriptions,
         dissmissPromptToSubscribe,
+        introEligibility: data.introEligibility,
         offerings: data.offerings,
         promptedToSubscribe,
         refetch: init,

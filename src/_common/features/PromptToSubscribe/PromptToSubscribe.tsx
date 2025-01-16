@@ -21,11 +21,13 @@ import {
 import { PlanFrom, PlanFromField } from './PromptToSubscribe.types';
 import Icon from './PromptToSubscribe.svg?react';
 import { PromptToSubscribeOption } from './PromptToSubscribeOption';
+import { PromptToSubscribeSubmit } from './PromptToSubscribeSubmit';
 
 export const PromptToSubscribe: PromptToSubscribeComponent = ({
   dismiss,
   dissmissTimeout,
   offerings,
+  introEligibility,
 }: PromptToSubscribeComponentProps) => {
   const { t } = useTranslation();
   const { isMobile } = useDevice();
@@ -133,7 +135,7 @@ export const PromptToSubscribe: PromptToSubscribeComponent = ({
         </Box>
       </Content>
       <Footer>
-        <Form.Submit color="dark">{t('actions.continue')}</Form.Submit>
+        <PromptToSubscribeSubmit introEligibility={introEligibility} />
       </Footer>
     </Form>
   );
