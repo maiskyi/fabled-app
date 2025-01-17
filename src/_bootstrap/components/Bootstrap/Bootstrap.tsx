@@ -42,14 +42,14 @@ export const Bootstrap: FC<BootstrapProps> = ({
   analytics,
 }) => {
   return (
-    <ThemeProvider>
-      <LocalizationProvider {...localization}>
-        <ErrorBoundary {...errorBoundary}>
-          <AnalyticsProvider {...analytics}>
-            <AppUpdate>
-              <AppUrlListener>
-                <Purchases {...purchases}>
-                  <QueryProvider>
+    <QueryProvider>
+      <ThemeProvider>
+        <LocalizationProvider {...localization}>
+          <ErrorBoundary {...errorBoundary}>
+            <AnalyticsProvider {...analytics}>
+              <AppUpdate>
+                <AppUrlListener>
+                  <Purchases {...purchases}>
                     <AppProvider {...app}>
                       <Auth>
                         <Network {...network}>
@@ -59,13 +59,13 @@ export const Bootstrap: FC<BootstrapProps> = ({
                         </Network>
                       </Auth>
                     </AppProvider>
-                  </QueryProvider>
-                </Purchases>
-              </AppUrlListener>
-            </AppUpdate>
-          </AnalyticsProvider>
-        </ErrorBoundary>
-      </LocalizationProvider>
-    </ThemeProvider>
+                  </Purchases>
+                </AppUrlListener>
+              </AppUpdate>
+            </AnalyticsProvider>
+          </ErrorBoundary>
+        </LocalizationProvider>
+      </ThemeProvider>
+    </QueryProvider>
   );
 };

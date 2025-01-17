@@ -1,7 +1,10 @@
 import { useAsync } from 'react-use';
 import { get } from 'lodash';
 
-import { PromptToSubscribeComponent } from '@core/purchases';
+import {
+  PromptToSubscribeComponent,
+  usePurchaseStoreProduct,
+} from '@core/purchases';
 import { useTranslation, Translate } from '@core/localization';
 import {
   AttributeList,
@@ -14,6 +17,8 @@ import {
   useDevice,
   Banner,
   Text,
+  useUtils,
+  Loading,
 } from '@core/uikit';
 import { Fragment } from 'react/jsx-runtime';
 
@@ -31,6 +36,9 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
 > = ({ dismiss, dissmissTimeout, offerings, introEligibility, message }) => {
   const { t } = useTranslation();
   const { isMobile } = useDevice();
+  const { toast } = useUtils();
+
+  const { isPending, mutate } = usePurchaseStoreProduct();
 
   const { value: canClose } = useAsync(async () => {
     return new Promise<boolean>((resolve) => {
@@ -46,10 +54,31 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
     return product.pricePerMonth > acc ? product.pricePerMonth : acc;
   }, 0);
 
+  const handleOnSubmit = ({ product: value }: PlanFrom) => {
+    const product = packages.find(
+      ({ product: { identifier } }) => identifier === value
+    )?.product;
+
+    mutate(
+      { product },
+      {
+        onError: (error) => {
+          toast({
+            message: error.message,
+            variant: 'error',
+          });
+        },
+        onSuccess: dismiss,
+      }
+    );
+  };
+
   return (
     <Fragment>
+      <Loading isOpen={isPending} />
       <Form<PlanFrom>
         defaultValues={{ [PlanFromField.Product]: defaultProduct }}
+        onSubmit={handleOnSubmit}
       >
         <Header translucent>
           {canClose && (
