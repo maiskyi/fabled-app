@@ -3,8 +3,6 @@ import classNames from 'classnames';
 
 import { useIonToast, useIonModal } from '@ionic/react';
 
-import { Selector } from '../../constants/selector.const';
-
 import { ToastParams, ConfirmParams } from './useUtils.types';
 import { ICON_MAPPING, COLOR_MAPPING } from './useUtils.const';
 import { ConfirmModal, ConfirmModalParams } from './_partitions/ConfirmModal';
@@ -31,12 +29,10 @@ export const useUtils = () => {
           },
         ],
         color: COLOR_MAPPING[variant],
-        cssClass: styles.toast,
         header: title,
         icon: ICON_MAPPING[variant],
         message,
         position: 'top',
-        positionAnchor: Selector.Header,
       });
     },
     [showToast]
