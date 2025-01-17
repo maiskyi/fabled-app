@@ -22,9 +22,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   const platform = Capacitor.getPlatform() as DevicePlatform;
 
-  const isDesktop = isPlatform('desktop');
-
   const isMobile = isPlatform('mobile');
+  const isTablet = isPlatform('tablet');
+  const isDesktop = isPlatform('desktop');
 
   const isNativePlatform = Capacitor.isNativePlatform();
 
@@ -36,6 +36,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
         isDesktop,
         isMobile,
         isNativePlatform,
+        isTablet,
         platform,
         width: window.innerWidth,
       }}

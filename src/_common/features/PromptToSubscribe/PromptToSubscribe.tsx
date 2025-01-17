@@ -36,7 +36,7 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
   PromptToSubscribeProps
 > = ({ dismiss, dissmissTimeout, offerings, introEligibility, message }) => {
   const { t } = useTranslation();
-  const { isMobile } = useDevice();
+  const { isTablet } = useDevice();
   const { toast } = useUtils();
 
   const { isPending, mutate } = usePurchaseStoreProduct();
@@ -130,7 +130,7 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
               )}
               <Grid.Row flex={1}>
                 <Grid.Cell>
-                  {!isMobile && (
+                  {isTablet && (
                     <Box
                       alignItems="center"
                       display="flex"

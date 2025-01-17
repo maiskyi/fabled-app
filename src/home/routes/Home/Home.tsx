@@ -11,8 +11,6 @@ import {
   Logo,
   useViewWillEnter,
   Grid,
-  useViewDidEnter,
-  useUtils,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -36,7 +34,6 @@ export const Home = withLoad({
 })(function Home() {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
-  const { toast } = useUtils();
 
   const title = t('pages.home');
 
@@ -69,14 +66,6 @@ export const Home = withLoad({
   usePromptToSubscribe({
     auto: true,
     component: PromptToSubscribe,
-  });
-
-  useViewDidEnter(() => {
-    toast({
-      message: 'test',
-      title: 'test',
-      variant: 'success',
-    });
   });
 
   return (

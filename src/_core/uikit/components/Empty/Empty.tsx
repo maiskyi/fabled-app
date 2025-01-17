@@ -7,6 +7,7 @@ import { Color } from '@ionic/core';
 import { Box } from '../Box';
 import { IconName, ICON } from '../Icon';
 import { SvgFunctionComponent } from '../../types';
+import { useMediaSwitch } from '../../hooks/useMediaSwitch';
 
 import styles from './Empty.module.scss';
 
@@ -26,6 +27,12 @@ export const Empty: FC<EmptyProps> = ({
   variant,
   Icon,
 }) => {
+  const { value: width } = useMediaSwitch({
+    md: 300,
+    sm: 200,
+    xs: 200,
+  });
+
   return (
     <Box
       alignItems="center"
@@ -39,7 +46,7 @@ export const Empty: FC<EmptyProps> = ({
           <IonIcon className={styles.icon} color={variant} icon={ICON[icon]} />
         )}
         {!!Icon && (
-          <Box aspectRatio={1} width={200}>
+          <Box aspectRatio={1} width={width}>
             <Icon
               className={classNames(
                 styles.svg,
