@@ -21,6 +21,7 @@ import {
   Loading,
 } from '@core/uikit';
 import { Fragment } from 'react/jsx-runtime';
+import { NotificationType } from '@bootstrap/constants';
 
 import { PlanFrom, PlanFromField } from './PromptToSubscribe.types';
 import Icon from './PromptToSubscribe.svg?react';
@@ -68,7 +69,18 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
             variant: 'error',
           });
         },
-        onSuccess: dismiss,
+        onSuccess: () => {
+          toast({
+            message: t(
+              `notifications.${NotificationType.SubscriptionSucceed}.message`
+            ),
+            title: t(
+              `notifications.${NotificationType.SubscriptionSucceed}.title`
+            ),
+            variant: 'success',
+          });
+          dismiss();
+        },
       }
     );
   };
