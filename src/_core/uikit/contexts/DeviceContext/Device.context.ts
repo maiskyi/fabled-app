@@ -10,6 +10,7 @@ interface DeviceContextProps {
   isMobile: boolean;
   identifier: string;
   isNativePlatform: boolean;
+  isTablet: boolean;
 }
 
 export const DeviceContext = createContext<DeviceContextProps>({
@@ -18,6 +19,7 @@ export const DeviceContext = createContext<DeviceContextProps>({
   isDesktop: false,
   isMobile: false,
   isNativePlatform: true,
+  isTablet: false,
   platform: 'ios',
   width: window.innerWidth,
 });

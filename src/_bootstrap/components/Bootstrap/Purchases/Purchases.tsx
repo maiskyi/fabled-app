@@ -9,7 +9,10 @@ export const Purchases: FC<PurchasesProps> = ({ children, ...props }) => {
   const { isNativePlatform } = useDevice();
 
   return (
-    <PurchasesProvider {...props} shouldPromptedToSubscribe={isNativePlatform}>
+    <PurchasesProvider
+      {...props}
+      // shouldPromptedToSubscribe={isNativePlatform}
+    >
       {children}
     </PurchasesProvider>
   );
