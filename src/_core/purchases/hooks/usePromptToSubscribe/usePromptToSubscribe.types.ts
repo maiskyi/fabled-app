@@ -12,4 +12,6 @@ export interface PromptToSubscribeComponentProps {
   introEligibility: Record<string, IntroEligibility>;
 }
 
-export type PromptToSubscribeComponent = FC<PromptToSubscribeComponentProps>;
+export type PromptToSubscribeComponent<T extends object = {}> = FC<
+  PromptToSubscribeComponentProps & T
+>;

@@ -1,5 +1,5 @@
 import { useAsyncFn } from 'react-use';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useContextSelector } from 'use-context-selector';
 
 import { useIonModal, useIonViewDidEnter } from '@ionic/react';
@@ -9,24 +9,26 @@ import { PurchasesContext } from '../../contexts/PurchasesContext';
 import { PromptToSubscribeComponent } from './usePromptToSubscribe.types';
 import { DISSMISS_TIMEOUT } from './usePromptToSubscribe.const';
 
-interface UsePromptToSubscribeParams {
-  component: PromptToSubscribeComponent;
+interface UsePromptToSubscribeParams<T extends object> {
+  component: PromptToSubscribeComponent<T>;
   auto?: boolean;
 }
 
 interface UsePromptToSubscribeState {}
 
-type UsePromptToSubscribeDispatch = () => void;
+type UsePromptToSubscribeDispatch<T extends object> = (params?: T) => void;
 
-type UsePromptToSubscribeReturnType = [
+type UsePromptToSubscribeReturnType<T extends object> = [
   UsePromptToSubscribeState,
-  UsePromptToSubscribeDispatch,
+  UsePromptToSubscribeDispatch<T>,
 ];
 
-export const usePromptToSubscribe = ({
+export const usePromptToSubscribe = <T extends object = {}>({
   component,
   auto = false,
-}: UsePromptToSubscribeParams): UsePromptToSubscribeReturnType => {
+}: UsePromptToSubscribeParams<T>): UsePromptToSubscribeReturnType<T> => {
+  const [extraModalParams, setExtraModalParams] = useState<T>({} as T);
+
   const unlocked = useRef(false);
 
   const promptedToSubscribe = useContextSelector(
@@ -72,6 +74,7 @@ export const usePromptToSubscribe = ({
   unlocked.current = canDismiss;
 
   const [open, dismiss] = useIonModal(component, {
+    ...extraModalParams,
     dismiss: () => {
       if (unlocked.current) {
         dismiss();
@@ -85,16 +88,21 @@ export const usePromptToSubscribe = ({
 
   const state = useMemo(() => ({}), []);
 
-  const dispatch = useCallback(() => {
-    open({
-      breakpoints: [0, 1],
-      canDismiss: () => Promise.resolve(unlocked.current),
-      handle: false,
-      initialBreakpoint: 1,
-      keyboardClose: false,
-      onDidPresent: unlock,
-    });
-  }, [open, unlock]);
+  const dispatch = useCallback(
+    (params: T = {} as T) => {
+      setExtraModalParams(params);
+      open({
+        breakpoints: [0, 1],
+        canDismiss: () => Promise.resolve(unlocked.current),
+        handle: false,
+        initialBreakpoint: 1,
+        keyboardClose: false,
+        onDidDismiss: () => setExtraModalParams({} as T),
+        onDidPresent: unlock,
+      });
+    },
+    [open, unlock]
+  );
 
   useIonViewDidEnter(() => {
     if (auto && !promptedToSubscribe && !hasActiveSubscriptions) dispatch();

@@ -30,12 +30,20 @@ export const PromptToSubscribeSubmit: FC<PromptToSubscribeSubmitProps> = ({
     get(introEligibility, [value, 'status']) ===
     INTRO_ELIGIBILITY_STATUS.INTRO_ELIGIBILITY_STATUS_ELIGIBLE;
 
-  const days = packages.find(({ product }) => product.identifier === value)
-    ?.product?.introPrice?.periodNumberOfUnits;
+  const introPrice = packages.find(
+    ({ product }) => product.identifier === value
+  )?.product?.introPrice;
 
   return (
     <Form.Submit color="dark">
-      {hasTrial ? t('actions.startYourTrial', { days }) : t('actions.continue')}
+      {hasTrial
+        ? t('actions.startYourTrial', {
+            periodNumberOfUnits: introPrice?.periodNumberOfUnits,
+            periodUnit: t(
+              `units.${introPrice?.periodUnit.toLowerCase()}`
+            ).toLowerCase(),
+          })
+        : t('actions.continue')}
     </Form.Submit>
   );
 };

@@ -82,6 +82,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react/jsx-key': 'error',
     'react/jsx-sort-props': 'warn',
+    'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'sort-keys': [
       'warn',
