@@ -1,28 +1,22 @@
 import { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonAvatar,
-} from '@ionic/react';
+import { IonCard, IonCardContent, IonAvatar } from '@ionic/react';
 import { Color } from '@ionic/core';
+
+import { Typography } from '../Typography';
 
 import { MessageOrigin } from './Message.types';
 
 import styles from './Message.module.scss';
 
 export type MessageProps = PropsWithChildren<{
-  title: string;
   origin: MessageOrigin;
   avatar?: string;
   color?: Color;
 }>;
 
 export const Message: FC<MessageProps> = ({
-  title,
   origin,
   children,
   avatar,
@@ -30,13 +24,13 @@ export const Message: FC<MessageProps> = ({
 }) => {
   const color: Color = (() => {
     if (initialColor) return initialColor;
-    return origin === 'companion' ? 'tertiary' : 'dark';
+    return origin === 'companion' ? 'primary' : 'secondary';
   })();
 
   return (
     <div className={classNames(styles.root, styles[origin])}>
       <IonAvatar className={styles.avatar}>
-        <img alt={title} src={avatar} />
+        <img alt="" src={avatar} />
       </IonAvatar>
       <div className={styles.message}>
         <div
@@ -46,11 +40,13 @@ export const Message: FC<MessageProps> = ({
             `ion-color-${color}`
           )}
         />
-        <IonCard color={color}>
-          <IonCardHeader>
-            <IonCardSubtitle>{title}</IonCardSubtitle>
-          </IonCardHeader>
-          <IonCardContent>{children}</IonCardContent>
+        <IonCard
+          className={classNames(styles.card, styles[origin])}
+          color={color}
+        >
+          <IonCardContent className={styles.content}>
+            <Typography variant="body-3">{children}</Typography>
+          </IonCardContent>
         </IonCard>
       </div>
     </div>

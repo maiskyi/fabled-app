@@ -1,7 +1,6 @@
 import {
   logoGoogle,
   add,
-  arrowBack,
   personCircle,
   bookOutline,
   chevronForward,
@@ -25,18 +24,18 @@ import {
 
 import fire from './assets/fire.svg?raw';
 import chevronRight from './assets/chevron-right.svg?raw';
+import arrowLeft from './assets/arrow-left.svg?raw';
 
 const NEW_ICONS = {
+  'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
   'chevron-right': `data:image/svg+xml;utf8,${chevronRight}`,
   fire: `data:image/svg+xml;utf8,${fire}`,
 };
 
 export const ICON = {
-  ...NEW_ICONS,
   add,
   'alert-circle-outline': alertCircleOutline,
   apple: logoApple,
-  'arrow-back': arrowBack,
   'arrow-forward-outline': arrowForwardOutline,
   'book-outline': bookOutline,
   'chatbox-ellipses-outline': chatboxEllipsesOutline,
@@ -55,4 +54,5 @@ export const ICON = {
   'mail-outline': mailOutline,
   'person-circle': personCircle,
   'person-outline': personOutline,
+  ...NEW_ICONS,
 };
