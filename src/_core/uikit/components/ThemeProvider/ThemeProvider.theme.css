@@ -17,14 +17,14 @@ html {
 :root {
   --ion-color-primary: #2639e6;
   --ion-color-primary-rgb: 38, 57, 230;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-contrast: #f9f9f9;
+  --ion-color-primary-contrast-rgb: 249, 249, 249;
   --ion-color-primary-shade: #2132ca;
   --ion-color-primary-tint: #3c4de9;
   --ion-color-secondary: #f78012;
   --ion-color-secondary-rgb: 247, 128, 18;
-  --ion-color-secondary-contrast: #000000;
-  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-contrast: #f9f9f9;
+  --ion-color-secondary-contrast-rgb: 249, 249, 249;
   --ion-color-secondary-shade: #d97110;
   --ion-color-secondary-tint: #f88d2a;
   /* 

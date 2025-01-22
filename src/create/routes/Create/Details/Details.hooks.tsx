@@ -18,7 +18,7 @@ interface UseThreadParams {
 
 export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
   const { t } = useTranslation();
-  const { displayName, avatar } = useUser();
+  const { avatar } = useUser();
   const [, navigate] = useRoute();
   const { toast } = useUtils();
 
@@ -128,7 +128,6 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           avatar: avatar,
           children: request?.message,
           origin: 'me',
-          title: displayName,
         },
         type: 'message',
       },
@@ -322,7 +321,6 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
       ...successActions,
     ];
   }, [
-    displayName,
     avatar,
     request,
     t,
