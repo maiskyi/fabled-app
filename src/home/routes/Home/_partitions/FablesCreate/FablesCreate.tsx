@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Card, Icon } from '@core/uikit';
+import { Box, Card, Icon, Typography } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 import { FablesCreateOnClickFn } from './FablesCreate.types';
@@ -16,14 +16,18 @@ export const FablesCreate = memo<FablesCreateProps>(function FablesCreate({
 
   return (
     <Card color="horizontal" onClick={() => onClick({})}>
-      <Card.Content></Card.Content>
-      {/* <Card.Header>
-        <Card.Subtitle>{t('intro.home')}</Card.Subtitle>
-        <Card.Title>{t('actions.createNewFable')}</Card.Title>
-      </Card.Header>
-      <Card.Footer>
-        <Icon name="arrow-forward-outline" size="large" />
-      </Card.Footer> */}
+      <Card.Content>
+        <Box display="flex" gap={12}>
+          <Box flex={0}></Box>
+          <Box display="flex" flex={1} flexDirection="column" gap={4}>
+            <Typography variant="body-2" weight="semi-bold">
+              {t('actions.createNewFable')}
+            </Typography>
+            <Typography variant="body-4">{t('intro.home')}</Typography>
+          </Box>
+          <Box flex={0}></Box>
+        </Box>
+      </Card.Content>
     </Card>
   );
 });
