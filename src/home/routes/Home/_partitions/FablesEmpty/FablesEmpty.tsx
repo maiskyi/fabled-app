@@ -1,9 +1,7 @@
 import { memo } from 'react';
 
-import { Box, Empty, Grid } from '@core/uikit';
+import { Box, Grid, Banner } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-
-import Icon from './FablesEmpty.svg?react';
 
 export const FablesEmpty = memo(function FableEmpty() {
   const { t } = useTranslation();
@@ -17,11 +15,12 @@ export const FablesEmpty = memo(function FableEmpty() {
         justifyContent="center"
         minHeight="100%"
       >
-        <Empty
-          Icon={Icon}
+        <Banner
           description={t('empty.noFables.description')}
           title={t('empty.noFables.title')}
-        ></Empty>
+        >
+          <Banner.Image asset="two-robots" />
+        </Banner>
       </Box>
     </Grid.Row>
   );

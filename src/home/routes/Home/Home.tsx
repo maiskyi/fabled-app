@@ -6,9 +6,7 @@ import {
   Content,
   InfiniteScroll,
   Header,
-  Box,
   SafeArea,
-  Logo,
   useViewWillEnter,
   Grid,
 } from '@core/uikit';
@@ -71,11 +69,6 @@ export const Home = withLoad({
   return (
     <Page>
       <Header translucent>
-        <Header.Actions slot="start">
-          <Box paddingLeft={12}>
-            <Logo height={26} />
-          </Box>
-        </Header.Actions>
         <Header.Title>{title}</Header.Title>
         <Header.Actions>
           <Header.Action icon="person-circle" onClick={handleOnProfileClick} />

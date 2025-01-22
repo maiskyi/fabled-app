@@ -9,18 +9,20 @@ import styles from './Typography.module.scss';
 export type TypographyProps = PropsWithChildren<{
   variant?: TypographyVariant;
   weight?: TypographyWeight;
+  className?: string;
 }>;
 
 export const Typography: FC<TypographyProps> = ({
   children,
+  className,
   variant = 'body-1',
   weight = 'regular',
 }) => {
-  const className = classNames(styles[variant], styles[weight]);
-
   return createElement(
     TYPOGRAPHY_TAG_MAPPING[variant],
-    { className },
+    {
+      className: classNames(styles[variant], styles[weight], className),
+    },
     children
   );
 };
