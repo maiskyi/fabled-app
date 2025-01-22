@@ -23,7 +23,16 @@ import {
   cloudDownloadOutline,
 } from 'ionicons/icons';
 
+import fire from './assets/fire.svg?raw';
+import chevronRight from './assets/chevron-right.svg?raw';
+
+const NEW_ICONS = {
+  'chevron-right': `data:image/svg+xml;utf8,${chevronRight}`,
+  fire: `data:image/svg+xml;utf8,${fire}`,
+};
+
 export const ICON = {
+  ...NEW_ICONS,
   add,
   'alert-circle-outline': alertCircleOutline,
   apple: logoApple,
