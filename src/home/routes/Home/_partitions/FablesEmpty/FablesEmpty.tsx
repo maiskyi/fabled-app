@@ -19,7 +19,7 @@ export const FablesEmpty = memo(function FableEmpty() {
           description={t('empty.noFables.description')}
           title={t('empty.noFables.title')}
         >
-          <Banner.Image />
+          <Banner.Image asset="two-robots" />
         </Banner>
       </Box>
     </Grid.Row>

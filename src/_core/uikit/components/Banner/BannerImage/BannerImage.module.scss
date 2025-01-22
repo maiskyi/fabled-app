@@ -7,6 +7,14 @@
   height: 271px;
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .shade {
