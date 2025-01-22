@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Box, Empty, Grid } from '@core/uikit';
+import { Box, Empty, Grid, Banner } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 import Icon from './FablesEmpty.svg?react';
@@ -17,11 +17,17 @@ export const FablesEmpty = memo(function FableEmpty() {
         justifyContent="center"
         minHeight="100%"
       >
-        <Empty
+        <Banner
+          description={t('empty.noFables.description')}
+          title={t('empty.noFables.title')}
+        >
+          <Banner.Image />
+        </Banner>
+        {/* <Empty
           Icon={Icon}
           description={t('empty.noFables.description')}
           title={t('empty.noFables.title')}
-        ></Empty>
+        ></Empty> */}
       </Box>
     </Grid.Row>
   );

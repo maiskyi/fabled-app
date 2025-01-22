@@ -1,60 +1,61 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
 import { Box } from '../Box';
+import { Typography } from '../Typography';
 
 import { BannerSvg } from './BannerSvg/BannerSvg';
+import { BannerImage } from './BannerImage/BannerImage';
 
-export type BannerProps = PropsWithChildren<{}>;
+import styles from './Banner.module.scss';
+
+export type BannerProps = PropsWithChildren<{
+  title?: string;
+  description?: string;
+}>;
 
 interface BannerComponent {
   (props: BannerProps): ReactElement;
   Svg: typeof BannerSvg;
+  Image: typeof BannerImage;
 }
 
-export const Banner: BannerComponent = ({ children }: BannerProps) => {
+export const Banner: BannerComponent = ({
+  children,
+  title,
+  description,
+}: BannerProps) => {
+  const showText = !!title || !!description;
+
   return (
     <Box
       alignItems="center"
       display="flex"
       flexDirection="column"
-      gap={16}
+      gap={72}
       paddingInline={20}
     >
       {children}
-      {/* <Box>
-        {!!icon && (
-          <IonIcon className={styles.icon} color={variant} icon={ICON[icon]} />
-        )}
-        {!!Icon && (
-          <Box aspectRatio={1} width={200}>
-            <Icon
-              className={classNames(
-                styles.svg,
-                styles.tertiary,
-                styles[variant]
-              )}
-            />
-          </Box>
-        )}
-      </Box>
-      <Box display="flex" flexDirection="column" gap={8}>
-        <Box>
-          <IonText
-            className={classNames(styles.text, styles.title)}
-            color={variant}
-          >
-            {title}
-          </IonText>
+      {showText && (
+        <Box display="flex" flexDirection="column" gap={12}>
+          {!!title && (
+            <Box>
+              <Typography className={styles.title} variant="h4" weight="bold">
+                {title}
+              </Typography>
+            </Box>
+          )}
+          {!!description && (
+            <Box>
+              <Typography className={styles.description} variant="body-2">
+                {description}
+              </Typography>
+            </Box>
+          )}
         </Box>
-        {!!description && (
-          <Box>
-            <IonNote className={classNames(styles.text)}>{description}</IonNote>
-          </Box>
-        )}
-      </Box>
-      {!!children && <Box>{children}</Box>} */}
+      )}
     </Box>
   );
 };
 
 Banner.Svg = BannerSvg;
+Banner.Image = BannerImage;
