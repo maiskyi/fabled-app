@@ -14,13 +14,14 @@ import { CardContent } from './CardContent/CardContent';
 import { CardFooter } from './CardFooter/CardFooter';
 import { CardBadge } from './CardBadge/CardBadge';
 import { CardContext } from './Card.context';
+import { CardColor } from './Card.types';
 
 import styles from './Card.module.scss';
 
 export type CardProps = PropsWithChildren<{
   loading?: boolean;
   onClick?: () => void;
-  color?: Color;
+  color?: CardColor;
   className?: string;
   outline?: Color;
 }>;
@@ -58,6 +59,7 @@ export const Card: CardComponent = ({
           styles.root,
           {
             [outlineClassName]: !!outline,
+            [styles.bgHorizontal]: color === 'horizontal',
           },
           className
         )}

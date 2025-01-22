@@ -1,0 +1,5 @@
+.root {
+  &::part(native) {
+    opacity: 1;
+  }
+}

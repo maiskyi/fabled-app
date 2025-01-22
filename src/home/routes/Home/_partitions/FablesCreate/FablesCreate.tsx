@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Box, Card, Icon } from '@core/uikit';
+import { Box, Card, Icon, Typography } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 import { FablesCreateOnClickFn } from './FablesCreate.types';
@@ -15,16 +15,23 @@ export const FablesCreate = memo<FablesCreateProps>(function FablesCreate({
   const { t } = useTranslation();
 
   return (
-    <Box flex={0}>
-      <Card color="secondary" onClick={() => onClick({})}>
-        <Card.Header>
-          <Card.Subtitle>{t('intro.home')}</Card.Subtitle>
-          <Card.Title>{t('actions.createNewFable')}</Card.Title>
-        </Card.Header>
-        <Card.Footer>
-          <Icon name="arrow-forward-outline" size="large" />
-        </Card.Footer>
-      </Card>
-    </Box>
+    <Card color="horizontal" onClick={() => onClick({})}>
+      <Card.Content>
+        <Box alignItems="center" display="flex" gap={12}>
+          <Box display="flex" flex={0}>
+            <Icon fontSize={28} name="fire" />
+          </Box>
+          <Box display="flex" flex={1} flexDirection="column" gap={4}>
+            <Typography variant="body-2" weight="semi-bold">
+              {t('actions.createNewFable')}
+            </Typography>
+            <Typography variant="body-4">{t('intro.home')}</Typography>
+          </Box>
+          <Box display="flex" flex={0}>
+            <Icon fontSize={24} name="chevron-right" />
+          </Box>
+        </Box>
+      </Card.Content>
+    </Card>
   );
 });

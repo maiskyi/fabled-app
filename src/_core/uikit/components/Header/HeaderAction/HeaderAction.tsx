@@ -4,6 +4,8 @@ import { IonButton } from '@ionic/react';
 
 import { Icon, IconName } from '../../Icon';
 
+import styles from './HeaderAction.module.scss';
+
 interface HeaderActionProps {
   icon: IconName;
   onClick?: () => void;
@@ -11,7 +13,12 @@ interface HeaderActionProps {
 
 export const HeaderAction: FC<HeaderActionProps> = ({ icon, onClick }) => {
   return (
-    <IonButton color="tertiary" onClick={onClick}>
+    <IonButton
+      className={styles.root}
+      color="dark"
+      onClick={onClick}
+      style={{ opacity: 1 }}
+    >
       <Icon name={icon} slot="icon-only" />
     </IonButton>
   );

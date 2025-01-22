@@ -12,10 +12,11 @@ export interface IconProps {
   className?: string;
   size?: ComponentProps<typeof IonIcon>['size'];
   color?: Color;
+  fontSize?: CSSProperties['fontSize'];
 }
 
 export const Icon: FC<IconProps> = forwardRef<any, IconProps>(function Icon(
-  { size, name, slot, className, color },
+  { size, name, slot, className, color, fontSize },
   ref
 ) {
   const colorStyles: CSSProperties = color
@@ -29,7 +30,7 @@ export const Icon: FC<IconProps> = forwardRef<any, IconProps>(function Icon(
       ref={ref}
       size={size}
       slot={slot}
-      style={{ ...colorStyles }}
+      style={{ ...colorStyles, fontSize }}
     />
   );
 });

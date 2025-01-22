@@ -26,4 +26,5 @@ import '@ionic/react/css/palettes/dark.always.css';
 /* import '@ionic/react/css/palettes/dark.class.css'; */
 // import '@ionic/react/css/palettes/dark.system.css';
 import '../../assets/fonts/sf-rounded/stylesheet.css';
+import '../../assets/fonts/ibm-plex-sans/stylesheet.css';
 import './ThemeProvider.theme.css';

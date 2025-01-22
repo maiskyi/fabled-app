@@ -33,8 +33,10 @@ export * from './components/Spinner';
 export * from './components/Swiper';
 export * from './components/Text';
 export * from './components/ThemeProvider';
+export * from './components/Tile';
 export * from './components/Typist';
 export * from './components/View';
+export * from './components/Typography';
 
 // Hooks
 export * from './hooks/useBrowser';

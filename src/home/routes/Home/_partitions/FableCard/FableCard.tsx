@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Card, Image } from '@core/uikit';
+import { Tile } from '@core/uikit';
 import { DTO } from '@network/api';
 import { useTranslation } from '@core/localization';
 
@@ -10,20 +10,19 @@ interface FableCardProps {
   item: DTO.StoryItem;
 }
 
-export const FableCard: FC<FableCardProps> = ({ item, loading, onClick }) => {
+export const FableCard: FC<FableCardProps> = ({ item, onClick }) => {
   const { t } = useTranslation();
 
   return (
-    <Card loading={loading} onClick={onClick}>
-      <Card.Thumb
-        aspectRatio={4 / 3}
-        subtitle={t('forms.readTimeMin', {
-          min: item?.readTime,
-        })}
-        title={item.title}
-      >
-        <Image src={item?.image} />
-      </Card.Thumb>
-    </Card>
+    <Tile aspectRatio={4 / 3} onClick={onClick} src={item?.image}>
+      <Tile.Header>
+        <Tile.Subtitle>
+          {t('forms.readTimeMin', {
+            min: item?.readTime,
+          })}
+        </Tile.Subtitle>
+        <Tile.Title>{item.title}</Tile.Title>
+      </Tile.Header>
+    </Tile>
   );
 };
