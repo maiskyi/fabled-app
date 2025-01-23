@@ -7,11 +7,20 @@ html {
     #f58e2e 0%,
     #f78012 100%
   );
+  --color-gradient-brand-horizontal: linear-gradient(
+    90deg,
+    #4758ef 0%,
+    #2639e6 100%
+  );
   --color-gradient-brand-horizontal-revers: linear-gradient(
     90deg,
     #2639e6 0%,
     #4758ef 100%
   );
+}
+
+a {
+  color: var(--ion-color-secondary);
 }
 
 :root {

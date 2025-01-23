@@ -158,10 +158,10 @@ export const Index: FC<IndexProps> = withLoad({
                 padding={16}
                 paddingInline={20}
               >
-                <Button fill="outline" onClick={handleOnCancel}>
+                <Button color="dark" fill="outline" onClick={handleOnCancel}>
                   {t('actions.cancel')}
                 </Button>
-                <Form.Submit loading={isPending}>
+                <Form.Submit icon="feather" loading={isPending}>
                   {t('actions.writeFable')}
                 </Form.Submit>
               </Box>

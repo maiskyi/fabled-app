@@ -242,8 +242,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
             props: [
               {
                 children: t('actions.cancel'),
+                color: 'dark',
                 fill: 'outline',
-
                 onClick: onCancel,
               },
               {
@@ -295,11 +295,13 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
             props: [
               {
                 children: t('actions.readLater'),
+                color: 'dark',
                 fill: 'outline',
                 onClick: onCancel,
               },
               {
                 children: t('actions.readNow'),
+                icon: 'book-open',
                 onClick: onReadNow,
               },
             ],
