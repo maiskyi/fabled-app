@@ -125,8 +125,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
       {
         id: 'userMessage',
         props: {
-          avatar: avatar,
           children: request?.message,
+          icon: 'user',
           origin: 'me',
         },
         type: 'message',

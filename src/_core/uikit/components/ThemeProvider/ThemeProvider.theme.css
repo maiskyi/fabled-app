@@ -17,6 +17,11 @@ html {
     #2639e6 0%,
     #4758ef 100%
   );
+  --color-gradient-mix-vertical: linear-gradient(
+    180deg,
+    #f58e2e 0%,
+    #4758ef 100%
+  );
 }
 
 a {

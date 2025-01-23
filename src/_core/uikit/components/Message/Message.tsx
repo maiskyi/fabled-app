@@ -1,10 +1,12 @@
 import { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import { IonCard, IonCardContent, IonAvatar } from '@ionic/react';
+import { IonCard, IonCardContent } from '@ionic/react';
 import { Color } from '@ionic/core';
 
 import { Typography } from '../Typography';
+import { IconName } from '../Icon';
+import { Avatar } from '../Avatar';
 
 import { MessageOrigin } from './Message.types';
 
@@ -14,12 +16,14 @@ export type MessageProps = PropsWithChildren<{
   origin: MessageOrigin;
   avatar?: string;
   color?: Color;
+  icon?: IconName;
 }>;
 
 export const Message: FC<MessageProps> = ({
   origin,
   children,
   avatar,
+  icon,
   color: initialColor,
 }) => {
   const color: Color = (() => {
@@ -29,9 +33,7 @@ export const Message: FC<MessageProps> = ({
 
   return (
     <div className={classNames(styles.root, styles[origin])}>
-      <IonAvatar className={styles.avatar}>
-        <img alt="" src={avatar} />
-      </IonAvatar>
+      <Avatar className={styles.avatar} icon={icon} src={avatar} />
       <div className={styles.message}>
         <div
           className={classNames(

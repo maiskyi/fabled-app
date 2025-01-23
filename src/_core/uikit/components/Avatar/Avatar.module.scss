@@ -1,0 +1,22 @@
+.root {
+  color: var(--ion-color-dark);
+  &.withIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &.border {
+    position: relative;
+    background: var(--color-gradient-mix-vertical);
+    &::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      bottom: 2px;
+      top: 2px;
+      background: var(--ion-background-color);
+      border-radius: 100px;
+    }
+  }
+}
