@@ -5,6 +5,8 @@ import { Color } from '@ionic/core';
 
 import { ICON } from '../../Icon';
 
+import styles from './HeaderBack.module.scss';
+
 interface HeaderBackProps {
   pathname?: string;
   color?: Color;
@@ -27,7 +29,12 @@ export const HeaderBack: FC<HeaderBackProps> = ({
 
   return (
     <IonButtons slot="start">
-      <IonButton color={color} mode="md" onClick={handleOnClick}>
+      <IonButton
+        className={styles.button}
+        color={color}
+        mode="md"
+        onClick={handleOnClick}
+      >
         <IonIcon icon={ICON['arrow-left']} slot="icon-only" />
       </IonButton>
     </IonButtons>
