@@ -12,21 +12,37 @@
   }
 }
 
+.card {
+  border-radius: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  .content {
+    p {
+      margin: 0;
+    }
+  }
+
+  &.companion {
+    background: var(--color-gradient-brand-horizontal-revers);
+  }
+
+  &.me {
+    background: var(--color-gradient-secondary-horizontal);
+  }
+}
+
 .avatar {
   flex-grow: 0;
   flex-shrink: 0;
-  margin-top: 24px;
+  margin-top: 10px;
 }
 
 .message {
   position: relative;
   flex: 1;
-  
-  &.companion {
-    padding-left: 20px;
-  }
 
   &.companion {
+    padding-left: 20px;
     padding-right: 20px;
   }
 }
@@ -38,16 +54,15 @@
   height: 10px;
   overflow: hidden;
   z-index: 11;
-  
+  top: 32px;
+
   &.companion {
     left: 0px;
-    top: 44px;
     transform: rotate(-90deg);
   }
 
   &.me {
     right: 0;
-    top: 44px;
     transform: rotate(90deg);
   }
 

@@ -73,11 +73,7 @@ export const Create = memo(function Create() {
           <Grid.Row>
             <Grid.Cell>
               <Animation.Message>
-                <Message
-                  avatar={BOT_AVATAR_SRC}
-                  origin="companion"
-                  title={t('bot.fabledAi')}
-                >
+                <Message avatar={BOT_AVATAR_SRC} origin="companion">
                   {t('bot.createFableAiGreeting', {
                     displayName: userDisplayName,
                   })}

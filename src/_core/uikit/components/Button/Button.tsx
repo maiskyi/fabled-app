@@ -1,8 +1,11 @@
 import { ComponentProps, PropsWithChildren, ReactElement } from 'react';
 import classNames from 'classnames';
+import { noop } from 'lodash';
 
-import { IonButton, IonSpinner } from '@ionic/react';
+import { IonButton, IonIcon, IonSpinner } from '@ionic/react';
 import { Color } from '@ionic/core';
+
+import { ICON, IconName } from '../Icon';
 
 import { ButtonSocial } from './ButtonSocial/ButtonSocial';
 
@@ -17,6 +20,8 @@ export type ButtonProps = PropsWithChildren<{
   type?: ComponentProps<typeof IonButton>['type'];
   fill?: ComponentProps<typeof IonButton>['fill'];
   color?: Color;
+  size?: ComponentProps<typeof IonButton>['size'];
+  icon?: IconName;
 }>;
 
 interface ButtonComponent {
@@ -27,25 +32,40 @@ interface ButtonComponent {
 export const Button: ButtonComponent = ({
   fill,
   onClick,
-  color,
+  color = 'primary',
   children,
   className,
   block = true,
   type = 'button',
   loading = false,
   disabled = false,
+  size = 'default',
+  icon,
 }: ButtonProps) => {
   return (
     <IonButton
-      className={classNames(styles.root, className)}
+      className={classNames(
+        styles.root,
+        styles[color],
+        styles[size],
+        className
+      )}
       color={color}
       disabled={disabled}
       expand={block ? 'block' : undefined}
       fill={fill}
-      onClick={onClick}
+      onClick={loading ? noop : onClick}
       shape="round"
+      size={size}
       type={type}
     >
+      {!!icon && (
+        <IonIcon
+          className={classNames(styles.icon)}
+          icon={ICON[icon]}
+          slot="start"
+        />
+      )}
       {loading && (
         <IonSpinner className={styles.spinner} color={color} name="circular" />
       )}

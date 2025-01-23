@@ -59,6 +59,8 @@ export const Details: FC<DetailsProps> = withLoad({
                     display="flex"
                     gap={8}
                     justifyContent="flex-end"
+                    marginBottom={10}
+                    marginTop={10}
                     paddingInline={20}
                   >
                     {item.props.map((props, index) => {

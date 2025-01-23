@@ -18,7 +18,7 @@ interface UseThreadParams {
 
 export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
   const { t } = useTranslation();
-  const { displayName, avatar } = useUser();
+  const { avatar } = useUser();
   const [, navigate] = useRoute();
   const { toast } = useUtils();
 
@@ -128,7 +128,6 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           avatar: avatar,
           children: request?.message,
           origin: 'me',
-          title: displayName,
         },
         type: 'message',
       },
@@ -243,8 +242,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
             props: [
               {
                 children: t('actions.cancel'),
+                color: 'dark',
                 fill: 'outline',
-
                 onClick: onCancel,
               },
               {
@@ -296,11 +295,13 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
             props: [
               {
                 children: t('actions.readLater'),
+                color: 'dark',
                 fill: 'outline',
                 onClick: onCancel,
               },
               {
                 children: t('actions.readNow'),
+                icon: 'book-open',
                 onClick: onReadNow,
               },
             ],
@@ -322,7 +323,6 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
       ...successActions,
     ];
   }, [
-    displayName,
     avatar,
     request,
     t,
