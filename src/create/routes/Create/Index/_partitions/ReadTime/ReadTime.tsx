@@ -1,5 +1,13 @@
-/* eslint-disable react/prop-types */
-import { Box, Content, Form, FormPickerComponent, Header } from '@core/uikit';
+import {
+  Box,
+  Card,
+  Checkbox,
+  Content,
+  Footer,
+  Form,
+  FormPickerComponent,
+  Typography,
+} from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 import { FormField } from '../../../Create.const';
@@ -21,26 +29,42 @@ export const ReadTime: FormPickerComponent<number> = ({
 
   return (
     <Form<ReadTimeForm>
-      defaultValues={{ [FormField.ReadTime]: value }}
+      defaultValues={{ [FormField.ReadTime]: value || options[0].value }}
       onSubmit={handleOnSubmit}
     >
-      <Content>
-        <Header collapse="condense">
-          <Header.Title size="large" wrap>
-            {t('forms.pickReadingTime')}
-          </Header.Title>
-        </Header>
-        <Box padding={16} paddingInline={0}>
+      <Content />
+      <Box display="flex" flexDirection="column" gap={4}>
+        <Box paddingInline={20}>{t('forms.pickReadingTime')}</Box>
+        <Box display="flex" flexDirection="column" gap={16}>
           <Form.RadioGroup name={FormField.ReadTime} transparent>
             {options.map((props) => {
-              return <Form.RadioGroup.Item key={props.value} {...props} />;
+              return (
+                <Form.RadioGroup.Custom<number>
+                  key={props.value}
+                  value={props.value}
+                >
+                  {({ value: v, onSelect }) => {
+                    return (
+                      <Card onClick={onSelect} outline={v === props.value}>
+                        <Card.Content>
+                          <Box alignItems="center" display="flex" gap={12}>
+                            <Checkbox checked={v === props.value} />
+                            <Typography weight="bold">{props.label}</Typography>
+                          </Box>
+                        </Card.Content>
+                      </Card>
+                    );
+                  }}
+                </Form.RadioGroup.Custom>
+              );
             })}
           </Form.RadioGroup>
         </Box>
-        <Box padding={16} paddingInline={20}>
-          <Form.Submit>{t('actions.confirm')}</Form.Submit>
-        </Box>
-      </Content>
+      </Box>
+      <Content />
+      <Footer>
+        <Form.Submit>{t('actions.confirm')}</Form.Submit>
+      </Footer>
     </Form>
   );
 };

@@ -1,9 +1,8 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { camelCase, noop } from 'lodash';
+import { noop } from 'lodash';
 import classNames from 'classnames';
 
 import { IonCard } from '@ionic/react';
-import { Color } from '@ionic/core';
 
 import { CardHeader } from './CardHeader/CardHeader';
 import { CardSubtitle } from './CardSubtitle/CardSubtitle';
@@ -23,7 +22,7 @@ export type CardProps = PropsWithChildren<{
   onClick?: () => void;
   color?: CardColor;
   className?: string;
-  outline?: Color;
+  outline?: boolean;
 }>;
 
 interface CardComponent {
@@ -50,15 +49,13 @@ export const Card: CardComponent = ({
     if (!loading) onClick();
   };
 
-  const outlineClassName = styles[camelCase(`outline ${outline}`)];
-
   return (
     <CardContext.Provider value={{ loading }}>
       <IonCard
         className={classNames(
           styles.root,
           {
-            [outlineClassName]: !!outline,
+            [styles.outline]: outline,
             [styles.bgHorizontal]: color === 'horizontal',
           },
           className

@@ -21,7 +21,12 @@ export const Typography: FC<TypographyProps> = ({
   return createElement(
     TYPOGRAPHY_TAG_MAPPING[variant],
     {
-      className: classNames(styles[variant], styles[weight], className),
+      className: classNames(
+        styles.default,
+        styles[variant],
+        styles[weight],
+        className
+      ),
     },
     children
   );

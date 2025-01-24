@@ -44,6 +44,7 @@ export const Character: FormPickerComponent<string> = ({
         <Form.RadioGroup name={FormField.Character}>
           <Swiper
             className={styles.swiper}
+            gap={12}
             initialSlide={initialSlide}
             pagination={{ dynamicBullets: true }}
           >
