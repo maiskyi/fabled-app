@@ -41,7 +41,7 @@ export const PackageCard = memo<PackageCardProps>(function PackageCard({
               size="large"
               slot="start"
             />
-            <Card onClick={onSelect} outline={selected && 'primary'}>
+            <Card onClick={onSelect} outline={selected}>
               <Card.Header className={styles.header}>
                 {hightestMonthlyPrice !== pricePerMonth && (
                   <Card.Badge color="danger">
