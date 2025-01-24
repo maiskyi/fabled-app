@@ -121,6 +121,7 @@ export const Index: FC<IndexProps> = withLoad({
                     description: (
                       <Form.Picker<string>
                         component={Theme}
+                        height="full"
                         label={t('forms.moralLesson')}
                         name={FormField.Description}
                         options={themes}

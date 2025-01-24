@@ -1,9 +1,11 @@
 import { noop } from 'lodash';
 import { createContext } from 'use-context-selector';
 
+import { FormRadioGroupValue } from './FormRadioGroup.types';
+
 interface FormRadioGroupContextProps {
   invalid: boolean;
-  value: string;
+  value: FormRadioGroupValue;
   onChange: (...args: any[]) => void;
 }
 

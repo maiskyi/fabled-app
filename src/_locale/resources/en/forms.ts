@@ -1,5 +1,5 @@
 export const forms = {
-  chooseMoralLessonFromTheFable: 'Choose a moral lesson from the Fable',
+  chooseMoralLessonFromTheFable: 'Choose a moral lesson from the fable',
   email: 'Email',
   eventsOfTheFableHappen: 'Events of the fable happen...',
   idValue: 'ID: {{id}}',
