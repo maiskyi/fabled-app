@@ -96,6 +96,7 @@ export const FormPicker: FormPickerComponent = ({
               {anchor}
             </a>
             <IonModal
+              className={styles.modal}
               presentingElement={ref?.current?.closest('ion-page')}
               ref={modal}
               trigger={id}
@@ -104,7 +105,11 @@ export const FormPicker: FormPickerComponent = ({
                 <IonToolbar>
                   <IonTitle>{props.label}</IonTitle>
                   <IonButtons slot="end">
-                    <IonButton color="tertiary" onClick={handleOnDismiss}>
+                    <IonButton
+                      className={styles.close}
+                      color="dark"
+                      onClick={handleOnDismiss}
+                    >
                       <IonIcon icon={ICON['close-outline']} slot="icon-only" />
                     </IonButton>
                   </IonButtons>

@@ -59,10 +59,7 @@ export const Scene: FormPickerComponent<string> = ({
             justifyContent="center"
           >
             <Box>
-              <Form.RadioGroup
-                name={FormField.Scene}
-                validation={{ required: true }}
-              >
+              <Form.RadioGroup name={FormField.Scene}>
                 <Swiper
                   initialSlide={initialSlide}
                   pagination={{ dynamicBullets: true }}

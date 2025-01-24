@@ -9,3 +9,11 @@
     color: var(--ion-color-danger);
   }
 }
+
+.modal {
+  --border-radius: 24px;
+}
+
+.close {
+  --opacity: 1;
+}

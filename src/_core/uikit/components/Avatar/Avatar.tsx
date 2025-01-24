@@ -11,15 +11,16 @@ export interface AvatarProps {
   src?: string;
   icon?: IconName;
   className?: string;
+  border?: boolean;
 }
 
-export const Avatar: FC<AvatarProps> = ({ src, icon, className }) => {
+export const Avatar: FC<AvatarProps> = ({ src, icon, className, border }) => {
   return (
     <IonAvatar
       className={classNames(
         styles.root,
         {
-          [styles.border]: !!icon,
+          [styles.border]: border,
           [styles.withIcon]: !!icon,
         },
         className

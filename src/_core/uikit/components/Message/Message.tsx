@@ -33,7 +33,12 @@ export const Message: FC<MessageProps> = ({
 
   return (
     <div className={classNames(styles.root, styles[origin])}>
-      <Avatar className={styles.avatar} icon={icon} src={avatar} />
+      <Avatar
+        border={origin === 'me'}
+        className={styles.avatar}
+        icon={icon}
+        src={avatar}
+      />
       <div className={styles.message}>
         <div
           className={classNames(
