@@ -2,11 +2,10 @@
 import {
   Box,
   FormPickerComponent,
-  Header,
   Swiper,
   Form,
   Content,
-  SafeArea,
+  Footer,
 } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 
@@ -34,64 +33,46 @@ export const Character: FormPickerComponent<string> = ({
 
   return (
     <Form<CharacterForm>
-      defaultValues={{ [FormField.Character]: value }}
+      defaultValues={{ [FormField.Character]: value || options[0].value }}
       onSubmit={handleOnSubmit}
     >
-      <Content>
-        <SafeArea
-          display="flex"
-          flexDirection="column"
-          minHeight="100%"
-          safe={['bottom']}
-        >
-          <Box flex={0}>
-            <Header collapse="condense">
-              <Header.Title size="large" wrap>
-                <Translate id="forms.mainCharacterWillBe" />
-              </Header.Title>
-            </Header>
-          </Box>
-          <Box
-            display="flex"
-            flex={1}
-            flexDirection="column"
-            gap={20}
-            justifyContent="center"
+      <Content />
+      <Box display="flex" flexDirection="column" gap={8}>
+        <Box paddingInline={20}>
+          <Translate id="forms.mainCharacterWillBe" />
+        </Box>
+        <Form.RadioGroup name={FormField.Character}>
+          <Swiper
+            className={styles.swiper}
+            initialSlide={initialSlide}
+            pagination={{ dynamicBullets: true }}
           >
-            <Box>
-              <Form.RadioGroup name={FormField.Character}>
-                <Swiper
-                  initialSlide={initialSlide}
-                  pagination={{ dynamicBullets: true }}
-                >
-                  {options.map(({ value: v, label, image }) => {
-                    return (
-                      <Swiper.Slide className={styles.slide} key={v}>
-                        <Form.RadioGroup.Custom value={v}>
-                          {({ onSelect, value }) => {
-                            return (
-                              <Slide
-                                caption={label}
-                                checked={v === value}
-                                key={v}
-                                onClick={onSelect}
-                                src={image}
-                              />
-                            );
-                          }}
-                        </Form.RadioGroup.Custom>
-                      </Swiper.Slide>
-                    );
-                  })}
-                </Swiper>
-              </Form.RadioGroup>
-            </Box>
-            <Box paddingInline={80}>
-              <Form.Submit>{t('actions.confirm')}</Form.Submit>
-            </Box>
-          </Box>
-        </SafeArea>
-      </Content>
+            {options.map(({ value: v, label, image }) => {
+              return (
+                <Swiper.Slide className={styles.slide} key={v} width={170}>
+                  <Form.RadioGroup.Custom value={v}>
+                    {({ onSelect, value }) => {
+                      return (
+                        <Slide
+                          caption={label}
+                          checked={v === value}
+                          key={v}
+                          onClick={onSelect}
+                          src={image}
+                        />
+                      );
+                    }}
+                  </Form.RadioGroup.Custom>
+                </Swiper.Slide>
+              );
+            })}
+          </Swiper>
+        </Form.RadioGroup>
+      </Box>
+      <Content />
+      <Footer>
+        <Form.Submit>{t('actions.confirm')}</Form.Submit>
+      </Footer>
     </Form>
   );
 };
