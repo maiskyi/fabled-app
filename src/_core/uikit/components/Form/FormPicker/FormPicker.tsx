@@ -91,6 +91,7 @@ export const FormPicker: FormPickerComponent = ({
               {anchor}
             </a>
             <IonModal
+              backdropDismiss={false}
               breakpoints={height === 'auto' ? [0, 1] : undefined}
               className={classNames(styles.modal, {
                 [styles.auto]: height === 'auto',
