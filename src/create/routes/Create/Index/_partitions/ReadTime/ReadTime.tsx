@@ -34,7 +34,9 @@ export const ReadTime: FormPickerComponent<number> = ({
     >
       <Content />
       <Box display="flex" flexDirection="column" gap={4}>
-        <Box paddingInline={20}>{t('forms.pickReadingTime')}</Box>
+        <Box paddingInline={20}>
+          <Typography variant="body-2">{t('forms.pickReadingTime')}</Typography>
+        </Box>
         <Box display="flex" flexDirection="column" gap={16}>
           <Form.RadioGroup name={FormField.ReadTime} transparent>
             {options.map((props) => {

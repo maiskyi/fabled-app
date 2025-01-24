@@ -1,5 +1,11 @@
 .default {
   color: var(--ion-text-color);
+  &.muted {
+    color: #ababab;
+  }
+  &.secondary {
+    color: var(--ion-color-secondary);
+  }
 }
 
 .h4 {

@@ -6,6 +6,7 @@ import {
   Form,
   Content,
   Footer,
+  Typography,
 } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 
@@ -39,7 +40,9 @@ export const Character: FormPickerComponent<string> = ({
       <Content />
       <Box display="flex" flexDirection="column" gap={8}>
         <Box paddingInline={20}>
-          <Translate id="forms.mainCharacterWillBe" />
+          <Typography variant="body-2">
+            <Translate id="forms.mainCharacterWillBe" />
+          </Typography>
         </Box>
         <Form.RadioGroup name={FormField.Character}>
           <Swiper
