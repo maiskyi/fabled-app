@@ -17,8 +17,8 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
   const { isSuccess, data: bootstrap } = useGetBootstrap({
     image: {
       crop: 'thumb',
-      height: 170,
-      width: 170,
+      height: 170 * window.devicePixelRatio,
+      width: 170 * window.devicePixelRatio,
     },
   });
 

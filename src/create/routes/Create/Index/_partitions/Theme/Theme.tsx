@@ -41,33 +41,42 @@ export const Theme: FormPickerComponent<string> = ({
           </Box>
           <Box>
             <Form.RadioGroup name={FormField.Description} transparent>
-              {options.map((props) => {
-                return (
-                  <Form.RadioGroup.Custom key={props.value} value={props.value}>
-                    {({ value, onSelect }) => {
-                      const selected = value === props.value;
-                      return (
-                        <Card onClick={onSelect} outline={selected}>
-                          <Card.Content>
-                            <Box display="flex" flexDirection="column" gap={4}>
-                              <Typography
-                                color={selected ? 'secondary' : undefined}
-                                variant="body-2"
-                                weight="medium"
+              <Box display="flex" flexDirection="column">
+                {options.map((props) => {
+                  return (
+                    <Form.RadioGroup.Custom
+                      key={props.value}
+                      value={props.value}
+                    >
+                      {({ value, onSelect }) => {
+                        const selected = value === props.value;
+                        return (
+                          <Card onClick={onSelect} outline={selected}>
+                            <Card.Content>
+                              <Box
+                                display="flex"
+                                flexDirection="column"
+                                gap={4}
                               >
-                                {props.label}
-                              </Typography>
-                              <Typography muted variant="body-3">
-                                {props.note}
-                              </Typography>
-                            </Box>
-                          </Card.Content>
-                        </Card>
-                      );
-                    }}
-                  </Form.RadioGroup.Custom>
-                );
-              })}
+                                <Typography
+                                  color={selected ? 'secondary' : undefined}
+                                  variant="body-2"
+                                  weight="medium"
+                                >
+                                  {props.label}
+                                </Typography>
+                                <Typography muted variant="body-3">
+                                  {props.note}
+                                </Typography>
+                              </Box>
+                            </Card.Content>
+                          </Card>
+                        );
+                      }}
+                    </Form.RadioGroup.Custom>
+                  );
+                })}
+              </Box>
             </Form.RadioGroup>
           </Box>
         </Box>
