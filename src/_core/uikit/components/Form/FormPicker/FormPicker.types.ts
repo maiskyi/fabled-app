@@ -22,3 +22,5 @@ export interface FormPickerComponentProps<V extends FormInputOptionValue> {
 export type FormPickerComponent<V extends FormInputOptionValue> = FC<
   FormPickerComponentProps<V>
 >;
+
+export type FormPickerHeight = 'auto' | 'full';

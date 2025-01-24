@@ -9,23 +9,16 @@ import {
 import classNames from 'classnames';
 import { useContextSelector } from 'use-context-selector';
 
-import {
-  IonButton,
-  IonButtons,
-  IonHeader,
-  IonIcon,
-  IonModal,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/react';
+import { IonModal } from '@ionic/react';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';
 import { LocalizationContext } from '../../../contexts/LocalizationContext';
-import { ICON } from '../../Icon';
 import { FormInputOptionProps, FormInputOptionValue } from '../../../types';
+import { Header } from '../../Header';
 
 import {
   FormPickerValidation,
+  FormPickerHeight,
   FormPickerComponent as FormPickerModalComponent,
 } from './FormPicker.types';
 
@@ -34,6 +27,7 @@ import styles from './FormPicker.module.scss';
 interface FormPickerProps<V extends FormInputOptionValue>
   extends FormControlBaseProps<FormPickerValidation> {
   placeholder?: string;
+  height?: FormPickerHeight;
   component?: FormPickerModalComponent<V>;
   options: FormInputOptionProps<V>[];
 }
@@ -45,6 +39,7 @@ interface FormPickerComponent {
 }
 
 export const FormPicker: FormPickerComponent = ({
+  height = 'auto',
   options,
   placeholder: initialPlaceholder,
   component: Component = Fragment,
@@ -96,20 +91,24 @@ export const FormPicker: FormPickerComponent = ({
               {anchor}
             </a>
             <IonModal
+              breakpoints={height === 'auto' ? [0, 1] : undefined}
+              className={classNames(styles.modal, {
+                [styles.auto]: height === 'auto',
+              })}
+              initialBreakpoint={height === 'auto' ? 1 : undefined}
               presentingElement={ref?.current?.closest('ion-page')}
               ref={modal}
+              showBackdrop={true}
               trigger={id}
             >
-              <IonHeader translucent>
-                <IonToolbar>
-                  <IonTitle>{props.label}</IonTitle>
-                  <IonButtons slot="end">
-                    <IonButton color="tertiary" onClick={handleOnDismiss}>
-                      <IonIcon icon={ICON['close-outline']} slot="icon-only" />
-                    </IonButton>
-                  </IonButtons>
-                </IonToolbar>
-              </IonHeader>
+              <Header transparent>
+                <Header.Actions>
+                  <Header.Action
+                    icon="close-outline"
+                    onClick={handleOnDismiss}
+                  ></Header.Action>
+                </Header.Actions>
+              </Header>
               <Component
                 dismiss={handleOnDismiss}
                 onChange={onChange}

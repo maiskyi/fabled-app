@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { merge } from 'lodash';
 
-import { useUser } from '@common/hooks';
 import { BOT_AVATAR_SRC, Spinner, Typist, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -18,7 +17,7 @@ interface UseThreadParams {
 
 export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
   const { t } = useTranslation();
-  const { avatar } = useUser();
+
   const [, navigate] = useRoute();
   const { toast } = useUtils();
 
@@ -125,8 +124,8 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
       {
         id: 'userMessage',
         props: {
-          avatar: avatar,
           children: request?.message,
+          icon: 'user',
           origin: 'me',
         },
         type: 'message',
@@ -323,7 +322,6 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
       ...successActions,
     ];
   }, [
-    avatar,
     request,
     t,
     onReadNow,

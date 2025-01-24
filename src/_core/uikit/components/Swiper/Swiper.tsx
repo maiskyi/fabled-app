@@ -1,4 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react';
+import classNames from 'classnames';
 
 import { Swiper as ReactSwiper } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -10,8 +11,10 @@ import styles from './Swiper.module.scss';
 
 export type SwiperProps = PropsWithChildren<{
   gap?: number;
+  centered?: boolean;
   initialSlide?: number;
   pagination?: SwiperPaginationProps;
+  className?: string;
 }>;
 
 interface SwiperComponent {
@@ -24,11 +27,13 @@ export const Swiper: SwiperComponent = ({
   gap,
   pagination,
   initialSlide,
+  centered,
+  className,
 }: SwiperProps) => {
   return (
     <ReactSwiper
-      centeredSlides
-      className={styles.root}
+      centeredSlides={centered}
+      className={classNames(styles.root, className)}
       initialSlide={initialSlide}
       modules={[Pagination]}
       pagination={pagination}

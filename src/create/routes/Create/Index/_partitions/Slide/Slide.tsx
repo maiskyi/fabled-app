@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { Box, Card, Checkbox, Image } from '@core/uikit';
+import { Tile } from '@core/uikit';
 
-import styles from './Slide.module.scss';
+import styles from '../_partitions.module.scss';
 
 interface SlideProps {
   onClick: () => void;
@@ -13,20 +13,16 @@ interface SlideProps {
 
 export const Slide: FC<SlideProps> = ({ onClick, checked, src, caption }) => {
   return (
-    <Card onClick={onClick}>
-      <Card.Thumb aspectRatio={1}>
-        <Checkbox checked={checked} className={styles.checkbox} />
-        <Image src={src} />
-        <Box
-          bottom={12}
-          display="flex"
-          left={12}
-          position="absolute"
-          right={12}
-        >
-          <Card.Title className={styles.title}>{caption}</Card.Title>
-        </Box>
-      </Card.Thumb>
-    </Card>
+    <Tile
+      aspectRatio={1}
+      className={styles.tile}
+      onClick={onClick}
+      outline={checked ? 'secondary' : undefined}
+      src={src}
+    >
+      <Tile.Header>
+        <Tile.Title>{caption}</Tile.Title>
+      </Tile.Header>
+    </Tile>
   );
 };

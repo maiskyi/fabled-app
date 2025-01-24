@@ -8,6 +8,7 @@ import { Color } from '@ionic/core';
 import { ICON, IconName } from '../Icon';
 
 import { ButtonSocial } from './ButtonSocial/ButtonSocial';
+import { SPINNER_COLOR_MAPPING } from './Button.const';
 
 import styles from './Button.module.scss';
 
@@ -61,13 +62,19 @@ export const Button: ButtonComponent = ({
     >
       {!!icon && (
         <IonIcon
-          className={classNames(styles.icon)}
+          className={classNames(styles.icon, {
+            [styles.transparent]: loading,
+          })}
           icon={ICON[icon]}
           slot="start"
         />
       )}
       {loading && (
-        <IonSpinner className={styles.spinner} color={color} name="circular" />
+        <IonSpinner
+          className={styles.spinner}
+          color={SPINNER_COLOR_MAPPING[color]}
+          name="circular"
+        />
       )}
       <span
         className={classNames({

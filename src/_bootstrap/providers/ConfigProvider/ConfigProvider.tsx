@@ -1,6 +1,5 @@
 import { FC, Fragment, PropsWithChildren } from 'react';
 
-import { useDevice } from '@core/uikit';
 import { useGetBootstrap } from '@network/api';
 
 import { ConfigContext } from './ConfigProvider.context';
@@ -15,13 +14,11 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
   version,
   Loader = Fragment,
 }) => {
-  const { width } = useDevice();
-
   const { isSuccess, data: bootstrap } = useGetBootstrap({
     image: {
       crop: 'thumb',
-      height: width,
-      width: width,
+      height: 170,
+      width: 170,
     },
   });
 

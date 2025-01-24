@@ -27,6 +27,7 @@ import chevronRight from './assets/chevron-right.svg?raw';
 import arrowLeft from './assets/arrow-left.svg?raw';
 import feather from './assets/feather.svg?raw';
 import bookOpen from './assets/book-open.svg?raw';
+import user from './assets/user.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
@@ -34,6 +35,7 @@ const NEW_ICONS = {
   'chevron-right': `data:image/svg+xml;utf8,${chevronRight}`,
   feather: `data:image/svg+xml;utf8,${feather}`,
   fire: `data:image/svg+xml;utf8,${fire}`,
+  user: `data:image/svg+xml;utf8,${user}`,
 };
 
 export const ICON = {

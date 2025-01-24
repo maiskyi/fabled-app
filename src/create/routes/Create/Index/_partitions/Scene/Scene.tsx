@@ -2,11 +2,11 @@
 import {
   Box,
   FormPickerComponent,
-  Header,
   Swiper,
   Form,
   Content,
-  SafeArea,
+  Footer,
+  Typography,
 } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 
@@ -34,66 +34,50 @@ export const Scene: FormPickerComponent<string> = ({
 
   return (
     <Form<CharacterForm>
-      defaultValues={{ [FormField.Scene]: value }}
+      defaultValues={{ [FormField.Scene]: value || options[0].value }}
       onSubmit={handleOnSubmit}
     >
-      <Content>
-        <SafeArea
-          display="flex"
-          flexDirection="column"
-          minHeight="100%"
-          safe={['bottom']}
-        >
-          <Box flex={0}>
-            <Header collapse="condense">
-              <Header.Title size="large" wrap>
-                <Translate id="forms.eventsOfTheFableHappen" />
-              </Header.Title>
-            </Header>
-          </Box>
-          <Box
-            display="flex"
-            flex={1}
-            flexDirection="column"
-            gap={20}
-            justifyContent="center"
-          >
-            <Box>
-              <Form.RadioGroup
-                name={FormField.Scene}
-                validation={{ required: true }}
-              >
-                <Swiper
-                  initialSlide={initialSlide}
-                  pagination={{ dynamicBullets: true }}
-                >
-                  {options.map(({ label, image, value: v }) => {
-                    return (
-                      <Swiper.Slide className={styles.slide} key={v}>
-                        <Form.RadioGroup.Custom value={v}>
-                          {({ onSelect, value }) => {
-                            return (
-                              <Slide
-                                caption={label}
-                                checked={v === value}
-                                onClick={onSelect}
-                                src={image}
-                              />
-                            );
-                          }}
-                        </Form.RadioGroup.Custom>
-                      </Swiper.Slide>
-                    );
-                  })}
-                </Swiper>
-              </Form.RadioGroup>
-            </Box>
-            <Box paddingInline={80}>
-              <Form.Submit>{t('actions.confirm')}</Form.Submit>
-            </Box>
-          </Box>
-        </SafeArea>
-      </Content>
+      <Content />
+      <Box display="flex" flexDirection="column" gap={8}>
+        <Box paddingInline={20}>
+          <Typography variant="body-2">
+            <Translate id="forms.eventsOfTheFableHappen" />
+          </Typography>
+        </Box>
+        <Box>
+          <Form.RadioGroup name={FormField.Scene}>
+            <Swiper
+              className={styles.swiper}
+              gap={12}
+              initialSlide={initialSlide}
+              pagination={{ dynamicBullets: true }}
+            >
+              {options.map(({ label, image, value: v }) => {
+                return (
+                  <Swiper.Slide className={styles.slide} key={v} width={170}>
+                    <Form.RadioGroup.Custom value={v}>
+                      {({ onSelect, value }) => {
+                        return (
+                          <Slide
+                            caption={label}
+                            checked={v === value}
+                            onClick={onSelect}
+                            src={image}
+                          />
+                        );
+                      }}
+                    </Form.RadioGroup.Custom>
+                  </Swiper.Slide>
+                );
+              })}
+            </Swiper>
+          </Form.RadioGroup>
+        </Box>
+      </Box>
+      <Content />
+      <Footer>
+        <Form.Submit>{t('actions.confirm')}</Form.Submit>
+      </Footer>
     </Form>
   );
 };
