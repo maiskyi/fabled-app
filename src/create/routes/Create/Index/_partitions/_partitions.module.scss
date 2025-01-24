@@ -1,4 +1,18 @@
 .slide {
   width: calc(100% - 80px);
-  padding-bottom: 20px;
+  padding-bottom: 28px;
+  padding-top: 4px;
+}
+
+.content {
+  height: fit-content;
+  min-height: fit-content;
+}
+
+.swiper {
+  padding-inline: 20px;
+}
+
+.tile {
+  margin: 0;
 }

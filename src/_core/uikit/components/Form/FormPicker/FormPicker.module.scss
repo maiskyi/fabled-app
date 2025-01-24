@@ -12,6 +12,9 @@
 
 .modal {
   --border-radius: 24px;
+  &.auto {
+    --height: auto;
+  }
 }
 
 .close {
