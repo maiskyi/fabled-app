@@ -12,7 +12,7 @@ export const BannerAction: FC<BannerActionProps> = ({ children, onClick }) => {
   return (
     <Button
       className={styles.action}
-      color="tertiary"
+      color="light"
       onClick={onClick}
       size="small"
     >
