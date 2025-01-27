@@ -7,6 +7,8 @@ import { FormControl, FormControlBaseProps } from '../FormControl';
 
 import { FormTextareaValidation } from './FormTextarea.types';
 
+import styles from '../Form.module.scss';
+
 interface FormTextareaProps
   extends FormControlBaseProps<FormTextareaValidation> {
   rows?: number;
@@ -15,10 +17,9 @@ interface FormTextareaProps
 }
 
 export const FormTextarea: FC<FormTextareaProps> = ({
-  rows = 6,
+  rows = 4,
   disabled,
   autofocus,
-  placeholder,
   autocapitalize,
   ...props
 }) => {
@@ -31,7 +32,7 @@ export const FormTextarea: FC<FormTextareaProps> = ({
           <IonTextarea
             autoCapitalize={autocapitalize}
             autofocus={autofocus}
-            className={classNames({
+            className={classNames(styles.textarea, styles.outline, {
               'ion-invalid': invalid,
               'ion-touched': invalid,
             })}
@@ -39,13 +40,11 @@ export const FormTextarea: FC<FormTextareaProps> = ({
             errorText={error?.message}
             fill="outline"
             helperText={help}
-            label={props.label}
-            labelPlacement="floating"
             maxlength={validation?.maxLength}
             mode="md"
             onIonBlur={onBlur}
             onIonInput={onChange}
-            placeholder={placeholder}
+            placeholder={props.label}
             rows={rows}
             value={value}
           />

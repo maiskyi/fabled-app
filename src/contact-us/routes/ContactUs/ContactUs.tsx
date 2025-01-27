@@ -1,6 +1,15 @@
 import { FC } from 'react';
 
-import { Page, Header, Content, Form, Text, Box, Grid } from '@core/uikit';
+import {
+  Page,
+  Header,
+  Content,
+  Form,
+  Box,
+  Grid,
+  Typography,
+  Footer,
+} from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
@@ -54,15 +63,15 @@ export const ContactUs: FC = withLoad({
 
   return (
     <Page>
-      <Header translucent>
-        <Header.Back />
-        <Header.Title>{title}</Header.Title>
-      </Header>
-      <Content fullscreen inset={false}>
-        <Form<DTO.CreateInquiryRequest>
-          defaultValues={defaultValues}
-          onSubmit={handleOnSubmit}
-        >
+      <Form<DTO.CreateInquiryRequest>
+        defaultValues={defaultValues}
+        onSubmit={handleOnSubmit}
+      >
+        <Header translucent>
+          <Header.Back pathname={RoutePath.Profile} />
+          <Header.Title>{title}</Header.Title>
+        </Header>
+        <Content fullscreen inset={false}>
           <Grid>
             <Grid.Row>
               <Grid.Cell>
@@ -73,21 +82,23 @@ export const ContactUs: FC = withLoad({
             </Grid.Row>
             <Grid.Row>
               <Grid.Cell>
-                <Box padding={16} paddingInline={20}>
-                  <Text>{t('intro.inquiry')}</Text>
+                <Box paddingInline={20} paddingTop={12}>
+                  <Typography variant="body-3">{t('intro.inquiry')}</Typography>
                 </Box>
               </Grid.Cell>
             </Grid.Row>
             <Grid.Row>
               <Grid.Cell>
-                <Box padding={16} paddingInline={20}>
+                <Box padding={20}>
                   <Form.Text
                     disabled={!!user?.email}
+                    icon="at-sign"
                     label={t('forms.email')}
                     name="email"
                     validation={{ email: true, required: true }}
                   />
                   <Form.Text
+                    icon="mail"
                     label={t('forms.subject')}
                     name="subject"
                     validation={{ required: true }}
@@ -100,18 +111,12 @@ export const ContactUs: FC = withLoad({
                 </Box>
               </Grid.Cell>
             </Grid.Row>
-            <Grid.Row>
-              <Grid.Cell>
-                <Box padding={16} paddingInline={20}>
-                  <Form.Submit loading={isPending}>
-                    {t('actions.submit')}
-                  </Form.Submit>
-                </Box>
-              </Grid.Cell>
-            </Grid.Row>
           </Grid>
-        </Form>
-      </Content>
+        </Content>
+        <Footer>
+          <Form.Submit loading={isPending}>{t('actions.submit')}</Form.Submit>
+        </Footer>
+      </Form>
     </Page>
   );
 });
