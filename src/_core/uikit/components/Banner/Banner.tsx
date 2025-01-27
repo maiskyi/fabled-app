@@ -5,6 +5,7 @@ import { Typography } from '../Typography';
 
 import { BannerSvg } from './BannerSvg/BannerSvg';
 import { BannerImage } from './BannerImage/BannerImage';
+import { BannerIcon } from './BannerIcon/BannerIcon';
 
 import styles from './Banner.module.scss';
 
@@ -17,6 +18,7 @@ interface BannerComponent {
   (props: BannerProps): ReactElement;
   Svg: typeof BannerSvg;
   Image: typeof BannerImage;
+  Icon: typeof BannerIcon;
 }
 
 export const Banner: BannerComponent = ({
@@ -59,3 +61,4 @@ export const Banner: BannerComponent = ({
 
 Banner.Svg = BannerSvg;
 Banner.Image = BannerImage;
+Banner.Icon = BannerIcon;

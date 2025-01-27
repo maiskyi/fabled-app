@@ -10,3 +10,38 @@
   text-align: center;
   color: #f9f9f9;
 }
+
+.picture {
+  position: relative;
+
+  .image {
+    width: 333px;
+    height: 271px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .shade {
+    width: 499px;
+    height: 499px;
+    border-radius: 499px;
+    opacity: 0.5;
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      #4758ef 0%,
+      rgba(71, 88, 239, 0) 100%
+    );
+    filter: blur(128px);
+    position: absolute;
+    transform: translate(-25%, -25%);
+    z-index: 1;
+  }
+}
