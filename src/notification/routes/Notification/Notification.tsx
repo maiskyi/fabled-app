@@ -37,7 +37,6 @@ export const Notification = withLoad({
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content>
-        <Header collapse="condense" />
         {/* <Header collapse="condense">
           <Header.Title size="large" wrap>
             {title}
@@ -45,6 +44,11 @@ export const Notification = withLoad({
         </Header> */}
         <Box display="flex" flexDirection="column" minHeight="100%">
           <Grid>
+            <Grid.Row flex={0}>
+              <Grid.Cell>
+                <Header collapse="condense" transparent />
+              </Grid.Cell>
+            </Grid.Row>
             <Grid.Row flex={1}>
               <Grid.Cell>
                 <Box
@@ -54,8 +58,11 @@ export const Notification = withLoad({
                   justifyContent="center"
                   minHeight="100%"
                 >
-                  <Banner description={message} title={title}>
+                  <Banner>
                     <Banner.Icon />
+                    <Banner.Title>{title}</Banner.Title>
+                    <Banner.Description>{message}</Banner.Description>
+                    <Banner.Action>{cta}</Banner.Action>
                   </Banner>
                 </Box>
               </Grid.Cell>

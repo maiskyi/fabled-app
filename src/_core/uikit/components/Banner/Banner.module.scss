@@ -4,11 +4,18 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
+  + .description {
+    margin-top: 12px;
+  }
 }
 
 .description {
   text-align: center;
   color: #f9f9f9;
+  width: 240px;
+  + .action {
+    margin-top: 20px;
+  }
 }
 
 .picture {
@@ -22,6 +29,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &.withIcon {
+      img {
+        width: 200px;
+        height: auto;
+      }
+    }
+
     img {
       object-fit: contain;
       width: 100%;
@@ -43,5 +58,10 @@
     position: absolute;
     transform: translate(-25%, -25%);
     z-index: 1;
+  }
+
+  + .title,
+  + .description {
+    margin-top: 72px;
   }
 }

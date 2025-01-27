@@ -1,64 +1,42 @@
 import { PropsWithChildren, ReactElement } from 'react';
 
 import { Box } from '../Box';
-import { Typography } from '../Typography';
 
 import { BannerSvg } from './BannerSvg/BannerSvg';
 import { BannerImage } from './BannerImage/BannerImage';
 import { BannerIcon } from './BannerIcon/BannerIcon';
+import { BannerTitle } from './BannerTitle/BannerTitle';
+import { BannerDescription } from './BannerDescription/BannerDescription';
+import { BannerAction } from './BannerAction/BannerAction';
 
-import styles from './Banner.module.scss';
-
-export type BannerProps = PropsWithChildren<{
-  title?: string;
-  description?: string;
-}>;
+export type BannerProps = PropsWithChildren<{}>;
 
 interface BannerComponent {
   (props: BannerProps): ReactElement;
   Svg: typeof BannerSvg;
   Image: typeof BannerImage;
   Icon: typeof BannerIcon;
+  Title: typeof BannerTitle;
+  Description: typeof BannerDescription;
+  Action: typeof BannerAction;
 }
 
-export const Banner: BannerComponent = ({
-  children,
-  title,
-  description,
-}: BannerProps) => {
-  const showText = !!title || !!description;
-
+export const Banner: BannerComponent = ({ children }: BannerProps) => {
   return (
     <Box
       alignItems="center"
       display="flex"
       flexDirection="column"
-      gap={72}
       paddingInline={20}
     >
       {children}
-      {showText && (
-        <Box display="flex" flexDirection="column" gap={12}>
-          {!!title && (
-            <Box>
-              <Typography className={styles.title} variant="h4" weight="bold">
-                {title}
-              </Typography>
-            </Box>
-          )}
-          {!!description && (
-            <Box>
-              <Typography className={styles.description} variant="body-2">
-                {description}
-              </Typography>
-            </Box>
-          )}
-        </Box>
-      )}
     </Box>
   );
 };
 
-Banner.Svg = BannerSvg;
-Banner.Image = BannerImage;
+Banner.Action = BannerAction;
+Banner.Description = BannerDescription;
 Banner.Icon = BannerIcon;
+Banner.Image = BannerImage;
+Banner.Svg = BannerSvg;
+Banner.Title = BannerTitle;
