@@ -1,6 +1,8 @@
 export const intro = {
   action:
     'The link is either invalid or not supported. Please check the link or contact support for assistance.',
+  changeName:
+    'Update your profile name to personalize your experience. Your new name will appear across the app.',
   feedback:
     'We value your feedback! Please share your thoughts with us so we can continue to improve your experience. Thank you for helping us grow!',
   forgotPassword:

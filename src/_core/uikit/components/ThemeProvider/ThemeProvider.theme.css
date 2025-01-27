@@ -1,4 +1,5 @@
 html {
+  --ion-placeholder-opacity: 1;
   --ion-dynamic-font: var(--ion-default-dynamic-font);
   --ion-font-family: "IBM Plex Sans";
   /* Theme */
@@ -22,6 +23,8 @@ html {
     #f58e2e 0%,
     #4758ef 100%
   );
+  --color-bnw-800: #161616;
+  --color-bnw-700: #737373;
 }
 
 a {

@@ -1,14 +1,14 @@
 import { FC, ComponentProps } from 'react';
 import classNames from 'classnames';
-import { useContextSelector } from 'use-context-selector';
 
 import { IonIcon, IonInput } from '@ionic/react';
 
 import { FormControl, FormControlBaseProps } from '../FormControl';
 import { IconName, ICON } from '../../Icon';
-import { LocalizationContext } from '../../../contexts/LocalizationContext';
 
 import { FormTextValidation } from './FormText.types';
+
+import styles from '../Form.module.scss';
 
 interface FormTextProps extends FormControlBaseProps<FormTextValidation> {
   icon?: IconName;
@@ -22,23 +22,11 @@ export const FormText: FC<FormTextProps> = ({
   icon,
   disabled,
   autofocus,
-  placeholder: initialPlaceholder,
   autocomplete,
   type = 'text',
   autocapitalize,
   ...props
 }) => {
-  const placeholder = useContextSelector(
-    LocalizationContext,
-    ({
-      form: {
-        text: { placeholder },
-      },
-    }) =>
-      initialPlaceholder ||
-      placeholder({ label: props.label, name: props.name })
-  );
-
   return (
     <FormControl type="text" {...props}>
       {({ help, error, onBlur, invalid, onChange, value = '' }) => {
@@ -47,7 +35,7 @@ export const FormText: FC<FormTextProps> = ({
             autoCapitalize={autocapitalize}
             autocomplete={autocomplete}
             autofocus={autofocus}
-            className={classNames({
+            className={classNames(styles.input, styles.outline, {
               'ion-invalid': invalid,
               'ion-touched': invalid,
             })}
@@ -55,17 +43,22 @@ export const FormText: FC<FormTextProps> = ({
             errorText={error?.message}
             fill="outline"
             helperText={help}
-            label={props.label}
-            labelPlacement={icon ? 'stacked' : 'floating'}
             mode="md"
             onIonBlur={onBlur}
             onIonInput={onChange}
-            placeholder={placeholder}
+            placeholder={props.label}
             type={type}
             value={value}
           >
             {icon && (
-              <IonIcon aria-hidden="true" icon={ICON[icon]} slot="start" />
+              <IonIcon
+                aria-hidden="true"
+                icon={ICON[icon]}
+                slot="start"
+                style={{
+                  fontSize: 20,
+                }}
+              />
             )}
           </IonInput>
         );
