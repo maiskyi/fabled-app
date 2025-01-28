@@ -28,13 +28,17 @@ import arrowLeft from './assets/arrow-left.svg?raw';
 import feather from './assets/feather.svg?raw';
 import bookOpen from './assets/book-open.svg?raw';
 import user from './assets/user.svg?raw';
+import mail from './assets/mail.svg?raw';
+import atSign from './assets/at-sign.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
+  'at-sign': `data:image/svg+xml;utf8,${atSign}`,
   'book-open': `data:image/svg+xml;utf8,${bookOpen}`,
   'chevron-right': `data:image/svg+xml;utf8,${chevronRight}`,
   feather: `data:image/svg+xml;utf8,${feather}`,
   fire: `data:image/svg+xml;utf8,${fire}`,
+  mail: `data:image/svg+xml;utf8,${mail}`,
   user: `data:image/svg+xml;utf8,${user}`,
 };
 

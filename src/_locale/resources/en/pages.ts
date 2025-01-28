@@ -2,7 +2,7 @@ export const pages = {
   action: 'Invalid or unsupported link',
   appUpdate: 'Update Available!',
   auth: 'Welcome to',
-  changeName: 'Change name',
+  changeName: 'Change your name',
   changePassword: 'Change password',
   contactUs: 'Contact us',
   create: 'Create a new fable',

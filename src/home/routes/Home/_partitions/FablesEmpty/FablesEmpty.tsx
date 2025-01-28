@@ -15,11 +15,12 @@ export const FablesEmpty = memo(function FableEmpty() {
         justifyContent="center"
         minHeight="100%"
       >
-        <Banner
-          description={t('empty.noFables.description')}
-          title={t('empty.noFables.title')}
-        >
+        <Banner>
           <Banner.Image asset="two-robots" />
+          <Banner.Title>{t('empty.noFables.title')}</Banner.Title>
+          <Banner.Description>
+            {t('empty.noFables.description')}
+          </Banner.Description>
         </Banner>
       </Box>
     </Grid.Row>

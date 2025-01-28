@@ -6,6 +6,17 @@
     height: auto;
   }
 
+  &.small {
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+    min-height: 32px;
+  }
+
   &.default {
     --padding-start: 26px;
     --padding-end: 26px;
@@ -22,10 +33,17 @@
     }
   }
 
+  &.light {
+    --background: var(--color-bnw-800);
+    &::part(native) {
+      background: var(--color-bnw-800);
+    }
+  }
+
   &.primary {
     --background: var(--color-gradient-brand-horizontal);
     &::part(native) {
-      --background: var(--color-gradient-brand-horizontal);
+      background: var(--color-gradient-brand-horizontal);
     }
   }
 }

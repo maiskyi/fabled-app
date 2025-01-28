@@ -1,4 +1,4 @@
-import { Box, Button, Content, Grid, Header, Page, Text } from '@core/uikit';
+import { Banner, Box, Content, Grid, Header, Page } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 import { withLoad } from '@core/analytics';
@@ -28,23 +28,33 @@ export const Notification = withLoad({
         <Header.Back pathname={RoutePath.Index} />
       </Header>
       <Content>
-        <Header collapse="condense">
-          <Header.Title size="large" wrap>
-            {title}
-          </Header.Title>
-        </Header>
-        <Grid>
-          <Grid.Row>
-            <Grid.Cell>
-              <Box padding={16} paddingInline={20}>
-                <Text>{message}</Text>
-              </Box>
-              <Box padding={16} paddingInline={20}>
-                <Button onClick={dispatch}>{cta}</Button>
-              </Box>
-            </Grid.Cell>
-          </Grid.Row>
-        </Grid>
+        <Box display="flex" flexDirection="column" minHeight="100%">
+          <Grid>
+            <Grid.Row flex={0}>
+              <Grid.Cell>
+                <Header collapse="condense" transparent />
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row flex={1}>
+              <Grid.Cell>
+                <Box
+                  alignItems="center"
+                  display="flex"
+                  flex={1}
+                  justifyContent="center"
+                  minHeight="100%"
+                >
+                  <Banner>
+                    <Banner.Icon />
+                    <Banner.Title>{title}</Banner.Title>
+                    <Banner.Description>{message}</Banner.Description>
+                    <Banner.Action onClick={dispatch}>{cta}</Banner.Action>
+                  </Banner>
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
+        </Box>
       </Content>
     </Page>
   );

@@ -1,6 +1,15 @@
 import { FC } from 'react';
 
-import { Page, Header, Content, Text, Form, Box, Grid } from '@core/uikit';
+import {
+  Page,
+  Header,
+  Content,
+  Form,
+  Box,
+  Grid,
+  Footer,
+  Typography,
+} from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { useTranslation } from '@core/localization';
 import { NotificationType, RoutePath } from '@bootstrap/constants';
@@ -50,15 +59,15 @@ export const Feedback: FC = withLoad({
 
   return (
     <Page>
-      <Header translucent>
-        <Header.Back />
-        <Header.Title>{title}</Header.Title>
-      </Header>
-      <Content fullscreen inset={false}>
-        <Form<DTO.CreateFeedbackRequest>
-          defaultValues={defaultValues}
-          onSubmit={handleOnSubmit}
-        >
+      <Form<DTO.CreateFeedbackRequest>
+        defaultValues={defaultValues}
+        onSubmit={handleOnSubmit}
+      >
+        <Header translucent>
+          <Header.Back pathname={RoutePath.Profile} />
+          <Header.Title>{title}</Header.Title>
+        </Header>
+        <Content fullscreen inset={false}>
           <Grid>
             <Grid.Row>
               <Grid.Cell>
@@ -69,21 +78,23 @@ export const Feedback: FC = withLoad({
             </Grid.Row>
             <Grid.Row>
               <Grid.Cell>
-                <Box padding={16} paddingInline={20}>
-                  <Text>{t('intro.feedback')}</Text>
+                <Box paddingInline={20} paddingTop={12}>
+                  <Typography variant="body-3">
+                    {t('intro.feedback')}
+                  </Typography>
                 </Box>
               </Grid.Cell>
             </Grid.Row>
             <Grid.Row>
               <Grid.Cell>
-                <Form.StarRating
-                  label={t('forms.rateUs')}
-                  name="rating"
-                  validation={{ max: 5, min: 1, required: true }}
-                />
-                <Box padding={16} paddingInline={20}>
+                <Box padding={20}>
+                  <Form.StarRating
+                    label={t('forms.rateUs')}
+                    name="rating"
+                    validation={{ max: 5, min: 1, required: true }}
+                  />
                   <Form.Text
-                    disabled={!!user?.email}
+                    icon="at-sign"
                     label={t('forms.email')}
                     name="email"
                     validation={{ email: true, required: true }}
@@ -98,16 +109,15 @@ export const Feedback: FC = withLoad({
             </Grid.Row>
             <Grid.Row>
               <Grid.Cell>
-                <Box padding={16} paddingInline={20}>
-                  <Form.Submit loading={isPending}>
-                    {t('actions.submit')}
-                  </Form.Submit>
-                </Box>
+                <Box padding={16} paddingInline={20}></Box>
               </Grid.Cell>
             </Grid.Row>
           </Grid>
-        </Form>
-      </Content>
+        </Content>
+        <Footer>
+          <Form.Submit loading={isPending}>{t('actions.submit')}</Form.Submit>
+        </Footer>
+      </Form>
     </Page>
   );
 });

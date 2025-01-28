@@ -11,7 +11,7 @@ import {
   FormControlType,
 } from './FormControl.types';
 
-import styles from './FormControl.module.scss';
+import styles from '../Form.module.scss';
 
 interface FormControlProps<T extends FormControlBaseValidation>
   extends FormControlBaseProps<T> {
@@ -74,7 +74,7 @@ export const FormControl: FormControlComponent = ({
         if (inline) return <>{content}</>;
 
         return (
-          <div className={classNames(styles.root, className)}>{content}</div>
+          <div className={classNames(styles.control, className)}>{content}</div>
         );
       }}
       rules={rules}

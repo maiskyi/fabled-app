@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import SRC from '../../assets/images/logo.webp';
+import SRC from '../../assets/images/logo.png';
 
 export interface LogoProps {
   height?: number;
