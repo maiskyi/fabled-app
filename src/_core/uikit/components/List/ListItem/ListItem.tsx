@@ -2,6 +2,8 @@ import { FC, PropsWithChildren } from 'react';
 
 import { IonItem } from '@ionic/react';
 
+import { ICON } from '../../Icon';
+
 import styles from '../List.module.scss';
 
 type ListItemProps = PropsWithChildren<{
@@ -20,6 +22,7 @@ export const ListItem: FC<ListItemProps> = ({
     <IonItem
       button={button}
       className={styles.item}
+      detailIcon={ICON['chevron-right']}
       lines={lines}
       onClick={onClick}
     >
