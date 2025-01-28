@@ -1,6 +1,4 @@
-import { entries } from 'lodash';
-
-import { Header, Page, Content, List, Text, SafeArea, Grid } from '@core/uikit';
+import { Header, Page, Content, SafeArea, Grid } from '@core/uikit';
 import { useAuth } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
@@ -10,6 +8,7 @@ import { ProfileUserCard } from './_partitions/ProfileUserCard';
 import { ProfileMenu } from './_partitions/ProfileMenu';
 import { ProfileActions } from './_partitions/ProfileActions';
 import { useProfileMenu } from './Profile.hooks';
+import { ProfilePlan } from './_partitions/ProfilePlan';
 
 export const Profile = withLoad({
   category: 'Profile',
@@ -18,7 +17,7 @@ export const Profile = withLoad({
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  const { menu, plans } = useProfileMenu();
+  const { menu, hasActiveSubscription } = useProfileMenu();
 
   const title = t('pages.profile');
 
@@ -38,7 +37,7 @@ export const Profile = withLoad({
             </Grid.Row>
             <Grid.Row>
               <Grid.Cell>
-                {entries(plans).map(([title, items]) => {
+                {/* {entries(plans).map(([title, items]) => {
                   return (
                     <List key={title}>
                       <List.Header>{title}</List.Header>
@@ -57,7 +56,8 @@ export const Profile = withLoad({
                       ))}
                     </List>
                   );
-                })}
+                })} */}
+                {!hasActiveSubscription && <ProfilePlan />}
                 <ProfileMenu menu={menu} />
                 {!user?.isAnonymous && <ProfileActions />}
               </Grid.Cell>

@@ -11,7 +11,7 @@ interface ProfileMenuProps {
 
 export const ProfileMenu: FC<ProfileMenuProps> = ({ menu }) => {
   return (
-    <Fragment>
+    <Box marginTop={12}>
       {entries(menu).map(([title, items], index, arr) => {
         return (
           <Fragment key={title}>
@@ -36,6 +36,6 @@ export const ProfileMenu: FC<ProfileMenuProps> = ({ menu }) => {
           </Fragment>
         );
       })}
-    </Fragment>
+    </Box>
   );
 };
