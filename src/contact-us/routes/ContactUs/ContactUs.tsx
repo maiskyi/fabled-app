@@ -91,7 +91,6 @@ export const ContactUs: FC = withLoad({
               <Grid.Cell>
                 <Box padding={20}>
                   <Form.Text
-                    disabled={!!user?.email}
                     icon="at-sign"
                     label={t('forms.email')}
                     name="email"
