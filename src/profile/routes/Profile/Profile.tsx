@@ -33,13 +33,6 @@ export const Profile = withLoad({
           <Grid>
             <Grid.Row>
               <Grid.Cell>
-                <Header collapse="condense">
-                  <Header.Title size="large">{title}</Header.Title>
-                </Header>
-              </Grid.Cell>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Cell>
                 <ProfileUserCard />
               </Grid.Cell>
             </Grid.Row>
@@ -71,6 +64,7 @@ export const Profile = withLoad({
             </Grid.Row>
           </Grid>
         </SafeArea>
+        <Header collapse="condense" />
       </Content>
     </Page>
   );

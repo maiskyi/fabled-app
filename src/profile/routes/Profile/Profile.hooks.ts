@@ -51,7 +51,7 @@ export const useProfileMenu = () => {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
   const { openPrivacyPolicy, openTermsAndConditions } = useLegal();
-  // const { user } = useAuth();
+
   const { subscriptions, subscriptionOfferingMapping } =
     useProfileSubscription();
 
@@ -90,7 +90,7 @@ export const useProfileMenu = () => {
       {
         active: true,
         group: t('actions.support'),
-        icon: 'mail-outline',
+        icon: 'mail',
         label: t('actions.contactUs'),
         onClick: () =>
           navigate({ action: 'push', pathname: RoutePath.ContactUs }),
@@ -98,7 +98,7 @@ export const useProfileMenu = () => {
       {
         active: true,
         group: t('actions.support'),
-        icon: 'chatbox-ellipses-outline',
+        icon: 'smile',
         label: t('actions.shareYourFeedback'),
         onClick: () =>
           navigate({ action: 'push', pathname: RoutePath.Feedback }),
@@ -106,14 +106,14 @@ export const useProfileMenu = () => {
       {
         active: true,
         group: t('actions.legal'),
-        icon: 'document-text-outline',
+        icon: 'shield',
         label: t('actions.privacyPolicy'),
         onClick: openPrivacyPolicy,
       } as ProfileMenuItem,
       {
         active: true,
         group: t('actions.legal'),
-        icon: 'document-text-outline',
+        icon: 'bookmark',
         label: t('actions.termsAndConditions'),
         onClick: openTermsAndConditions,
       } as ProfileMenuItem,

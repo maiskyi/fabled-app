@@ -23,7 +23,7 @@ export const ProfileMenu: FC<ProfileMenuProps> = ({ menu }) => {
                   lines="none"
                   onClick={onClick}
                 >
-                  <List.Icon name={icon} />
+                  <List.Icon color="secondary" name={icon} />
                   <List.Label>{label}</List.Label>
                 </List.Item>
               ))}
