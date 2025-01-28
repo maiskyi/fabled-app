@@ -41,9 +41,11 @@
   }
 
   &.primary {
-    --background: var(--color-gradient-brand-horizontal);
-    &::part(native) {
-      background: var(--color-gradient-brand-horizontal);
+    &.solid {
+      --background: var(--color-gradient-brand-horizontal);
+      &::part(native) {
+        background: var(--color-gradient-brand-horizontal);
+      }
     }
   }
 }

@@ -28,7 +28,7 @@ export const FablesProvider: FC<FablesProviderProps> = ({ children }) => {
   } = useGetStoriesInfinite(
     {
       image: {
-        aspectRatio: '4:3',
+        aspectRatio: '59:44',
         crop: 'thumb',
         width: value,
       },

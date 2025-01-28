@@ -83,7 +83,7 @@ export const ContactUs: FC = withLoad({
             <Grid.Row>
               <Grid.Cell>
                 <Box paddingInline={20} paddingTop={12}>
-                  <Typography variant="body-3">{t('intro.inquiry')}</Typography>
+                  <Typography variant="body-2">{t('intro.inquiry')}</Typography>
                 </Box>
               </Grid.Cell>
             </Grid.Row>

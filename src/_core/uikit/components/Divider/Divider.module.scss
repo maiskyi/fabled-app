@@ -1,7 +1,10 @@
 .root {
   display: flex;
   align-items: center;
-  gap: 8px;
+
+  &.gap {
+    gap: 8px;
+  }
 }
 
 .middle {
@@ -13,5 +16,5 @@
   display: block;
   flex: 1;
   height: 1px;
-  background-color: var(--ion-text-color-step-400);
+  background-color: var(--color-bnw-800);
 }
