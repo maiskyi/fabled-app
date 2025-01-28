@@ -64,7 +64,7 @@ export const ProfileActions: FC = () => {
       </Button>
       <Button
         block
-        color="danger"
+        color="secondary"
         fill="outline"
         onClick={handleOnDelete}
         size="small"

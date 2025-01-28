@@ -13,7 +13,7 @@ type ListLabelProps = PropsWithChildren<{
 export const ListLabel: FC<ListLabelProps> = ({ children, color }) => {
   return (
     <IonLabel
-      className={classNames(typography['body-3'], styles.label)}
+      className={classNames(typography['body-2'], styles.label)}
       color={color}
     >
       {children}
