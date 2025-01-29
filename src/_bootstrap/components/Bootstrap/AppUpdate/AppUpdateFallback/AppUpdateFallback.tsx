@@ -4,19 +4,8 @@ import {
   AppUpdateProviderFallbackComponent,
   AppUpdateProviderFallbackComponentProps,
 } from '@core/app';
-import {
-  Box,
-  Button,
-  Content,
-  Empty,
-  Footer,
-  Header,
-  Page,
-  useSplashScreen,
-} from '@core/uikit';
+import { Banner, Box, Content, Grid, Page, useSplashScreen } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-
-import Icon from './AppUpdateFallback.svg?react';
 
 export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
   openAppStore,
@@ -30,36 +19,42 @@ export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
 
   return (
     <Page>
-      <Header translucent />
-      <Content>
-        <Box display="flex" flexDirection="column" minHeight="100%">
-          <Box flex={0}>
-            <Header collapse="condense">
-              <Header.Title size="large" wrap>
-                {t('pages.appUpdate')}
-              </Header.Title>
-            </Header>
-          </Box>
-          <Box
-            alignItems="center"
-            display="flex"
-            flex={1}
-            justifyContent="center"
-            minHeight="100%"
-          >
-            <Empty
-              Icon={Icon}
-              description={t('empty.appUpdate.description')}
-              title={t('empty.appUpdate.title')}
-            >
-              <Button loading={loading} onClick={handleOnUpdateNow}>
-                {t('actions.updateNow')}
-              </Button>
-            </Empty>
-          </Box>
+      <Content scrollY={false}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          minHeight="100%"
+          paddingInline={20}
+        >
+          <Grid>
+            <Grid.Row flex={1}>
+              <Grid.Cell>
+                <Box
+                  alignItems="center"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  minHeight="100%"
+                >
+                  <Banner>
+                    <Banner.Image asset="tree-robots" />
+                    <Banner.Title>{t('empty.appUpdate.title')}</Banner.Title>
+                    <Banner.Description>
+                      {t('empty.appUpdate.description')}
+                    </Banner.Description>
+                    <Banner.Action
+                      loading={loading}
+                      onClick={handleOnUpdateNow}
+                    >
+                      {t('actions.updateNow')}
+                    </Banner.Action>
+                  </Banner>
+                </Box>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
         </Box>
       </Content>
-      <Footer />
     </Page>
   );
 };

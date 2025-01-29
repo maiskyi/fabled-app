@@ -2,6 +2,7 @@
 
 export * from './components/Animation';
 export * from './components/AttributeList';
+export * from './components/Avatar';
 export * from './components/Badge';
 export * from './components/Banner';
 export * from './components/Box';
@@ -35,8 +36,8 @@ export * from './components/Text';
 export * from './components/ThemeProvider';
 export * from './components/Tile';
 export * from './components/Typist';
-export * from './components/View';
 export * from './components/Typography';
+export * from './components/View';
 
 // Hooks
 export * from './hooks/useBrowser';

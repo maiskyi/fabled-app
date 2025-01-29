@@ -216,6 +216,7 @@ export const ImageTransformationQueryAspectRatio = {
   '3:1': '3:1',
   '3:2': '3:2',
   '4:3': '4:3',
+  '59:44': '59:44',
   '5:4': '5:4',
 } as const;
 

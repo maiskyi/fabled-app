@@ -31,7 +31,7 @@ interface ButtonComponent {
 }
 
 export const Button: ButtonComponent = ({
-  fill,
+  fill = 'solid',
   onClick,
   color = 'primary',
   children,
@@ -49,6 +49,7 @@ export const Button: ButtonComponent = ({
         styles.root,
         styles[color],
         styles[size],
+        styles[fill],
         className
       )}
       color={color}
@@ -71,7 +72,7 @@ export const Button: ButtonComponent = ({
       )}
       {loading && (
         <IonSpinner
-          className={styles.spinner}
+          className={classNames(styles.spinner, styles[size])}
           color={SPINNER_COLOR_MAPPING[color]}
           name="circular"
         />

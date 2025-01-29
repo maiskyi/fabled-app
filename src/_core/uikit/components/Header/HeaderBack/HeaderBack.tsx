@@ -14,7 +14,7 @@ interface HeaderBackProps {
 
 export const HeaderBack: FC<HeaderBackProps> = ({
   pathname,
-  color = 'tertiary',
+  color = 'dark',
 }) => {
   const router = useIonRouter();
 

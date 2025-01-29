@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
 import { IonCardSubtitle } from '@ionic/react';
 
@@ -9,9 +10,17 @@ export type DividerProps = PropsWithChildren<{}>;
 export const Divider: FC<DividerProps> = ({ children }) => {
   if (children) {
     return (
-      <div className={styles.root}>
+      <div
+        className={classNames(styles.root, {
+          [styles.gap]: !!children,
+        })}
+      >
         <span className={styles.line} />
-        <IonCardSubtitle className={styles.middle}>{children}</IonCardSubtitle>
+        {!!children && (
+          <IonCardSubtitle className={styles.middle}>
+            {children}
+          </IonCardSubtitle>
+        )}
         <span className={styles.line} />
       </div>
     );

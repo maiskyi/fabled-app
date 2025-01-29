@@ -14,7 +14,7 @@ export const FableCard: FC<FableCardProps> = ({ item, onClick }) => {
   const { t } = useTranslation();
 
   return (
-    <Tile aspectRatio={4 / 3} onClick={onClick} src={item?.image}>
+    <Tile aspectRatio={59 / 44} onClick={onClick} src={item?.image}>
       <Tile.Header>
         <Tile.Subtitle>
           {t('forms.readTimeMin', {

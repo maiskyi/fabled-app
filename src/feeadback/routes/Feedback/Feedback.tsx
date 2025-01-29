@@ -79,7 +79,7 @@ export const Feedback: FC = withLoad({
             <Grid.Row>
               <Grid.Cell>
                 <Box paddingInline={20} paddingTop={12}>
-                  <Typography variant="body-3">
+                  <Typography variant="body-2">
                     {t('intro.feedback')}
                   </Typography>
                 </Box>

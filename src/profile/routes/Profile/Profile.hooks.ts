@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
-import { PlanAction, RoutePath } from '@bootstrap/constants';
+import { RoutePath } from '@bootstrap/constants';
 import { useLegal } from '@common/hooks';
 // import { useAuth } from '@core/auth';
 import { usePurchases, PurchasesStoreProduct } from '@core/purchases';
@@ -51,46 +51,14 @@ export const useProfileMenu = () => {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
   const { openPrivacyPolicy, openTermsAndConditions } = useLegal();
-  // const { user } = useAuth();
-  const { subscriptions, subscriptionOfferingMapping } =
-    useProfileSubscription();
-
-  const planItems = useMemo((): ProfileMenuItem[] => {
-    return subscriptions.map(({ title, description, identifier }) => ({
-      active: true,
-      group: t('actions.plan'),
-      icon: 'diamond-outline',
-      label: title,
-      note: description,
-      onClick: () =>
-        navigate({
-          action: 'push',
-          params: {
-            action: PlanAction.Manage,
-            identifier: subscriptionOfferingMapping[identifier],
-          },
-          pathname: RoutePath.Plan,
-          search: {
-            productId: identifier,
-          },
-        }),
-    }));
-  }, [t, subscriptions, navigate, subscriptionOfferingMapping]);
+  const { activeSubscriptions } = usePurchases();
 
   const menuItems = useMemo((): ProfileMenuItem[] => {
     return [
       {
         active: true,
-        group: t('actions.settings'),
-        icon: 'person-outline',
-        label: t('actions.changeName'),
-        onClick: () =>
-          navigate({ action: 'push', pathname: RoutePath.ChangeName }),
-      } as ProfileMenuItem,
-      {
-        active: true,
         group: t('actions.support'),
-        icon: 'mail-outline',
+        icon: 'mail',
         label: t('actions.contactUs'),
         onClick: () =>
           navigate({ action: 'push', pathname: RoutePath.ContactUs }),
@@ -98,7 +66,7 @@ export const useProfileMenu = () => {
       {
         active: true,
         group: t('actions.support'),
-        icon: 'chatbox-ellipses-outline',
+        icon: 'smile',
         label: t('actions.shareYourFeedback'),
         onClick: () =>
           navigate({ action: 'push', pathname: RoutePath.Feedback }),
@@ -106,14 +74,14 @@ export const useProfileMenu = () => {
       {
         active: true,
         group: t('actions.legal'),
-        icon: 'document-text-outline',
+        icon: 'shield',
         label: t('actions.privacyPolicy'),
         onClick: openPrivacyPolicy,
       } as ProfileMenuItem,
       {
         active: true,
         group: t('actions.legal'),
-        icon: 'document-text-outline',
+        icon: 'bookmark',
         label: t('actions.termsAndConditions'),
         onClick: openTermsAndConditions,
       } as ProfileMenuItem,
@@ -125,10 +93,5 @@ export const useProfileMenu = () => {
     [menuItems]
   );
 
-  const plans = useMemo(
-    () => groupBy(planItems, ({ group }) => group),
-    [planItems]
-  );
-
-  return { menu, plans };
+  return { hasActiveSubscription: !!activeSubscriptions.length, menu };
 };
