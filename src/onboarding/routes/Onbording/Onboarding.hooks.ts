@@ -2,10 +2,6 @@ import { useMemo } from 'react';
 
 import { useTranslation } from '@core/localization';
 
-import Image from './_assets/image.svg?react';
-import Library from './_assets/library.svg?react';
-import Outline from './_assets/outline.svg?react';
-// import Personalized from './_assets/personalized.svg?react';
 import { OnboardingSlideProps } from './_partitions/OnboardingSlide';
 
 export const useOnboarding = () => {
@@ -15,12 +11,17 @@ export const useOnboarding = () => {
     (): OnboardingSlideProps[] => [
       {
         description: t('onboarding.library.description'),
-        image: Library,
+        image: 'tree-robots',
+        title: t('onboarding.library.title'),
+      },
+      {
+        description: t('onboarding.library.description'),
+        image: 'tree-robots',
         title: t('onboarding.library.title'),
       },
       {
         description: t('onboarding.outline.description'),
-        image: Outline,
+        image: 'tree-robots',
         title: t('onboarding.outline.title'),
       },
       // {
@@ -30,7 +31,7 @@ export const useOnboarding = () => {
       // },
       {
         description: t('onboarding.image.description'),
-        image: Image,
+        image: 'tree-robots',
         title: t('onboarding.image.title'),
       },
     ],
