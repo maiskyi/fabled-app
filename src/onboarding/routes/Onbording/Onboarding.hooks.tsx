@@ -13,7 +13,7 @@ export const useOnboarding = () => {
     (): OnboardingSlideProps[] => [
       {
         description: t('onboarding.welcome.description'),
-        image: 'tree-robots',
+        image: 'robot-1',
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}
@@ -24,7 +24,7 @@ export const useOnboarding = () => {
       },
       {
         description: t('onboarding.library.description'),
-        image: 'tree-robots',
+        image: 'robot-2',
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}
@@ -34,7 +34,7 @@ export const useOnboarding = () => {
       },
       {
         description: t('onboarding.outline.description'),
-        image: 'tree-robots',
+        image: 'robot-3',
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}
@@ -49,7 +49,7 @@ export const useOnboarding = () => {
       // },
       {
         description: t('onboarding.image.description'),
-        image: 'tree-robots',
+        image: 'robots-1-2-3',
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}
