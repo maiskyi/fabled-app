@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { useAsyncFn } from 'react-use';
 
 import { Swiper, SwiperClass, SwiperRef } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 
 import { Button } from '../Button';
 
@@ -65,9 +64,7 @@ export const Onboarding: OnboardingComponent = ({
         <Swiper
           centeredSlides
           className={styles.root}
-          modules={[Pagination]}
           onSlideChange={handleOnSlideChange}
-          pagination
           ref={swiper}
           slidesPerView={1}
           spaceBetween={gap}
@@ -78,7 +75,7 @@ export const Onboarding: OnboardingComponent = ({
       <div className={styles.nav}>
         <div>
           <Button
-            color="medium"
+            color="dark"
             fill="outline"
             loading={isSkipping}
             onClick={handleOnSkip}

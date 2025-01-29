@@ -6,21 +6,18 @@
   --swiper-pagination-bullet-inactive-color: var(--ion-color-dark);
   --swiper-pagination-color: var(--ion-color-tertiary);
   --swiper-pagination-bullet-horizontal-gap: 2px;
-  gap: 16px;
+  gap: 60px;
 }
 
 .slides {
   flex: 1 0 auto;
 }
 
-.slide {
-  padding-bottom: 48px;
-}
-
 .nav {
   flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
+  padding-inline: 20px;
 
   .primary {
     width: 200px;
