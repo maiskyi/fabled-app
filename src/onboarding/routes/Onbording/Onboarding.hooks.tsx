@@ -25,12 +25,22 @@ export const useOnboarding = () => {
       {
         description: t('onboarding.library.description'),
         image: 'tree-robots',
-        title: <Translate id="onboarding.library.title" />,
+        title: (
+          <Translate
+            components={{ hl: <OnboardingHl /> }}
+            id="onboarding.library.title"
+          />
+        ),
       },
       {
         description: t('onboarding.outline.description'),
         image: 'tree-robots',
-        title: <Translate id="onboarding.outline.title" />,
+        title: (
+          <Translate
+            components={{ hl: <OnboardingHl /> }}
+            id="onboarding.outline.title"
+          />
+        ),
       },
       // {
       //   description: t('onboarding.personalized.description'),
@@ -40,7 +50,12 @@ export const useOnboarding = () => {
       {
         description: t('onboarding.image.description'),
         image: 'tree-robots',
-        title: <Translate id="onboarding.image.title" />,
+        title: (
+          <Translate
+            components={{ hl: <OnboardingHl /> }}
+            id="onboarding.image.title"
+          />
+        ),
       },
     ],
     [t]

@@ -1,13 +1,11 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { IonText } from '@ionic/react';
-
-import styles from './OnboardingItemDescription.module.scss';
+import { Typography } from '../../../Typography';
 
 type OnboardingItemDescriptionProps = PropsWithChildren<{}>;
 
 export const OnboardingItemDescription: FC<OnboardingItemDescriptionProps> = ({
   children,
 }) => {
-  return <IonText className={styles.root}>{children}</IonText>;
+  return <Typography variant="body-2">{children}</Typography>;
 };
