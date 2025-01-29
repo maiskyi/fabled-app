@@ -12,6 +12,7 @@ export const useOnboarding = () => {
   const onboarding = useMemo(
     (): OnboardingSlideProps[] => [
       {
+        background: 'ultramarine-blue',
         description: t('onboarding.welcome.description'),
         image: 'robot-1',
         title: (
@@ -23,6 +24,7 @@ export const useOnboarding = () => {
         ),
       },
       {
+        background: 'lavender-indigo',
         description: t('onboarding.library.description'),
         image: 'robot-2',
         title: (
@@ -33,6 +35,7 @@ export const useOnboarding = () => {
         ),
       },
       {
+        background: 'ultramarine-blue',
         description: t('onboarding.outline.description'),
         image: 'robot-3',
         title: (
@@ -48,6 +51,7 @@ export const useOnboarding = () => {
       //   title: t('onboarding.personalized.title'),
       // },
       {
+        background: 'lavender-indigo',
         description: t('onboarding.image.description'),
         image: 'robots-1-2-3',
         title: (

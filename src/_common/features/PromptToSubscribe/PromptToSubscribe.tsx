@@ -24,7 +24,7 @@ import { Fragment } from 'react/jsx-runtime';
 import { NotificationType } from '@bootstrap/constants';
 
 import { PlanFrom, PlanFromField } from './PromptToSubscribe.types';
-import Icon from './PromptToSubscribe.svg?react';
+// import Icon from './PromptToSubscribe.svg?react';
 import { PromptToSubscribeOption } from './PromptToSubscribeOption';
 import { PromptToSubscribeSubmit } from './PromptToSubscribeSubmit';
 
@@ -138,9 +138,7 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
                       height="100%"
                       justifyContent="center"
                     >
-                      <Banner>
-                        <Banner.Svg Component={Icon} />
-                      </Banner>
+                      <Banner>{/* <Banner.Svg Component={Icon} /> */}</Banner>
                     </Box>
                   )}
                 </Grid.Cell>
