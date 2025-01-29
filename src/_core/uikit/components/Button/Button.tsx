@@ -72,7 +72,7 @@ export const Button: ButtonComponent = ({
       )}
       {loading && (
         <IonSpinner
-          className={styles.spinner}
+          className={classNames(styles.spinner, styles[size])}
           color={SPINNER_COLOR_MAPPING[color]}
           name="circular"
         />
