@@ -74,7 +74,7 @@ export const Button: ButtonComponent = ({
         <IonSpinner
           className={classNames(styles.spinner, styles[size])}
           color={SPINNER_COLOR_MAPPING[color]}
-          name="circular"
+          name="crescent"
         />
       )}
       <span
