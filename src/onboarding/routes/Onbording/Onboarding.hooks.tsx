@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
 
-import { useTranslation } from '@core/localization';
+import { Translate, useTranslation } from '@core/localization';
+import { APP_NAME } from '@common/constants';
 
 import { OnboardingSlideProps } from './_partitions/OnboardingSlide';
+import { OnboardingHl } from './_partitions/OnboardingHl';
 
 export const useOnboarding = () => {
   const { t } = useTranslation();
@@ -10,19 +12,25 @@ export const useOnboarding = () => {
   const onboarding = useMemo(
     (): OnboardingSlideProps[] => [
       {
-        description: t('onboarding.library.description'),
+        description: t('onboarding.welcome.description'),
         image: 'tree-robots',
-        title: t('onboarding.library.title'),
+        title: (
+          <Translate
+            components={{ hl: <OnboardingHl /> }}
+            id="onboarding.welcome.title"
+            values={{ name: APP_NAME }}
+          />
+        ),
       },
       {
         description: t('onboarding.library.description'),
         image: 'tree-robots',
-        title: t('onboarding.library.title'),
+        title: <Translate id="onboarding.library.title" />,
       },
       {
         description: t('onboarding.outline.description'),
         image: 'tree-robots',
-        title: t('onboarding.outline.title'),
+        title: <Translate id="onboarding.outline.title" />,
       },
       // {
       //   description: t('onboarding.personalized.description'),
@@ -32,7 +40,7 @@ export const useOnboarding = () => {
       {
         description: t('onboarding.image.description'),
         image: 'tree-robots',
-        title: t('onboarding.image.title'),
+        title: <Translate id="onboarding.image.title" />,
       },
     ],
     [t]

@@ -63,7 +63,7 @@ export const Onboarding = withLoad({
                   >
                     {onboarding.map((item) => {
                       return (
-                        <Slides.Item key={item.title}>
+                        <Slides.Item key={item.description}>
                           <OnboardingSlide {...item} />
                         </Slides.Item>
                       );

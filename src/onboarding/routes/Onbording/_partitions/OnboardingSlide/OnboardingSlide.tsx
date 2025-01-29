@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 
 import { Banner, BannerImageAsset, Box, Onboarding } from '@core/uikit';
 
 export interface OnboardingSlideProps {
-  title: string;
+  title: ReactElement;
   description: string;
   image: BannerImageAsset;
 }
@@ -26,7 +26,13 @@ export const OnboardingSlide: FC<OnboardingSlideProps> = ({
           <Banner.Image asset={image} />
         </Banner>
       </Box>
-      <Box display="flex" flexDirection="column" gap={20} textAlign="center">
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap={20}
+        paddingInline={20}
+        textAlign="center"
+      >
         <Onboarding.Item.Title>{title}</Onboarding.Item.Title>
         <Onboarding.Item.Description>{description}</Onboarding.Item.Description>
       </Box>
