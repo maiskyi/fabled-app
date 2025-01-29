@@ -4,16 +4,7 @@ import {
   AppUpdateProviderFallbackComponent,
   AppUpdateProviderFallbackComponentProps,
 } from '@core/app';
-import {
-  Banner,
-  Box,
-  Content,
-  Footer,
-  Grid,
-  Header,
-  Page,
-  useSplashScreen,
-} from '@core/uikit';
+import { Banner, Box, Content, Grid, Page, useSplashScreen } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
 export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
@@ -28,8 +19,7 @@ export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
 
   return (
     <Page>
-      <Header transparent />
-      <Content>
+      <Content scrollY={false}>
         <Box
           display="flex"
           flexDirection="column"
@@ -47,7 +37,7 @@ export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
                   minHeight="100%"
                 >
                   <Banner>
-                    <Banner.Image asset="two-robots" />
+                    <Banner.Image asset="tree-robots" />
                     <Banner.Title>{t('empty.appUpdate.title')}</Banner.Title>
                     <Banner.Description>
                       {t('empty.appUpdate.description')}
@@ -65,7 +55,6 @@ export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
           </Grid>
         </Box>
       </Content>
-      <Footer />
     </Page>
   );
 };

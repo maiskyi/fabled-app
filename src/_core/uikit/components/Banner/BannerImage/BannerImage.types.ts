@@ -1,1 +1,1 @@
-export type BannerImageAsset = 'two-robots';
+export type BannerImageAsset = 'two-robots' | 'tree-robots';

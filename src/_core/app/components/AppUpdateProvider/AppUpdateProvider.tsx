@@ -28,7 +28,7 @@ export const AppUpdateProvider: FC<AppUpdateProviderProps> = ({
 
       return updateAvailability === AppUpdateAvailability.UPDATE_AVAILABLE;
     }
-    return true;
+    return false;
   });
 
   if (loading) return <Loader />;
