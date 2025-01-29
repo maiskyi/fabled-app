@@ -57,14 +57,6 @@ export const useProfileMenu = () => {
     return [
       {
         active: true,
-        group: t('actions.settings'),
-        icon: 'person-outline',
-        label: t('actions.changeName'),
-        onClick: () =>
-          navigate({ action: 'push', pathname: RoutePath.ChangeName }),
-      } as ProfileMenuItem,
-      {
-        active: true,
         group: t('actions.support'),
         icon: 'mail',
         label: t('actions.contactUs'),

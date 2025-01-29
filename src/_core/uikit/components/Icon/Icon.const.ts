@@ -33,6 +33,7 @@ import atSign from './assets/at-sign.svg?raw';
 import bookmark from './assets/bookmark.svg?raw';
 import shield from './assets/shield.svg?raw';
 import smile from './assets/smile.svg?raw';
+import edit3 from './assets/edit-3.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
@@ -40,6 +41,7 @@ const NEW_ICONS = {
   'book-open': `data:image/svg+xml;utf8,${bookOpen}`,
   bookmark: `data:image/svg+xml;utf8,${bookmark}`,
   'chevron-right': `data:image/svg+xml;utf8,${chevronRight}`,
+  'edit-3': `data:image/svg+xml;utf8,${edit3}`,
   feather: `data:image/svg+xml;utf8,${feather}`,
   fire: `data:image/svg+xml;utf8,${fire}`,
   mail: `data:image/svg+xml;utf8,${mail}`,

@@ -12,9 +12,16 @@ export interface AvatarProps {
   icon?: IconName;
   className?: string;
   border?: boolean;
+  size?: number;
 }
 
-export const Avatar: FC<AvatarProps> = ({ src, icon, className, border }) => {
+export const Avatar: FC<AvatarProps> = ({
+  src,
+  icon,
+  className,
+  border,
+  size,
+}) => {
   return (
     <IonAvatar
       className={classNames(
@@ -25,6 +32,7 @@ export const Avatar: FC<AvatarProps> = ({ src, icon, className, border }) => {
         },
         className
       )}
+      style={{ height: size, width: size }}
     >
       {!!src && <img alt="" src={src} />}
       {!!icon && <IonIcon icon={ICON[icon]} style={{ fontSize: 24 }} />}

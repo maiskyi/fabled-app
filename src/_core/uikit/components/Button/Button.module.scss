@@ -15,6 +15,10 @@
     line-height: 14px;
     font-weight: 400;
     min-height: 32px;
+    .icon {
+      margin: 0 12px 0 0;
+      font-size: 16px;
+    }
   }
 
   &.default {
@@ -34,9 +38,11 @@
   }
 
   &.light {
-    --background: var(--color-bnw-800);
-    &::part(native) {
-      background: var(--color-bnw-800);
+    &.solid {
+      --background: var(--color-bnw-800);
+      &::part(native) {
+        background: var(--color-bnw-800);
+      }
     }
   }
 
