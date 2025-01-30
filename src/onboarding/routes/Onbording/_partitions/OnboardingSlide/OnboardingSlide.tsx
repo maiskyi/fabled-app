@@ -1,25 +1,17 @@
 import { FC, ReactElement } from 'react';
 
-import {
-  Banner,
-  BannerImageAsset,
-  Box,
-  Onboarding,
-  BannerImageBackground,
-} from '@core/uikit';
+import { Box, Onboarding } from '@core/uikit';
 
 export interface OnboardingSlideProps {
   title: ReactElement;
   description: string;
-  image: BannerImageAsset;
-  background: BannerImageBackground;
+  image: string;
 }
 
 export const OnboardingSlide: FC<OnboardingSlideProps> = ({
   title,
   description,
   image,
-  background,
 }) => {
   return (
     <Box
@@ -30,9 +22,21 @@ export const OnboardingSlide: FC<OnboardingSlideProps> = ({
       height="100%"
     >
       <Box alignItems="center" display="flex" flex={1} justifyContent="center">
-        <Banner>
-          <Banner.Image asset={image} background={background} />
-        </Banner>
+        <Box
+          alignItems="center"
+          display="flex"
+          height={271}
+          justifyContent="center"
+          position="relative"
+          width={333}
+          zIndex={2}
+        >
+          <img
+            alt=""
+            src={image}
+            style={{ height: '100%', objectFit: 'contain', width: '100%' }}
+          />
+        </Box>
       </Box>
       <Box
         display="flex"
