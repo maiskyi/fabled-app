@@ -12,6 +12,7 @@ import { DISSMISS_TIMEOUT } from './usePromptToSubscribe.const';
 interface UsePromptToSubscribeParams<T extends object> {
   component: PromptToSubscribeComponent<T>;
   auto?: boolean;
+  dissmissTimeout?: number;
 }
 
 interface UsePromptToSubscribeState {}
@@ -26,6 +27,7 @@ type UsePromptToSubscribeReturnType<T extends object> = [
 export const usePromptToSubscribe = <T extends object = {}>({
   component,
   auto = false,
+  dissmissTimeout = DISSMISS_TIMEOUT,
 }: UsePromptToSubscribeParams<T>): UsePromptToSubscribeReturnType<T> => {
   const [extraModalParams, setExtraModalParams] = useState<T>({} as T);
 
@@ -59,7 +61,7 @@ export const usePromptToSubscribe = <T extends object = {}>({
   const [{ value: canDismiss }, unlock] = useAsyncFn(
     async () => {
       return new Promise<boolean>((resolve) => {
-        setTimeout(() => resolve(true), DISSMISS_TIMEOUT);
+        setTimeout(() => resolve(true), dissmissTimeout);
       });
     },
     [],
@@ -81,7 +83,7 @@ export const usePromptToSubscribe = <T extends object = {}>({
         dissmissPromptToSubscribe();
       }
     },
-    dissmissTimeout: DISSMISS_TIMEOUT,
+    dissmissTimeout,
     introEligibility,
     offerings,
   });
