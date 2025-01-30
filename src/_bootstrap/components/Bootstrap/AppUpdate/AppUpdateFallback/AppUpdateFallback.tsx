@@ -37,7 +37,7 @@ export const AppUpdateFallback: AppUpdateProviderFallbackComponent = ({
                   minHeight="100%"
                 >
                   <Banner>
-                    <Banner.Image asset="tree-robots" />
+                    <Banner.Image asset="robots-1-2-3" />
                     <Banner.Title>{t('empty.appUpdate.title')}</Banner.Title>
                     <Banner.Description>
                       {t('empty.appUpdate.description')}

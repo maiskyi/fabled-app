@@ -2,16 +2,16 @@ export const onboarding = {
   image: {
     description:
       'Every fable you create comes to life with a beautiful illustration.',
-    title: 'Custom AI illustrations',
+    title: '<hl>Custom</hl> AI illustrations',
   },
   library: {
     description: 'Store and revisit the magical stories you’ve created.',
-    title: 'Your personal story library',
+    title: 'Your <hl>personal</hl> story library',
   },
   outline: {
     description:
       'Customize your fables with a location, characters, and moral lesson.',
-    title: 'Create unique stories',
+    title: 'Create <hl>unique</hl> stories',
   },
   personalized: {
     description:
@@ -21,6 +21,6 @@ export const onboarding = {
   welcome: {
     description:
       'Discover enchanting tales crafted for you with AI assistance.',
-    title: 'Welcome to',
+    title: 'Welcome to <hl>{{name}}</hl>',
   },
 };

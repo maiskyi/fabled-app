@@ -1,31 +1,26 @@
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 
 import {
+  Banner,
+  BannerImageAsset,
   Box,
   Onboarding,
-  useMediaSwitch,
-  SvgFunctionComponent,
+  BannerImageBackground,
 } from '@core/uikit';
 
 export interface OnboardingSlideProps {
-  title: string;
+  title: ReactElement;
   description: string;
-  image: SvgFunctionComponent;
+  image: BannerImageAsset;
+  background: BannerImageBackground;
 }
 
 export const OnboardingSlide: FC<OnboardingSlideProps> = ({
   title,
   description,
-  image: Image,
+  image,
+  background,
 }) => {
-  const { value: width } = useMediaSwitch({
-    lg: 600,
-    md: 500,
-    sm: 300,
-    xl: 600,
-    xs: 300,
-  });
-
   return (
     <Box
       alignItems="center"
@@ -33,33 +28,21 @@ export const OnboardingSlide: FC<OnboardingSlideProps> = ({
       flexDirection="column"
       gap={24}
       height="100%"
-      justifyContent="center"
     >
-      <Box
-        alignItems="center"
-        aspectRatio={1}
-        display="flex"
-        justifyContent="center"
-        width={width}
-      >
-        <Onboarding.Item.Svg Svg={Image} height="auto" width="auto" />
+      <Box alignItems="center" display="flex" flex={1} justifyContent="center">
+        <Banner>
+          <Banner.Image asset={image} background={background} />
+        </Banner>
       </Box>
-      <Box display="flex" flexDirection="column" gap={8}>
-        <Box flex={0} textAlign="center">
-          <Onboarding.Item.Title>{title}</Onboarding.Item.Title>
-        </Box>
-        <Box
-          alignItems="center"
-          display="flex"
-          flex={0}
-          flexDirection="column"
-          justifyContent="center"
-          textAlign="center"
-        >
-          <Onboarding.Item.Description>
-            {description}
-          </Onboarding.Item.Description>
-        </Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap={20}
+        paddingInline={20}
+        textAlign="center"
+      >
+        <Onboarding.Item.Title>{title}</Onboarding.Item.Title>
+        <Onboarding.Item.Description>{description}</Onboarding.Item.Description>
       </Box>
     </Box>
   );

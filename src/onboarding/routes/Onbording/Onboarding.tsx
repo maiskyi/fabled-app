@@ -14,7 +14,6 @@ import { RoutePath } from '@bootstrap/constants';
 import { useRoute } from '@core/navigation';
 import { useSignInAnonymously } from '@core/auth';
 
-import { OnboardingWelome } from './_partitions/OnboardingWelome';
 import { OnboardingSlide } from './_partitions/OnboardingSlide';
 import { useOnboarding } from './Onboarding.hooks';
 
@@ -41,12 +40,12 @@ export const Onboarding = withLoad({
 
   return (
     <Page>
-      <Header translucent>
+      <Header transparent>
         <Header.Actions>
-          <Header.Action icon="help-buoy-outline" onClick={handleOnContactUs} />
+          <Header.Action icon="life-buoy" onClick={handleOnContactUs} />
         </Header.Actions>
       </Header>
-      <Content>
+      <Content scrollY={false}>
         <SafeArea
           display="flex"
           flexDirection="column"
@@ -57,17 +56,14 @@ export const Onboarding = withLoad({
           <Grid>
             <Grid.Row flex="1 0 auto">
               <Grid.Cell>
-                <Box height="100%" minHeight="100%" paddingInline={20}>
+                <Box height="100%" minHeight="100%">
                   <Slides
                     onCompleted={handleOnCompletedSkip}
                     onSkip={handleOnCompletedSkip}
                   >
-                    <Slides.Item>
-                      <OnboardingWelome />
-                    </Slides.Item>
                     {onboarding.map((item) => {
                       return (
-                        <Slides.Item key={item.title}>
+                        <Slides.Item key={item.description}>
                           <OnboardingSlide {...item} />
                         </Slides.Item>
                       );
@@ -80,7 +76,7 @@ export const Onboarding = withLoad({
         </SafeArea>
       </Content>
       <Footer>
-        <Box paddingInline={20} textAlign="center">
+        <Box textAlign="center">
           <Disclaimer />
         </Box>
       </Footer>

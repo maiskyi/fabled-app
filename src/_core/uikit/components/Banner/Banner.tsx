@@ -2,7 +2,6 @@ import { PropsWithChildren, ReactElement } from 'react';
 
 import { Box } from '../Box';
 
-import { BannerSvg } from './BannerSvg/BannerSvg';
 import { BannerImage } from './BannerImage/BannerImage';
 import { BannerIcon } from './BannerIcon/BannerIcon';
 import { BannerTitle } from './BannerTitle/BannerTitle';
@@ -13,7 +12,7 @@ export type BannerProps = PropsWithChildren<{}>;
 
 interface BannerComponent {
   (props: BannerProps): ReactElement;
-  Svg: typeof BannerSvg;
+
   Image: typeof BannerImage;
   Icon: typeof BannerIcon;
   Title: typeof BannerTitle;
@@ -38,5 +37,4 @@ Banner.Action = BannerAction;
 Banner.Description = BannerDescription;
 Banner.Icon = BannerIcon;
 Banner.Image = BannerImage;
-Banner.Svg = BannerSvg;
 Banner.Title = BannerTitle;

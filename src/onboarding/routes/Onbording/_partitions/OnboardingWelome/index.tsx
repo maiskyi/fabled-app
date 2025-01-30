@@ -1,1 +1,0 @@
-export { OnboardingWelome } from './OnboardingWelome';
