@@ -14,8 +14,6 @@ import {
   Form,
   Grid,
   Header,
-  useDevice,
-  Banner,
   Text,
   useUtils,
   Loading,
@@ -36,7 +34,6 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
   PromptToSubscribeProps
 > = ({ dismiss, dissmissTimeout, offerings, introEligibility, message }) => {
   const { t } = useTranslation();
-  const { isTablet } = useDevice();
   const { toast } = useUtils();
 
   const { isPending, mutate } = usePurchaseStoreProduct();
@@ -128,21 +125,7 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
                   </Grid.Cell>
                 </Grid.Row>
               )}
-              <Grid.Row flex={1}>
-                <Grid.Cell>
-                  {isTablet && (
-                    <Box
-                      alignItems="center"
-                      display="flex"
-                      flexDirection="column"
-                      height="100%"
-                      justifyContent="center"
-                    >
-                      <Banner>{/* <Banner.Svg Component={Icon} /> */}</Banner>
-                    </Box>
-                  )}
-                </Grid.Cell>
-              </Grid.Row>
+              <Grid.Row flex={1} />
               <Grid.Row flex={0}>
                 <Grid.Cell>
                   <Box paddingInline={20}>
@@ -162,24 +145,20 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
               </Grid.Row>
               <Grid.Row flex={0}>
                 <Grid.Cell>
-                  <Box padding={16} paddingInline={20}>
-                    <Form.RadioGroup
-                      name={PlanFromField.Product}
-                      validation={{ required: true }}
-                    >
-                      <Box display="flex" flexDirection="column" gap={8}>
-                        {packages.map((item) => {
-                          return (
-                            <PromptToSubscribeOption
-                              hightestMonthlyPrice={hightestMonthlyPrice}
-                              key={item.identifier}
-                              package={item}
-                            />
-                          );
-                        })}
-                      </Box>
-                    </Form.RadioGroup>
-                  </Box>
+                  <Form.RadioGroup
+                    name={PlanFromField.Product}
+                    validation={{ required: true }}
+                  >
+                    {packages.map((item) => {
+                      return (
+                        <PromptToSubscribeOption
+                          hightestMonthlyPrice={hightestMonthlyPrice}
+                          key={item.identifier}
+                          package={item}
+                        />
+                      );
+                    })}
+                  </Form.RadioGroup>
                 </Grid.Cell>
               </Grid.Row>
             </Grid>

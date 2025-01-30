@@ -35,7 +35,7 @@ export const PromptToSubscribeSubmit: FC<PromptToSubscribeSubmitProps> = ({
   )?.product?.introPrice;
 
   return (
-    <Form.Submit color="dark">
+    <Form.Submit color="primary">
       {hasTrial
         ? t('actions.startYourTrial', {
             periodNumberOfUnits: introPrice?.periodNumberOfUnits,
