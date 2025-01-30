@@ -1,11 +1,13 @@
 .root {
+  left: 50%;
+  top: 50%;
   width: 499px;
   height: 499px;
   border-radius: 499px;
   opacity: 0.5;
   filter: blur(128px);
   position: absolute;
-  transform: translate(-25%, -25%);
+  transform: translate(-50%, -50%);
   z-index: 1;
   &.ultramarine-blue {
     background: radial-gradient(

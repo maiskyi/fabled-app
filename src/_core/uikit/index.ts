@@ -30,6 +30,7 @@ export * from './components/Onboarding';
 export * from './components/Page';
 export * from './components/Reader';
 export * from './components/SafeArea';
+export * from './components/Shade';
 export * from './components/Spinner';
 export * from './components/Swiper';
 export * from './components/Text';

@@ -7,11 +7,10 @@ import {
   Header,
   Page,
   SafeArea,
+  Shade,
   Onboarding as Slides,
 } from '@core/uikit';
 import { Disclaimer } from '@common/features';
-import { RoutePath } from '@bootstrap/constants';
-import { useRoute } from '@core/navigation';
 import { useSignInAnonymously } from '@core/auth';
 
 import { OnboardingSlide } from './_partitions/OnboardingSlide';
@@ -21,18 +20,9 @@ export const Onboarding = withLoad({
   category: 'Onbording',
   name: 'Onbording',
 })(() => {
-  const [, navigate] = useRoute();
-
   const { onboarding } = useOnboarding();
 
   const { mutateAsync } = useSignInAnonymously();
-
-  const handleOnContactUs = () => {
-    navigate({
-      action: 'push',
-      pathname: RoutePath.ContactUs,
-    });
-  };
 
   const handleOnCompletedSkip = async () => {
     await mutateAsync();
@@ -40,11 +30,7 @@ export const Onboarding = withLoad({
 
   return (
     <Page>
-      <Header transparent>
-        <Header.Actions>
-          <Header.Action icon="life-buoy" onClick={handleOnContactUs} />
-        </Header.Actions>
-      </Header>
+      <Header transparent />
       <Content scrollY={false}>
         <SafeArea
           display="flex"
@@ -56,7 +42,8 @@ export const Onboarding = withLoad({
           <Grid>
             <Grid.Row flex="1 0 auto">
               <Grid.Cell>
-                <Box height="100%" minHeight="100%">
+                <Box height="100%" minHeight="100%" position="relative">
+                  <Shade top="calc(50% - 108px)" />
                   <Slides
                     onCompleted={handleOnCompletedSkip}
                     onSkip={handleOnCompletedSkip}
