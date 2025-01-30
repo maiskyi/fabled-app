@@ -23,6 +23,11 @@ html {
     #f58e2e 0%,
     #4758ef 100%
   );
+  --color-gradient-mix-horizontal: linear-gradient(
+    90deg,
+    #f58e2e 0%,
+    #4758ef 100%
+  );
   --color-bnw-800: #161616;
   --color-bnw-700: #737373;
 }

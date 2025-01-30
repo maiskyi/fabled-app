@@ -52,7 +52,7 @@ export const PromptToSubscribeOption: FC<PromptToSubscribeOptionProps> = ({
                 </Box>
                 {hightestMonthlyPrice !== pricePerMonth && (
                   <Box flex={0}>
-                    <Badge color="secondary">
+                    <Badge color="gradient-mix-horizontal">
                       {t('help.discountOff', {
                         value: calcDiscount(
                           hightestMonthlyPrice,

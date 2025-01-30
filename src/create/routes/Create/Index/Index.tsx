@@ -41,8 +41,10 @@ export const Index: FC<IndexProps> = withLoad({
   const [, navigate] = useRoute();
   const { characters, themes, scenes, readTimes } = useOptions();
   const { toast } = useUtils();
+
   const [, subscribe] = usePromptToSubscribe({
     component: PromptToSubscribe,
+    dissmissTimeout: 1,
   });
 
   const { data, isPending, isSuccess, mutate } = useCreateStory();
