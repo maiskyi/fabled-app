@@ -14,12 +14,13 @@ import {
   Form,
   Grid,
   Header,
-  Text,
   useUtils,
   Loading,
+  Typography,
 } from '@core/uikit';
 import { Fragment } from 'react/jsx-runtime';
 import { NotificationType } from '@bootstrap/constants';
+import { APP_NAME } from '@common/constants';
 
 import { PlanFrom, PlanFromField } from './PromptToSubscribe.types';
 // import Icon from './PromptToSubscribe.svg?react';
@@ -107,58 +108,46 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
             minHeight="100%"
           >
             <Grid>
-              <Grid.Row flex={0}>
+              <Grid.Row flex={1}>
                 <Grid.Cell>
-                  <Header collapse="condense">
-                    <Header.Title size="large" wrap>
-                      {t('forms.unlockPremiumFeatures')}
-                    </Header.Title>
-                  </Header>
-                </Grid.Cell>
-              </Grid.Row>
-              {!!message && (
-                <Grid.Row flex={0}>
-                  <Grid.Cell>
-                    <Box paddingInline={20}>
-                      <Text>{message}</Text>
+                  <Box display="flex" flexDirection="column" height="100%">
+                    <Box flex={1} />
+                    <Box flex={0} paddingInline={20}>
+                      <Typography variant="h3" weight="semi-bold">
+                        {message ||
+                          t('pages.promptToSubscribe', { name: APP_NAME })}
+                      </Typography>
                     </Box>
-                  </Grid.Cell>
-                </Grid.Row>
-              )}
-              <Grid.Row flex={1} />
-              <Grid.Row flex={0}>
-                <Grid.Cell>
-                  <Box paddingInline={20}>
-                    <AttributeList>
-                      <AttributeList.Item>
-                        <Translate id="features.ad" />
-                      </AttributeList.Item>
-                      <AttributeList.Item>
-                        <Translate id="features.speed" />
-                      </AttributeList.Item>
-                      <AttributeList.Item>
-                        <Translate id="features.storiesGereric" />
-                      </AttributeList.Item>
-                    </AttributeList>
+                    <Box flex={0} paddingInline={20}>
+                      <AttributeList>
+                        <AttributeList.Item variant="body-2">
+                          <Translate id="features.ad" />
+                        </AttributeList.Item>
+                        <AttributeList.Item variant="body-2">
+                          <Translate id="features.speed" />
+                        </AttributeList.Item>
+                        <AttributeList.Item variant="body-2">
+                          <Translate id="features.storiesGereric" />
+                        </AttributeList.Item>
+                      </AttributeList>
+                    </Box>
+                    <Box flex={1}>
+                      <Form.RadioGroup
+                        name={PlanFromField.Product}
+                        validation={{ required: true }}
+                      >
+                        {packages.map((item) => {
+                          return (
+                            <PromptToSubscribeOption
+                              hightestMonthlyPrice={hightestMonthlyPrice}
+                              key={item.identifier}
+                              package={item}
+                            />
+                          );
+                        })}
+                      </Form.RadioGroup>
+                    </Box>
                   </Box>
-                </Grid.Cell>
-              </Grid.Row>
-              <Grid.Row flex={0}>
-                <Grid.Cell>
-                  <Form.RadioGroup
-                    name={PlanFromField.Product}
-                    validation={{ required: true }}
-                  >
-                    {packages.map((item) => {
-                      return (
-                        <PromptToSubscribeOption
-                          hightestMonthlyPrice={hightestMonthlyPrice}
-                          key={item.identifier}
-                          package={item}
-                        />
-                      );
-                    })}
-                  </Form.RadioGroup>
                 </Grid.Cell>
               </Grid.Row>
             </Grid>

@@ -1,5 +1,6 @@
 export type TypographyVariant =
   | 'h1'
+  | 'h3'
   | 'h4'
   | 'body-1'
   | 'body-2'

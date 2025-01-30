@@ -18,5 +18,4 @@ export const forms = {
   readTimeMin: 'Read time: {{min}} min',
   readingTime: 'Reading time',
   subject: 'Subject',
-  unlockPremiumFeatures: 'Unlock Premium features',
 };
