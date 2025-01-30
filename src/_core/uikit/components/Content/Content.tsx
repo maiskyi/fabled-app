@@ -20,7 +20,7 @@ export type ContentProps = PropsWithChildren<{
 
 export const Content = forwardRef<ContentInstance, ContentProps>(
   function Content({ children, fullscreen, inset = false, ...props }, ref) {
-    const { src, withCover } = useContext(CoverContext);
+    const { src, withCover, size, position } = useContext(CoverContext);
 
     return (
       <IonContent
@@ -36,7 +36,11 @@ export const Content = forwardRef<ContentInstance, ContentProps>(
         {withCover && (
           <div
             className={styles.cover}
-            style={{ backgroundImage: `url(${src})` }}
+            style={{
+              backgroundImage: `url(${src})`,
+              backgroundPosition: position,
+              backgroundSize: size,
+            }}
           />
         )}
         {children}
