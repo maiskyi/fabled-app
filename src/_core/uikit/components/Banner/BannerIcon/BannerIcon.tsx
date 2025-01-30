@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Color } from '@ionic/core';
 
 import { IconName } from '../../Icon';
-import { LOGO } from '../../../constants';
+import { ASSETS } from '../../../constants';
 
 import styles from '../Banner.module.scss';
 
@@ -18,7 +18,7 @@ export const BannerIcon: FC<BannerIconProps> = () => {
     <div className={styles.picture}>
       <div className={styles.shade}></div>
       <div className={classNames(styles.image, styles.withIcon)}>
-        <img alt="" src={LOGO} />
+        <img alt="" src={ASSETS.LOGO} />
       </div>
     </div>
   );

@@ -5,5 +5,3 @@ export type BannerImageAsset =
   | 'robot-4'
   | 'two-robots'
   | 'robots-1-2-3';
-
-export type BannerImageBackground = 'ultramarine-blue' | 'lavender-indigo';

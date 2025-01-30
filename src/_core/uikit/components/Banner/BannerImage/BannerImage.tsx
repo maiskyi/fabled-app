@@ -1,14 +1,15 @@
 import { FC } from 'react';
-import classNames from 'classnames';
 
-import { BannerImageAsset, BannerImageBackground } from './BannerImage.types';
+import { Shade, ShadeBackground } from '../../Shade';
+
+import { BannerImageAsset } from './BannerImage.types';
 import { ASSETS_MAPPING } from './BannerImage.const';
 
 import styles from '../Banner.module.scss';
 
 interface BannerImageProps {
   asset: BannerImageAsset;
-  background?: BannerImageBackground;
+  background?: ShadeBackground;
 }
 
 export const BannerImage: FC<BannerImageProps> = ({
@@ -17,7 +18,7 @@ export const BannerImage: FC<BannerImageProps> = ({
 }) => {
   return (
     <div className={styles.picture}>
-      <div className={classNames(styles.shade, styles[background])}></div>
+      <Shade background={background} />
       <div className={styles.image}>
         <img alt="" src={ASSETS_MAPPING[asset]} />
       </div>

@@ -1,13 +1,8 @@
-import {
-  TWO_ROBOTS,
-  ROBOTS_1_2_3,
-  ROBOT_1,
-  ROBOT_2,
-  ROBOT_3,
-  ROBOT_4,
-} from '../../../constants';
+import { ASSETS } from '../../../constants';
 
 import { BannerImageAsset } from './BannerImage.types';
+
+const { TWO_ROBOTS, ROBOTS_1_2_3, ROBOT_1, ROBOT_2, ROBOT_3, ROBOT_4 } = ASSETS;
 
 export const ASSETS_MAPPING: Record<BannerImageAsset, string> = {
   'robot-1': ROBOT_1,
