@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import { ASSETS } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 import { APP_NAME } from '@common/constants';
 
@@ -12,9 +13,8 @@ export const useOnboarding = () => {
   const onboarding = useMemo(
     (): OnboardingSlideProps[] => [
       {
-        background: 'ultramarine-blue',
         description: t('onboarding.welcome.description'),
-        image: 'robot-1',
+        image: ASSETS.ROBOTS_1_2_3,
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}
@@ -24,9 +24,8 @@ export const useOnboarding = () => {
         ),
       },
       {
-        background: 'lavender-indigo',
         description: t('onboarding.library.description'),
-        image: 'robot-2',
+        image: ASSETS.ROBOT_1,
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}
@@ -35,9 +34,8 @@ export const useOnboarding = () => {
         ),
       },
       {
-        background: 'ultramarine-blue',
         description: t('onboarding.outline.description'),
-        image: 'robot-3',
+        image: ASSETS.ROBOT_2,
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}
@@ -51,9 +49,8 @@ export const useOnboarding = () => {
       //   title: t('onboarding.personalized.title'),
       // },
       {
-        background: 'lavender-indigo',
         description: t('onboarding.image.description'),
-        image: 'robots-1-2-3',
+        image: ASSETS.ROBOT_3,
         title: (
           <Translate
             components={{ hl: <OnboardingHl /> }}

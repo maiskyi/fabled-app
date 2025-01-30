@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { merge } from 'lodash';
 
-import { BOT_AVATAR_SRC, Spinner, Typist, useUtils } from '@core/uikit';
+import { ASSETS, Spinner, Typist, useUtils } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { PlanAction, RoutePath } from '@bootstrap/constants';
@@ -140,7 +140,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           {
             id: 'contentMessage',
             props: {
-              avatar: BOT_AVATAR_SRC,
+              avatar: ASSETS.BOT_AVATAR_SRC,
               children: (
                 <Typist
                   onComplete={() => handleOnTypingComplete('contentMessage')}
@@ -168,7 +168,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           {
             id: 'imageMessage',
             props: {
-              avatar: BOT_AVATAR_SRC,
+              avatar: ASSETS.BOT_AVATAR_SRC,
               children: (
                 <Typist
                   onComplete={() => handleOnTypingComplete('imageMessage')}
@@ -196,7 +196,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           {
             id: 'progressMessage',
             props: {
-              avatar: BOT_AVATAR_SRC,
+              avatar: ASSETS.BOT_AVATAR_SRC,
               children: <Spinner color="light" variant="dots" />,
               origin: 'companion',
               title: t('bot.fabledAi'),
@@ -214,7 +214,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           {
             id: 'errorMessage',
             props: {
-              avatar: BOT_AVATAR_SRC,
+              avatar: ASSETS.BOT_AVATAR_SRC,
               children: (
                 <Typist
                   onComplete={() => handleOnTypingComplete('errorMessage')}
@@ -264,7 +264,7 @@ export const useThread = ({ id, onReadNow, onCancel }: UseThreadParams) => {
           {
             id: 'successMessage',
             props: {
-              avatar: BOT_AVATAR_SRC,
+              avatar: ASSETS.BOT_AVATAR_SRC,
               children: (
                 <Typist
                   onComplete={() => handleOnTypingComplete('successMessage')}

@@ -5,7 +5,7 @@ import { Device } from '@capacitor/device';
 import { Capacitor } from '@capacitor/core';
 import { IonApp, isPlatform, setupIonicReact } from '@ionic/react';
 
-import * as ASSETS from '../../constants/assets.const';
+import { ASSETS } from '../../constants';
 import { DeviceContext, DevicePlatform } from '../../contexts/DeviceContext';
 
 import './ThemeProvider.css';

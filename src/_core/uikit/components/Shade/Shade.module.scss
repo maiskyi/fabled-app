@@ -1,0 +1,26 @@
+.root {
+  left: 50%;
+  top: 50%;
+  width: 499px;
+  height: 499px;
+  border-radius: 499px;
+  opacity: 0.5;
+  filter: blur(128px);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  &.ultramarine-blue {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      #4758ef 0%,
+      rgba(71, 88, 239, 0) 100%
+    );
+  }
+  &.lavender-indigo {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      #8747ef 0%,
+      rgba(135, 71, 239, 0) 100%
+    );
+  }
+}

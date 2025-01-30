@@ -5,7 +5,7 @@ import {
   Header,
   Page,
   Message,
-  BOT_AVATAR_SRC,
+  ASSETS,
   Animation,
   ContentInstance,
   useViewWillEnter,
@@ -73,7 +73,7 @@ export const Create = memo(function Create() {
           <Grid.Row>
             <Grid.Cell>
               <Animation.Message>
-                <Message avatar={BOT_AVATAR_SRC} origin="companion">
+                <Message avatar={ASSETS.BOT_AVATAR_SRC} origin="companion">
                   {t('bot.createFableAiGreeting', {
                     displayName: userDisplayName,
                   })}
