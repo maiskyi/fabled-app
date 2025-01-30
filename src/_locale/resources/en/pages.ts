@@ -12,6 +12,7 @@ export const pages = {
   home: 'My Fables',
   manageYourPlan: 'Manage your plan',
   profile: 'Profile',
+  promptToSubscribe: 'Get {{name}} Premium to enjoy all the benefit!',
   resetPassword: 'Create a new password',
   signIn: 'Sign in',
   signUp: 'Sign Up',

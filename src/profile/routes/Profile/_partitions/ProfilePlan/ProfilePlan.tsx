@@ -7,13 +7,19 @@ import { PromptToSubscribe } from '@common/features';
 
 export const ProfilePlan: FC = () => {
   const { t } = useTranslation();
+
   const [, dispatch] = usePromptToSubscribe({
     component: PromptToSubscribe,
+    dissmissTimeout: 1,
   });
+
+  const handleOnClick = () => {
+    dispatch();
+  };
 
   return (
     <Box marginTop={24}>
-      <Card color="horizontal" onClick={dispatch}>
+      <Card color="horizontal" onClick={handleOnClick}>
         <Card.Content>
           <Box alignItems="center" display="flex" gap={12}>
             <Box display="flex" flex={0}>

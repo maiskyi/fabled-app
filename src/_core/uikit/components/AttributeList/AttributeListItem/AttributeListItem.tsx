@@ -4,15 +4,20 @@ import classNames from 'classnames';
 import { IonIcon } from '@ionic/react';
 import { checkmarkCircle } from 'ionicons/icons';
 
+import { Typography, TypographyProps } from '../../Typography';
+
 import styles from '../AttributeList.module.scss';
 
-type AttributeListItemProps = PropsWithChildren<{
-  active?: boolean;
-}>;
+type AttributeListItemProps = PropsWithChildren<
+  {
+    active?: boolean;
+  } & TypographyProps
+>;
 
 export const AttributeListItem: FC<AttributeListItemProps> = ({
   children,
   active = true,
+  ...props
 }) => {
   return (
     <li
@@ -26,7 +31,7 @@ export const AttributeListItem: FC<AttributeListItemProps> = ({
         })}
         icon={checkmarkCircle}
       />
-      {children}
+      <Typography {...props}>{children}</Typography>
     </li>
   );
 };
