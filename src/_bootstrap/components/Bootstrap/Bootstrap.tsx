@@ -19,6 +19,7 @@ import {
 import { AppUpdate } from './AppUpdate';
 import { Auth, AuthProps } from './Auth';
 import { Purchases, PurchasesProps } from './Purchases';
+import { Init } from './Init/Init';
 
 export type BootstrapProps = PropsWithChildren<{
   app: AppProviderProps;
@@ -54,7 +55,9 @@ export const Bootstrap: FC<BootstrapProps> = ({
                       <Auth>
                         <Network {...network}>
                           <Config {...config}>
-                            <Navigation>{children}</Navigation>
+                            <Navigation>
+                              <Init>{children}</Init>
+                            </Navigation>
                           </Config>
                         </Network>
                       </Auth>

@@ -1,6 +1,5 @@
 import {
   FC,
-  Fragment,
   PropsWithChildren,
   useCallback,
   useMemo,
@@ -27,13 +26,11 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { AuthStateChangeParams } from './AuthProvider.types';
 
 export type AuthProviderProps = PropsWithChildren<{
-  Loader?: FC;
   onAuthStateChange?: (state: AuthStateChangeParams) => void;
 }>;
 
 export const AuthProvider: FC<AuthProviderProps> = ({
   children,
-  Loader = Fragment,
   onAuthStateChange = noop,
 }) => {
   const [user, setUser] = useState<User>();
@@ -55,6 +52,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({
 
   const isAuthenticated = !!user;
 
+  const isReady = !isUndefined(user);
+
   const reload = useCallback(async () => {
     if (isAuthenticated) {
       await FirebaseAuthentication.reload();
@@ -65,8 +64,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   }, [isAuthenticated]);
 
   const contextValue = useMemo(
-    () => ({ getIdToken, isAuthenticated, reload, user }),
-    [user, reload, isAuthenticated, getIdToken]
+    () => ({
+      getIdToken,
+      isAuthenticated,
+      isReady,
+      reload,
+      user,
+    }),
+    [user, reload, isAuthenticated, getIdToken, isReady]
   );
 
   useMount(() => {
@@ -77,8 +82,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   });
 
   return (
-    <AuthContext.Provider value={contextValue}>
-      {isUndefined(user) ? <Loader /> : children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };

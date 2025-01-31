@@ -1,4 +1,4 @@
-import { FC, Fragment, PropsWithChildren, useCallback, useState } from 'react';
+import { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
@@ -11,14 +11,12 @@ import {
 
 export type PurchasesProviderProps = PropsWithChildren<{
   apiKey: string;
-  Loader?: FC;
   shouldPromptedToSubscribe?: boolean;
 }>;
 
 export const PurchasesProvider: FC<PurchasesProviderProps> = ({
   children,
   apiKey,
-  Loader = Fragment,
   shouldPromptedToSubscribe = true,
 }) => {
   const [{ promptedToSubscribe }, setState] = useState({
@@ -112,7 +110,7 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
     }
   );
 
-  const ready = config?.ready && data?.ready;
+  const isReady = config?.ready && data?.ready;
 
   const dissmissPromptToSubscribe = useCallback(() => {
     setState((prev) => ({
@@ -132,12 +130,13 @@ export const PurchasesProvider: FC<PurchasesProviderProps> = ({
         activeSubscriptions: data.activeSubscriptions,
         dissmissPromptToSubscribe,
         introEligibility: data.introEligibility,
+        isReady,
         offerings: data.offerings,
         promptedToSubscribe,
         refetch: init,
       }}
     >
-      {ready ? children : <Loader />}
+      {children}
     </PurchasesContext.Provider>
   );
 };
