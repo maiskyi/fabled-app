@@ -40,10 +40,11 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const isMobile = isPlatform('mobile');
   const isTablet = isPlatform('tablet');
   const isDesktop = isPlatform('desktop');
+  const isReady = !!value;
 
   const isNativePlatform = Capacitor.isNativePlatform();
 
-  return value ? (
+  return (
     <DeviceContext.Provider
       value={{
         ...value,
@@ -51,6 +52,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
         isDesktop,
         isMobile,
         isNativePlatform,
+        isReady,
         isTablet,
         platform,
         width: window.innerWidth,
@@ -58,5 +60,5 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     >
       <IonApp>{children}</IonApp>
     </DeviceContext.Provider>
-  ) : null;
+  );
 };

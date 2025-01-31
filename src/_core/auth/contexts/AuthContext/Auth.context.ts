@@ -8,6 +8,7 @@ import {
 
 interface AuthContextProps {
   user: User;
+  isReady: boolean;
   reload: () => Promise<void>;
   isAuthenticated: boolean;
   getIdToken(options?: GetIdTokenOptions): Promise<GetIdTokenResult>;
@@ -16,6 +17,7 @@ interface AuthContextProps {
 export const AuthContext = createContext<AuthContextProps>({
   getIdToken: () => Promise.resolve({ token: null }),
   isAuthenticated: false,
+  isReady: false,
   reload: () => Promise.resolve(),
   user: null,
 });

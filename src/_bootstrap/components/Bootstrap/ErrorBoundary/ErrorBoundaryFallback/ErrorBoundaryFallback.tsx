@@ -1,18 +1,8 @@
 import { FC } from 'react';
 import { useMount } from 'react-use';
 
-import {
-  Box,
-  Content,
-  Empty,
-  Footer,
-  Header,
-  Page,
-  useSplashScreen,
-} from '@core/uikit';
+import { Banner, Box, Content, Page, useSplashScreen } from '@core/uikit';
 import { useTranslation } from '@core/localization';
-
-import Icon from './ErrorBoundaryFallback.svg?react';
 
 export const ErrorBoundaryFallback: FC = () => {
   const { t } = useTranslation();
@@ -22,33 +12,23 @@ export const ErrorBoundaryFallback: FC = () => {
 
   return (
     <Page>
-      <Header translucent />
-      <Content>
-        <Box display="flex" flexDirection="column" minHeight="100%">
-          <Box flex={0}>
-            <Header collapse="condense">
-              <Header.Title size="large" wrap>
-                {t('pages.errorBoundary')}
-              </Header.Title>
-            </Header>
-          </Box>
-          <Box
-            alignItems="center"
-            display="flex"
-            flex={1}
-            justifyContent="center"
-            minHeight="100%"
-          >
-            <Empty
-              Icon={Icon}
-              description={t('empty.errorBoundary.description')}
-              title={t('empty.errorBoundary.title')}
-              variant="danger"
-            ></Empty>
-          </Box>
+      <Content scrollY={false}>
+        <Box
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          minHeight="100%"
+        >
+          <Banner>
+            <Banner.Image asset="robot-3" />
+            <Banner.Title>{t('empty.errorBoundary.title')}</Banner.Title>
+            <Banner.Description>
+              {t('empty.errorBoundary.description')}
+            </Banner.Description>
+          </Banner>
         </Box>
       </Content>
-      <Footer />
     </Page>
   );
 };

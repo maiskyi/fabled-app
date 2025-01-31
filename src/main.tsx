@@ -25,9 +25,7 @@ const config: AppProps = {
       projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
       storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
     },
-    auth: {
-      Loader: Splash,
-    },
+    auth: {},
     config: {
       Loader: Splash,
       version: import.meta.env.PACKAGE_VERSION,
@@ -50,7 +48,6 @@ const config: AppProps = {
       },
     },
     purchases: {
-      Loader: Splash,
       apiKey: import.meta.env.VITE_REVENUECAT_API_KEY,
     },
   },

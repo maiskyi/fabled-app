@@ -20,9 +20,8 @@ export type AppUpdateProviderProps = PropsWithChildren<{
 export const AppUpdateProvider: FC<AppUpdateProviderProps> = ({
   children,
   Fallback,
-  Loader,
 }) => {
-  const { loading, value } = useAsync(async () => {
+  const { value } = useAsync(async () => {
     if (Capacitor.isNativePlatform()) {
       const { updateAvailability } = await AppUpdate.getAppUpdateInfo();
 
@@ -30,8 +29,6 @@ export const AppUpdateProvider: FC<AppUpdateProviderProps> = ({
     }
     return false;
   });
-
-  if (loading) return <Loader />;
 
   if (value) return <Fallback openAppStore={AppUpdate.openAppStore} />;
 

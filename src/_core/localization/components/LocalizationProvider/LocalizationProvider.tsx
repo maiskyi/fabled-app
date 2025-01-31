@@ -53,8 +53,10 @@ export const LocalizationProvider: FC<LocalizationProviderProps> = ({
     return i18n.language;
   });
 
+  const isReady = !!value;
+
   return (
-    <LocalizationContext.Provider value={{ lng: value }}>
+    <LocalizationContext.Provider value={{ isReady, lng: value }}>
       {value ? children : <Loader />}
     </LocalizationContext.Provider>
   );

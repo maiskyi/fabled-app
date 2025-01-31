@@ -10,6 +10,7 @@ import {
 import { DEFAULT_PURCHASES_OFFERINGS } from './Purchases.const';
 
 export interface PurchasesContextProps {
+  isReady: boolean;
   introEligibility: Record<string, IntroEligibility>;
   offerings: PurchasesOfferings;
   promptedToSubscribe: boolean;
@@ -26,6 +27,7 @@ export const PurchasesContext = createContext<PurchasesContextProps>({
   activeSubscriptions: [],
   dissmissPromptToSubscribe: noop,
   introEligibility: {},
+  isReady: false,
   offerings: DEFAULT_PURCHASES_OFFERINGS,
   promptedToSubscribe: false,
   refetch: () =>
