@@ -43,7 +43,7 @@ export const Onboarding = withLoad({
             <Grid.Row flex="1 0 auto">
               <Grid.Cell>
                 <Box height="100%" minHeight="100%" position="relative">
-                  <Shade top="calc(50% - 122px)" />
+                  <Shade top="calc(50% - 108px)" />
                   <Slides
                     onCompleted={handleOnCompletedSkip}
                     onSkip={handleOnCompletedSkip}
