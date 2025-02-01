@@ -55,7 +55,7 @@ export const LocalizationProvider: FC<LocalizationProviderProps> = ({
 
   return (
     <LocalizationContext.Provider value={{ isReady, lng: value }}>
-      {children}
+      {isReady ? children : null}
     </LocalizationContext.Provider>
   );
 };
