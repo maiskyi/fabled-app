@@ -79,12 +79,13 @@ export const Onboarding: OnboardingComponent = ({
             fill="outline"
             loading={isSkipping}
             onClick={handleOnSkip}
+            size="large"
           >
             Skip
           </Button>
         </div>
         <div className={styles.primary}>
-          <Button loading={isCompleting} onClick={handleOnNext}>
+          <Button loading={isCompleting} onClick={handleOnNext} size="large">
             {isEnd ? `Let's get started` : 'Next'}
           </Button>
         </div>
