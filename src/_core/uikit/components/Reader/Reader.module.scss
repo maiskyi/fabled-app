@@ -1,5 +1,5 @@
 .root {
-  --swiper-pagination-bullet-inactive-color: var(--ion-color-dark);
+  --swiper-pagination-bullet-inactive-color: var(--color-bnw-700);
   --swiper-pagination-color: var(--ion-color-secondary);
   --swiper-pagination-bullet-horizontal-gap: 2px;
 }
@@ -17,7 +17,7 @@
 .text {
   display: block;
   + .text {
-    margin-top: 16px;
+    margin-top: 12px;
   }
 }
 

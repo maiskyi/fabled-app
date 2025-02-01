@@ -1,35 +1,22 @@
 export const defaultOnCompleted = () => Promise.resolve();
 
-export const groupParagraphs = (
-  paragraphs: string[],
-  maxLength = 150,
-  maxDiff = 20
-) => {
-  const groups = [];
-  let currentGroup: string[] = [];
-  let currentLength = 0;
+export const groupParagraphs = (text: string, maxLength = 150) => {
+  const words = text.split(' ');
+  let paragraphs = [];
+  let currentParagraph = '';
 
-  paragraphs.forEach((paragraph) => {
-    const paragraphLength = paragraph.length;
-
-    // Check if adding the current paragraph would exceed the acceptable range
-    if (currentLength + paragraphLength <= maxLength + maxDiff) {
-      currentGroup.push(paragraph);
-      currentLength += paragraphLength;
+  words.forEach((word) => {
+    if ((currentParagraph + word).length <= maxLength) {
+      currentParagraph += (currentParagraph ? ' ' : '') + word;
     } else {
-      // Push the current group to groups and start a new one
-      if (currentGroup.length > 0) {
-        groups.push(currentGroup);
-      }
-      currentGroup = [paragraph];
-      currentLength = paragraphLength;
+      paragraphs.push(currentParagraph);
+      currentParagraph = word;
     }
   });
 
-  // Add the last group if it has content
-  if (currentGroup.length > 0) {
-    groups.push(currentGroup);
+  if (currentParagraph) {
+    paragraphs.push(currentParagraph);
   }
 
-  return groups;
+  return paragraphs;
 };

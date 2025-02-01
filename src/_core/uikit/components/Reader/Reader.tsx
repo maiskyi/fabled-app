@@ -33,12 +33,7 @@ export const Reader: FC<ReaderProps> = ({
     isEnd: false,
   });
 
-  const paragraphs = children
-    .split('\n')
-    .map((v) => v.trim())
-    .filter((v) => !!v);
-
-  const groups = groupParagraphs(paragraphs, 400);
+  const groups = groupParagraphs(children, 250);
 
   const handleOnSlideChange = (swiper: SwiperClass) => {
     setState((prev) => ({
@@ -65,6 +60,8 @@ export const Reader: FC<ReaderProps> = ({
         modules={[Navigation, Pagination]}
         onSlideChange={handleOnSlideChange}
         pagination={{
+          dynamicBullets: true,
+          dynamicMainBullets: 10,
           el: `.${styles.swiperPagination}`,
         }}
         ref={swiper}
@@ -73,15 +70,20 @@ export const Reader: FC<ReaderProps> = ({
           return (
             <SwiperSlide className={styles.slide} key={index}>
               <div className={styles.box}>
-                {items.map((text) => {
-                  return (
-                    <div key={text}>
-                      <Typography className={styles.text} variant="body-1">
+                {items
+                  .split('\n')
+                  .filter((v) => !!v)
+                  .map((text) => {
+                    return (
+                      <Typography
+                        className={styles.text}
+                        key={text}
+                        variant="body-1"
+                      >
                         {text}
                       </Typography>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </SwiperSlide>
           );
