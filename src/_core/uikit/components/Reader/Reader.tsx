@@ -4,12 +4,10 @@ import { useAsyncFn } from 'react-use';
 
 import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
-import { IonFabButton, IonIcon, IonSpinner, IonText } from '@ionic/react';
-import {
-  chevronBackSharp,
-  chevronForwardSharp,
-  checkmarkSharp,
-} from 'ionicons/icons';
+import { IonFabButton, IonIcon, IonSpinner } from '@ionic/react';
+
+import { Typography } from '../Typography';
+import { ICON } from '../Icon';
 
 import { groupParagraphs, defaultOnCompleted } from './Reader.utils';
 
@@ -74,13 +72,17 @@ export const Reader: FC<ReaderProps> = ({
         {groups.map((items, index) => {
           return (
             <SwiperSlide className={styles.slide} key={index}>
-              {items.map((text) => {
-                return (
-                  <IonText className={styles.text} key={text}>
-                    {text}
-                  </IonText>
-                );
-              })}
+              <div className={styles.box}>
+                {items.map((text) => {
+                  return (
+                    <div key={text}>
+                      <Typography className={styles.text} variant="body-1">
+                        {text}
+                      </Typography>
+                    </div>
+                  );
+                })}
+              </div>
             </SwiperSlide>
           );
         })}
@@ -94,23 +96,23 @@ export const Reader: FC<ReaderProps> = ({
             className={classNames(styles.prev, {
               [styles.disabled]: isBeginning,
             })}
-            color="tertiary"
+            color="primary"
             disabled={isBeginning}
             onClick={handleOnPrev}
           >
-            <IonIcon icon={chevronBackSharp} />
+            <IonIcon icon={ICON['chevron-left']} />
           </IonFabButton>
           {!isEnd && (
-            <IonFabButton color="tertiary" onClick={handleOnNext}>
-              <IonIcon icon={chevronForwardSharp} />
+            <IonFabButton color="primary" onClick={handleOnNext}>
+              <IonIcon icon={ICON['chevron-right']} />
             </IonFabButton>
           )}
           {isEnd && (
-            <IonFabButton color="tertiary" onClick={handleOnNext}>
+            <IonFabButton color="primary" onClick={handleOnNext}>
               {isCompleting ? (
                 <IonSpinner name="circular" />
               ) : (
-                <IonIcon icon={checkmarkSharp} />
+                <IonIcon icon={ICON['check']} />
               )}
             </IonFabButton>
           )}
