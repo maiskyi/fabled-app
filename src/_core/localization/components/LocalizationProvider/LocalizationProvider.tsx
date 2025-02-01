@@ -1,4 +1,4 @@
-import { FC, Fragment, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { invoke } from 'lodash';
 import { initReactI18next } from 'react-i18next';
 import { useAsync } from 'react-use';
@@ -12,7 +12,6 @@ import { LocalizationFormatters } from './LocalizationProvider.types';
 
 export type LocalizationProviderProps = PropsWithChildren<{
   fallbackLng: string;
-  Loader?: FC;
   supportedLngs: string[];
   formatters?: LocalizationFormatters;
   resources: Record<string, object>;
@@ -24,7 +23,6 @@ export const LocalizationProvider: FC<LocalizationProviderProps> = ({
   fallbackLng,
   supportedLngs,
   formatters = {},
-  Loader = Fragment,
 }) => {
   const { value } = useAsync(async (): Promise<string> => {
     const { value: lng } = await Device.getLanguageTag();
@@ -57,7 +55,7 @@ export const LocalizationProvider: FC<LocalizationProviderProps> = ({
 
   return (
     <LocalizationContext.Provider value={{ isReady, lng: value }}>
-      {value ? children : <Loader />}
+      {children}
     </LocalizationContext.Provider>
   );
 };

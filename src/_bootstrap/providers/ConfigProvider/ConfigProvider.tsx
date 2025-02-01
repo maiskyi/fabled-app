@@ -1,4 +1,4 @@
-import { FC, Fragment, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { useGetBootstrap } from '@network/api';
 
@@ -6,15 +6,13 @@ import { ConfigContext } from './ConfigProvider.context';
 
 export type ConfigProviderProps = PropsWithChildren<{
   version: string;
-  Loader: FC;
 }>;
 
 export const ConfigProvider: FC<ConfigProviderProps> = ({
   children,
   version,
-  Loader = Fragment,
 }) => {
-  const { isSuccess, data: bootstrap } = useGetBootstrap({
+  const { isSuccess: isReady, data: bootstrap } = useGetBootstrap({
     image: {
       crop: 'thumb',
       height: 170 * window.devicePixelRatio,
@@ -30,11 +28,11 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
     new Image().src = image;
   });
 
-  return isSuccess ? (
+  return (
     <ConfigContext.Provider
       value={{
         characters: bootstrap?.characters,
-
+        isReady,
         privacyPolicyUrl: bootstrap?.config.privacyPolicyUrl,
         prompts: bootstrap?.prompts,
         scenes: bootstrap?.placeOfEvents,
@@ -45,7 +43,5 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
     >
       {children}
     </ConfigContext.Provider>
-  ) : (
-    <Loader />
   );
 };

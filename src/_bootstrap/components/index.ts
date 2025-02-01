@@ -1,2 +1,2 @@
 export * from './Bootstrap/Bootstrap';
-export * from './Splash/Splash';
+export * from './Bootstrap/Init/Splash/Splash';
