@@ -24,6 +24,7 @@ import {
 
 import fire from './assets/fire.svg?raw';
 import chevronRight from './assets/chevron-right.svg?raw';
+import chevronLeft from './assets/chevron-left.svg?raw';
 import arrowLeft from './assets/arrow-left.svg?raw';
 import feather from './assets/feather.svg?raw';
 import bookOpen from './assets/book-open.svg?raw';
@@ -35,12 +36,15 @@ import shield from './assets/shield.svg?raw';
 import smile from './assets/smile.svg?raw';
 import edit3 from './assets/edit-3.svg?raw';
 import lifeBuoy from './assets/life-buoy.svg?raw';
+import check from './assets/check.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
   'at-sign': `data:image/svg+xml;utf8,${atSign}`,
   'book-open': `data:image/svg+xml;utf8,${bookOpen}`,
   bookmark: `data:image/svg+xml;utf8,${bookmark}`,
+  check: `data:image/svg+xml;utf8,${check}`,
+  'chevron-left': `data:image/svg+xml;utf8,${chevronLeft}`,
   'chevron-right': `data:image/svg+xml;utf8,${chevronRight}`,
   'edit-3': `data:image/svg+xml;utf8,${edit3}`,
   feather: `data:image/svg+xml;utf8,${feather}`,

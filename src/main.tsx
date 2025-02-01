@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 
 import { Language } from '@locale/constants';
 import { resources } from '@locale/resources';
-import { Splash } from '@bootstrap/components';
 
 import { App, AppProps } from './App';
 
@@ -27,7 +26,6 @@ const config: AppProps = {
     },
     auth: {},
     config: {
-      Loader: Splash,
       version: import.meta.env.PACKAGE_VERSION,
     },
     errorBoundary: {
@@ -37,7 +35,6 @@ const config: AppProps = {
       release: import.meta.env.PACKAGE_VERSION,
     },
     localization: {
-      Loader: Splash,
       fallbackLng: Language.en,
       resources,
       supportedLngs: [Language.en],

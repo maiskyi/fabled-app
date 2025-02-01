@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from 'react';
 
 import { AppUpdateProvider } from '@core/app';
 
-import { Splash } from '../../Splash';
+import { Splash } from '../Init/Splash';
 
 import { AppUpdateFallback } from './AppUpdateFallback';
 

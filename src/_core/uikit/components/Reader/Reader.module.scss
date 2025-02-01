@@ -1,18 +1,23 @@
 .root {
-  --swiper-pagination-bullet-inactive-color: var(--ion-color-dark);
-  --swiper-pagination-color: var(--ion-color-tertiary);
-  --swiper-pagination-bullet-horizontal-gap: 2px
+  --swiper-pagination-bullet-inactive-color: var(--color-bnw-700);
+  --swiper-pagination-color: var(--ion-color-secondary);
+  --swiper-pagination-bullet-horizontal-gap: 2px;
 }
 
 .slide {
   align-self: flex-end;
 }
 
+.box {
+  border-radius: 12px;
+  padding: 16px;
+  background: rgba(22, 22, 22, 0.5);
+}
+
 .text {
   display: block;
-  letter-spacing: 1px;
   + .text {
-    margin-top: 16px;
+    margin-top: 12px;
   }
 }
 

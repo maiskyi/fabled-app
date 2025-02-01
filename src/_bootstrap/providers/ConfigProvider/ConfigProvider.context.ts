@@ -10,10 +10,12 @@ interface ConfigContextProps {
   prompts: DTO.PromptItem[];
   scenes: DTO.PlaceOfEventItem[];
   themes: DTO.MoralLessonsItem[];
+  isReady: boolean;
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({
   characters: [],
+  isReady: false,
   privacyPolicyUrl: '/',
   prompts: [],
   scenes: [],

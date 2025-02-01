@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useContext } from 'use-context-selector';
 
-import { Box, Button, Text, Chip, Card, Grid } from '@core/uikit';
+import { Box, Button, Text, Chip, Grid, Typography } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
@@ -34,11 +34,13 @@ export const Index: FC = () => {
     <Grid>
       <Grid.Row>
         <Grid.Cell>
-          <Card.Header>
-            <Card.Title>{story?.title}</Card.Title>
-          </Card.Header>
           <Box display="flex" flexDirection="column" gap={16}>
             <Box display="flex" flexDirection="column" gap={8}>
+              <Box paddingInline={20}>
+                <Typography variant="h3" weight="semi-bold">
+                  {story?.title}
+                </Typography>
+              </Box>
               <Box
                 display="flex"
                 flexWrap="nowrap"
@@ -59,7 +61,9 @@ export const Index: FC = () => {
               </Box>
             </Box>
             <Box paddingInline={20}>
-              <Button onClick={handleOnRead}>{t('actions.readFable')}</Button>
+              <Button icon="book-open" onClick={handleOnRead}>
+                {t('actions.readFable')}
+              </Button>
             </Box>
           </Box>
         </Grid.Cell>

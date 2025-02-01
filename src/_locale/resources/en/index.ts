@@ -15,3 +15,4 @@ export { constants } from './constants';
 export { onboarding } from './onboarding';
 export { features } from './features';
 export { units } from './units';
+export { feedback } from './feedback';
