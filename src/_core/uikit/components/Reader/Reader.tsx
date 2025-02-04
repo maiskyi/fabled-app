@@ -6,6 +6,7 @@ import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { IonFabButton, IonIcon, IonSpinner } from '@ionic/react';
 
+import { useMediaSwitch } from '../../hooks/useMediaSwitch';
 import { Typography } from '../Typography';
 import { ICON } from '../Icon';
 
@@ -23,6 +24,10 @@ export const Reader: FC<ReaderProps> = ({
   onCompleted = defaultOnCompleted,
 }) => {
   const swiper = useRef<SwiperRef>();
+  const { value: length } = useMediaSwitch({
+    lg: 600,
+    xs: 250,
+  });
 
   const [{ loading: isCompleting }] = useAsyncFn(async () => {
     await onCompleted();
@@ -33,7 +38,7 @@ export const Reader: FC<ReaderProps> = ({
     isEnd: false,
   });
 
-  const groups = groupParagraphs(children, 250);
+  const groups = groupParagraphs(children, length);
 
   const handleOnSlideChange = (swiper: SwiperClass) => {
     setState((prev) => ({
