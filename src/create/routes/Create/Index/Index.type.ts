@@ -1,8 +1,9 @@
 import { FormField } from '../Create.const';
 
 export interface IndexForm {
-  [FormField.Character]: string;
-  [FormField.Description]: string;
+  [FormField.CharacterId]: string;
   [FormField.ReadTime]: number;
-  [FormField.Scene]: string;
+  [FormField.placeOfEventId]: string;
+  [FormField.PromptId]: string;
+  [FormField.MoralLessonId]: string;
 }

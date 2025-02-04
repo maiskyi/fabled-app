@@ -1,6 +1,7 @@
 export enum FormField {
-  Character = 'character',
-  Scene = 'scene',
-  Description = 'description',
+  CharacterId = 'characterId',
+  placeOfEventId = 'placeOfEventId',
   ReadTime = 'readTime',
+  PromptId = 'promptId',
+  MoralLessonId = 'moralLessonId',
 }

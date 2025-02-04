@@ -12,9 +12,9 @@ import { useTranslation } from '@core/localization';
 
 import { FormField } from '../../../Create.const';
 
-import { ThemeForm } from './Theme.types';
+import { MoralLessonForm } from './MoralLesson.types';
 
-export const Theme: FormPickerComponent<string> = ({
+export const MoralLesson: FormPickerComponent<string> = ({
   onChange,
   dismiss,
   value,
@@ -22,14 +22,14 @@ export const Theme: FormPickerComponent<string> = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleOnSubmit = (form: ThemeForm) => {
-    onChange(form.description);
+  const handleOnSubmit = ({ moralLessonId }: MoralLessonForm) => {
+    onChange(moralLessonId);
     dismiss();
   };
 
   return (
-    <Form<ThemeForm>
-      defaultValues={{ [FormField.Description]: value || options[0].value }}
+    <Form<MoralLessonForm>
+      defaultValues={{ [FormField.MoralLessonId]: value || options[0].value }}
       onSubmit={handleOnSubmit}
     >
       <Content>
@@ -40,7 +40,7 @@ export const Theme: FormPickerComponent<string> = ({
             </Typography>
           </Box>
           <Box>
-            <Form.RadioGroup name={FormField.Description} transparent>
+            <Form.RadioGroup name={FormField.MoralLessonId} transparent>
               <Box display="flex" flexDirection="column">
                 {options.map((props) => {
                   return (

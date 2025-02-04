@@ -25,8 +25,8 @@ export const Character: FormPickerComponent<string> = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleOnSubmit = ({ character }: CharacterForm) => {
-    onChange(character);
+  const handleOnSubmit = ({ characterId }: CharacterForm) => {
+    onChange(characterId);
     dismiss();
   };
 
@@ -34,7 +34,7 @@ export const Character: FormPickerComponent<string> = ({
 
   return (
     <Form<CharacterForm>
-      defaultValues={{ [FormField.Character]: value || options[0].value }}
+      defaultValues={{ [FormField.CharacterId]: value || options[0].value }}
       onSubmit={handleOnSubmit}
     >
       <Content />
@@ -44,7 +44,7 @@ export const Character: FormPickerComponent<string> = ({
             <Translate id="forms.mainCharacterWillBe" />
           </Typography>
         </Box>
-        <Form.RadioGroup name={FormField.Character}>
+        <Form.RadioGroup name={FormField.CharacterId}>
           <Swiper
             className={styles.swiper}
             gap={12}

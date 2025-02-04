@@ -150,40 +150,41 @@ export interface Stories {
   total: number;
 }
 
-export interface Config {
+export interface BootstrapConfig {
   privacyPolicyUrl: string;
   termsAndConditionsUrl: string;
 }
 
-export interface PromptItem {
+export interface BootstrapPromptItem {
   id: string;
   message: string;
+  title: string;
 }
 
-export interface PlaceOfEventItem {
+export interface BootstrapPlaceOfEventItem {
   id: string;
   image: string;
   title: string;
 }
 
-export interface CharacterItem {
+export interface BootstrapCharacterItem {
   id: string;
   image: string;
   title: string;
 }
 
-export interface MoralLessonsItem {
+export interface BootstrapMoralLessonsItem {
   description: string;
   id: string;
   title: string;
 }
 
-export interface Bootstrap {
-  characters: CharacterItem[];
-  config: Config;
-  moralLessons: MoralLessonsItem[];
-  placeOfEvents: PlaceOfEventItem[];
-  prompts: PromptItem[];
+export interface BootstrapResponse {
+  characters: BootstrapCharacterItem[];
+  config: BootstrapConfig;
+  moralLessons: BootstrapMoralLessonsItem[];
+  placeOfEvents: BootstrapPlaceOfEventItem[];
+  prompts: BootstrapPromptItem[];
 }
 
 export type ImageTransformationQueryCrop =

@@ -13,11 +13,11 @@ import { Translate, useTranslation } from '@core/localization';
 import { FormField } from '../../../Create.const';
 import { Slide } from '../Slide';
 
-import { CharacterForm } from './Scene.types';
+import { PlaceOfEventForm } from './PlaceOfEvents.types';
 
 import styles from '../_partitions.module.scss';
 
-export const Scene: FormPickerComponent<string> = ({
+export const PlaceOfEvent: FormPickerComponent<string> = ({
   dismiss,
   onChange,
   value,
@@ -25,16 +25,16 @@ export const Scene: FormPickerComponent<string> = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleOnSubmit = ({ scene }: CharacterForm) => {
-    onChange(scene);
+  const handleOnSubmit = ({ placeOfEventId }: PlaceOfEventForm) => {
+    onChange(placeOfEventId);
     dismiss();
   };
 
   const initialSlide = options.findIndex(({ value: v }) => v === value);
 
   return (
-    <Form<CharacterForm>
-      defaultValues={{ [FormField.Scene]: value || options[0].value }}
+    <Form<PlaceOfEventForm>
+      defaultValues={{ [FormField.placeOfEventId]: value || options[0].value }}
       onSubmit={handleOnSubmit}
     >
       <Content />
@@ -45,7 +45,7 @@ export const Scene: FormPickerComponent<string> = ({
           </Typography>
         </Box>
         <Box>
-          <Form.RadioGroup name={FormField.Scene}>
+          <Form.RadioGroup name={FormField.placeOfEventId}>
             <Swiper
               className={styles.swiper}
               gap={12}
