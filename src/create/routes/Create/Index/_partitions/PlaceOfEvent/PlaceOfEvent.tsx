@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import { get } from 'lodash';
+
 import {
   Box,
   FormPickerComponent,
@@ -7,6 +9,7 @@ import {
   Content,
   Footer,
   Typography,
+  useFormControl,
 } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 
@@ -21,20 +24,28 @@ export const PlaceOfEvent: FormPickerComponent<string> = ({
   dismiss,
   onChange,
   value,
-  options,
+  options: initialOptions,
 }) => {
   const { t } = useTranslation();
+
+  const [promptId] = useFormControl({
+    name: FormField.PromptId,
+  });
 
   const handleOnSubmit = ({ placeOfEventId }: PlaceOfEventForm) => {
     onChange(placeOfEventId);
     dismiss();
   };
 
+  const options = initialOptions.filter(({ note }) => note === promptId);
+
   const initialSlide = options.findIndex(({ value: v }) => v === value);
 
   return (
     <Form<PlaceOfEventForm>
-      defaultValues={{ [FormField.placeOfEventId]: value || options[0].value }}
+      defaultValues={{
+        [FormField.placeOfEventId]: value || get(options, [0, 'value']),
+      }}
       onSubmit={handleOnSubmit}
     >
       <Content />

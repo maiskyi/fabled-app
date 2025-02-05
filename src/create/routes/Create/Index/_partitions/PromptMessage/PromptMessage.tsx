@@ -18,6 +18,7 @@ import { Character } from '../Character';
 import { PlaceOfEvent } from '../PlaceOfEvent';
 import { MoralLesson } from '../MoralLesson';
 import { ReadTime } from '../ReadTime';
+import { ChildGender } from '../ChildGender';
 import { FormField } from '../../../Create.const';
 
 import { useOptions } from './PromptMessage.hooks';
@@ -30,7 +31,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
   const { t } = useTranslation();
   const { prompts } = useConfig();
   const [, navigate] = useRoute();
-  const { characters, themes, scenes, readTimes } = useOptions();
+  const { characters, themes, placesOfEvent, readTimes } = useOptions();
 
   const [promptId] = useFormControl({
     name: FormField.PromptId,
@@ -61,6 +62,15 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       validation={{ required: true }}
                     />
                   ),
+                  childGender: (
+                    <Form.Picker<string>
+                      component={ChildGender}
+                      label={t('forms.gender')}
+                      name={FormField.ChildGender}
+                      options={characters}
+                      validation={{ required: true }}
+                    />
+                  ),
                   description: (
                     <Form.Picker<string>
                       component={MoralLesson}
@@ -85,7 +95,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       component={PlaceOfEvent}
                       label={t('forms.placeOfEvents')}
                       name={FormField.placeOfEventId}
-                      options={scenes}
+                      options={placesOfEvent}
                       validation={{ required: true }}
                     />
                   ),

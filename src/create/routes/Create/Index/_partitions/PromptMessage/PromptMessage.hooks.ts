@@ -28,11 +28,12 @@ export const useOptions = () => {
     [themes]
   );
 
-  const scenesOptions = useMemo(
+  const placeOfEventOptions = useMemo(
     (): FormInputOptionProps<string>[] =>
-      scenes.map(({ id, title, image }) => ({
+      scenes.map(({ id, title, image, prompt }) => ({
         image,
         label: title,
+        note: prompt?.id,
         value: id,
       })),
     [scenes]
@@ -49,8 +50,8 @@ export const useOptions = () => {
 
   return {
     characters: charactersOptions,
+    placesOfEvent: placeOfEventOptions,
     readTimes: readTimeOptions,
-    scenes: scenesOptions,
     themes: themesOptions,
   };
 };

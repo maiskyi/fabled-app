@@ -2,6 +2,7 @@ export const forms = {
   chooseMoralLessonFromTheFable: 'Choose a moral lesson from the fable',
   email: 'Email',
   eventsOfTheFableHappen: 'Events of the fable happen...',
+  gender: 'Gender',
   idValue: 'ID: {{id}}',
   mainCharacter: 'Main character',
   mainCharacterWillBe: 'Main character will be a...',
