@@ -6,4 +6,5 @@ export enum FormField {
   MoralLessonId = 'moralLessonId',
   ChildGender = 'childGender',
   ChildName = 'childName',
+  ChildAge = 'childAge',
 }

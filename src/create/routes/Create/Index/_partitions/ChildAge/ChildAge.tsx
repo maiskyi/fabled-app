@@ -10,24 +10,24 @@ import { Translate, useTranslation } from '@core/localization';
 
 import { FormField } from '../../../Create.const';
 
-import { ChildNameForm } from './ChildName.types';
+import { ChildAgeForm } from './ChildAge.types';
 
-export const ChildName: FormPickerComponent<string> = ({
+export const ChildAge: FormPickerComponent<number> = ({
   dismiss,
   onChange,
   value,
 }) => {
   const { t } = useTranslation();
 
-  const handleOnSubmit = ({ childName }: ChildNameForm) => {
-    onChange(childName);
+  const handleOnSubmit = ({ childAge }: ChildAgeForm) => {
+    onChange(childAge);
     dismiss();
   };
 
   return (
-    <Form<ChildNameForm>
+    <Form<ChildAgeForm>
       defaultValues={{
-        [FormField.ChildName]: value,
+        [FormField.ChildAge]: value,
       }}
       onSubmit={handleOnSubmit}
     >
@@ -42,7 +42,7 @@ export const ChildName: FormPickerComponent<string> = ({
           <Form.Text
             autofocus
             label={t('forms.childName')}
-            name={FormField.ChildName}
+            name={FormField.ChildAge}
           />
         </Box>
       </Box>

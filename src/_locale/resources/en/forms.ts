@@ -1,4 +1,5 @@
 export const forms = {
+  age: 'Age',
   childName: 'Child name',
   chooseMoralLessonFromTheFable: 'Choose a moral lesson from the fable',
   email: 'Email',

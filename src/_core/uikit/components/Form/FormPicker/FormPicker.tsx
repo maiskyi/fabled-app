@@ -78,7 +78,7 @@ export const FormPicker: FormPickerComponent = ({
           if (value && options?.length) {
             return options.find(({ value: v }) => value === v)?.label;
           }
-          if (value && !options.length) {
+          if (value && !options?.length) {
             return value;
           }
           return placeholder;

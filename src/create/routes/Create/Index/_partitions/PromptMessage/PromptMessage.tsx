@@ -20,6 +20,7 @@ import { MoralLesson } from '../MoralLesson';
 import { ReadTime } from '../ReadTime';
 import { ChildGender } from '../ChildGender';
 import { ChildName } from '../ChildName';
+import { ChildAge } from '../ChildAge';
 import { FormField } from '../../../Create.const';
 
 import { useOptions } from './PromptMessage.hooks';
@@ -63,6 +64,15 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       validation={{ required: true }}
                     />
                   ),
+                  childAge: (
+                    <Form.Picker<number>
+                      component={ChildAge}
+                      label={t('forms.age')}
+                      name={FormField.ChildAge}
+                      placeholder={t('placeholders.setAge')}
+                      validation={{ required: true }}
+                    />
+                  ),
                   childGender: (
                     <Form.Picker<string>
                       component={ChildGender}
@@ -77,7 +87,6 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       component={ChildName}
                       label={t('forms.name')}
                       name={FormField.ChildName}
-                      options={[]}
                       placeholder={t('placeholders.setName')}
                       validation={{ required: true }}
                     />
