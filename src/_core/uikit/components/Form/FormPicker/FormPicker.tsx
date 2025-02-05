@@ -29,7 +29,7 @@ interface FormPickerProps<V extends FormInputOptionValue>
   placeholder?: string;
   height?: FormPickerHeight;
   component?: FormPickerModalComponent<V>;
-  options: FormInputOptionProps<V>[];
+  options?: FormInputOptionProps<V>[];
 }
 
 interface FormPickerComponent {
@@ -57,8 +57,10 @@ export const FormPicker: FormPickerComponent = ({
         picker: { placeholder },
       },
     }) =>
-      initialPlaceholder ||
-      placeholder({ label: props.label, name: props.name }).toLowerCase()
+      (
+        initialPlaceholder ||
+        placeholder({ label: props.label, name: props.name })
+      ).toLowerCase()
   );
 
   const handleOnClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
@@ -72,9 +74,15 @@ export const FormPicker: FormPickerComponent = ({
   return (
     <FormControl inline type="picker" {...props}>
       {({ invalid, onChange, value }) => {
-        const anchor = value
-          ? options.find(({ value: v }) => value === v)?.label
-          : placeholder;
+        const anchor = (() => {
+          if (value && options?.length) {
+            return options.find(({ value: v }) => value === v)?.label;
+          }
+          if (value && !options.length) {
+            return value;
+          }
+          return placeholder;
+        })();
 
         return (
           <Fragment>

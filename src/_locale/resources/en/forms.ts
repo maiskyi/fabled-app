@@ -1,11 +1,12 @@
 export const forms = {
+  childName: 'Child name',
   chooseMoralLessonFromTheFable: 'Choose a moral lesson from the fable',
   email: 'Email',
   eventsOfTheFableHappen: 'Events of the fable happen...',
   gender: 'Gender',
   idValue: 'ID: {{id}}',
   mainCharacter: 'Main character',
-  mainCharacterWillBe: 'Main character will be a...',
+  mainCharacterWillBe: 'Main character will be...',
   message: 'Message',
   moralLesson: 'Moral lesson',
   name: 'Name',

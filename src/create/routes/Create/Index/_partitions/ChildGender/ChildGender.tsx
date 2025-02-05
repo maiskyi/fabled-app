@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { get } from 'lodash';
 
 import {
@@ -37,7 +36,7 @@ export const ChildGender: FormPickerComponent<string> = ({
   return (
     <Form<ChildGenderForm>
       defaultValues={{
-        [FormField.ChildGender]: value || get(options, [0, value]),
+        [FormField.ChildGender]: value || get(options, [0, 'value']),
       }}
       onSubmit={handleOnSubmit}
     >
@@ -48,7 +47,7 @@ export const ChildGender: FormPickerComponent<string> = ({
             <Translate id="forms.mainCharacterWillBe" />
           </Typography>
         </Box>
-        <Form.RadioGroup name={FormField.CharacterId}>
+        <Form.RadioGroup name={FormField.ChildGender}>
           <Swiper
             className={styles.swiper}
             gap={12}

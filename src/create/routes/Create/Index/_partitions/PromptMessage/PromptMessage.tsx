@@ -19,6 +19,7 @@ import { PlaceOfEvent } from '../PlaceOfEvent';
 import { MoralLesson } from '../MoralLesson';
 import { ReadTime } from '../ReadTime';
 import { ChildGender } from '../ChildGender';
+import { ChildName } from '../ChildName';
 import { FormField } from '../../../Create.const';
 
 import { useOptions } from './PromptMessage.hooks';
@@ -68,6 +69,16 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       label={t('forms.gender')}
                       name={FormField.ChildGender}
                       options={characters}
+                      validation={{ required: true }}
+                    />
+                  ),
+                  childName: (
+                    <Form.Picker<string>
+                      component={ChildName}
+                      label={t('forms.name')}
+                      name={FormField.ChildName}
+                      options={[]}
+                      placeholder={t('placeholders.setName')}
                       validation={{ required: true }}
                     />
                   ),
