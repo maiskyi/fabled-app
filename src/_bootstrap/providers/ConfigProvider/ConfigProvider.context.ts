@@ -6,10 +6,10 @@ interface ConfigContextProps {
   version: string;
   privacyPolicyUrl: string;
   termsAndConditionsUrl: string;
-  characters: DTO.CharacterItem[];
-  prompts: DTO.PromptItem[];
-  scenes: DTO.PlaceOfEventItem[];
-  themes: DTO.MoralLessonsItem[];
+  characters: DTO.BootstrapCharacterItem[];
+  prompts: DTO.BootstrapPromptItem[];
+  scenes: DTO.BootstrapPlaceOfEventItem[];
+  themes: DTO.BootstrapMoralLessonsItem[];
   isReady: boolean;
 }
 

@@ -1,0 +1,1 @@
+export { ChildName } from './ChildName';

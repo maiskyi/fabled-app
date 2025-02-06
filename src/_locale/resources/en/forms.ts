@@ -1,10 +1,13 @@
 export const forms = {
+  age: 'Age',
+  childName: 'Child name',
   chooseMoralLessonFromTheFable: 'Choose a moral lesson from the fable',
   email: 'Email',
   eventsOfTheFableHappen: 'Events of the fable happen...',
+  gender: 'Gender',
   idValue: 'ID: {{id}}',
   mainCharacter: 'Main character',
-  mainCharacterWillBe: 'Main character will be a...',
+  mainCharacterWillBe: 'Main character will be...',
   message: 'Message',
   moralLesson: 'Moral lesson',
   name: 'Name',
@@ -18,4 +21,7 @@ export const forms = {
   readTimeMin: 'Read time: {{min}} min',
   readingTime: 'Reading time',
   subject: 'Subject',
+  theAgeOfManiCharacterIs: 'The age of mani character is...',
+  theGenderOfMainCharacterWillBe: 'The gender of main character will be...',
+  theNameOfMainCharacterWillBe: 'The name of main character will be...',
 };

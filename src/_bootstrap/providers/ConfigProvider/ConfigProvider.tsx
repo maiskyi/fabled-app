@@ -1,6 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
+import { useMount } from 'react-use';
 
 import { useGetBootstrap } from '@network/api';
+import { GENDER } from '@common/assets';
 
 import { ConfigContext } from './ConfigProvider.context';
 
@@ -26,6 +28,12 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
 
   bootstrap?.placeOfEvents.forEach(({ image }) => {
     new Image().src = image;
+  });
+
+  useMount(() => {
+    Object.values(GENDER).forEach((image) => {
+      new Image().src = image;
+    });
   });
 
   return (

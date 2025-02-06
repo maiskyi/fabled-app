@@ -12,7 +12,7 @@ export const bot = {
     9: 'Your fairy tale is brewing in our cauldron of creativity! ✨🪄 Stay tuned, and your story will be revealed shortly!',
   },
   createFableAiGreeting:
-    'Hi, {{displayName}}. What should I tell you a fable about today?',
+    'Hi, {{displayName}}. What kind of fable should I tell you today? Chose an option.',
   error: {
     0: "Uh-oh! 🧙‍♂️ Something magical went astray while crafting your Fable. Fear not, we're casting another spell to fix it!",
     1: "It seems a little goblin hid our magic ink! 🧚 Please try again, and we'll bring your story to life.",

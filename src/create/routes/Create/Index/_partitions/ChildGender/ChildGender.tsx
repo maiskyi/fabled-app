@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import { get } from 'lodash';
+
 import {
   Box,
   FormPickerComponent,
@@ -13,11 +14,11 @@ import { Translate, useTranslation } from '@core/localization';
 import { FormField } from '../../../Create.const';
 import { Slide } from '../Slide';
 
-import { CharacterForm } from './Character.types';
+import { ChildGenderForm } from './ChildGender.types';
 
 import styles from '../_partitions.module.scss';
 
-export const Character: FormPickerComponent<string> = ({
+export const ChildGender: FormPickerComponent<string> = ({
   dismiss,
   onChange,
   value,
@@ -25,26 +26,28 @@ export const Character: FormPickerComponent<string> = ({
 }) => {
   const { t } = useTranslation();
 
-  const handleOnSubmit = ({ characterId }: CharacterForm) => {
-    onChange(characterId);
+  const handleOnSubmit = ({ childGender }: ChildGenderForm) => {
+    onChange(childGender);
     dismiss();
   };
 
   const initialSlide = options.findIndex(({ value: v }) => v === value);
 
   return (
-    <Form<CharacterForm>
-      defaultValues={{ [FormField.CharacterId]: value || options[0].value }}
+    <Form<ChildGenderForm>
+      defaultValues={{
+        [FormField.ChildGender]: value || get(options, [0, 'value']),
+      }}
       onSubmit={handleOnSubmit}
     >
       <Content />
       <Box display="flex" flexDirection="column" gap={8}>
         <Box paddingInline={20}>
           <Typography variant="body-2">
-            <Translate id="forms.mainCharacterWillBe" />
+            <Translate id="forms.theGenderOfMainCharacterWillBe" />
           </Typography>
         </Box>
-        <Form.RadioGroup name={FormField.CharacterId}>
+        <Form.RadioGroup name={FormField.ChildGender}>
           <Swiper
             className={styles.swiper}
             gap={12}

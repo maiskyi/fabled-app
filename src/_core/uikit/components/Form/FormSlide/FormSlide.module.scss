@@ -1,0 +1,12 @@
+.root {
+  --bar-background: var(--ion-color-secondary);
+  &::part(tick) {
+    display: flex;
+    background: var(--ion-color-secondary);
+  }
+  &::part(pin) {
+    font-size: 20px;
+    display: block;
+    transform: translate3d(0px, calc(-100% + 11px), 0px) scale(1);
+  }
+}
