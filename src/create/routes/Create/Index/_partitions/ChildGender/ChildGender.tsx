@@ -44,7 +44,7 @@ export const ChildGender: FormPickerComponent<string> = ({
       <Box display="flex" flexDirection="column" gap={8}>
         <Box paddingInline={20}>
           <Typography variant="body-2">
-            <Translate id="forms.mainCharacterWillBe" />
+            <Translate id="forms.theGenderOfMainCharacterWillBe" />
           </Typography>
         </Box>
         <Form.RadioGroup name={FormField.ChildGender}>

@@ -35,7 +35,7 @@ export const ChildName: FormPickerComponent<string> = ({
       <Box display="flex" flexDirection="column" gap={8}>
         <Box paddingInline={20}>
           <Typography variant="body-2">
-            <Translate id="forms.mainCharacterWillBe" />
+            <Translate id="forms.theNameOfMainCharacterWillBe" />
           </Typography>
         </Box>
         <Box paddingInline={20}>

@@ -27,7 +27,12 @@ export const PromtOptions: FC = () => {
           >
             {prompts.map(({ id, title }) => {
               return (
-                <Button color="secondary" key={id} onClick={() => setValue(id)}>
+                <Button
+                  color="secondary"
+                  fill="outline"
+                  key={id}
+                  onClick={() => setValue(id)}
+                >
                   {title}
                 </Button>
               );

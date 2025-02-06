@@ -10,18 +10,12 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { PartialDeep } from 'type-fest';
 
-// import { FormCheckbox } from './FormCheckbox/FormCheckbox';
-// import { FormDatepicker } from './FormDatepicker/FormDatepicker';
 import { FormPassword } from './FormPassword/FormPassword';
-// import { FormSection } from './FormSection/FormSection';
 import { FormSubmit } from './FormSubmit/FormSubmit';
 import { FormText } from './FormText/FormText';
 import { FormRadioGroup } from './FormRadioGroup/FormRadioGroup';
-// import { FormCheckboxGroup } from './FormCheckboxGroup/FormCheckboxGroup';
-// import { FormActions } from './FormActions/FormActions';
 import { FormSelect } from './FormSelect/FormSelect';
-// import { FormCheckboxToggle } from './FormCheckboxToggle/FormCheckboxToggle';
-// import { FormPlain } from './FormPlain/FormPlain';
+import { FormSlide } from './FormSlide/FormSlide';
 import { FormTextarea } from './FormTextarea/FormTextarea';
 import { FormStarRating } from './FormStarRating/FormStarRating';
 import { FormPicker } from './FormPicker/FormPicker';
@@ -39,21 +33,15 @@ interface FormComponent {
     props: FormProps<T>,
     ref: FormInstance<T>
   ): ReactElement;
-  //   Checkbox: typeof FormCheckbox;
-  //   Datepicker: typeof FormDatepicker;
   Password: typeof FormPassword;
-  //   Section: typeof FormSection;
   Submit: typeof FormSubmit;
   Text: typeof FormText;
   RadioGroup: typeof FormRadioGroup;
-  //   CheckboxGroup: typeof FormCheckboxGroup;
-  //   Actions: typeof FormActions;
   Select: typeof FormSelect;
-  //   CheckboxToggle: typeof FormCheckboxToggle;
-  //   Plain: typeof FormPlain;
   Textarea: typeof FormTextarea;
   StarRating: typeof FormStarRating;
   Picker: typeof FormPicker;
+  Slide: typeof FormSlide;
 }
 
 export const Form = forwardRef<FormInstance<{}>, FormProps>(function Form(
@@ -92,18 +80,12 @@ export const Form = forwardRef<FormInstance<{}>, FormProps>(function Form(
   );
 }) as unknown as FormComponent;
 
-// Form.Checkbox = FormCheckbox;
-// Form.Datepicker = FormDatepicker;
 Form.Password = FormPassword;
-// Form.Section = FormSection;
 Form.Submit = FormSubmit;
 Form.Text = FormText;
 Form.RadioGroup = FormRadioGroup;
-// Form.CheckboxGroup = FormCheckboxGroup;
-// Form.Actions = FormActions;
 Form.Select = FormSelect;
-// Form.CheckboxToggle = FormCheckboxToggle;
-// Form.Plain = FormPlain;
 Form.Textarea = FormTextarea;
 Form.StarRating = FormStarRating;
 Form.Picker = FormPicker;
+Form.Slide = FormSlide;

@@ -33,7 +33,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
   const { t } = useTranslation();
   const { prompts } = useConfig();
   const [, navigate] = useRoute();
-  const { characters, themes, placesOfEvent, readTimes } = useOptions();
+  const { characters, themes, placesOfEvent, readTimes, gender } = useOptions();
 
   const [promptId] = useFormControl({
     name: FormField.PromptId,
@@ -69,7 +69,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       component={ChildAge}
                       label={t('forms.age')}
                       name={FormField.ChildAge}
-                      placeholder={t('placeholders.setAge')}
+                      placeholder={t('placeholders.tapToSetAge')}
                       validation={{ required: true }}
                     />
                   ),
@@ -78,7 +78,8 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       component={ChildGender}
                       label={t('forms.gender')}
                       name={FormField.ChildGender}
-                      options={characters}
+                      options={gender}
+                      placeholder={t('placeholders.tapToPickGender')}
                       validation={{ required: true }}
                     />
                   ),
@@ -87,7 +88,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       component={ChildName}
                       label={t('forms.name')}
                       name={FormField.ChildName}
-                      placeholder={t('placeholders.setName')}
+                      placeholder={t('placeholders.tapToSetName')}
                       validation={{ required: true }}
                     />
                   ),
@@ -98,6 +99,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       label={t('forms.moralLesson')}
                       name={FormField.MoralLessonId}
                       options={themes}
+                      placeholder={t('placeholders.tapToPickMoralLesson')}
                       validation={{ required: true }}
                     />
                   ),
@@ -107,6 +109,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       label={t('forms.readTime')}
                       name={FormField.ReadTime}
                       options={readTimes}
+                      placeholder={t('placeholders.tapToPickReadTime')}
                       validation={{ required: true }}
                     />
                   ),
@@ -116,6 +119,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       label={t('forms.placeOfEvents')}
                       name={FormField.placeOfEventId}
                       options={placesOfEvent}
+                      placeholder={t('placeholders.tapToPickPlaceOfEvents')}
                       validation={{ required: true }}
                     />
                   ),

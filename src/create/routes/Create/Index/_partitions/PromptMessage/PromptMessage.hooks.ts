@@ -3,10 +3,27 @@ import { useMemo } from 'react';
 import { useConfig } from '@bootstrap/providers';
 import { FormInputOptionProps } from '@core/uikit';
 import { useTranslation } from '@core/localization';
+import { GENDER } from '@common/assets';
 
 export const useOptions = () => {
   const { t } = useTranslation();
   const { characters, themes, scenes } = useConfig();
+
+  const genderOptions = useMemo(
+    (): FormInputOptionProps<string>[] => [
+      {
+        image: GENDER.BOY,
+        label: t('options.boy'),
+        value: 'boy',
+      },
+      {
+        image: GENDER.GIRL,
+        label: t('options.girl'),
+        value: 'girl',
+      },
+    ],
+    [t]
+  );
 
   const charactersOptions = useMemo(
     (): FormInputOptionProps<string>[] =>
@@ -50,6 +67,7 @@ export const useOptions = () => {
 
   return {
     characters: charactersOptions,
+    gender: genderOptions,
     placesOfEvent: placeOfEventOptions,
     readTimes: readTimeOptions,
     themes: themesOptions,

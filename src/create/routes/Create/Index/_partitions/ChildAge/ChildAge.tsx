@@ -27,7 +27,7 @@ export const ChildAge: FormPickerComponent<number> = ({
   return (
     <Form<ChildAgeForm>
       defaultValues={{
-        [FormField.ChildAge]: value,
+        [FormField.ChildAge]: value || 4,
       }}
       onSubmit={handleOnSubmit}
     >
@@ -35,15 +35,11 @@ export const ChildAge: FormPickerComponent<number> = ({
       <Box display="flex" flexDirection="column" gap={8}>
         <Box paddingInline={20}>
           <Typography variant="body-2">
-            <Translate id="forms.mainCharacterWillBe" />
+            <Translate id="forms.theAgeOfManiCharacterIs" />
           </Typography>
         </Box>
-        <Box paddingInline={20}>
-          <Form.Text
-            autofocus
-            label={t('forms.childName')}
-            name={FormField.ChildAge}
-          />
+        <Box paddingInline={40}>
+          <Form.Slide max={10} min={1} name={FormField.ChildAge} snaps ticks />
         </Box>
       </Box>
       <Content />
