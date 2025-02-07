@@ -7,12 +7,11 @@ import {
   Form,
   Grid,
   Header,
+  useForm,
   useFormControl,
 } from '@core/uikit';
 import { Translate, useTranslation } from '@core/localization';
 import { useConfig } from '@bootstrap/providers';
-import { RoutePath } from '@bootstrap/constants';
-import { useRoute } from '@core/navigation';
 
 import { Character } from '../Character';
 import { PlaceOfEvent } from '../PlaceOfEvent';
@@ -32,7 +31,7 @@ interface PromptMessageProps {
 export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
   const { t } = useTranslation();
   const { prompts } = useConfig();
-  const [, navigate] = useRoute();
+  const { reset } = useForm();
   const { characters, themes, placesOfEvent, readTimes, gender } = useOptions();
 
   const [promptId] = useFormControl({
@@ -41,9 +40,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
 
   const outline = prompts.find(({ id }) => id === promptId)?.message;
 
-  const handleOnCancel = () => {
-    navigate({ action: 'back', pathname: RoutePath.Index });
-  };
+  const handleOnCancel = () => reset();
 
   if (!outline) return null;
 
