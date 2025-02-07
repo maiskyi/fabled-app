@@ -4,12 +4,12 @@ import { IonSpinner } from '@ionic/react';
 
 export interface SpinnerProps {
   className?: string;
-  variant?: 'dots' | 'circular';
+  variant?: 'dots' | 'crescent';
   color?: Parameters<typeof IonSpinner>['0']['color'];
 }
 
 export const Spinner = memo<SpinnerProps>(function Spinner({
-  variant = 'circular',
+  variant = 'crescent',
   color,
   className,
 }: SpinnerProps) {
