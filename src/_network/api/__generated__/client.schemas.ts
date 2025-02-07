@@ -130,8 +130,19 @@ export interface CreateStoryResponse {
   id: string;
 }
 
+export type ChildGender = (typeof ChildGender)[keyof typeof ChildGender];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ChildGender = {
+  boy: 'boy',
+  girl: 'girl',
+} as const;
+
 export interface CreateStoryRequest {
   characterId?: string;
+  childAge?: number;
+  childGender?: ChildGender;
+  childName?: string;
   moralLessonId: string;
   placeOfEventId: string;
   promptId: string;

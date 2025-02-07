@@ -4,13 +4,12 @@ import { Box, Form, useUtils, Spinner } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { Redirect } from '@core/navigation';
-import { useCreateStory } from '@network/api';
+import { useCreateStory, DTO } from '@network/api';
 import { withLoad } from '@core/analytics';
 import { usePromptToSubscribe } from '@core/purchases';
 import { PromptToSubscribe } from '@common/features';
 
 import { PromtOptions } from './_partitions/PromtOptions';
-import { IndexForm } from './Index.type';
 import { PromptMessage } from './_partitions/PromptMessage';
 
 interface IndexProps {
@@ -32,7 +31,7 @@ export const Index: FC<IndexProps> = withLoad({
 
   const { data, isPending, isSuccess, mutate } = useCreateStory();
 
-  const handleOnSubmit = (data: IndexForm) => {
+  const handleOnSubmit = (data: DTO.CreateStoryRequest) => {
     mutate(
       {
         data,
@@ -74,7 +73,7 @@ export const Index: FC<IndexProps> = withLoad({
   }
 
   return (
-    <Form<IndexForm> defaultValues={{}} onSubmit={handleOnSubmit}>
+    <Form<DTO.CreateStoryRequest> defaultValues={{}} onSubmit={handleOnSubmit}>
       <PromtOptions />
       <PromptMessage isPending={isPending} />
     </Form>

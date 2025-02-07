@@ -48,7 +48,9 @@ export const Message: FC<MessageProps> = ({
           )}
         />
         <IonCard
-          className={classNames(styles.card, styles[origin])}
+          className={classNames(styles.card, styles[origin], {
+            [styles.error]: color === 'danger',
+          })}
           color={color}
         >
           <IonCardContent className={styles.content}>
