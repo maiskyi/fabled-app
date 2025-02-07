@@ -16,7 +16,7 @@ export const Image = memo<ImageProps>(function Image({ src }: ImageProps) {
 
   return (
     <Fragment>
-      {!ready && <Spinner className={styles.spinner} />}
+      {!ready && <Spinner className={styles.spinner} color="secondary" />}
       <img
         alt=""
         className={classNames({

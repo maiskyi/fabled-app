@@ -8,6 +8,8 @@ import { useRoute } from '@core/navigation';
 
 import { FableContext } from '../Fable.context';
 
+import { CHILD_EMOJI_MAPPING } from './Index.const';
+
 export const Index: FC = () => {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
@@ -16,7 +18,18 @@ export const Index: FC = () => {
 
   const description = story?.content.split('\n')[0].trim();
 
+  const child = (() => {
+    if (story?.childName && story?.childGender) {
+      return {
+        emoji: CHILD_EMOJI_MAPPING[story.childGender],
+        id: story?.childGender,
+        title: story.childName,
+      };
+    }
+  })();
+
   const chips = [
+    child,
     story?.character,
     story?.placeOfEvent,
     story?.moralLesson,

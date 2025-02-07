@@ -23,16 +23,7 @@ export const useOnboarding = () => {
           />
         ),
       },
-      {
-        description: t('onboarding.library.description'),
-        image: ASSETS.ROBOT_1,
-        title: (
-          <Translate
-            components={{ hl: <OnboardingHl /> }}
-            id="onboarding.library.title"
-          />
-        ),
-      },
+
       {
         description: t('onboarding.outline.description'),
         image: ASSETS.ROBOT_2,
@@ -43,11 +34,16 @@ export const useOnboarding = () => {
           />
         ),
       },
-      // {
-      //   description: t('onboarding.personalized.description'),
-      //   image: Personalized,
-      //   title: t('onboarding.personalized.title'),
-      // },
+      {
+        description: t('onboarding.personalized.description'),
+        image: ASSETS.ROBOT_4,
+        title: (
+          <Translate
+            components={{ hl: <OnboardingHl /> }}
+            id="onboarding.personalized.title"
+          />
+        ),
+      },
       {
         description: t('onboarding.image.description'),
         image: ASSETS.ROBOT_3,
@@ -55,6 +51,16 @@ export const useOnboarding = () => {
           <Translate
             components={{ hl: <OnboardingHl /> }}
             id="onboarding.image.title"
+          />
+        ),
+      },
+      {
+        description: t('onboarding.library.description'),
+        image: ASSETS.ROBOT_1,
+        title: (
+          <Translate
+            components={{ hl: <OnboardingHl /> }}
+            id="onboarding.library.title"
           />
         ),
       },

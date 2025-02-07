@@ -16,7 +16,7 @@ export const onboarding = {
   personalized: {
     description:
       'Personalize your stories by making your child the main character.',
-    title: 'Make your child the star',
+    title: 'Make <hl>your child</hl> the star',
   },
   welcome: {
     description:

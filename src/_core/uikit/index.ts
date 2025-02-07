@@ -49,6 +49,7 @@ export * from './hooks/useMediaSwitch';
 export * from './hooks/useModal';
 export * from './hooks/useSplashScreen';
 export * from './hooks/useUtils';
+export * from './hooks/useForm';
 export {
   useIonModal as useModal,
   useIonViewDidEnter as useViewDidEnter,

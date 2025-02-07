@@ -103,7 +103,9 @@ export interface StoryCharacter {
 }
 
 export interface Story {
-  character: StoryCharacter;
+  character?: StoryCharacter;
+  childGender?: ChildGender;
+  childName?: string;
   content: string;
   createdAt: string;
   id: string;
