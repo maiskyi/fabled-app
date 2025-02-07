@@ -100,11 +100,11 @@ export const FormPicker: FormPickerComponent = ({
             </a>
             <IonModal
               backdropDismiss={false}
-              breakpoints={height === 'auto' ? [0, 1] : undefined}
+              breakpoints={[0, 1]}
               className={classNames(styles.modal, {
                 [styles.auto]: height === 'auto',
               })}
-              initialBreakpoint={height === 'auto' ? 1 : undefined}
+              initialBreakpoint={1}
               presentingElement={ref?.current?.closest('ion-page')}
               ref={modal}
               showBackdrop={true}
