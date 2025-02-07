@@ -22,11 +22,11 @@
     }
   }
 
-  &.companion {
+  &.companion:not(.error) {
     background: var(--color-gradient-brand-horizontal-revers);
   }
 
-  &.me {
+  &.me:not(.error) {
     background: var(--color-gradient-secondary-horizontal);
   }
 }

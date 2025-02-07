@@ -4,6 +4,7 @@ import { useConfig } from '@bootstrap/providers';
 import { FormInputOptionProps } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { GENDER } from '@common/assets';
+import { DTO } from '@network/api';
 
 export const useOptions = () => {
   const { t } = useTranslation();
@@ -14,12 +15,12 @@ export const useOptions = () => {
       {
         image: GENDER.BOY,
         label: t('options.boy'),
-        value: 'boy',
+        value: DTO.ChildGender.boy,
       },
       {
         image: GENDER.GIRL,
         label: t('options.girl'),
-        value: 'girl',
+        value: DTO.ChildGender.girl,
       },
     ],
     [t]
