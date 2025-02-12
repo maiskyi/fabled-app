@@ -9,6 +9,7 @@ type FabButtonProps = PropsWithChildren<{
   icon?: IconName;
   onClick?: () => void;
   color?: Color;
+  size?: 'small';
 }>;
 
 export const FabButton: FC<FabButtonProps> = ({
@@ -16,9 +17,10 @@ export const FabButton: FC<FabButtonProps> = ({
   onClick,
   children,
   color,
+  size,
 }) => {
   return (
-    <IonFabButton color={color} onClick={onClick}>
+    <IonFabButton color={color} onClick={onClick} size={size}>
       {!!icon && <IonIcon icon={ICON[icon]} />}
       {children}
     </IonFabButton>

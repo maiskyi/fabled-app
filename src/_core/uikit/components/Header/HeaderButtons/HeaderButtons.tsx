@@ -2,11 +2,11 @@ import { FC, PropsWithChildren } from 'react';
 
 import { IonButtons } from '@ionic/react';
 
-type HeaderActionsProps = PropsWithChildren<{
+type HeaderButtonsProps = PropsWithChildren<{
   slot?: 'start' | 'end';
 }>;
 
-export const HeaderActions: FC<HeaderActionsProps> = ({
+export const HeaderButtons: FC<HeaderButtonsProps> = ({
   children,
   slot = 'end',
 }) => {
