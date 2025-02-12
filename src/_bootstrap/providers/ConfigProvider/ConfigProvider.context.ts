@@ -11,11 +11,13 @@ interface ConfigContextProps {
   scenes: DTO.BootstrapPlaceOfEventItem[];
   themes: DTO.BootstrapMoralLessonsItem[];
   isReady: boolean;
+  lullabies: DTO.BootstrapLullabyItem[];
 }
 
 export const ConfigContext = createContext<ConfigContextProps>({
   characters: [],
   isReady: false,
+  lullabies: [],
   privacyPolicyUrl: '/',
   prompts: [],
   scenes: [],
