@@ -38,6 +38,7 @@ import edit3 from './assets/edit-3.svg?raw';
 import lifeBuoy from './assets/life-buoy.svg?raw';
 import check from './assets/check.svg?raw';
 import music from './assets/music.svg?raw';
+import settings from './assets/settings.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
@@ -53,6 +54,7 @@ const NEW_ICONS = {
   'life-buoy': `data:image/svg+xml;utf8,${lifeBuoy}`,
   mail: `data:image/svg+xml;utf8,${mail}`,
   music: `data:image/svg+xml;utf8,${music}`,
+  settings: `data:image/svg+xml;utf8,${settings}`,
   shield: `data:image/svg+xml;utf8,${shield}`,
   smile: `data:image/svg+xml;utf8,${smile}`,
   user: `data:image/svg+xml;utf8,${user}`,

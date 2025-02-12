@@ -20,7 +20,7 @@ export const Lullaby: FC = () => {
         <source src={lullabies[0].url} type="audio/mpeg" />
       </audio>
       <Fab placement={['end', 'top']} slot="fixed">
-        <Fab.Button></Fab.Button>
+        <Fab.Button color="light" icon="settings" />
       </Fab>
     </Fragment>
   );
