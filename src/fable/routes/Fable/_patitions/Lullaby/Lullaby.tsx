@@ -16,7 +16,7 @@ export const Lullaby: FC = () => {
 
   return (
     <Fragment>
-      <audio ref={audio}>
+      <audio loop ref={audio}>
         <source src={lullabies[0].url} type="audio/mpeg" />
       </audio>
       <Fab placement={['end', 'top']} slot="fixed">
