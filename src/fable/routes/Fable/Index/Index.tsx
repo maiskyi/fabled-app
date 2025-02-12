@@ -1,20 +1,18 @@
 import { FC } from 'react';
-import { useContext } from 'use-context-selector';
 
 import { Box, Button, Text, Chip, Grid, Typography } from '@core/uikit';
 import { RoutePath } from '@bootstrap/constants';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 
-import { FableContext } from '../Fable.context';
+import { useFable } from '../../../providers/FableProvider';
 
 import { CHILD_EMOJI_MAPPING } from './Index.const';
 
 export const Index: FC = () => {
   const { t } = useTranslation();
   const [, navigate] = useRoute();
-
-  const { story } = useContext(FableContext);
+  const { story } = useFable();
 
   const description = story?.content.split('\n')[0].trim();
 
