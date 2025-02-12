@@ -70,9 +70,9 @@ export const Home = withLoad({
     <Page>
       <Header translucent>
         <Header.Title>{title}</Header.Title>
-        <Header.Actions>
-          <Header.Action icon="person-circle" onClick={handleOnProfileClick} />
-        </Header.Actions>
+        <Header.Buttons>
+          <Header.Button icon="person-circle" onClick={handleOnProfileClick} />
+        </Header.Buttons>
       </Header>
       <Content fullscreen inset={false}>
         <InfiniteScroll disabled={!hasNextPage} onScroll={fetchNextPage}>

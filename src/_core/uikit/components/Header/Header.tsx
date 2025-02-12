@@ -15,8 +15,8 @@ import { DeviceContext } from '../../contexts/DeviceContext';
 
 import { HeaderTitle } from './HeaderTitle/HeaderTitle';
 import { HeaderBack } from './HeaderBack/HeaderBack';
-import { HeaderActions } from './HeaderActions/HeaderActions';
-import { HeaderAction } from './HeaderAction/HeaderAction';
+import { HeaderButtons } from './HeaderButtons/HeaderButtons';
+import { HeaderButton } from './HeaderButton/HeaderButton';
 
 import styles from './Header.module.scss';
 
@@ -32,8 +32,8 @@ interface HeaderComponent {
   (props: HeaderProps): ReactElement;
   Title: typeof HeaderTitle;
   Back: typeof HeaderBack;
-  Actions: typeof HeaderActions;
-  Action: typeof HeaderAction;
+  Buttons: typeof HeaderButtons;
+  Button: typeof HeaderButton;
 }
 
 export const Header = forwardRef<any, HeaderProps>(function Header(
@@ -84,5 +84,5 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
 
 Header.Title = HeaderTitle;
 Header.Back = HeaderBack;
-Header.Actions = HeaderActions;
-Header.Action = HeaderAction;
+Header.Buttons = HeaderButtons;
+Header.Button = HeaderButton;

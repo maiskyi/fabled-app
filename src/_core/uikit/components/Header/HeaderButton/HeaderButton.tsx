@@ -4,14 +4,14 @@ import { IonButton } from '@ionic/react';
 
 import { Icon, IconName } from '../../Icon';
 
-import styles from './HeaderAction.module.scss';
+import styles from './HeaderButton.module.scss';
 
-interface HeaderActionProps {
+interface HeaderButtonProps {
   icon: IconName;
   onClick?: () => void;
 }
 
-export const HeaderAction: FC<HeaderActionProps> = ({ icon, onClick }) => {
+export const HeaderButton: FC<HeaderButtonProps> = ({ icon, onClick }) => {
   return (
     <IonButton
       className={styles.root}
