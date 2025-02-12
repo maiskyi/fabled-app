@@ -7,7 +7,10 @@
  * Fabled API Documentation
  * OpenAPI spec version: 1.0
  */
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
+
+import { useCustomInstance } from '../hooks/useCustomInstance/index';
+
 import type {
   InfiniteData,
   MutationFunction,
@@ -18,12 +21,13 @@ import type {
   UseMutationOptions,
   UseQueryOptions,
   UseQueryResult,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 import type {
   BootstrapResponse,
   CreateFeedbackRequest,
   CreateFeedbackResponse,
   CreateInquiryRequest,
+  CreateRevenueCatRequest,
   CreateStoryRequest,
   CreateStoryResponse,
   GetBootstrapParams,
@@ -33,16 +37,1093 @@ import type {
   HttpExceptionResponse,
   Stories,
   Story,
-} from "./client.schemas";
-import { useCustomInstance } from "../hooks/useCustomInstance/index";
+} from './client.schemas';
 
 // eslint-disable-next-line
 type SecondParameter<T extends (...args: any) => any> = T extends (
   config: any,
-  args: infer P,
+  args: infer P
 ) => any
   ? P
   : never;
+
+/**
+ * @summary Get app bootstrap data
+ */
+export const useGetBootstrapHook = () => {
+  const getBootstrap = useCustomInstance<BootstrapResponse>();
+
+  return (
+    params?: GetBootstrapParams,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal
+  ) => {
+    return getBootstrap(
+      { method: 'get', params, signal, url: `/api/bootstrap` },
+      options
+    );
+  };
+};
+
+export const getGetBootstrapQueryKey = (params?: GetBootstrapParams) => {
+  return [`/api/bootstrap`, ...(params ? [params] : [])] as const;
+};
+
+export const useGetBootstrapInfiniteQueryOptions = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    GetBootstrapParams['skip']
+  >,
+  TError = unknown,
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        QueryKey,
+        GetBootstrapParams['skip']
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey(params);
+
+  const getBootstrap = useGetBootstrapHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    QueryKey,
+    GetBootstrapParams['skip']
+  > = ({ signal, pageParam }) =>
+    getBootstrap({ skip: pageParam, ...params }, requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    TError,
+    TData,
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    QueryKey,
+    GetBootstrapParams['skip']
+  > & { queryKey: QueryKey };
+};
+
+export type GetBootstrapInfiniteQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+>;
+export type GetBootstrapInfiniteQueryError = unknown;
+
+/**
+ * @summary Get app bootstrap data
+ */
+export const useGetBootstrapInfinite = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    GetBootstrapParams['skip']
+  >,
+  TError = unknown,
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        QueryKey,
+        GetBootstrapParams['skip']
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetBootstrapInfiniteQueryOptions(params, options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetBootstrapQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+  TError = unknown,
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey(params);
+
+  const getBootstrap = useGetBootstrapHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+  > = ({ signal }) => getBootstrap(params, requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetBootstrapQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
+>;
+export type GetBootstrapQueryError = unknown;
+
+/**
+ * @summary Get app bootstrap data
+ */
+export const useGetBootstrap = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+  TError = unknown,
+>(
+  params?: GetBootstrapParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetBootstrapQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+/**
+ * @summary Create feedback
+ */
+export const useCreateFeedbackHook = () => {
+  const createFeedback = useCustomInstance<CreateFeedbackResponse>();
+
+  return (
+    createFeedbackRequest: CreateFeedbackRequest,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>
+  ) => {
+    return createFeedback(
+      {
+        data: createFeedbackRequest,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `/api/feedbacks`,
+      },
+      options
+    );
+  };
+};
+
+export const useCreateFeedbackMutationOptions = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+    TError,
+    { data: CreateFeedbackRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+  TError,
+  { data: CreateFeedbackRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const createFeedback = useCreateFeedbackHook();
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+    { data: CreateFeedbackRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createFeedback(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateFeedbackMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>
+>;
+export type CreateFeedbackMutationBody = CreateFeedbackRequest;
+export type CreateFeedbackMutationError = HttpExceptionResponse;
+
+/**
+ * @summary Create feedback
+ */
+export const useCreateFeedback = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
+    TError,
+    { data: CreateFeedbackRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const mutationOptions = useCreateFeedbackMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+/**
+ * @summary Get health check status
+ */
+export const useGetHealthCheckHook = () => {
+  const getHealthCheck = useCustomInstance<string>();
+
+  return (
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal
+  ) => {
+    return getHealthCheck(
+      { method: 'get', signal, url: `/api/health-check` },
+      options
+    );
+  };
+};
+
+export const getGetHealthCheckQueryKey = () => {
+  return [`/api/health-check`] as const;
+};
+
+export const useGetHealthCheckInfiniteQueryOptions = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetHealthCheckQueryKey();
+
+  const getHealthCheck = useGetHealthCheckHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  > = ({ signal }) => getHealthCheck(requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetHealthCheckInfiniteQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+>;
+export type GetHealthCheckInfiniteQueryError = unknown;
+
+/**
+ * @summary Get health check status
+ */
+export const useGetHealthCheckInfinite = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  >,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseInfiniteQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetHealthCheckInfiniteQueryOptions(options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetHealthCheckQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetHealthCheckQueryKey();
+
+  const getHealthCheck = useGetHealthCheckHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+  > = ({ signal }) => getHealthCheck(requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetHealthCheckQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
+>;
+export type GetHealthCheckQueryError = unknown;
+
+/**
+ * @summary Get health check status
+ */
+export const useGetHealthCheck = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+  TError = unknown,
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
+      TError,
+      TData
+    >
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetHealthCheckQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useCreateRevenueCatControllerCreateRevenueCatHook = () => {
+  const createRevenueCatControllerCreateRevenueCat = useCustomInstance<void>();
+
+  return (
+    createRevenueCatRequest: CreateRevenueCatRequest,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>
+  ) => {
+    return createRevenueCatControllerCreateRevenueCat(
+      {
+        data: createRevenueCatRequest,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `/api/hooks/revenuecat`,
+      },
+      options
+    );
+  };
+};
+
+export const useCreateRevenueCatControllerCreateRevenueCatMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<
+      ReturnType<
+        ReturnType<typeof useCreateRevenueCatControllerCreateRevenueCatHook>
+      >
+    >,
+    TError,
+    { data: CreateRevenueCatRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseMutationOptions<
+  Awaited<
+    ReturnType<
+      ReturnType<typeof useCreateRevenueCatControllerCreateRevenueCatHook>
+    >
+  >,
+  TError,
+  { data: CreateRevenueCatRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const createRevenueCatControllerCreateRevenueCat =
+    useCreateRevenueCatControllerCreateRevenueCatHook();
+
+  const mutationFn: MutationFunction<
+    Awaited<
+      ReturnType<
+        ReturnType<typeof useCreateRevenueCatControllerCreateRevenueCatHook>
+      >
+    >,
+    { data: CreateRevenueCatRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createRevenueCatControllerCreateRevenueCat(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateRevenueCatControllerCreateRevenueCatMutationResult =
+  NonNullable<
+    Awaited<
+      ReturnType<
+        ReturnType<typeof useCreateRevenueCatControllerCreateRevenueCatHook>
+      >
+    >
+  >;
+export type CreateRevenueCatControllerCreateRevenueCatMutationBody =
+  CreateRevenueCatRequest;
+export type CreateRevenueCatControllerCreateRevenueCatMutationError = unknown;
+
+export const useCreateRevenueCatControllerCreateRevenueCat = <
+  TError = unknown,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<
+      ReturnType<
+        ReturnType<typeof useCreateRevenueCatControllerCreateRevenueCatHook>
+      >
+    >,
+    TError,
+    { data: CreateRevenueCatRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const mutationOptions =
+    useCreateRevenueCatControllerCreateRevenueCatMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+/**
+ * @summary Create inquiry
+ */
+export const useCreateInquiryHook = () => {
+  const createInquiry = useCustomInstance<unknown>();
+
+  return (
+    createInquiryRequest: CreateInquiryRequest,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>
+  ) => {
+    return createInquiry(
+      {
+        data: createInquiryRequest,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `/api/inquiries`,
+      },
+      options
+    );
+  };
+};
+
+export const useCreateInquiryMutationOptions = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+    TError,
+    { data: CreateInquiryRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+  TError,
+  { data: CreateInquiryRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const createInquiry = useCreateInquiryHook();
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+    { data: CreateInquiryRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createInquiry(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateInquiryMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>
+>;
+export type CreateInquiryMutationBody = CreateInquiryRequest;
+export type CreateInquiryMutationError = HttpExceptionResponse;
+
+/**
+ * @summary Create inquiry
+ */
+export const useCreateInquiry = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
+    TError,
+    { data: CreateInquiryRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const mutationOptions = useCreateInquiryMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+/**
+ * @summary Get user stories
+ */
+export const useGetStoriesHook = () => {
+  const getStories = useCustomInstance<Stories>();
+
+  return (
+    params?: GetStoriesParams,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal
+  ) => {
+    return getStories(
+      { method: 'get', params, signal, url: `/api/stories` },
+      options
+    );
+  };
+};
+
+export const getGetStoriesQueryKey = (params?: GetStoriesParams) => {
+  return [`/api/stories`, ...(params ? [params] : [])] as const;
+};
+
+export const useGetStoriesInfiniteQueryOptions = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+    GetStoriesParams['skip']
+  >,
+  TError = unknown,
+>(
+  params?: GetStoriesParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+        QueryKey,
+        GetStoriesParams['skip']
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetStoriesQueryKey(params);
+
+  const getStories = useGetStoriesHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+    QueryKey,
+    GetStoriesParams['skip']
+  > = ({ signal, pageParam }) =>
+    getStories({ skip: pageParam, ...params }, requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+    TError,
+    TData,
+    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+    QueryKey,
+    GetStoriesParams['skip']
+  > & { queryKey: QueryKey };
+};
+
+export type GetStoriesInfiniteQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>
+>;
+export type GetStoriesInfiniteQueryError = unknown;
+
+/**
+ * @summary Get user stories
+ */
+export const useGetStoriesInfinite = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+    GetStoriesParams['skip']
+  >,
+  TError = unknown,
+>(
+  params?: GetStoriesParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+        QueryKey,
+        GetStoriesParams['skip']
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetStoriesInfiniteQueryOptions(params, options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetStoriesQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+  TError = unknown,
+>(
+  params?: GetStoriesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetStoriesQueryKey(params);
+
+  const getStories = useGetStoriesHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>
+  > = ({ signal }) => getStories(params, requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetStoriesQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>
+>;
+export type GetStoriesQueryError = unknown;
+
+/**
+ * @summary Get user stories
+ */
+export const useGetStories = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+  TError = unknown,
+>(
+  params?: GetStoriesParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetStoriesQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+/**
+ * @summary Create user story
+ */
+export const useCreateStoryHook = () => {
+  const createStory = useCustomInstance<CreateStoryResponse>();
+
+  return (
+    createStoryRequest: CreateStoryRequest,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>
+  ) => {
+    return createStory(
+      {
+        data: createStoryRequest,
+        headers: { 'Content-Type': 'application/json' },
+        method: 'post',
+        url: `/api/stories`,
+      },
+      options
+    );
+  };
+};
+
+export const useCreateStoryMutationOptions = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
+    TError,
+    { data: CreateStoryRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}): UseMutationOptions<
+  Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
+  TError,
+  { data: CreateStoryRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
+
+  const createStory = useCreateStoryHook();
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
+    { data: CreateStoryRequest }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createStory(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateStoryMutationResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>
+>;
+export type CreateStoryMutationBody = CreateStoryRequest;
+export type CreateStoryMutationError = HttpExceptionResponse;
+
+/**
+ * @summary Create user story
+ */
+export const useCreateStory = <
+  TError = HttpExceptionResponse,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
+    TError,
+    { data: CreateStoryRequest },
+    TContext
+  >;
+  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+}) => {
+  const mutationOptions = useCreateStoryMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+
+/**
+ * @summary Get user story
+ */
+export const useGetStoryHook = () => {
+  const getStory = useCustomInstance<Story>();
+
+  return (
+    id: string,
+    params?: GetStoryParams,
+    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
+    signal?: AbortSignal
+  ) => {
+    return getStory(
+      { method: 'get', params, signal, url: `/api/stories/${id}` },
+      options
+    );
+  };
+};
+
+export const getGetStoryQueryKey = (id: string, params?: GetStoryParams) => {
+  return [`/api/stories/${id}`, ...(params ? [params] : [])] as const;
+};
+
+export const useGetStoryInfiniteQueryOptions = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    GetStoryParams['skip']
+  >,
+  TError = unknown,
+>(
+  id: string,
+  params?: GetStoryParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        QueryKey,
+        GetStoryParams['skip']
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id, params);
+
+  const getStory = useGetStoryHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    QueryKey,
+    GetStoryParams['skip']
+  > = ({ signal, pageParam }) =>
+    getStory(id, { skip: pageParam, ...params }, requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    enabled: !!id,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseInfiniteQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    TError,
+    TData,
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    QueryKey,
+    GetStoryParams['skip']
+  > & { queryKey: QueryKey };
+};
+
+export type GetStoryInfiniteQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
+>;
+export type GetStoryInfiniteQueryError = unknown;
+
+/**
+ * @summary Get user story
+ */
+export const useGetStoryInfinite = <
+  TData = InfiniteData<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    GetStoryParams['skip']
+  >,
+  TError = unknown,
+>(
+  id: string,
+  params?: GetStoryParams,
+  options?: {
+    query?: Partial<
+      UseInfiniteQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData,
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        QueryKey,
+        GetStoryParams['skip']
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetStoryInfiniteQueryOptions(id, params, options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
+    TData,
+    TError
+  > & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+export const useGetStoryQueryOptions = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+  TError = unknown,
+>(
+  id: string,
+  params?: GetStoryParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id, params);
+
+  const getStory = useGetStoryHook();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
+  > = ({ signal }) => getStory(id, params, requestOptions, signal);
+
+  return {
+    cacheTime: 0,
+    enabled: !!id,
+    queryFn,
+    queryKey,
+    refetchOnWindowFocus: false,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetStoryQueryResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
+>;
+export type GetStoryQueryError = unknown;
+
+/**
+ * @summary Get user story
+ */
+export const useGetStory = <
+  TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+  TError = unknown,
+>(
+  id: string,
+  params?: GetStoryParams,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
+  }
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = useGetStoryQueryOptions(id, params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
 
 export const useGetDatabaseUrlControllerGetDatabaseUrlHook = () => {
   const getDatabaseUrlControllerGetDatabaseUrl =
@@ -50,11 +1131,11 @@ export const useGetDatabaseUrlControllerGetDatabaseUrlHook = () => {
 
   return (
     options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) => {
     return getDatabaseUrlControllerGetDatabaseUrl(
-      { url: `/api/system/database-url`, method: "get", signal },
-      options,
+      { method: 'get', signal, url: `/api/system/database-url` },
+      options
     );
   };
 };
@@ -105,9 +1186,9 @@ export const useGetDatabaseUrlControllerGetDatabaseUrlInfiniteQueryOptions = <
     getDatabaseUrlControllerGetDatabaseUrl(requestOptions, signal);
 
   return {
-    queryKey,
-    queryFn,
     cacheTime: 0,
+    queryFn,
+    queryKey,
     refetchOnWindowFocus: false,
     ...queryOptions,
   } as UseInfiniteQueryOptions<
@@ -205,9 +1286,9 @@ export const useGetDatabaseUrlControllerGetDatabaseUrlQueryOptions = <
     getDatabaseUrlControllerGetDatabaseUrl(requestOptions, signal);
 
   return {
-    queryKey,
-    queryFn,
     cacheTime: 0,
+    queryFn,
+    queryKey,
     refetchOnWindowFocus: false,
     ...queryOptions,
   } as UseQueryOptions<
@@ -257,983 +1338,4 @@ export const useGetDatabaseUrlControllerGetDatabaseUrl = <
   query.queryKey = queryOptions.queryKey;
 
   return query;
-};
-
-/**
- * @summary Get app bootstrap data
- */
-export const useGetBootstrapHook = () => {
-  const getBootstrap = useCustomInstance<BootstrapResponse>();
-
-  return (
-    params?: GetBootstrapParams,
-    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-    signal?: AbortSignal,
-  ) => {
-    return getBootstrap(
-      { url: `/api/bootstrap`, method: "get", params, signal },
-      options,
-    );
-  };
-};
-
-export const getGetBootstrapQueryKey = (params?: GetBootstrapParams) => {
-  return [`/api/bootstrap`, ...(params ? [params] : [])] as const;
-};
-
-export const useGetBootstrapInfiniteQueryOptions = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-    GetBootstrapParams["skip"]
-  >,
-  TError = unknown,
->(
-  params?: GetBootstrapParams,
-  options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-        TError,
-        TData,
-        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-        QueryKey,
-        GetBootstrapParams["skip"]
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey(params);
-
-  const getBootstrap = useGetBootstrapHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-    QueryKey,
-    GetBootstrapParams["skip"]
-  > = ({ signal, pageParam }) =>
-    getBootstrap({ skip: pageParam, ...params }, requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-    TError,
-    TData,
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-    QueryKey,
-    GetBootstrapParams["skip"]
-  > & { queryKey: QueryKey };
-};
-
-export type GetBootstrapInfiniteQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
->;
-export type GetBootstrapInfiniteQueryError = unknown;
-
-/**
- * @summary Get app bootstrap data
- */
-export const useGetBootstrapInfinite = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-    GetBootstrapParams["skip"]
-  >,
-  TError = unknown,
->(
-  params?: GetBootstrapParams,
-  options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-        TError,
-        TData,
-        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-        QueryKey,
-        GetBootstrapParams["skip"]
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetBootstrapInfiniteQueryOptions(params, options);
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
-    TData,
-    TError
-  > & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-export const useGetBootstrapQueryOptions = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-  TError = unknown,
->(
-  params?: GetBootstrapParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetBootstrapQueryKey(params);
-
-  const getBootstrap = useGetBootstrapHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
-  > = ({ signal }) => getBootstrap(params, requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
-};
-
-export type GetBootstrapQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>
->;
-export type GetBootstrapQueryError = unknown;
-
-/**
- * @summary Get app bootstrap data
- */
-export const useGetBootstrap = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-  TError = unknown,
->(
-  params?: GetBootstrapParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetBootstrapHook>>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetBootstrapQueryOptions(params, options);
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-/**
- * @summary Get health check status
- */
-export const useGetHealthCheckHook = () => {
-  const getHealthCheck = useCustomInstance<string>();
-
-  return (
-    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-    signal?: AbortSignal,
-  ) => {
-    return getHealthCheck(
-      { url: `/api/health-check`, method: "get", signal },
-      options,
-    );
-  };
-};
-
-export const getGetHealthCheckQueryKey = () => {
-  return [`/api/health-check`] as const;
-};
-
-export const useGetHealthCheckInfiniteQueryOptions = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
-  >,
-  TError = unknown,
->(options?: {
-  query?: Partial<
-    UseInfiniteQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetHealthCheckQueryKey();
-
-  const getHealthCheck = useGetHealthCheckHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
-  > = ({ signal }) => getHealthCheck(requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
-};
-
-export type GetHealthCheckInfiniteQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
->;
-export type GetHealthCheckInfiniteQueryError = unknown;
-
-/**
- * @summary Get health check status
- */
-export const useGetHealthCheckInfinite = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
-  >,
-  TError = unknown,
->(options?: {
-  query?: Partial<
-    UseInfiniteQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetHealthCheckInfiniteQueryOptions(options);
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
-    TData,
-    TError
-  > & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-export const useGetHealthCheckQueryOptions = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-  TError = unknown,
->(options?: {
-  query?: Partial<
-    UseQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetHealthCheckQueryKey();
-
-  const getHealthCheck = useGetHealthCheckHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
-  > = ({ signal }) => getHealthCheck(requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
-};
-
-export type GetHealthCheckQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>
->;
-export type GetHealthCheckQueryError = unknown;
-
-/**
- * @summary Get health check status
- */
-export const useGetHealthCheck = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-  TError = unknown,
->(options?: {
-  query?: Partial<
-    UseQueryOptions<
-      Awaited<ReturnType<ReturnType<typeof useGetHealthCheckHook>>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetHealthCheckQueryOptions(options);
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-/**
- * @summary Get user stories
- */
-export const useGetStoriesHook = () => {
-  const getStories = useCustomInstance<Stories>();
-
-  return (
-    params?: GetStoriesParams,
-    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-    signal?: AbortSignal,
-  ) => {
-    return getStories(
-      { url: `/api/stories`, method: "get", params, signal },
-      options,
-    );
-  };
-};
-
-export const getGetStoriesQueryKey = (params?: GetStoriesParams) => {
-  return [`/api/stories`, ...(params ? [params] : [])] as const;
-};
-
-export const useGetStoriesInfiniteQueryOptions = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    GetStoriesParams["skip"]
-  >,
-  TError = unknown,
->(
-  params?: GetStoriesParams,
-  options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-        TError,
-        TData,
-        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-        QueryKey,
-        GetStoriesParams["skip"]
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetStoriesQueryKey(params);
-
-  const getStories = useGetStoriesHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    QueryKey,
-    GetStoriesParams["skip"]
-  > = ({ signal, pageParam }) =>
-    getStories({ skip: pageParam, ...params }, requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    TError,
-    TData,
-    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    QueryKey,
-    GetStoriesParams["skip"]
-  > & { queryKey: QueryKey };
-};
-
-export type GetStoriesInfiniteQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>
->;
-export type GetStoriesInfiniteQueryError = unknown;
-
-/**
- * @summary Get user stories
- */
-export const useGetStoriesInfinite = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    GetStoriesParams["skip"]
-  >,
-  TError = unknown,
->(
-  params?: GetStoriesParams,
-  options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-        TError,
-        TData,
-        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-        QueryKey,
-        GetStoriesParams["skip"]
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetStoriesInfiniteQueryOptions(params, options);
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
-    TData,
-    TError
-  > & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-export const useGetStoriesQueryOptions = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-  TError = unknown,
->(
-  params?: GetStoriesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetStoriesQueryKey(params);
-
-  const getStories = useGetStoriesHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>
-  > = ({ signal }) => getStories(params, requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
-};
-
-export type GetStoriesQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>
->;
-export type GetStoriesQueryError = unknown;
-
-/**
- * @summary Get user stories
- */
-export const useGetStories = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-  TError = unknown,
->(
-  params?: GetStoriesParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoriesHook>>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetStoriesQueryOptions(params, options);
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-/**
- * @summary Create user story
- */
-export const useCreateStoryHook = () => {
-  const createStory = useCustomInstance<CreateStoryResponse>();
-
-  return (
-    createStoryRequest: CreateStoryRequest,
-    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-  ) => {
-    return createStory(
-      {
-        url: `/api/stories`,
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        data: createStoryRequest,
-      },
-      options,
-    );
-  };
-};
-
-export const useCreateStoryMutationOptions = <
-  TError = HttpExceptionResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
-    TError,
-    { data: CreateStoryRequest },
-    TContext
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
-  TError,
-  { data: CreateStoryRequest },
-  TContext
-> => {
-  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
-
-  const createStory = useCreateStoryHook();
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
-    { data: CreateStoryRequest }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return createStory(data, requestOptions);
-  };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type CreateStoryMutationResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>
->;
-export type CreateStoryMutationBody = CreateStoryRequest;
-export type CreateStoryMutationError = HttpExceptionResponse;
-
-/**
- * @summary Create user story
- */
-export const useCreateStory = <
-  TError = HttpExceptionResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateStoryHook>>>,
-    TError,
-    { data: CreateStoryRequest },
-    TContext
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}) => {
-  const mutationOptions = useCreateStoryMutationOptions(options);
-
-  return useMutation(mutationOptions);
-};
-
-/**
- * @summary Get user story
- */
-export const useGetStoryHook = () => {
-  const getStory = useCustomInstance<Story>();
-
-  return (
-    id: string,
-    params?: GetStoryParams,
-    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-    signal?: AbortSignal,
-  ) => {
-    return getStory(
-      { url: `/api/stories/${id}`, method: "get", params, signal },
-      options,
-    );
-  };
-};
-
-export const getGetStoryQueryKey = (id: string, params?: GetStoryParams) => {
-  return [`/api/stories/${id}`, ...(params ? [params] : [])] as const;
-};
-
-export const useGetStoryInfiniteQueryOptions = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-    GetStoryParams["skip"]
-  >,
-  TError = unknown,
->(
-  id: string,
-  params?: GetStoryParams,
-  options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-        TError,
-        TData,
-        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-        QueryKey,
-        GetStoryParams["skip"]
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id, params);
-
-  const getStory = useGetStoryHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-    QueryKey,
-    GetStoryParams["skip"]
-  > = ({ signal, pageParam }) =>
-    getStory(id, { skip: pageParam, ...params }, requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    enabled: !!id,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseInfiniteQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-    TError,
-    TData,
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-    QueryKey,
-    GetStoryParams["skip"]
-  > & { queryKey: QueryKey };
-};
-
-export type GetStoryInfiniteQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
->;
-export type GetStoryInfiniteQueryError = unknown;
-
-/**
- * @summary Get user story
- */
-export const useGetStoryInfinite = <
-  TData = InfiniteData<
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-    GetStoryParams["skip"]
-  >,
-  TError = unknown,
->(
-  id: string,
-  params?: GetStoryParams,
-  options?: {
-    query?: Partial<
-      UseInfiniteQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-        TError,
-        TData,
-        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-        QueryKey,
-        GetStoryParams["skip"]
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetStoryInfiniteQueryOptions(id, params, options);
-
-  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<
-    TData,
-    TError
-  > & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-export const useGetStoryQueryOptions = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-  TError = unknown,
->(
-  id: string,
-  params?: GetStoryParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetStoryQueryKey(id, params);
-
-  const getStory = useGetStoryHook();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
-  > = ({ signal }) => getStory(id, params, requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    enabled: !!id,
-    cacheTime: 0,
-    refetchOnWindowFocus: false,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-    TError,
-    TData
-  > & { queryKey: QueryKey };
-};
-
-export type GetStoryQueryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>
->;
-export type GetStoryQueryError = unknown;
-
-/**
- * @summary Get user story
- */
-export const useGetStory = <
-  TData = Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-  TError = unknown,
->(
-  id: string,
-  params?: GetStoryParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<ReturnType<typeof useGetStoryHook>>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-  },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = useGetStoryQueryOptions(id, params, options);
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
-    queryKey: QueryKey;
-  };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-};
-
-/**
- * @summary Create inquiry
- */
-export const useCreateInquiryHook = () => {
-  const createInquiry = useCustomInstance<unknown>();
-
-  return (
-    createInquiryRequest: CreateInquiryRequest,
-    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-  ) => {
-    return createInquiry(
-      {
-        url: `/api/inquiries`,
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        data: createInquiryRequest,
-      },
-      options,
-    );
-  };
-};
-
-export const useCreateInquiryMutationOptions = <
-  TError = HttpExceptionResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
-    TError,
-    { data: CreateInquiryRequest },
-    TContext
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
-  TError,
-  { data: CreateInquiryRequest },
-  TContext
-> => {
-  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
-
-  const createInquiry = useCreateInquiryHook();
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
-    { data: CreateInquiryRequest }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return createInquiry(data, requestOptions);
-  };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type CreateInquiryMutationResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>
->;
-export type CreateInquiryMutationBody = CreateInquiryRequest;
-export type CreateInquiryMutationError = HttpExceptionResponse;
-
-/**
- * @summary Create inquiry
- */
-export const useCreateInquiry = <
-  TError = HttpExceptionResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateInquiryHook>>>,
-    TError,
-    { data: CreateInquiryRequest },
-    TContext
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}) => {
-  const mutationOptions = useCreateInquiryMutationOptions(options);
-
-  return useMutation(mutationOptions);
-};
-
-/**
- * @summary Create feedback
- */
-export const useCreateFeedbackHook = () => {
-  const createFeedback = useCustomInstance<CreateFeedbackResponse>();
-
-  return (
-    createFeedbackRequest: CreateFeedbackRequest,
-    options?: SecondParameter<ReturnType<typeof useCustomInstance>>,
-  ) => {
-    return createFeedback(
-      {
-        url: `/api/feedbacks`,
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        data: createFeedbackRequest,
-      },
-      options,
-    );
-  };
-};
-
-export const useCreateFeedbackMutationOptions = <
-  TError = HttpExceptionResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
-    TError,
-    { data: CreateFeedbackRequest },
-    TContext
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}): UseMutationOptions<
-  Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
-  TError,
-  { data: CreateFeedbackRequest },
-  TContext
-> => {
-  const { mutation: mutationOptions, request: requestOptions } = options ?? {};
-
-  const createFeedback = useCreateFeedbackHook();
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
-    { data: CreateFeedbackRequest }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return createFeedback(data, requestOptions);
-  };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type CreateFeedbackMutationResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>
->;
-export type CreateFeedbackMutationBody = CreateFeedbackRequest;
-export type CreateFeedbackMutationError = HttpExceptionResponse;
-
-/**
- * @summary Create feedback
- */
-export const useCreateFeedback = <
-  TError = HttpExceptionResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<ReturnType<typeof useCreateFeedbackHook>>>,
-    TError,
-    { data: CreateFeedbackRequest },
-    TContext
-  >;
-  request?: SecondParameter<ReturnType<typeof useCustomInstance>>;
-}) => {
-  const mutationOptions = useCreateFeedbackMutationOptions(options);
-
-  return useMutation(mutationOptions);
 };
