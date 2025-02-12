@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from 'react';
+import { FC, PropsWithChildren, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { useAsyncFn } from 'react-use';
 
@@ -14,16 +14,18 @@ import { groupParagraphs, defaultOnCompleted } from './Reader.utils';
 
 import styles from './Reader.module.scss';
 
-export interface ReaderProps {
-  children?: string;
+export type ReaderProps = PropsWithChildren<{
+  content: string;
   onCompleted?: () => Promise<void>;
-}
+}>;
 
 export const Reader: FC<ReaderProps> = ({
-  children = '',
+  children,
+  content,
   onCompleted = defaultOnCompleted,
 }) => {
   const swiper = useRef<SwiperRef>();
+
   const { value: length } = useMediaSwitch({
     lg: 600,
     xs: 250,
@@ -38,7 +40,7 @@ export const Reader: FC<ReaderProps> = ({
     isEnd: false,
   });
 
-  const groups = groupParagraphs(children, length);
+  const groups = groupParagraphs(content, length);
 
   const handleOnSlideChange = (swiper: SwiperClass) => {
     setState((prev) => ({
@@ -66,7 +68,7 @@ export const Reader: FC<ReaderProps> = ({
         onSlideChange={handleOnSlideChange}
         pagination={{
           dynamicBullets: true,
-          dynamicMainBullets: 10,
+          dynamicMainBullets: 5,
           el: `.${styles.swiperPagination}`,
         }}
         ref={swiper}
@@ -95,6 +97,7 @@ export const Reader: FC<ReaderProps> = ({
         })}
       </Swiper>
       <div className={styles.bottom}>
+        {!!children && <div className={styles.children}>{children}</div>}
         <div className={styles.pagination}>
           <div className={styles.swiperPagination} />
         </div>

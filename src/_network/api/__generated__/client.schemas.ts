@@ -33,20 +33,8 @@ export type GetBootstrapParams = {
   image?: ImageTransformationQuery;
 };
 
-export interface CreateFeedbackResponse {
-  id: string;
-}
-
-export interface CreateFeedbackRequest {
-  comment: string;
-  email?: string;
-  rating: number;
-}
-
-export interface CreateInquiryRequest {
-  email: string;
-  message: string;
-  subject: string;
+export interface GetDatabaseUrlResponse {
+  url: string;
 }
 
 export type StoryStatusLogItem =
@@ -102,6 +90,18 @@ export interface StoryCharacter {
   title: string;
 }
 
+export interface CreateStoryResponse {
+  id: string;
+}
+
+export type ChildGender = (typeof ChildGender)[keyof typeof ChildGender];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ChildGender = {
+  boy: 'boy',
+  girl: 'girl',
+} as const;
+
 export interface Story {
   character?: StoryCharacter;
   childGender?: ChildGender;
@@ -119,26 +119,6 @@ export interface Story {
   statusLog: StoryStatusLogItem[];
   title: string;
 }
-
-export type HttpExceptionResponseMessage = string | string[];
-
-export interface HttpExceptionResponse {
-  error: string;
-  message: HttpExceptionResponseMessage;
-  statusCode: number;
-}
-
-export interface CreateStoryResponse {
-  id: string;
-}
-
-export type ChildGender = (typeof ChildGender)[keyof typeof ChildGender];
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const ChildGender = {
-  boy: 'boy',
-  girl: 'girl',
-} as const;
 
 export interface CreateStoryRequest {
   characterId?: string;
@@ -161,6 +141,47 @@ export interface StoryItem {
 export interface Stories {
   data: StoryItem[];
   total: number;
+}
+
+export interface CreateInquiryRequest {
+  email: string;
+  message: string;
+  subject: string;
+}
+
+export interface CreateRevenueCatRequestEvent {
+  country_code: string;
+  product_id: string;
+  store: string;
+  type: string;
+}
+
+export interface CreateRevenueCatRequest {
+  event: CreateRevenueCatRequestEvent;
+}
+
+export type HttpExceptionResponseMessage = string | string[];
+
+export interface HttpExceptionResponse {
+  error: string;
+  message: HttpExceptionResponseMessage;
+  statusCode: number;
+}
+
+export interface CreateFeedbackResponse {
+  id: string;
+}
+
+export interface CreateFeedbackRequest {
+  comment: string;
+  email?: string;
+  rating: number;
+}
+
+export interface BootstrapLullabyItem {
+  id: string;
+  title: string;
+  url: string;
 }
 
 export interface BootstrapConfig {
@@ -200,6 +221,7 @@ export interface BootstrapMoralLessonsItem {
 export interface BootstrapResponse {
   characters: BootstrapCharacterItem[];
   config: BootstrapConfig;
+  lullabies: BootstrapLullabyItem[];
   moralLessons: BootstrapMoralLessonsItem[];
   placeOfEvents: BootstrapPlaceOfEventItem[];
   prompts: BootstrapPromptItem[];
@@ -244,8 +266,4 @@ export interface ImageTransformationQuery {
   crop?: ImageTransformationQueryCrop;
   height?: number;
   width?: number;
-}
-
-export interface GetDatabaseUrlResponse {
-  url: string;
 }
