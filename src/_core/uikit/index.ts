@@ -51,7 +51,6 @@ export * from './hooks/useSplashScreen';
 export * from './hooks/useUtils';
 export * from './hooks/useForm';
 export {
-  useIonModal as useModal,
   useIonViewDidEnter as useViewDidEnter,
   useIonViewWillEnter as useViewWillEnter,
 } from '@ionic/react';

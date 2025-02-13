@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react';
+import { memo, PropsWithChildren } from 'react';
 
 import { IonFabButton, IonIcon } from '@ionic/react';
 import { Color } from '@ionic/core';
@@ -12,13 +12,13 @@ type FabButtonProps = PropsWithChildren<{
   size?: 'small';
 }>;
 
-export const FabButton: FC<FabButtonProps> = ({
+export const FabButton = memo<FabButtonProps>(function FabButton({
   icon,
   onClick,
   children,
   color,
   size,
-}) => {
+}) {
   return (
     <IonFabButton
       closeIcon={ICON.x}
@@ -30,4 +30,4 @@ export const FabButton: FC<FabButtonProps> = ({
       {children}
     </IonFabButton>
   );
-};
+});
