@@ -1,5 +1,10 @@
+import { noop } from 'lodash';
 import { createContext } from 'use-context-selector';
 
-export interface LullabyContextProps {}
+export interface LullabyContextProps {
+  play: () => void;
+}
 
-export const LullabyContext = createContext<LullabyContextProps>({});
+export const LullabyContext = createContext<LullabyContextProps>({
+  play: noop,
+});

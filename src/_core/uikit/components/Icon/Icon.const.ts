@@ -39,6 +39,8 @@ import lifeBuoy from './assets/life-buoy.svg?raw';
 import check from './assets/check.svg?raw';
 import music from './assets/music.svg?raw';
 import settings from './assets/settings.svg?raw';
+import volume2 from './assets/volume-2.svg?raw';
+import x from './assets/x.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
@@ -58,6 +60,8 @@ const NEW_ICONS = {
   shield: `data:image/svg+xml;utf8,${shield}`,
   smile: `data:image/svg+xml;utf8,${smile}`,
   user: `data:image/svg+xml;utf8,${user}`,
+  'volume-2': `data:image/svg+xml;utf8,${volume2}`,
+  x: `data:image/svg+xml;utf8,${x}`,
 };
 
 export const ICON = {

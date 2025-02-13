@@ -20,7 +20,12 @@ export const FabButton: FC<FabButtonProps> = ({
   size,
 }) => {
   return (
-    <IonFabButton color={color} onClick={onClick} size={size}>
+    <IonFabButton
+      closeIcon={ICON.x}
+      color={color}
+      onClick={onClick}
+      size={size}
+    >
       {!!icon && <IonIcon icon={ICON[icon]} />}
       {children}
     </IonFabButton>
