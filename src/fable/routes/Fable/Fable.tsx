@@ -17,7 +17,7 @@ import { LullabyProvider } from '../../providers/LullabyProvider';
 
 import { Index } from './Index/Index';
 import { Read } from './Read/Read';
-import { Lullaby } from './_patitions/Lullaby';
+import { Settings } from './_patitions/Settings';
 
 export const Fable = withLoad({
   category: 'Fable',
@@ -48,7 +48,7 @@ export const Fable = withLoad({
                     justifyContent="flex-end"
                   >
                     <Route path={RoutePath.FableRead}>
-                      <Lullaby />
+                      <Settings />
                     </Route>
                     <SafeArea
                       background="linear-gradient(to top, rgba(0, 0, 0, 1), transparent)"
