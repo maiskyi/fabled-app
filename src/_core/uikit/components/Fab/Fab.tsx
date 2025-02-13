@@ -9,6 +9,7 @@ import { FabPlacement } from './Fab.types';
 export type FabProps = PropsWithChildren<{
   slot?: string;
   placement?: FabPlacement;
+  edge?: boolean;
 }>;
 
 interface FabComponent {
@@ -17,11 +18,11 @@ interface FabComponent {
   List: typeof FabList;
 }
 
-export const Fab: FabComponent = ({ children, slot, placement }: FabProps) => {
+export const Fab: FabComponent = ({ children, slot, placement, edge }) => {
   const [horizontal, vertical] = placement || [];
 
   return (
-    <IonFab horizontal={horizontal} slot={slot} vertical={vertical}>
+    <IonFab edge={edge} horizontal={horizontal} slot={slot} vertical={vertical}>
       {children}
     </IonFab>
   );

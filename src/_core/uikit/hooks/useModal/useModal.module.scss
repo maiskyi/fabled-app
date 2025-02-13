@@ -1,0 +1,8 @@
+.root {
+  --border-radius: 24px;
+  --backdrop-opacity: 0.1;
+  --ion-backdrop-color: var(--ion-color-dark);
+  &.autoheight {
+    --height: "auto";
+  }
+}
