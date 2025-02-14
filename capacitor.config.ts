@@ -4,7 +4,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'app.fabled.space',
-  appName: 'Fabled Space',
+  appName: 'Lupi',
   plugins: {
     FirebaseAuthentication: {
       providers: ['google.com', 'apple.com', 'facebook.com'],

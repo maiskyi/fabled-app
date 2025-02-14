@@ -111,12 +111,12 @@ export const FormPicker: FormPickerComponent = ({
               trigger={id}
             >
               <Header transparent>
-                <Header.Actions>
-                  <Header.Action
+                <Header.Buttons>
+                  <Header.Button
                     icon="close-outline"
                     onClick={handleOnDismiss}
-                  ></Header.Action>
-                </Header.Actions>
+                  ></Header.Button>
+                </Header.Buttons>
               </Header>
               <Component
                 dismiss={handleOnDismiss}

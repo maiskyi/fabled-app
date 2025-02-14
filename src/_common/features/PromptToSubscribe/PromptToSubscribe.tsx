@@ -98,12 +98,9 @@ export const PromptToSubscribe: PromptToSubscribeComponent<
         >
           <Header transparent>
             {canClose && (
-              <Header.Actions slot="end">
-                <Header.Action
-                  icon="close-outline"
-                  onClick={dismiss}
-                ></Header.Action>
-              </Header.Actions>
+              <Header.Buttons slot="end">
+                <Header.Button icon="close-outline" onClick={dismiss} />
+              </Header.Buttons>
             )}
           </Header>
           <Content scrollY={false}>

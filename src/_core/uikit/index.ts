@@ -39,6 +39,7 @@ export * from './components/Tile';
 export * from './components/Typist';
 export * from './components/Typography';
 export * from './components/View';
+export * from './components/Volume';
 
 // Hooks
 export * from './hooks/useBrowser';

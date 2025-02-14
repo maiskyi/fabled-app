@@ -3,19 +3,22 @@ import { FC, useCallback, useLayoutEffect } from 'react';
 import { Fab, useModal } from '@core/uikit';
 
 import { useLullaby } from '../../../../providers/LullabyProvider';
-import { Volume } from '../Volume';
+import { VolumeModal } from '../VolumeModal';
 
 export const Settings: FC = () => {
-  const { play } = useLullaby();
+  const [{ volume }, { play, setVolume }] = useLullaby();
 
   const [, openVolumeSettings] = useModal({
-    component: Volume,
+    component: VolumeModal,
     height: 'auto',
   });
 
   const handleOnSettingsClick = useCallback(() => {
-    openVolumeSettings();
-  }, [openVolumeSettings]);
+    openVolumeSettings({
+      setVolume,
+      volume,
+    });
+  }, [openVolumeSettings, setVolume, volume]);
 
   useLayoutEffect(() => play());
 

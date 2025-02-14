@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 
 import { useIonModal } from '@ionic/react';
@@ -9,9 +9,12 @@ import styles from './useModal.module.scss';
 
 interface UseModalReturnState {}
 
-type UseModalReturnDispatch = () => void;
+type UseModalReturnDispatch<T extends object> = (params: T) => void;
 
-type UseModalReturnType = [UseModalReturnState, UseModalReturnDispatch];
+type UseModalReturnType<T extends object> = [
+  UseModalReturnState,
+  UseModalReturnDispatch<T>,
+];
 
 interface UseModalParams<T extends object> {
   component: ModalComponent<T>;
@@ -21,20 +24,27 @@ interface UseModalParams<T extends object> {
 export const useModal = <T extends object = {}>({
   component,
   height,
-}: UseModalParams<T>): UseModalReturnType => {
+}: UseModalParams<T>): UseModalReturnType<T> => {
+  const [params, setParams] = useState<T>({} as T);
+
   const [openModal, dismiss] = useIonModal(component, {
+    ...params,
     dismiss: () => dismiss(),
   });
 
-  const dispatch = useCallback(() => {
-    openModal({
-      breakpoints: [0, 1],
-      cssClass: classNames(styles.root, {
-        [styles.autoheight]: height === 'auto',
-      }),
-      initialBreakpoint: 1,
-    });
-  }, [openModal, height]);
+  const dispatch = useCallback(
+    (params: T) => {
+      setParams((prev) => ({ ...prev, ...params }));
+      openModal({
+        breakpoints: [0, 1],
+        cssClass: classNames(styles.root, {
+          [styles.autoheight]: height === 'auto',
+        }),
+        initialBreakpoint: 1,
+      });
+    },
+    [openModal, height]
+  );
 
   return [{}, dispatch];
 };
