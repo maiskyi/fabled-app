@@ -22,23 +22,24 @@ import {
   cloudDownloadOutline,
 } from 'ionicons/icons';
 
-import fire from './assets/fire.svg?raw';
-import chevronRight from './assets/chevron-right.svg?raw';
-import chevronLeft from './assets/chevron-left.svg?raw';
 import arrowLeft from './assets/arrow-left.svg?raw';
-import feather from './assets/feather.svg?raw';
-import bookOpen from './assets/book-open.svg?raw';
-import user from './assets/user.svg?raw';
-import mail from './assets/mail.svg?raw';
 import atSign from './assets/at-sign.svg?raw';
 import bookmark from './assets/bookmark.svg?raw';
-import shield from './assets/shield.svg?raw';
-import smile from './assets/smile.svg?raw';
-import edit3 from './assets/edit-3.svg?raw';
-import lifeBuoy from './assets/life-buoy.svg?raw';
+import bookOpen from './assets/book-open.svg?raw';
 import check from './assets/check.svg?raw';
+import chevronLeft from './assets/chevron-left.svg?raw';
+import chevronRight from './assets/chevron-right.svg?raw';
+import edit3 from './assets/edit-3.svg?raw';
+import feather from './assets/feather.svg?raw';
+import fire from './assets/fire.svg?raw';
+import lifeBuoy from './assets/life-buoy.svg?raw';
+import mail from './assets/mail.svg?raw';
 import music from './assets/music.svg?raw';
 import settings from './assets/settings.svg?raw';
+import shield from './assets/shield.svg?raw';
+import smile from './assets/smile.svg?raw';
+import user from './assets/user.svg?raw';
+import volume1 from './assets/volume-1.svg?raw';
 import volume2 from './assets/volume-2.svg?raw';
 import x from './assets/x.svg?raw';
 
@@ -60,6 +61,7 @@ const NEW_ICONS = {
   shield: `data:image/svg+xml;utf8,${shield}`,
   smile: `data:image/svg+xml;utf8,${smile}`,
   user: `data:image/svg+xml;utf8,${user}`,
+  'volume-1': `data:image/svg+xml;utf8,${volume1}`,
   'volume-2': `data:image/svg+xml;utf8,${volume2}`,
   x: `data:image/svg+xml;utf8,${x}`,
 };
