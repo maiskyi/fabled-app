@@ -30,6 +30,10 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
     new Image().src = image;
   });
 
+  bootstrap?.lullabies.forEach(({ url }) => {
+    new Audio().src = url;
+  });
+
   useMount(() => {
     Object.values(GENDER).forEach((image) => {
       new Image().src = image;
@@ -41,6 +45,7 @@ export const ConfigProvider: FC<ConfigProviderProps> = ({
       value={{
         characters: bootstrap?.characters,
         isReady,
+        lullabies: bootstrap?.lullabies,
         privacyPolicyUrl: bootstrap?.config.privacyPolicyUrl,
         prompts: bootstrap?.prompts,
         scenes: bootstrap?.placeOfEvents,

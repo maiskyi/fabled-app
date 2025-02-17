@@ -39,6 +39,7 @@ export * from './components/Tile';
 export * from './components/Typist';
 export * from './components/Typography';
 export * from './components/View';
+export * from './components/Volume';
 
 // Hooks
 export * from './hooks/useBrowser';
@@ -51,7 +52,6 @@ export * from './hooks/useSplashScreen';
 export * from './hooks/useUtils';
 export * from './hooks/useForm';
 export {
-  useIonModal as useModal,
   useIonViewDidEnter as useViewDidEnter,
   useIonViewWillEnter as useViewWillEnter,
 } from '@ionic/react';

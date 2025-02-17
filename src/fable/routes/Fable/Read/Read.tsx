@@ -1,17 +1,15 @@
 import { FC } from 'react';
-import { useContextSelector } from 'use-context-selector';
 
 import { Box, Grid, Reader, useInAppReview } from '@core/uikit';
 import { useRoute } from '@core/navigation';
 import { RoutePath } from '@bootstrap/constants';
 
-import { FableContext } from '../Fable.context';
+import { useFable } from '../../../providers/FableProvider';
 
 export const Read: FC = () => {
   const [, navigate] = useRoute();
   const [, inAppReview] = useInAppReview();
-
-  const story = useContextSelector(FableContext, ({ story }) => story);
+  const { story } = useFable();
 
   const handleOnCompleted = async () => {
     await inAppReview();
@@ -26,7 +24,7 @@ export const Read: FC = () => {
       <Grid.Row>
         <Grid.Cell>
           <Box paddingInline={20}>
-            <Reader onCompleted={handleOnCompleted}>{story?.content}</Reader>
+            <Reader content={story?.content} onCompleted={handleOnCompleted} />
           </Box>
         </Grid.Cell>
       </Grid.Row>

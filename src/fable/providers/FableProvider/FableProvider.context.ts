@@ -2,7 +2,7 @@ import { createContext } from 'use-context-selector';
 
 import { DTO } from '@network/api';
 
-interface FableContextProps {
+export interface FableContextProps {
   isReady: boolean;
   story: DTO.Story;
 }
