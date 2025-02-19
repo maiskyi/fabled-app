@@ -26,6 +26,7 @@ export * from './components/List';
 export * from './components/Loading';
 export * from './components/Logo';
 export * from './components/Message';
+export * from './components/Modal';
 export * from './components/Onboarding';
 export * from './components/Page';
 export * from './components/Reader';

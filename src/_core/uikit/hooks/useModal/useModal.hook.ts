@@ -5,7 +5,7 @@ import { useIonModal } from '@ionic/react';
 
 import { ModalComponent } from './useModal.types';
 
-import styles from './useModal.module.scss';
+import styles from '../../components/Modal/Modal.module.scss';
 
 interface UseModalReturnState {}
 

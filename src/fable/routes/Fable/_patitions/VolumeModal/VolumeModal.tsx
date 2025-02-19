@@ -1,7 +1,6 @@
-import { Fragment } from 'react';
+import { memo, useRef } from 'react';
 
 import {
-  ModalComponent,
   Header,
   Content,
   Box,
@@ -9,28 +8,29 @@ import {
   Volume,
   Typography,
   Button,
+  Modal,
+  ModalElement,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 
-import { LullabySetVolume } from '../../../../providers/LullabyProvider';
+import { useLullaby } from '../../../../providers/LullabyProvider';
+import { Setting } from '../../Fable.types';
 
-interface VolumeModalProps {
-  volume: number;
-  setVolume: LullabySetVolume;
-}
+export const VolumeModal = memo(function VolumeModal() {
+  const modal = useRef<ModalElement>();
 
-export const VolumeModal: ModalComponent<VolumeModalProps> = ({
-  volume,
-  dismiss,
-  setVolume,
-}) => {
+  const [{ volume }, { setVolume }] = useLullaby();
+
   const { t } = useTranslation();
 
   return (
-    <Fragment>
+    <Modal height="auto" ref={modal} trigger={Setting.Volume}>
       <Header collapse="fade">
         <Header.Buttons>
-          <Header.Button icon="close-outline" onClick={dismiss}></Header.Button>
+          <Header.Button
+            icon="close-outline"
+            onClick={() => modal.current?.dismiss()}
+          ></Header.Button>
         </Header.Buttons>
       </Header>
       <Content />
@@ -40,8 +40,10 @@ export const VolumeModal: ModalComponent<VolumeModalProps> = ({
       </Box>
       <Content />
       <Footer>
-        <Button onClick={dismiss}>{t('actions.confirm')}</Button>
+        <Button onClick={() => modal.current?.dismiss()}>
+          {t('actions.confirm')}
+        </Button>
       </Footer>
-    </Fragment>
+    </Modal>
   );
-};
+});
