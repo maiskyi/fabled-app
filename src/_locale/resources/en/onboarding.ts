@@ -1,7 +1,7 @@
 export const onboarding = {
   image: {
     description:
-      'Every fable you create comes to life with a beautiful illustration.',
+      'Every story you create comes to life with a beautiful illustration.',
     title: '<hl>Custom</hl> AI illustrations',
   },
   library: {
@@ -10,7 +10,7 @@ export const onboarding = {
   },
   outline: {
     description:
-      'Customize your fables with a location, characters, and moral lesson.',
+      'Customize your storiess with a location, characters, and moral lesson.',
     title: 'Create <hl>unique</hl> stories',
   },
   personalized: {

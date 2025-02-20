@@ -1,9 +1,9 @@
 export const forms = {
   age: 'Age',
   childName: 'Child name',
-  chooseMoralLessonFromTheFable: 'Choose a moral lesson from the fable',
+  chooseMoralLessonFromTheFable: 'Choose a moral lesson from the story',
   email: 'Email',
-  eventsOfTheFableHappen: 'Events of the fable happen...',
+  eventsOfTheFableHappen: 'Events of the story happen...',
   gender: 'Gender',
   idValue: 'ID: {{id}}',
   lullabyMelody: 'Lullaby melody',
