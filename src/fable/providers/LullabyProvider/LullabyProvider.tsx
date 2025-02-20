@@ -38,23 +38,19 @@ export const LullabyProvider: FC<LullabyProviderProps> = ({ children }) => {
 
   const setVolume: LullabySetVolume = useCallback(
     (params) => {
-      setSettings((prev) => {
-        const vol = params.value / 100;
-        audio.current.volume = vol;
-        return { ...prev, vol };
-      });
+      const vol = params.value / 100;
+      setSettings({ lullaby, vol });
+      audio.current.volume = vol;
     },
-    [setSettings]
+    [setSettings, lullaby]
   );
 
   const setLullaby: LullabySetMelody = useCallback(
     ({ value }) => {
-      setSettings((prev) => {
-        audio.current.src = lullabies.find(({ id }) => id === value)?.url;
-        return { ...prev, lullaby: value };
-      });
+      setSettings({ lullaby: value, vol });
+      audio.current.src = lullabies.find(({ id }) => id === value)?.url;
     },
-    [setSettings, lullabies]
+    [setSettings, lullabies, vol]
   );
 
   useLayoutEffect(() => {

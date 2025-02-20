@@ -58,9 +58,13 @@ export const LullabyModal = memo(function LullabyModal() {
                         {title}
                       </Typography>
                       <Box display="flex" gap={8}>
-                        {tags.map((text) => {
+                        {tags.map((text, index) => {
                           return (
-                            <Typography key={text} muted variant="body-3">
+                            <Typography
+                              key={`${text}${index}`}
+                              muted
+                              variant="body-3"
+                            >
                               {`#${text}`}
                             </Typography>
                           );
