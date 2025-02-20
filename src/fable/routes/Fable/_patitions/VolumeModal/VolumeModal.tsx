@@ -6,7 +6,6 @@ import {
   Box,
   Footer,
   Volume,
-  Typography,
   Button,
   Modal,
   ModalElement,
@@ -26,6 +25,7 @@ export const VolumeModal = memo(function VolumeModal() {
   return (
     <Modal height="auto" ref={modal} trigger={Setting.Volume}>
       <Header collapse="fade">
+        <Header.Title>{t('forms.lullabyVolume')}</Header.Title>
         <Header.Buttons>
           <Header.Button
             icon="close-outline"
@@ -35,7 +35,6 @@ export const VolumeModal = memo(function VolumeModal() {
       </Header>
       <Content />
       <Box paddingInline={20}>
-        <Typography variant="body-2">{t('forms.lullabyVolume')}</Typography>
         <Volume onChange={setVolume} value={volume} />
       </Box>
       <Content />

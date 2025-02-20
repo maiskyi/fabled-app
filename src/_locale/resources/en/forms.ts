@@ -6,6 +6,7 @@ export const forms = {
   eventsOfTheFableHappen: 'Events of the fable happen...',
   gender: 'Gender',
   idValue: 'ID: {{id}}',
+  lullabyMelody: 'Lullaby melody',
   lullabyVolume: 'Lullaby volume',
   mainCharacter: 'Main character',
   mainCharacterWillBe: 'Main character will be...',

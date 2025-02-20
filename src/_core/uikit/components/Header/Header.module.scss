@@ -2,9 +2,14 @@
   &.transparent {
     --background: transparent;
   }
+  .toolbar {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+  }
 }
 
 .toolbar {
+  --min-height: 64px;
   &.transparent {
     --background: transparent;
   }

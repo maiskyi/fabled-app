@@ -37,26 +37,6 @@ export const Profile = withLoad({
             </Grid.Row>
             <Grid.Row>
               <Grid.Cell>
-                {/* {entries(plans).map(([title, items]) => {
-                  return (
-                    <List key={title}>
-                      <List.Header>{title}</List.Header>
-                      {items.map(({ label, onClick, icon, note }) => (
-                        <List.Item
-                          button={!!onClick}
-                          key={label}
-                          onClick={onClick}
-                        >
-                          <List.Icon name={icon} />
-                          <List.Label>
-                            <Text>{label}</Text>
-                            <List.Note>{note}</List.Note>
-                          </List.Label>
-                        </List.Item>
-                      ))}
-                    </List>
-                  );
-                })} */}
                 {!hasActiveSubscription && <ProfilePlan />}
                 <ProfileMenu menu={menu} />
                 {!user?.isAnonymous && <ProfileActions />}
@@ -64,7 +44,6 @@ export const Profile = withLoad({
             </Grid.Row>
           </Grid>
         </SafeArea>
-        <Header collapse="condense" />
       </Content>
     </Page>
   );

@@ -31,6 +31,7 @@ export const LullabyModal = memo(function LullabyModal() {
   return (
     <Modal ref={modal} trigger={Setting.Lullaby}>
       <Header>
+        <Header.Title>{t('forms.lullabyMelody')}</Header.Title>
         <Header.Buttons slot="end">
           <Header.Button icon="x" onClick={() => modal.current?.dismiss()} />
         </Header.Buttons>
