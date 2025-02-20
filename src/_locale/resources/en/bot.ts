@@ -11,8 +11,18 @@ export const bot = {
     8: 'The magic is flowing, and your fairy tale is on its way! 🧙‍♀️✨ Please hold tight as we bring every detail to life.',
     9: 'Your fairy tale is brewing in our cauldron of creativity! ✨🪄 Stay tuned, and your story will be revealed shortly!',
   },
-  createFableAiGreeting:
-    'Hi, {{displayName}}. What kind of story should I tell you today? Chose an option.',
+  createFableAiGreeting: {
+    0: 'Hi, {{displayName}}. What kind of story should I tell you today? Please, chose an option.',
+    1: 'Hey, {{displayName}}! What type of story would you like to hear today? Pick an option.',
+    2: 'Hello, {{displayName}}! Which story should I share with you today? Choose an option.',
+    3: 'Hi there, {{displayName}}! What kind of tale should I spin for you today? Select an option.',
+    4: 'Hello, {{displayName}}! What kind of adventure should I share with you today? Choose one option.',
+    5: 'Greetings, {{displayName}}! What story would you like to listen to today? Choose an option.',
+    6: 'Hey {{displayName}}, what story are you in the mood for today? Please pick an option.',
+    7: 'Hello {{displayName}}, what kind of narrative should I tell you today? Choose an option.',
+    8: 'Hi {{displayName}}, which kind of story would you like today? Pick an option.',
+    9: 'Hey there, {{displayName}}! What story should I tell you today? Select your choice.',
+  },
   error: {
     0: "Uh-oh! 🧙‍♂️ Something magical went astray while crafting your story. Fear not, we're casting another spell to fix it!",
     1: "It seems a little goblin hid our magic ink! 🧚 Please try again, and we'll bring your story to life.",

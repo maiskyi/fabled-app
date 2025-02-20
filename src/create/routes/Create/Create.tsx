@@ -25,6 +25,7 @@ export const Create = memo(function Create() {
   const { t } = useTranslation();
   const { displayName: userDisplayName } = useUser();
   const [, navigate] = useRoute();
+  const timestamp = useRef(Date.now());
 
   const { isFetching, refetch } = useGetStories(
     {
@@ -74,7 +75,7 @@ export const Create = memo(function Create() {
             <Grid.Cell>
               <Animation.Message>
                 <Message avatar={ASSETS.BOT_AVATAR_SRC} origin="companion">
-                  {t('bot.createFableAiGreeting', {
+                  {t(`bot.createFableAiGreeting.${timestamp.current % 10}`, {
                     displayName: userDisplayName,
                   })}
                 </Message>
