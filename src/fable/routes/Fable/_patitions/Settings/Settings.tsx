@@ -4,6 +4,7 @@ import { Fab } from '@core/uikit';
 
 import { useLullaby } from '../../../../providers/LullabyProvider';
 import { VolumeModal } from '../VolumeModal';
+import { LullabyModal } from '../LullabyModal';
 import { Setting } from '../../Fable.types';
 
 export const Settings: FC = () => {
@@ -16,11 +17,12 @@ export const Settings: FC = () => {
       <Fab edge placement={['end', 'top']} slot="fixed">
         <Fab.Button color="light" icon="settings" />
         <Fab.List side="bottom">
-          <Fab.Button icon="music" />
+          <Fab.Button icon="music" id={Setting.Lullaby} />
           <Fab.Button icon="volume-2" id={Setting.Volume} />
         </Fab.List>
       </Fab>
       <VolumeModal />
+      <LullabyModal />
     </Fragment>
   );
 };

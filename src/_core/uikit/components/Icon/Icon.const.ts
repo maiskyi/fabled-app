@@ -42,6 +42,7 @@ import user from './assets/user.svg?raw';
 import volume1 from './assets/volume-1.svg?raw';
 import volume2 from './assets/volume-2.svg?raw';
 import x from './assets/x.svg?raw';
+import playIndicator from './assets/play-indicator.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
@@ -57,6 +58,7 @@ const NEW_ICONS = {
   'life-buoy': `data:image/svg+xml;utf8,${lifeBuoy}`,
   mail: `data:image/svg+xml;utf8,${mail}`,
   music: `data:image/svg+xml;utf8,${music}`,
+  'play-indicator': `data:image/svg+xml;utf8,${playIndicator}`,
   settings: `data:image/svg+xml;utf8,${settings}`,
   shield: `data:image/svg+xml;utf8,${shield}`,
   smile: `data:image/svg+xml;utf8,${smile}`,
