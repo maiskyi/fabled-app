@@ -18,6 +18,7 @@ export const Typist: FC<TypistProps> = ({
       className="css"
       cursor={false}
       sequence={[onStart, children, onComplete]}
+      speed={75}
     />
   );
 };
