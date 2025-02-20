@@ -1,1 +1,1 @@
-export const DISSMISS_TIMEOUT = 5000;
+export const DISSMISS_TIMEOUT = 3000;

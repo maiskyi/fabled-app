@@ -29,7 +29,10 @@ export const Init: FC<InitProps> = ({ children }) => {
   ].every((v) => v);
 
   useEffect(() => {
-    if (isReady) hide();
+    const timeout = setTimeout(() => {
+      if (isReady) hide();
+    }, 300);
+    return () => clearTimeout(timeout);
   }, [isReady, hide]);
 
   return <Fragment>{isReady ? children : <Splash />}</Fragment>;
