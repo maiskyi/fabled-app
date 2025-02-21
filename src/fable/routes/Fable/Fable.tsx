@@ -17,7 +17,7 @@ import { LullabyProvider } from '../../providers/LullabyProvider';
 
 import { Index } from './Index/Index';
 import { Read } from './Read/Read';
-import { Settings } from './_patitions/Settings';
+// import { Settings } from './_patitions/Settings';
 
 export const Fable = withLoad({
   category: 'Fable',
@@ -47,9 +47,9 @@ export const Fable = withLoad({
                     height="100%"
                     justifyContent="flex-end"
                   >
-                    <Route path={RoutePath.FableRead}>
+                    {/* <Route path={RoutePath.FableRead}>
                       <Settings />
-                    </Route>
+                    </Route> */}
                     <SafeArea
                       background="linear-gradient(to top, rgba(0, 0, 0, 1), transparent)"
                       display="flex"

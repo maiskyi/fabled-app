@@ -141,6 +141,7 @@ a {
   --ion-item-background: #000000;
    */
   --ion-card-background: #161616;
+  --ion-toolbar-background: #020202;
 }
 :root.ios ion-modal {
   --ion-background-color: #020202;
