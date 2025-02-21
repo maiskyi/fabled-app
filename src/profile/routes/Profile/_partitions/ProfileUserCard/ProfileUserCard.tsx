@@ -21,9 +21,13 @@ export const ProfileUserCard = memo(function ProfileUserCard() {
   return (
     <Box paddingInline={20} paddingTop={130} position="relative">
       <Box
-        backgroundColor="var(--color-bnw-800)"
+        backgroundColor="#020202"
+        backgroundImage="repeating-linear-gradient(45deg, #161616 25%, transparent 25%, transparent 75%, #161616 75%, #161616), repeating-linear-gradient(45deg, #161616 25%, #020202 25%, #020202 75%, #161616 75%, #161616)"
+        backgroundPosition="0 0, 10px 10px"
+        backgroundSize="20px 20px"
         height={172}
         left={0}
+        opacity={0.8}
         position="absolute"
         right={0}
         top={0}
