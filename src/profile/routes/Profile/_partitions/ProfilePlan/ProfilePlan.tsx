@@ -4,6 +4,7 @@ import { Box, Card, Icon, Typography } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { usePromptToSubscribe } from '@core/purchases';
 import { PromptToSubscribe } from '@common/features';
+import { APP_NAME } from '@common/constants';
 
 export const ProfilePlan: FC = () => {
   const { t } = useTranslation();
@@ -27,11 +28,11 @@ export const ProfilePlan: FC = () => {
             </Box>
             <Box display="flex" flex={1} flexDirection="column" gap={4}>
               <Typography variant="body-2" weight="semi-bold">
-                Fabled Premium
+                {`${APP_NAME} Premium`}
               </Typography>
               <Typography variant="body-4">
                 {t('intro.profile', {
-                  plan: 'Fabled Premium',
+                  plan: `${APP_NAME} Premium`,
                 })}
               </Typography>
             </Box>
