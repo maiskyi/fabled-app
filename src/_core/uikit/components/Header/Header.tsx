@@ -62,7 +62,6 @@ export const Header = forwardRef<any, HeaderProps>(function Header(
       )}
       collapse={collapse}
       id={Selector.Header}
-      // mode="md"
       ref={ref}
       translucent={translucent}
     >
