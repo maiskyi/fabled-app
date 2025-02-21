@@ -1,9 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
-import { useMount } from 'react-use';
 
 import { NavigationProvider } from '@core/navigation';
 import { useAuth } from '@core/auth';
-import { useSplashScreen } from '@core/uikit';
 
 import { RoutePath } from '../../../constants';
 
@@ -13,7 +11,6 @@ export type NavigationProps = PropsWithChildren<{}>;
 
 export const Navigation: FC<NavigationProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
-  const [, { hide }] = useSplashScreen();
 
   const roles = (() => {
     if (isAuthenticated && user?.isAnonymous) {
@@ -34,8 +31,6 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
     }
     return RoutePath.Onbording;
   })();
-
-  useMount(() => hide());
 
   return (
     <NavigationProvider
