@@ -3,18 +3,21 @@
   align-items: center;
 
   &.gap {
-    gap: 8px;
+    gap: 12px;
   }
 }
 
 .middle {
   flex: 0;
   margin: 0;
+  text-wrap: nowrap;
+  text-transform: lowercase;
+  color: var(--ion-text-color);
 }
 
 .line {
   display: block;
   flex: 1;
   height: 1px;
-  background-color: var(--color-bnw-800);
+  background-color: var(--color-bnw-700);
 }

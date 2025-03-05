@@ -9,6 +9,8 @@ import {
 import { AppUrlListener } from '@core/navigation';
 import { AnalyticsProvider, AnalyticsProviderProps } from '@core/analytics';
 
+import { SettingsProvider } from '../../providers';
+
 import { Network, NetworkProps } from './Network';
 import { Navigation } from './Navigation';
 import { Config, ConfigProps } from './Config';
@@ -55,9 +57,11 @@ export const Bootstrap: FC<BootstrapProps> = ({
                       <Auth>
                         <Network {...network}>
                           <Config {...config}>
-                            <Navigation>
-                              <Init>{children}</Init>
-                            </Navigation>
+                            <SettingsProvider>
+                              <Navigation>
+                                <Init>{children}</Init>
+                              </Navigation>
+                            </SettingsProvider>
                           </Config>
                         </Network>
                       </Auth>

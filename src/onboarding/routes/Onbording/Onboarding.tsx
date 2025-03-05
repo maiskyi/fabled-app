@@ -10,22 +10,20 @@ import {
   Shade,
   Onboarding as Slides,
 } from '@core/uikit';
-import { Disclaimer } from '@common/features';
-import { useSignInAnonymously } from '@core/auth';
+import { useSettings } from '@bootstrap/providers';
 
 import { OnboardingSlide } from './_partitions/OnboardingSlide';
 import { useOnboarding } from './Onboarding.hooks';
 
 export const Onboarding = withLoad({
-  category: 'Onbording',
-  name: 'Onbording',
+  category: 'Onboarding',
+  name: 'Onboarding',
 })(() => {
   const { onboarding } = useOnboarding();
-
-  const { mutateAsync } = useSignInAnonymously();
+  const [, { setIsOnboarded }] = useSettings();
 
   const handleOnCompletedSkip = async () => {
-    await mutateAsync();
+    setIsOnboarded(true);
   };
 
   return (
@@ -62,11 +60,7 @@ export const Onboarding = withLoad({
           </Grid>
         </SafeArea>
       </Content>
-      <Footer>
-        <Box textAlign="center">
-          <Disclaimer />
-        </Box>
-      </Footer>
+      <Footer />
     </Page>
   );
 });
