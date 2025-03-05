@@ -11,7 +11,7 @@ import {
   Onboarding as Slides,
 } from '@core/uikit';
 import { Disclaimer } from '@common/features';
-import { useSignInAnonymously } from '@core/auth';
+import { useSettings } from '@bootstrap/providers';
 
 import { OnboardingSlide } from './_partitions/OnboardingSlide';
 import { useOnboarding } from './Onboarding.hooks';
@@ -21,11 +21,10 @@ export const Onboarding = withLoad({
   name: 'Onbording',
 })(() => {
   const { onboarding } = useOnboarding();
-
-  const { mutateAsync } = useSignInAnonymously();
+  const [, { setIsOnboarded }] = useSettings();
 
   const handleOnCompletedSkip = async () => {
-    await mutateAsync();
+    setIsOnboarded(true);
   };
 
   return (

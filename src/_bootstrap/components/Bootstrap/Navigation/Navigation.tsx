@@ -26,7 +26,7 @@ export const Navigation: FC<NavigationProps> = ({ children }) => {
   const defaultProtectedRedirect = (() => {
     if (isAuthenticated) return RoutePath.Index;
 
-    if (!isOnboarded) return RoutePath.SignIn;
+    if (isOnboarded) return RoutePath.SignIn;
 
     return RoutePath.Onboarding;
   })();

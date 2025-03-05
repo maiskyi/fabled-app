@@ -1,9 +1,15 @@
 import { useContext } from 'use-context-selector';
+import { Dispatch, SetStateAction } from 'react';
 
 import { SettingsProviderContext } from './SettingsProvider.context';
 
-export const useSettings = () => {
-  const settings = useContext(SettingsProviderContext);
+type UseSettingsReturnType = [
+  { isOnboarded: boolean },
+  { setIsOnboarded: Dispatch<SetStateAction<boolean>> },
+];
 
-  return [settings];
+export const useSettings = (): UseSettingsReturnType => {
+  const { setIsOnboarded, ...settings } = useContext(SettingsProviderContext);
+
+  return [settings, { setIsOnboarded }];
 };
