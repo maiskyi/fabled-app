@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import {
+  Banner,
   Box,
   Button,
   Content,
@@ -88,7 +89,19 @@ export const SignIn: FC = withLoad({
               </Grid.Cell>
             </Grid.Row>
             <Grid.Row flex={1}>
-              <Grid.Cell></Grid.Cell>
+              <Grid.Cell>
+                <Box
+                  alignItems="center"
+                  display="flex"
+                  flex={1}
+                  height="100%"
+                  justifyContent="center"
+                >
+                  <Banner>
+                    <Banner.Image asset="robots-1-2-3" />
+                  </Banner>
+                </Box>
+              </Grid.Cell>
             </Grid.Row>
             <Grid.Row flex={0}>
               <Grid.Cell>
@@ -99,27 +112,25 @@ export const SignIn: FC = withLoad({
                   paddingTop={32}
                   safe={['bottom']}
                 >
-                  <Box display="flex" flexDirection="column" gap={80}>
-                    <Box display="flex" flexDirection="column" gap={32}>
-                      <Box>
-                        <Divider>
-                          <Typography variant="body-3">
-                            {t('forms.signInUpWith')}
-                          </Typography>
-                        </Divider>
-                      </Box>
-                      <Box display="flex" gap={40} justifyContent="center">
-                        <Button.Social
-                          loading={isSigningInWithGoogle}
-                          name="google"
-                          onClick={handleOnSignInWithGoogle}
-                        />
-                        <Button.Social
-                          loading={isSigningInWithApple}
-                          name="apple"
-                          onClick={handleOnSignInWithApple}
-                        />
-                      </Box>
+                  <Box display="flex" flexDirection="column" gap={32}>
+                    <Box>
+                      <Divider>
+                        <Typography variant="body-3">
+                          {t('forms.signInUpWith')}
+                        </Typography>
+                      </Divider>
+                    </Box>
+                    <Box display="flex" gap={32} justifyContent="center">
+                      <Button.Social
+                        loading={isSigningInWithGoogle}
+                        name="google"
+                        onClick={handleOnSignInWithGoogle}
+                      />
+                      <Button.Social
+                        loading={isSigningInWithApple}
+                        name="apple"
+                        onClick={handleOnSignInWithApple}
+                      />
                     </Box>
                     <Box textAlign="center">
                       <Disclaimer />
