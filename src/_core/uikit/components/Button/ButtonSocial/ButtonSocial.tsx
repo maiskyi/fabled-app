@@ -1,9 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import { IonButton, IonSpinner } from '@ionic/react';
-
-import { Icon } from '../../Icon';
+import { IonButton, IonSpinner, IonIcon } from '@ionic/react';
 
 import { ButtonSocialName } from './ButtonSocial.type';
 import { ICONS_MAPPING } from './ButtonSocial.const';
@@ -20,27 +18,28 @@ type ButtonSocialProps = PropsWithChildren<{
 export const ButtonSocial: FC<ButtonSocialProps> = ({
   name,
   expand,
-  children,
   loading = false,
   onClick,
+  children,
 }) => {
   return (
-    <IonButton expand={expand} fill="outline" onClick={onClick} shape="round">
-      {loading && <IonSpinner className={styles.spinner} name="circular" />}
-      <Icon
+    <IonButton color="medium" expand={expand} onClick={onClick} shape="round">
+      {loading && <IonSpinner className={styles.spinner} name="crescent" />}
+      <IonIcon
         className={classNames({
           [styles.transparent]: loading,
         })}
-        name={ICONS_MAPPING[name]}
-        slot="start"
+        icon={ICONS_MAPPING[name]}
       />
-      <span
-        className={classNames({
-          [styles.transparent]: loading,
-        })}
-      >
-        {children}
-      </span>
+      {!!children && (
+        <span
+          className={classNames({
+            [styles.transparent]: loading,
+          })}
+        >
+          {children}
+        </span>
+      )}
     </IonButton>
   );
 };
