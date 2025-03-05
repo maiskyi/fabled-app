@@ -19,6 +19,7 @@ import {
   AuthError,
   SignInWithEmailAndPasswordRequest,
   useSignInWithApple,
+  useSignInWithFacebook,
   useSignInWithGoogle,
 } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
@@ -45,6 +46,9 @@ export const SignIn: FC = withLoad({
   const { isPending: isSigningInWithApple, mutate: signInWithApple } =
     useSignInWithApple();
 
+  const { isPending: isSigningInWithFacebook, mutate: signInWithFacebook } =
+    useSignInWithFacebook();
+
   const signInErrorHandler = ({ title, message }: AuthError) => {
     toast({ message, title, variant: 'error' });
   };
@@ -57,6 +61,12 @@ export const SignIn: FC = withLoad({
 
   const handleOnSignInWithApple = () => {
     signInWithApple(undefined, {
+      onError: (error) => signInErrorHandler(error),
+    });
+  };
+
+  const handleOnSignInWithFacebook = () => {
+    signInWithFacebook(undefined, {
       onError: (error) => signInErrorHandler(error),
     });
   };
@@ -130,6 +140,11 @@ export const SignIn: FC = withLoad({
                         loading={isSigningInWithApple}
                         name="apple"
                         onClick={handleOnSignInWithApple}
+                      />
+                      <Button.Social
+                        loading={isSigningInWithFacebook}
+                        name="facebook"
+                        onClick={handleOnSignInWithFacebook}
                       />
                     </Box>
                     <Box textAlign="center">
