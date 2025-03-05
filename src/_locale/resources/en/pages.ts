@@ -14,7 +14,7 @@ export const pages = {
   profile: 'Profile',
   promptToSubscribe: 'Get {{name}} Premium to enjoy all the benefit!',
   resetPassword: 'Create a new password',
-  signIn: 'Sign in',
+  signIn: 'Sign in/up to your account',
   signUp: 'Sign Up',
   subscribe: 'Get started with our {{title}} plan',
   verifyEmail: 'Verify your email',

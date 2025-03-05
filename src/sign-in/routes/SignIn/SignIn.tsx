@@ -1,23 +1,18 @@
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 
 import {
   Box,
-  Button,
   Content,
-  Form,
-  FormInstance,
+  Divider,
   Grid,
   Header,
   Page,
-  Text,
-  useUtils,
+  SafeArea,
+  Typography,
 } from '@core/uikit';
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
-import {
-  useSignInWithEmailAndPassword,
-  SignInWithEmailAndPasswordRequest,
-} from '@core/auth';
+import { SignInWithEmailAndPasswordRequest } from '@core/auth';
 import { RoutePath } from '@bootstrap/constants';
 import { Disclaimer } from '@common/features';
 import { withLoad } from '@core/analytics';
@@ -27,100 +22,70 @@ export const SignIn: FC = withLoad({
   name: 'Sign In',
 })(() => {
   const { t } = useTranslation();
-  const [{ search }, navigate] = useRoute<
+
+  const [, navigate] = useRoute<
     {},
     Partial<SignInWithEmailAndPasswordRequest>
   >();
-  const form = useRef<FormInstance<SignInWithEmailAndPasswordRequest>>();
-  const { toast } = useUtils();
 
   const title = t('pages.signIn');
 
-  const { isPending, mutate: signInWithCredentials } =
-    useSignInWithEmailAndPassword();
-
-  const handleOnSubmit = (data: SignInWithEmailAndPasswordRequest) => {
-    signInWithCredentials(data, {
-      onError: ({ title, message, fields }) => {
-        if (fields) {
-          form.current.setErrors(fields);
-        } else {
-          toast({ message, title, variant: 'error' });
-        }
-      },
-      onSuccess: ({ user: { emailVerified } }) => {
-        if (!emailVerified) {
-          navigate({
-            action: 'replace',
-            pathname: RoutePath.VerifyEmail,
-          });
-        }
-      },
+  const handleOnContactUs = () => {
+    navigate({
+      action: 'push',
+      pathname: RoutePath.ContactUs,
     });
-  };
-
-  const handleOnForgotPassword = () => {
-    navigate({ action: 'push', pathname: RoutePath.ForgotPassword });
   };
 
   return (
     <Page>
       <Header translucent>
-        <Header.Back pathname={RoutePath.Auth} />
         <Header.Title>{title}</Header.Title>
+        <Header.Buttons>
+          <Header.Button icon="help-buoy-outline" onClick={handleOnContactUs} />
+        </Header.Buttons>
       </Header>
-      <Content>
-        <Header collapse="condense">
-          <Header.Title size="large">{title}</Header.Title>
-        </Header>
-        <Grid>
-          <Grid.Row>
-            <Grid.Cell>
-              <Box padding={16} paddingInline={20}>
-                <Text>{t('intro.signIn')}</Text>
-              </Box>
-              <Form<SignInWithEmailAndPasswordRequest>
-                defaultValues={search}
-                onSubmit={handleOnSubmit}
-                ref={form}
-              >
-                <Box padding={16} paddingInline={20}>
-                  <Form.Text
-                    icon="mail-outline"
-                    label={t('forms.email')}
-                    name="email"
-                    validation={{
-                      email: true,
-                      required: true,
-                    }}
-                  />
-                  <Form.Password
-                    icon="lock-closed-outline"
-                    label={t('forms.password')}
-                    name="password"
-                    validation={{ required: true }}
-                  />
-                </Box>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  padding={16}
+      <Content scrollY={false}>
+        <Box display="flex" flexDirection="column" minHeight="100%">
+          <Grid>
+            <Grid.Row flex={0}>
+              <Grid.Cell>
+                <Header collapse="condense">
+                  <Header.Title size="large" wrap>
+                    {title}
+                  </Header.Title>
+                </Header>
+              </Grid.Cell>
+            </Grid.Row>
+            <Grid.Row flex={1}>
+              <Grid.Cell></Grid.Cell>
+            </Grid.Row>
+            <Grid.Row flex={0}>
+              <Grid.Cell>
+                <SafeArea
+                  background="var(--color-bnw-800)"
+                  borderRadius="24px 24px 0px 0px"
                   paddingInline={20}
+                  paddingTop={32}
+                  safe={['bottom']}
                 >
-                  <Form.Submit loading={isPending}>
-                    {t('actions.signIn')}
-                  </Form.Submit>
-                  <Button fill="clear" onClick={handleOnForgotPassword}>
-                    {t('actions.forgotPassword')}
-                  </Button>
-                </Box>
-                <Box paddingBottom={12} paddingInline={20} textAlign="center">
-                  <Disclaimer />
-                </Box>
-              </Form>
-            </Grid.Cell>
-          </Grid.Row>
-        </Grid>
+                  <Box display="flex" flexDirection="column" gap={80}>
+                    <Box>
+                      <Divider>
+                        <Typography variant="body-3">
+                          {t('forms.signInUpWith')}
+                        </Typography>
+                      </Divider>
+                    </Box>
+                    <Box textAlign="center">
+                      <Disclaimer />
+                    </Box>
+                  </Box>
+                </SafeArea>
+              </Grid.Cell>
+            </Grid.Row>
+          </Grid>
+        </Box>
       </Content>
     </Page>
   );

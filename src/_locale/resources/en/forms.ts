@@ -22,6 +22,7 @@ export const forms = {
   readTime: 'Read time',
   readTimeMin: 'Read time: {{min}} min',
   readingTime: 'Reading time',
+  signInUpWith: 'Sign in/up with',
   subject: 'Subject',
   theAgeOfManiCharacterIs: 'The age of mani character is...',
   theGenderOfMainCharacterWillBe: 'The gender of main character will be...',
