@@ -1,6 +1,5 @@
 export enum Role {
+  New = 'New',
   None = 'None',
   User = 'User',
-  Unverified = 'Unverified',
-  Anonymous = 'Anonymous',
 }

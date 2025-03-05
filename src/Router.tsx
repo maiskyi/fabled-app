@@ -27,11 +27,11 @@ import { ChangeName } from './change-name/routes';
 import { Plan } from './plan/routes';
 import { Onboarding } from './onboarding/routes';
 
-const USER_ROLES = [Role.User, Role.Anonymous];
+const USER_ROLES = [Role.User];
 
-const AUTH_ROLES = [Role.None, Role.Unverified];
+const AUTH_ROLES = [Role.None];
 
-const ONBOARDING_ROLES = [Role.None];
+const ONBOARDING_ROLES = [Role.New];
 
 export const Router = memo(function Router() {
   return (
@@ -85,7 +85,7 @@ export const Router = memo(function Router() {
         <Route path={RoutePath.Notification}>
           <Notification />
         </Route>
-        <Route path={RoutePath.Onbording}>
+        <Route path={RoutePath.Onboarding}>
           <ProtectedWithRedirect roles={ONBOARDING_ROLES}>
             <Onboarding />
           </ProtectedWithRedirect>
