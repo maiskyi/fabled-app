@@ -19,6 +19,7 @@ import { Header } from '../../Header';
 import {
   FormPickerValidation,
   FormPickerHeight,
+  FormPickerWidth,
   FormPickerComponent as FormPickerModalComponent,
 } from './FormPicker.types';
 
@@ -28,6 +29,7 @@ interface FormPickerProps<V extends FormInputOptionValue>
   extends FormControlBaseProps<FormPickerValidation> {
   placeholder?: string;
   height?: FormPickerHeight;
+  width?: FormPickerWidth;
   component?: FormPickerModalComponent<V>;
   options?: FormInputOptionProps<V>[];
 }
@@ -40,6 +42,7 @@ interface FormPickerComponent {
 
 export const FormPicker: FormPickerComponent = ({
   height = 'auto',
+  width = 'auto',
   options,
   placeholder: initialPlaceholder,
   component: Component = Fragment,
@@ -102,7 +105,9 @@ export const FormPicker: FormPickerComponent = ({
               backdropDismiss={false}
               breakpoints={[0, 1]}
               className={classNames(styles.modal, {
-                [styles.auto]: height === 'auto',
+                [styles.autoHeight]: height === 'auto',
+                [styles.autoHeight]: height === 'auto',
+                [styles.fullWidth]: width === 'full',
               })}
               initialBreakpoint={1}
               presentingElement={ref?.current?.closest('ion-page')}

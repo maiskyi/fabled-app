@@ -5,9 +5,9 @@ import { IonIcon } from '@ionic/react';
 
 import { ConfirmVariant } from '../../useUtils.types';
 import { Box } from '../../../../components/Box';
-import { Text } from '../../../../components/Text';
 import { Button } from '../../../../components/Button';
 import { IconName, ICON } from '../../../../components/Icon';
+import { Typography } from '../../../../components/Typography';
 
 export interface ConfirmModalParams {
   title: string;
@@ -42,16 +42,18 @@ export const ConfirmModal = memo<ConfirmModalParams>(function ConfirmModal({
   return (
     <Box paddingBottom="var(--ion-safe-area-bottom)">
       <Box display="flex" gap={8} paddingInline={20} paddingTop={24}>
-        <Box flex={0} paddingTop={4}>
+        <Box flex={0} paddingTop={1}>
           <IonIcon color={variant} icon={ICON[icon]} size="large" />
         </Box>
-        <Box flex={1} fontSize="min(2.125rem, 61.2px)" fontWeight="bold">
-          <Text>{title}</Text>
+        <Box flex={1}>
+          <Typography variant="h3" weight="semi-bold">
+            {title}
+          </Typography>
         </Box>
       </Box>
       <Box display="flex" padding={16} paddingInline={20}>
         <Box flex={1}>
-          <Text>{message}</Text>
+          <Typography variant="body-2">{message}</Typography>
         </Box>
       </Box>
       <Box

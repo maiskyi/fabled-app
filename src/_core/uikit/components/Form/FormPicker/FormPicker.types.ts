@@ -24,3 +24,5 @@ export type FormPickerComponent<V extends FormInputOptionValue> = FC<
 >;
 
 export type FormPickerHeight = 'auto' | 'full';
+
+export type FormPickerWidth = 'auto' | 'full';
