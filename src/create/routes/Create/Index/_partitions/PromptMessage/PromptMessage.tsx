@@ -59,6 +59,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       name={FormField.CharacterId}
                       options={characters}
                       validation={{ required: true }}
+                      width="full"
                     />
                   ),
                   childAge: (
@@ -78,6 +79,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       options={gender}
                       placeholder={t('placeholders.tapToPickGender')}
                       validation={{ required: true }}
+                      width="full"
                     />
                   ),
                   childName: (
@@ -118,6 +120,7 @@ export const PromptMessage: FC<PromptMessageProps> = ({ isPending }) => {
                       options={placesOfEvent}
                       placeholder={t('placeholders.tapToPickPlaceOfEvents')}
                       validation={{ required: true }}
+                      width="full"
                     />
                   ),
                 }}
