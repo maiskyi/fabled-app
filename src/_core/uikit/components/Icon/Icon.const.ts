@@ -43,6 +43,7 @@ import volume1 from './assets/volume-1.svg?raw';
 import volume2 from './assets/volume-2.svg?raw';
 import x from './assets/x.svg?raw';
 import playIndicator from './assets/play-indicator.svg?raw';
+import trash2 from './assets/trash-2.svg?raw';
 
 const NEW_ICONS = {
   'arrow-left': `data:image/svg+xml;utf8,${arrowLeft}`,
@@ -62,6 +63,7 @@ const NEW_ICONS = {
   settings: `data:image/svg+xml;utf8,${settings}`,
   shield: `data:image/svg+xml;utf8,${shield}`,
   smile: `data:image/svg+xml;utf8,${smile}`,
+  'trash-2': `data:image/svg+xml;utf8,${trash2}`,
   user: `data:image/svg+xml;utf8,${user}`,
   'volume-1': `data:image/svg+xml;utf8,${volume1}`,
   'volume-2': `data:image/svg+xml;utf8,${volume2}`,

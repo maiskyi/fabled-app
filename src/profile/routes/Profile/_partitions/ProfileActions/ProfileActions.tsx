@@ -43,11 +43,11 @@ export const ProfileActions: FC = () => {
   const handleOnDelete = () => {
     confirm({
       confirmBtn: t('actions.deleteAccount'),
-      icon: 'log-out-outline',
+      icon: 'trash-2',
       message: t('confirms.deleteAccount.message'),
       onConfirm: () => deleteAccount(),
       title: t('confirms.deleteAccount.title'),
-      variant: 'danger',
+      variant: 'secondary',
     });
   };
 
