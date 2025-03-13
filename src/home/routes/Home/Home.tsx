@@ -13,8 +13,8 @@ import {
 import { useTranslation } from '@core/localization';
 import { useRoute } from '@core/navigation';
 import { withLoad } from '@core/analytics';
-import { usePromptToSubscribe } from '@core/purchases';
-import { PromptToSubscribe } from '@common/features';
+// import { usePromptToSubscribe } from '@core/purchases';
+// import { PromptToSubscribe } from '@common/features';
 
 import { useFablesContext } from '../../providers';
 
@@ -61,10 +61,10 @@ export const Home = withLoad({
     refetch();
   });
 
-  usePromptToSubscribe({
-    auto: true,
-    component: PromptToSubscribe,
-  });
+  // usePromptToSubscribe({
+  //   auto: true,
+  //   component: PromptToSubscribe,
+  // });
 
   return (
     <Page>
